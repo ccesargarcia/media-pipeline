@@ -1,5 +1,9 @@
 name: Traduzir Legenda Existente do FTP
 
+concurrency:
+  group: gemini-translate-quota
+  cancel-in-progress: false
+
 on:
   workflow_dispatch:
     inputs:
