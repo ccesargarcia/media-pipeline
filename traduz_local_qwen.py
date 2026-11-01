@@ -3,6 +3,7 @@
 Traduz arquivos .srt (Turco -> Português do Brasil) usando um servidor local
 llama.cpp / llama-server (OpenAI-compatible) rodando Qwen 2.5 Instruct em 127.0.0.1:8080.
 100% offline, sem custos, sem chaves de API e sem limites de requisição (HTTP 429).
+Com barra de progresso visual, porcentagem exata e cálculo de ETA (tempo estimado).
 """
 import argparse
 import json
@@ -94,6 +95,11 @@ def traduzir_lote_local(server_url: str, contexto_anterior: list, lote_atual: li
     return mapa
 
 
+def format_progress_bar(current: int, total: int, width: int = 25) -> str:
+    filled = int(width * current / total) if total > 0 else 0
+    return "=" * filled + ">" * (1 if filled < width else 0) + "." * max(0, width - filled - 1)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Traduz legenda .srt usando servidor local llama-server (Qwen 2.5).")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
@@ -115,38 +121,66 @@ def main():
     for i, item in enumerate(itens, start=1):
         item["id"] = i
 
-    print(f"==> Total de falas para traduzir localmente via Qwen 2.5 ({args.server_url}): {len(itens)}", flush=True)
-
+    total_itens = len(itens)
     batch_size = args.batch_size
-    total_lotes = (len(itens) + batch_size - 1) // batch_size
+    total_lotes = (total_itens + batch_size - 1) // batch_size
     traducoes = {}
+
+    print("=" * 70, flush=True)
+    print(f"==> Iniciando Tradução Local via Qwen 2.5 7B (llama-server)", flush=True)
+    print(f"==> Total de Falas: {total_itens} | Total de Lotes: {total_lotes} (Tamanho: {batch_size})", flush=True)
+    print("=" * 70, flush=True)
+
+    t_inicio = time.time()
 
     for idx_lote in range(total_lotes):
         inicio = idx_lote * batch_size
-        fim = min(inicio + batch_size, len(itens))
+        fim = min(inicio + batch_size, total_itens)
         lote_atual = itens[inicio:fim]
 
         ctx_inicio = max(0, inicio - 6)
         contexto_anterior = itens[ctx_inicio:inicio]
 
+        pct_atual = (inicio / total_itens) * 100
+        print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
+
         sucesso = False
         for tentativa in range(4):
             try:
+                t_lote_start = time.time()
                 mapa = traduzir_lote_local(args.server_url, contexto_anterior, lote_atual)
+                t_lote_dur = time.time() - t_lote_start
+
                 for item in lote_atual:
                     texto = mapa.get(item["id"], item["texto"])
                     item["traducao"] = texto
                     traducoes[item["id"]] = texto
-                print(f"[{idx_lote + 1}/{total_lotes}] Traduzidas {fim}/{len(itens)} falas com Qwen local...", flush=True)
+
+                # Cálculo de progresso, tempo e ETA
+                tempo_decorrido = time.time() - t_inicio
+                pct_concluido = (fim / total_itens) * 100
+                velocidade = fim / tempo_decorrido if tempo_decorrido > 0 else 0
+                falas_restantes = total_itens - fim
+                tempo_restante = falas_restantes / velocidade if velocidade > 0 else 0
+
+                el_m, el_s = divmod(int(tempo_decorrido), 60)
+                eta_m, eta_s = divmod(int(tempo_restante), 60)
+                bar = format_progress_bar(fim, total_itens, width=20)
+
+                print(
+                    f"✓ [{pct_concluido:5.1f}%] [{bar}] Lote {idx_lote + 1}/{total_lotes} OK ({t_lote_dur:.1f}s) | "
+                    f"Concluídas: {fim}/{total_itens} | Tempo: {el_m:02d}:{el_s:02d} | ETA: {eta_m:02d}:{eta_s:02d} ({velocidade:.1f} falas/s)",
+                    flush=True,
+                )
                 sucesso = True
                 break
             except Exception as e:
                 if tentativa < 3:
                     espera = 3 * (tentativa + 1)
-                    print(f"Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                    print(f"  [Tentativa {tentativa + 1}/4 falhou: {e}]. Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"Falha no lote {idx_lote + 1}; mantendo original.", file=sys.stderr, flush=True)
+                    print(f"  [ERRO DEFINITIVO no lote {idx_lote + 1}]; mantendo falas originais.", file=sys.stderr, flush=True)
                     for item in lote_atual:
                         item["traducao"] = item["texto"]
 
@@ -155,9 +189,15 @@ def main():
         txt = item.get("traducao") or item["texto"]
         blocos_saida.append(f"{item['idx']}\n{item['tempo']}\n{txt}")
 
+    tempo_total = time.time() - t_inicio
+    tot_m, tot_s = divmod(int(tempo_total), 60)
+
     saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text("\n\n".join(blocos_saida) + "\n", encoding="utf-8")
-    print(f"==> Concluído com sucesso via Qwen 2.5 Local! Salvo em: {saida}", flush=True)
+    print("=" * 70, flush=True)
+    print(f"==> Concluído com sucesso via Qwen 2.5 Local em {tot_m:02d}m{tot_s:02d}s!", flush=True)
+    print(f"==> Legenda salva em: {saida}", flush=True)
+    print("=" * 70, flush=True)
 
 
 if __name__ == "__main__":
