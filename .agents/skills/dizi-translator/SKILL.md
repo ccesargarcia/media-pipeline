@@ -21,7 +21,8 @@ A série se passa em Mardin e gira em torno da rivalidade entre as famílias **A
 - **Sadakat Albora (Feminino):** Matriarca impiedosa, tradicional e manipuladora. Deseja a guarda do neto Deniz e inferniza a nora Alya.
 - **Alya Albora (Feminino):** Médica pediatra, viúva de Boran, mãe protetora de Deniz. Luta com firmeza contra Sadakat para defender o filho.
 - **Boran Albora (Masculino):** Irmão falecido de Cihan e marido de Alya (cuja morte desencadeia a trama).
-- **Kaya Albora (Masculino):** Irmão mais novo de Cihan. Jovem impetuoso, impulsivo e passional.
+- **Kaya Albora (Masculino):** Irmão mais novo de Cihan. Jovem impetuoso, impulsivo e passional, noivo de İpek.
+- **İpek (Feminino):** Noiva de Kaya e futura NORA de Dona Sadakat.
 - **Şahin Albora (Masculino):** Primo de Cihan (filho de Ecmel e Fidan). Apaixonado por Nare, dividido entre o amor e a lealdade familiar.
 - **Nare Albora (Feminino):** Irmã mais nova de Cihan. Apaixonada por Şahin e grávida em segredo.
 - **Deniz Albora (Masculino):** Menino de 5 anos, filho pequeno de Alya e Boran.
@@ -44,6 +45,9 @@ A série se passa em Mardin e gira em torno da rivalidade entre as famílias **A
    - **Regra:** Identifique SEMPRE quem está falando e de quem está falando para usar "ele" ou "ela" corretamente.
 2. **Adaptação de Termos Culturais:**
    - *"Sadakat Hanım"* ➔ *"Dona Sadakat"*
+   - *"Gelin"* / *"Gelinim"* ➔ Se dita pela sogra/família do noivo (ex: Sadakat para İpek), traduza OBRIGATORIAMENTE como *"Nora"* / *"Minha nora"* (NUNCA "minha noiva"). Se dita pelo próprio noivo (Kaya), traduza como *"Noiva"*.
+   - *"Damat"* / *"Damadım"* ➔ Se dita pelos sogros/família, traduza como *"Genro"* / *"Nosso genro"*. Se dita pela noiva, traduza como *"Noivo"*.
+   - *"Anne diyeceksin bana"* ➔ *"Vai me chamar de mãe"* (exigência tradicional da sogra para a nora na Turquia).
    - *"Abla"* ➔ *"Irmã"* / *"Tia"*
    - *"Abi"* ➔ *"Irmão"* / *"Meu irmão"*
    - *"Yenge"* ➔ *"Cunhada"*

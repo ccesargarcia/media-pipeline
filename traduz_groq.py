@@ -24,7 +24,8 @@ PERSONAGENS E DINÂMICAS:
   * Alya Albora: Médica que veio do Canadá com o filho Deniz para enterrar o marido Boran. Firme, lúcida, elegante e corajosa.
   * Boran Albora: Marido falecido de Alya que reapareceu vivo (estava em coma/escondido pelo segurança).
   * Sadakat Albora (Sadakat Hanım): Matriarca implacável e tradicional. Chame de "Dona Sadakat" ou "Senhora Sadakat".
-  * Kaya Albora: Irmão mais novo leal a Cihan.
+  * Kaya Albora: Irmão mais novo leal a Cihan, noivo de İpek.
+  * İpek: Noiva de Kaya e futura NORA de Dona Sadakat.
   * Şahin Albora: Primo impulsivo e explosivo (filho de Ecmel).
   * Deniz: Filho pequeno de Alya e Boran (fala como criança de 6 anos).
   * Kadir, Muzaffer: Homens de confiança da mansão.
@@ -32,12 +33,22 @@ PERSONAGENS E DINÂMICAS:
   * Demir Baybars: Rival violento e implacável.
   * Ecmel: Traidor.
 
+RELAÇÕES DE PARENTESCO E ARMADILHAS DO TURCO (MUITO IMPORTANTE):
+- "Gelin" / "Gelinim":
+  * Em turco significa tanto "noiva" quanto "NORA"!
+  * Se dita pela sogra/família do noivo (ex: Dona Sadakat dizendo para İpek "Sen artık benim gelinimsin"): traduza OBRIGATORIAMENTE como "NORA" ("Agora você é a minha nora!"), NUNCA como "minha noiva"!
+  * Se dita pelo próprio noivo (Kaya para İpek): "minha noiva".
+- "Damat" / "Damadım":
+  * Se dita pelos sogros/família: "GENRO" ou "nosso genro".
+  * Se dita pela noiva: "meu noivo".
+- "Anne diyeceksin bana": "Vai me chamar de mãe!" (a sogra tradicional turca exige que a nora a chame de mãe).
+
 TRATAMENTOS CULTURAIS E VOCABULÁRIO:
 - "Yenge" -> "Cunhada" (ou "Dona Alya" dependendo do respeito do capataz).
 - "Abi" -> "Irmão" / "Meu irmão".
 - "Abla" -> "Irmã".
 - "Ağa" -> "Agha" ou "Patrão".
-- "Konak / Konağın" -> "Mansão" / "Casa".
+- "Konak / Konağın" -> "Mansão" / "Casa dos Albora".
 - "Başım üstüne" -> "Às suas ordens" / "Com certeza".
 - "Allah aşkına" -> "Pelo amor de Deus".
 - "Geçmiş olsun" -> "Que passe logo" / "Melhoras".
