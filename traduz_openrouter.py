@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Traduz arquivos .srt (Turco -> Português do Brasil) usando a API do OpenRouter
-com auto-descoberta de modelos gratuitos ativos (ex: google/gemma-4-31b-it:free)
-e fallback automático em caso de 404/descontinuação de slugs.
+com auto-descoberta de modelos gratuitos ativos, rotação dinâmica de modelos
+em caso de HTTP 429 (Rate Limit) e fallback automático contra HTTP 404.
 """
 import argparse
 import getpass
@@ -17,6 +17,12 @@ from pathlib import Path
 
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
+
+FREE_MODELS_POOL = [
+    "google/gemma-4-31b-it:free",
+    "google/gemma-4-26b-a4b-it:free",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+]
 
 SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
 
@@ -49,27 +55,16 @@ def resolve_model(requested_model: str, available_models: list) -> str:
     if available_models and requested_model in available_models:
         return requested_model
 
-    # Ordem de preferência de modelos gratuitos excelentes para tradução
-    preferencias_free = [
-        "google/gemma-4-31b-it:free",
-        "google/gemma-4-26b-a4b-it:free",
-        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
-        "meta-llama/llama-3.3-70b-instruct",
-    ]
-
-    free_models = [m for m in available_models if m.endswith(":free")]
-
-    for pref in preferencias_free:
+    for pref in FREE_MODELS_POOL:
         if pref in available_models:
             print(f"==> Modelo '{requested_model}' não encontrado ou substituído. Usando '{pref}'.")
             return pref
 
+    free_models = [m for m in available_models if m.endswith(":free")]
     if free_models:
-        escolhido = free_models[0]
-        print(f"==> Modelo alternativo gratuito selecionado: '{escolhido}'.")
-        return escolhido
+        return free_models[0]
 
-    return requested_model or "google/gemma-4-31b-it:free"
+    return requested_model or FREE_MODELS_POOL[0]
 
 
 def parse_srt(conteudo: str):
@@ -144,12 +139,21 @@ def traduzir_lote_openrouter(api_key: str, modelo: str, contexto_anterior: list,
     return mapa
 
 
+def next_free_model(current_model: str, pool: list) -> str:
+    """Alterna para o próximo modelo gratuito do pool para contornar rate limits (HTTP 429)."""
+    try:
+        idx = pool.index(current_model)
+        return pool[(idx + 1) % len(pool)]
+    except ValueError:
+        return pool[0]
+
+
 def main():
     parser = argparse.ArgumentParser(description="Traduz legenda .srt usando OpenRouter API.")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
     parser.add_argument("-m", "--model", default="google/gemma-4-31b-it:free", help="Modelo OpenRouter")
-    parser.add_argument("-b", "--batch-size", type=int, default=35, help="Falas por lote (padrão: 35)")
+    parser.add_argument("-b", "--batch-size", type=int, default=40, help="Falas por lote (padrão: 40)")
     args = parser.parse_args()
 
     entrada = Path(args.entrada).expanduser()
@@ -170,6 +174,11 @@ def main():
 
     available_models = get_available_models()
     active_model = resolve_model(args.model, available_models)
+
+    # Filtra pool com base nos modelos realmente ativos
+    active_pool = [m for m in FREE_MODELS_POOL if not available_models or m in available_models]
+    if not active_pool:
+        active_pool = FREE_MODELS_POOL
 
     dados = entrada.read_bytes()
     conteudo = dados.decode("utf-16") if dados.startswith((b"\xff\xfe", b"\xfe\xff")) else dados.decode("utf-8-sig", errors="replace")
@@ -192,35 +201,46 @@ def main():
         contexto_anterior = itens[ctx_inicio:inicio]
 
         sucesso = False
-        for tentativa in range(4):
+        max_tentativas = 8
+        for tentativa in range(max_tentativas):
             try:
                 mapa = traduzir_lote_openrouter(api_key, active_model, contexto_anterior, lote_atual)
                 for item in lote_atual:
                     texto = mapa.get(item["id"], item["texto"])
                     item["traducao"] = texto
                     traducoes[item["id"]] = texto
-                print(f"[{idx_lote + 1}/{total_lotes}] Traduzidas {fim}/{len(itens)} falas...", flush=True)
+                print(f"[{idx_lote + 1}/{total_lotes}] Traduzidas {fim}/{len(itens)} falas com sucesso ({active_model})...", flush=True)
                 sucesso = True
                 break
             except urllib.error.HTTPError as e:
-                # Se for 404 (modelo descontinuado na hora), troca automaticamente de modelo
-                if e.code == 404 and ":free" in active_model:
-                    fallback_free = "google/gemma-4-26b-a4b-it:free" if active_model != "google/gemma-4-26b-a4b-it:free" else "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
-                    print(f"HTTP 404 com {active_model}. Trocando para {fallback_free}...", file=sys.stderr, flush=True)
-                    active_model = fallback_free
+                # 429 = Rate limit excedido -> Rotação imediata para outro modelo free
+                if e.code == 429:
+                    novo_modelo = next_free_model(active_model, active_pool)
+                    espera = 5 + (tentativa * 4)
+                    print(f"HTTP 429 (Rate Limit) com '{active_model}'. Alternando para '{novo_modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
+                    active_model = novo_modelo
+                    time.sleep(espera)
+                    continue
+
+                # 404 = Modelo descontinuado
+                if e.code == 404:
+                    novo_modelo = next_free_model(active_model, active_pool)
+                    print(f"HTTP 404 com '{active_model}'. Trocando para '{novo_modelo}'...", file=sys.stderr, flush=True)
+                    active_model = novo_modelo
                     time.sleep(2)
                     continue
 
-                if tentativa < 3:
+                if tentativa < max_tentativas - 1:
                     espera = 6 * (tentativa + 1)
                     print(f"Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"Falha no lote {idx_lote + 1}; mantendo original.", file=sys.stderr, flush=True)
+                    print(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas; mantendo original.", file=sys.stderr, flush=True)
                     for item in lote_atual:
                         item["traducao"] = item["texto"]
+
             except Exception as e:
-                if tentativa < 3:
+                if tentativa < max_tentativas - 1:
                     espera = 6 * (tentativa + 1)
                     print(f"Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
@@ -229,7 +249,8 @@ def main():
                     for item in lote_atual:
                         item["traducao"] = item["texto"]
 
-        time.sleep(2.0)
+        # Intervalo seguro entre requisições para evitar rate limit
+        time.sleep(3.5)
 
     blocos_saida = []
     for item in itens:
