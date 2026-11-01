@@ -74,6 +74,11 @@ def listar_modelos_flash(api_key: str) -> list[str]:
     return ordenados
 
 
+def format_progress_bar(current: int, total: int, width: int = 25) -> str:
+    filled = int(width * current / total) if total > 0 else 0
+    return "=" * filled + ">" * (1 if filled < width else 0) + "." * max(0, width - filled - 1)
+
+
 def parse_srt(conteudo: str):
     blocos = re.split(r"\r?\n\s*\r?\n", conteudo.strip())
     itens = []
@@ -220,6 +225,8 @@ def main():
     batch_size = args.batch_size
     total_lotes = (len(itens) + batch_size - 1) // batch_size
 
+    t_inicio = time.time()
+
     for idx_lote in range(total_lotes):
         inicio = idx_lote * batch_size
         fim = min(inicio + batch_size, len(itens))
@@ -231,15 +238,34 @@ def main():
         ctx_inicio = max(0, inicio - 8)
         contexto_anterior = itens[ctx_inicio:inicio]
 
+        print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
+
         for tentativa in range(6):
             try:
+                t_lote_start = time.time()
                 mapa = traduzir_lote(api_key, modelo, contexto_anterior, lote_atual)
+                t_lote_dur = time.time() - t_lote_start
                 for item in lote_atual:
                     texto_trad = mapa.get(item["id"], item["texto"])
                     item["traducao"] = texto_trad
                     traducoes_salvas[item["id"]] = texto_trad
                 ckpt_path.write_text(json.dumps(traducoes_salvas, ensure_ascii=False), encoding="utf-8")
-                print(f"[{idx_lote + 1}/{total_lotes}] Traduzidas {fim}/{len(itens)} falas ({modelo})...", flush=True)
+
+                tempo_decorrido = time.time() - t_inicio
+                pct_concluido = (fim / len(itens)) * 100
+                velocidade = fim / tempo_decorrido if tempo_decorrido > 0 else 0
+                falas_restantes = len(itens) - fim
+                tempo_restante = falas_restantes / velocidade if velocidade > 0 else 0
+
+                el_m, el_s = divmod(int(tempo_decorrido), 60)
+                eta_m, eta_s = divmod(int(tempo_restante), 60)
+                bar = format_progress_bar(fim, len(itens), width=20)
+
+                print(
+                    f"✓ [{pct_concluido:5.1f}%] [{bar}] Lote {idx_lote + 1}/{total_lotes} OK ({t_lote_dur:.1f}s) | "
+                    f"Concluídas: {fim}/{len(itens)} | Tempo: {el_m:02d}:{el_s:02d} | ETA: {eta_m:02d}:{eta_s:02d} ({velocidade:.1f} falas/s)",
+                    flush=True,
+                )
                 break
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
