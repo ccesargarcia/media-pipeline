@@ -1,0 +1,54 @@
+name: Deploy Qwen 2.5 no Cloud Run
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Autenticar no Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configurar gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configurar Docker para Artifact Registry
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build e Push do Docker Container
+        run: |
+          IMAGE_TAG="us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/media-repo/qwen-translator:latest"
+          echo "Building image $IMAGE_TAG..."
+          docker build -t $IMAGE_TAG .
+          echo "Pushing image to Artifact Registry..."
+          docker push $IMAGE_TAG
+
+      - name: Deploy no Cloud Run (Serverless)
+        run: |
+          IMAGE_TAG="us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/media-repo/qwen-translator:latest"
+          gcloud run deploy qwen-translator \
+            --image=$IMAGE_TAG \
+            --platform=managed \
+            --region=us-central1 \
+            --project=${{ secrets.GCP_PROJECT_ID }} \
+            --cpu=8 \
+            --memory=16Gi \
+            --min-instances=0 \
+            --max-instances=1 \
+            --timeout=1800 \
+            --allow-unauthenticated \
+            --port=8080
+
+      - name: Obter URL do Serviço
+        run: |
+          SERVICE_URL=$(gcloud run services describe qwen-translator --platform=managed --region=us-central1 --project=${{ secrets.GCP_PROJECT_ID }} --format="value(status.url)")
+          echo "=========================================================="
+          echo "==> Qwen Translator Cloud Run está ativo em: $SERVICE_URL"
+          echo "=========================================================="
