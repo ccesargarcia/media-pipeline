@@ -244,7 +244,7 @@ def main():
 
         print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
-        for tentativa in range(6):
+        for tentativa in range(10):
             try:
                 t_lote_start = time.time()
                 mapa = traduzir_lote(api_key, modelo, contexto_anterior, lote_atual)
@@ -273,23 +273,23 @@ def main():
                 break
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
-                if e.code == 429 and tentativa < 5:
-                    espera = 20 * (tentativa + 1)
+                if e.code == 429 and tentativa < 9:
+                    espera = 25
                     print(f"Limite de requisições (HTTP 429). Aguardando {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
-                elif tentativa < 5:
-                    espera = 8 * (tentativa + 1)
+                elif tentativa < 9:
+                    espera = 10 * (tentativa + 1)
                     print(f"Erro HTTP {e.code} no lote {idx_lote + 1}. Nova tentativa em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"Falha no lote {idx_lote + 1} após tentativas; mantendo original.", file=sys.stderr, flush=True)
+                    raise RuntimeError(f"Falha definitiva no lote {idx_lote + 1} após 10 tentativas: HTTP {e.code} - {detalhe}")
             except Exception as e:
-                if tentativa < 5:
-                    espera = 6 * (tentativa + 1)
+                if tentativa < 9:
+                    espera = 8 * (tentativa + 1)
                     print(f"Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"Falha no lote {idx_lote + 1} ({e}); mantendo original.", file=sys.stderr, flush=True)
+                    raise RuntimeError(f"Falha definitiva no lote {idx_lote + 1} após 10 tentativas: {e}")
 
         if idx_lote + 1 < total_lotes:
             time.sleep(3.5)
