@@ -23,12 +23,12 @@ on:
         required: true
         type: choice
         options:
-          - 'groq'
           - 'gemini'
+          - 'groq'
           - 'gcp-qwen'
           - 'openrouter'
           - 'local-qwen'
-        default: 'groq'
+        default: 'gemini'
 
 jobs:
   translate:
