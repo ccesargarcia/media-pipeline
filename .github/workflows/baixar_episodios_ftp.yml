@@ -1,4 +1,5 @@
 name: Baixar Episódios para FTP (Turkish123)
+run-name: "📥 Baixar Turkish123: Ep ${{ inputs.episode_start }} a ${{ inputs.episode_end }} (${{ inputs.season }})"
 
 on:
   workflow_dispatch:

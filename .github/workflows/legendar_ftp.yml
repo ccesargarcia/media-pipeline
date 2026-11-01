@@ -1,4 +1,5 @@
 name: Legendar Série via FTP
+run-name: "🎬 Legendar: ${{ inputs.video_filename }} [${{ inputs.translator }}]"
 
 on:
   workflow_dispatch:

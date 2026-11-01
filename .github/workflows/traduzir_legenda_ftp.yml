@@ -1,4 +1,5 @@
 name: Traduzir Legenda Existente do FTP
+run-name: "📝 Traduzir: ${{ inputs.srt_filename }} [${{ inputs.translator }}]"
 
 on:
   workflow_dispatch:

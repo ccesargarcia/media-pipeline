@@ -1,4 +1,5 @@
 name: Deploy Qwen 2.5 no Cloud Run
+run-name: "🚀 Deploy Qwen 2.5 no Cloud Run"
 
 on:
   workflow_dispatch:
