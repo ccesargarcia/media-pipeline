@@ -269,13 +269,8 @@ def main():
                 break
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
-                if e.code == 429 and len(modelos_disponiveis) > 1 and tentativa in (1, 3):
-                    idx_modelo = (idx_modelo + 1) % len(modelos_disponiveis)
-                    modelo = modelos_disponiveis[idx_modelo]
-                    print(f"Cota atingida no modelo anterior (HTTP 429). Alternando automaticamente para: {modelo}", file=sys.stderr, flush=True)
-                    time.sleep(3)
-                elif e.code == 429 and tentativa < 5:
-                    espera = 15 * (tentativa + 1)
+                if e.code == 429 and tentativa < 5:
+                    espera = 20 * (tentativa + 1)
                     print(f"Limite de requisições (HTTP 429). Aguardando {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 elif tentativa < 5:
@@ -293,7 +288,7 @@ def main():
                     print(f"Falha no lote {idx_lote + 1} ({e}); mantendo original.", file=sys.stderr, flush=True)
 
         if idx_lote + 1 < total_lotes:
-            time.sleep(1.5)
+            time.sleep(3.5)
 
     blocos_saida = []
     for item in itens:

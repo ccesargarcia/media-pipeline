@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Traduz arquivos .srt (Turco -> Português do Brasil) usando um servidor local
-llama.cpp / llama-server (OpenAI-compatible) rodando Qwen 2.5 Instruct em 127.0.0.1:8080.
-100% offline, sem custos, sem chaves de API e sem limites de requisição (HTTP 429).
-Com barra de progresso visual, porcentagem exata e cálculo de ETA (tempo estimado).
+Traduz arquivos .srt (Turco -> Português do Brasil) usando um servidor
+llama.cpp / llama-server (OpenAI-compatible) rodando Qwen 2.5 Instruct
+localmente ou no Google Cloud Run (Serverless).
+100% sob seu controle, sem limites de requisição (HTTP 429).
+Com barra de progresso visual, porcentagem exata, ETA e retomada por checkpoint.
 """
 import argparse
 import json
@@ -14,6 +15,11 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
+
+DEFAULT_SERVER_URL = os.environ.get(
+    "QWEN_SERVER_URL",
+    "https://qwen-translator-wme7f6jafq-uc.a.run.app/v1",
+)
 
 SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
 
@@ -76,7 +82,7 @@ def traduzir_lote_local(server_url: str, contexto_anterior: list, lote_atual: li
         method="POST",
     )
 
-    with urllib.request.urlopen(req, timeout=180) as resp:
+    with urllib.request.urlopen(req, timeout=300) as resp:
         corpo = json.loads(resp.read().decode("utf-8"))
 
     conteudo_resp = corpo["choices"][0]["message"]["content"].strip()
@@ -101,11 +107,11 @@ def format_progress_bar(current: int, total: int, width: int = 25) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Traduz legenda .srt usando servidor local llama-server (Qwen 2.5).")
+    parser = argparse.ArgumentParser(description="Traduz legenda .srt usando Qwen 2.5 (Cloud Run ou local).")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
-    parser.add_argument("-s", "--server-url", default="http://127.0.0.1:8080/v1", help="URL da API OpenAI-compatível")
-    parser.add_argument("-b", "--batch-size", type=int, default=35, help="Falas por lote (padrão: 35)")
+    parser.add_argument("-s", "--server-url", default=DEFAULT_SERVER_URL, help=f"URL da API OpenAI-compatível (padrão: {DEFAULT_SERVER_URL})")
+    parser.add_argument("-b", "--batch-size", type=int, default=20, help="Falas por lote (padrão: 20)")
     args = parser.parse_args()
 
     entrada = Path(args.entrada).expanduser()
@@ -124,10 +130,23 @@ def main():
     total_itens = len(itens)
     batch_size = args.batch_size
     total_lotes = (total_itens + batch_size - 1) // batch_size
+
+    # Checkpoint para retomada resiliente
+    ckpt_path = saida.with_suffix(".ckpt.json")
     traducoes = {}
+    if ckpt_path.is_file():
+        try:
+            traducoes = {int(k): v for k, v in json.loads(ckpt_path.read_text(encoding="utf-8")).items()}
+            print(f"==> Retomando progresso anterior: {len(traducoes)}/{total_itens} falas já traduzidas.", flush=True)
+        except Exception:
+            traducoes = {}
+
+    for item in itens:
+        if item["id"] in traducoes:
+            item["traducao"] = traducoes[item["id"]]
 
     print("=" * 70, flush=True)
-    print(f"==> Iniciando Tradução Local via Qwen 2.5 7B (llama-server)", flush=True)
+    print(f"==> Servidor Qwen: {args.server_url}", flush=True)
     print(f"==> Total de Falas: {total_itens} | Total de Lotes: {total_lotes} (Tamanho: {batch_size})", flush=True)
     print("=" * 70, flush=True)
 
@@ -138,14 +157,15 @@ def main():
         fim = min(inicio + batch_size, total_itens)
         lote_atual = itens[inicio:fim]
 
+        if all("traducao" in item for item in lote_atual):
+            continue
+
         ctx_inicio = max(0, inicio - 6)
         contexto_anterior = itens[ctx_inicio:inicio]
 
-        pct_atual = (inicio / total_itens) * 100
         print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
-        sucesso = False
-        for tentativa in range(4):
+        for tentativa in range(6):
             try:
                 t_lote_start = time.time()
                 mapa = traduzir_lote_local(args.server_url, contexto_anterior, lote_atual)
@@ -155,6 +175,8 @@ def main():
                     texto = mapa.get(item["id"], item["texto"])
                     item["traducao"] = texto
                     traducoes[item["id"]] = texto
+
+                ckpt_path.write_text(json.dumps(traducoes, ensure_ascii=False), encoding="utf-8")
 
                 # Cálculo de progresso, tempo e ETA
                 tempo_decorrido = time.time() - t_inicio
@@ -172,12 +194,23 @@ def main():
                     f"Concluídas: {fim}/{total_itens} | Tempo: {el_m:02d}:{el_s:02d} | ETA: {eta_m:02d}:{eta_s:02d} ({velocidade:.1f} falas/s)",
                     flush=True,
                 )
-                sucesso = True
                 break
+            except urllib.error.HTTPError as e:
+                if e.code == 503 and tentativa < 5:
+                    print(f"  [Cloud Run iniciando container / carregando modelo...]. Aguardando 15s...", file=sys.stderr, flush=True)
+                    time.sleep(15)
+                elif tentativa < 5:
+                    espera = 5 * (tentativa + 1)
+                    print(f"  [Tentativa {tentativa + 1}/6 HTTP {e.code}]. Nova tentativa em {espera}s...", file=sys.stderr, flush=True)
+                    time.sleep(espera)
+                else:
+                    print(f"  [ERRO DEFINITIVO no lote {idx_lote + 1}]; mantendo falas originais.", file=sys.stderr, flush=True)
+                    for item in lote_atual:
+                        item["traducao"] = item["texto"]
             except Exception as e:
-                if tentativa < 3:
-                    espera = 3 * (tentativa + 1)
-                    print(f"  [Tentativa {tentativa + 1}/4 falhou: {e}]. Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                if tentativa < 5:
+                    espera = 4 * (tentativa + 1)
+                    print(f"  [Tentativa {tentativa + 1}/6 falhou: {e}]. Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
                     print(f"  [ERRO DEFINITIVO no lote {idx_lote + 1}]; mantendo falas originais.", file=sys.stderr, flush=True)
@@ -195,7 +228,7 @@ def main():
     saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text("\n\n".join(blocos_saida) + "\n", encoding="utf-8")
     print("=" * 70, flush=True)
-    print(f"==> Concluído com sucesso via Qwen 2.5 Local em {tot_m:02d}m{tot_s:02d}s!", flush=True)
+    print(f"==> Concluído com sucesso via Qwen 2.5 em {tot_m:02d}m{tot_s:02d}s!", flush=True)
     print(f"==> Legenda salva em: {saida}", flush=True)
     print("=" * 70, flush=True)
 

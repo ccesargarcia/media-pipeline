@@ -22,11 +22,12 @@ on:
         required: true
         type: choice
         options:
-          - 'local-qwen'
-          - 'openrouter'
+          - 'gcp-qwen'
           - 'gemini'
+          - 'openrouter'
           - 'groq'
-        default: 'local-qwen'
+          - 'local-qwen'
+        default: 'gcp-qwen'
 
 jobs:
   translate:
@@ -77,7 +78,13 @@ jobs:
           GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
-          if [ "${{ inputs.translator }}" = "local-qwen" ]; then
+          if [ "${{ inputs.translator }}" = "gcp-qwen" ]; then
+            echo "Traduzindo via Qwen 2.5 no Google Cloud Run (Serverless 8 vCPUs)..."
+            python3 traduz_local_qwen.py \
+              --server-url "https://qwen-translator-wme7f6jafq-uc.a.run.app/v1" \
+              --batch-size 20 \
+              input.srt "${{ env.STEM }}.pt-BR.srt"
+          elif [ "${{ inputs.translator }}" = "local-qwen" ]; then
             echo "Preparando Qwen 2.5 7B local com llama.cpp..."
             if [ ! -d "llama-bin" ]; then
               mkdir -p llama-bin
@@ -116,7 +123,7 @@ jobs:
             python3 traduz_groq.py input.srt "${{ env.STEM }}.pt-BR.srt"
           else
             echo "Traduzindo via Google Gemini..."
-            python3 traduz_gemini.py -b 35 input.srt "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_gemini.py -b 65 input.srt "${{ env.STEM }}.pt-BR.srt"
           fi
           python3 srt_para_ass.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.ass"
 
