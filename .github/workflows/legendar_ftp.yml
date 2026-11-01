@@ -16,10 +16,11 @@ on:
         required: true
         type: choice
         options:
+          - 'local-qwen'
           - 'openrouter'
           - 'gemini'
           - 'groq'
-        default: 'openrouter'
+        default: 'local-qwen'
 
 jobs:
   transcribe-and-translate:
@@ -111,13 +112,53 @@ jobs:
               "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/" || true
           fi
 
+      - name: Cache do Qwen 2.5 7B e llama.cpp
+        if: inputs.translator == 'local-qwen'
+        uses: actions/cache@v4
+        with:
+          path: |
+            llama-bin
+            models/qwen2.5-7b-instruct-q4_k_m.gguf
+          key: qwen2.5-7b-instruct-q4-v1
+
       - name: Traduzir para PT-BR (${{ inputs.translator }}) e Gerar .ass
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY || secrets.GROK_API_KEY }}
         run: |
-          if [ "${{ inputs.translator }}" = "openrouter" ]; then
+          if [ "${{ inputs.translator }}" = "local-qwen" ]; then
+            echo "Preparando Qwen 2.5 7B local com llama.cpp..."
+            if [ ! -d "llama-bin" ]; then
+              mkdir -p llama-bin
+              curl -sL https://github.com/ggerganov/llama.cpp/releases/download/b12032/llama-b12032-bin-ubuntu-x64.tar.gz | tar -xzf - -C llama-bin --strip-components=1
+            fi
+            
+            mkdir -p models
+            if [ ! -f "models/qwen2.5-7b-instruct-q4_k_m.gguf" ]; then
+              echo "Baixando Qwen 2.5 7B GGUF (4.6 GB)..."
+              curl -L -# -C - "https://huggingface.co/bartowski/Qwen2.5-7B-Instruct-GGUF/resolve/main/Qwen2.5-7B-Instruct-Q4_K_M.gguf" -o "models/qwen2.5-7b-instruct-q4_k_m.gguf"
+            fi
+            
+            echo "Iniciando llama-server local em background..."
+            export LD_LIBRARY_PATH="$PWD/llama-bin:$LD_LIBRARY_PATH"
+            ./llama-bin/llama-server \
+              -m models/qwen2.5-7b-instruct-q4_k_m.gguf \
+              -c 4096 \
+              -t $(nproc) \
+              --host 127.0.0.1 \
+              --port 8080 \
+              -fa &
+            SERVER_PID=$!
+            
+            echo "Aguardando servidor local carregar o modelo..."
+            timeout 90 bash -c 'until curl -s http://127.0.0.1:8080/health | grep -q "ok"; do sleep 2; done' || true
+            
+            echo "Traduzindo legendas 100% localmente via Qwen 2.5 7B..."
+            python3 traduz_local_qwen.py "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
+            
+            kill $SERVER_PID 2>/dev/null || true
+          elif [ "${{ inputs.translator }}" = "openrouter" ]; then
             echo "Traduzindo via OpenRouter..."
             python3 traduz_openrouter.py "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
           elif [ "${{ inputs.translator }}" = "groq" ]; then
