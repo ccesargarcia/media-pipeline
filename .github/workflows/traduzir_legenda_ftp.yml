@@ -40,9 +40,10 @@ jobs:
           python-version: '3.11'
 
       - name: Baixar arquivo .srt do FTP
+        env:
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+          SRT_NAME: "${{ inputs.srt_filename }}"
         run: |
-          FTP_BASE_DIR="/G/Series/Longe demais - ${{ inputs.season }}"
-          SRT_NAME="${{ inputs.srt_filename }}"
           STEM="${SRT_NAME%.*}"
           STEM="${STEM%.tr}"
           
