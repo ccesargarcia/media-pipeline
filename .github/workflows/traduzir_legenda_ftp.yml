@@ -97,7 +97,7 @@ jobs:
               -t $(nproc) \
               --host 127.0.0.1 \
               --port 8080 \
-              -fa &
+              --flash-attn on &
             SERVER_PID=$!
             
             echo "Aguardando servidor local carregar o modelo..."
