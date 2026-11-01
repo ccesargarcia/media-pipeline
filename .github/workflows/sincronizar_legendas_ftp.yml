@@ -1,0 +1,47 @@
+name: Sincronizar Legendas com FTP
+
+run-name: 📤 Sincronizar Legendas Prontas (Ep 31, 32, 33) para o FTP
+
+on:
+  workflow_dispatch:
+    inputs:
+      ftp_dir:
+        description: 'Diretório no FTP'
+        required: false
+        default: '/G/Series/Longe demais - Segunda Temporada'
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Enviar legendas para o FTP
+        env:
+          FTP_BASE_DIR: ${{ inputs.ftp_dir }}
+        run: |
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
+          
+          cd legendas_prontas
+          echo "Iniciando upload das legendas normalizadas para o FTP..."
+          for f in *; do
+            if [ -f "$f" ]; then
+              echo "----------------------------------------"
+              echo "Enviando $f para $FTP_BASE_DIR..."
+              curl -# --fail --ftp-pasv \
+                --retry 5 --retry-delay 5 --retry-connrefused \
+                -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+                -T "$f" \
+                "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+              echo "✓ Concluído: $f"
+            fi
+          done
+          echo "Todos os arquivos foram enviados com sucesso!"
+
+      - name: Salvar Artifact de Backup no GitHub
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legendas-prontas-ep31-32-33
+          path: legendas_prontas/
