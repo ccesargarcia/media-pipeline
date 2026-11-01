@@ -2,7 +2,7 @@
 """
 Traduz arquivos .srt (Turco -> Português do Brasil) usando a API do OpenRouter
 com auto-descoberta de modelos gratuitos ativos, rotação dinâmica de modelos
-em caso de HTTP 429 (Rate Limit) e fallback automático contra HTTP 404.
+em caso de HTTP 429 (Rate Limit), barra de progresso visual com ETA e fallback automático.
 """
 import argparse
 import getpass
@@ -148,6 +148,11 @@ def next_free_model(current_model: str, pool: list) -> str:
         return pool[0]
 
 
+def format_progress_bar(current: int, total: int, width: int = 25) -> str:
+    filled = int(width * current / total) if total > 0 else 0
+    return "=" * filled + ">" * (1 if filled < width else 0) + "." * max(0, width - filled - 1)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Traduz legenda .srt usando OpenRouter API.")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
@@ -175,7 +180,6 @@ def main():
     available_models = get_available_models()
     active_model = resolve_model(args.model, available_models)
 
-    # Filtra pool com base nos modelos realmente ativos
     active_pool = [m for m in FREE_MODELS_POOL if not available_models or m in available_models]
     if not active_pool:
         active_pool = FREE_MODELS_POOL
@@ -186,80 +190,110 @@ def main():
     for i, item in enumerate(itens, start=1):
         item["id"] = i
 
-    print(f"==> Total de falas para traduzir via OpenRouter ({active_model}): {len(itens)}", flush=True)
-
+    total_itens = len(itens)
     batch_size = args.batch_size
-    total_lotes = (len(itens) + batch_size - 1) // batch_size
+    total_lotes = (total_itens + batch_size - 1) // batch_size
     traducoes = {}
+
+    print("=" * 70, flush=True)
+    print(f"==> Iniciando Tradução via OpenRouter ({active_model})", flush=True)
+    print(f"==> Total de Falas: {total_itens} | Total de Lotes: {total_lotes} (Lote: {batch_size})", flush=True)
+    print("=" * 70, flush=True)
+
+    t_inicio = time.time()
 
     for idx_lote in range(total_lotes):
         inicio = idx_lote * batch_size
-        fim = min(inicio + batch_size, len(itens))
+        fim = min(inicio + batch_size, total_itens)
         lote_atual = itens[inicio:fim]
 
         ctx_inicio = max(0, inicio - 6)
         contexto_anterior = itens[ctx_inicio:inicio]
 
+        print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
+
         sucesso = False
         max_tentativas = 8
         for tentativa in range(max_tentativas):
             try:
+                t_lote_start = time.time()
                 mapa = traduzir_lote_openrouter(api_key, active_model, contexto_anterior, lote_atual)
+                t_lote_dur = time.time() - t_lote_start
+
                 for item in lote_atual:
                     texto = mapa.get(item["id"], item["texto"])
                     item["traducao"] = texto
                     traducoes[item["id"]] = texto
-                print(f"[{idx_lote + 1}/{total_lotes}] Traduzidas {fim}/{len(itens)} falas com sucesso ({active_model})...", flush=True)
+
+                tempo_decorrido = time.time() - t_inicio
+                pct_concluido = (fim / total_itens) * 100
+                velocidade = fim / tempo_decorrido if tempo_decorrido > 0 else 0
+                falas_restantes = total_itens - fim
+                tempo_restante = falas_restantes / velocidade if velocidade > 0 else 0
+
+                el_m, el_s = divmod(int(tempo_decorrido), 60)
+                eta_m, eta_s = divmod(int(tempo_restante), 60)
+                bar = format_progress_bar(fim, total_itens, width=20)
+
+                print(
+                    f"✓ [{pct_concluido:5.1f}%] [{bar}] Lote {idx_lote + 1}/{total_lotes} OK ({t_lote_dur:.1f}s) | "
+                    f"Concluídas: {fim}/{total_itens} | Tempo: {el_m:02d}:{el_s:02d} | ETA: {eta_m:02d}:{eta_s:02d} ({velocidade:.1f} falas/s)",
+                    flush=True,
+                )
                 sucesso = True
                 break
             except urllib.error.HTTPError as e:
-                # 429 = Rate limit excedido -> Rotação imediata para outro modelo free
                 if e.code == 429:
                     novo_modelo = next_free_model(active_model, active_pool)
-                    espera = 5 + (tentativa * 4)
-                    print(f"HTTP 429 (Rate Limit) com '{active_model}'. Alternando para '{novo_modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
+                    espera = 4 + (tentativa * 3)
+                    print(f"  HTTP 429 (Rate Limit) com '{active_model}'. Alternando para '{novo_modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
                     active_model = novo_modelo
                     time.sleep(espera)
                     continue
 
-                # 404 = Modelo descontinuado
                 if e.code == 404:
                     novo_modelo = next_free_model(active_model, active_pool)
-                    print(f"HTTP 404 com '{active_model}'. Trocando para '{novo_modelo}'...", file=sys.stderr, flush=True)
+                    print(f"  HTTP 404 com '{active_model}'. Trocando para '{novo_modelo}'...", file=sys.stderr, flush=True)
                     active_model = novo_modelo
                     time.sleep(2)
                     continue
 
                 if tentativa < max_tentativas - 1:
-                    espera = 6 * (tentativa + 1)
-                    print(f"Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                    espera = 5 * (tentativa + 1)
+                    print(f"  Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas; mantendo original.", file=sys.stderr, flush=True)
+                    print(f"  Falha no lote {idx_lote + 1} após {max_tentativas} tentativas; mantendo original.", file=sys.stderr, flush=True)
                     for item in lote_atual:
                         item["traducao"] = item["texto"]
 
             except Exception as e:
                 if tentativa < max_tentativas - 1:
-                    espera = 6 * (tentativa + 1)
-                    print(f"Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                    espera = 5 * (tentativa + 1)
+                    print(f"  Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"Falha no lote {idx_lote + 1}; mantendo original.", file=sys.stderr, flush=True)
+                    print(f"  Falha no lote {idx_lote + 1}; mantendo original.", file=sys.stderr, flush=True)
                     for item in lote_atual:
                         item["traducao"] = item["texto"]
 
-        # Intervalo seguro entre requisições para evitar rate limit
-        time.sleep(3.5)
+        # Intervalo seguro para não estourar rate limit
+        time.sleep(2.5)
 
     blocos_saida = []
     for item in itens:
         txt = item.get("traducao") or item["texto"]
         blocos_saida.append(f"{item['idx']}\n{item['tempo']}\n{txt}")
 
+    tempo_total = time.time() - t_inicio
+    tot_m, tot_s = divmod(int(tempo_total), 60)
+
     saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text("\n\n".join(blocos_saida) + "\n", encoding="utf-8")
-    print(f"==> Concluído via OpenRouter! Legenda salva em: {saida}", flush=True)
+    print("=" * 70, flush=True)
+    print(f"==> Concluído com sucesso via OpenRouter em {tot_m:02d}m{tot_s:02d}s!", flush=True)
+    print(f"==> Legenda salva em: {saida}", flush=True)
+    print("=" * 70, flush=True)
 
 
 if __name__ == "__main__":
