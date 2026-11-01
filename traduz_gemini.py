@@ -54,13 +54,10 @@ def listar_modelos_flash(api_key: str) -> list[str]:
         disponiveis.append(nome)
 
     preferidos = [
-        "gemini-3-flash-preview",
-        "gemini-3.0-flash",
-        "gemini-flash-latest",
-        "gemini-2.5-flash",
         "gemini-2.0-flash",
-        "gemini-flash-lite-latest",
-        "gemini-2.0-flash-lite",
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-8b",
+        "gemini-flash-latest",
     ]
     ordenados = [p for p in preferidos if p in disponiveis]
     for m in sorted(disponiveis, reverse=True):
