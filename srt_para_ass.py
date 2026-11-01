@@ -6,9 +6,9 @@ Converte arquivo .srt para .ass (Advanced SubStation Alpha) e normaliza timings:
 - Limita falas a no máximo 6.0 segundos (ou 7.5s para falas muito extensas).
 - Garante intervalo limpo sem legenda durante trilha sonora e silêncio.
 - Remove marcadores fantasmas como '[Música]'.
-- Tarja preta 100% opaca cobrindo a área de legendas embutidas (hardsub) do vídeo.
-- Texto em amarelo vivo (#FFFF00) em negrito centralizado sobre a tarja preta.
-Suportado nativamente pelo VLC (Android / PC / TV) sem precisar recodificar o vídeo.
+- Tarja preta opaca inteligente (BorderStyle 3) ajustada estritamente ao tamanho de cada legenda.
+- Texto em amarelo vivo (#FFFF00) em negrito perfeitamente posicionado sobre o hardsub original.
+- Suportado nativamente pelo VLC (Android / PC / TV) sem precisar recodificar o vídeo.
 """
 import re
 import sys
@@ -85,9 +85,9 @@ def converter_srt_para_ass(srt_path: Path, ass_path: Path = None, atualizar_srt:
             srt_lines.append(f"{idx}\n{t_srt}\n{item['text']}")
         srt_path.write_text("\n\n".join(srt_lines) + "\n", encoding="utf-8")
 
-    # Gerar ASS com estilo caixa preta + texto amarelo
+    # Gerar ASS com caixa opaca delimitada exclusivamente em volta de cada legenda (BorderStyle: 3)
     ass_header = """[Script Info]
-Title: Legenda PT-BR (Tarja Preta Opaca + Amarelo)
+Title: Legenda PT-BR (Tarja Preta Delimitada + Amarelo)
 ScriptType: v4.00+
 PlayResX: 1280
 PlayResY: 720
@@ -96,26 +96,17 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Box,sans-serif,42,&H00000000,&H00000000,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,0,0,7,0,0,0,1
-Style: Default,sans-serif,42,&H0000FFFF,&H0000FFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,3,14,0,2,60,60,48,1
+Style: Default,Arial,36,&H0000FFFF,&H0000FFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,3,10,0,2,40,40,68,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     ass_events = []
     for item in parsed:
-        ini_box = srt_time_to_ass(max(0.0, item["start"] - 0.12))
-        fim_box = srt_time_to_ass(item["end"] + 0.15)
         ini = srt_time_to_ass(item["start"])
         fim = srt_time_to_ass(item["end"])
-
         txt_ass = r"\N".join(l.strip() for l in item["text"].splitlines() if l.strip())
-
-        ass_events.append(
-            f"Dialogue: 0,{ini_box},{fim_box},Box,,0,0,0,,"
-            f"{{\\pos(0,0)\\p1}}m 120 555 l 1160 555 1160 695 120 695{{\\p0}}"
-        )
-        ass_events.append(f"Dialogue: 1,{ini},{fim},Default,,0,0,0,,{txt_ass}")
+        ass_events.append(f"Dialogue: 0,{ini},{fim},Default,,0,0,0,,{txt_ass}")
 
     ass_path.write_text(ass_header + "\n".join(ass_events) + "\n", encoding="utf-8")
     return ass_path, len(parsed)
