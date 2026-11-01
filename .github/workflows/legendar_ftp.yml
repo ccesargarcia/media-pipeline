@@ -43,14 +43,14 @@ jobs:
             whisper.cpp/build/bin
             whisper.cpp/models/ggml-large-v3-turbo-q8_0.bin
             whisper.cpp/models/ggml-silero-v6.2.0.bin
-          key: whisper-avx2-turbo-q8-vad-v1
+          key: whisper-turbo-q8-vad-v3
 
-      - name: Compilar whisper.cpp (Otimizado AVX2 + OpenMP) e Baixar Modelos
+      - name: Compilar whisper.cpp (Otimizado OpenMP) e Baixar Modelos
         if: steps.cache-whisper.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 https://github.com/ggerganov/whisper.cpp.git
           cd whisper.cpp
-          cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_OPENMP=ON -DGGML_AVX2=ON -DGGML_FMA=ON
+          cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_OPENMP=ON
           cmake --build build --config Release -j$(nproc)
           sh ./models/download-ggml-model.sh large-v3-turbo-q8_0
           sh ./models/download-vad-model.sh silero-v6.2.0
@@ -94,7 +94,6 @@ jobs:
             -f input.wav \
             -l ${{ inputs.lang }} \
             -t $NTHREADS \
-            -fa \
             -sns \
             -mc 0 \
             -osrt \
