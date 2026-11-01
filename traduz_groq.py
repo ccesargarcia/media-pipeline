@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Traduz arquivos .srt (Turco -> Português do Brasil) usando a API da Groq Cloud
-(modelo Llama 3.3 70B Versatile) com janela de contexto deslizante e alta velocidade.
+Traduz arquivos .srt (Turco -> Português do Brasil) usando a Groq Cloud API
+com o modelo openai/gpt-oss-120b (120B parâmetros) em alta velocidade e fidelidade dramática.
 """
 import argparse
 import getpass
@@ -16,18 +16,44 @@ from pathlib import Path
 
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
-SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
+SYSTEM_PROMPT = """Você é um tradutor sênior de legendas de séries dramáticas turcas (dizis) para o Português do Brasil (PT-BR), especializado na série "Uzak Şehir" (Longe Demais), ambientada em Mardin.
 
-Contexto da série (Uzak Şehir / Longe Demais - ambientada em Mardin):
-- Personagens masculinos: Cihan (chefe da família Albora), Boran (irmão que reapareceu), Kaya (irmão mais novo), Şahin (primo), Demir (rival Baybars), Ecmel (pai de Şahin), Kadir, Muzaffer, Deniz (filho pequeno de Alya), Halis, Özkan.
-- Personagens femininas: Alya (médica, mãe de Deniz), Sadakat (matriarca dos Albora), Nare, Zerrin, Mine, Fidan, Pakize, Ümmü Hanım.
+PERSONAGENS E DINÂMICAS:
+- Família Albora:
+  * Cihan Albora: Líder patriarcal forte, protetor e honrado. Fala com autoridade e respeito.
+  * Alya Albora: Médica que veio do Canadá com o filho Deniz para enterrar o marido Boran. Firme, lúcida, elegante e corajosa.
+  * Boran Albora: Marido falecido de Alya que reapareceu vivo (estava em coma/escondido pelo segurança).
+  * Sadakat Albora (Sadakat Hanım): Matriarca implacável e tradicional. Chame de "Dona Sadakat" ou "Senhora Sadakat".
+  * Kaya Albora: Irmão mais novo leal a Cihan.
+  * Şahin Albora: Primo impulsivo e explosivo (filho de Ecmel).
+  * Deniz: Filho pequeno de Alya e Boran (fala como criança de 6 anos).
+  * Kadir, Muzaffer: Homens de confiança da mansão.
+- Clã Baybars (Inimigos mortais):
+  * Demir Baybars: Rival violento e implacável.
+  * Ecmel: Traidor.
 
-Regras obrigatórias de tradução de legendas:
-1. Gênero gramatical: determine masculino/feminino pelo contexto de quem fala e de quem se fala (em turco "o" é neutro).
-2. Conecte falas que foram quebradas entre blocos para que a leitura flua naturalmente.
-3. Adapte expressões idiomáticas ("Yenge" -> "Cunhada", "Abi" -> "Irmão", "Abla" -> "Irmã", "Ağa", "Hanım", "Geçmiş olsun", "Başım üstüne") para o português brasileiro falado.
-4. Mantenha o texto conciso para leitura em tela.
-5. Retorne EXCLUSIVAMENTE um array JSON válido no formato: [{"id": <numero>, "text": "<tradução>"}] contendo todos os IDs solicitados."""
+TRATAMENTOS CULTURAIS E VOCABULÁRIO:
+- "Yenge" -> "Cunhada" (ou "Dona Alya" dependendo do respeito do capataz).
+- "Abi" -> "Irmão" / "Meu irmão".
+- "Abla" -> "Irmã".
+- "Ağa" -> "Agha" ou "Patrão".
+- "Konak / Konağın" -> "Mansão" / "Casa".
+- "Başım üstüne" -> "Às suas ordens" / "Com certeza".
+- "Allah aşkına" -> "Pelo amor de Deus".
+- "Geçmiş olsun" -> "Que passe logo" / "Melhoras".
+
+CORREÇÃO DE ALUCINAÇÕES FONÉTICAS DO WHISPER NO TURCO:
+- O áudio turco gravado com vento ou música tem erros fonéticos comuns:
+  * "tersiz / telsiz / tersizmez" refere-se a RÁDIO / COMUNICADOR (walkie-talkie do menino Deniz). NUNCA traduza como fogo!
+  * "Ali Hanım" ou "Hamada" refere-se a "Dona Alya" ou "Alya".
+  * "Memardik" ou "De Mardin" é sobre Mardin ou a canção de abertura.
+
+REGRAS DE LEGENDA:
+1. Português do Brasil coloquial dramático, sonoro e natural (como em dublagem/legendagem profissional de streaming).
+2. Respeite pontuação de suspense, exclamações e quebras de frase.
+3. Não resuma nem invente fatos fora do contexto; apenas traduza com exatidão e naturalidade.
+4. Responda EXCLUSIVAMENTE em formato JSON com a chave "subtitles":
+   {"subtitles": [{"id": <int>, "text": "<tradução em PT-BR>"}]}"""
 
 
 def parse_srt(conteudo: str):
@@ -51,14 +77,14 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
             [{"id": item["id"], "tr": item["texto"], "pt": item.get("traducao", "")} for item in contexto_anterior],
             ensure_ascii=False,
         )
-        prompt_partes.append(f"CONTEXTO ANTERIOR (referência):\n{ctx_json}\n")
+        prompt_partes.append(f"CONTEXTO ANTERIOR (para continuidade da cena):\n{ctx_json}\n")
 
     entrada_json = json.dumps(
         [{"id": item["id"], "text": item["texto"]} for item in lote_atual],
         ensure_ascii=False,
     )
     prompt_partes.append(
-        f"TRADUZA ESTE LOTE ({len(lote_atual)} itens) PARA PORTUGUÊS DO BRASIL (PT-BR):\n{entrada_json}"
+        f"TRADUZA ESTE LOTE DE FALA ({len(lote_atual)} itens) PARA PORTUGUÊS DO BRASIL (PT-BR):\n{entrada_json}"
     )
 
     payload = {
@@ -66,7 +92,7 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
         "temperature": 0.2,
         "response_format": {"type": "json_object"},
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT + "\nRetorne um objeto JSON contendo a chave 'subtitles' com a lista: {\"subtitles\": [{\"id\": ..., \"text\": ...}]}"},
+            {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": "\n".join(prompt_partes)},
         ],
     }
@@ -77,7 +103,7 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-            "User-Agent": "Termux-SRT-Groq/1.0",
+            "User-Agent": "curl/8.5.0",
         },
         method="POST",
     )
@@ -86,14 +112,20 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
         corpo = json.loads(resp.read().decode("utf-8"))
 
     conteudo_resp = corpo["choices"][0]["message"]["content"].strip()
-    dado_json = json.loads(conteudo_resp)
     
+    # Limpa possíveis blocos ```json
+    if conteudo_resp.startswith("```"):
+        conteudo_resp = re.sub(r"^```(?:json)?\s*", "", conteudo_resp)
+        conteudo_resp = re.sub(r"\s*```$", "", conteudo_resp)
+
+    dado_json = json.loads(conteudo_resp, strict=False)
+
     if isinstance(dado_json, dict):
         lista = dado_json.get("subtitles") or dado_json.get("translations") or list(dado_json.values())[0]
     elif isinstance(dado_json, list):
         lista = dado_json
     else:
-        raise ValueError("Resposta inesperada da Groq.")
+        raise ValueError(f"Formato inesperado retornado pela Groq: {conteudo_resp[:100]}")
 
     mapa = {}
     for obj in lista:
@@ -104,11 +136,11 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Traduz legenda .srt usando Groq Cloud API (Llama 3.3 70B).")
+    parser = argparse.ArgumentParser(description="Traduz legenda .srt usando Groq Cloud API (openai/gpt-oss-120b).")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
-    parser.add_argument("-m", "--model", default="llama-3.3-70b-versatile", help="Modelo Groq")
-    parser.add_argument("-b", "--batch-size", type=int, default=50, help="Falas por lote (padrão: 50)")
+    parser.add_argument("-m", "--model", default="openai/gpt-oss-120b", help="Modelo Groq (padrão: openai/gpt-oss-120b)")
+    parser.add_argument("-b", "--batch-size", type=int, default=35, help="Falas por lote (padrão: 35)")
     args = parser.parse_args()
 
     entrada = Path(args.entrada).expanduser()
@@ -121,11 +153,11 @@ def main():
     api_key = (
         os.environ.get("GROQ_API_KEY")
         or os.environ.get("GROK_API_KEY")
-        or getpass.getpass("Cole sua chave Groq/Grok API (não aparecerá na tela): ")
+        or getpass.getpass("Cole sua chave Groq API (não aparecerá na tela): ")
     ).strip()
 
     if not api_key:
-        print("Erro: Chave da API necessária.", file=sys.stderr)
+        print("Erro: Chave GROQ_API_KEY não encontrada.", file=sys.stderr)
         sys.exit(1)
 
     dados = entrada.read_bytes()
@@ -145,38 +177,48 @@ def main():
         fim = min(inicio + batch_size, len(itens))
         lote_atual = itens[inicio:fim]
 
-        ctx_inicio = max(0, inicio - 6)
+        ctx_inicio = max(0, inicio - 5)
         contexto_anterior = itens[ctx_inicio:inicio]
 
-        for tentativa in range(4):
-            try:
-                mapa = traduzir_lote_groq(api_key, args.model, contexto_anterior, lote_atual)
-                for item in lote_atual:
-                    texto = mapa.get(item["id"], item["texto"])
-                    item["traducao"] = texto
-                    traducoes[item["id"]] = texto
-                print(f"[{idx_lote + 1}/{total_lotes}] Traduzidas {fim}/{len(itens)} falas...", flush=True)
-                break
-            except Exception as e:
-                if tentativa < 3:
-                    espera = 5 * (tentativa + 1)
-                    print(f"Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
-                    time.sleep(espera)
-                else:
-                    print(f"Falha no lote {idx_lote + 1}; mantendo original.", file=sys.stderr, flush=True)
-                    for item in lote_atual:
-                        item["traducao"] = item["texto"]
+        print(f"--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
-        time.sleep(0.5)
+        for tentativa in range(6):
+            try:
+                t0 = time.time()
+                mapa = traduzir_lote_groq(api_key, args.model, contexto_anterior, lote_atual)
+                dt = time.time() - t0
+
+                faltantes = 0
+                for item in lote_atual:
+                    if item["id"] in mapa:
+                        item["traducao"] = mapa[item["id"]]
+                        traducoes[item["id"]] = mapa[item["id"]]
+                    else:
+                        faltantes += 1
+                        item["traducao"] = item["texto"]
+                        traducoes[item["id"]] = item["texto"]
+
+                if faltantes > 0:
+                    print(f"  [Aviso: {faltantes} falas mantiveram original no lote {idx_lote + 1}]", flush=True)
+                else:
+                    print(f"  ✓ Lote {idx_lote + 1} traduzido com sucesso em {dt:.2f}s", flush=True)
+                break
+            except urllib.error.HTTPError as e:
+                espera = 5 * (tentativa + 1)
+                print(f"  [Tentativa {tentativa + 1}/6 HTTP {e.code}]. Nova tentativa em {espera}s...", file=sys.stderr, flush=True)
+                time.sleep(espera)
+            except Exception as e:
+                espera = 3 * (tentativa + 1)
+                print(f"  [Tentativa {tentativa + 1}/6 falhou: {e}]. Tentando em {espera}s...", file=sys.stderr, flush=True)
+                time.sleep(espera)
 
     blocos_saida = []
     for item in itens:
-        txt = item.get("traducao") or item["texto"]
-        blocos_saida.append(f"{item['idx']}\n{item['tempo']}\n{txt}")
+        t_final = traducoes.get(item["id"], item["texto"])
+        blocos_saida.append(f"{item['idx']}\n{item['tempo']}\n{t_final}")
 
-    saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text("\n\n".join(blocos_saida) + "\n", encoding="utf-8")
-    print(f"==> Concluído via Groq! Legenda salva em: {saida}", flush=True)
+    print(f"\n==> Tradução concluída com sucesso! Arquivo salvo em: {saida}")
 
 
 if __name__ == "__main__":
