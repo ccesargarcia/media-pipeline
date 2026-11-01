@@ -21,7 +21,7 @@ OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 FREE_MODELS_POOL = [
     "google/gemma-4-31b-it:free",
     "google/gemma-4-26b-a4b-it:free",
-    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "nvidia/nemotron-3.5-lightning:free",
 ]
 
 SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
