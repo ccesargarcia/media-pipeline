@@ -1,0 +1,70 @@
+name: Baixar Episódios para FTP (Turkish123)
+
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: 'Temporada'
+        required: true
+        type: choice
+        options:
+          - 'Segunda Temporada'
+          - 'Terceira Temporada'
+          - 'Primeira Temporada'
+        default: 'Segunda Temporada'
+      episode_start:
+        description: 'Número do episódio inicial (ex: 33)'
+        required: true
+        type: number
+        default: 33
+      episode_end:
+        description: 'Número do episódio final (ex: 33 para apenas um, ou 35 para lote)'
+        required: true
+        type: number
+        default: 33
+
+jobs:
+  download-and-upload-ftp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar FFmpeg, Python e Playwright
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg curl python3 python3-pip
+          pip3 install playwright
+          playwright install --with-deps chromium
+
+      - name: Processar Episódios
+        env:
+          FTP_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+        run: |
+          START_EP=${{ inputs.episode_start }}
+          END_EP=${{ inputs.episode_end }}
+          
+          echo "Processando episódios de $START_EP até $END_EP para a pasta: $FTP_DIR"
+          
+          # Codifica o diretório FTP para o curl
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_DIR"]))')
+
+          for (( ep=$START_EP; ep<=$END_EP; ep++ )); do
+            EP_PADDED=$(printf "%02d" $ep)
+            FILENAME="Uzak_Sehir_-_Episode_${EP_PADDED}.mp4"
+            echo "=================================================="
+            echo "==> Baixando Episódio $ep: $FILENAME"
+            echo "=================================================="
+            
+            # Executa o extrator com Playwright + FFmpeg
+            python3 extrair_turkish123.py $ep -o "$FILENAME"
+            
+            echo "==> Enviando $FILENAME via FTP para $FTP_DIR..."
+            curl -# --fail --ftp-pasv --ftp-create-dirs \
+              -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+              -T "$FILENAME" \
+              "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+              
+            echo "==> Upload concluído com sucesso para $FILENAME!"
+            rm -f "$FILENAME" # limpa espaço no runner para o próximo episódio
+          done

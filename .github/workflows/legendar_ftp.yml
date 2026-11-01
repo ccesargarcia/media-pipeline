@@ -1,0 +1,151 @@
+name: Legendar Série via FTP
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_filename:
+        description: 'Nome do arquivo de vídeo (ex: Uzak_Sehir_-_Episode_31.mp4)'
+        required: true
+        type: string
+      lang:
+        description: 'Idioma do áudio original (ex: tr, en, auto)'
+        required: false
+        default: 'tr'
+      translator:
+        description: 'Motor de tradução'
+        required: true
+        type: choice
+        options:
+          - 'openrouter'
+          - 'gemini'
+          - 'groq'
+        default: 'openrouter'
+
+jobs:
+  transcribe-and-translate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar Dependências do Sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg cmake build-essential python3 curl libomp-dev
+
+      - name: Cache do Whisper.cpp e Modelos GGML
+        id: cache-whisper
+        uses: actions/cache@v4
+        with:
+          path: |
+            whisper.cpp/build/bin
+            whisper.cpp/models/ggml-large-v3-turbo-q8_0.bin
+            whisper.cpp/models/ggml-silero-v6.2.0.bin
+          key: whisper-avx2-turbo-q8-vad-v1
+
+      - name: Compilar whisper.cpp (Otimizado AVX2 + OpenMP) e Baixar Modelos
+        if: steps.cache-whisper.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 https://github.com/ggerganov/whisper.cpp.git
+          cd whisper.cpp
+          cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_OPENMP=ON -DGGML_AVX2=ON -DGGML_FMA=ON
+          cmake --build build --config Release -j$(nproc)
+          sh ./models/download-ggml-model.sh large-v3-turbo-q8_0
+          sh ./models/download-vad-model.sh silero-v6.2.0
+
+      - name: Configurar Caminhos e Variáveis
+        run: |
+          FTP_BASE_DIR="/G/Series/Longe demais - Segunda Temporada"
+          VIDEO_NAME="${{ inputs.video_filename }}"
+          STEM="${VIDEO_NAME%.*}"
+          
+          echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> $GITHUB_ENV
+          echo "VIDEO_NAME=$VIDEO_NAME" >> $GITHUB_ENV
+          echo "STEM=$STEM" >> $GITHUB_ENV
+
+      - name: Baixar vídeo do FTP (Com Barra de Progresso)
+        run: |
+          ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
+          
+          echo "Baixando vídeo do FTP com barra de progresso..."
+          curl -# --fail --ftp-pasv \
+            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_PATH}" \
+            -o input_media
+
+      - name: Extrair áudio em 16kHz Mono (FFmpeg Multi-thread)
+        run: |
+          ffmpeg -hide_banner -loglevel warning -stats -threads $(nproc) -y \
+            -i input_media -vn -acodec pcm_s16le -ar 16000 -ac 1 input.wav
+          rm -f input_media  # libera espaço no runner
+
+      - name: Transcrever com Whisper Large-v3-Turbo + Silero VAD
+        run: |
+          NTHREADS=$(nproc)
+          echo "Rodando Whisper com $NTHREADS núcleos..."
+          ./whisper.cpp/build/bin/whisper-cli \
+            -m ./whisper.cpp/models/ggml-large-v3-turbo-q8_0.bin \
+            -vm ./whisper.cpp/models/ggml-silero-v6.2.0.bin \
+            --vad \
+            -f input.wav \
+            -l ${{ inputs.lang }} \
+            -t $NTHREADS \
+            -fa \
+            -sns \
+            -mc 0 \
+            -osrt \
+            -of "${{ env.STEM }}"
+
+      - name: Salvar Backup da Transcrição Original no FTP (Imediato)
+        if: always()
+        run: |
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
+          if [ -f "${{ env.STEM }}.srt" ]; then
+            echo "Enviando arquivo original .srt para o FTP..."
+            curl -# --fail --ftp-pasv \
+              -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+              -T "${{ env.STEM }}.srt" \
+              "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/" || true
+          fi
+
+      - name: Traduzir para PT-BR (${{ inputs.translator }}) e Gerar .ass
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY || secrets.GROK_API_KEY }}
+        run: |
+          if [ "${{ inputs.translator }}" = "openrouter" ]; then
+            echo "Traduzindo via OpenRouter (Llama 3.3 70B Free)..."
+            python3 traduz_openrouter.py "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
+          elif [ "${{ inputs.translator }}" = "groq" ]; then
+            echo "Traduzindo via Groq..."
+            python3 traduz_groq.py "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
+          else
+            echo "Traduzindo via Google Gemini..."
+            python3 traduz_gemini.py -b 35 "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
+          fi
+          python3 srt_para_ass.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.ass"
+
+      - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
+        run: |
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
+          
+          echo "Enviando legendas geradas de volta para o FTP..."
+          curl -# --fail --ftp-pasv \
+            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+            -T "${{ env.STEM }}.pt-BR.srt" \
+            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+
+          curl -# --fail --ftp-pasv \
+            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+            -T "${{ env.STEM }}.ass" \
+            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+
+      - name: Salvar Legendas como Artifact de Backup no GitHub
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legendas-${{ env.STEM }}
+          path: |
+            ${{ env.STEM }}*.srt
+            ${{ env.STEM }}*.ass
