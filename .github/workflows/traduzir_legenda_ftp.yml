@@ -113,7 +113,10 @@ jobs:
             timeout 90 bash -c 'until curl -s http://127.0.0.1:8080/health | grep -q "ok"; do sleep 2; done' || true
             
             echo "Traduzindo legendas 100% localmente via Qwen 2.5 7B..."
-            python3 traduz_local_qwen.py input.srt "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_local_qwen.py \
+              --server-url "http://127.0.0.1:8080/v1" \
+              --batch-size 20 \
+              input.srt "${{ env.STEM }}.pt-BR.srt"
             
             kill $SERVER_PID 2>/dev/null || true
           elif [ "${{ inputs.translator }}" = "openrouter" ]; then

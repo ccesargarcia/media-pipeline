@@ -169,7 +169,7 @@ def main():
 
         print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
-        for tentativa in range(6):
+        for tentativa in range(12):
             try:
                 t_lote_start = time.time()
                 mapa = traduzir_lote_local(args.server_url, contexto_anterior, lote_atual)
@@ -200,26 +200,26 @@ def main():
                 )
                 break
             except urllib.error.HTTPError as e:
-                if e.code == 503 and tentativa < 5:
+                if e.code == 503 and tentativa < 11:
                     print(f"  [Cloud Run iniciando container / carregando modelo...]. Aguardando 15s...", file=sys.stderr, flush=True)
                     time.sleep(15)
-                elif tentativa < 5:
-                    espera = 5 * (tentativa + 1)
-                    print(f"  [Tentativa {tentativa + 1}/6 HTTP {e.code}]. Nova tentativa em {espera}s...", file=sys.stderr, flush=True)
+                elif e.code == 429 and tentativa < 11:
+                    espera = 25
+                    print(f"  [Cloud Run ocupado processando requisição (HTTP 429)]. Aguardando {espera}s...", file=sys.stderr, flush=True)
+                    time.sleep(espera)
+                elif tentativa < 11:
+                    espera = 8 * (tentativa + 1)
+                    print(f"  [Tentativa {tentativa + 1}/12 HTTP {e.code}]. Nova tentativa em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"  [ERRO DEFINITIVO no lote {idx_lote + 1}]; mantendo falas originais.", file=sys.stderr, flush=True)
-                    for item in lote_atual:
-                        item["traducao"] = item["texto"]
+                    raise RuntimeError(f"Falha definitiva no lote {idx_lote + 1}: HTTP {e.code}")
             except Exception as e:
-                if tentativa < 5:
-                    espera = 4 * (tentativa + 1)
-                    print(f"  [Tentativa {tentativa + 1}/6 falhou: {e}]. Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                if tentativa < 11:
+                    espera = 6 * (tentativa + 1)
+                    print(f"  [Tentativa {tentativa + 1}/12 falhou: {e}]. Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"  [ERRO DEFINITIVO no lote {idx_lote + 1}]; mantendo falas originais.", file=sys.stderr, flush=True)
-                    for item in lote_atual:
-                        item["traducao"] = item["texto"]
+                    raise RuntimeError(f"Falha definitiva no lote {idx_lote + 1}: {e}")
 
     blocos_saida = []
     for item in itens:
