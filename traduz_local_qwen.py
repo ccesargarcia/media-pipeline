@@ -89,7 +89,11 @@ def traduzir_lote_local(server_url: str, contexto_anterior: list, lote_atual: li
     if conteudo_resp.startswith("```"):
         conteudo_resp = re.sub(r"^```(?:json)?\s*|\s*```$", "", conteudo_resp, flags=re.DOTALL).strip()
 
-    lista = json.loads(conteudo_resp)
+    try:
+        lista = json.loads(conteudo_resp, strict=False)
+    except Exception:
+        limpo = re.sub(r'[\x00-\x1f\x7f-\x9f]', lambda m: ' ' if m.group() in '\r\n\t' else '', conteudo_resp)
+        lista = json.loads(limpo, strict=False)
     if isinstance(lista, dict):
         lista = lista.get("subtitles") or lista.get("translations") or list(lista.values())[0]
 

@@ -147,7 +147,11 @@ def traduzir_lote(api_key: str, modelo: str, contexto_anterior: list, lote_atual
     if texto_resp.startswith("```"):
         texto_resp = re.sub(r"^```(?:json)?\s*|\s*```$", "", texto_resp, flags=re.DOTALL).strip()
 
-    lista_traduzida = json.loads(texto_resp)
+    try:
+        lista_traduzida = json.loads(texto_resp, strict=False)
+    except Exception:
+        limpo = re.sub(r'[\x00-\x1f\x7f-\x9f]', lambda m: ' ' if m.group() in '\r\n\t' else '', texto_resp)
+        lista_traduzida = json.loads(limpo, strict=False)
     if not isinstance(lista_traduzida, list):
         raise ValueError("O modelo não retornou uma lista JSON.")
 
