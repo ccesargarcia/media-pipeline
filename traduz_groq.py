@@ -70,7 +70,7 @@ def parse_srt(conteudo: str):
     return itens
 
 
-def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_atual: list) -> dict:
+def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_atual: list):
     prompt_partes = []
     if contexto_anterior:
         ctx_json = json.dumps(
@@ -109,6 +109,7 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
     )
 
     with urllib.request.urlopen(req, timeout=60) as resp:
+        headers = dict(resp.headers)
         corpo = json.loads(resp.read().decode("utf-8"))
 
     conteudo_resp = corpo["choices"][0]["message"]["content"].strip()
@@ -132,7 +133,7 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
         if isinstance(obj, dict) and "id" in obj and "text" in obj:
             mapa[int(obj["id"])] = str(obj["text"]).strip()
 
-    return mapa
+    return mapa, headers
 
 
 def main():
@@ -140,7 +141,7 @@ def main():
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
     parser.add_argument("-m", "--model", default="openai/gpt-oss-120b", help="Modelo Groq (padrão: openai/gpt-oss-120b)")
-    parser.add_argument("-b", "--batch-size", type=int, default=35, help="Falas por lote (padrão: 35)")
+    parser.add_argument("-b", "--batch-size", type=int, default=30, help="Falas por lote (padrão: 30)")
     args = parser.parse_args()
 
     entrada = Path(args.entrada).expanduser()
@@ -182,11 +183,20 @@ def main():
 
         print(f"--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
-        for tentativa in range(6):
+        for tentativa in range(8):
             try:
                 t0 = time.time()
-                mapa = traduzir_lote_groq(api_key, args.model, contexto_anterior, lote_atual)
+                mapa, headers = traduzir_lote_groq(api_key, args.model, contexto_anterior, lote_atual)
                 dt = time.time() - t0
+
+                # Verifica consumo de TPM (tokens por minuto)
+                rem_tokens = int(headers.get("x-ratelimit-remaining-tokens", 99999))
+                reset_str = headers.get("x-ratelimit-reset-tokens", "0s")
+                if rem_tokens < 2200:
+                    m = re.search(r"([\d\.]+)s", str(reset_str))
+                    pausa = (float(m.group(1)) + 1.0) if m else 15.0
+                    print(f"  [Groq TPM: restam {rem_tokens} tokens. Aguardando {pausa:.1f}s para renovação da janela...]", flush=True)
+                    time.sleep(pausa)
 
                 faltantes = 0
                 for item in lote_atual:
@@ -204,12 +214,13 @@ def main():
                     print(f"  ✓ Lote {idx_lote + 1} traduzido com sucesso em {dt:.2f}s", flush=True)
                 break
             except urllib.error.HTTPError as e:
-                espera = 5 * (tentativa + 1)
-                print(f"  [Tentativa {tentativa + 1}/6 HTTP {e.code}]. Nova tentativa em {espera}s...", file=sys.stderr, flush=True)
+                m = re.search(r"([\d\.]+)s", str(e.headers.get("x-ratelimit-reset-tokens", "")))
+                espera = (float(m.group(1)) + 2.0) if m else (10.0 * (tentativa + 1))
+                print(f"  [Groq HTTP {e.code}]. Aguardando {espera:.1f}s para liberação da cota...", file=sys.stderr, flush=True)
                 time.sleep(espera)
             except Exception as e:
-                espera = 3 * (tentativa + 1)
-                print(f"  [Tentativa {tentativa + 1}/6 falhou: {e}]. Tentando em {espera}s...", file=sys.stderr, flush=True)
+                espera = 4 * (tentativa + 1)
+                print(f"  [Tentativa {tentativa + 1}/8 falhou: {e}]. Tentando em {espera}s...", file=sys.stderr, flush=True)
                 time.sleep(espera)
 
     blocos_saida = []
