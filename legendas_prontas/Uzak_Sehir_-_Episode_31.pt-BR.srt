@@ -1,6 +1,6 @@
 1
-00:00:06,850 --> 00:00:08,880
-As pedras de Mardin...
+00:00:06,850 --> 00:00:08,685
+Pedras de Mardin...
 
 2
 00:07:12,340 --> 00:07:16,905
@@ -12,15 +12,15 @@ Ele está vivo.
 
 4
 00:07:45,020 --> 00:07:46,640
-Diga agora mesmo.
+Diga agora.
 
 5
 00:07:47,610 --> 00:07:48,930
 Ele está vivo.
 
 6
-00:08:18,560 --> 00:08:21,305
-Liguei para o seu pai, meu filho.
+00:08:18,560 --> 00:08:20,915
+Eu procurei seu pai, filho.
 
 7
 00:08:32,740 --> 00:08:34,290
@@ -28,11 +28,11 @@ Deixe-me falar com você também.
 
 8
 00:08:34,470 --> 00:08:36,850
-Não, eu também não consegui falar. Não deve ter sinal onde ele está.
+Não, eu também não consegui falar, provavelmente não está funcionando onde ele está.
 
 9
 00:08:37,340 --> 00:08:38,750
-Use o fogo, então.
+Usa o rádio comunicador, então!
 
 10
 00:08:39,610 --> 00:08:40,370
@@ -40,43 +40,43 @@ Deniz.
 
 11
 00:08:40,830 --> 00:08:42,610
-Você já sabe que nada vai dar errado.
+Você já sabe que tem o rádio.
 
 12
 00:08:42,730 --> 00:08:45,520
-Todo mundo sabe, mãe. Por que você não sabe?
+Ele sabe, mãe, por que você não sabe?
 
 13
 00:08:46,700 --> 00:08:48,890
-Vá lá com sua bicicleta, espertinho.
+Vamos, você conhece muito a sua bicicleta.
 
 14
-00:08:53,070 --> 00:08:56,400
-Por que será que não estou nada tranquila?
+00:08:53,070 --> 00:08:56,790
+Por que nunca está à vontade, será que é o medo?
 
 15
-00:09:00,990 --> 00:09:05,490
-Por que ficou calado, então? Por que não nos perguntou nada?
+00:09:00,990 --> 00:09:05,425
+Por que ficou calado, então, por que não nos pergunta nada?
 
 16
 00:09:15,820 --> 00:09:17,110
-O Boran quis assim.
+Boran pediu assim.
 
 17
-00:09:18,770 --> 00:09:20,800
-O Boran quis assim, é?
+00:09:18,770 --> 00:09:20,930
+Boran pediu assim, hein.
 
 18
 00:09:21,790 --> 00:09:25,120
-Ele disse: "Se um dia eu morrer, me esconda".
+Ele disse: "Se um dia eu não morrer, guarde-me".
 
 19
 00:09:25,990 --> 00:09:28,330
-Não vou explicar agora, vocês sabem o motivo.
+Não vou contar agora, vocês já sabem o motivo.
 
 20
 00:09:28,670 --> 00:09:29,330
-E eu o escondi.
+Eu também escondi.
 
 21
 00:09:38,710 --> 00:09:40,510
@@ -84,59 +84,59 @@ Ninguém?
 
 22
 00:09:46,240 --> 00:09:48,650
-Eu e o Boran nos conhecemos na Bulgária.
+Nós nos conhecemos com Boran na Bulgária.
 
 23
 00:09:49,290 --> 00:09:50,990
-Eu estava nas sombras, e ele estava fugindo.
+Eu estava na escuridão, ele estava fugindo.
 
 24
 00:09:51,870 --> 00:09:52,290
-Não perguntei.
+Eu não perguntei.
 
 25
 00:09:53,070 --> 00:09:53,830
-Dava para ver nos olhos dele.
+Estava claro nos olhos dele.
 
 26
 00:09:54,710 --> 00:09:55,490
-Ele tinha um passado difícil.
+O passado era pesado.
 
 27
 00:09:57,140 --> 00:09:58,440
-Eu o ajudei a sair dessa.
+Ajudei-o a sair.
 
 28
 00:09:58,980 --> 00:10:00,240
-Depois, eu também me meti em confusão.
+Depois eu também me meti nessa confusão.
 
 29
 00:10:01,810 --> 00:10:02,620
-Tive problemas com a máfia.
+Entrei em conflito com a máfia.
 
 30
 00:10:03,560 --> 00:10:04,660
-Nós dois fugimos para o Canadá.
+Fugimos para o Canadá, nós dois.
 
 31
 00:10:05,370 --> 00:10:07,560
-Ele abriu um restaurante e eu fiquei com ele.
+Ele abriu um restaurante, e eu fui me envolver com ele, então.
 
 32
 00:10:09,100 --> 00:10:10,160
-No começo, ele era reservado.
+No começo, ele era distante.
 
 33
 00:10:11,020 --> 00:10:11,920
-Depois, ele passou a confiar em mim.
+Depois, passou a confiar em mim.
 
 34
 00:10:12,200 --> 00:10:14,250
 Um dia ele perguntou: "Quer ser meu segurança?"
 
 35
-00:10:14,330 --> 00:10:17,075
-Ele saiu vivo, afinal, meu filho.
+00:10:14,330 --> 00:10:17,270
+Ele sobreviveu e saiu com vida, meu filho.
 
 36
 00:10:22,400 --> 00:10:24,200
@@ -147,8 +147,8 @@ Alya.
 Ela estava desmaiada, não viu nada.
 
 38
-00:10:38,540 --> 00:10:42,390
-No dia do acidente, eu estava no carro logo atrás.
+00:10:38,540 --> 00:10:42,520
+No dia do atentado, eu estava logo no carro de trás.
 
 39
 00:10:44,960 --> 00:10:45,600
@@ -160,19 +160,19 @@ Um dos meus homens estava comigo.
 
 41
 00:10:49,490 --> 00:10:51,820
-Depois da batida, nós corremos para lá.
+Depois da colisão, corremos para lá.
 
 42
 00:10:52,390 --> 00:10:53,310
-A Dona Alya estava desmaiada.
+Dona Alya estava desacordada.
 
 43
 00:10:54,000 --> 00:10:55,050
-Boran também estava inconsciente.
+Ela não viu absolutamente nada.
 
 44
 00:10:55,530 --> 00:10:56,880
-Ele estava gravemente ferido.
+O Boran estava gravemente ferido.
 
 45
 00:10:57,860 --> 00:10:59,320
@@ -180,23 +180,23 @@ Colocamos o Boran no meu carro.
 
 46
 00:10:59,730 --> 00:11:03,630
-Depois, esmaguei a cabeça do homem que estava comigo com um pé de cabra.
+Então, parti a cabeça do homem ao meu lado com uma alavanca.
 
 47
 00:11:05,450 --> 00:11:06,910
-Deixei o rosto dele irreconhecível.
+Dei ao rosto dele uma aparência irreconhecível.
 
 48
 00:11:08,940 --> 00:11:09,720
-Ömer Bakır.
+Öner Bakır.
 
 49
 00:11:10,690 --> 00:11:10,970
-Isso mesmo.
+Exatamente.
 
 50
 00:11:11,880 --> 00:11:13,340
-O marido da mulher sobre quem vocês vivem perguntando.
+O marido da mulher que vocês estão interrogando.
 
 51
 00:11:15,460 --> 00:11:17,280
@@ -208,35 +208,35 @@ Peguei a identidade dele.
 
 53
 00:11:17,980 --> 00:11:20,920
-Vesti o Ömer com as roupas do Boran.
+Vesti o Boran com as roupas do Ömer.
 
 54
 00:11:21,260 --> 00:11:22,460
-O coloquei sentado ao lado da Dona Alya.
+Sentei a Dona Alya ao lado.
 
 55
 00:11:22,970 --> 00:11:24,470
-E coloquei a identidade do Boran no bolso dele.
+Coloquei a identidade do Boran no bolso dele.
 
 56
 00:11:25,010 --> 00:11:27,330
-E no Boran, coloquei as roupas e a identidade do Ömer.
+Dei ao Boran a identidade usando as roupas do Ömer.
 
 57
 00:11:27,680 --> 00:11:29,310
-Ele ainda não tinha acordado.
+Mas ele ainda não havia despertado.
 
 58
 00:11:30,220 --> 00:11:30,960
-Liguei para a ambulância.
+Chamei a ambulância.
 
 59
 00:11:31,280 --> 00:11:31,860
-Dei o aviso.
+Avisei.
 
 60
 00:11:31,960 --> 00:11:33,770
-Depois, saí de lá com o Boran.
+Depois me afastei dali com o Boran.
 
 61
 00:11:36,370 --> 00:11:38,170
@@ -244,51 +244,51 @@ Para onde eu o levei?
 
 62
 00:11:39,070 --> 00:11:40,800
-Eu o internei em um hospital particular.
+Eu o internou em um hospital particular.
 
 63
 00:11:41,800 --> 00:11:43,390
-Ele ficou em coma por meses.
+Ele ficou em coma por um curto período.
 
 64
 00:11:44,210 --> 00:11:45,490
-E depois, ficou em estado vegetativo.
+Depois, ele ficou em estado vegetativo.
 
 65
-00:11:49,320 --> 00:11:51,805
-E por que escondeu tudo isso?
+00:11:49,320 --> 00:11:52,325
+Por que você ficou calado sobre isso?
 
 66
 00:11:52,840 --> 00:11:54,060
-Por que não nos avisou? Diga!
+Por que você não nos avisou? Diga!
 
 67
 00:11:54,330 --> 00:11:55,210
-Eu já disse.
+Eu já tinha dito.
 
 68
 00:11:55,580 --> 00:11:56,310
-Ele me disse para não falar.
+Ele disse para não falar.
 
 69
 00:11:56,700 --> 00:11:57,770
-Tinha muita gente atrás dele.
+Os que o seguem.
 
 70
 00:11:58,450 --> 00:12:00,050
-Não dava para saber se ele sobreviveria.
+Você não sabe se ele vai viver ou não.
 
 71
 00:12:01,110 --> 00:12:01,830
-Então eu me calei.
+Eu também fiquei calado.
 
 72
 00:12:02,230 --> 00:12:03,030
-E então?
+Eee?
 
 73
 00:12:02,720 --> 00:12:04,250
-E por que voltei agora?
+Agora, para onde eu voltei?
 
 74
 00:12:04,500 --> 00:12:05,550
@@ -296,23 +296,23 @@ Meu tempo no Canadá acabou.
 
 75
 00:12:06,830 --> 00:12:08,130
-Eu o trouxe comigo quando vim.
+Quando vim, eu também o trouxe.
 
 76
 00:12:10,730 --> 00:12:11,890
-Dê um jeito nisso.
+Que tudo dê certo.
 
 77
 00:12:12,340 --> 00:12:13,520
-Ele reconhece? Você já o viu?
+Ele reconhece? Você viu alguma vez?
 
 78
 00:12:13,860 --> 00:12:14,600
 Não, ele não reconhece.
 
 79
-00:12:26,050 --> 00:12:28,470
-Infelizmente, ele não reage.
+00:12:26,050 --> 00:12:28,535
+Infelizmente, há um silêncio.
 
 80
 00:13:00,380 --> 00:13:02,180
@@ -320,19 +320,19 @@ O que vamos fazer?
 
 81
 00:13:23,530 --> 00:13:24,550
-Vamos levá-lo.
+Nós o levaremos.
 
 82
 00:13:25,800 --> 00:13:27,440
-Para os da mansão.
+Os que estão no leito.
 
 83
 00:13:28,210 --> 00:13:29,100
-Para a senhora Sadakat.
+Senhora Tabakat.
 
 84
 00:13:29,450 --> 00:13:30,110
-Para a cunhada Alya.
+Cunhada Ali.
 
 85
 00:13:32,890 --> 00:13:34,080
@@ -343,8 +343,8 @@ Nós vamos contar.
 Você tem que contar.
 
 87
-00:13:38,270 --> 00:13:41,795
-É difícil dizer, mas ele pode não sobreviver.
+00:13:38,270 --> 00:13:41,535
+É difícil dizer, mas pode não sobreviver.
 
 88
 00:13:52,910 --> 00:13:54,350
@@ -352,15 +352,15 @@ Ele vai viver.
 
 89
 00:13:55,380 --> 00:13:56,160
-Nós o manteremos vivo.
+Nós vamos mantê-lo vivo.
 
 90
 00:13:56,280 --> 00:13:57,360
-Faremos o impossível para salvá-lo.
+Vamos mantê-lo vivo com sua própria força.
 
 91
 00:13:57,500 --> 00:13:58,860
-Talvez recorramos a métodos antigos.
+Talvez voltemos aos antigos saberes.
 
 92
 00:13:59,870 --> 00:14:01,190
@@ -368,175 +368,175 @@ Se Deus quiser, querida.
 
 93
 00:14:02,430 --> 00:14:03,490
-Se Deus quiser, Ele é grande.
+Se Deus quiser, Deus aumentará.
 
 94
 00:14:04,770 --> 00:14:06,560
-Nós também faremos o possível, claro.
+Nós também faremos o que pudermos, claro.
 
 95
-00:14:06,640 --> 00:14:08,800
-Mas eu vi o estado dele.
+00:14:06,640 --> 00:14:08,540
+Mas eu vi como está.
 
 96
 00:14:12,200 --> 00:14:15,720
-Nesse estado, não sabemos quanto tempo ele resiste.
+Quer dizer, não sabemos quanto tempo isso vai durar nem o que pode acontecer.
 
 97
-00:14:18,640 --> 00:14:20,605
-Eu já perdi um filho.
+00:14:18,640 --> 00:14:21,010
+Você é como um filho para mim, vá.
 
 98
 00:14:22,190 --> 00:14:23,010
-Você sabe disso.
+Você sabe, né?
 
 99
-00:14:24,780 --> 00:14:28,110
-Se o Boran viver e acordar, aí você conta.
+00:14:24,780 --> 00:14:28,670
+Se Boran sobreviver, se recuperar, então você conta.
 
 100
 00:14:29,420 --> 00:14:30,560
-Não conte nada agora.
+Olha, não diga agora.
 
 101
 00:14:31,340 --> 00:14:32,400
-Não faça isso, eu te imploro.
+Não faça isso, por favor, olha.
 
 102
 00:14:33,490 --> 00:14:35,390
-Se você contar, todos virão atrás dele.
+Se você contar, todo mundo vai atrás dele.
 
 103
 00:14:36,240 --> 00:14:37,890
-A polícia, os Baybars...
+Polícia, os Baybars.
 
 104
 00:14:38,410 --> 00:14:40,250
-Afinal, o Boran matou o Süleyman Baybars.
+Afinal, Boran matou Süleyman Baybars.
 
 105
 00:14:40,870 --> 00:14:42,510
-Pelo menos, vamos escondê-lo em outro lugar.
+Pelo menos vamos esconder em outro lugar.
 
 106
 00:14:45,670 --> 00:14:46,550
-Ninguém além de nós vai saber.
+Ninguém além de nós saberá.
 
 107
-00:14:48,140 --> 00:14:50,235
-Cala a boca, é o Cihan.
+00:14:48,140 --> 00:14:49,975
+Cale a boca, Cihan.
 
 108
-00:15:25,220 --> 00:15:29,330
-Tem mais alguém que sabe que ele tá vivo além de você?
+00:15:25,220 --> 00:15:28,615
+Alguém além de você sabe que ele está vivo?
 
 109
-00:16:04,500 --> 00:16:07,765
-Além de mim e do Erol, ninguém vai saber.
+00:16:04,500 --> 00:16:07,440
+Den, ninguém além de Erol vai saber.
 
 110
-00:16:12,080 --> 00:16:15,280
-Preparem o avião, façam os preparativos.
+00:16:12,080 --> 00:16:15,150
+Arrume o avião, façam os preparativos.
 
 111
 00:16:15,360 --> 00:16:17,830
-Vamos levar o Boran para Mardin.
+Vamos levar Boran para Mardin.
 
 112
 00:16:19,460 --> 00:16:20,960
-Deixa isso comigo.
+Esse trabalho é comigo.
 
 113
 00:16:21,710 --> 00:16:22,430
-Considere feito.
+Ele pegou, eu sei.
 
 114
 00:16:22,970 --> 00:16:24,730
-O tratamento dele vai continuar na empresa.
+Mesmo na Davre, continuaremos na empresa.
 
 115
 00:16:25,050 --> 00:16:28,450
-Mas irmão, a empresa não vai dar problema? Podem ver ele lá.
+Então, irmão, para a empresa não ter problemas, eles vão ver, etc.
 
 116
 00:16:29,050 --> 00:16:30,170
-Lá é o lugar mais seguro.
+Que conversa fiada?
 
 117
 00:16:30,870 --> 00:16:32,850
-Não temos como proteger de outro jeito. Tem que ficar diante dos nossos olhos.
+De outro jeito não dá para proteger, que fique à vista.
 
 118
 00:16:33,520 --> 00:16:34,570
-Vamos levá-lo para dentro de noite.
+Vamos levar à noite para dentro.
 
 119
 00:16:35,270 --> 00:16:35,810
-Em silêncio.
+Silencioso.
 
 120
 00:16:37,080 --> 00:16:38,430
-Tudo bem, Cihan.
+Certo, Cihan.
 
 121
 00:16:39,150 --> 00:16:39,870
-Deixa com a gente.
+Desça aqui.
 
 122
-00:16:41,680 --> 00:16:44,130
-Só você sabe que ele está vivo.
+00:16:41,680 --> 00:16:43,970
+Só você sabe o que passou.
 
 123
-00:16:47,380 --> 00:16:49,215
-Deixa isso para lá.
+00:16:47,380 --> 00:16:49,180
+Já deixa isso.
 
 124
-00:17:07,890 --> 00:17:10,050
-Passe esses no barbante.
+00:17:07,890 --> 00:17:09,690
+Amarre isso.
 
 125
 00:17:16,990 --> 00:17:18,880
-Ah, meu cordeirinho curioso.
+Hã, minha curiosa filhinha.
 
 126
 00:17:19,280 --> 00:17:20,900
-Nós vamos secá-los no sol.
+Nós vamos secar isso ao sol.
 
 127
 00:17:21,290 --> 00:17:23,930
-E no inverno faremos charutos para comer juntos com gosto.
+No inverno, vamos rechear e comer juntos, com prazer.
 
 128
 00:17:24,170 --> 00:17:24,590
-É...
+Ah.
 
 129
 00:17:24,990 --> 00:17:26,310
-E milho também?
+Se for pipoca, então.
 
 130
 00:17:26,390 --> 00:17:28,610
-Claro que penduro, meu bem. Se você pedir, eu penduro.
+Quer que eu pendure, Cihan? Se quiser, eu penduro, claro.
 
 131
 00:17:28,690 --> 00:17:29,570
-A gente assiste a um filme...
+Assistimos no filme.
 
 132
 00:17:29,690 --> 00:17:31,370
-...e come pipoca croc croc, tá bom?
+Vamos comer o milho crocante, pode ser?
 
 133
 00:17:31,590 --> 00:17:33,590
-O que vocês estão comendo croc croc, deixa eu ver?
+O que vocês estão comendo? Mostrem o crocante.
 
 134
 00:17:33,990 --> 00:17:35,690
-O que você tá comendo no croc croc?
+O que você está comendo, crocante?
 
 135
-00:17:35,790 --> 00:17:39,640
-Mãe, a gente vai comer milho, mas só quando secar.
+00:17:35,790 --> 00:17:40,030
+Mãe, vamos comer milho, mas quando eles quebram estalam.
 
 136
 00:17:40,590 --> 00:17:41,070
@@ -544,39 +544,39 @@ Mãe, a gente vai comer milho, mas só quando secar.
 
 137
 00:17:41,710 --> 00:17:42,600
-Croc croc.
+Crocrante.
 
 138
 00:17:42,780 --> 00:17:44,360
-Minha vida, o que você tá fazendo?
+Essas coisas são eternas, o que você está fazendo?
 
 139
 00:17:45,020 --> 00:17:47,720
-Dona Sadakat, nós estávamos preparando as coisas para o inverno.
+Senhora Sadakat, estávamos fazendo os preparativos de inverno.
 
 140
 00:17:47,820 --> 00:17:49,100
-Resolvemos nos adiantar.
+Dissemos que devemos ser rápidos.
 
 141
 00:17:49,360 --> 00:17:49,960
-É o momento certo.
+É a sua vez.
 
 142
 00:17:50,740 --> 00:17:52,480
-O aniversário da morte do Boran.
+Aniversário de falecimento da Sra. Bora.
 
 143
 00:17:52,660 --> 00:17:54,020
-Essas coisas nem têm a ver com isso.
+Isso não tem nada a ver com ela.
 
 144
 00:17:54,620 --> 00:17:57,060
-Dona Sadakat, ainda faltam dois anos, se Deus quiser nós vamos resolver tudo isso.
+Senhora Sadakat, ainda faltam dois anos, mas vamos resolver isso, se Deus quiser.
 
 145
 00:17:57,140 --> 00:17:58,280
-Vai começar agora, vamos.
+Vamos começar agora, vamos.
 
 146
 00:17:58,640 --> 00:17:59,120
@@ -588,35 +588,35 @@ Vamos.
 
 148
 00:17:59,920 --> 00:18:00,900
-Está bem, Dona Sadakat.
+Certo, Senhora Sadakat.
 
 149
 00:18:00,980 --> 00:18:01,660
-Venha cá, ele também.
+Vem, vamos ver, ele também.
 
 150
-00:18:01,940 --> 00:18:04,620
-Mãe, é sobre a morte do meu pai?
+00:18:01,940 --> 00:18:04,230
+Mãe, é a morte do meu pai?
 
 151
 00:18:06,730 --> 00:18:08,180
-Venha, nós vamos conversar.
+Vamos, venha, vamos conversar.
 
 152
 00:18:08,460 --> 00:18:09,770
 Sim, Cihan.
 
 153
-00:18:10,190 --> 00:18:12,650
-É o aniversário de morte do seu pai.
+00:18:10,190 --> 00:18:12,220
+A patrulha do seu pai.
 
 154
 00:18:12,910 --> 00:18:13,710
-A sua mãe não te contou?
+Não contou à mãe?
 
 155
 00:18:14,170 --> 00:18:15,960
-Nós vamos conversar agora, vovó.
+Agora vamos conversar, avó.
 
 156
 00:18:16,160 --> 00:18:16,300
@@ -624,11 +624,11 @@ Venha.
 
 157
 00:18:16,980 --> 00:18:18,200
-Ah, então ela não contou, né?
+Ah, não contou, hein?
 
 158
 00:18:18,460 --> 00:18:19,740
-Pelo visto ela mesma se esqueceu.
+Ele mesmo parece ter esquecido.
 
 159
 00:18:21,500 --> 00:18:22,960
@@ -636,15 +636,15 @@ Pakize!
 
 160
 00:18:23,930 --> 00:18:24,790
-Pode levar o Deniz, por favor?
+Você pode pegar o Deniz?
 
 161
 00:18:28,520 --> 00:18:29,640
-Venha, querido.
+Professor, venha.
 
 162
 00:18:30,440 --> 00:18:31,780
-Como assim esquecer, hein?
+O que significa esquecer, hein?
 
 163
 00:18:32,160 --> 00:18:32,890
@@ -652,15 +652,15 @@ Por que eu esqueceria?
 
 164
 00:18:32,990 --> 00:18:34,050
-Tem como esquecer uma coisa dessas?
+Pode-se esquecer algo assim?
 
 165
 00:18:34,530 --> 00:18:35,650
-O que a senhora está insinuando?
+O que vocês estão tentando dizer?
 
 166
 00:18:35,730 --> 00:18:37,900
-Tudo tem a sua hora, Dona Sadakat.
+Tudo tem seu tempo, Senhora Sadakat.
 
 167
 00:18:38,280 --> 00:18:38,720
@@ -668,15 +668,15 @@ Eu sou a mãe dele.
 
 168
 00:18:39,420 --> 00:18:41,380
-Sou eu quem decide quando e o que conversar.
+Eu decido quando e sobre o que vamos conversar.
 
 169
 00:18:41,480 --> 00:18:42,480
-Eu sei qual é o momento certo.
+Eu sei o momento certo.
 
 170
 00:18:42,840 --> 00:18:45,260
-Por que a senhora fica caçando oportunidade para ferir o meu filho?
+Por que vocês vêm aqui procurando uma oportunidade para ferir meu filho?
 
 171
 00:18:45,340 --> 00:18:45,940
@@ -684,55 +684,55 @@ Que oportunidade?
 
 172
 00:18:46,350 --> 00:18:47,580
-Que mentira é essa que você está dizendo?
+Que mentira você está contando?
 
 173
 00:18:47,660 --> 00:18:48,920
-Você simplesmente não contou para o menino.
+Você não contou ao garoto.
 
 174
 00:18:49,810 --> 00:18:50,270
-Meu Cihan...
+Meu Cihan.
 
 175
 00:18:50,450 --> 00:18:52,710
-Agora você chama o seu tio Cihan de pai, né?
+Você está chamando o tio Cihan de pai agora.
 
 176
 00:18:52,790 --> 00:18:53,590
-Não, não ouse!
+Não, de jeito nenhum.
 
 177
 00:18:53,430 --> 00:18:54,390
-Ele não é o seu pai de verdade.
+Ele não é seu verdadeiro pai.
 
 178
 00:18:54,550 --> 00:18:55,590
-O seu pai é o Boran.
+Seu pai é Oran.
 
 179
 00:18:55,670 --> 00:18:56,250
-O que a senhora está fazendo?
+Então, o que você está fazendo?
 
 180
 00:18:57,210 --> 00:18:58,930
-Alguém aqui negou isso?
+Vocês estão dizendo que há alguém que nega isso?
 
 181
 00:18:59,010 --> 00:19:00,210
-Por que está gritando isso?
+Por que vocês estão gritando?
 
 182
 00:19:00,290 --> 00:19:01,690
-Alguém por acaso negou, dona Sadakat?
+Tem alguém que nega, Sadakat?
 
 183
 00:19:01,950 --> 00:19:03,750
-Saia daqui!
+Saia para fora.
 
 184
 00:19:04,850 --> 00:19:06,170
-Assim não dá. Pra fora!
+Olha, assim não dá, saia.
 
 185
 00:19:06,490 --> 00:19:08,410
@@ -740,63 +740,63 @@ Quem você pensa que é para me dar ordens, hein?
 
 186
 00:19:08,830 --> 00:19:10,570
-Olha, eu fiquei quieta com o que houve com a Mine.
+Vejam, eu fiquei calado sobre o caso da Mine.
 
 187
 00:19:11,200 --> 00:19:15,000
-Fiquei em silêncio sofrendo, com a consciência pesada, mas não foi por vocês!
+Meu coração ardia, minha consciência sangrava, eu fiquei calado, mas não por vocês.
 
 188
 00:19:16,060 --> 00:19:20,030
-Me calei pela sua família, me calei por esta casa, me calei pelo Cihan!
+Fiquei calado por causa da sua família, desta casa, de Cihan.
 
 189
 00:19:20,640 --> 00:19:24,340
-Mas não vou poupar ninguém, vou à polícia se não sair. Saia daqui agora!
+Mas não vou ouvir ninguém; irei à polícia se vocês não saírem, saiam para fora.
 
 190
 00:19:24,860 --> 00:19:27,100
-Se continuar fazendo isso, eu te denuncio!
+Se continuarem com isso, eu denuncio.
 
 191
 00:19:28,130 --> 00:19:28,490
-Pra fora!
+Saia.
 
 192
 00:19:30,050 --> 00:19:31,110
-Está me ameaçando?
+Você está ameaçando Seme.
 
 193
 00:19:32,860 --> 00:19:34,140
 Eu vou sair.
 
 194
-00:19:34,570 --> 00:19:38,095
-Mas não por medo, e sim pensando no meu neto.
+00:19:34,570 --> 00:19:38,150
+Mas não por medo, e sim porque penso no meu neto, eu vou sair.
 
 195
-00:19:38,230 --> 00:19:40,390
-Pensando nada! Pra fora!
+00:19:38,230 --> 00:19:40,770
+Vocês vão ficar pensando demais, saiam.
 
 196
 00:19:45,170 --> 00:19:46,970
-Você... você...
+Você, você...
 
 197
 00:19:52,120 --> 00:19:52,820
-Oi, mãe.
+Olá, mãe.
 
 198
 00:19:54,140 --> 00:19:55,140
-Chegou cedo.
+Vocês chegaram cedo.
 
 199
 00:19:55,580 --> 00:19:56,060
-É.
+Ah.
 
 200
 00:19:56,260 --> 00:19:56,740
-O que houve?
+O que aconteceu?
 
 201
 00:19:56,960 --> 00:19:58,000
@@ -804,27 +804,27 @@ Senti sua falta.
 
 202
 00:19:58,180 --> 00:20:00,340
-Sei... Faz um café para tomarmos.
+De novo. Vamos fazer um café e beber.
 
 203
 00:20:02,020 --> 00:20:04,000
-Você bebe café demais. Já preparei a comida.
+Você está bebendo muito café. Eu preparei comida.
 
 204
 00:20:04,330 --> 00:20:05,650
-Come primeiro, depois eu faço. Pode ser?
+Coma, eu cuido do resto. Tudo bem?
 
 205
 00:20:05,770 --> 00:20:08,320
-Não precisa. Onde está a Nare?
+Você não quer? Onde está Nare?
 
 206
-00:20:15,480 --> 00:20:17,835
-Sei lá. Ela acabou de sair.
+00:20:15,480 --> 00:20:18,050
+Sinceramente, não sei. Acabou de sair e foi embora.
 
 207
 00:20:18,430 --> 00:20:21,100
-Como assim acabou de sair? Falou alguma coisa para ela?
+O que significa saiu e foi? Você disse alguma coisa?
 
 208
 00:20:21,650 --> 00:20:22,350
@@ -832,75 +832,75 @@ O que você fez de novo, mãe?
 
 209
 00:20:22,780 --> 00:20:25,810
-Olha aqui! Não jogue a culpa de tudo em mim.
+Porra, olha pra mim. Você não sabe nada de mim.
 
 210
 00:20:27,080 --> 00:20:28,500
-Não admite que falem nada da sua mulher, né? Que beleza.
+Você não se mete em confusão, mashallah.
 
 211
 00:20:28,760 --> 00:20:29,840
-Juro que eu perguntei.
+Juro, eu perguntei.
 
 212
 00:20:29,920 --> 00:20:30,900
-Por acaso eu não te conheço?
+Eu não te conheço, não?
 
 213
 00:20:30,980 --> 00:20:33,500
-Juro que perguntei. Ele ficou me encarando com cara de tacho.
+Juro, eu perguntei. Ele ficou me olhando como um boi.
 
 214
 00:20:33,580 --> 00:20:34,880
-Virou as costas e foi embora. O que eu podia fazer?
+Ele saiu correndo. O que eu faço?
 
 215
 00:20:35,500 --> 00:20:38,220
-Em vez de me enfrentar, cuide dessa sua barriga, ouviu?
+Se vai me desafiar, cuida da sua barriga, hein.
 
 216
 00:20:39,040 --> 00:20:39,820
-Poxa, irmã...
+Ai, irmã.
 
 217
 00:20:40,770 --> 00:20:44,610
-Talvez ele não tenha suportado o fato de a mãe ser uma assassina.
+Talvez ele não tenha conseguido aceitar que a mãe dele seja assassina.
 
 218
 00:20:45,480 --> 00:20:48,060
-Não teve coragem de olhar na nossa cara, largou tudo e sumiu.
+Ele não teve coragem de nos olhar, nos largou e foi embora.
 
 219
 00:20:48,740 --> 00:20:49,740
-Em silêncio, sem dizer nada.
+Em silêncio total.
 
 220
 00:20:50,100 --> 00:20:50,500
-Tomara a Deus.
+Tomara.
 
 221
 00:20:51,340 --> 00:20:52,340
-Que Deus queira, meu Senhor.
+Tomara, meu Deus.
 
 222
 00:20:54,130 --> 00:20:56,010
-Para onde ele foi sem te avisar?
+Pra onde ele vai sem avisar?
 
 223
 00:20:56,970 --> 00:20:57,550
-Liga para ele agora.
+Liga agora.
 
 224
 00:20:58,000 --> 00:20:58,720
-Onde será que ele foi se meter?
+Onde ele está?
 
 225
 00:21:02,820 --> 00:21:04,540
-Misericórdia, meu Deus.
+Arrependa-se, Resulallah.
 
 226
 00:21:05,340 --> 00:21:07,140
-Pois não, Şahin.
+Sim, Şahin.
 
 227
 00:21:12,430 --> 00:21:13,090
@@ -908,19 +908,19 @@ Onde você está, Nare?
 
 228
 00:21:14,110 --> 00:21:15,330
-Eu vim até a mansão.
+Cheguei à mansão.
 
 229
 00:21:15,710 --> 00:21:16,670
-Por que você foi para a mansão?
+Por que você foi à mansão?
 
 230
 00:21:18,230 --> 00:21:20,470
-Depois eu te explico, está bem? Conversamos depois.
+Eu conto depois, pode ser? Falamos depois.
 
 231
-00:21:20,550 --> 00:21:22,840
-Por que não avisou que ia?
+00:21:20,550 --> 00:21:23,165
+Por que não avisou que ia sair?
 
 232
 00:21:24,680 --> 00:21:26,100
@@ -928,39 +928,39 @@ Eu precisava avisar?
 
 233
 00:21:26,600 --> 00:21:27,740
-Nare, pelo que nós passamos?
+O que a gente passou, Nare?
 
 234
 00:21:28,210 --> 00:21:30,730
-O que a gente está vivendo, pelo amor de Deus? Não aja como se tivesse esquecido.
+O que estamos vivendo, pelo amor de Deus? Não finja que esqueceu.
 
 235
 00:21:31,710 --> 00:21:32,890
-E se não deixarem você sair de lá?
+E se eles não te deixarem sair de lá?
 
 236
 00:21:33,660 --> 00:21:36,140
-Olha aqui, se você não voltar em uma hora, eu vou bater nessa porta, fique sabendo.
+Olha, se não voltar em uma hora, eu vou ficar batendo na porta, entendeu?
 
 237
 00:21:36,470 --> 00:21:39,990
-Şahin, eu vou voltar. Está bem. Por favor. Por favor, se acalme. Eu vou voltar.
+Şahin, eu vou voltar. Certo. Por favor. Por favor, fica calmo. Eu volto.
 
 238
 00:21:40,650 --> 00:21:42,650
-Como vou me acalmar? Estou preocupado com você.
+Como eu fico calmo? Estou preocupado com você.
 
 239
 00:21:43,210 --> 00:21:44,400
-Şahin, depois a gente se fala.
+Şahin, a gente conversa depois.
 
 240
 00:21:51,480 --> 00:21:53,280
 Naci.
 
 241
-00:22:00,080 --> 00:22:02,305
-Você está bem? Bem-vinda.
+00:22:00,080 --> 00:22:02,630
+Você está bem? Seja bem-vinda.
 
 242
 00:22:07,270 --> 00:22:07,870
@@ -968,47 +968,47 @@ Sim, seja bem-vinda.
 
 243
 00:22:08,560 --> 00:22:09,810
-Eu vim para conversar com a minha mãe.
+Vim conversar com a minha mãe.
 
 244
 00:22:11,530 --> 00:22:12,570
-Vim para falar sobre a Mine.
+Vim conversar com a Mine.
 
 245
 00:22:14,760 --> 00:22:15,380
-Foi ela quem fez isso, não foi?
+Ele fez, não fez?
 
 246
 00:22:16,620 --> 00:22:17,960
-Foi ela quem matou a Mine, não foi?
+Ele matou a Mine, não foi?
 
 247
-00:22:20,060 --> 00:22:22,285
-Sim, minha filha, fui eu.
+00:22:20,060 --> 00:22:21,895
+Sim, filha, eu fiz.
 
 248
 00:22:27,880 --> 00:22:28,680
-Fui eu.
+Eu fiz.
 
 249
-00:22:28,560 --> 00:22:31,500
-Mãe, como a senhora pôde fazer isso?
+00:22:28,560 --> 00:22:30,720
+Mãe, como você fez isso?
 
 250
 00:22:36,070 --> 00:22:37,090
-Mãe, como a senhora foi capaz de fazer isso?
+Mãe, como você conseguiu fazer isso?
 
 251
 00:22:38,010 --> 00:22:40,050
-Filha, por que você está agindo desse jeito, tão surpresa?
+Filha, por que você está agindo como se estivesse surpresa?
 
 252
 00:22:41,080 --> 00:22:41,820
-Por que você me ligou?
+Quem me chamou?
 
 253
 00:22:42,900 --> 00:22:44,520
-Por que você me ligou então, Nare?
+Então por que você me chamou, Nare?
 
 254
 00:22:44,800 --> 00:22:45,960
@@ -1020,127 +1020,127 @@ Eu liguei para o meu irmão.
 
 256
 00:22:47,920 --> 00:22:49,760
-Eu liguei para você porque não consegui falar com eles.
+Eu te liguei porque não consegui alcançar eles.
 
 257
 00:22:50,520 --> 00:22:52,220
-Eu liguei para você porque não tive escolha.
+Eu te liguei porque fui obrigada.
 
 258
 00:22:52,300 --> 00:22:53,240
-Ah, não teve escolha?
+Ah, foi obrigada?
 
 259
 00:22:53,800 --> 00:22:54,820
-Você não me conhece, minha filha.
+Você não me conhece, filha.
 
 260
 00:22:56,000 --> 00:22:59,420
-Você não sabia como eu ia dar um jeito naquela mulher?
+Você não sabia como eu iria parar aquela mulher?
 
 261
 00:23:00,580 --> 00:23:02,060
-Sabia muito bem, Nare.
+Você sabia tudo, Nare.
 
 262
 00:23:02,140 --> 00:23:06,760
-O que você sabia ainda melhor é que, quando Ecmel descobrisse que era pai do Boran,
+Quando o Ecmel, que você conhece melhor, descobriu que era pai do Bora.
 
 263
 00:23:06,840 --> 00:23:09,900
-tudo ia virar um inferno, não é, minha filha?
+Ele iria virar um inferno, não é, filha?
 
 264
 00:23:10,890 --> 00:23:11,990
-Aí você não poderia mais ficar do lado do Şahin.
+Então você não poderia ficar ao lado do Şahin.
 
 265
 00:23:13,090 --> 00:23:14,190
-Você não quis arriscar, não é?
+Você não aguentou, não é?
 
 266
 00:23:15,400 --> 00:23:18,275
-Aquela mulher precisava ser detida.
+Aquela mulher precisava ser parada.
 
 267
 00:23:18,360 --> 00:23:18,900
-Fui eu quem fez.
+Eu fiz.
 
 268
 00:23:19,690 --> 00:23:21,150
-Em vez de me acusar, devia me agradecer.
+Agradeça por me acusar.
 
 269
 00:23:22,120 --> 00:23:24,120
-Mãe, todo mundo está dizendo que a senhora é uma assassina.
+Mãe, todo mundo está falando que você é assassina.
 
 270
 00:23:24,900 --> 00:23:26,740
-Mãe, todo mundo está te chamando de assassina.
+Mãe, todo mundo está dizendo que você é assassina.
 
 271
 00:23:26,880 --> 00:23:27,700
-O verdadeiro assassino é o Ecmel.
+O verdadeiro assassino é Ecmel.
 
 272
 00:23:28,180 --> 00:23:29,600
-O verdadeiro assassino é ele.
+Ele é o verdadeiro assassino.
 
 273
-00:23:29,680 --> 00:23:35,675
-Aquele maldito tirou a vida do meu filho injustamente e o colocou debaixo da terra.
+00:23:29,680 --> 00:23:35,870
+Meu filho, aquele demônio que derramou sangue sem motivo, enterrou meu filho na terra.
 
 274
 00:23:36,740 --> 00:23:37,460
-O verdadeiro assassino é ele.
+Ele é o verdadeiro assassino.
 
 275
 00:23:37,900 --> 00:23:42,330
-Mãe, com a morte da Mine, tudo o que escondemos veio à tona.
+Mãe, descobriu‑se que tudo que estávamos escondendo com a morte de Mine.
 
 276
 00:23:43,170 --> 00:23:44,530
-O que eu vou dizer para essa gente?
+O que eu direi a essas pessoas?
 
 277
 00:23:44,610 --> 00:23:45,930
-Você não vai dizer nada a ninguém, minha filha.
+Você não vai contar nada a ninguém, filha.
 
 278
 00:23:46,010 --> 00:23:48,930
-Você vai voltar para a nossa mansão, vai voltar para a nossa casa, Nare.
+Você vai voltar para a nossa mansão, vai voltar para casa, Nare.
 
 279
 00:23:49,030 --> 00:23:52,390
-Eu te disse mil vezes que não dá, que não vai dar certo.
+Eu já te falei mil vezes, eu disse que não, não pode.
 
 280
 00:23:52,770 --> 00:23:54,690
-Com o Şahin não dá, minha filha.
+Não dá com o Şahin, filha.
 
 281
 00:23:55,640 --> 00:23:56,980
-Estes ainda são os seus dias melhores.
+Estes são os seus dias melhores.
 
 282
 00:23:57,240 --> 00:23:59,620
-Você vai viver o verdadeiro inferno naquela mansão.
+Naquela mansão, você vai viver o inferno.
 
 283
 00:24:01,030 --> 00:24:02,470
-Mãe, eu não posso voltar.
+Mãe, eu não volto.
 
 284
 00:24:04,590 --> 00:24:05,230
-Você não pode.
+Você não volta.
 
 285
 00:24:06,590 --> 00:24:07,930
-Então vá viver no inferno, Nare.
+Então vá, Nare, viva o inferno.
 
 286
 00:24:14,640 --> 00:24:19,335
-O aniversário de morte do meu irmão Boran está chegando e eu...
+Boran, meu irmão, a patrulha de amanhã está se aproximando, eu.
 
 287
 00:24:20,970 --> 00:24:23,650
@@ -1152,7 +1152,7 @@ O quê? O que você está dizendo, Nare?
 
 289
 00:24:28,950 --> 00:24:32,120
-Filha, o que a sua boca diz está chegando aos seus ouvidos, Nare?
+Filha, seu ouvido está ouvindo o que sai da sua boca, Nare?
 
 290
 00:24:32,620 --> 00:24:33,380
@@ -1160,11 +1160,11 @@ O que você está dizendo?
 
 291
 00:24:33,740 --> 00:24:38,800
-Vai se aliar aos assassinos do meu filho Boran e depois vir para a reza, minha filha?
+Você vai se unir aos assassinos de Bora, meu filho, e depois virá para Mevlüt, filha?
 
 292
 00:24:39,600 --> 00:24:42,800
-Seu irmão vai se revirar no túmulo, Nare.
+Seu irmão vai cair de cabeça no túmulo, Nare.
 
 293
 00:24:42,980 --> 00:24:45,820
@@ -1172,35 +1172,35 @@ Mãe, ele é meu irmão, ele é meu irmão.
 
 294
 00:24:46,040 --> 00:24:47,660
-Então você vai fazer o que for preciso, minha filha.
+Então você fará o que for necessário, filha.
 
 295
 00:24:48,160 --> 00:24:51,930
-Vai voltar para a nossa mansão ou então suma, Nare.
+Você vai voltar para a nossa mansão, ou então desapareça, Nare.
 
 296
 00:24:54,450 --> 00:24:55,880
-Mãe, por favor, não faça isso.
+Mãe, por favor, não faça.
 
 297
 00:25:19,050 --> 00:25:20,290
-O que vai acontecer na reza?
+O que vai acontecer com Mevlüt?
 
 298
-00:25:21,920 --> 00:25:24,665
-Nare, Nare, minha querida, venha.
+00:25:21,920 --> 00:25:24,990
+Nare, Nare, minha querida Nare, venha.
 
 299
 00:25:25,610 --> 00:25:28,880
-Espere, por favor, não se desgaste tanto assim.
+Espere, segure‑se... por favor, não fique parada tanto assim.
 
 300
 00:25:29,830 --> 00:25:30,830
-Tá bom?
+Tudo bem?
 
 301
 00:25:31,160 --> 00:25:35,010
-Olha, eu não aguentei mais ficar preocupada achando que algo ia acontecer com você.
+Olha, eu não consegui encontrar nenhum motivo pra ficar preocupado com você, achando que algo vai acontecer.
 
 302
 00:25:35,130 --> 00:25:35,490
@@ -1208,7 +1208,7 @@ Por favor.
 
 303
 00:25:37,310 --> 00:25:39,220
-Quem dera eu não me preocupasse.
+Tomara que eu não tenha encontrado motivo de preocupação.
 
 304
 00:25:39,630 --> 00:25:40,820
@@ -1220,19 +1220,19 @@ Onde estão meus irmãos?
 
 306
 00:25:47,290 --> 00:25:48,270
-Meu irmão foi para a Síria.
+Meu irmão está na Síria.
 
 307
 00:25:49,380 --> 00:25:54,110
-Não sei, ele não disse nada, mas... acho que foi por causa de algum carregamento.
+Não sei, ele não disse nada, mas acho que foi por causa da entrega ou algo assim.
 
 308
 00:25:55,980 --> 00:25:58,010
-Ayla, eu preciso falar com o meu irmão.
+Preciso conversar com meu irmão sobre a família.
 
 309
 00:25:59,750 --> 00:26:00,910
-Quer dizer, ele precisa me entender.
+Quero dizer, ele precisa me entender.
 
 310
 00:26:01,780 --> 00:26:03,200
@@ -1240,11 +1240,11 @@ Eu preciso estar aqui naquele dia.
 
 311
 00:26:03,900 --> 00:26:07,560
-Na reza do meu irmão, com toda a família, eu também preciso estar.
+No velório do meu irmão, toda a família tem que estar, inclusive eu.
 
 312
 00:26:07,900 --> 00:26:08,460
-Isso é importante para mim.
+Eu sou importante.
 
 313
 00:26:08,860 --> 00:26:10,900
@@ -1252,23 +1252,23 @@ Claro que é importante, claro que você vai estar aqui.
 
 314
 00:26:10,980 --> 00:26:13,360
-Assim que o Cihan chegar, eu te aviso.
+Assim que Cihan chegar, eu te aviso.
 
 315
 00:26:13,620 --> 00:26:15,140
-Eu também vou falar com ele.
+Eu também vou falar, inferno.
 
 316
 00:26:15,730 --> 00:26:16,610
-Farei tudo o que estiver ao meu alcance.
+Farei o que estiver ao meu alcance.
 
 317
 00:26:16,690 --> 00:26:17,690
-Você vai vir, não se preocupe.
+Você virá, não se preocupe.
 
 318
 00:26:18,370 --> 00:26:18,690
-Tá bom?
+Tudo bem?
 
 319
 00:26:19,020 --> 00:26:19,850
@@ -1288,27 +1288,27 @@ Não faça.
 
 323
 00:26:23,660 --> 00:26:25,530
-Vamos lá, nada de ficar de luto.
+Vamos, nada de enrolar.
 
 324
 00:26:44,280 --> 00:26:46,080
-Eu mesmo faço.
+Eu mesmo.
 
 325
 00:26:52,900 --> 00:26:53,460
-Ah, tá bom.
+Ah, tudo bem.
 
 326
 00:26:54,210 --> 00:26:55,910
-Certo, mande a ambulância e a equipe.
+Certo, você sai com a equipe da ambulância.
 
 327
 00:26:56,190 --> 00:26:57,250
-A Diga também ao amigo que for.
+Diga também ao amigo que foi.
 
 328
 00:26:57,970 --> 00:26:59,870
-Para colocar a mãe de lado.
+Deite a mãe de lado esquerdo.
 
 329
 00:26:59,970 --> 00:27:00,630
@@ -1316,11 +1316,11 @@ Até eu chegar.
 
 330
 00:27:00,770 --> 00:27:01,790
-Já estou a caminho.
+Já estou saindo agora.
 
 331
 00:27:03,540 --> 00:27:04,060
-Tchau, obrigado.
+Valeu.
 
 332
 00:27:05,640 --> 00:27:06,480
@@ -1332,67 +1332,67 @@ Pakize.
 
 334
 00:27:10,090 --> 00:27:10,860
-Dona Halil.
+Sra. Halil.
 
 335
-00:27:11,000 --> 00:27:13,120
-Estou indo atender uma paciente.
+00:27:11,000 --> 00:27:12,800
+Vou a um paciente.
 
 336
 00:27:13,220 --> 00:27:14,400
-O Deniz está sob os seus cuidados, dona Ünlü.
+Deniz está sob seus cuidados, Sra. Ünlü.
 
 337
 00:27:14,720 --> 00:27:16,140
-Pakize, você pode trazer minha bolsa?
+Pakize, pode trazer minha bolsa?
 
 338
 00:27:16,220 --> 00:27:17,020
-Vou indo para o carro.
+Vou ao carro.
 
 339
 00:27:16,980 --> 00:27:19,880
-Puxa vida, hoje era seu dia de folga.
+Poxa, Deus, hoje era seu dia de folga.
 
 340
 00:27:19,960 --> 00:27:20,980
-Não tem o que fazer.
+Não tem nada a fazer.
 
 341
 00:27:21,060 --> 00:27:22,740
-Há uma mulher dando à luz em uma vila agora.
+Numa aldeia, uma mulher está em parto agora.
 
 342
 00:27:22,820 --> 00:27:24,820
-Bebês não respeitam folga nem nada.
+Os bebês não escutam nem quando pedimos licença.
 
 343
 00:27:24,900 --> 00:27:26,390
-E sem o Deniz...
+Mesmo sem o Deniz.
 
 344
 00:27:26,470 --> 00:27:27,630
 Não se preocupe.
 
 345
-00:27:27,710 --> 00:27:32,145
-Cara, o que está acontecendo? Por que este carro está aqui?
+00:27:27,710 --> 00:27:32,210
+Irmão, o que está acontecendo? Por que esse carro está aqui?
 
 346
 00:27:51,390 --> 00:27:54,310
-Por que estamos na saída de cargas? Por que os capangas do meu irmão vieram?
+Por que, na saída de carga, apareceram servos especiais, meus irmãos?
 
 347
 00:27:54,390 --> 00:27:57,070
-Tenha paciência, Kaya, só mais um pouco.
+Aguenta, Kaya, aguenta mais um pouco.
 
 348
 00:27:57,150 --> 00:27:58,170
-O Cihan vai explicar.
+Cihan vai explicar.
 
 349
 00:27:58,250 --> 00:28:00,920
-Explicar o quê? Tem coisa acontecendo que eu não sei?
+O que ele vai contar? Vai ser algo que eu não conheço?
 
 350
 00:28:01,000 --> 00:28:02,800
@@ -1400,19 +1400,19 @@ Graças a Deus.
 
 351
 00:28:05,030 --> 00:28:08,400
-Cara, o que está acontecendo? Por que vocês saíram pela área de cargas?
+Irmão, o que está acontecendo? Por que vocês saíram da saída de carga?
 
 352
-00:28:08,480 --> 00:28:10,835
-Eu vou explicar, meu filho.
+00:28:08,480 --> 00:28:10,280
+Vou contar, filho.
 
 353
 00:28:13,810 --> 00:28:16,120
-Vou falar daqui a pouco, espere.
+Vou dizer daqui a pouco, espere.
 
 354
 00:28:16,200 --> 00:28:20,290
-Você está bem? Olha, você está pálido. Me diga, expliquem logo para mim.
+Você está bem? Olha, a Bet colocou gasolina, me conta, por favor.
 
 355
 00:28:20,370 --> 00:28:22,170
@@ -1428,11 +1428,11 @@ Quem está vivo, meu irmão?
 
 358
 00:28:32,910 --> 00:28:34,710
-O Orhan.
+Orhan.
 
 359
 00:28:35,920 --> 00:28:37,610
-O Orhan está vivo.
+Orhan está vivo.
 
 360
 00:28:37,690 --> 00:28:39,490
@@ -1440,71 +1440,71 @@ O quê?
 
 361
 00:28:39,850 --> 00:28:40,690
-O Orhan.
+Orhan.
 
 362
 00:28:40,770 --> 00:28:42,570
 Ele está vivo.
 
 363
-00:28:42,830 --> 00:28:45,835
-Cara, não brinque com a minha cabeça.
+00:28:42,830 --> 00:28:45,900
+Irmão, não brinque com a minha cabeça.
 
 364
 00:28:46,270 --> 00:28:47,330
-Não estou, meu filho.
+Não, filho.
 
 365
 00:28:47,410 --> 00:28:49,110
-Meu irmão Orhan está vivo?
+Orhan, meu irmão, está vivo?
 
 366
 00:28:49,190 --> 00:28:50,100
-Onde é?
+O que é?
 
 367
 00:28:50,180 --> 00:28:51,580
-Onde ele está?
+Onde?
 
 368
 00:28:51,660 --> 00:28:53,870
-Como assim? Onde? O Orhan.
+Para a saúde, o quê? Para a saúde? Orhan.
 
 369
-00:28:53,950 --> 00:28:56,240
-Calma, estou aqui, tá bom?
+00:28:53,950 --> 00:28:56,110
+Não sei, estou aqui, ok.
 
 370
 00:29:27,240 --> 00:29:28,260
-Meu irmão Orhan...
+Orhan, meu irmão.
 
 371
 00:29:28,340 --> 00:29:29,140
-Meu irmão Orhan.
+Orhan, meu irmão.
 
 372
 00:29:29,100 --> 00:29:29,900
-Meu irmão Orhan.
+Orhan, meu irmão.
 
 373
 00:29:29,300 --> 00:29:30,100
-Meu irmão Orhan.
+Orhan, meu irmão.
 
 374
 00:29:29,300 --> 00:29:30,100
-Meu irmão Orhan.
+Orhan, meu irmão.
 
 375
 00:29:29,790 --> 00:29:30,590
-Meu irmão Orhan.
+Orhan, meu irmão.
 
 376
 00:29:30,060 --> 00:29:31,780
-Como assim? Meu irmão Orhan...
+Como está acontecendo? Orhan, meu irmão.
 
 377
 00:29:31,860 --> 00:29:32,660
-Meu irmão Orhan.
+Orhan, meu irmão.
 
 378
 00:29:32,360 --> 00:29:33,400
@@ -1515,16 +1515,16 @@ Precisamos pegar o carro.
 Precisamos pegar o carro.
 
 380
-00:29:35,480 --> 00:29:37,510
-Ele vai pegar o carro.
+00:29:35,480 --> 00:29:37,280
+Vai pegar o carro.
 
 381
-00:29:37,790 --> 00:29:39,840
-Ele vai pegar o carro, droga.
+00:29:37,790 --> 00:29:39,820
+Vai pegar o carro, pô.
 
 382
 00:30:11,310 --> 00:30:12,750
-Irmão, precisamos ir, vai dar tudo certo.
+Irmão, precisamos ir, vamos ficar bem.
 
 383
 00:30:12,830 --> 00:30:13,630
@@ -1535,52 +1535,52 @@ Vamos.
 Kaya, vamos.
 
 385
-00:30:24,710 --> 00:30:28,365
-Pela primeira vez, eu sinto uma paz por dentro.
+00:30:24,710 --> 00:30:28,170
+Dentro de mim, pela primeira vez, sem sabor.
 
 386
 00:31:08,350 --> 00:31:09,970
-Nemhum murmúrio na minha mente.
+Não há conversas na minha cabeça.
 
 387
 00:31:10,050 --> 00:31:11,610
 Porque estou ao seu lado.
 
 388
-00:31:11,690 --> 00:31:14,955
-Tudo o que você perseguiu por tanto tempo
+00:31:11,690 --> 00:31:15,200
+Só o tempo que você tem corrido atrás de algo.
 
 389
 00:31:15,280 --> 00:31:17,360
-é um sentimento mais real do que nós.
+Um sentimento mais real do que o nosso.
 
 390
 00:31:17,440 --> 00:31:19,240
 Asahi.
 
 391
-00:31:20,130 --> 00:31:24,890
-É como se eu tivesse achado o que todo mundo procura e não acha.
+00:31:20,130 --> 00:31:24,760
+Parece que eu encontrei o que todo mundo procurou e não achou.
 
 392
-00:31:25,630 --> 00:31:27,465
-Contra a segurança.
+00:31:25,630 --> 00:31:27,430
+Não vire contra.
 
 393
 00:31:51,170 --> 00:31:52,970
-Vamos pegar.
+Vamos levar.
 
 394
-00:31:57,830 --> 00:32:01,030
-Que a paz esteja com você, senhor Mevru.
+00:31:57,830 --> 00:32:00,250
+Salam aleikum, senhor Mevru.
 
 395
 00:32:23,590 --> 00:32:25,310
-E com você. Vamos fazer uma checagem de identidade.
+Aleyküm selam. Vamos fazer patrulha de identidade.
 
 396
 00:32:25,390 --> 00:32:27,270
-Certo, quer que eu junte os documentos e traga para você?
+Ok, deixa eu reunir isso pra você, eu trago, tudo bem?
 
 397
 00:32:27,350 --> 00:32:27,770
@@ -1588,7 +1588,7 @@ Estou esperando.
 
 398
 00:32:27,910 --> 00:32:28,070
-Certo.
+Ok.
 
 399
 00:32:28,370 --> 00:32:29,160
@@ -1596,7 +1596,7 @@ Controle de identidade.
 
 400
 00:32:29,430 --> 00:32:30,960
-Irmão, é a polícia fazendo controle?
+Irmão, são as identidades da segurança?
 
 401
 00:32:31,540 --> 00:32:32,560
@@ -1604,151 +1604,151 @@ Controle de identidade.
 
 402
 00:32:34,470 --> 00:32:36,430
-Seus documentos estão em ordem?
+Seus documentos estão completos?
 
 403
 00:32:36,930 --> 00:32:38,390
-Estão, não precisa se preocupar.
+Ok, não há necessidade de se preocupar.
 
 404
 00:32:39,070 --> 00:32:40,930
-Olá, os documentos estão em ordem?
+Olá, os documentos estão completos?
 
 405
 00:32:41,050 --> 00:32:41,270
-Sim.
+Ok.
 
 406
 00:32:41,490 --> 00:32:42,470
-Pelo que você viu hoje, estão.
+Pelo que vi hoje, está tudo certo.
 
 407
-00:32:45,350 --> 00:32:49,395
-Olá, gostaríamos de fazer uma checagem de identidade.
+00:32:45,350 --> 00:32:48,485
+Olá, tivemos um controle de identidade.
 
 408
 00:32:50,870 --> 00:32:51,050
-Pois não.
+Claro.
 
 409
 00:32:51,990 --> 00:32:56,990
-Acontece que sou médica e estou indo para um parto de urgência, seria possível ser bem rápida?
+Só que eu, como médico, estou indo para um parto de emergência; se puder, pode ser bem rápido?
 
 410
 00:32:57,290 --> 00:32:58,320
-Vamos fazer o possível.
+Faremos o que estiver ao nosso alcance.
 
 411
 00:32:58,770 --> 00:32:59,180
-Obrigada.
+Obrigado.
 
 412
-00:33:12,170 --> 00:33:14,525
-Eles vão olhar isso, irmão?
+00:33:12,170 --> 00:33:14,655
+Eles podem olhar isso, irmão?
 
 413
 00:33:43,710 --> 00:33:44,800
-Vão olhar.
+Eles olham isso.
 
 414
 00:33:44,880 --> 00:33:46,700
-E se olharem, o que tem? Os documentos não estão em ordem?
+Se eles olharem, o que vai acontecer? Não importa, os documentos estão completos?
 
 415
-00:33:46,780 --> 00:33:49,590
-Que ótima notícia, seja bem-vinda.
+00:33:46,780 --> 00:33:49,915
+Não me dê essa notícia, seja bem-vindo.
 
 416
-00:34:39,580 --> 00:34:42,070
-Aconteceu alguma coisa com você?
+00:34:39,580 --> 00:34:41,870
+Tem alguma coisa com você?
 
 417
 00:34:42,970 --> 00:34:44,590
-Esse seu rosto abatido...
+Esse rosto leve.
 
 418
-00:34:46,750 --> 00:34:51,510
-Há alguns problemas com o trabalho, coisas que chateiam a gente.
+00:34:46,750 --> 00:34:51,590
+Tem problemas relacionados ao trabalho e coisas que irritam surgem.
 
 419
-00:34:51,970 --> 00:34:54,455
-Não tem a ver com a Ruma, né?
+00:34:51,970 --> 00:34:54,260
+Não tem a ver com a Rumay?
 
 420
 00:34:57,220 --> 00:34:59,340
-Tem alguma coisa nos carros com a qual eu deveria me preocupar?
+Tem algo que eu deva temer dentro dos carros?
 
 421
-00:35:02,530 --> 00:35:05,795
-Como vocês estão? O que está acontecendo?
+00:35:02,530 --> 00:35:05,405
+Como estão? O que está acontecendo?
 
 422
-00:35:10,640 --> 00:35:12,870
-O que você está fazendo com isso?
+00:35:10,640 --> 00:35:12,865
+Qual é a sua parte nisso?
 
 423
-00:35:13,370 --> 00:35:15,750
-Estou indo para o vilarejo fazer um parto.
+00:35:13,370 --> 00:35:15,465
+Vou ao parto na aldeia.
 
 424
 00:35:16,540 --> 00:35:17,420
-Eles pegaram o meu documento.
+Levaram minha identidade.
 
 425
-00:35:18,290 --> 00:35:21,165
-Kadir, ela precisa ir para o parto.
+00:35:18,290 --> 00:35:20,580
+Kadir precisa ir ao parto.
 
 426
 00:35:22,250 --> 00:35:24,010
-Verifiquem o documento dela logo, é urgente.
+Que verifiquem a identidade dele imediatamente, é urgente.
 
 427
 00:35:24,430 --> 00:35:27,050
-Senhor policial, a senhora é médica, por favor, nos dê passagem.
+Senhor Agente, se a doutora puder abrir caminho.
 
 428
 00:35:27,130 --> 00:35:28,070
-Vamos revistar os veículos.
+Vamos chamar os veículos.
 
 429
 00:35:28,620 --> 00:35:30,570
-Comandante, é uma situação muito urgente.
+Comandante, há uma situação muito urgente.
 
 430
 00:35:30,870 --> 00:35:33,450
-A senhora é médica, está a caminho do hospital.
+Doutora, está indo para o hospital.
 
 431
 00:35:33,530 --> 00:35:37,750
-Eu preciso seguir viagem. É uma questão de vida ou morte, não dá para esperar.
+Preciso seguir meu caminho. É uma questão de vida ou morte, então não pode ficar.
 
 432
-00:35:37,830 --> 00:35:41,940
-Doutora Alya, Doutora Alya, a sua bagagem está pronta.
+00:35:37,830 --> 00:35:41,225
+Dona Alya, Dona Alya, o almoço está pronto.
 
 433
-00:35:45,570 --> 00:35:47,665
-Tá bom, muito obrigada.
+00:35:45,570 --> 00:35:47,600
+Certo, muito obrigada.
 
 434
-00:35:51,810 --> 00:35:53,610
-Tüyam, tô indo.
+00:35:51,810 --> 00:35:53,710
+Ok, estou esperando.
 
 435
 00:35:56,090 --> 00:35:56,990
-Foi.
+Ele foi.
 
 436
 00:35:57,070 --> 00:35:58,870
-Dá, me dá.
+Dá, dá pra mim.
 
 437
 00:35:59,490 --> 00:36:00,710
-Deixe ir, né?
+Ele pode ir, né?
 
 438
 00:36:00,790 --> 00:36:02,020
-Eu tô bem, tô bem. Vá.
+Estou bem, estou bem. Você vá.
 
 439
 00:36:02,100 --> 00:36:03,700
@@ -1759,32 +1759,32 @@ Vá com cuidado.
 Nos vemos à noite.
 
 441
-00:36:30,990 --> 00:36:33,345
-Estou bem melhor que antes.
+00:36:30,990 --> 00:36:33,085
+Estou perto de Erbakır.
 
 442
 00:36:40,290 --> 00:36:42,160
-O tratamento dele continuava no Canadá.
+O tratamento continuava no Canadá.
 
 443
 00:36:42,240 --> 00:36:43,460
-Se o meu trabalho acabou, fique à vontade.
+Se o meu trabalho acabar, ficarei tranquilo.
 
 444
 00:36:43,540 --> 00:36:44,920
-Por que estão levando para Midyat?
+Por que estão levando para Madyata?
 
 445
 00:36:45,000 --> 00:36:46,810
-A esposa dele está aqui.
+O cônjuge está aqui.
 
 446
 00:36:46,890 --> 00:36:49,610
-A partir de agora, o tratamento dele continuará aqui.
+A partir de agora o tratamento continuará aqui.
 
 447
 00:36:49,690 --> 00:36:51,200
-Entendi, melhoras.
+Então, melhoras.
 
 448
 00:36:51,280 --> 00:36:52,510
@@ -1792,15 +1792,15 @@ Valeu.
 
 449
 00:36:52,590 --> 00:36:53,410
-Que Deus te abençoe, obrigado.
+Que Deus lhe agrade, obrigado.
 
 450
 00:36:53,490 --> 00:36:54,290
-A revista acabou?
+A busca terminou?
 
 451
 00:36:54,290 --> 00:36:54,910
-Terminei, eu também terminei.
+Certo, eu também.
 
 452
 00:36:55,520 --> 00:36:56,320
@@ -1812,23 +1812,23 @@ Obrigado.
 
 454
 00:36:56,320 --> 00:36:57,120
-Bom trabalho.
+Tarefas de setembro.
 
 455
 00:36:57,080 --> 00:36:58,180
-Bom trabalho.
+Tarefas de setembro.
 
 456
 00:36:58,260 --> 00:36:58,720
-Isso, agora sim.
+Heh, agora.
 
 457
 00:36:59,100 --> 00:37:00,120
-Quem é o advogado, não importa quem seja?
+Quem for o advogado, termine.
 
 458
 00:37:00,260 --> 00:37:00,460
-Tá bom.
+Ok.
 
 459
 00:37:00,820 --> 00:37:01,050
@@ -1836,11 +1836,11 @@ Vamos.
 
 460
 00:37:01,390 --> 00:37:02,240
-Vamos, entrem no carro.
+Vamos, entre no carro.
 
 461
 00:37:02,320 --> 00:37:03,120
-Vamos lá.
+Vamos.
 
 462
 00:37:02,540 --> 00:37:02,820
@@ -1848,35 +1848,35 @@ Vamos.
 
 463
 00:37:02,980 --> 00:37:03,240
-Anda.
+Vamos.
 
 464
 00:37:04,350 --> 00:37:05,240
-Quem é, hein?
+Quem é?
 
 465
 00:37:06,750 --> 00:37:08,550
-Tá bom, meu irmão.
+Ok, irmão.
 
 466
-00:37:22,280 --> 00:37:24,570
-Para mim, é como respirar.
+00:37:22,280 --> 00:37:25,220
+Acho que estou conseguindo respirar.
 
 467
 00:37:30,840 --> 00:37:32,920
-Quero meu fôlego de você.
+Quero recuperar meu fôlego.
 
 468
 00:37:33,000 --> 00:37:33,940
-Eu fico sem saber o que fazer.
+Fico sem saber o que fazer.
 
 469
 00:37:35,520 --> 00:37:36,850
-Eu perco a cabeça.
+Fico confuso.
 
 470
 00:37:37,230 --> 00:37:37,860
-Perde.
+Fico surpreso.
 
 471
 00:37:42,050 --> 00:37:43,850
@@ -1884,11 +1884,11 @@ Sorria.
 
 472
 00:37:46,880 --> 00:37:47,680
-Sorria, vamos.
+Que ele sorria.
 
 473
 00:37:47,500 --> 00:37:47,940
-Andem, vamos.
+Vamos, vamos.
 
 474
 00:38:03,630 --> 00:38:05,430
@@ -1896,59 +1896,59 @@ Levanta, olha.
 
 475
 00:38:20,030 --> 00:38:20,370
-Tá bom.
+Ok.
 
 476
 00:38:21,000 --> 00:38:22,280
-Você riscou rápido?
+Você terminou rápido?
 
 477
 00:38:22,380 --> 00:38:23,180
-Aqui tá pronto?
+Está tudo certo aqui?
 
 478
 00:38:22,900 --> 00:38:24,620
-Deixa eu segurar atrás.
+Segure atrás, deixa eu segurar.
 
 479
 00:38:25,130 --> 00:38:25,930
-Tá bom.
+Ok.
 
 480
 00:38:25,430 --> 00:38:27,230
-abra a porta
+Abra a porta.
 
 481
-00:38:37,820 --> 00:38:39,655
-essa parte é comigo
+00:38:37,820 --> 00:38:39,620
+Está aqui comigo.
 
 482
 00:38:42,630 --> 00:38:44,430
-já vou, irmão
+Cheguei, irmão.
 
 483
 00:38:45,950 --> 00:38:47,750
-a roda passou?
+A roda passou?
 
 484
 00:38:49,590 --> 00:38:51,390
-vem devagar
+Vem devagar.
 
 485
-00:38:51,490 --> 00:38:54,220
-irmão, deixa eu pegar pela frente
+00:38:51,490 --> 00:38:53,650
+Irmão, eu vou na frente.
 
 486
 00:38:54,300 --> 00:38:56,460
-pera aí, primeiro vou entrar por este lado
+Para, agora eu vou entrar primeiro por aqui.
 
 487
-00:38:56,540 --> 00:38:58,570
-que praga você é, Nare
+00:38:56,540 --> 00:38:59,025
+Vou te dar um problema, Nare.
 
 488
-00:39:09,450 --> 00:39:12,130
-quer que eu lave os seus também?
+00:39:09,450 --> 00:39:12,260
+Vou destruir as suas também, hein.
 
 489
 00:39:13,670 --> 00:39:16,090
@@ -1956,27 +1956,27 @@ quer que eu lave os seus também?
 
 490
 00:39:25,020 --> 00:39:27,430
-por que foi sem avisar? Estou ligando e na minha cara
+Por que saiu sem avisar? Estou te procurando, cara.
 
 491
 00:39:27,510 --> 00:39:29,350
-Você está desligando na minha cara, Şahin, eu disse
+Você está fechando, Şahin, eu já te falei.
 
 492
 00:39:29,430 --> 00:39:31,110
-Aonde você foi? Por que está indo, Nare?
+Para onde você foi? Por que está indo, Nare?
 
 493
 00:39:31,780 --> 00:39:34,460
-Ficou com peso na consciência porque contou pra sua mãe que a Mine se encontrou com meu pai?
+Você contou à sua mãe que Mine se encontrou com meu pai, e agora tem consciência?
 
 494
 00:39:34,960 --> 00:39:36,200
-Foi lá perguntar por que ele matou?
+Você foi dizer por que matou?
 
 495
-00:39:36,400 --> 00:39:39,470
-Nare, foi você que contou pra Sadakat.
+00:39:36,400 --> 00:39:38,885
+Nare, você contou à Sadakate.
 
 496
 00:39:42,490 --> 00:39:43,540
@@ -1992,7 +1992,7 @@ Ecmel.
 
 499
 00:39:47,150 --> 00:39:48,610
-Ecmel, vem aqui, vem.
+Ecmel, vem logo.
 
 500
 00:39:48,690 --> 00:39:49,490
@@ -2004,15 +2004,15 @@ Mãe.
 
 502
 00:39:49,690 --> 00:39:50,310
-Para com isso!
+O que você está fazendo?
 
 503
 00:39:50,670 --> 00:39:51,250
-Para com isso!
+O que você está fazendo?
 
 504
 00:39:51,720 --> 00:39:52,590
-Ecmel, chega.
+Ecmel, é só isso.
 
 505
 00:39:53,060 --> 00:39:53,300
@@ -2020,7 +2020,7 @@ Mãe.
 
 506
 00:39:53,750 --> 00:39:54,550
-Chega.
+É só isso.
 
 507
 00:39:54,160 --> 00:39:54,340
@@ -2028,11 +2028,11 @@ Mãe.
 
 508
 00:39:55,680 --> 00:39:56,200
-Isso, isso.
+É isso, é isso.
 
 509
 00:39:57,810 --> 00:40:00,930
-Isso de você se encontrar com a Dona Mine chegou aos ouvidos da Sadakat.
+Você vai encontrar a Mine com Sadakate, isso não tem nome.
 
 510
 00:40:02,230 --> 00:40:04,330
@@ -2040,99 +2040,99 @@ O que você está dizendo?
 
 511
 00:40:06,750 --> 00:40:07,840
-Isso é verdade?
+É verdade isso?
 
 512
 00:40:08,080 --> 00:40:10,160
-Juro que é verdade, eu ouvi com meus próprios ouvidos.
+Juro que estou dizendo a verdade, ouvi com meus ouvidos.
 
 513
 00:40:10,540 --> 00:40:11,340
-Saia da frente.
+Saia!
 
 514
 00:40:10,960 --> 00:40:11,760
-Pai, espera um pouco.
+Ei, espera aí!
 
 515
 00:40:11,560 --> 00:40:12,060
-Saia da frente.
+Saia!
 
 516
 00:40:12,660 --> 00:40:14,460
-Pai
+Pai!
 
 517
 00:40:20,050 --> 00:40:21,800
-Antigamente você
+Na época, eu...
 
 518
-00:40:21,880 --> 00:40:25,015
-me acusava de ser um assassino, lembra?
+00:40:21,880 --> 00:40:24,885
+Você me acusava de assassino, lembra?
 
 519
 00:40:25,530 --> 00:40:27,250
-Pois bem, e agora, o que você virou?
+Então, o que você fez agora?
 
 520
 00:40:27,330 --> 00:40:29,130
-Hein?
+Hã?
 
 521
 00:40:29,500 --> 00:40:33,420
-Você entregou a Mine de bandeja nos braços da sua mãe!
+Você entregou a Mine com suas próprias mãos ao colo da mãe!
 
 522
 00:40:33,500 --> 00:40:35,520
-Isso é coisa que se faça?
+Isso é digno da humanidade?
 
 523
 00:40:35,600 --> 00:40:36,800
-Mãe, não faça isso!
+Pare, por favor!
 
 524
 00:40:36,880 --> 00:40:39,360
-Ela vai virar assassina! Quem é a santinha agora?
+Assassino! Quem é agora a senhora Nane?
 
 525
 00:40:39,440 --> 00:40:41,400
-Pare! Pelos meus direitos, os verdadeiros criminosos são eles!
+Pare! Estes são os responsáveis por An Hakkı, entendeu!
 
 526
 00:40:41,480 --> 00:40:42,280
-Pare!
+Vá!
 
 527
 00:40:41,980 --> 00:40:43,780
-Meu amor!
+Çağım!
 
 528
 00:40:46,180 --> 00:40:47,700
-Um momento, um momento!
+Um minuto, um minuto!
 
 529
-00:40:47,780 --> 00:40:49,745
-Quem foi que te disse
+00:40:47,780 --> 00:40:49,875
+Que vamos nos encontrar
 
 530
-00:40:51,340 --> 00:40:53,650
-que a gente ia se encontrar?
+00:40:51,340 --> 00:40:53,140
+Quem te contou?
 
 531
 00:40:53,730 --> 00:40:55,530
-Hein?
+Hã?
 
 532
-00:40:56,260 --> 00:40:58,485
-De onde você soube disso?
+00:40:56,260 --> 00:40:58,095
+De onde você soube?
 
 533
 00:40:59,950 --> 00:41:02,565
-Garota, estou falando com você!
+Filha, eu estou te perguntando!
 
 534
-00:41:02,950 --> 00:41:04,750
-Olhe para mim!
+00:41:02,950 --> 00:41:04,880
+Olhe para o meu rosto!
 
 535
 00:41:04,980 --> 00:41:06,350
@@ -2148,7 +2148,7 @@ Quem?
 
 538
 00:41:08,500 --> 00:41:09,300
-Fui eu quem disse.
+Eu falei.
 
 539
 00:41:09,310 --> 00:41:10,730
@@ -2156,63 +2156,63 @@ Como?
 
 540
 00:41:10,810 --> 00:41:12,610
-Foi o Şahin.
+Şahin.
 
 541
 00:41:14,680 --> 00:41:17,850
-Eu ouvi você conversando com a Mine na empresa.
+Ouvi dizer que você conversou com a Mine na empresa.
 
 542
 00:41:17,930 --> 00:41:19,440
-Fui eu que disse.
+Eu falei.
 
 543
-00:41:19,520 --> 00:41:22,590
-Como você pôde fazer uma coisa dessas?
+00:41:19,520 --> 00:41:22,135
+Como você faz uma coisa dessas?
 
 544
 00:41:23,650 --> 00:41:25,615
-De quem você é filho?
+Você é filho de quem?
 
 545
-00:41:27,600 --> 00:41:29,565
-Droga, que Deus te...
+00:41:27,600 --> 00:41:29,500
+Pelo amor de Deus...
 
 546
 00:41:30,750 --> 00:41:31,890
-...veja bem o que faz.
+...você é meu filho.
 
 547
 00:41:31,970 --> 00:41:33,770
-Quer dizer, vá.
+Então vá.
 
 548
 00:42:27,550 --> 00:42:29,350
 Venha.
 
 549
-00:42:59,680 --> 00:43:01,645
-Eu entrego na parada.
+00:42:59,680 --> 00:43:01,480
+Eu dou ao Duraka.
 
 550
 00:43:05,130 --> 00:43:06,250
-Também conheço os equipamentos e tal.
+Eu também conheço os dispositivos e coisas do tipo.
 
 551
 00:43:06,330 --> 00:43:09,630
-Vamos arrumar uma enfermeira para você também, Edo.
+Vamos arrumar uma enfermeira pra você, Edo.
 
 552
 00:43:09,710 --> 00:43:11,690
-Não estou falando com o Yalçın, eu resolvo.
+Não falo com o Yalçın, eu resolvo.
 
 553
-00:43:11,770 --> 00:43:14,320
-Sühan, vamos dar o fora então.
+00:43:11,770 --> 00:43:14,385
+Sühan, vamos sair também então.
 
 554
 00:43:15,370 --> 00:43:16,690
-Afinal, temos muito trabalho.
+Como você sabe, temos trabalho e obrigações.
 
 555
 00:43:16,770 --> 00:43:18,570
@@ -2224,23 +2224,23 @@ Se Deus quiser.
 
 557
 00:44:03,450 --> 00:44:04,410
-Sejam bem-vindos.
+Bem‑vindos.
 
 558
 00:44:04,490 --> 00:44:05,790
-O bebê nasceu.
+Um bebê nasceu.
 
 559
 00:44:05,870 --> 00:44:07,290
-Os bebês nasceram.
+Bebês nasceram.
 
 560
 00:44:07,370 --> 00:44:09,020
-São gêmeos. Uma menina e um menino.
+Gêmeos. Uma menina e um menino.
 
 561
 00:44:09,280 --> 00:44:12,220
-Ai, que gracinha. Que Deus os crie com saúde junto dos pais.
+Ai, mashallah. Que Deus o faça crescer forte e saudável.
 
 562
 00:44:12,460 --> 00:44:13,060
@@ -2248,19 +2248,19 @@ Amém.
 
 563
 00:44:13,300 --> 00:44:15,140
-Nosso pequeno príncipe também está lá em cima no quarto dele.
+Nosso pequeno bebê também está lá em cima, no quarto.
 
 564
 00:44:15,300 --> 00:44:17,240
-A Pakize o alimentou, deve estar dormindo agora.
+Pakize o alimentou, agora ele está dormindo.
 
 565
 00:44:17,460 --> 00:44:19,160
-Vou dar uma olhada nele agora, com licença.
+Estou vendo, que o quarto dele está bem.
 
 566
 00:44:20,230 --> 00:44:23,190
-Ah, o Cihan também tá lá fora, ou tá em cima?
+Então, o Cihan está aqui ou lá em cima?
 
 567
 00:44:23,410 --> 00:44:24,330
@@ -2268,7 +2268,7 @@ Não, ele não veio.
 
 568
 00:44:24,530 --> 00:44:27,970
-Mas o Muzaffer ligou, disseram que vão se atrasar, foram pra empresa.
+Mas o Muzaffer ligou, disseram que vão se atrasar, foram para a empresa.
 
 569
 00:44:29,750 --> 00:44:30,590
@@ -2279,40 +2279,40 @@ Boa noite.
 Boa noite.
 
 571
-00:44:32,800 --> 00:44:37,235
-Eu imaginava que seria difícil, mas não imaginei que tanto.
+00:44:32,800 --> 00:44:36,975
+Eu sabia que seria difícil, mas não esperava isso tudo.
 
 572
-00:44:44,840 --> 00:44:48,820
-Eles tinham razão. Já começou errado desde o início.
+00:44:44,840 --> 00:44:47,910
+Eu estava certo. Já estávamos errados.
 
 573
-00:44:56,400 --> 00:44:59,210
-Você pensa assim mesmo de verdade?
+00:44:56,400 --> 00:44:59,080
+É isso que você realmente pensa?
 
 574
-00:45:02,530 --> 00:45:05,340
-Você pensa assim mesmo de verdade?
+00:45:02,530 --> 00:45:04,885
+Você realmente pensa assim?
 
 575
-00:45:07,160 --> 00:45:09,060
-Nada disso é errado.
+00:45:07,160 --> 00:45:09,080
+Não há nada de errado, nada.
 
 576
 00:45:10,200 --> 00:45:11,620
-E nada é impossível.
+Nada é impossível.
 
 577
 00:45:13,530 --> 00:45:15,910
-Tudo o que precisávamos fazer era nos apegar um ao outro.
+Tudo o que precisávamos fazer era nos agarrar um ao outro.
 
 578
 00:45:15,990 --> 00:45:17,250
 Era acreditar um no outro.
 
 579
-00:45:18,830 --> 00:45:21,185
-Mas você não acredita mais.
+00:45:18,830 --> 00:45:21,055
+Mas você já não acredita.
 
 580
 00:45:21,790 --> 00:45:22,900
@@ -2320,11 +2320,11 @@ A era de Eşah.
 
 581
 00:45:22,980 --> 00:45:23,880
-Chega mais perto do seu pai.
+Chegue perto do seu pai.
 
 582
 00:45:24,100 --> 00:45:26,640
-Fiquei sozinha bem no meio de dois fogos.
+Fiquei sozinho no meio de duas chamas.
 
 583
 00:45:26,720 --> 00:45:28,420
@@ -2332,143 +2332,143 @@ De um lado sua mãe, do outro meu pai.
 
 584
 00:45:29,020 --> 00:45:31,300
-Uma me ataca a cada oportunidade e a outra me acolhe.
+Um vem sobre mim a cada oportunidade, o outro me abre os braços.
 
 585
 00:45:31,380 --> 00:45:33,140
-Eu ainda não sei o que fazer.
+Ainda não sei o que fazer.
 
 586
 00:45:33,300 --> 00:45:35,040
-Nare, eu não sei de que lado ficar.
+Nare, não sei de que lado ficar.
 
 587
 00:45:35,220 --> 00:45:36,820
-Eu só tinha uma certeza, e essa certeza era você.
+A única coisa que eu sabia era você.
 
 588
 00:45:37,620 --> 00:45:39,490
-Era em você que eu ia me guiar?
+Eu encontraria você no meu caminho?
 
 589
-00:45:39,570 --> 00:45:42,170
-Eu perdi a minha bússola, Nare.
+00:45:39,570 --> 00:45:41,860
+Perdi minha bússola, Nare.
 
 590
-00:45:42,250 --> 00:45:45,255
-Nós entregamos a Mine para a sua mãe.
+00:45:42,250 --> 00:45:44,540
+Entregamos Bine à sua mãe.
 
 591
 00:45:48,960 --> 00:45:50,940
-Nós fomos a causa daquela morte.
+Fomos responsáveis por aquela morte.
 
 592
-00:45:51,020 --> 00:45:53,570
-Eu calei a boca por sua causa.
+00:45:51,020 --> 00:45:53,115
+Fiquei calado por você.
 
 593
 00:45:53,770 --> 00:45:54,950
-Engoli aquele tapa por sua causa.
+Engoli aquele tapa por você.
 
 594
 00:45:55,030 --> 00:45:56,960
-Mas você continua calada.
+Mas você está calado.
 
 595
 00:45:57,040 --> 00:46:00,010
-Tem algo que você sabe e não está me dizendo, eu sei.
+Eu sei de uma coisa, você não está falando, eu sei.
 
 596
 00:46:00,090 --> 00:46:03,745
-Eu comecei a duvidar de tudo, até de mim mesma.
+Comecei a desconfiar de tudo, até de mim mesmo.
 
 597
 00:46:05,880 --> 00:46:07,680
-Fala logo isso.
+Diga isso agora.
 
 598
 00:46:09,330 --> 00:46:10,830
-Fala, eu vou enlouquecer, Nare, fala.
+Diga, vou enlouquecer, Nare, diga.
 
 599
 00:46:10,910 --> 00:46:12,710
-Fala.
+Diga.
 
 600
-00:46:15,930 --> 00:46:18,220
-Şahin, eu não posso falar.
+00:46:15,930 --> 00:46:18,155
+Şahin, não consigo dizer.
 
 601
-00:46:30,420 --> 00:46:32,710
-Şahin, olha, eu não posso.
+00:46:30,420 --> 00:46:33,035
+Şahin, não consigo dizer, olha.
 
 602
 00:46:37,470 --> 00:46:40,290
-Şahin, se eu falar, tudo desmorona.
+Se eu contar, Şahin, tudo vai desmoronar.
 
 603
 00:46:40,370 --> 00:46:42,610
-Eu juro por Deus que tudo vai por água abaixo.
+Juro que tudo vai desmoronar.
 
 604
 00:46:42,690 --> 00:46:43,530
-Sua família se acaba.
+Sua família vai se despedaçar.
 
 605
 00:46:43,610 --> 00:46:44,510
-Minha mãe se acaba.
+Minha mãe vai se despedaçar.
 
 606
 00:46:44,590 --> 00:46:45,450
-O passado desmorona.
+O passado vai se desfazer.
 
 607
 00:46:45,530 --> 00:46:46,760
-O futuro desmorona.
+O futuro vai se desfazer.
 
 608
 00:46:46,840 --> 00:46:48,250
-Ela é obrigada a ficar em silêncio.
+Tenho que ficar calado.
 
 609
 00:46:48,330 --> 00:46:49,130
-Minha vontade
+Estou irritado.
 
 610
 00:46:48,970 --> 00:46:50,770
-de respirar...
+Leites.
 
 611
-00:46:55,650 --> 00:46:57,550
-Aquilo que você cala
+00:46:55,650 --> 00:46:57,810
+O que você está calando.
 
 612
 00:46:58,360 --> 00:46:59,160
-talvez seja
+Talvez seja meu.
 
 613
 00:46:59,020 --> 00:46:59,820
-o caminho que eu escolhi.
+Era o caminho que eu escolhi.
 
 614
-00:46:59,880 --> 00:47:02,300
-Você me deixou na escuridão.
+00:46:59,880 --> 00:47:02,105
+Você me deixou no escuro.
 
 615
 00:47:02,750 --> 00:47:04,550
-O que eu devo fazer?
+O que eu devo fazer.
 
 616
 00:47:04,630 --> 00:47:05,670
-Do lado de quem eu devo ficar?
+De quem eu devo ficar ao lado.
 
 617
 00:47:05,750 --> 00:47:06,610
-Eu já não sei de mais nada.
+Eu já não sei mais.
 
 618
 00:47:06,690 --> 00:47:08,490
-Ai.
+Aff.
 
 619
 00:47:20,790 --> 00:47:23,145
@@ -2476,63 +2476,63 @@ Eu faço isso todos os dias.
 
 620
 00:48:07,780 --> 00:48:10,220
-Para os músculos não enfraquecerem.
+Você não enfraquece os adversários.
 
 621
 00:48:10,300 --> 00:48:11,320
-Para o sangue circular.
+Que o sangue circule.
 
 622
 00:48:11,400 --> 00:48:12,220
-Só para ter algum movimento.
+Para que haja movimento.
 
 623
-00:48:12,300 --> 00:48:14,135
-Para que, se um dia
+00:48:12,300 --> 00:48:14,100
+Um dia novamente.
 
 624
 00:48:14,260 --> 00:48:15,280
-ele voltar a se levantar,
+Se ele puder se levantar.
 
 625
-00:48:15,360 --> 00:48:17,195
-ele possa continuar
+00:48:15,360 --> 00:48:17,260
+Do ponto onde parou.
 
 626
 00:48:18,300 --> 00:48:19,240
-de onde parou.
+Para que ele possa continuar.
 
 627
 00:48:19,320 --> 00:48:21,390
-Agora você vai protestar, Bora.
+Agora eu vou contestar, Bora.
 
 628
 00:48:22,650 --> 00:48:23,910
-Você vai ficar galã, meu garoto.
+Você vai ficar bonito, meu querido.
 
 629
 00:48:27,070 --> 00:48:28,870
-Quanto vai dar?
+Você vai fugir?
 
 630
 00:48:30,260 --> 00:48:30,580
-Hã?
+Hã.
 
 631
 00:48:33,060 --> 00:48:34,860
-Meu amor.
+Eu amei.
 
 632
 00:48:36,290 --> 00:48:36,950
-Tá bom.
+Claro.
 
 633
 00:49:54,890 --> 00:49:56,690
-Está tudo bem?
+Tudo está bem?
 
 634
-00:51:18,550 --> 00:51:21,750
-Eu falei, o Muzaffer deve ter comentado.
+00:51:18,550 --> 00:51:22,400
+Conversei e o Muzaffer, irmão, deve ter dito isso.
 
 635
 00:51:23,980 --> 00:51:25,240
@@ -2540,19 +2540,19 @@ Vocês ainda estão na empresa.
 
 636
 00:51:26,550 --> 00:51:28,410
-Já passou da meia-noite, Cihan.
+Já passou da meia‑noite, Cihan.
 
 637
-00:51:32,330 --> 00:51:35,335
-Aconteceu alguma coisa por aí também?
+00:51:32,330 --> 00:51:35,205
+Aconteceu alguma coisa aqui também?
 
 638
-00:51:38,820 --> 00:51:43,255
-Se eu fiz alguma besteira, pode falar, não vou ficar bravo.
+00:51:38,820 --> 00:51:43,775
+Se for algo estranho ou o que for, pode dizer, não vou ficar bravo.
 
 639
 00:51:44,400 --> 00:51:45,160
-Só fala.
+Só precisa dizer.
 
 640
 00:51:45,360 --> 00:51:45,960
@@ -2564,51 +2564,51 @@ Não, não.
 
 642
 00:51:50,480 --> 00:51:51,570
-Não é nada disso.
+Não tem nada disso.
 
 643
 00:51:52,380 --> 00:51:55,210
-Estávamos em reunião e acabou estendendo um pouco na empresa.
+Estávamos em reunião e acabou se estendendo um pouco na empresa.
 
 644
 00:51:56,910 --> 00:51:58,050
-Já vou, mas vou sair daqui a pouco.
+Vou chegar, mas vou sair um pouco.
 
 645
 00:52:03,610 --> 00:52:05,410
-Senti sua falta.
+Senti saudades.
 
 646
 00:52:26,310 --> 00:52:28,110
 Até mais.
 
 647
-00:52:39,240 --> 00:52:41,400
-Obrigado por assistirem.
+00:52:39,240 --> 00:52:41,270
+Obrigado por assistir.
 
 648
 00:56:11,260 --> 00:56:12,900
-Serão distribuídas provisões nas casas para Bora.
+Serão distribuídos mantimentos nas casas do Bora.
 
 649
 00:56:13,120 --> 00:56:14,820
-No dia seguinte, será servido o almoço.
+Será entregue no almoço do dia seguinte.
 
 650
 00:56:16,020 --> 00:56:18,690
-E à noite, serão feitas orações no Mevlid na mansão.
+À noite, na mansão, será feita a oração do Mevlüt.
 
 651
 00:56:20,870 --> 00:56:22,260
-A Nare veio.
+Nara chegou.
 
 652
 00:56:23,720 --> 00:56:25,180
-Quis participar do Mevlid.
+Queria participar do Mevlüt.
 
 653
 00:56:25,300 --> 00:56:26,060
-Eu não permiti.
+Não dei permissão.
 
 654
 00:56:26,220 --> 00:56:27,440
@@ -2616,11 +2616,11 @@ Vocês também não vão permitir.
 
 655
 00:56:28,460 --> 00:56:30,800
-Quem se senta à mesma mesa com os assassinos de Bora
+Aquele que se sentar à mesma mesa dos assassinos de Bora
 
 656
 00:56:30,880 --> 00:56:33,530
-não tem o direito de rezar pela alma de Bora.
+Não tem direito de rezar atrás de Bora.
 
 657
 00:56:34,640 --> 00:56:35,260
@@ -2632,31 +2632,31 @@ Boa noite.
 
 659
 00:56:36,000 --> 00:56:36,380
-Vou deitar.
+Vou me deitar.
 
 660
 00:56:37,470 --> 00:56:38,690
-Deixa eu ler uma resposta.
+Vou ler uma resposta.
 
 661
 00:56:57,930 --> 00:56:59,730
 Boa noite.
 
 662
-00:57:07,040 --> 00:57:08,940
-Perdi minhas chaves.
+00:57:07,040 --> 00:57:09,200
+Perdi o que foi roubado.
 
 663
 00:57:57,410 --> 00:57:59,210
-Que toque.
+Que se dane.
 
 664
-00:59:09,360 --> 00:59:14,055
-Acho que ele dormiu muito profundo, porque já passa dessa hora.
+00:59:09,360 --> 00:59:14,120
+Acho que ele dormiu muito profundamente, por causa dessas horas.
 
 665
-00:59:32,160 --> 00:59:33,960
-Eu ia a uma vila.
+00:59:32,160 --> 00:59:34,775
+Eu estava indo para uma aldeia.
 
 666
 00:59:35,780 --> 00:59:36,080
@@ -2672,23 +2672,23 @@ Eu passei.
 
 669
 00:59:41,840 --> 00:59:42,040
-Que bom.
+Bem.
 
 670
 00:59:44,620 --> 00:59:45,460
-A mulher teve 8 filhos.
+A mulher deu à luz oito.
 
 671
-00:59:49,720 --> 00:59:52,855
-Deixe o Anıl aproveitar o pai um pouco.
+00:59:49,720 --> 00:59:52,335
+Anıl, você tem um rosto de pai.
 
 672
 00:59:54,000 --> 00:59:54,830
 Amém.
 
 673
-00:59:58,100 --> 01:00:01,235
-Cihan, eu também estou sofrendo à beça.
+00:59:58,100 --> 01:00:00,780
+Cihan, eu também dou à luz nove.
 
 674
 01:00:01,520 --> 01:00:01,880
@@ -2696,39 +2696,39 @@ O que está acontecendo?
 
 675
 01:00:02,890 --> 01:00:03,930
-Vai me contar?
+Você vai contar?
 
 676
 01:00:04,630 --> 01:00:06,280
-Não tem nada acontecendo.
+Não há nada.
 
 677
 01:00:07,600 --> 01:00:09,060
-Ele falou com você.
+Ela sempre conversava com você.
 
 678
 01:00:09,180 --> 01:00:09,480
-Alya.
+Halya.
 
 679
 01:00:10,220 --> 01:00:12,800
-Há um problema no carregamento na fronteira, mas se Deus quiser vamos resolver.
+Há um problema na entrega na fronteira, mas vamos resolver, se Deus quiser.
 
 680
 01:00:13,710 --> 01:00:15,230
-Ou seja, não tem mais nada.
+Não tem mais nada, então.
 
 681
 01:00:15,750 --> 01:00:16,620
-Não tem mais nada.
+Não, nada mais.
 
 682
-01:00:18,360 --> 01:00:21,625
-Quando você diz que não tem nada assim...
+01:00:18,360 --> 01:00:21,235
+Você fica dizendo que não tem isso.
 
 683
 01:00:23,090 --> 01:00:25,390
-Fico ainda mais certa de que tem alguma coisa.
+Estou ainda mais certo de que há algo.
 
 684
 01:00:25,470 --> 01:00:25,850
@@ -2740,135 +2740,135 @@ Cihan.
 
 686
 01:00:31,940 --> 01:00:35,830
-Eu te conheço mais por esse seu silêncio, por esse lugar onde você se cala.
+Eu te conheço mais pelo teu silêncio, por esse lugar onde você se cala.
 
 687
 01:00:35,950 --> 01:00:36,570
-Tem alguma coisa.
+Tem algo.
 
 688
-01:00:38,010 --> 01:00:40,690
-Não, eu estou tentando entender.
+01:00:38,010 --> 01:00:40,495
+Não, estou tentando entender.
 
 689
 01:00:41,210 --> 01:00:41,690
-Eu pensei.
+Pensei.
 
 690
 01:00:42,770 --> 01:00:44,220
-Pensei muito e disse:
+Eu disse que pensei muito.
 
 691
 01:00:44,320 --> 01:00:45,900
-"Deve ter acontecido algum problema na Síria."
+Provavelmente aconteceu algo errado na Síria.
 
 692
 01:00:46,120 --> 01:00:46,920
-É.
+He.
 
 693
 01:00:46,280 --> 01:00:51,030
-"Ou sei lá, será que eles estão transportando contrabando numa blitz da gendarmeria?" - pensei.
+Ou então, quem sabe, será que eles estão transportando algo contrabandeado na viatura da gendarmaria?
 
 694
 01:00:51,270 --> 01:00:53,610
-Não é como se não pudessem fazer contrabando na estrada à luz do dia.
+De dia, não é impossível fazer contrabando na rodovia.
 
 695
 01:00:53,980 --> 01:00:55,880
-Mas eu já entendi que não tem a ver com isso, Cihan.
+Já percebi que isso não tem nada a ver, Cihan.
 
 696
 01:00:58,370 --> 01:01:03,470
-O motivo de você estar desviando os olhos de mim, se afastando e não se aproximando assim não é esse.
+O fato de você desviar o olhar de mim, se afastar, não se aproximar assim não tem a ver com isso.
 
 697
 01:01:04,600 --> 01:01:05,700
-Não consigo explicar com isso.
+Não consigo explicar isso com isso.
 
 698
 01:01:07,710 --> 01:01:09,250
-Nem é que o carregamento atrasou nem nada.
+Não é porque o envio atrasou ou algo assim.
 
 699
 01:01:09,650 --> 01:01:11,350
-Não é nada relacionado ao trabalho, tem outra coisa.
+Não tem nada a ver com o trabalho, há outra coisa.
 
 700
 01:01:14,430 --> 01:01:14,890
 O que aconteceu?
 
 701
-01:01:25,330 --> 01:01:30,805
-Se há alguma mágoa nos olhos da minha mãe, eu entendo, eu estou entendendo.
+01:01:25,330 --> 01:01:30,935
+Se houver algum ressentimento nos olhos da minha mãe, eu entendo, compreendo.
 
 702
 01:01:50,130 --> 01:01:54,110
-Ficamos no telefone e você disse "vamos dormir juntos".
+A gente ficou no telefone e você disse "vamos dormir juntos".
 
 703
 01:01:54,840 --> 01:01:56,950
-Naquela época, meus olhos brilhavam, por exemplo.
+Então meus olhos brilharam, por exemplo.
 
 704
-01:01:57,030 --> 01:01:59,905
-Você já tinha querido ficar comigo.
+01:01:57,030 --> 01:01:59,450
+Você já queria ficar comigo.
 
 705
 01:02:03,330 --> 01:02:07,360
-Sem o seu passado, sem nenhum medo, você quis ficar só comigo.
+Você quis ficar comigo, sem passado, sem medo, só comigo.
 
 706
-01:02:07,860 --> 01:02:12,425
-Pela primeira vez, eu tinha percebido de novo pelo seu olhar.
+01:02:07,860 --> 01:02:11,970
+Pela primeira vez, percebi novamente pelos seus olhos.
 
 707
 01:02:17,200 --> 01:02:18,900
-Mais uma vez, você tinha me feito sentir com os seus olhos.
+Novamente, você me fez sentir com seus olhos.
 
 708
 01:02:19,200 --> 01:02:20,060
-Agora eu também estou entendendo.
+Agora eu entendo.
 
 709
 01:02:22,360 --> 01:02:22,820
-O que foi?
+O que há?
 
 710
-01:02:29,100 --> 01:02:33,275
-Anda, venha, vamos conversar, vamos sentar e conversar.
+01:02:29,100 --> 01:02:32,950
+Vamos, venha, vamos conversar, sentar e conversar.
 
 711
 01:02:33,560 --> 01:02:35,100
-Me conte qual é o seu problema.
+Me conte, qual é o seu problema.
 
 712
 01:02:35,950 --> 01:02:36,760
-Me conte.
+Conte.
 
 713
 01:02:42,850 --> 01:02:44,650
 Droga, preciso.
 
 714
-01:02:53,760 --> 01:02:58,590
-Você está calado assim porque o aniversário de morte está chegando, não é?
+01:02:53,760 --> 01:02:58,195
+Você está calado porque o aniversário está chegando, não é?
 
 715
 01:02:59,950 --> 01:03:02,970
-É por isso que você foge, é por isso que você se cala.
+É por isso que está fugindo, por isso está calado.
 
 716
 01:03:21,430 --> 01:03:23,230
-Aonde você vai?
+Para onde?
 
 717
 01:03:26,530 --> 01:03:27,450
-Vou tomar um ar.
+Vou pegar um pouco.
 
 718
-01:03:30,970 --> 01:03:34,430
-Cihan! Cihan, aonde vai? Não me faça gritar.
+01:03:30,970 --> 01:03:34,300
+Cihan! Cihan, onde está? Não grite comigo.
 
 719
 01:03:34,900 --> 01:03:36,670
@@ -2876,79 +2876,79 @@ Por que você está fazendo isso comigo?
 
 720
 01:03:37,330 --> 01:03:38,390
-Eu quero saber.
+Quero saber.
 
 721
-01:03:38,590 --> 01:03:44,910
-Só quero saber se é porque o aniversário do Boran está chegando, ou o que quer que seja.
+01:03:38,590 --> 01:03:44,520
+Só quero saber, quem diz que o aniversário de Boran está chegando, seja o que for.
 
 722
-01:03:50,100 --> 01:03:52,845
-Eu só caminhei um pouco, só isso.
+01:03:50,100 --> 01:03:52,975
+Caminhei, peguei um pouco, só isso.
 
 723
-01:04:05,940 --> 01:04:09,140
-Como eu disse, não é por causa do Boran.
+01:04:05,940 --> 01:04:09,010
+Como eu disse, não por causa do Boran.
 
 724
-01:05:06,240 --> 01:05:09,050
-Por causa disso você está magoado.
+01:05:06,240 --> 01:05:08,790
+Volte, seu rosto está magoado.
 
 725
 01:06:02,880 --> 01:06:04,680
 Bom dia.
 
 726
-01:06:18,770 --> 01:06:23,120
-Com licença, cunhada, me desculpe por ter começado, mas preciso sair mais cedo.
+01:06:18,770 --> 01:06:23,010
+Aqui, cunhada, me desculpe, comecei e preciso sair cedo.
 
 727
 01:06:23,200 --> 01:06:24,580
-Não diga bobagem, bom apetite.
+Não fale bobagem, bom apetite.
 
 728
 01:06:25,090 --> 01:06:26,100
-Onde está o Cihan?
+Onde está Cihan?
 
 729
 01:06:26,720 --> 01:06:28,380
-Ainda está dormindo, não acordou.
+Ele ainda está dormindo, não acordou.
 
 730
 01:06:29,110 --> 01:06:31,640
-Eu não estava perguntando do meu marido, estava perguntando do meu filho.
+Não era sobre o meu problema, eu estava perguntando sobre meu filho.
 
 731
 01:06:32,830 --> 01:06:34,630
-Ele saiu cedo, tem coisas para resolver na empresa.
+Ele saiu cedo, tem negócios com a empresa.
 
 732
 01:06:35,130 --> 01:06:36,940
-Você vai comer halva, vou preparar.
+Se quiser halva, eu preparo.
 
 733
 01:06:38,000 --> 01:06:41,395
-Ele saiu sem dizer um olá, sem dar bom dia.
+Ele saiu sem nem dizer 'olá' nem 'bom dia'.
 
 734
 01:06:42,040 --> 01:06:44,650
-Temos trabalho na empresa, mãe, estamos ocupados.
+Temos trabalho, mãe, na empresa, estamos ocupados.
 
 735
-01:06:47,710 --> 01:06:50,000
-Como assim tenho que sair?
+01:06:47,710 --> 01:06:49,675
+Por que preciso sair?
 
 736
 01:06:53,630 --> 01:06:54,750
-Bom apetite.
+Melhoras.
 
 737
 01:06:54,990 --> 01:06:55,710
-Bom trabalho.
+Boa sorte.
 
 738
 01:06:56,750 --> 01:06:58,400
-Vou te dar um pastel de pinheiro.
+Vou te dar um börek de pinho.
 
 739
 01:06:58,670 --> 01:06:59,840
@@ -2964,11 +2964,11 @@ Sim.
 
 742
 01:07:11,360 --> 01:07:12,980
-Cihan veio ao quarto ontem à noite.
+Cihan chegou ao quarto ontem à noite.
 
 743
 01:07:14,270 --> 01:07:16,880
-Se isso não nos diz respeito, por que ainda fugimos?
+Se não nos interessar, vamos fugir ainda mais.
 
 744
 01:07:19,030 --> 01:07:20,980
@@ -2976,11 +2976,11 @@ Ele está fugindo de você, não é assim.
 
 745
 01:07:23,640 --> 01:07:25,760
-Desde o começo estava claro que seria assim.
+Já era óbvio desde o início que seria assim.
 
 746
 01:07:26,630 --> 01:07:27,870
-E dizer que ama é fácil.
+E dizer que amo é fácil.
 
 747
 01:07:28,490 --> 01:07:30,410
@@ -2988,95 +2988,95 @@ A sombra do passado é longa.
 
 748
 01:07:31,070 --> 01:07:32,610
-Vocês não podem simplesmente ignorá-la.
+Você não pode pular por cima.
 
 749
 01:07:33,850 --> 01:07:36,210
-Cihan está com peso na consciência.
+Cihan está sofrendo de culpa.
 
 750
 01:07:37,530 --> 01:07:40,920
-Ele ficar tão destruído no aniversário da morte dele é por isso.
+É por isso que a patrulha daquele lugar está tão desorganizada.
 
 751
 01:07:41,000 --> 01:07:42,800
-Por sua culpa.
+Por sua causa.
 
 752
-01:07:42,970 --> 01:07:50,040
-Quanto mais você toca o coração dele, mais ele sente como se estivesse apunhalando o Boran pelas costas.
+01:07:42,970 --> 01:07:49,550
+Quando você toca o coração dele, ele sente como se estivesse esfaqueando Boran pelas costas.
 
 753
-01:07:51,230 --> 01:07:53,730
-Você está machucando a minha escola.
+01:07:51,230 --> 01:07:53,390
+Você está me machucando.
 
 754
 01:07:58,440 --> 01:08:00,535
 Você é a maldição dele.
 
 755
-01:08:03,420 --> 01:08:05,440
-Você tinha que ir embora.
+01:08:03,420 --> 01:08:05,385
+Você deveria ter ido.
 
 756
-01:08:09,220 --> 01:08:13,005
-Ficar é um fardo tanto para ele quanto para você.
+01:08:09,220 --> 01:08:12,940
+Ficar é um peso tanto para ele quanto para você.
 
 757
-01:08:18,120 --> 01:08:19,955
-Vamos, bom apetite.
+01:08:18,120 --> 01:08:19,920
+Bom apetite.
 
 758
 01:08:31,820 --> 01:08:33,620
-Aydin Can.
+Aydın Can.
 
 759
 01:08:44,370 --> 01:08:45,840
-Bom dia.
+Manhãs.
 
 760
-01:08:51,810 --> 01:08:54,620
-Você se casou com a senhora Aliye.
+01:08:51,810 --> 01:08:54,425
+Você se casou com a Dona Aliye.
 
 761
 01:09:04,160 --> 01:09:06,385
 Estou ciente da situação.
 
 762
-01:09:13,130 --> 01:09:17,435
-Boran te disse para me proteger caso conseguisse escapar.
+01:09:13,130 --> 01:09:16,915
+Boran lhe disse: se conseguir escapar, guarde-me.
 
 763
 01:09:21,910 --> 01:09:24,090
-Ele também me disse para proteger a Aliye e casar com ela se algo lhe acontecesse.
+Ele me disse: se algo acontecer comigo, guarde-me para a Aliye e case-se.
 
 764
-01:09:28,520 --> 01:09:33,540
-Ninguém escreve um testamento para si mesmo enquanto está vivo, Can.
+01:09:28,520 --> 01:09:32,955
+Ninguém escreve testamento para si enquanto está vivo, Can.
 
 765
 01:09:35,970 --> 01:09:38,260
-Escreve para aqueles que ficam.
+Ele escreve para quem fica para trás.
 
 766
-01:09:38,440 --> 01:09:43,785
-Pelo que entendemos, enfermeira, você pode sair quando quiser se for vir.
+01:09:38,440 --> 01:09:43,200
+Entendemos, enfermeira, se você vier, pode sair a qualquer hora.
 
 767
 01:09:49,510 --> 01:09:50,910
-Não vou te segurar, você tinha o seu pai.
+Eu não vou te segurar, era seu pai.
 
 768
-01:10:04,570 --> 01:10:09,785
-Viver com o medo de que algumas coisas virem cinzas é uma coisa, mas...
+01:10:04,570 --> 01:10:09,265
+Algumas coisas se corromperam; viver com medo é outra história.
 
 769
 01:10:20,160 --> 01:10:23,640
-Mas deixar a mulher que você ama para o seu irmão, o que é isso?
+Mas deixar a mulher que você ama para o seu irmão, que coisa é essa?
 
 770
-01:10:25,230 --> 01:10:28,340
-Como uma coisa dessas saiu da sua boca?
+01:10:25,230 --> 01:10:27,585
+Como saiu isso da sua boca?
 
 771
 01:10:29,410 --> 01:10:32,480
@@ -3084,35 +3084,35 @@ Como você pôde dizer uma coisa dessas?
 
 772
 01:10:38,720 --> 01:10:42,530
-Faz desde ontem que eu te ligo e seu celular está desligado.
+Desde ontem, quantas vezes eu liguei, seu telefone está desligado.
 
 773
 01:10:42,870 --> 01:10:43,990
-Você não pensou em me ligar de volta?
+Você nunca pensou em voltar?
 
 774
 01:10:44,370 --> 01:10:46,150
-Eu estava ocupada, o que foi que você não entendeu?
+Ipek, eu disse que tinha um compromisso, o que você entendeu?
 
 775
 01:10:46,230 --> 01:10:47,270
-Não minta para mim.
+Não me minta.
 
 776
 01:10:47,970 --> 01:10:50,710
-Eu te liguei tanto, o mínimo que você podia fazer era retornar.
+Eu liguei tanto pra você, as pessoas só voltam uma vez.
 
 777
 01:10:51,090 --> 01:10:52,090
-Nem uma mensagem sequer.
+Nem uma mensagem.
 
 778
 01:10:52,310 --> 01:10:55,190
-Estávamos na Síria, o celular não pega lá, você sabe.
+Nós estávamos na Síria, a linha não funciona, você sabe.
 
 779
 01:10:55,450 --> 01:11:02,950
-Se fosse avisar que ia, sou eu que tenho que te ligar sempre? Ai, meu Deus. Eu estou dizendo que não tenho tempo? Surgiu um problema, o assunto é a Zerrin e o Kaya. Não importa o que você diga, por mais que negue, essa sua frieza comigo é por causa dela, você não conseguiu esquecê-la.
+Se ao menos você me dissesse que ia embora, eu saberia se devo te ligar. Sempre é assim, ou paciência ou segurança, eu não tenho tempo. O assunto surgiu, Zerrin, Kaya, Zerrin… não importa o que você diga, mas esse seu frio eu não consigo esquecer.
 
 780
 01:11:19,710 --> 01:11:21,870
@@ -3120,7 +3120,7 @@ O que você está dizendo?
 
 781
 01:11:48,660 --> 01:11:50,200
-Você sabe muito bien o que estou dizendo.
+Você sabe muito bem o que eu disse.
 
 782
 01:11:50,280 --> 01:11:51,910
@@ -3128,43 +3128,43 @@ Você escondeu de mim?
 
 783
 01:11:51,990 --> 01:11:54,340
-Tanto o relacionamento de vocês quanto o passado?
+Seu relacionamento e seu passado.
 
 784
 01:11:54,420 --> 01:11:56,900
-Não havia nada para esconder.
+Nada jamais ficaria escondido.
 
 785
 01:11:56,980 --> 01:11:58,820
-Então quer dizer que ainda tem alguma coisa.
+Então ainda há algo.
 
 786
 01:11:58,900 --> 01:12:01,370
-İpek, nada disso é como você está pensando.
+Ipek não é nada como você pensa.
 
 787
 01:12:01,450 --> 01:12:02,510
-É exatamente como estou pensando.
+Exatamente como você pensa.
 
 788
-01:12:02,590 --> 01:12:05,770
-Se você também tivesse se afastado de vez...
+01:12:02,590 --> 01:12:05,465
+Se você também tivesse se afastado.
 
 789
 01:12:05,850 --> 01:12:07,670
-Ele ainda não olharia para trás por sua causa.
+Ele ainda não se viraria para você.
 
 790
 01:12:07,750 --> 01:12:10,240
-Ele não consegue olhar para nós por sua culpa.
+Ele não consegue nos olhar por sua causa.
 
 791
 01:12:10,320 --> 01:12:13,310
-A cabeça dele ainda está em você por sua culpa.
+Por sua causa, a cabeça ainda está com você.
 
 792
 01:12:13,390 --> 01:12:15,630
-Você não tem vergonha nenhuma, garota?
+Você não tem vergonha nenhuma?
 
 793
 01:12:15,710 --> 01:12:17,510
@@ -3172,51 +3172,51 @@ Você se casou.
 
 794
 01:12:17,710 --> 01:12:18,940
-Está grávida.
+Você está grávida.
 
 795
-01:12:19,020 --> 01:12:21,570
-Saia do pé do Kaya de uma vez.
+01:12:19,020 --> 01:12:21,440
+Desça do seu pedestal agora.
 
 796
-01:12:21,970 --> 01:12:23,935
-Deixe o rapaz em paz.
+01:12:21,970 --> 01:12:24,065
+Deixe a criança em paz.
 
 797
-01:12:24,940 --> 01:12:26,800
-Deixe a gente em paz.
+01:12:24,940 --> 01:12:26,740
+Nos deixe em paz.
 
 798
 01:12:26,880 --> 01:12:30,210
-Não há nada entre nós e eu não vou ficar repetindo isso mil vezes.
+Não há nada entre nós e eu não vou ficar repetindo isso.
 
 799
 01:12:30,290 --> 01:12:31,850
-Chega, parem de ficar me atormentando.
+Chega, parem de me incomodar.
 
 800
 01:12:31,930 --> 01:12:34,480
 Dınar, por que você está indo?
 
 801
-01:12:51,870 --> 01:12:53,900
-Estou indo ver o Kete.
+01:12:51,870 --> 01:12:53,670
+Vou para Kete.
 
 802
 01:12:56,570 --> 01:12:58,000
-Vou falar com o meu irmão.
+Vou conversar com meu irmão.
 
 803
 01:12:58,080 --> 01:13:00,110
-Olha aqui, você não está entendendo.
+Olha, você não entende, hein?
 
 804
 01:13:00,190 --> 01:13:02,840
-Eles não nos aceitam. Por que você insiste em ir até a porta deles?
+Eles não nos aceitam. Por que você não vai até as portas deles?
 
 805
 01:13:02,920 --> 01:13:04,910
-Şahin Gülveren é parceiro do meu irmão.
+Şahin Gülveren, meu irmão, está na próxima temporada.
 
 806
 01:13:04,990 --> 01:13:07,215
@@ -3224,11 +3224,11 @@ Eu também quero estar lá.
 
 807
 01:13:11,000 --> 01:13:13,615
-Quero estar com eles na mansão.
+Quero ficar na mansão com eles.
 
 808
 01:13:16,140 --> 01:13:17,940
-A culpa é sua.
+A situação é sua.
 
 809
 01:13:42,670 --> 01:13:44,470
@@ -3236,47 +3236,47 @@ Eu?
 
 810
 01:14:19,980 --> 01:14:21,690
-Fui eu que causei isso, né?
+Eu causei isso, não foi?
 
 811
 01:14:21,770 --> 01:14:23,370
-Vocês brigaram por causa disso.
+Por isso vocês brigaram.
 
 812
 01:14:23,450 --> 01:14:25,250
-Me desculpa.
+Desculpe.
 
 813
-01:14:34,980 --> 01:14:37,985
-Isso também tem a ver com vocês dois.
+01:14:34,980 --> 01:14:37,595
+Isso também é algo entre vocês.
 
 814
 01:15:06,910 --> 01:15:08,710
-Olha, escuta.
+Certo, olha.
 
 815
-01:15:12,930 --> 01:15:15,935
-Não é nada do que você está pensando.
+01:15:12,930 --> 01:15:15,545
+Não é como eu realmente pensei.
 
 816
 01:15:16,380 --> 01:15:17,630
-O que você acha que é?
+Como eu imaginei?
 
 817
 01:15:17,710 --> 01:15:21,080
-Achei que o motivo de Zerrin falar aquilo era você.
+Como eu imaginei, Zerin dizia que você era ele.
 
 818
 01:15:21,160 --> 01:15:22,160
-İpek, você não está entendendo.
+Ipek, você não entende.
 
 819
 01:15:22,420 --> 01:15:23,320
-O que eu não estou entendendo, hein?
+O que eu não entendo, hein?
 
 820
 01:15:23,750 --> 01:15:25,630
-O que eu não entendi? Eu vi com meus próprios olhos.
+Eu vi o que não entendo.
 
 821
 01:15:28,040 --> 01:15:29,840
@@ -3284,23 +3284,23 @@ O que eu não entendi? Eu vi com meus próprios olhos.
 
 822
 01:15:30,620 --> 01:15:32,040
-Então vamos contar pro Demir.
+Então vamos contar ao Demir.
 
 823
 01:15:33,530 --> 01:15:35,340
 Vamos contar, talvez o Demir entenda.
 
 824
-01:15:36,880 --> 01:15:39,040
-Vamos falar pra ele vir.
+01:15:36,880 --> 01:15:38,910
+Vamos contar, ele vem.
 
 825
 01:15:39,140 --> 01:15:39,540
-Vai lá, conta.
+Vai lá e conta.
 
 826
 01:15:40,470 --> 01:15:42,720
-Vai lá contar pro Demir o que você quiser, vamos.
+Vai, conta o que quiser ao Demir, vamos.
 
 827
 01:15:42,880 --> 01:15:43,940
@@ -3308,27 +3308,27 @@ Você não pode dizer nada.
 
 828
 01:15:44,020 --> 01:15:45,280
-Deixa ele falar, eu já me cantei.
+Deixa ele falar, eu já cansei.
 
 829
 01:15:45,550 --> 01:15:47,360
-Olha, eu cansei, parem de ficar no meu pé.
+Olha, eu cansei de ficar sendo incomodado.
 
 830
 01:15:47,580 --> 01:15:49,000
-Vai lá e conta o que você quiser contar.
+Vai e conta o que quiser contar.
 
 831
 01:15:49,240 --> 01:15:50,320
-Ninguém vai contar nada a ninguém.
+Ninguém consegue contar nada.
 
 832
 01:15:50,540 --> 01:15:51,840
-Liga pra ele, vamos contar.
+Vamos contar ao Ara.
 
 833
 01:15:52,190 --> 01:15:52,390
-Liga, vamos contar.
+Vamos contar ao Ara.
 
 834
 01:15:54,180 --> 01:15:55,430
@@ -3336,15 +3336,15 @@ Isso.
 
 835
 01:15:56,440 --> 01:15:58,090
-Olha, aquele Keraçoğlu sempre diz isso.
+Olha, o Keraçoğlu sempre fala.
 
 836
 01:15:58,170 --> 01:16:00,440
-Se atrasarmos mais o nosso pagamento,
+Se atrasarmos ainda mais a nossa gravação.
 
 837
 01:16:00,520 --> 01:16:02,180
-eu juro por Deus que dou um tiro nos pés dele.
+Eu apertarei meu Alcorão nos pés dele.
 
 838
 01:16:02,360 --> 01:16:02,720
@@ -3352,19 +3352,19 @@ Cansou?
 
 839
 01:16:03,100 --> 01:16:04,570
-A ordem também chegou.
+Emir também chegou.
 
 840
 01:16:05,630 --> 01:16:06,830
-Ele também não tem o direito de saber?
+Ele também não tem direito de saber?
 
 841
 01:16:07,300 --> 01:16:08,220
-Vamos contar isso a ele também.
+Vamos contar a ele também.
 
 842
 01:16:08,300 --> 01:16:09,100
-Vamos contar logo.
+Vamos dizer.
 
 843
 01:16:09,180 --> 01:16:09,560
@@ -3372,35 +3372,35 @@ Vamos contar logo.
 
 844
 01:16:09,780 --> 01:16:10,190
-Faça e solte.
+Faça, deixa.
 
 845
 01:16:10,620 --> 01:16:12,500
-Não há nenhum outro significado além do que você viu.
+Não há nada além do que você viu.
 
 846
 01:16:12,580 --> 01:16:13,000
-Solte isso.
+Deixa pra lá.
 
 847
 01:16:13,180 --> 01:16:13,700
-De verdade.
+Sério.
 
 848
 01:16:14,110 --> 01:16:15,190
-Ponha essa cabeça no lugar.
+Ponha a cabeça no lugar.
 
 849
 01:16:15,930 --> 01:16:17,920
-Olha, estou te fazendo um favor.
+Olha, eu estou te fazendo um favor.
 
 850
 01:16:18,560 --> 01:16:19,660
-Senão você não vai conseguir lidar com isso.
+Senão você não pode perder a pedra.
 
 851
-01:16:30,350 --> 01:16:33,940
-Nossa, você saiu mais cedo da prova, como foi?
+01:16:30,350 --> 01:16:33,355
+Ei, você saiu cedo, como foi o exame?
 
 852
 01:16:38,530 --> 01:16:40,430
@@ -3408,7 +3408,7 @@ O filho de Kayı está esperando.
 
 853
 01:16:40,550 --> 01:16:41,910
-Vamos, vamos saber como o bebê está.
+Vamos, vamos descobrir como está o bebê.
 
 854
 01:16:42,310 --> 01:16:43,140
@@ -3416,7 +3416,7 @@ Vamos.
 
 855
 01:16:44,600 --> 01:16:45,750
-O que você é dele, não é?
+Você não é Neyisin, né?
 
 856
 01:16:46,430 --> 01:16:47,470
@@ -3428,43 +3428,43 @@ O que aconteceu?
 
 858
 01:16:50,200 --> 01:16:50,960
-O que você está dizendo?
+Do que você está falando?
 
 859
 01:16:51,860 --> 01:16:53,580
-Por que você não conta para o Demir?
+Por que você não conta ao Demir?
 
 860
 01:16:53,660 --> 01:16:56,460
-Em vez de agradecer, está me pedindo satisfações?
+Você está me pedindo contas por eu agradecer?
 
 861
-01:16:56,540 --> 01:17:00,845
-Pegue, mas veja bem, não há nada como você está pensando.
+01:16:56,540 --> 01:17:00,325
+Pegue, mas veja, não há nada como o que você viu.
 
 862
-01:17:06,950 --> 01:17:10,735
-Eu estava mal, ele veio me consolar, foi só isso.
+01:17:06,950 --> 01:17:10,150
+Eu estava mal, ele chegou e me consolou.
 
 863
-01:17:11,310 --> 01:17:13,860
-Por que você estava mal então?
+01:17:11,310 --> 01:17:13,925
+Então, por que você estava mal?
 
 864
 01:17:14,060 --> 01:17:15,860
 İpek está cansada.
 
 865
-01:17:17,500 --> 01:17:19,595
-Eu estou muito cansada.
+01:17:17,500 --> 01:17:19,400
+Estou muito cansado.
 
 866
 01:17:20,560 --> 01:17:25,750
-Eu não consigo digerir o que minha família passou, o que acontece na minha família.
+Não consigo aceitar o que minha família passou, o que aconteceu dentro da minha família.
 
 867
 01:17:25,830 --> 01:17:27,310
-Estou muito cansada.
+Estou muito cansado.
 
 868
 01:17:27,390 --> 01:17:29,190
@@ -3475,28 +3475,28 @@ Pobre.
 Tem certeza?
 
 870
-01:17:31,930 --> 01:17:37,015
-Se realmente for como você está dizendo, vamos nos casar agora mesmo.
+01:17:31,930 --> 01:17:36,560
+Se realmente for como você disse, vamos nos casar agora mesmo.
 
 871
 01:17:57,090 --> 01:17:58,890
-Me dê um tempo.
+Me dê tempo.
 
 872
-01:18:05,290 --> 01:18:08,880
-Me dê um tempo para digerir tudo o que passei.
+01:18:05,290 --> 01:18:08,230
+Me dê tempo para digerir o que vivi.
 
 873
-01:18:20,810 --> 01:18:23,165
-Dona Sadakat, sou eu, İpek.
+01:18:20,810 --> 01:18:23,100
+Dona Sadakat, eu sou İpek.
 
 874
 01:18:51,010 --> 01:18:54,470
-O que é isso de falar assim de longe, me chamando de dona Sadakat?
+Por que falar assim de longe, como se eu fosse Sadakat?
 
 875
 01:18:55,290 --> 01:18:56,770
-Você agora é minha nora.
+Você agora é minha noiva.
 
 876
 01:18:57,220 --> 01:18:58,240
@@ -3504,99 +3504,99 @@ Você vai me chamar de mãe.
 
 877
 01:19:00,340 --> 01:19:01,860
-Eu preciso falar uma coisa com o senhor.
+Preciso conversar com vocês sobre algo.
 
 878
 01:19:02,370 --> 01:19:02,890
 Cara a cara.
 
 879
-01:19:10,450 --> 01:19:13,390
-Não é sobre trabalho, é outra coisa.
+01:19:10,450 --> 01:19:13,910
+Não tem a ver com trabalho, tem outra coisa.
 
 880
 01:19:16,210 --> 01:19:16,950
-O que foi?
+O que aconteceu?
 
 881
-01:19:18,690 --> 01:19:20,760
-Hatice, eu quero saber.
+01:19:18,690 --> 01:19:20,590
+Quero saber, Hatice.
 
 882
 01:19:21,120 --> 01:19:23,320
-Você está assim porque o aniversário da morte do Boran está chegando?
+É porque o aniversário de Boran está chegando que está assim?
 
 883
 01:19:23,400 --> 01:19:24,040
-Por favor, saiba disso.
+Você nem imagina.
 
 884
 01:19:24,350 --> 01:19:24,740
 O que aconteceu?
 
 885
-01:19:26,160 --> 01:19:29,035
-Ele está fugindo de você, não está?
+01:19:26,160 --> 01:19:28,645
+Ele não está fugindo de você.
 
 886
 01:19:31,210 --> 01:19:33,170
-Estava claro desde o início que seria assim.
+Já estava claro desde o começo que seria assim.
 
 887
 01:19:33,470 --> 01:19:35,260
-Cihan está com peso na consciência.
+Cihan está sentindo culpa.
 
 888
 01:19:35,710 --> 01:19:38,850
-Ele ficar tão desestruturado assim no aniversário de morte do Boran é por causa disso.
+O estado desordenado de Boran durante a patrulha anual é por causa disso.
 
 889
 01:19:40,130 --> 01:19:40,930
-Por sua culpa.
+Por sua causa.
 
 890
-01:19:40,710 --> 01:19:47,870
-Quanto mais você toca o coração dele, mais ele sente como se estivesse esfaqueando o Boran pelas costas.
+01:19:40,710 --> 01:19:47,615
+Quanto mais você toca o coração dele, ele sente como se estivesse esfaqueando Boran pelas costas.
 
 891
 01:19:48,280 --> 01:19:49,980
-Você está machucando ele.
+Você está me machucando.
 
 892
 01:20:39,680 --> 01:20:44,310
-Cihan, Cihan, temos um problema que precisamos resolver agora.
+Cihan, Cihan, tenho um problema que precisamos resolver agora.
 
 893
-01:21:32,920 --> 01:21:36,120
-Alya, seja bem-vinda. Cihan, emergência.
+01:21:32,920 --> 01:21:35,730
+Ale, bem-vinda. Cihan, emergência.
 
 894
 01:21:37,180 --> 01:21:40,060
-O sistema de refrigeração deu defeito. O seguro não cobre a pane.
+O sistema de refrigeração falhou. O seguro não cobre o defeito.
 
 895
 01:21:40,160 --> 01:21:43,280
-Você precisa assinar este documento agora mesmo, senão toda a responsabilidade vai cair sobre nós.
+Você precisa assinar este documento agora. Caso contrário, toda a responsabilidade ficará sobre nós.
 
 896
-01:21:44,400 --> 01:21:49,810
-A situação é urgente, ou seja, Cihan precisa assinar este documento agora.
+01:21:44,400 --> 01:21:49,420
+A situação é urgente. Alecihan precisa assinar este documento agora.
 
 897
 01:21:50,670 --> 01:21:52,850
-Para nós, assim que um problema acaba, o fim do mundo começa.
+Se nossos problemas acabarem, o apocalipse já começaria.
 
 898
-01:22:07,820 --> 01:22:10,695
-O que você veio fazer aqui de novo?
+01:22:07,820 --> 01:22:09,620
+O que mais tem?
 
 899
 01:22:23,560 --> 01:22:24,890
-Vim falar com meu irmão.
+Vim conversar com meu irmão.
 
 900
 01:22:24,970 --> 01:22:27,040
-Meu irmão não vai falar com você assim. Vamos, vá embora.
+Meu irmão não falaria assim com você. Vai embora.
 
 901
 01:22:27,340 --> 01:22:28,430
@@ -3607,12 +3607,12 @@ Eu disse que vou falar.
 Nare.
 
 903
-01:22:30,640 --> 01:22:37,675
-Enquanto você ficar naquela mansão daquele sem-vergonha do Ecmel, meu irmão não vai falar com você.
+01:22:30,640 --> 01:22:36,640
+Enquanto você ficar na casa do Ecmel, meu irmão não vai querer se encontrar com você.
 
 904
 01:22:45,820 --> 01:22:46,740
-Não espere à toa, vá embora.
+Não espere, vá.
 
 905
 01:22:46,840 --> 01:22:47,300
@@ -3628,27 +3628,27 @@ Kaya, já chega.
 
 908
 01:22:49,410 --> 01:22:50,530
-Eu ainda sou irmã dele.
+Eu ainda sou irmão dele.
 
 909
 01:22:51,360 --> 01:22:53,520
-Eu vou falar sim, amanhã é a cerimônia do meu irmão.
+Eu vou falar, amanhã tem o memorial do meu irmão.
 
 910
 01:22:54,170 --> 01:22:55,410
-Eu quero estar na mansão.
+Eu quero ficar na mansão.
 
 911
-01:22:58,950 --> 01:23:01,240
-Como assim, que cerimônia?
+01:22:58,950 --> 01:23:00,915
+Como assim, memorial?
 
 912
 01:23:02,540 --> 01:23:04,120
-É o aniversário de morte do nosso irmão, Kaya.
+Kaya, é o aniversário do nosso irmão.
 
 913
 01:23:05,030 --> 01:23:05,830
-Amanhã tem a cerimônia.
+Amanhã tem o memorial.
 
 914
 01:23:07,150 --> 01:23:08,230
@@ -3660,7 +3660,7 @@ Eu também vou rezar pelo meu irmão.
 
 916
 01:23:12,500 --> 01:23:14,850
-Só porque fui para a mansão do Ecmel...
+Só porque fui à casa do Ecmel.
 
 917
 01:23:15,720 --> 01:23:18,360
@@ -3668,35 +3668,35 @@ Vocês acham que eu esqueci o Boran?
 
 918
 01:23:19,280 --> 01:23:20,350
-Meu amor por ele diminuiu?
+Meu amor está faltando?
 
 919
 01:23:20,430 --> 01:23:22,300
-Eu também estou sofrendo.
+Eu também estou ferido.
 
 920
 01:23:23,180 --> 01:23:26,650
-Ainda estou aguentando, Kaya, eu sinto tanto a falta do meu irmão.
+Ainda estou aguentando, Kaya, eu também sinto muita falta do meu irmão.
 
 921
 01:23:27,040 --> 01:23:28,190
-Kaya, eu vou.
+Kaya, eu vou chegar.
 
 922
 01:23:28,630 --> 01:23:29,970
-Eu quero estar na cerimônia.
+Eu quero estar em Evlüt.
 
 923
 01:23:30,790 --> 01:23:32,500
-Então não espere, vamos logo.
+Então não espere, vamos lá.
 
 924
 01:23:33,560 --> 01:23:34,760
-Kaya, o que foi?
+Kaya, o que aconteceu?
 
 925
 01:23:35,550 --> 01:23:37,700
-O que aconteceu com você? Aconteceu alguma coisa.
+O que aconteceu? O que houve com você? Alguma coisa?
 
 926
 01:23:39,110 --> 01:23:41,205
@@ -3704,19 +3704,19 @@ O que está acontecendo?
 
 927
 01:24:38,000 --> 01:24:39,620
-Passa, Gece abla.
+Passa à noite, irmã.
 
 928
 01:25:22,670 --> 01:25:24,470
-Acabei de pegar.
+Peguei agora.
 
 929
-01:26:02,910 --> 01:26:05,850
-Por que você demorou tanto para vir?
+01:26:02,910 --> 01:26:04,940
+Mas por que você veio?
 
 930
 01:26:30,250 --> 01:26:31,880
-Será que é porque você fugiu, querida?
+Pode ser porque você fugiu, querida?
 
 931
 01:26:33,570 --> 01:26:35,370
@@ -3724,7 +3724,7 @@ Você está fugindo.
 
 932
 01:26:41,050 --> 01:26:42,050
-Está fugindo de novo.
+De novo você está fugindo.
 
 933
 01:26:42,130 --> 01:26:42,490
@@ -3736,59 +3736,59 @@ Cihan, você não é assim.
 
 935
 01:26:46,700 --> 01:26:48,380
-O que aconteceu? Por favor, me conta.
+O que aconteceu, o que vai acontecer, me diga.
 
 936
 01:26:48,620 --> 01:26:49,900
-Olha, eu vou enlouquecer.
+Olha, eu já vou perder a cabeça.
 
 937
 01:26:49,980 --> 01:26:51,420
-Você nunca fugia.
+Você nunca fugiria.
 
 938
 01:26:52,100 --> 01:26:53,900
-Você não usa esse caminho.
+Você não usaria esse caminho.
 
 939
 01:26:54,860 --> 01:26:56,940
-Não importa o que acontecesse, você nunca fugia.
+Não importa o que você passe, nunca fugiu.
 
 940
 01:26:57,350 --> 01:26:59,370
-Não importa o que escondesse de mim, você não fugia.
+Guarde o que quiser de mim, mas não fugiu.
 
 941
 01:26:59,450 --> 01:27:00,230
-Nem mesmo no caso da Mine.
+Até no meu caso.
 
 942
 01:27:00,780 --> 01:27:03,120
-Quanto mais você escondia as coisas de mim, mais você vinha para cima.
+Quanto mais você me escondeu, mais você me pressionou.
 
 943
 01:27:03,220 --> 01:27:05,320
-Você discutia, peitava, batia de frente.
+Você ficou irritado, rebelde, teimoso.
 
 944
 01:27:05,400 --> 01:27:06,620
-Mas nem uma vez sequer você fugiu.
+Nem uma vez você fugiu.
 
 945
 01:27:07,480 --> 01:27:09,600
-O que aconteceu agora para você estar fugindo? Por favor, me diz.
+Então, o que aconteceu agora que você está fugindo? Diga o que vai acontecer.
 
 946
 01:27:12,290 --> 01:27:14,970
-Tá bom, responde à minha pergunta.
+Tudo bem, responda à minha pergunta.
 
 947
 01:27:16,210 --> 01:27:17,990
-Tá fazendo isso pra eu confiar em você amanhã?
+Você está fazendo isso para que amanhã haja confiança?
 
 948
 01:27:19,880 --> 01:27:21,990
-É por isso que você é tão valiosa?
+É por isso que você é tão valioso?
 
 949
 01:27:26,830 --> 01:27:28,630
@@ -3796,27 +3796,27 @@ Como assim?
 
 950
 01:27:30,180 --> 01:27:31,960
-Como assim não é? Como é então?
+Mas como, se não é assim, então como?
 
 951
 01:27:32,040 --> 01:27:33,830
-O que quer dizer com "não é assim"?
+O que quer dizer 'não é assim'?
 
 952
 01:27:33,950 --> 01:27:34,930
-Por que você tá fazendo isso comigo?
+Por que você está me fazendo isso?
 
 953
 01:27:36,250 --> 01:27:37,690
-Por que você tá falando assim?
+Por que você fala assim?
 
 954
 01:27:37,830 --> 01:27:38,950
-Por que você tá me deixando sozinho?
+Por que você me deixa sozinho?
 
 955
 01:27:39,050 --> 01:27:39,790
-O que foi que você me disse?
+O que você me disse?
 
 956
 01:27:40,540 --> 01:27:41,860
@@ -3824,39 +3824,39 @@ Você me disse que...
 
 957
 01:27:42,580 --> 01:27:44,140
-"Se eu não consigo me aproximar de você tanto assim..."
+Se não consigo chegar perto de você, é isso.
 
 958
 01:27:44,760 --> 01:27:46,740
-"...o motivo não é o peso desse amor", você disse.
+Você disse que não é por causa do peso desse amor.
 
 959
 01:27:47,940 --> 01:27:55,300
-Você me disse: "Quero me acostumar a carregar ao seu lado a culpa que você vai carregar depois que o Boran morreu".
+Você me disse que, depois que Boran morrer, quer se acostumar a carregar a consciência que carregará ao seu lado.
 
 960
 01:27:57,040 --> 01:27:59,300
-Você também disse: "Eu peço o mundo inteiro para enfrentar por você".
+Você disse que enfrentaria o mundo por você.
 
 961
 01:28:01,820 --> 01:28:04,380
-Disse: "Meu Deus, eu te amo com todo o meu coração".
+Você disse que me ama com todo o seu coração.
 
 962
-01:28:05,580 --> 01:28:08,455
-Por que você tá agindo assim agora?
+01:28:05,580 --> 01:28:08,585
+Por que você está fazendo isso agora?
 
 963
 01:28:11,350 --> 01:28:13,120
 Você ainda pensa assim?
 
 964
-01:28:13,200 --> 01:28:16,855
-Como assim, pelo menos? Você ainda pensa assim?
+01:28:13,200 --> 01:28:16,075
+Como assim? Você ainda pensa assim?
 
 965
-01:28:21,350 --> 01:28:23,185
-Não consegue dizer?
+01:28:21,350 --> 01:28:23,510
+Você não consegue dizer?
 
 966
 01:28:28,140 --> 01:28:29,740
@@ -3864,31 +3864,31 @@ Você diz que não tem coragem.
 
 967
 01:28:30,640 --> 01:28:31,100
-Eu vou embora.
+Eu vou.
 
 968
 01:29:05,400 --> 01:29:05,620
 Não.
 
 969
-01:29:15,980 --> 01:29:18,270
-Você tá bem? Tá bem, Nare?
+01:29:15,980 --> 01:29:18,855
+Você está bem? Você está bem, Nare?
 
 970
 01:29:28,950 --> 01:29:29,650
-Vem, calma.
+Vem, tudo bem.
 
 971
 01:29:32,410 --> 01:29:33,500
-Você tá bem?
+Você está bem?
 
 972
 01:29:34,120 --> 01:29:35,620
-Não é nada, não é nada.
+Não tem nada, não tem nada.
 
 973
 01:29:35,700 --> 01:29:36,140
-Tá bem?
+Você está bem?
 
 974
 01:29:37,030 --> 01:29:38,830
@@ -3896,15 +3896,15 @@ Vem aqui.
 
 975
 01:29:39,680 --> 01:29:41,310
-Vem aqui, solta isso.
+Vem aqui, deixa isso.
 
 976
 01:29:43,130 --> 01:29:44,690
-Solta isso.
+Deixa isso.
 
 977
-01:29:46,500 --> 01:29:48,660
-Traga uma colônia, Nare.
+01:29:46,500 --> 01:29:49,250
+Pega a água de colônia e vem, Nare.
 
 978
 01:29:49,730 --> 01:29:50,810
@@ -3912,39 +3912,39 @@ Traga.
 
 979
 01:29:51,370 --> 01:29:52,150
-Tá bom, tá bom.
+Tudo bem, tudo bem.
 
 980
-01:29:54,640 --> 01:29:57,320
-Inala um pouco, cheira um pouco.
+01:29:54,640 --> 01:29:57,385
+Cheire um pouco, cheire um pouco.
 
 981
 01:30:01,290 --> 01:30:02,210
-Meu amor, o que aconteceu?
+Meu bem, o que aconteceu?
 
 982
 01:30:02,290 --> 01:30:03,030
 Por que você ficou assim?
 
 983
-01:30:03,330 --> 01:30:06,140
-É que eu ia falar com o meu irmão.
+01:30:03,330 --> 01:30:05,880
+Eu ia conversar com meu irmão.
 
 984
 01:30:10,990 --> 01:30:12,190
-Para estar no funeral.
+Para estar no Mevlüt.
 
 985
 01:30:12,410 --> 01:30:12,630
-Tá bom.
+Tudo bem.
 
 986
 01:30:12,950 --> 01:30:15,730
-Quando não o vi, eu disse ao Kaya que você não podia vir e tal.
+Eu falei que se não o vir, não pode ir ao Kaya, algo assim.
 
 987
 01:30:16,030 --> 01:30:17,550
-Foi mal, Moise.
+Deu ruim, Moise.
 
 988
 01:30:18,430 --> 01:30:20,720
@@ -3952,51 +3952,51 @@ O que vocês estão fazendo?
 
 989
 01:30:22,050 --> 01:30:24,540
-Olha, Kaya, Cihan, estou falando para os dois.
+Olha, Kaya, estou falando tanto com você quanto com Cihan.
 
 990
 01:30:24,620 --> 01:30:25,540
-Não é nada disso.
+Não é assim.
 
 991
 01:30:27,650 --> 01:30:28,690
-A Nare tem que vir.
+Nare tem que vir.
 
 992
 01:30:29,720 --> 01:30:31,120
-Vocês não estão vendo o estado dela, gente?
+Vocês não veem como ele está?
 
 993
 01:30:31,360 --> 01:30:32,380
-Claro que ela vai estar com a gente.
+Claro que ele vai estar conosco.
 
 994
 01:30:32,520 --> 01:30:33,260
-Ele era irmão dela.
+É o irmão dele.
 
 995
 01:30:35,170 --> 01:30:36,330
-Será que ela não sente falta do Boran?
+Ele não sente falta do Boran?
 
 996
 01:30:36,630 --> 01:30:36,890
 Kaya.
 
 997
-01:30:38,370 --> 01:30:40,660
-Pelo menos não façam isso.
+01:30:38,370 --> 01:30:40,335
+Não façam, por favor.
 
 998
 01:30:44,200 --> 01:30:45,560
-Vocês têm que falar com a sua mãe.
+Você tem que conversar com sua mãe.
 
 999
 01:30:45,700 --> 01:30:46,800
-Você tem que convencê-la.
+Você tem que convencer.
 
 1000
 01:30:46,900 --> 01:30:47,620
-Tá bom, eu vou falar.
+Tudo bem, eu vou falar.
 
 1001
 01:30:49,430 --> 01:30:50,620
@@ -4004,23 +4004,23 @@ Eu vou falar.
 
 1002
 01:30:52,090 --> 01:30:53,330
-Vocês, para dentro, vamos.
+Entrem.
 
 1003
 01:30:53,520 --> 01:30:54,240
-Espere, você tá bem?
+Ei, está tudo bem?
 
 1004
 01:30:54,460 --> 01:30:54,980
-Vamos para dentro.
+Entrem.
 
 1005
 01:30:55,300 --> 01:30:55,760
-Tudo bem, tudo bem.
+Tudo bem, tudo bem, tudo bem.
 
 1006
 01:30:55,980 --> 01:30:56,780
-Eu tô bem.
+Eu estou bem.
 
 1007
 01:30:56,920 --> 01:30:57,240
@@ -4028,51 +4028,51 @@ Tudo bem.
 
 1008
 01:30:57,320 --> 01:30:57,920
-Deixe que ele ajude.
+Que ajude.
 
 1009
-01:30:59,560 --> 01:31:01,460
-Pegue, vamos, passe.
+01:30:59,560 --> 01:31:01,360
+Vai, pega e passa.
 
 1010
 01:31:02,250 --> 01:31:03,090
-Nare, cuidado.
+Nare, toma cuidado.
 
 1011
 01:31:03,170 --> 01:31:04,190
-Não se esforce tanto.
+Não se machuque.
 
 1012
 01:31:04,880 --> 01:31:05,480
-Vai dar tudo certo.
+Será resolvido.
 
 1013
-01:31:07,630 --> 01:31:09,660
-Como é que pode, hein?
+01:31:07,630 --> 01:31:09,430
+Como assim?
 
 1014
 01:31:10,620 --> 01:31:11,060
-Tá bom.
+Ok.
 
 1015
 01:31:23,610 --> 01:31:25,410
-Mas minha Sercin.
+Mas eu sou Sercin.
 
 1016
 01:31:37,510 --> 01:31:38,540
-Eu sei que é muito difícil.
+Eu sei, é muito difícil.
 
 1017
 01:31:38,620 --> 01:31:39,740
-Não, como vou ficar calma?
+Não, como eu posso ficar calmo?
 
 1018
 01:31:39,820 --> 01:31:41,720
-Eu sei que é muito difícil, mas sim, o Boran está vivo.
+Eu sei, é muito difícil, mas sim, o Boran está vivo.
 
 1019
 01:31:41,800 --> 01:31:42,890
-Minha esposa.
+Muito gentil.
 
 1020
 01:31:42,970 --> 01:31:43,230
@@ -4080,7 +4080,7 @@ Sim.
 
 1021
 01:31:43,840 --> 01:31:44,120
-Meu irmão.
+Irmão.
 
 1022
 01:31:44,440 --> 01:31:45,010
@@ -4088,19 +4088,19 @@ Sente-se.
 
 1023
 01:31:45,740 --> 01:31:46,700
-Que sentar, meu irmão?
+Irmão, não sente.
 
 1024
 01:31:48,620 --> 01:31:48,900
-Meu irmão...
+Irmão.
 
 1025
 01:31:49,160 --> 01:31:51,220
-Meu irmão, como vou me sentar?
+Irmão, como devo sentar?
 
 1026
 01:31:52,280 --> 01:31:53,630
-Nosso irmão está lá embaixo e está vivo.
+Irmão, nosso irmão mora lá embaixo.
 
 1027
 01:31:54,890 --> 01:31:55,470
@@ -4108,7 +4108,7 @@ Graças a Deus.
 
 1028
 01:31:58,580 --> 01:31:59,940
-Tá bom, tá bom, tá bom.
+Tudo bem, tudo bem, tudo bem.
 
 1029
 01:32:02,660 --> 01:32:05,040
@@ -4116,7 +4116,7 @@ Você não contou os detalhes?
 
 1030
 01:32:05,120 --> 01:32:06,600
-Ele contou tudo, contou?
+Irmão, ele contou tudo?
 
 1031
 01:32:06,680 --> 01:32:07,260
@@ -4124,27 +4124,27 @@ Ele contou os detalhes?
 
 1032
 01:32:07,400 --> 01:32:09,260
-Ele contou todos os detalhes, mas isso...
+Irmão, ele contou todos os detalhes, mas isso.
 
 1033
 01:32:09,810 --> 01:32:12,070
-Isso não é algo para se acreditar fácil assim.
+Isso não é algo tão fácil de acreditar.
 
 1034
 01:32:12,250 --> 01:32:13,430
-É obra de Deus, o que eu vou fazer?
+Pelo amor de Deus, o que eu faço?
 
 1035
 01:32:13,950 --> 01:32:15,290
-Eu não sei o que devo sentir.
+Eu não sei o que sentir.
 
 1036
 01:32:15,490 --> 01:32:16,190
-Nare, olha, eu...
+Olha só, eu.
 
 1037
 01:32:16,450 --> 01:32:18,430
-Eu estou quase enlouquecendo, mas isso é real.
+Estou prestes a perder a cabeça, mas isso é real.
 
 1038
 01:32:18,930 --> 01:32:20,510
@@ -4152,11 +4152,11 @@ Meu irmão Boran está lá embaixo e está vivo.
 
 1039
 01:32:21,210 --> 01:32:22,460
-Então o que nós vamos fazer?
+Então, o que vamos fazer?
 
 1040
 01:32:22,540 --> 01:32:23,180
-O que nós vamos fazer?
+O que faremos?
 
 1041
 01:32:23,300 --> 01:32:23,800
@@ -4164,19 +4164,19 @@ Eu não sei.
 
 1042
 01:32:24,480 --> 01:32:25,040
-Ai, minha mãe.
+Ai, mãe.
 
 1043
 01:32:25,820 --> 01:32:27,920
-O que vamos fazer se a mamãe vir isso, meu irmão?
+Se minha mãe vir isso, o que faremos, irmão Ali?
 
 1044
 01:32:28,330 --> 01:32:28,990
-Nem pense nisso.
+Nem pensar.
 
 1045
 01:32:29,360 --> 01:32:30,350
-Agora não, de jeito nenhum.
+Nem agora.
 
 1046
 01:32:30,550 --> 01:32:31,130
@@ -4184,107 +4184,107 @@ Irmão, cunhada.
 
 1047
 01:32:32,130 --> 01:32:33,690
-Ela estava aqui, olha, você não disse nada, né?
+Ele estava aqui, olha, você não disse nada, né?
 
 1048
 01:32:34,050 --> 01:32:35,110
-Ah, não, não disse.
+Não, eu não falei.
 
 1049
 01:32:35,980 --> 01:32:36,420
-Eu não disse.
+Eu não falei.
 
 1050
 01:32:36,800 --> 01:32:39,610
-Menina, eu não aguento carregar esse fardo por mais tempo.
+Menina, não consigo mais carregar esse peso.
 
 1051
 01:32:39,710 --> 01:32:40,630
-Não, eu vou contar.
+Não, eu vou dizer.
 
 1052
 01:32:40,910 --> 01:32:41,370
-Nem pensar.
+Não pode.
 
 1053
 01:32:41,770 --> 01:32:42,770
-Irmão, olha, não faça isso.
+Irmão, não olhe.
 
 1054
 01:32:43,010 --> 01:32:44,150
-Por favor, não fale agora, irmão.
+Irmão, não diga agora, por favor.
 
 1055
 01:32:44,290 --> 01:32:45,110
-Irmão, se acalma.
+Irmão, fique calmo.
 
 1056
 01:32:45,390 --> 01:32:46,170
-Eu estou calmo.
+Estou calmo.
 
 1057
 01:32:46,270 --> 01:32:47,650
-Nare, se tem algo para dizer, diga.
+Nare, se eu tiver algo a dizer, diga.
 
 1058
 01:32:47,830 --> 01:32:49,930
-Mas, irmão, ela está lá embaixo daquele jeito.
+Mas, irmão, ele está deitado assim lá embaixo.
 
 1059
 01:32:50,010 --> 01:32:53,940
-E se ela não acordar? E se não abrir os olhos, o que vamos fazer?
+Se ele não acordar, se não abrir os olhos, o que faremos?
 
 1060
 01:32:54,180 --> 01:32:55,280
-Isso não é um fardo para todo mundo?
+Isso não é um peso para todos?
 
 1061
 01:32:55,720 --> 01:32:58,000
-Se essa verdade vier à tona, não vai ser a nossa ruína, irmão?
+Se essa verdade vier à tona, não será uma destruição, irmão?
 
 1062
 01:32:58,760 --> 01:33:00,210
-Por favor, irmão, não vamos correr esse risco.
+Irmão, não vamos correr esse risco, por favor.
 
 1063
 01:33:00,430 --> 01:33:02,330
-O que eu vou dizer a ela se ela abrir os olhos agora?
+Se ele abrir os olhos agora, o que eu direi?
 
 1064
 01:33:03,360 --> 01:33:04,760
-E se ela me perguntar por que eu não contei?
+Pergunte a ele por que não me contou.
 
 1065
 01:33:04,840 --> 01:33:06,220
-Isso não é uma grande injustiça?
+Não é uma grande injustiça?
 
 1066
 01:33:06,890 --> 01:33:07,750
-O que eu vou dizer a ela?
+O que eu direi a ele?
 
 1067
 01:33:07,830 --> 01:33:09,170
-E se ela não abrir os olhos, o que eu vou dizer?
+Se ele não abrir os olhos, o que eu direi?
 
 1068
 01:33:09,250 --> 01:33:10,090
-E se abrir, o que eu vou dizer?
+Se ele abrir, o que eu direi?
 
 1069
 01:33:10,720 --> 01:33:12,020
-E se não abrir, até quando vai ser assim?
+Se ele não abrir, até onde vamos?
 
 1070
 01:33:12,580 --> 01:33:12,760
-Hein?
+Hã?
 
 1071
 01:33:13,020 --> 01:33:15,370
-Digamos que ela não abra os olhos.
+Vamos supor que ele não abriu os olhos.
 
 1072
 01:33:16,030 --> 01:33:16,770
-O que nós vamos fazer?
+O que vamos fazer?
 
 1073
 01:33:16,870 --> 01:33:17,970
@@ -4292,39 +4292,39 @@ Vamos ficar calados o tempo todo?
 
 1074
 01:33:18,070 --> 01:33:19,030
-O que vamos dizer para a moça?
+O que vamos dizer à garota?
 
 1075
 01:33:19,390 --> 01:33:20,290
-O que vamos dizer para o filho dela?
+O que vamos dizer ao filho?
 
 1076
 01:33:20,390 --> 01:33:21,110
-Isso não é vergonhoso?
+Não é vergonhoso?
 
 1077
 01:33:21,840 --> 01:33:22,960
-Isso não é uma injustiça?
+Não é injustiça?
 
 1078
 01:33:24,070 --> 01:33:24,870
 Não.
 
 1079
-01:33:24,330 --> 01:33:27,790
-Não, olha, eu já passei dos limites, tá bom?
+01:33:24,330 --> 01:33:27,920
+Não, eu também, olha, eu me desviei, tudo bem?
 
 1080
-01:33:31,950 --> 01:33:34,695
-Nós vamos manter a calma, tá bom.
+01:33:31,950 --> 01:33:34,305
+Vamos ficar calmos, tá bom.
 
 1081
 01:33:36,220 --> 01:33:36,540
-Tá bom.
+Tudo bem.
 
 1082
-01:33:42,330 --> 01:33:44,685
-Deus é maior, Deus é maior.
+01:33:42,330 --> 01:33:44,230
+Deus é grande, Deus.
 
 1083
 01:33:53,080 --> 01:33:55,305
@@ -4332,15 +4332,15 @@ Obrigado, Ümür, obrigado.
 
 1084
 01:33:57,100 --> 01:33:58,500
-Bom trabalho, parabéns.
+Saúde para as mãos de vocês.
 
 1085
 01:33:58,740 --> 01:33:59,460
-Sejam bem-vindos.
+Bem‑vindos.
 
 1086
-01:34:01,530 --> 01:34:06,680
-Em breve vamos tomar um café feito por você também, hein, minha filha.
+01:34:01,530 --> 01:34:06,030
+Logo vamos tomar um café feito por você também, hein, filha?
 
 1087
 01:34:07,180 --> 01:34:08,100
@@ -4352,23 +4352,23 @@ Vamos.
 
 1089
 01:34:11,260 --> 01:34:13,740
-Dona Sadakat, precisa de mais alguma coisa?
+Senhora Sadakat, precisa de mais alguma coisa?
 
 1090
 01:34:13,980 --> 01:34:15,400
-Não, podem ir, Ömür, vamos.
+Não, saiam vocês, Ümür, vamos.
 
 1091
 01:34:15,620 --> 01:34:16,440
 Bom apetite.
 
 1092
-01:34:21,280 --> 01:34:24,350
-Não vou tomar muito do tempo de vocês.
+01:34:21,280 --> 01:34:24,025
+Não vou tomar muito do seu tempo.
 
 1093
 01:34:26,250 --> 01:34:27,870
-Que isso, minha filha, fale, estou ouvindo.
+De nada, filha, fale, estou ouvindo.
 
 1094
 01:34:29,180 --> 01:34:30,710
@@ -4380,27 +4380,27 @@ Mas ele é indiferente comigo.
 
 1096
 01:34:35,720 --> 01:34:36,680
-Agora eu descobri o motivo.
+Agora aprendi o motivo.
 
 1097
-01:34:36,760 --> 01:34:38,725
-Era a Zerrin Baybars.
+01:34:36,760 --> 01:34:38,790
+Era o Baybars, Zehrin.
 
 1098
 01:34:39,810 --> 01:34:43,140
-Não é nada disso, isso foi há muito tempo.
+Não, não é isso, isso já era muito antigo.
 
 1099
 01:34:45,210 --> 01:34:47,210
-Mas hoje eu os vi abraçados.
+Mas eu os vi abraçando hoje.
 
 1100
-01:34:47,290 --> 01:34:50,425
-Ou seja, o passado ainda não é passado.
+01:34:47,290 --> 01:34:50,530
+Então, o que era antigo já não é mais antigo.
 
 1101
-01:34:50,610 --> 01:34:53,030
-Hoje eu e o Kaya discutimos.
+01:34:50,610 --> 01:34:53,225
+Nós discutimos com o Kaya hoje.
 
 1102
 01:34:53,630 --> 01:34:55,460
@@ -4408,11 +4408,11 @@ Depois eu quis ver o Kaya.
 
 1103
 01:34:55,540 --> 01:34:58,200
-Quando voltei, o que vi de repente na minha frente...
+Quando voltei novamente, de repente vi algo à minha frente.
 
 1104
 01:34:58,280 --> 01:34:59,880
-Tá bom, minha filha, não precisa me explicar.
+Tudo bem, filha, não tem problema, me conte.
 
 1105
 01:34:59,960 --> 01:35:01,710
@@ -4424,79 +4424,79 @@ Como assim?
 
 1107
 01:35:04,850 --> 01:35:06,670
-Você não disse que ama o Kaya, minha filha?
+Você não disse que ama o Kaya, filha?
 
 1108
 01:35:08,980 --> 01:35:10,380
-Vocês vão se casar o mais rápido possível.
+Vocês vão se casar em breve.
 
 1109
-01:35:10,460 --> 01:35:14,440
-Mas você também vai saber como segurar o seu marido.
+01:35:10,460 --> 01:35:14,570
+Mas você também vai saber segurar seu marido nas mãos.
 
 1110
 01:35:15,150 --> 01:35:17,150
-Eu disse isso mesmo para o Kaya.
+Eu também falei isso ao Kaya.
 
 1111
 01:35:17,230 --> 01:35:19,980
-Disse: "Vamos nos casar logo, para mim tanto faz".
+Eu disse logo: vamos casar, não importa para mim, eu falei.
 
 1112
-01:35:21,440 --> 01:35:24,965
-Mas ele me disse que há situações familiares.
+01:35:21,440 --> 01:35:24,900
+Mas ele me disse que há questões familiares.
 
 1113
 01:35:28,480 --> 01:35:29,440
-Não tem nada disso.
+Não, não é nada disso.
 
 1114
 01:35:30,800 --> 01:35:33,240
-Amanhã é o aniversário de um ano da morte do meu falecido filho Boran.
+A ronda do meu filho Boran é amanhã.
 
 1115
 01:35:33,800 --> 01:35:36,460
-À noite haverá uma reza, sua família também vai vir, venha você também.
+À noite vai ter mevlüt, sua família virá, venha também.
 
 1116
 01:35:36,900 --> 01:35:38,680
-Conversamos sobre o assunto do casamento aproveitando a ocasião, hein.
+A gente conversa sobre o casamento depois, tá bom.
 
 1117
 01:35:41,740 --> 01:35:43,540
-Sim, senhora.
+Sim, senhor.
 
 1118
 01:35:45,270 --> 01:35:45,770
 Bom apetite.
 
 1119
-01:36:02,840 --> 01:36:06,170
-Não deixei você ir daquele jeito, querida.
+01:36:02,840 --> 01:36:06,300
+Eu não deixei você ir assim, senão, meu bem.
 
 1120
 01:36:21,720 --> 01:36:23,150
-Não, eu já vou mesmo.
+Não, eu vou embora.
 
 1121
 01:36:24,770 --> 01:36:26,130
-Por que você ficou chateada então?
+Por que ficou chateado então?
 
 1122
 01:36:28,750 --> 01:36:29,310
 Boran.
 
 1123
-01:36:33,150 --> 01:36:35,505
-Você está com saudades, né?
+01:36:33,150 --> 01:36:35,115
+Você sente falta, né?
 
 1124
-01:36:43,130 --> 01:36:46,005
-Eu também estou com muita saudades.
+01:36:43,130 --> 01:36:45,550
+Eu também sinto muita falta.
 
 1125
 01:36:48,740 --> 01:36:49,790
-Vamos, ande.
+Vamos embora, vamos.
 
 1126
 01:36:51,660 --> 01:36:52,340
@@ -4507,16 +4507,16 @@ Vamos.
 Dona Alya, por favor.
 
 1128
-01:37:13,090 --> 01:37:17,590
-Você disse que tinha roupas para lavar, vim buscar as sujas.
+01:37:13,090 --> 01:37:17,460
+Você disse que tem coisas para lavar, vim buscar as sujas.
 
 1129
 01:37:18,850 --> 01:37:20,620
-Vou fazer você esperar um instante, desculpa.
+Vou fazer esperar logo, desculpe.
 
 1130
 01:37:20,700 --> 01:37:22,500
-Meus pêsames.
+Obrigado.
 
 1131
 01:38:02,490 --> 01:38:04,290
@@ -4524,75 +4524,75 @@ Boa noite.
 
 1132
 01:38:30,050 --> 01:38:30,970
-Quem veio ver?
+Para quem você veio?
 
 1133
 01:38:31,050 --> 01:38:31,970
-Vim fazer uma visita ao senhor Ecmel.
+Vim visitar o senhor Ecmel.
 
 1134
 01:38:32,050 --> 01:38:33,650
-Deixe-me avisá-lo, certo.
+Vou avisar ao Değ, ok.
 
 1135
-01:38:33,730 --> 01:38:37,125
-Vieram te fazer uma visita de melhora, pai.
+01:38:33,730 --> 01:38:36,475
+Melhoras, sua visita chegou, pai.
 
 1136
 01:38:41,680 --> 01:38:42,720
-Quem veio?
+Quem chegou?
 
 1137
 01:38:42,800 --> 01:38:44,720
-Boa noite, melhoras, Nadim.
+Boa noite, melhoras, senhor.
 
 1138
 01:38:44,800 --> 01:38:46,380
-Ora, o que você está fazendo aqui?
+Ei, o que você tem a fazer aqui?
 
 1139
 01:38:46,460 --> 01:38:48,110
-Fora!
+Saia!
 
 1140
 01:38:48,190 --> 01:38:50,310
-Como você deixa esse homem entrar?
+Como você vai deixar esse homem entrar?
 
 1141
 01:38:50,390 --> 01:38:53,310
-Juro que ele veio até a porta, não pude mandá-lo embora, me desculpe.
+Juro, ele chegou até a porta, não pude recusá‑lo, me desculpe.
 
 1142
 01:38:53,390 --> 01:38:56,110
-Vocês estão brincando comigo, hein?
+Ei, vocês estão jogando comigo, né?
 
 1143
 01:38:56,190 --> 01:38:58,130
-O único motivo de eu estar assim é este homem!
+O único motivo desse meu estado é esse homem!
 
 1144
 01:38:58,210 --> 01:39:01,390
-Tá bom, um minuto. Escuta o homem, cara. Vá em frente, Ecmel, entre.
+Certo, um minuto. Ouça o cara. Por favor, Ecmel Baba, passe.
 
 1145
 01:39:02,000 --> 01:39:03,420
-Nem se atreva.
+Não faça isso, hein.
 
 1146
 01:39:05,150 --> 01:39:07,020
-O motivo não sou eu, Nadim.
+A culpa não sou eu, Nadim.
 
 1147
-01:39:08,680 --> 01:39:13,245
-Quem deixou você nesse estado foi o Cihan, a Sadakat, o Kaya.
+01:39:08,680 --> 01:39:12,335
+Quem te deixou assim foi Cihan, Sadakat e Kaya.
 
 1148
-01:39:15,890 --> 01:39:21,600
-Ora, não foi você quem me fez dar um tiro no Hamado e me chamou de Nadim, o assassino, hein?
+01:39:15,890 --> 01:39:21,560
+Você, que bateu no Hamada e fez todo mundo dizer que Nadim é assassino, não é?
 
 1149
 01:39:22,470 --> 01:39:23,930
-Não foi você quem armou essa cilada para mim?
+Você não é quem armou essa armadilha pra mim?
 
 1150
 01:39:24,330 --> 01:39:25,420
@@ -4600,35 +4600,35 @@ Não fui eu.
 
 1151
 01:39:25,730 --> 01:39:26,530
-Quem foi então?
+Então quem foi?
 
 1152
 01:39:26,230 --> 01:39:29,600
-Além disso, essa cilada não é uma armadilha simples como você pensa.
+Além disso, essa armadilha não é tão simples quanto você imagina.
 
 1153
-01:39:30,200 --> 01:39:33,040
-Talvez quem tenha armado essa cilada tenha sido o Cihan.
+01:39:30,200 --> 01:39:32,815
+Talvez quem armou seja o Cihan.
 
 1154
-01:39:33,670 --> 01:39:38,560
-Será que ele não planejou isso para nos colocar um contra o outro?
+01:39:33,670 --> 01:39:38,755
+Não poderia ter planejado isso para nos colocar uns contra os outros?
 
 1155
-01:39:44,350 --> 01:39:46,185
-Hein? Será que não?
+01:39:44,350 --> 01:39:46,150
+Hã? Não pode ser?
 
 1156
-01:39:48,380 --> 01:39:52,260
-Para me fazer virar as costas para o Emir e destruir nossa parceria.
+01:39:48,380 --> 01:39:52,165
+Para me tornar inimigo e destruir nossa parceria.
 
 1157
 01:39:54,090 --> 01:39:55,950
-Era o plano da Nacihan.
+Foi plano da Nacihan.
 
 1158
 01:39:56,850 --> 01:39:57,030
-Hein?
+Hã?
 
 1159
 01:39:58,110 --> 01:39:59,690
@@ -4636,71 +4636,71 @@ Pense bem, Nadim.
 
 1160
 01:40:00,960 --> 01:40:05,140
-Quem está jogando com quem, quem está puxando o tapete de quem, pense bem.
+Quem está jogando contra quem, quem está cavando a cova do outro, pense bem.
 
 1161
 01:40:06,710 --> 01:40:07,710
-Poxa, é capaz.
+Juro que pode ser.
 
 1162
 01:40:08,890 --> 01:40:11,000
-Olha, agora somos consogros.
+Olha, agora somos parentes.
 
 1163
 01:40:11,700 --> 01:40:12,540
-Viramos parentes.
+Somos parentes.
 
 1164
 01:40:13,830 --> 01:40:14,850
-Um neto está vindo aí em breve.
+Em breve vem neto.
 
 1165
 01:40:17,250 --> 01:40:19,290
-Uma luz está se abrindo para você, Nadim.
+Um menino está vindo até você, Nadim.
 
 1166
 01:40:20,810 --> 01:40:21,910
-Vamos deixar a inimizade.
+Chega de inimizade.
 
 1167
 01:40:22,310 --> 01:40:24,790
-Vamos deixar o rancor de lado.
+Vamos deixar o rancor de lado, colocar tudo de lado.
 
 1168
 01:40:26,520 --> 01:40:27,880
-Precisamos nos unir.
+Precisamos estar unidos.
 
 1169
 01:40:29,250 --> 01:40:30,050
-O Cihan está ficando mais forte.
+Cihan está ficando mais forte.
 
 1170
-01:40:30,090 --> 01:40:35,630
-Se não nos unirmos, juro por Deus que ele vai destruir todos nós, um por um.
+01:40:30,090 --> 01:40:34,460
+Se não ficarmos unidos, juro que um a um vão nos destruir.
 
 1171
-01:40:41,040 --> 01:40:46,125
-Me escute bem. Vamos fazer os carregamentos juntos daqui para frente.
+01:40:41,040 --> 01:40:45,930
+Me escuta bem. Venha, depois disso vamos fazer as entregas juntos.
 
 1172
 01:40:52,040 --> 01:40:54,460
 Hacime, olhe nos meus olhos.
 
 1173
-01:40:57,170 --> 01:41:00,780
-Eu não vou me curvar aos seus joguinhos e trapaças.
+01:40:57,170 --> 01:41:00,760
+Eu não vou me curvar aos seus jogos e truques.
 
 1174
 01:41:02,080 --> 01:41:03,120
-Guarde isso para se torturar.
+Que isso te dê um problema.
 
 1175
 01:41:05,010 --> 01:41:07,170
-Vamos, meu filho, vamos!
+Saia, seu covarde, saia!
 
 1176
-01:41:10,850 --> 01:41:13,140
-Pense nisso mais um pouco.
+01:41:10,850 --> 01:41:12,650
+Pense bem.
 
 1177
 01:41:14,620 --> 01:41:17,110
@@ -4708,83 +4708,83 @@ Olha, meu genro é inteligente.
 
 1178
 01:41:17,830 --> 01:41:19,350
-Sabe distinguir muito bem o certo do errado.
+Ele conhece bem o certo e o errado.
 
 1179
-01:41:24,210 --> 01:41:27,085
-Meu Deus, meu Deus, meu Deus Soğur.
+01:41:24,210 --> 01:41:26,695
+Divino, Divino, Divino Soğur.
 
 1180
-01:41:29,400 --> 01:41:32,145
-Eu te acompanho até a saída, pai.
+01:41:29,400 --> 01:41:31,690
+Vou te deixar passar, pai.
 
 1181
-01:41:33,020 --> 01:41:37,390
-Você falou sobre esse assunto com o meu irmão também, pai?
+01:41:33,020 --> 01:41:36,805
+Você já discutiu esse assunto com meu irmão, pai?
 
 1182
-01:41:39,040 --> 01:41:41,590
-Não se intrometa. Vá com Deus.
+01:41:39,040 --> 01:41:41,460
+Não se intrometa. Vá em paz.
 
 1183
 01:41:52,490 --> 01:41:55,130
-Parece até que você ainda não acredita na minha inocência.
+Parece que você ainda não acredita que eu sou inocente.
 
 1184
-01:41:55,650 --> 01:42:00,280
-Olha, a mercadoria que vamos trazer neste último carregamento.
+01:41:55,650 --> 01:42:00,085
+Olha, tem mercadoria que vamos trazer nessa última entrega.
 
 1185
 01:42:02,410 --> 01:42:03,690
-É uma fortuna, uma fortuna.
+Riqueza, riqueza.
 
 1186
 01:42:05,720 --> 01:42:08,220
-Talvez esse dinheiro facilite para você acreditar, hein?
+Esse dinheiro talvez facilite você acreditar, né?
 
 1187
 01:42:08,730 --> 01:42:13,080
-Se a minha parte for satisfatória, Ecmel, acreditar não será problema.
+Juro, se a minha parte for satisfeita, não será questão de acreditar, Ecmel.
 
 1188
 01:42:14,580 --> 01:42:17,290
-Não se preocupe com isso. Fique com a consciência tranquila.
+Não seja um obstáculo. Que fique confortável para você.
 
 1189
 01:42:19,740 --> 01:42:24,840
-Talvez o seu pai também perceba que a inimizade e o ódio são coisas insignificantes perto do interesse.
+Talvez seu pai perceba que sua rivalidade e ódio são coisas pequenas, para o seu próprio bem.
 
 1190
 01:42:24,920 --> 01:42:26,720
 Vamos, boa noite.
 
 1191
-01:42:34,160 --> 01:42:38,465
-Demir, você não vai fazer nenhum acordo com aquela cobra.
+01:42:34,160 --> 01:42:37,555
+Demir, não faça acordo com aquela serpente.
 
 1192
 01:42:44,030 --> 01:42:44,770
-Por que você está se metendo?
+Por que ficou parado?
 
 1193
 01:42:45,230 --> 01:42:46,590
-Quem está se metendo é você.
+Na verdade, por que você ficou parado?
 
 1194
 01:42:47,700 --> 01:42:50,820
-Foi você quem disse que, se não se divorciar de Zerrin, vai cooperar com o Cihan.
+Se eu não conseguir esgotar o seu limite, você é quem diz que vai colaborar com Cihan.
 
 1195
 01:42:51,630 --> 01:42:52,690
-Quem está se rebaixando é você.
+Você é quem está se rebaixando.
 
 1196
 01:42:53,680 --> 01:42:54,440
-Por que você está se metendo nisso?
+Por que você ficou parado?
 
 1197
-01:43:00,510 --> 01:43:03,515
-Você vai ver quem vai bater no Demir!
+01:43:00,510 --> 01:43:03,905
+Quem vai ver quem bate Demir com o martelo?
 
 1198
 01:43:32,890 --> 01:43:34,690
@@ -4804,43 +4804,43 @@ Boa noite.
 
 1202
 01:44:15,290 --> 01:44:16,250
-Sejam bem-vindos.
+Bem-vindos.
 
 1203
 01:44:17,020 --> 01:44:19,360
-Dona Sadakat está esperando vocês na ponta da mesa.
+Senhora Sadakat está esperando por vocês à cabeceira da mesa.
 
 1204
 01:44:19,780 --> 01:44:20,660
-Ela disse para não se atrasarem.
+Ele disse para não se atrasarem.
 
 1205
 01:44:20,970 --> 01:44:22,070
-Espero que não tenha começado a dar ordens de novo.
+Verdi, que Deus queira novamente.
 
 1206
 01:44:23,480 --> 01:44:25,400
-O Cihan está lá em cima?
+Cihan está lá em cima?
 
 1207
 01:44:26,580 --> 01:44:28,740
-No quarto dele, com certeza.
+Ele está na sala, tenho certeza.
 
 1208
 01:44:28,820 --> 01:44:30,620
-Então vamos.
+Vamos então.
 
 1209
-01:44:31,250 --> 01:44:35,750
-Vocês já devem ter saído. Fiz comidas deliciosas para vocês.
+01:44:31,250 --> 01:44:34,905
+Já saíram. Tenho comidas deliciosas para vocês.
 
 1210
 01:44:41,920 --> 01:44:43,840
-Tomara que a gente consiga comer.
+Feito. Podemos comer o banquete.
 
 1211
-01:44:49,780 --> 01:44:52,265
-Graças a Deus, está tudo bem.
+01:44:49,780 --> 01:44:51,745
+Hayet, graças a Deus.
 
 1212
 01:44:54,540 --> 01:44:56,505
@@ -4848,19 +4848,19 @@ Boa noite. Boa noite.
 
 1213
 01:44:56,710 --> 01:44:58,100
-Por favor, sirvam-se à mesa.
+Por favor. À mesa.
 
 1214
-01:45:08,060 --> 01:45:11,390
-Todo mundo arrumado e ninguém abre a boca.
+01:45:08,060 --> 01:45:12,755
+Todo mundo está se exibindo, ninguém abre a boca para criticar.
 
 1215
 01:45:20,740 --> 01:45:21,870
-É por causa do Boran?
+Por causa do Boran?
 
 1216
-01:45:26,730 --> 01:45:29,800
-Que Deus o tenha. Que descanse em paz.
+01:45:26,730 --> 01:45:30,840
+Que Deus tenha misericórdia dele. Que descanse em luz.
 
 1217
 01:45:32,830 --> 01:45:34,630
@@ -4868,71 +4868,71 @@ Amém. Amém.
 
 1218
 01:45:36,840 --> 01:45:39,650
-As cestas básicas foram distribuídas na vila? Foram, mãe.
+A comida foi distribuída na aldeia? Foi distribuída, mãe.
 
 1219
 01:45:40,200 --> 01:45:42,280
-Amanhã o hoxha virá rezar
+Amanhã o mestre virá para a oração.
 
 1220
 01:45:42,360 --> 01:45:43,980
-para o <i>Mevlüt</i>. Avisaram todo mundo?
+Para o Mevlüt. Foi avisado?
 
 1221
 01:45:44,510 --> 01:45:46,200
-Avisamos. Certo.
+Avisado. Certo.
 
 1222
-01:45:46,280 --> 01:45:48,635
-A Dona Cemile e o Sr. Salih
+01:45:46,280 --> 01:45:49,480
+A senhora Cemile e o senhor Salih também
 
 1223
 01:45:53,180 --> 01:45:55,590
-também virão amanhã para o <i>Mevlüt</i>. Quem?
+virão amanhã para o Mevlüt. Quem?
 
 1224
 01:45:56,730 --> 01:45:59,070
-Você se lembrou da sua sogra e do seu sogro.
+Você lembrou da sua sogra e do seu sogro.
 
 1225
 01:46:00,700 --> 01:46:03,340
-Como assim, por que eles não viriam? Eles são nossos!
+O que isso significa, por que eles são nossos?
 
 1226
 01:46:03,960 --> 01:46:06,110
-Os nossos consogros virão para a reza.
+Nossos parentes virão ao campo.
 
 1227
 01:46:07,350 --> 01:46:09,350
-A İpek também virá, eu a convidei.
+İpek também virá, eu a convidei.
 
 1228
 01:46:09,650 --> 01:46:10,390
-Ela virá para o <i>Mevlüt</i>.
+Virá ao Mevlüt.
 
 1229
 01:46:10,550 --> 01:46:13,080
-E depois do <i>Mevlüt</i>, vamos conversar sobre o casamento.
+Depois do Mevlüt, vamos conversar sobre o casamento.
 
 1230
 01:46:14,260 --> 01:46:16,340
-Não há necessidade de esticar tanto essa história.
+Não há necessidade de prolongar isso.
 
 1231
 01:46:16,680 --> 01:46:17,540
-Isso não nos pega bem.
+Não nos cabe.
 
 1232
 01:46:17,900 --> 01:46:21,760
-Vamos fazer um casamento digno da nossa mansão aqui e acabar logo com isso.
+Vamos fazer um casamento digno e glorioso aqui na nossa casa e acabar com isso.
 
 1233
 01:46:22,490 --> 01:46:24,790
-Tá bom, mãe, depois conversamos sobre essas coisas.
+Tudo bem, mãe, vamos conversar sobre isso depois.
 
 1234
 01:46:25,030 --> 01:46:26,150
-Como assim depois conversamos?
+O que quer dizer, vamos conversar depois?
 
 1235
 01:46:26,530 --> 01:46:27,690
@@ -4940,47 +4940,47 @@ O casamento vai ficar para o inverno?
 
 1236
 01:46:28,030 --> 01:46:29,370
-O casamento vai ser antes do verão acabar.
+O casamento será antes do verão acabar.
 
 1237
 01:46:29,890 --> 01:46:31,210
-Mãe, olha, agora não é o momento.
+Mãe, olha, não é a hora agora.
 
 1238
 01:46:31,290 --> 01:46:38,790
-Quando é o momento, Sr. Kaya? Quando é o momento? Olha, não fique enrolando a İpek, essa menina. Foi você quem tomou a decisão de casar. Vai levar até o fim. O contrário não nos convém.
+Quando será a vez, senhor Kaya? Quando será? Não fique enrolando a Ipe com essa garota. Você foi quem deu a decisão de casar. Vai concluir até o fim. Caso contrário, não nos cabe.
 
 1239
 01:46:42,770 --> 01:46:46,710
-Mãe, olha, eu tô te dizendo que vou me casar. Tô te dizendo que vou me casar, mas agora não é a hora.
+Mãe, olha, eu estou dizendo que vou me casar. Estou dizendo que vou me casar, mas agora não é a hora.
 
 1240
 01:46:47,010 --> 01:46:52,990
-Tá bom. Espera um minuto. Mãe, tem necessidade de toda essa pressa? Eles nem noivos estão ainda. Por que você tá com tanta pressa?
+Tudo bem. Espera um minuto. Mãe, será que há necessidade de pressa? Eles ainda não ficaram noivos. Por que está tão apressada?
 
 1241
 01:46:53,250 --> 01:46:59,810
-Porque eu não confio nele. A qualquer momento a cabeça dele pode voar para outro lugar. Esse assunto tem que terminar o mais rápido possível.
+Porque eu não confio nisso. A qualquer momento o cavalo pode fugir para outro lugar. Isso tem que acabar o quanto antes.
 
 1242
-01:46:59,890 --> 01:47:02,070
-Que cabeça voar, que cabeça voar o quê?
+01:46:59,890 --> 01:47:01,725
+Que fuga, que fuga?
 
 1243
 01:47:02,390 --> 01:47:03,910
-De onde você tira essas coisas?
+De onde você tira isso?
 
 1244
 01:47:04,250 --> 01:47:05,410
-Olha, não desconte em mim.
+Olha, não venha me incomodar.
 
 1245
 01:47:05,710 --> 01:47:06,630
-Não me tire do sério, mãe.
+Não me enlouqueça, mãe.
 
 1246
 01:47:06,710 --> 01:47:07,830
-Não me tire do sério.
+Não me enlouqueça.
 
 1247
 01:47:08,230 --> 01:47:08,510
@@ -4988,43 +4988,43 @@ Kaya.
 
 1248
 01:47:09,110 --> 01:47:10,290
-Eu vou me casar.
+Eu me casarei.
 
 1249
 01:47:10,740 --> 01:47:11,920
-Mas não porque você tá me forçando.
+Mas não é por imposição sua.
 
 1250
 01:47:13,290 --> 01:47:14,880
-Eu conheço bem a minha mercadoria.
+Eu sei o que sou capaz.
 
 1251
 01:47:15,480 --> 01:47:15,840
-Tia.
+Ainda.
 
 1252
 01:47:16,860 --> 01:47:17,380
-Tia.
+Ainda.
 
 1253
 01:47:17,660 --> 01:47:18,440
-Vocês podiam pegar aqui.
+Pegue isso aí.
 
 1254
 01:47:19,660 --> 01:47:21,440
-Mãe, amanhã sobre o casamento...
+Mãe, amanhã tem a coisa do casamento.
 
 1255
 01:47:21,560 --> 01:47:22,840
-A senhora não vai dizer uma só palavra, mãe.
+Você não vai dizer nada, mãe.
 
 1256
 01:47:23,230 --> 01:47:24,050
-Uma só.
+Só.
 
 1257
-01:47:26,100 --> 01:47:28,130
-Olha para essa mulher.
+01:47:26,100 --> 01:47:27,900
+Olha essa mulher.
 
 1258
 01:47:31,250 --> 01:47:33,050
@@ -5032,59 +5032,59 @@ Olha.
 
 1259
 01:47:34,660 --> 01:47:35,490
-Pecado, pecado.
+É proibido, é proibido.
 
 1260
 01:47:35,730 --> 01:47:37,160
-É um pecado comer comida nesta casa.
+É proibido comer aqui dentro.
 
 1261
 01:47:38,320 --> 01:47:40,980
-Bom trabalho, vocês prepararam um banquete e tanto.
+Parabéns pelo trabalho, vocês prepararam um mergulho bem avançado.
 
 1262
-01:47:41,060 --> 01:47:45,040
-Foi até os Baybars e propôs uma trégua para o Demir?
+01:47:41,060 --> 01:47:45,105
+Você foi aos Baybars e propôs levar a carga ao Demir?
 
 1263
 01:48:20,450 --> 01:48:22,670
-É, conversamos sobre algumas coisas.
+Ah, falamos sobre alguma coisa.
 
 1264
 01:48:23,500 --> 01:48:24,420
-O que ele disse?
+Será que ficou frio?
 
 1265
 01:48:24,640 --> 01:48:25,720
-Por que eu não estou sabendo disso?
+Por que eu não fui avisado disso?
 
 1266
 01:48:26,460 --> 01:48:27,760
-O que vai acontecer, hein?
+Que vai ser, cara?
 
 1267
 01:48:29,450 --> 01:48:33,360
-Tudo o que eu precisava saber foi enterrado por sua culpa.
+Tudo que eu precisava saber foi enterrado por sua causa.
 
 1268
 01:48:34,030 --> 01:48:35,950
-Daqui em diante, cada um por si.
+De agora em diante, cada um segue seu caminho.
 
 1269
 01:48:36,730 --> 01:48:37,790
-Acabou a confiança.
+Não há mais confiança.
 
 1270
 01:48:38,010 --> 01:48:39,330
-Não vai haver acordo com o Demir.
+Não vai ter acordo com o Demir.
 
 1271
 01:48:40,400 --> 01:48:40,900
-Vai, sim.
+Vai acontecer.
 
 1272
 01:48:41,310 --> 01:48:42,190
-Nós somos obrigados a fazer isso.
+Estamos obrigados a isso.
 
 1273
 01:48:42,350 --> 01:48:43,990
@@ -5092,15 +5092,15 @@ Você quer traficar drogas.
 
 1274
 01:48:44,470 --> 01:48:46,930
-Foi por isso que você se aproximou do Demir, mas só por cima do meu cadáver, hein.
+Por isso você se aproximou do Demir, achando que vai comer meu cadáver, hein?
 
 1275
 01:48:47,470 --> 01:48:48,030
-Eu não vou permitir.
+Eu não permito.
 
 1276
 01:48:48,680 --> 01:48:50,860
-Que drogas? Não tem droga nenhuma.
+Não existe droga que seja droga.
 
 1277
 01:48:52,150 --> 01:48:52,830
@@ -5108,43 +5108,43 @@ Você está mentindo.
 
 1278
 01:48:53,800 --> 01:48:54,780
-Não estou mentindo.
+Não é mentira.
 
 1279
-01:48:54,860 --> 01:48:58,125
-Eu passei anos preso por causa de drogas.
+01:48:54,860 --> 01:48:58,580
+Fiquei preso aqui por anos por causa das drogas.
 
 1280
 01:48:59,270 --> 01:49:00,650
-Consegui a liberdade condicional.
+Saí em liberdade condicional.
 
 1281
 01:49:00,910 --> 01:49:03,170
-Você acha que eu sou tão estúpido a ponto de correr esse risco, porra?
+Sou eu tão idiota a ponto de correr esse risco, cara?
 
 1282
-01:49:04,650 --> 01:49:07,200
-Será apenas contrabando comum.
+01:49:04,650 --> 01:49:07,520
+Só vai ser mercadoria contrabandeada.
 
 1283
 01:49:07,840 --> 01:49:09,180
-E estará sob o nosso controle.
+Isso também está sob nosso controle.
 
 1284
-01:49:10,660 --> 01:49:13,665
-Şahin, olha, ele agora é nosso genro.
+01:49:10,660 --> 01:49:13,600
+Olha, dá logo, ele já é nosso genro.
 
 1285
 01:49:17,080 --> 01:49:18,460
-Precisamos nos unir.
+Precisamos estar unidos.
 
 1286
 01:49:19,380 --> 01:49:22,280
-Senão, esse Cihan vai nos esmagar um por um.
+Senão este mundo vai nos esmagar um a um.
 
 1287
 01:49:23,580 --> 01:49:24,500
-Caia em si.
+Use a cabeça.
 
 1288
 01:49:27,430 --> 01:49:29,590
@@ -5152,91 +5152,91 @@ Vamos adiar o casamento.
 
 1289
 01:49:35,450 --> 01:49:36,550
-Marcamos para uma data futura.
+Vamos marcar para uma data futura.
 
 1290
 01:49:36,670 --> 01:49:38,050
-Fazemos depois, não se preocupe.
+Faremos depois, não se preocupe.
 
 1291
-01:49:40,590 --> 01:49:43,270
-Mas você tem certeza, meu filho?
+01:49:40,590 --> 01:49:43,010
+Mas você tem certeza, filho?
 
 1292
 01:49:45,270 --> 01:49:52,770
-Não vai voltar atrás depois, hein? Não machuque essa menina, não machuque a si mesmo e nem nos machuque, porque as coisas vão ficar complicadas depois.
+Depois, não se arrependa, veja, não machuque essa garota, nem a si mesmo, nem a gente, porque depois as coisas vão se complicar.
 
 1293
-01:49:54,550 --> 01:50:02,050
-Eu não vou deixar que a maltratem por causa daquela casa, meu irmão. Eu dei minha palavra e não vou voltar atrás. O contrário disso não nos combina.
+01:49:54,550 --> 01:50:01,780
+Eu não vou enfrentar essa casa, irmão. Eu dei a palavra, não vou recuar, isso não combina com a gente.
 
 1294
-01:50:03,560 --> 01:50:11,060
-Mas você sabe como estão as coisas agora, irmão. Nossa vida sempre foi difícil, mas depois do meu irmão Boran, eu...
+01:50:03,560 --> 01:50:10,595
+Mas você conhece a situação atual, irmão. Nossa vida sempre foi difícil, mas depois do Boran, eu...
 
 1295
-01:50:20,430 --> 01:50:27,930
-não tenho paciência para mais nada. Nem para ouvir desaforo, nem para rir, nem para sonhar com casamento. Sabe, eu não sei...
+01:50:20,430 --> 01:50:27,270
+Não aguento mais nada, não suporto ouvir conversa, nem rir, nem sonhar com casamento, não sei...
 
 1296
-01:50:34,870 --> 01:50:37,160
-está tudo perdido. Você...
+01:50:34,870 --> 01:50:36,900
+Estou perdido. Você...
 
 1297
-01:50:43,950 --> 01:50:46,435
-como você aguenta, meu irmão?
+01:50:43,950 --> 01:50:46,175
+Como você aguenta, irmão?
 
 1298
-01:50:51,140 --> 01:50:55,250
-Tia Ayca... Tudo está muito mais difícil agora, não é?
+01:50:51,140 --> 01:50:54,795
+Dona Ayça, tudo está ainda mais difícil, não é?
 
 1299
 01:51:04,460 --> 01:51:05,540
-Tenta me recompor.
+Vou tentar me recompor.
 
 1300
-01:51:09,040 --> 01:51:11,005
-Não diga nada, irmão.
+01:51:09,040 --> 01:51:11,525
+Irmão, não diga nada ao time.
 
 1301
-01:51:16,880 --> 01:51:20,925
-Por favor. Sem saber da situação do meu irmão Burhan,
+01:51:16,880 --> 01:51:20,990
+Eu imploro. A situação do meu irmão Burhan está clara.
 
 1302
 01:51:21,220 --> 01:51:22,900
-por favor, não diga nada.
+Por favor, não diga nada antes que isso aconteça.
 
 1303
-01:51:37,130 --> 01:51:40,590
-Não, como assim? Está melhor. Mas é claro...
+01:51:37,130 --> 01:51:39,615
+Não, como? Melhor. Mas claro.
 
 1304
 01:51:52,950 --> 01:51:54,810
-o que você espera? É normal ele ficar
+O que você está esperando, então? O do Burhan...
 
 1305
 01:51:54,890 --> 01:51:57,100
-tão abalado assim no aniversário
+Ele ficar tão afetado na sua patrulha anual.
 
 1306
 01:51:57,180 --> 01:51:58,660
-de falecimento do Burhan. Por isso ele explode desse jeito.
+É muito normal. Por isso ele está explodindo assim.
 
 1307
 01:51:59,090 --> 01:52:01,440
-Mas eu acho que não é normal ele explodir tanto assim.
+Ele ter tantas explosões não é normal, mas eu acho.
 
 1308
 01:52:03,280 --> 01:52:04,520
-Parece que tem outra coisa por trás.
+Parece que tem outra coisa.
 
 1309
 01:52:05,480 --> 01:52:07,835
-Como motivo. Não é? Sei lá.
+Como causa, não é? Não sei.
 
 1310
 01:52:09,510 --> 01:52:11,490
-Talvez ele não queira essa menina por obrigação.
+Talvez ele não queira aquela garota por causa do trabalho.
 
 1311
 01:52:12,920 --> 01:52:13,560
@@ -5247,16 +5247,16 @@ Pode ser, sim.
 Talvez.
 
 1313
-01:52:17,240 --> 01:52:19,985
-Talvez o mesmo se aplique a você.
+01:52:17,240 --> 01:52:20,180
+Talvez seja a mesma coisa para você.
 
 1314
 01:52:21,850 --> 01:52:23,070
 Não entendi.
 
 1315
-01:52:29,540 --> 01:52:32,220
-Talvez seja o mesmo no seu caso.
+01:52:29,540 --> 01:52:32,415
+Talvez seja assim para você também.
 
 1316
 01:52:36,700 --> 01:52:37,650
@@ -5264,19 +5264,19 @@ Não é?
 
 1317
 01:52:37,770 --> 01:52:41,510
-Quer dizer, deve haver algum outro motivo por trás desse seu jeito e dessa sua atitude.
+Então, deve haver outro motivo por trás da sua atitude.
 
 1318
 01:52:44,670 --> 01:52:45,830
-Eu não estou entendendo o que você quer dizer.
+Não entendo o que você quer dizer.
 
 1319
-01:52:48,560 --> 01:52:55,855
-Eu não entendo como o aniversário da morte do Bora pôde te deixar tão calada e tão fechada em si mesma.
+01:52:48,560 --> 01:52:54,295
+Não entendo por que o aniversário de Bora te deixa tão silencioso, tão recluso.
 
 1320
 01:52:59,250 --> 01:53:00,430
-Tem outra coisa por trás disso.
+Tem algo mais por trás.
 
 1321
 01:53:00,910 --> 01:53:01,310
@@ -5291,8 +5291,8 @@ Tem algo mais profundo.
 O quê?
 
 1324
-01:53:06,770 --> 01:53:09,775
-O que está te afastando tanto de mim?
+01:53:06,770 --> 01:53:09,255
+O que te afasta tanto de mim?
 
 1325
 01:53:11,580 --> 01:53:13,380
@@ -5300,23 +5300,23 @@ Não tem nada.
 
 1326
 01:53:13,920 --> 01:53:15,720
-Sabe o que é isso?
+Você sabe?
 
 1327
 01:53:43,660 --> 01:53:45,490
-Sua passagem para Istambul.
+É o seu bilhete de ida para Istambul.
 
 1328
 01:53:45,570 --> 01:53:49,280
-Justo no dia em que você disse que ia para a Síria.
+E ainda no dia em que você disse que foi para a Síria.
 
 1329
-01:53:49,360 --> 01:53:51,325
-Onde você achou isso?
+01:53:49,360 --> 01:53:51,780
+De onde você encontrou isso?
 
 1330
-01:53:52,460 --> 01:53:54,260
-Me responda.
+01:53:52,460 --> 01:53:54,295
+Me dê uma resposta.
 
 1331
 01:53:55,470 --> 01:53:57,180
@@ -5324,35 +5324,35 @@ Por que você foi para Istambul?
 
 1332
 01:53:57,260 --> 01:53:58,960
-Você estava revirando as minhas coisas?
+Você não vai mexer nas minhas coisas?
 
 1333
 01:53:59,040 --> 01:54:00,300
-Eu não estava revirando nada!
+Eu não estou mexendo!
 
 1334
 01:54:00,380 --> 01:54:02,960
-Que ideia, por que você fala uma coisa dessas?
+Qual a razão, por que está dizendo isso agora?
 
 1335
 01:54:03,040 --> 01:54:04,000
-Então como você achou isso?
+E como você encontrou então?
 
 1336
 01:54:04,080 --> 01:54:06,720
-Estava saindo do seu bolso, gritando para eu ver, então eu peguei.
+Estava pendurado no seu bolso, gritando que eu estava aqui, eu peguei.
 
 1337
 01:54:06,800 --> 01:54:07,640
-Ah, você pegou.
+Ah, você também pegou.
 
 1338
 01:54:07,720 --> 01:54:10,760
-Me diga por que você mentiu para mim, por que foi para Istambul?
+Me diga por que mentiu para mim, por que foi para Istambul?
 
 1339
 01:54:10,840 --> 01:54:12,120
-Por que escondeu de mim?
+Por que você escondeu de mim?
 
 1340
 01:54:12,200 --> 01:54:13,310
@@ -5364,19 +5364,19 @@ Por quê?
 
 1342
 01:54:14,400 --> 01:54:16,200
-Me explica.
+Vou explicar.
 
 1343
-01:54:18,750 --> 01:54:20,585
-Eu vou enlouquecer.
+01:54:18,750 --> 01:54:20,550
+Vou ficar louco.
 
 1344
 01:54:22,630 --> 01:54:26,130
-Sério, eu vou enlouquecer, fico pensando nisso o tempo todo.
+De verdade vou ficar louco, fico pensando o tempo todo.
 
 1345
 01:54:26,600 --> 01:54:28,690
-Pensei nisso de novo e de novo, para ver se era algo do trabalho.
+Fico pensando repetidamente se tem a ver com o trabalho.
 
 1346
 01:54:28,790 --> 01:54:28,930
@@ -5384,27 +5384,27 @@ Não.
 
 1347
 01:54:29,780 --> 01:54:31,360
-Se fosse sobre o trabalho, você me contaria.
+Se for sobre o trabalho, me conta.
 
 1348
 01:54:32,910 --> 01:54:34,350
-Se fosse brigar com alguém, também me contaria.
+Se você for pra briga, também me conta.
 
 1349
 01:54:34,430 --> 01:54:35,830
-Sabe que enfrentamos as coisas juntos.
+A gente encara juntos, você sabe.
 
 1350
 01:54:37,420 --> 01:54:38,960
-Imagino que não foi dar um tiro em alguém do nada.
+Você não atirou em ninguém sem motivo, né?
 
 1351
 01:54:40,710 --> 01:54:42,190
-E você também não teria se envolvido com contrabando.
+Você nem se envolveu em contrabando.
 
 1352
 01:54:42,270 --> 01:54:44,150
-De qualquer forma, isso não seria motivo para você se afastar de mim.
+De qualquer forma, isso não vai fazer você se afastar de mim.
 
 1353
 01:54:46,110 --> 01:54:46,970
@@ -5416,7 +5416,7 @@ Por que você foi para Istambul?
 
 1355
 01:54:56,620 --> 01:54:57,220
-Foi a Meryem?
+É a Meryem?
 
 1356
 01:54:58,880 --> 01:55:00,680
@@ -5424,15 +5424,15 @@ A Meryem veio?
 
 1357
 01:55:02,240 --> 01:55:04,430
-Sei lá, ela foi para Istambul e você foi vê-la?
+Como eu saber? Você foi a Istambul só pra encontrá‑la?
 
 1358
 01:55:05,260 --> 01:55:06,500
-Você pode me dizer, por favor, me conta.
+Pode falar, por favor, fala.
 
 1359
 01:55:06,600 --> 01:55:08,000
-Só não minta para mim, me diga a verdade.
+Só não minta, fala.
 
 1360
 01:55:08,990 --> 01:55:09,290
@@ -5440,23 +5440,23 @@ Não.
 
 1361
 01:55:10,280 --> 01:55:10,620
-Satisfeita?
+Deu certo?
 
 1362
 01:55:10,960 --> 01:55:11,560
-O que é então?
+E então?
 
 1363
 01:55:11,720 --> 01:55:13,000
-Já teve a sua resposta? Não.
+Você recebeu a resposta? Não.
 
 1364
 01:55:13,320 --> 01:55:15,500
-Tá bom, então o que é? Se não é a Meryem, o que é?
+Certo, então, se não for a Meryem, o que é?
 
 1365
 01:55:16,700 --> 01:55:18,590
-Por que você está mentindo para mim?
+Por que você está mentindo pra mim?
 
 1366
 01:55:32,530 --> 01:55:34,330
@@ -5468,7 +5468,7 @@ O que vocês estão fazendo?
 
 1368
 01:55:41,530 --> 01:55:43,680
-Não estamos brigando, estamos conversando, meu amor.
+Não estamos brigando, estamos conversando, meu bem.
 
 1369
 01:55:43,900 --> 01:55:45,460
@@ -5480,67 +5480,67 @@ Mas vocês estão gritando muito.
 
 1371
 01:55:47,420 --> 01:55:48,940
-Pode ser, me desculpe, meu bebê.
+Pode ser, desculpa, querida.
 
 1372
 01:55:49,060 --> 01:55:52,340
-Não fique triste, papai, a mamãe às vezes fica zangada assim.
+Não fique triste, pai, minha mãe às vezes fica assim, irritada.
 
 1373
 01:55:54,760 --> 01:55:56,140
-Eu fico assim às vezes.
+É assim mesmo, eu também fico assim às vezes.
 
 1374
 01:55:56,220 --> 01:56:00,005
-Venham, vamos fazer as pazes esta noite e deitar.
+Vamos ficar em paz esta noite, vamos nos abraçar.
 
 1375
 01:56:00,160 --> 01:56:01,790
-Não, meu amor, para o quarto.
+Não, querido, para o quarto.
 
 1376
 01:56:01,920 --> 01:56:03,810
-Por favor, a gente já passou o dia todo deitado.
+Por favor, estávamos sempre deitados.
 
 1377
 01:56:04,050 --> 01:56:05,770
-Hoje não, por favor, você diz isso?
+Não hoje, por favor, pode dizer?
 
 1378
 01:56:06,440 --> 01:56:07,160
-Tá bom.
+Ok.
 
 1379
 01:56:07,560 --> 01:56:08,700
-Vamos, por favor, meu amor.
+Vamos, por favor, querida.
 
 1380
 01:56:09,720 --> 01:56:10,800
-Diga boa noite para o papai.
+Boa noite ao papai também.
 
 1381
 01:56:11,100 --> 01:56:12,260
-Boa noite, papai.
+Boa noite, pai.
 
 1382
 01:56:12,520 --> 01:56:13,440
-Boa noite, meu sapinho.
+Boa noite, sapo.
 
 1383
-01:56:26,170 --> 01:56:28,395
-Nem fizemos nada de mais.
+01:56:26,170 --> 01:56:28,330
+Não fizemos nada de bom.
 
 1384
 01:56:40,450 --> 01:56:41,890
-Vamos para a cama agora.
+Vamos, já vá para a cama.
 
 1385
-01:56:45,120 --> 01:56:47,280
-Vocês brigaram na volta.
+01:56:45,120 --> 01:56:47,600
+Vocês brigaram no caminho de volta.
 
 1386
 01:56:48,820 --> 01:56:50,100
-Meu filho, você...
+Filho, você...
 
 1387
 01:56:50,180 --> 01:56:52,200
@@ -5548,31 +5548,31 @@ Eu não quero que a gente brigue.
 
 1388
 01:56:52,740 --> 01:56:53,480
-De jeito nenhum.
+Nem um pouco.
 
 1389
-01:56:55,930 --> 01:56:58,070
-Nós não estamos brigando.
+01:56:55,930 --> 01:56:57,960
+A gente não briga, já.
 
 1390
-01:57:00,230 --> 01:57:04,210
-Se não há problema, então viva essa vida lindamente.
+01:57:00,230 --> 01:57:03,625
+Se não houver problema, viva bem essa vida.
 
 1391
-01:57:04,730 --> 01:57:08,775
-Enquanto você não diz isso, eu tento respirar, mas...
+01:57:04,730 --> 01:57:08,645
+A menos que eu diga isso, eu tento respirar, mas...
 
 1392
 01:57:45,300 --> 01:57:48,670
-...é como se o meu peito fosse se estreitando a cada respiração.
+...como se a parte de cima da minha gaiola fosse encolhendo a cada respiração.
 
 1393
 01:57:49,870 --> 01:57:50,750
-Isso me aperta por dentro.
+Estou afundando no meu peito.
 
 1394
 01:57:52,640 --> 01:57:53,440
-Isso consome o meu peito.
+Meu peito vibra.
 
 1395
 01:57:54,860 --> 01:57:56,410
@@ -5580,19 +5580,19 @@ Nazım Açık.
 
 1396
 01:57:57,410 --> 01:57:58,210
-É assim que vou me salvar.
+É assim que eu vou escapar.
 
 1397
-01:57:58,720 --> 01:58:06,210
-Minha razão, refugiada da noite, minha tristeza, meu coração que não volta, tenho medo, linda, tenho medo.
+01:57:58,720 --> 01:58:06,220
+Para a mente, para o que está à minha frente, a escuridão que vai, meu motivo, refugiado da noite, minha tristeza, minha esposa não volta, meu coração, eu temo, minha linda, eu temo.
 
 1398
-01:59:35,760 --> 01:59:42,990
-Minha razão, refugiada da noite, minha tristeza, meu coração que não volta, meu coração vai se partir.
+01:59:35,760 --> 01:59:43,260
+Meu motivo, refugiado da noite, minha tristeza, minha esposa não volta, meu coração, minha esposa vai rasgar.
 
 1399
-02:01:25,900 --> 02:01:29,815
-Diz que está doendo muito, fica chorando sem parar.
+02:01:25,900 --> 02:01:29,360
+Ele está com muita dor, está chorando muito.
 
 1400
 02:02:22,540 --> 02:02:23,440
@@ -5600,11 +5600,11 @@ Abra a boca, abra a boca.
 
 1401
 02:02:23,680 --> 02:02:24,900
-Não, está doendo.
+Não, dói.
 
 1402
 02:02:25,220 --> 02:02:28,780
-Se não abrirmos a boca, não podemos ver. Vamos abrir para ver o que é.
+Se não abrir a boca, não vamos ver; abra, vamos ver o que é isso.
 
 1403
 02:02:28,860 --> 02:02:29,300
@@ -5612,23 +5612,23 @@ Deniz!
 
 1404
 02:02:33,890 --> 02:02:35,190
-O que foi?
+O que aconteceu?
 
 1405
 02:02:35,770 --> 02:02:37,530
-Tire uma foto.
+Pega um.
 
 1406
 02:02:37,610 --> 02:02:39,390
-Mamãe, é o meu.
+Mãe, ele está dizendo que é meu.
 
 1407
 02:02:39,770 --> 02:02:41,210
-De quem é isso?
+Quem será que é?
 
 1408
 02:02:41,290 --> 02:02:45,630
-Não, querido, primeiro preciso dar uma olhada. Vamos, meu grandão.
+Não, preciso olhar primeiro, meu querido. Vamos, meu grande filho.
 
 1409
 02:02:46,250 --> 02:02:47,130
@@ -5639,12 +5639,12 @@ O que aconteceu?
 O quê?
 
 1411
-02:02:49,110 --> 02:02:51,270
-Será que é dor de dente?
+02:02:49,110 --> 02:02:51,430
+É a dentinha que está doendo, né?
 
 1412
 02:02:51,870 --> 02:02:52,830
-Abra para eu ver.
+Abra, deixa eu ver.
 
 1413
 02:02:53,030 --> 02:02:53,230
@@ -5652,7 +5652,7 @@ Abra.
 
 1414
 02:02:53,660 --> 02:02:54,930
-Abra bem, rapaz. Abra, abra.
+Abre muito, cara. Abre, abre.
 
 1415
 02:02:55,950 --> 02:02:57,210
@@ -5660,35 +5660,35 @@ Abra.
 
 1416
 02:02:58,010 --> 02:02:58,680
-Está estragado.
+Está podre.
 
 1417
 02:02:59,240 --> 02:03:01,760
-O que foi, filho? Está estragado?
+O que aconteceu, filho? Está podre?
 
 1418
 02:03:01,900 --> 02:03:02,840
-Não é nada. É uma cárie pequena.
+Não tem nada. É só uma cárie pequena.
 
 1419
 02:03:02,920 --> 02:03:04,360
-Ah, filho, não é nada demais.
+É nada, filho.
 
 1420
 02:03:04,540 --> 02:03:06,160
-São dentes de leite. Arranca e passa.
+São dentes de leite. Caem, tudo bem.
 
 1421
 02:03:06,240 --> 02:03:08,080
-Não, não arranquem, por favor.
+Não, não puxem, por favor.
 
 1422
 02:03:08,550 --> 02:03:09,780
-Como assim? Ora essa.
+Que isso? Pelo amor de Deus.
 
 1423
 02:03:09,860 --> 02:03:12,520
-É dente de leite, filho. Outro vai nascer no lugar.
+É um dente de leite. Vai nascer outro no lugar, filho.
 
 1424
 02:03:12,660 --> 02:03:13,060
@@ -5696,11 +5696,11 @@ Não.
 
 1425
 02:03:13,340 --> 02:03:15,170
-Não precisa ser arrancado assim.
+Sadaka, minha querida, não dá para puxar.
 
 1426
-02:03:15,250 --> 02:03:17,345
-Nós não vamos arrancar.
+02:03:15,250 --> 02:03:17,050
+Nós não puxamos.
 
 1427
 02:03:19,230 --> 02:03:20,150
@@ -5708,7 +5708,7 @@ Vamos ao dentista.
 
 1428
 02:03:20,310 --> 02:03:21,870
-Ele vai olhar e tratar.
+Ele vai ver, vai tratar.
 
 1429
 02:03:21,950 --> 02:03:23,110
@@ -5716,11 +5716,11 @@ Não vai acontecer nada, tá bom?
 
 1430
 02:03:23,550 --> 02:03:24,730
-Tá bom, vamos nessa então.
+Certo, então vamos.
 
 1431
 02:03:24,950 --> 02:03:25,210
-Venha cá.
+Vamos, vem.
 
 1432
 02:03:25,710 --> 02:03:26,370
@@ -5736,11 +5736,11 @@ Não vai doer.
 
 1435
 02:03:29,500 --> 02:03:30,940
-Vou pegar minha bolsa e já volto.
+Vou pegar minha bolsa e volto.
 
 1436
 02:03:31,260 --> 02:03:32,540
-Olha, olha, olha só o que ele tá dizendo.
+Olha, olha, olha o que ele está dizendo.
 
 1437
 02:03:32,900 --> 02:03:33,380
@@ -5748,27 +5748,27 @@ Não vai doer.
 
 1438
 02:03:33,520 --> 02:03:35,000
-O meu também arrancaram, não sentia nada.
+Eles puxaram o meu também, não tem nada.
 
 1439
 02:03:35,560 --> 02:03:36,360
-Não arrancaram o seu.
+Não te puxaram.
 
 1440
 02:03:36,080 --> 02:03:37,100
-É, não arrancaram o meu.
+Não, não puxaram o meu.
 
 1441
 02:03:37,300 --> 02:03:39,280
-Trataram e não doeu nada.
+Fizeram o tratamento, não doeu nada.
 
 1442
 02:03:39,380 --> 02:03:41,920
-Tá bom, meu chapa, força aí, amigão.
+Certo, senhor, melhoras, papai.
 
 1443
 02:03:42,140 --> 02:03:43,760
-Pronto, veja que não vai acontecer nada.
+Certo, olha, nada vai acontecer.
 
 1444
 02:03:44,420 --> 02:03:45,020
@@ -5776,31 +5776,31 @@ Não vai doer?
 
 1445
 02:03:45,320 --> 02:03:46,240
-Tá bom, tá bom.
+Certo, certo.
 
 1446
-02:03:47,250 --> 02:03:49,280
-Vamos entrar, pessoal.
+02:03:47,250 --> 02:03:49,050
+Levantem, entrem.
 
 1447
 02:03:49,740 --> 02:03:51,260
-Esses aí também sabem de tudo.
+Eles também sabem de tudo.
 
 1448
 02:03:51,420 --> 02:03:52,460
-Esse dente vai ser extraído.
+O dente que vai ser puxado.
 
 1449
 02:03:53,240 --> 02:03:54,020
-Vamos, meu filho.
+Vamos, filho.
 
 1450
 02:03:54,300 --> 02:03:54,700
-Venha.
+Vem.
 
 1451
 02:03:55,380 --> 02:03:56,360
-Vamos lá.
+Vamos.
 
 1452
 02:03:56,460 --> 02:03:56,620
@@ -5820,15 +5820,15 @@ Rápido, rápido.
 
 1456
 02:03:59,430 --> 02:03:59,790
-Bem rápido.
+Muito rápido.
 
 1457
 02:03:59,970 --> 02:04:01,530
-O dente do menino estragou por sua culpa.
+Por sua causa, o dente do seu filho apodreceu.
 
 1458
 02:04:01,630 --> 02:04:02,570
-Ficou dando chocolates a ele.
+Você deu chocolate a ele.
 
 1459
 02:04:02,850 --> 02:04:03,010
@@ -5836,27 +5836,27 @@ O quê?
 
 1460
 02:04:03,390 --> 02:04:05,210
-E essa aí joga a culpa de tudo em cima de mim.
+Isso também coloca todos os pecados em cima de mim.
 
 1461
 02:04:05,290 --> 02:04:07,010
-Por que foi você que deu melão gelado à noite?
+Por que você não deu melão frio à noite?
 
 1462
 02:04:07,350 --> 02:04:08,950
-Olha, se a criança ficar resfriada, será que ela te dedura?
+Olha, se a criança quebrar, vai te delatar?
 
 1463
 02:04:09,030 --> 02:04:10,250
-Juro, olha, tava gelado, hein?
+Sério, olha, estava frio, né?
 
 1464
 02:04:10,590 --> 02:04:11,130
-Tava gelado?
+Estava frio?
 
 1465
 02:04:12,280 --> 02:04:12,720
-Tava.
+Estava frio.
 
 1466
 02:04:14,500 --> 02:04:14,660
@@ -5864,15 +5864,15 @@ Olha.
 
 1467
 02:04:15,120 --> 02:04:17,240
-Olha aqui, moça, não pise descalça no chão.
+Olha, não pise perto da borda.
 
 1468
 02:04:18,180 --> 02:04:19,120
-Vai pegar friagem nos pés.
+Seu pé ficou frio.
 
 1469
 02:04:19,560 --> 02:04:21,640
-Juro que você vai ficar resfriada e não vai poder ter filhos. Eu quero netos.
+Sério, se você quebrar, não vai ter filho. Eu quero ter filho.
 
 1470
 02:04:22,170 --> 02:04:22,530
@@ -5883,44 +5883,44 @@ O quê?
 O quê?
 
 1472
-02:04:26,580 --> 02:04:28,540
-O que você disse, Kadir?
+02:04:26,580 --> 02:04:28,415
+Quem é você, Kadir?
 
 1473
 02:04:28,920 --> 02:04:29,360
-Eu disse resfriada.
+Eu disse que está quebrado.
 
 1474
 02:04:29,910 --> 02:04:31,620
-Eu disse resfriada. E o que mais você disse?
+Eu disse que está quebrado. O que você disse?
 
 1475
 02:04:31,950 --> 02:04:32,550
-Resfriada, resfriada.
+Quebrado, quebrado.
 
 1476
 02:04:32,710 --> 02:04:34,210
-Não, eu digo sobre o filho. O que você disse?
+Não, estou falando da criança. O que você disse?
 
 1477
 02:04:34,290 --> 02:04:35,670
-Vou te mostrar, meu filho.
+Vou mostrar. Eu sou seu filho.
 
 1478
 02:04:39,340 --> 02:04:40,730
 Vamos ver.
 
 1479
-02:04:42,910 --> 02:04:44,875
-Nossa, não doeu nada.
+02:04:42,910 --> 02:04:44,810
+Juro, não doeu nada.
 
 1480
 02:04:45,720 --> 02:04:48,380
-Não foi? Eu te falei. Não tem nada para ter medo.
+Não é? Eu te falei. Não tem nada a temer.
 
 1481
 02:04:48,460 --> 02:04:53,140
-Mas olha só. Só porque não doeu, você não vai comer tudo de uma vez, né? Aqueles doces.
+Mas veja, só porque não doeu, você não vai simplesmente levar tudo assim. Não são os doces, né?
 
 1482
 02:04:53,860 --> 02:04:54,430
@@ -5928,87 +5928,87 @@ Não.
 
 1483
 02:04:55,250 --> 02:04:55,810
-Muito bem.
+Bom trabalho.
 
 1484
-02:04:57,510 --> 02:05:00,500
-Papai, os nossos negócios são por aqui?
+02:04:57,510 --> 02:05:00,060
+Pai, nossos negócios são aqui?
 
 1485
 02:05:01,540 --> 02:05:04,580
-Sim, olha. Vê aquela rua ali na frente, meu amor?
+Sim, olha. Aquela casa do outro lado, querida.
 
 1486
 02:05:04,780 --> 02:05:06,540
-Passando por lá, fica bem perto daqui.
+Quando sair de lá, fica bem perto daqui.
 
 1487
-02:05:07,360 --> 02:05:09,500
-Me leve embora, por favor.
+02:05:07,360 --> 02:05:09,325
+Por favor, me salvem.
 
 1488
-02:05:10,220 --> 02:05:12,510
-Tá bom, eu te levo, mas...
+02:05:10,220 --> 02:05:12,020
+Ok, eu levo, mas.
 
 1489
 02:05:15,810 --> 02:05:18,030
-Estes dias a situação tá meio complicada, depois eu te levo, tá bom?
+Ultimamente as coisas estão meio confusas, depois eu levo, tá bom?
 
 1490
 02:05:18,110 --> 02:05:18,290
-Promessa.
+Combinado.
 
 1491
-02:05:21,950 --> 02:05:24,370
-Se a gente ficar por aqui...
+02:05:21,950 --> 02:05:23,750
+Se ficarmos aqui.
 
 1492
 02:05:28,190 --> 02:05:30,190
-Meu filho, o que a gente acabou de te falar?
+Filho, o que a gente acabou de te dizer?
 
 1493
 02:05:31,320 --> 02:05:32,690
-O que que tem o doce?
+O que tem no doce?
 
 1494
 02:05:32,790 --> 02:05:33,930
-Só um, hein? Vamos lá.
+Só um, vamos.
 
 1495
 02:05:34,050 --> 02:05:35,470
-Mamãe, só um pouquinho.
+Mãe, só um pouquinho.
 
 1496
-02:05:37,010 --> 02:05:38,910
-Bem pouquinho, hein.
+02:05:37,010 --> 02:05:38,810
+É pouco, mas.
 
 1497
 02:05:40,110 --> 02:05:41,190
-Nada de pedir muito.
+Não peça demais.
 
 1498
 02:05:41,290 --> 02:05:41,690
-Bem pouquinho.
+Pouco mesmo.
 
 1499
 02:05:41,850 --> 02:05:43,360
-Tá bom, vai.
+Tudo bem, vamos.
 
 1500
 02:05:45,960 --> 02:05:47,900
-Não corre, não corre sem olhar, meu filho.
+Não corra, não corra, filho.
 
 1501
-02:05:52,990 --> 02:05:55,800
-Mamãe, sabia? Eu conheço esse tio.
+02:05:52,990 --> 02:05:55,605
+Mãe, sabe? Eu conheço esse tio.
 
 1502
-02:05:58,330 --> 02:06:01,465
-Vamos lá, venha aqui. Desculpem. Vamos.
+02:05:58,330 --> 02:06:01,595
+Vamos, me dê um sorvete. Desculpe. Vamos.
 
 1503
 02:06:02,460 --> 02:06:07,080
-Mamãe, esse tio... Ele trabalhava no restaurante do papai antes.
+Mãe, esse tio também trabalhava no restaurante do meu pai, bem ali na sua frente.
 
 1504
 02:06:12,950 --> 02:06:14,750
@@ -6016,87 +6016,87 @@ Mamãe, esse tio... Ele trabalhava no restaurante do papai antes.
 
 1505
 02:06:17,860 --> 02:06:19,690
-Você não me reconheceu, tio?
+Você não me reconheceu, esse tio.
 
 1506
 02:06:21,650 --> 02:06:23,500
-Não me reconheceu, tio Vurgun?
+Não reconheceu, tio Vurgun?
 
 1507
 02:06:24,840 --> 02:06:27,010
-Ora, como eu não ia te reconhecer?
+Como eu poderia não te reconhecer, hein?
 
 1508
 02:06:27,290 --> 02:06:29,280
-Meu leãozinho! Como você cresceu, hein?
+Meu leão. Como você cresceu!
 
 1509
 02:06:30,340 --> 02:06:31,040
-É.
+Sim.
 
 1510
 02:06:31,320 --> 02:06:32,000
-Muito bem.
+Parabéns.
 
 1511
 02:06:33,310 --> 02:06:35,070
-Vocês trabalhavam com o Boran?
+Vocês estavam com o Bora?
 
 1512
 02:06:35,370 --> 02:06:37,110
-Sim. Vurgun Kelebi.
+Sim. Tio Vurgun.
 
 1513
 02:06:37,190 --> 02:06:38,560
-Vamos, Deniz.
+Ali, vamos, Bora.
 
 1514
 02:06:39,130 --> 02:06:41,010
-Não me lembro do senhor, desculpe.
+Não consegui lembrar de vocês, desculpem.
 
 1515
 02:06:41,190 --> 02:06:42,110
 Por que vocês estão aqui agora?
 
 1516
-02:06:45,410 --> 02:06:49,975
-Vai lá pegar mais meia bola de sorvete para você, meu garoto.
+02:06:45,410 --> 02:06:49,130
+Vamos, me dá meio sorvete, um bolinho, corta aí.
 
 1517
 02:06:52,740 --> 02:06:54,570
-Vurgun trabalhava para mim?
+O Vurgun é um dos meus homens?
 
 1518
 02:06:55,170 --> 02:06:58,460
-Quando mandaram ele para fora da cidade pela primeira vez, ele foi comigo, graças a Deus.
+Quando mandamos o primeiro para fora, graças a Deus, mandamos também ele para ficar ao meu lado.
 
 1519
 02:07:00,740 --> 02:07:02,900
-Eu nunca o vi no funeral nem nada.
+Eu nunca vi o Dada em um funeral, por exemplo.
 
 1520
 02:07:03,520 --> 02:07:04,300
 Quando vocês voltaram?
 
 1521
-02:07:05,600 --> 02:07:07,500
-Já faz alguns meses.
+02:07:05,600 --> 02:07:07,565
+Já faz quantos meses?
 
 1522
 02:07:12,130 --> 02:07:15,480
-Por que não vieram assim que perderam o chefe?
+Por que, quando perderam contato, não vieram logo?
 
 1523
 02:07:16,000 --> 02:07:18,260
-Minha mãe estava doente, eu estava em Istambul há um bom tempo.
+Minha mãe estava doente, eu estava em Istambul há bastante tempo.
 
 1524
 02:07:18,900 --> 02:07:20,430
-Mas agora ela melhorou, graças a Deus.
+Ela se recuperou, mas agora, graças a Deus.
 
 1525
-02:07:20,510 --> 02:07:23,645
-Estavam em Istambul. Melhoras para ela.
+02:07:20,510 --> 02:07:23,450
+Vocês estavam em Istambul. Melhoras.
 
 1526
 02:07:27,550 --> 02:07:28,400
@@ -6108,19 +6108,19 @@ Venha.
 
 1528
 02:07:30,670 --> 02:07:31,870
-Peguei bem pouquinho.
+Peguei muito pouco.
 
 1529
 02:07:32,050 --> 02:07:33,110
-Foi pouco mesmo? Tá bom.
+É muito pouco, tudo bem.
 
 1530
 02:07:33,510 --> 02:07:36,030
-Se não tiver mais nada para falar, tio Vurgun, a gente se fala depois.
+Não tem mais nada a dizer? Vamos conversar com o tio Vurgun depois.
 
 1531
 02:07:36,580 --> 02:07:37,000
-Vamos indo.
+Vamos deixar pra lá.
 
 1532
 02:07:37,690 --> 02:07:37,910
@@ -6136,31 +6136,31 @@ Vamos.
 
 1535
 02:07:45,420 --> 02:07:46,060
-Vamos, Deniz.
+Vamos, Ali.
 
 1536
 02:07:48,460 --> 02:07:49,760
-Papai.
+Pai.
 
 1537
 02:07:50,280 --> 02:07:50,460
-Diga.
+Ei.
 
 1538
 02:07:51,210 --> 02:07:55,260
-Sabe de uma coisa? Hoje é aniversário da morte do meu pai.
+Você sabe? Hoje meu pai está lamentando a morte do pai.
 
 1539
 02:07:55,400 --> 02:07:58,900
-É, hoje tem a reza. Vamos homenageá-lo. Por isso vou voltar mais cedo.
+Sim. Hoje tem um Mevlüt. Vamos lembrá‑lo. Por isso eu também chegarei cedo.
 
 1540
-02:08:03,010 --> 02:08:04,845
-Dê valor à sua mãe.
+02:08:03,010 --> 02:08:04,810
+Valorize a mãe.
 
 1541
 02:08:06,290 --> 02:08:06,870
-Vamos nos congelar.
+Vamos ficar com frio.
 
 1542
 02:08:25,860 --> 02:08:27,660
@@ -6168,19 +6168,19 @@ Vamos nos congelar.
 
 1543
 02:08:39,420 --> 02:08:43,540
-Sua passagem para Istambul. Logo no dia em que disse que ia para a Síria.
+Seu bilhete para Istambul. E ainda no dia em que você disse que foi para a Síria.
 
 1544
 02:08:44,180 --> 02:08:44,980
-Onde achou isso?
+De onde você encontrou isso?
 
 1545
 02:08:45,050 --> 02:08:49,810
-Me diga por que mentiu. Por que foi para Istambul? Por que escondeu de mim?
+Por que mentiu? Diga. Por que foi para Istambul? Por que escondeu de mim?
 
 1546
 02:08:49,950 --> 02:08:50,690
-Eu precisava ir.
+Preciso ir.
 
 1547
 02:08:52,180 --> 02:08:52,580
@@ -6188,59 +6188,59 @@ Por quê?
 
 1548
 02:08:54,370 --> 02:08:55,270
-Tá bom.
+Certo.
 
 1549
 02:08:57,070 --> 02:08:58,950
-Mas por que vocês não vieram quando perderam essa porcentagem?
+Por que não vieram quando perderam essa quantia?
 
 1550
 02:08:59,420 --> 02:09:01,700
-Minha mãe estava do মানুষের. Estava em Istambul havia um bom tempo.
+Minha mãe estava doente. Ela estava em Istambul há muito tempo.
 
 1551
 02:09:02,010 --> 02:09:03,050
 Vocês estavam em Istambul.
 
 1552
-02:09:18,460 --> 02:09:22,505
-Muito obrigado. Como o senhor está, como tem passado?
+02:09:18,460 --> 02:09:22,375
+Muito obrigado. Como vocês estão, como têm passado?
 
 1553
 02:09:37,210 --> 02:09:39,470
-Graças a você, estou muito melhor. Obrigado.
+Graças a vocês estou muito melhor. Obrigado.
 
 1554
-02:09:39,990 --> 02:09:44,590
-Ah, que ótimo. Mas continue tomando os seus remédios, por favor.
+02:09:39,990 --> 02:09:44,295
+Oh, muito bem. Continue tomando seus remédios, por favor.
 
 1555
-02:09:46,720 --> 02:09:49,985
-Será que posso te pedir um pequeno favor?
+02:09:46,720 --> 02:09:49,790
+Eu tenho um pequeno pedido para vocês.
 
 1556
 02:09:51,380 --> 02:09:54,060
-Quer dizer, preciso da sua ajuda. Eu sei.
+Quero dizer, preciso da sua ajuda. Eu sei.
 
 1557
 02:09:55,050 --> 02:09:57,700
-Não vai pegar bem, mas é muito importante para mim.
+Pode não ser conveniente, mas é muito importante para mim.
 
 1558
 02:09:57,780 --> 02:10:01,780
-Claro, se for algo em que eu possa ajudar, estou ouvindo. Pode falar, Alya.
+Claro, se houver algo em que eu possa ajudar, estou ouvindo. Por favor, Dona Alya.
 
 1559
-02:10:03,310 --> 02:10:06,380
-Se eu te der o número de um bilhete...
+02:10:03,310 --> 02:10:06,185
+Se eu lhe der um número de bilhete.
 
 1560
 02:10:07,310 --> 02:10:09,250
-Poderia verificar quem viajou?
+Você poderia verificar quem viajou?
 
 1561
 02:10:10,110 --> 02:10:11,700
-É... veja bem.
+Eee, então.
 
 1562
 02:10:12,200 --> 02:10:13,590
@@ -6248,11 +6248,11 @@ Normalmente é proibido.
 
 1563
 02:10:14,740 --> 02:10:16,880
-Mas vou abrir uma exceção para você.
+Mas vou tentar por você.
 
 1564
 02:10:17,250 --> 02:10:18,020
-Estou te ouvindo.
+Estou ouvindo você.
 
 1565
 02:10:18,580 --> 02:10:18,970
@@ -6260,99 +6260,99 @@ Certo.
 
 1566
 02:10:21,310 --> 02:10:23,110
-235.77.89.
+235.77.89
 
 1567
 02:10:23,590 --> 02:10:25,910
-Parece ser um voo para Istambul.
+Aparece um voo para Istambul.
 
 1568
 02:10:27,110 --> 02:10:29,070
-Os seguintes nomes constam na reserva.
+A reserva tem os seguintes nomes.
 
 1569
 02:10:30,220 --> 02:10:33,615
 Cihan Albora, Kadir Yolcu, Muzaffer Sancak.
 
 1570
-02:10:34,960 --> 02:10:37,055
-E tem reserva de volta?
+02:10:34,960 --> 02:10:37,250
+Eee, tem reserva de volta?
 
 1571
 02:10:43,220 --> 02:10:44,580
-Vou verificar.
+Estou fazendo as verificações.
 
 1572
 02:10:45,100 --> 02:10:47,400
-Não, Alya, não consta nenhuma reserva de volta.
+Não, Dona Alya, não aparece reserva de volta.
 
 1573
 02:10:48,710 --> 02:10:50,760
-Muito obrigada, Şükran.
+Muito obrigada, Dona Şükran.
 
 1574
 02:10:50,880 --> 02:10:52,960
-Eu que agradeço, tenha um bom dia.
+Eu que agradeço, desejo um bom dia.
 
 1575
-02:10:59,710 --> 02:11:02,780
-Você está bem? Aconteceu alguma coisa?
+02:10:59,710 --> 02:11:02,390
+Você está bem? Tem alguma coisa?
 
 1576
 02:11:04,800 --> 02:11:08,360
-É que... São problemas de trabalho, coisas que chateiam.
+É que há problemas relacionados ao trabalho e coisas irritantes acontecendo.
 
 1577
-02:11:08,990 --> 02:11:14,725
-Não tem a ver com a busca, né? Tem algo nos carros que eu deveria me preocupar?
+02:11:08,990 --> 02:11:14,400
+Não tem a ver com a chamada? Tem algo que eu deva temer dentro dos carros?
 
 1578
 02:11:16,320 --> 02:11:17,890
 Não.
 
 1579
-02:11:32,000 --> 02:11:36,565
-Doutora Alya, vamos levar o paciente para a sala de cirurgia.
+02:11:32,000 --> 02:11:36,630
+Dona Alya, estamos levando o paciente para a sala de cirurgia.
 
 1580
 02:11:48,530 --> 02:11:49,980
-Já vou, preparem tudo que estou indo.
+Estou chegando, preparem, estou vindo.
 
 1581
-02:12:00,120 --> 02:12:02,085
-Então eu já vou indo.
+02:12:00,120 --> 02:12:01,920
+Estou indo, então.
 
 1582
 02:12:08,190 --> 02:12:11,910
-Tá bom, querida, eu também vou para a mansão, para o culto.
+Certo, querida, eu também vou para a mansão, ao mevlid.
 
 1583
 02:12:12,750 --> 02:12:14,900
-Quem dera eu também pudesse ir.
+Eu gostaria de poder ir também.
 
 1584
-02:12:17,660 --> 02:12:19,690
-Vamos, eu te deixo lá.
+02:12:17,660 --> 02:12:19,495
+Então, eu te deixo.
 
 1585
-02:12:21,090 --> 02:12:23,900
-Não, não. Pode ir, eu vou sozinha.
+02:12:21,090 --> 02:12:23,965
+Não, não. Você vá, eu vou eu mesmo.
 
 1586
 02:12:26,980 --> 02:12:27,680
-Não precisa.
+Não é necessário, então.
 
 1587
 02:12:28,870 --> 02:12:29,430
-Por que não a levou?
+Você teria levado?
 
 1588
 02:12:29,610 --> 02:12:31,630
-Não, não, não precisa mesmo. Já estou saindo.
+Não, não, nem preciso. Já estou saindo agora.
 
 1589
-02:12:33,230 --> 02:12:36,235
-Enfim, levante-se. Até logo, querida.
+02:12:33,230 --> 02:12:36,900
+Finalmente levante, vamos ver. Até mais, querida.
 
 1590
 02:13:01,500 --> 02:13:03,300
@@ -6360,59 +6360,59 @@ Irmão.
 
 1591
 02:13:08,160 --> 02:13:09,700
-Aconteceu alguma coisa, Nare? O que você está fazendo aqui?
+O que foi, Narya? O que você está fazendo aqui?
 
 1592
 02:13:10,470 --> 02:13:13,670
-Irmão, eu precisava sair de casa. Eu tinha dito ao Şahin que viria para o culto.
+Irmão, eu precisava sair de casa. Eu tinha dito ao Şahin que iria ao mevlüt.
 
 1593
 02:13:14,330 --> 02:13:15,870
-Além disso, quero ver meu irmão também. Quando vocês... Eu...
+Além disso, quero ver meu irmão. Enquanto vocês estavam casados, eu...
 
 1594
 02:13:15,950 --> 02:13:19,110
-Olha, você vem aqui o tempo todo, vem e vai sempre, está chamando atenção.
+Olha, você está sempre vindo e indo aqui, chamando atenção.
 
 1595
 02:13:19,520 --> 02:13:21,230
-Irmão, eu estou tomando cuidado, não se preocupe.
+Irmão, estou atento, mas não se preocupe.
 
 1596
 02:13:21,570 --> 02:13:22,710
-Vai acabar dando corda para o Şahin.
+Você vai despedir o Şahin.
 
 1597
 02:13:23,690 --> 02:13:26,490
-Irmão, de verdade, estou tomando cuidado. Muito cuidado.
+Irmão, realmente estou atento. Estou muito atento.
 
 1598
 02:13:27,420 --> 02:13:28,050
 Você.
 
 1599
-02:13:28,620 --> 02:13:30,845
-Tudo bem, né? Pode falar.
+02:13:28,620 --> 02:13:30,455
+Certo, não é? Diga.
 
 1600
 02:14:02,470 --> 02:14:06,420
-Sobre o quê? Olha, se for sobre esse assunto do acordo, nem comece, não tenho tempo agora.
+Sobre o quê? Olha, se for sobre esse acordo, nem pense, agora não tenho tempo.
 
 1601
 02:14:07,170 --> 02:14:08,350
-É outro assunto.
+É outra questão.
 
 1602
 02:14:08,840 --> 02:14:09,420
-Pode falar.
+Diga.
 
 1603
 02:14:10,840 --> 02:14:11,900
-Sobre o quê?
+Sobre o que?
 
 1604
 02:14:17,780 --> 02:14:19,875
-Eu te ligam mais tarde.
+Eu vou te ligar depois.
 
 1605
 02:14:27,760 --> 02:14:28,730
@@ -6420,47 +6420,47 @@ O que você está dizendo, irmão?
 
 1606
 02:14:28,910 --> 02:14:31,720
-Nada, sério, é esse negócio do acordo. Anda, vai andando.
+Não tem nada, é só esse acordo. Vai.
 
 1607
 02:15:00,080 --> 02:15:01,880
-Tipo o quê?
+Como assim.
 
 1608
-02:15:30,940 --> 02:15:33,880
-Ele não quis falar no dia, por isso.
+02:15:30,940 --> 02:15:34,205
+Ele não quis fazer isso no dia, por isso.
 
 1609
 02:15:38,200 --> 02:15:39,990
 Eu quero muito.
 
 1610
-02:16:09,080 --> 02:16:11,825
-Que Deus tenha misericórdia dele.
+02:16:09,080 --> 02:16:11,890
+Que Deus lhe conceda misericórdia.
 
 1611
 02:16:30,240 --> 02:16:31,530
-Que o céu seja seu lugar.
+Que o lugar seja um paraíso.
 
 1612
 02:16:31,650 --> 02:16:32,230
-Meu querido.
+Que seja do nosso agrado.
 
 1613
 02:16:32,630 --> 02:16:33,370
-Meu querido.
+Que seja do nosso agrado.
 
 1614
 02:16:36,970 --> 02:16:38,030
-Com licença, fiquem em pé.
+Aqui, estou de pé.
 
 1615
 02:16:38,590 --> 02:16:40,390
-Que Ele aceite.
+Que aceite.
 
 1616
 02:17:10,600 --> 02:17:11,730
-Que Alá aceite.
+Que Deus aceite.
 
 1617
 02:17:12,130 --> 02:17:12,530
@@ -6468,35 +6468,35 @@ Amém.
 
 1618
 02:17:12,910 --> 02:17:16,010
-Seu pai ouve nossas orações, não é, mãe?
+Pai, ele está ouvindo nossas preces, não é, mãe?
 
 1619
 02:17:17,180 --> 02:17:18,980
-Claro que ouve.
+Não, ele ouve.
 
 1620
 02:17:21,270 --> 02:17:23,680
-Seu pai ouve tudo o que você diz.
+Pai ouve tudo o que você diz.
 
 1621
 02:17:24,270 --> 02:17:25,910
-Ele te ouve de todo lugar.
+Ele te ouve de todos os lugares.
 
 1622
 02:17:27,830 --> 02:17:30,030
-O imam veio lá de baixo, o que estão esperando?
+O doutor chegou de baixo, o que está esperando?
 
 1623
 02:17:30,770 --> 02:17:31,650
-Tá bom, vamos.
+Tudo bem, vamos.
 
 1624
 02:17:33,220 --> 02:17:33,740
-Como assim?
+Não com a gente.
 
 1625
 02:17:44,250 --> 02:17:48,750
-Trate com misericórdia o Teu servo reunido para se despedir.
+Trate com sua misericórdia o servo que reunimos para ajudar.
 
 1626
 02:18:00,240 --> 02:18:00,890
@@ -6504,27 +6504,27 @@ Amém.
 
 1627
 02:18:01,010 --> 02:18:02,370
-Faça do paraíso a sua morada.
+Que seu lugar seja o paraíso.
 
 1628
 02:18:02,450 --> 02:18:03,290
 Amém.
 
 1629
-02:18:03,690 --> 02:18:09,685
-Dá paciência, firmeza e discernimento ao seu filho, à sua família e aos que o amam.
+02:18:03,690 --> 02:18:10,480
+Conceda paciência, firmeza e discernimento ao seu filho, à sua família e aos seus entes queridos.
 
 1630
 02:18:10,900 --> 02:18:11,550
 Amém.
 
 1631
-02:18:11,800 --> 02:18:14,580
-E louvado seja Alá, Senhor dos Mundos.
+02:18:11,800 --> 02:18:14,545
+Alhamdulillah, Senhor dos mundos.
 
 1632
 02:18:14,760 --> 02:18:16,240
-Com a Fatiha.
+Al‑Fatiha.
 
 1633
 02:18:28,030 --> 02:18:28,830
@@ -6532,7 +6532,7 @@ O que aconteceu?
 
 1634
 02:18:28,470 --> 02:18:29,150
-Senhora Sadakat, o que está acontecendo?
+Senhora Hükşehir, o que está acontecendo?
 
 1635
 02:18:29,690 --> 02:18:30,620
@@ -6548,23 +6548,23 @@ Vou intervir imediatamente.
 
 1638
 02:18:33,730 --> 02:18:34,250
-Como assim caiu?
+Como isso aconteceu?
 
 1639
 02:18:34,620 --> 02:18:35,470
-Ele não está conseguindo respirar?
+Ele não consegue respirar?
 
 1640
 02:18:35,610 --> 02:18:36,670
-O que isso significa? Não entendi.
+O que isso quer dizer? Não entendi.
 
 1641
 02:18:36,750 --> 02:18:37,390
-Chame o médico logo.
+Chame o médico imediatamente.
 
 1642
 02:18:37,530 --> 02:18:39,130
-Por que esses aparelhos estão apitando tanto?
+Por que esses aparelhos estão fazendo tanto barulho?
 
 1643
 02:18:39,430 --> 02:18:40,250
@@ -6580,15 +6580,15 @@ Calma.
 
 1646
 02:18:41,920 --> 02:18:43,000
-Não pode ser, mas um minuto, o que aconteceu?
+Não pode ser, mas espere, o que aconteceu?
 
 1647
 02:18:43,080 --> 02:18:44,740
-O nível de oxigênio no sangue caiu.
+O nível de oxigênio no sangue do paciente caiu.
 
 1648
 02:18:44,940 --> 02:18:45,540
-Chame ele aqui.
+Que ele venha aqui.
 
 1649
 02:18:45,860 --> 02:18:46,420
@@ -6596,7 +6596,7 @@ Certo, doutor.
 
 1650
 02:18:47,260 --> 02:18:48,200
-Tá bom, fiquem calmos.
+Tudo bem, acalmem‑se.
 
 1651
 02:18:48,300 --> 02:18:48,820
@@ -6604,23 +6604,23 @@ O médico está chegando.
 
 1652
 02:18:48,940 --> 02:18:49,660
-Por favor, se acalmem.
+Por favor, acalmem‑se.
 
 1653
-02:18:52,240 --> 02:18:54,660
-Que a irmã Sevda leve vocês.
+02:18:52,240 --> 02:18:54,725
+Leve o Hakisi, irmã da Sevda.
 
 1654
 02:18:55,880 --> 02:18:56,710
-Que a irmã cuide disso.
+Que isso traga saúde, irmã.
 
 1655
 02:18:56,790 --> 02:18:57,590
-Muito obrigado.
+Obrigado.
 
 1656
 02:18:57,230 --> 02:18:58,030
-Muito obrigado.
+Obrigado.
 
 1657
 02:18:57,750 --> 02:18:58,610
@@ -6632,15 +6632,15 @@ Meus pêsames.
 
 1659
 02:19:00,220 --> 02:19:01,020
-Obrigado, minha filha.
+Obrigada, filha.
 
 1660
 02:19:00,720 --> 02:19:01,400
-Que Deus tenha piedade.
+Que Deus tenha misericórdia.
 
 1661
 02:19:02,020 --> 02:19:02,920
-Que o céu seja o lugar dele.
+Que você vá para o céu.
 
 1662
 02:19:03,080 --> 02:19:04,060
@@ -6648,7 +6648,7 @@ Obrigado.
 
 1663
 02:19:04,140 --> 02:19:04,820
-Que Deus abençoe.
+Que Deus te agradeça.
 
 1664
 02:19:06,760 --> 02:19:07,100
@@ -6664,19 +6664,19 @@ Meus pêsames.
 
 1667
 02:19:14,160 --> 02:19:15,120
-Que Deus tenha piedade.
+Que Deus tenha misericórdia.
 
 1668
 02:19:16,400 --> 02:19:21,620
-Senhor Cihan, nós também achamos melhor antecipar o casamento do nosso filho Kaya com a İpek.
+Senhor Cihan, achamos adequado antecipar o casamento do nosso filho Kaya com İpek.
 
 1669
-02:19:21,700 --> 02:19:26,525
-Aliás, será muito bom se o casamento acontecer na semana que vem.
+02:19:21,700 --> 02:19:26,590
+Além disso, será ótimo se o casamento acontecer na próxima semana.
 
 1670
 02:19:30,850 --> 02:19:33,330
-É hora de falar de casamento agora, senhor Salih?
+Agora é a vez do casamento, senhor Salih.
 
 1671
 02:19:33,510 --> 02:19:33,890
@@ -6684,59 +6684,59 @@ Silêncio.
 
 1672
 02:19:35,450 --> 02:19:36,130
-Aconteceu alguma coisa?
+O que foi?
 
 1673
 02:19:36,710 --> 02:19:37,690
-Será que falamos algo errado?
+Dissemos algo errado?
 
 1674
 02:19:38,900 --> 02:19:41,940
-Pensamos que traria um pouco de paz aos nossos corações em um dia tão doloroso.
+Pensamos que, justamente num dia tão doloroso como este, seria bom refrescar nossos corações.
 
 1675
 02:19:42,920 --> 02:19:45,120
-Além disso, quem fez essa proposta foi a senhora Sadakat.
+Além disso, quem fez a proposta foi a senhora Sadakat.
 
 1676
 02:19:45,640 --> 02:19:47,220
-Ela disse à İpek que conversariam sobre esse assunto.
+Disse a İpek que conversaríamos sobre esse assunto.
 
 1677
 02:19:47,650 --> 02:19:49,380
-Um minuto, eu não disse uma coisa dessas.
+Um minuto, eu não disse nada assim.
 
 1678
 02:19:49,890 --> 02:19:51,970
-Mãe, eu disse que conversaríamos, não disse mais nada.
+Eu disse que conversaríamos, não falei nada.
 
 1679
 02:19:52,050 --> 02:19:52,870
-Espera aí, um minuto.
+Um minuto, um minuto.
 
 1680
 02:19:53,210 --> 02:19:53,910
-Você está voltando atrás?
+Você está chorando?
 
 1681
 02:19:54,220 --> 02:19:55,200
-Eu não entendi, quer dizer.
+Eu não entendi, então.
 
 1682
 02:19:55,400 --> 02:19:57,020
-Que voltar atrás o quê, seu Salih?
+Mas o que há, Sr. Salih?
 
 1683
 02:19:57,120 --> 02:19:57,760
-De onde você tirou isso?
+De onde ele apareceu?
 
 1684
 02:19:57,840 --> 02:19:58,560
-Esse casamento vai acontecer.
+Isso será um casamento.
 
 1685
 02:19:58,760 --> 02:19:59,620
-Olha, que história é essa?
+Olha, o que é isso?
 
 1686
 02:19:59,820 --> 02:20:00,180
@@ -6744,31 +6744,31 @@ Chega.
 
 1687
 02:20:00,560 --> 02:20:01,320
-Chega, tá bom.
+Chega, tudo bem.
 
 1688
 02:20:02,640 --> 02:20:03,430
-Ninguém vai voltar atrás.
+Não vai recuar.
 
 1689
 02:20:04,220 --> 02:20:05,300
-Seu Salih.
+Sr. Salih.
 
 1690
 02:20:05,890 --> 02:20:07,330
-Ninguém vai voltar atrás, o casamento vai acontecer.
+Não vai recuar, o casamento será realizado.
 
 1691
 02:20:07,740 --> 02:20:09,500
-Mas a data não vai ser discutida hoje.
+Mas não vamos falar disso hoje.
 
 1692
 02:20:10,270 --> 02:20:10,730
-De jeito nenhum.
+Jamais.
 
 1693
 02:20:11,180 --> 02:20:11,980
-Meus pêsames novamente.
+Obrigado novamente.
 
 1694
 02:20:12,060 --> 02:20:12,860
@@ -6780,7 +6780,7 @@ Obrigado.
 
 1696
 02:20:14,110 --> 02:20:17,870
-Ömür, filha, faz uma água com limão para mim. Anda, minha pressão subiu.
+Ömür, minha filha, me faça uma água com limão. Vamos, minha pressão subiu.
 
 1697
 02:20:18,090 --> 02:20:18,950
@@ -6788,7 +6788,7 @@ Vamos conversar sobre isso, mãe.
 
 1698
 02:20:19,030 --> 02:20:19,430
-Eu vou morrer.
+Vou morrer.
 
 1699
 02:20:19,950 --> 02:20:20,390
@@ -6796,31 +6796,31 @@ Diga.
 
 1700
 02:20:21,010 --> 02:20:21,950
-Venha logo, o Boran está mal.
+Vem logo, Boran está mal.
 
 1701
 02:20:22,210 --> 02:20:23,210
-Irmão, corre, aconteceu alguma coisa.
+Irmão, corre, algo aconteceu.
 
 1702
-02:20:26,880 --> 02:20:28,680
-Aconteceu o quê?
+02:20:26,880 --> 02:20:28,975
+Aconteceu alguma coisa?
 
 1703
 02:20:32,210 --> 02:20:35,490
-Houve um problema com a remessa e nós temos que voltar para a empresa agora.
+Um problema com a entrega surgiu e precisamos voltar imediatamente à empresa.
 
 1704
-02:20:35,900 --> 02:20:37,930
-É mesmo? Bom trabalho.
+02:20:35,900 --> 02:20:38,280
+É mesmo? Preciso de algo rápido.
 
 1705
 02:20:38,460 --> 02:20:39,060
 Obrigado, cunhada.
 
 1706
-02:21:29,020 --> 02:21:31,180
-O que você está fazendo?
+02:21:29,020 --> 02:21:31,115
+Você tem algum assunto?
 
 1707
 02:22:03,380 --> 02:22:03,820
@@ -6832,23 +6832,23 @@ Cunhada, eles desceram.
 
 1709
 02:22:05,470 --> 02:22:06,400
-Tá bom, saia da frente.
+Certo, vamos, saia.
 
 1710
 02:22:06,480 --> 02:22:08,540
-Sai da frente, não posso largar assim. Minha reunião está lá embaixo.
+Um momento, não posso largar agora. Minha reunião está lá embaixo.
 
 1711
 02:22:08,780 --> 02:22:09,750
-Kadir, saia da frente.
+Kadir, saia.
 
 1712
 02:22:09,910 --> 02:22:11,710
-Cunhada, saia logo. Olha, não insista.
+Cunhada, saia já. Olha, não fique aí.
 
 1713
-02:22:13,300 --> 02:22:18,255
-Arrombe essa porta. O que vocês estão trancados aí dentro, caramba?
+02:22:13,300 --> 02:22:17,865
+Quebrem essa porta. O que vocês estão aprontando aqui dentro?
 
 1714
 02:22:20,910 --> 02:22:21,710
@@ -6856,19 +6856,19 @@ Arrombe essa porta. O que vocês estão trancados aí dentro, caramba?
 
 1715
 02:22:21,420 --> 02:22:22,340
-Abra essa porta!
+Abra a porta!
 
 1716
 02:22:22,420 --> 02:22:23,340
-Şahin, afinal o que você está fazendo aqui?
+Şahin, que negócio você tem aqui?
 
 1717
 02:22:23,420 --> 02:22:24,340
-Droga, abre essa porta, abre!
+Ei, abra a porta!
 
 1718
 02:22:24,420 --> 02:22:25,340
-Şahin, quem está aqui?
+Quem é o Şahin aqui?
 
 1719
 02:22:25,420 --> 02:22:26,910
@@ -6880,7 +6880,7 @@ Cunhada!
 
 1721
 02:22:28,210 --> 02:22:29,130
-Abram logo essa porta!
+Ei, abram essa porta!
 
 1722
 02:22:29,210 --> 02:22:30,130
@@ -6888,23 +6888,23 @@ Abram logo essa porta!
 
 1723
 02:22:30,210 --> 02:22:31,130
-Olha que eu vou usar a força.
+Olha, eu forcei.
 
 1724
 02:22:31,210 --> 02:22:32,130
-Rapaz, abre essa porta!
+Filho, abra essa porta!
 
 1725
 02:22:32,210 --> 02:22:33,100
-Vamos arrombar!
+Vamos arrebentar!
 
 1726
 02:22:33,180 --> 02:22:34,100
-Vou botar isso abaixo em cima de vocês!
+Ei, vocês vão se dar mal!
 
 1727
 02:22:34,180 --> 02:22:36,160
-O nível de oxigênio tinha caído.
+O nível de oxigênio havia caído.
 
 1728
 02:22:36,240 --> 02:22:37,160
@@ -6912,16 +6912,16 @@ Trocamos a máscara.
 
 1729
 02:22:37,240 --> 02:22:39,160
-Limpamos as vias respiratórias.
+Limpamos o concentrador de respiração.
 
 1730
 02:22:39,240 --> 02:22:41,860
-Também administramos fluidos de suporte.
+Também administramos soro de suporte.
 
 1731
 02:22:41,940 --> 02:22:42,860
-Por enquanto, o estado é estável.
+Por enquanto nossa situação está estável.
 
 1732
 02:22:42,940 --> 02:22:45,035
-Ou seja, vai ficar bem.
+Ou seja, está bem vivo.
