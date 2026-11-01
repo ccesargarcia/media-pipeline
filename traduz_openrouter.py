@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Traduz arquivos .srt (Turco -> Português do Brasil) usando a API do OpenRouter
-com suporte a modelos gratuitos (ex: meta-llama/llama-3.3-70b-instruct:free).
+com auto-descoberta de modelos gratuitos ativos (ex: google/gemma-4-31b-it:free)
+e fallback automático em caso de 404/descontinuação de slugs.
 """
 import argparse
 import getpass
@@ -15,6 +16,7 @@ import urllib.request
 from pathlib import Path
 
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
+OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 
 SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
 
@@ -28,6 +30,46 @@ Regras obrigatórias de tradução de legendas:
 3. Adapte expressões idiomáticas ("Yenge" -> "Cunhada", "Abi" -> "Irmão", "Abla" -> "Irmã", "Ağa", "Hanım", "Geçmiş olsun", "Başım üstüne") para o português brasileiro falado.
 4. Mantenha o texto conciso para leitura em tela.
 5. Retorne EXCLUSIVAMENTE um array JSON válido no formato: [{"id": <numero>, "text": "<tradução>"}] contendo todos os IDs solicitados."""
+
+
+def get_available_models() -> list:
+    """Consulta os modelos ativos no OpenRouter para evitar erros 404 de modelos descontinuados."""
+    req = urllib.request.Request(OPENROUTER_MODELS_URL, headers={"User-Agent": "MediaPipeline/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        return [m["id"] for m in data.get("data", [])]
+    except Exception as e:
+        print(f"Aviso ao consultar lista de modelos OpenRouter: {e}", file=sys.stderr)
+        return []
+
+
+def resolve_model(requested_model: str, available_models: list) -> str:
+    """Garante um modelo válido. Se o solicitado não existir ou for 'auto', escolhe o melhor modelo gratuito disponível."""
+    if available_models and requested_model in available_models:
+        return requested_model
+
+    # Ordem de preferência de modelos gratuitos excelentes para tradução
+    preferencias_free = [
+        "google/gemma-4-31b-it:free",
+        "google/gemma-4-26b-a4b-it:free",
+        "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "meta-llama/llama-3.3-70b-instruct",
+    ]
+
+    free_models = [m for m in available_models if m.endswith(":free")]
+
+    for pref in preferencias_free:
+        if pref in available_models:
+            print(f"==> Modelo '{requested_model}' não encontrado ou substituído. Usando '{pref}'.")
+            return pref
+
+    if free_models:
+        escolhido = free_models[0]
+        print(f"==> Modelo alternativo gratuito selecionado: '{escolhido}'.")
+        return escolhido
+
+    return requested_model or "google/gemma-4-31b-it:free"
 
 
 def parse_srt(conteudo: str):
@@ -76,9 +118,9 @@ def traduzir_lote_openrouter(api_key: str, modelo: str, contexto_anterior: list,
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://github.com/ccesargarcia/luisices",
+            "HTTP-Referer": "https://github.com/ccesargarcia/media-pipeline",
             "X-Title": "Legendas Dizi PT-BR",
-            "User-Agent": "Termux-SRT-OpenRouter/1.0",
+            "User-Agent": "MediaPipeline-OpenRouter/1.0",
         },
         method="POST",
     )
@@ -106,8 +148,8 @@ def main():
     parser = argparse.ArgumentParser(description="Traduz legenda .srt usando OpenRouter API.")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
-    parser.add_argument("-m", "--model", default="meta-llama/llama-3.3-70b-instruct:free", help="Modelo OpenRouter")
-    parser.add_argument("-b", "--batch-size", type=int, default=40, help="Falas por lote (padrão: 40)")
+    parser.add_argument("-m", "--model", default="google/gemma-4-31b-it:free", help="Modelo OpenRouter")
+    parser.add_argument("-b", "--batch-size", type=int, default=35, help="Falas por lote (padrão: 35)")
     args = parser.parse_args()
 
     entrada = Path(args.entrada).expanduser()
@@ -126,13 +168,16 @@ def main():
         print("Erro: OPENROUTER_API_KEY necessária.", file=sys.stderr)
         sys.exit(1)
 
+    available_models = get_available_models()
+    active_model = resolve_model(args.model, available_models)
+
     dados = entrada.read_bytes()
     conteudo = dados.decode("utf-16") if dados.startswith((b"\xff\xfe", b"\xfe\xff")) else dados.decode("utf-8-sig", errors="replace")
     itens = parse_srt(conteudo)
     for i, item in enumerate(itens, start=1):
         item["id"] = i
 
-    print(f"==> Total de falas para traduzir via OpenRouter ({args.model}): {len(itens)}", flush=True)
+    print(f"==> Total de falas para traduzir via OpenRouter ({active_model}): {len(itens)}", flush=True)
 
     batch_size = args.batch_size
     total_lotes = (len(itens) + batch_size - 1) // batch_size
@@ -146,15 +191,34 @@ def main():
         ctx_inicio = max(0, inicio - 6)
         contexto_anterior = itens[ctx_inicio:inicio]
 
+        sucesso = False
         for tentativa in range(4):
             try:
-                mapa = traduzir_lote_openrouter(api_key, args.model, contexto_anterior, lote_atual)
+                mapa = traduzir_lote_openrouter(api_key, active_model, contexto_anterior, lote_atual)
                 for item in lote_atual:
                     texto = mapa.get(item["id"], item["texto"])
                     item["traducao"] = texto
                     traducoes[item["id"]] = texto
                 print(f"[{idx_lote + 1}/{total_lotes}] Traduzidas {fim}/{len(itens)} falas...", flush=True)
+                sucesso = True
                 break
+            except urllib.error.HTTPError as e:
+                # Se for 404 (modelo descontinuado na hora), troca automaticamente de modelo
+                if e.code == 404 and ":free" in active_model:
+                    fallback_free = "google/gemma-4-26b-a4b-it:free" if active_model != "google/gemma-4-26b-a4b-it:free" else "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free"
+                    print(f"HTTP 404 com {active_model}. Trocando para {fallback_free}...", file=sys.stderr, flush=True)
+                    active_model = fallback_free
+                    time.sleep(2)
+                    continue
+
+                if tentativa < 3:
+                    espera = 6 * (tentativa + 1)
+                    print(f"Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                    time.sleep(espera)
+                else:
+                    print(f"Falha no lote {idx_lote + 1}; mantendo original.", file=sys.stderr, flush=True)
+                    for item in lote_atual:
+                        item["traducao"] = item["texto"]
             except Exception as e:
                 if tentativa < 3:
                     espera = 6 * (tentativa + 1)
