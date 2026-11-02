@@ -1,0 +1,123 @@
+name: Test OpenVPN FTP connection
+
+on:
+  workflow_dispatch:
+    inputs:
+      season:
+        description: Temporada para validar o acesso de leitura ao FTP
+        required: true
+        default: "1"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  test-vpn-ftp:
+    name: Connect to FTP through OpenVPN
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FTP_HOST: ${{ secrets.FTP_HOST }}
+      FTP_PORT: ${{ secrets.FTP_PORT }}
+      FTP_USER: ${{ secrets.FTP_USER }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      FTP_BASE_DIR: /G/Series/Longe demais - ${{ inputs.season }}
+
+    steps:
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=()
+          for name in OPENVPN_CONFIG FTP_HOST FTP_PORT FTP_USER FTP_PASSWORD; do
+            if [[ -z "${!name:-}" ]]; then
+              missing+=("$name")
+            fi
+          done
+          if (( ${#missing[@]} )); then
+            printf 'Missing Actions secrets: %s\n' "${missing[*]}" >&2
+            exit 1
+          fi
+        env:
+          OPENVPN_CONFIG: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Install OpenVPN
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes openvpn
+
+      - name: Write OpenVPN profile
+        shell: bash
+        env:
+          OPENVPN_CONFIG: ${{ secrets.OPENVPN_CONFIG }}
+        run: |
+          set -euo pipefail
+          umask 077
+          printf '%s' "$OPENVPN_CONFIG" > "$RUNNER_TEMP/openvpn.ovpn"
+          test -s "$RUNNER_TEMP/openvpn.ovpn"
+
+      - name: Connect to OpenVPN
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo openvpn \
+            --config "$RUNNER_TEMP/openvpn.ovpn" \
+            --daemon \
+            --writepid "$RUNNER_TEMP/openvpn.pid" \
+            --log "$RUNNER_TEMP/openvpn.log"
+
+          for attempt in $(seq 1 60); do
+            if grep -Fq 'Initialization Sequence Completed' "$RUNNER_TEMP/openvpn.log"; then
+              echo 'OpenVPN tunnel connected.'
+              exit 0
+            fi
+            if ! sudo kill -0 "$(cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null; then
+              break
+            fi
+            sleep 2
+          done
+
+          echo 'OpenVPN did not establish the tunnel. Relevant client log:' >&2
+          grep -E 'AUTH_FAILED|Options error|Cannot open|TLS Error|Initialization Sequence Completed' \
+            "$RUNNER_TEMP/openvpn.log" | tail -n 30 >&2 || true
+          exit 1
+
+      - name: Verify FTP login and directory listing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          import sys
+          from ftplib import FTP
+
+          try:
+              ftp = FTP()
+              ftp.connect(
+                  os.environ["FTP_HOST"],
+                  int(os.environ["FTP_PORT"]),
+                  timeout=20,
+              )
+              ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
+              ftp.cwd(os.environ["FTP_BASE_DIR"])
+              entries = ftp.nlst()
+              ftp.quit()
+          except Exception as error:
+              print(f"FTP connectivity test failed ({type(error).__name__}).", file=sys.stderr)
+              raise SystemExit(1)
+
+          print(
+              "FTP login and directory listing succeeded "
+              f"({len(entries)} entries in the selected season directory)."
+          )
+          PY
+
+      - name: Stop OpenVPN
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f "$RUNNER_TEMP/openvpn.pid" ]]; then
+            sudo kill "$(cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null || true
+          fi
+          rm -f "$RUNNER_TEMP/openvpn.ovpn" "$RUNNER_TEMP/openvpn.pid" "$RUNNER_TEMP/openvpn.log"
