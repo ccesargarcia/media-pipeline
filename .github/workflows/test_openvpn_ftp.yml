@@ -6,8 +6,12 @@ on:
       season:
         description: Temporada para validar o acesso de leitura ao FTP
         required: true
-        default: "1"
-        type: string
+        type: choice
+        options:
+          - Segunda Temporada
+          - Terceira Temporada
+          - Primeira Temporada
+        default: Segunda Temporada
 
 permissions:
   contents: read
@@ -92,6 +96,7 @@ jobs:
           import sys
           from ftplib import FTP
 
+          phase = "connect"
           try:
               ftp = FTP()
               ftp.connect(
@@ -99,12 +104,21 @@ jobs:
                   int(os.environ["FTP_PORT"]),
                   timeout=20,
               )
+              phase = "login"
               ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
+              phase = "change directory"
               ftp.cwd(os.environ["FTP_BASE_DIR"])
+              phase = "list directory"
               entries = ftp.nlst()
               ftp.quit()
           except Exception as error:
-              print(f"FTP connectivity test failed ({type(error).__name__}).", file=sys.stderr)
+              response_code = str(error).split(maxsplit=1)[0]
+              if not response_code[:3].isdigit():
+                  response_code = type(error).__name__
+              print(
+                  f"FTP test failed during {phase} (response {response_code}).",
+                  file=sys.stderr,
+              )
               raise SystemExit(1)
 
           print(
