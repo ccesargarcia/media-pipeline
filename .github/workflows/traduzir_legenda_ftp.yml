@@ -43,8 +43,17 @@ jobs:
       - name: Baixar arquivo .srt do FTP
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
-          SRT_NAME: "${{ inputs.srt_filename }}"
+          SRT_NAME_INPUT: ${{ inputs.srt_filename }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
+          SRT_NAME="$SRT_NAME_INPUT"
+          if [ "$SRT_NAME" != "$(basename "$SRT_NAME")" ] || [[ ! "$SRT_NAME" =~ ^[A-Za-z0-9_.-]+\.srt$ ]]; then
+            echo "Informe somente o nome de um arquivo .srt válido." >&2
+            exit 1
+          fi
           STEM="${SRT_NAME%.*}"
           STEM="${STEM%.tr}"
           
@@ -57,8 +66,8 @@ jobs:
           echo "Baixando $SRT_NAME do FTP..."
           curl -# --fail --ftp-pasv \
             --retry 5 --retry-delay 5 --retry-connrefused \
-            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
-            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_PATH}" \
+            -u "$FTP_USER:$FTP_PASSWORD" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
             -o input.srt
 
       - name: Traduzir para PT-BR (${{ inputs.translator }}) e Gerar .ass
@@ -81,21 +90,26 @@ jobs:
           python3 srt_para_ass.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.ass"
 
       - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
           
           echo "Enviando legendas geradas de volta para o FTP..."
           curl -# --fail --ftp-pasv \
             --retry 5 --retry-delay 5 --retry-connrefused \
-            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+            -u "$FTP_USER:$FTP_PASSWORD" \
             -T "${{ env.STEM }}.pt-BR.srt" \
-            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
 
           curl -# --fail --ftp-pasv \
             --retry 5 --retry-delay 5 --retry-connrefused \
-            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+            -u "$FTP_USER:$FTP_PASSWORD" \
             -T "${{ env.STEM }}.ass" \
-            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
 
       - name: Salvar Legendas como Artifact de Backup no GitHub
         if: always()

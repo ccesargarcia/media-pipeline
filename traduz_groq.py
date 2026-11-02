@@ -181,6 +181,8 @@ def main():
     print(f"==> Total de falas para traduzir via Groq ({args.model}): {len(itens)}", flush=True)
 
     batch_size = args.batch_size
+    if batch_size <= 0:
+        raise ValueError("O tamanho do lote precisa ser maior que zero.")
     total_lotes = (len(itens) + batch_size - 1) // batch_size
     traducoes = {}
 
@@ -194,11 +196,16 @@ def main():
 
         print(f"--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
+        lote_concluido = False
         for tentativa in range(8):
             try:
                 t0 = time.time()
                 mapa, headers = traduzir_lote_groq(api_key, args.model, contexto_anterior, lote_atual)
                 dt = time.time() - t0
+
+                faltantes = [item["id"] for item in lote_atual if not mapa.get(item["id"])]
+                if faltantes:
+                    raise ValueError(f"A resposta omitiu {len(faltantes)} falas do lote.")
 
                 # Verifica consumo de TPM (tokens por minuto)
                 rem_tokens = int(headers.get("x-ratelimit-remaining-tokens", 99999))
@@ -209,20 +216,12 @@ def main():
                     print(f"  [Groq TPM: restam {rem_tokens} tokens. Aguardando {pausa:.1f}s para renovação da janela...]", flush=True)
                     time.sleep(pausa)
 
-                faltantes = 0
                 for item in lote_atual:
                     if item["id"] in mapa:
                         item["traducao"] = mapa[item["id"]]
                         traducoes[item["id"]] = mapa[item["id"]]
-                    else:
-                        faltantes += 1
-                        item["traducao"] = item["texto"]
-                        traducoes[item["id"]] = item["texto"]
-
-                if faltantes > 0:
-                    print(f"  [Aviso: {faltantes} falas mantiveram original no lote {idx_lote + 1}]", flush=True)
-                else:
-                    print(f"  ✓ Lote {idx_lote + 1} traduzido com sucesso em {dt:.2f}s", flush=True)
+                print(f"  ✓ Lote {idx_lote + 1} traduzido com sucesso em {dt:.2f}s", flush=True)
+                lote_concluido = True
                 break
             except urllib.error.HTTPError as e:
                 m = re.search(r"([\d\.]+)s", str(e.headers.get("x-ratelimit-reset-tokens", "")))
@@ -233,6 +232,9 @@ def main():
                 espera = 4 * (tentativa + 1)
                 print(f"  [Tentativa {tentativa + 1}/8 falhou: {e}]. Tentando em {espera}s...", file=sys.stderr, flush=True)
                 time.sleep(espera)
+
+        if not lote_concluido:
+            raise RuntimeError(f"Falha ao traduzir o lote {idx_lote + 1} após 8 tentativas; nenhuma saída foi marcada como concluída.")
 
     blocos_saida = []
     for item in itens:

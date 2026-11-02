@@ -20,6 +20,10 @@ jobs:
       - name: Enviar legendas para o FTP
         env:
           FTP_BASE_DIR: ${{ inputs.ftp_dir }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
           
@@ -31,9 +35,9 @@ jobs:
               echo "Enviando $f para $FTP_BASE_DIR..."
               curl -# --fail --ftp-pasv \
                 --retry 5 --retry-delay 5 --retry-connrefused \
-                -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+                -u "$FTP_USER:$FTP_PASSWORD" \
                 -T "$f" \
-                "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+                "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
               echo "✓ Concluído: $f"
             fi
           done

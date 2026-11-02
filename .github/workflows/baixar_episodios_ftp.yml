@@ -41,9 +41,25 @@ jobs:
       - name: Processar Episódios
         env:
           FTP_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+          START_EP_INPUT: ${{ inputs.episode_start }}
+          END_EP_INPUT: ${{ inputs.episode_end }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          START_EP=${{ inputs.episode_start }}
-          END_EP=${{ inputs.episode_end }}
+          START_EP="$START_EP_INPUT"
+          END_EP="$END_EP_INPUT"
+          if ! [[ "$START_EP" =~ ^[0-9]+$ && "$END_EP" =~ ^[0-9]+$ ]]; then
+            echo "Intervalo de episódios inválido." >&2
+            exit 1
+          fi
+          START_EP=$((10#$START_EP))
+          END_EP=$((10#$END_EP))
+          if (( START_EP < 1 || END_EP < START_EP )); then
+            echo "Intervalo de episódios inválido." >&2
+            exit 1
+          fi
           
           echo "Processando episódios de $START_EP até $END_EP para a pasta: $FTP_DIR"
           
@@ -63,9 +79,9 @@ jobs:
             echo "==> Enviando $FILENAME via FTP para $FTP_DIR..."
             curl -# --fail --ftp-pasv --ftp-create-dirs \
               --retry 5 --retry-delay 5 --retry-connrefused \
-              -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+              -u "$FTP_USER:$FTP_PASSWORD" \
               -T "$FILENAME" \
-              "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+              "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
               
             echo "==> Upload concluído com sucesso para $FILENAME!"
             rm -f "$FILENAME" # limpa espaço no runner para o próximo episódio

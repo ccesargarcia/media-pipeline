@@ -265,6 +265,8 @@ def main():
             item["traducao"] = traducoes_salvas[item["id"]]
 
     batch_size = args.batch_size
+    if batch_size <= 0:
+        raise ValueError("O tamanho do lote precisa ser maior que zero.")
     total_lotes = (len(itens) + batch_size - 1) // batch_size
 
     t_inicio = time.time()
@@ -286,6 +288,9 @@ def main():
             try:
                 t_lote_start = time.time()
                 mapa = traduzir_lote(api_key, modelo, contexto_anterior, lote_atual)
+                faltantes = [item["id"] for item in lote_atual if not mapa.get(item["id"])]
+                if faltantes:
+                    raise ValueError(f"A resposta omitiu {len(faltantes)} falas do lote.")
                 t_lote_dur = time.time() - t_lote_start
                 for item in lote_atual:
                     texto_trad = mapa.get(item["id"], item["texto"])

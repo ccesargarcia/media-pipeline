@@ -192,6 +192,8 @@ def main():
 
     total_itens = len(itens)
     batch_size = args.batch_size
+    if batch_size <= 0:
+        raise ValueError("O tamanho do lote precisa ser maior que zero.")
     total_lotes = (total_itens + batch_size - 1) // batch_size
     traducoes = {}
 
@@ -218,6 +220,9 @@ def main():
             try:
                 t_lote_start = time.time()
                 mapa = traduzir_lote_openrouter(api_key, active_model, contexto_anterior, lote_atual)
+                faltantes = [item["id"] for item in lote_atual if not mapa.get(item["id"])]
+                if faltantes:
+                    raise ValueError(f"A resposta omitiu {len(faltantes)} falas do lote.")
                 t_lote_dur = time.time() - t_lote_start
 
                 for item in lote_atual:
@@ -263,9 +268,7 @@ def main():
                     print(f"  Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"  Falha no lote {idx_lote + 1} após {max_tentativas} tentativas; mantendo original.", file=sys.stderr, flush=True)
-                    for item in lote_atual:
-                        item["traducao"] = item["texto"]
+                    raise RuntimeError(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas.")
 
             except Exception as e:
                 if tentativa < max_tentativas - 1:
@@ -273,9 +276,7 @@ def main():
                     print(f"  Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    print(f"  Falha no lote {idx_lote + 1}; mantendo original.", file=sys.stderr, flush=True)
-                    for item in lote_atual:
-                        item["traducao"] = item["texto"]
+                    raise RuntimeError(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas: {e}") from e
 
         # Intervalo seguro para não estourar rate limit
         time.sleep(2.5)
