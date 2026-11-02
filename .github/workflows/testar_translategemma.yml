@@ -236,11 +236,9 @@ jobs:
           exit 1
 
       - name: Traduzir shard ${{ matrix.part }} de 8
-        env:
-          LOCAL_LLM_MODEL: ${{ env.MODEL_ALIAS }}
-          PYTHONUNBUFFERED: "1"
         run: |
-          python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
+          : "${MODEL_ALIAS:?MODEL_ALIAS não foi configurado}"
+          LOCAL_LLM_MODEL="$MODEL_ALIAS" PYTHONUNBUFFERED=1 python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
             input.srt "part-${{ matrix.part }}.json"
 
       - name: Salvar checkpoint de tradução
