@@ -14,7 +14,8 @@ from pathlib import Path
 
 API_URL = os.environ.get("LOCAL_LLM_URL", "http://127.0.0.1:8080/v1/chat/completions")
 MODEL = os.environ.get("LOCAL_LLM_MODEL", "qwen3-8b-local")
-TRANSLATION_CACHE_VERSION = "4"
+TRANSLATION_CACHE_VERSION = "5"
+CONTEXT_WINDOW_SIZE = 8
 
 
 class LocalServerConfigurationError(RuntimeError):
@@ -280,7 +281,7 @@ def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> di
         sub_context = list(context)
         for item in part1:
             sub_context.append({"id": item["id"], "text": item["text"], "translation": res1.get(item["id"], "")})
-        res2 = translate_batch_with_fallbacks(sub_context[-4:], part2)
+        res2 = translate_batch_with_fallbacks(sub_context[-CONTEXT_WINDOW_SIZE:], part2)
         return {**res1, **res2}
 
     # Lote pequeno (<= 3 falas): traduz cada fala individualmente
@@ -292,7 +293,7 @@ def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> di
         translated_text = None
         for attempt in range(1, 4):
             try:
-                single_res = request_batch(curr_context[-4:], [item])
+                single_res = request_batch(curr_context[-CONTEXT_WINDOW_SIZE:], [item])
                 val = single_res.get(item_id, "").strip()
                 if val:
                     translated_text = val
@@ -367,7 +368,7 @@ def main() -> None:
         batch = items[start:min(start + args.batch_size, part_end)]
         if all("translation" in item for item in batch):
             continue
-        context = items[max(0, start - 4):start]
+        context = items[max(0, start - CONTEXT_WINDOW_SIZE):start]
         print(f"Lote {start // args.batch_size + 1}/{(len(items) + args.batch_size - 1) // args.batch_size}: falas {start + 1}-{start + len(batch)}", flush=True)
         translations = translate_batch_with_fallbacks(context, batch)
         expected_ids = {item["id"] for item in batch}

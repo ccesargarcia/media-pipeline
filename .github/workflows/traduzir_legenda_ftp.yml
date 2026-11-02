@@ -162,7 +162,6 @@ jobs:
             sudo mkswap /swapfile_tune
             sudo swapon /swapfile_tune
           fi
-          sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
           sudo sysctl -w vm.swappiness=10
           free -h
 
@@ -176,7 +175,7 @@ jobs:
           taskset -c 0,1 nice -n -20 nohup llama.cpp/build/bin/llama-server \
             -m models/Qwen3-8B-Q4_K_M.gguf \
             --alias qwen3-8b-local --host 127.0.0.1 --port 8080 \
-            --ctx-size 2048 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \
+            --ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \
             > llama-server.log 2>&1 &
           SERVER_PID=$!
           for attempt in $(seq 1 60); do
