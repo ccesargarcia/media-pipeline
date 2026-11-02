@@ -1,5 +1,5 @@
-name: Testar TranslateGemma 4B em paralelo
-run-name: "🧪 TranslateGemma 4B: ${{ inputs.srt_filename }} · 8 shards"
+name: Testar Gemma 3 4B Instruct em paralelo
+run-name: "🧪 Gemma 3 4B: ${{ inputs.srt_filename }} · 8 shards"
 
 on:
   workflow_dispatch:
@@ -71,11 +71,11 @@ jobs:
         if: ${{ always() && inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-disconnect
 
-      - name: Cache do TranslateGemma 4B Q4
+      - name: Cache do Gemma 3 4B Instruct Q4_K_M
         uses: actions/cache@v4
         with:
-          path: models/translategemma-4b-it.Q4_K_M.gguf
-          key: translategemma-4b-q4-k-m-v1
+          path: models/gemma-3-4b-it-Q4_K_M.gguf
+          key: gemma-3-4b-it-q4-k-m-v1
 
       - name: Cache do llama.cpp v0.8.0
         uses: actions/cache@v4
@@ -83,15 +83,15 @@ jobs:
           path: llama.cpp/build
           key: llama-build-ubuntu-cpu-v0.8.0
 
-      - name: Baixar modelo e compilar llama.cpp
+      - name: Baixar Gemma 3 e compilar llama.cpp
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake build-essential
           mkdir -p models
-          if [ ! -s models/translategemma-4b-it.Q4_K_M.gguf ]; then
+          if [ ! -s models/gemma-3-4b-it-Q4_K_M.gguf ]; then
             curl --fail --location --retry 4 --retry-delay 3 \
-              "https://huggingface.co/mradermacher/translategemma-4b-it-GGUF/resolve/main/translategemma-4b-it.Q4_K_M.gguf?download=true" \
-              -o models/translategemma-4b-it.Q4_K_M.gguf
+              "https://huggingface.co/ggml-org/gemma-3-4b-it-GGUF/resolve/main/gemma-3-4b-it-Q4_K_M.gguf?download=true" \
+              -o models/gemma-3-4b-it-Q4_K_M.gguf
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
             git clone --branch v0.8.0 --depth 1 https://github.com/ggml-org/llama.cpp.git
@@ -102,7 +102,7 @@ jobs:
       - name: Compartilhar SRT de entrada
         uses: actions/upload-artifact@v4
         with:
-          name: translategemma-srt-input
+          name: gemma3-srt-input
           path: input.srt
           retention-days: 1
 
@@ -123,11 +123,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Restaurar cache do TranslateGemma
+      - name: Restaurar cache do Gemma 3
         uses: actions/cache@v4
         with:
-          path: models/translategemma-4b-it.Q4_K_M.gguf
-          key: translategemma-4b-q4-k-m-v1
+          path: models/gemma-3-4b-it-Q4_K_M.gguf
+          key: gemma-3-4b-it-q4-k-m-v1
 
       - name: Restaurar cache do llama.cpp
         uses: actions/cache@v4
@@ -138,23 +138,23 @@ jobs:
       - name: Baixar SRT de entrada
         uses: actions/download-artifact@v4
         with:
-          name: translategemma-srt-input
+          name: gemma3-srt-input
 
-      - name: Iniciar TranslateGemma neste runner
+      - name: Iniciar Gemma 3 neste runner
         run: |
-          if [ ! -s models/translategemma-4b-it.Q4_K_M.gguf ] || [ ! -x llama.cpp/build/bin/llama-server ]; then
+          if [ ! -s models/gemma-3-4b-it-Q4_K_M.gguf ] || [ ! -x llama.cpp/build/bin/llama-server ]; then
             echo "Modelo ou llama-server não foi encontrado no cache." >&2
             exit 1
           fi
           nohup llama.cpp/build/bin/llama-server \
-            -m models/translategemma-4b-it.Q4_K_M.gguf \
-            --alias translategemma-4b-it-local --host 127.0.0.1 --port 8080 \
-            --ctx-size 2048 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \
+            -m models/gemma-3-4b-it-Q4_K_M.gguf \
+            --alias gemma-3-4b-it-local --host 127.0.0.1 --port 8080 \
+            --ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \
             > llama-server.log 2>&1 &
           SERVER_PID=$!
           for attempt in $(seq 1 60); do
             if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
-              echo "TranslateGemma pronto (PID $SERVER_PID)."
+              echo "Gemma 3 pronto (PID $SERVER_PID)."
               exit 0
             fi
             if ! kill -0 "$SERVER_PID" 2>/dev/null; then
@@ -164,13 +164,13 @@ jobs:
             fi
             sleep 2
           done
-          echo "Timeout aguardando TranslateGemma. Log:" >&2
+          echo "Timeout aguardando Gemma 3. Log:" >&2
           cat llama-server.log >&2
           exit 1
 
       - name: Traduzir shard ${{ matrix.part }} de 8
         env:
-          LOCAL_LLM_MODEL: translategemma-4b-it-local
+          LOCAL_LLM_MODEL: gemma-3-4b-it-local
           PYTHONUNBUFFERED: "1"
         run: |
           python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
@@ -179,7 +179,7 @@ jobs:
       - name: Salvar shard traduzido
         uses: actions/upload-artifact@v4
         with:
-          name: translategemma-part-${{ matrix.part }}
+          name: gemma3-part-${{ matrix.part }}
           path: part-${{ matrix.part }}.json
           retention-days: 1
 
@@ -198,12 +198,12 @@ jobs:
       - name: Baixar SRT original
         uses: actions/download-artifact@v4
         with:
-          name: translategemma-srt-input
+          name: gemma3-srt-input
 
       - name: Baixar os shards traduzidos
         uses: actions/download-artifact@v4
         with:
-          pattern: translategemma-part-*
+          pattern: gemma3-part-*
           path: parts
           merge-multiple: true
 
@@ -219,7 +219,7 @@ jobs:
       - name: Publicar artefatos para revisão
         uses: actions/upload-artifact@v4
         with:
-          name: teste-translategemma-${{ inputs.srt_filename }}
+          name: teste-gemma3-${{ inputs.srt_filename }}
           path: |
             *.pt-BR.srt
             *.ass
