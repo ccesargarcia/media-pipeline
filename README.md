@@ -9,8 +9,8 @@ Pipeline automatizado no GitHub Actions para:
 ## Workflows Disponíveis
 
 - **Baixar Episódios para FTP (Turkish123):** Baixa episódios individuais ou em lote e envia para `/G/Series/Longe demais - [Temporada]`.
-- **Legendar Série via FTP:** Pega o vídeo do FTP, transcreve com Whisper, traduz para PT-BR e envia as legendas (`.pt-BR.srt` e `.ass`) de volta para o FTP.
-- **Traduzir Legenda Existente do FTP:** Baixa um `.srt`, traduz com o mecanismo escolhido, gera `.ass` e envia ambos ao FTP.
+- **Legendar Série via FTP:** Pega o vídeo do FTP, transcreve com Whisper, traduz para PT-BR e envia as legendas (`.pt-BR.srt` e `.ass`) de volta para o FTP. O mecanismo `local` usa Qwen3-8B GGUF Q4 via llama.cpp no runner Ubuntu.
+- **Traduzir Legenda Existente do FTP:** Baixa um `.srt`, traduz com o mecanismo escolhido (Gemini, Groq, OpenRouter ou local), gera `.ass` e envia ambos ao FTP.
 - **Sincronizar Legendas Prontas com FTP:** Envia os arquivos versionados em `legendas_prontas/` para a pasta escolhida.
 
 ## Secrets Necessários no Repositório
@@ -28,4 +28,5 @@ O workflow de legendagem também aceita `GROK_API_KEY` como alternativa a `GROQ_
 ## Observações operacionais
 
 - Os mecanismos de tradução falham explicitamente se a resposta omitir falas ou se um lote não puder ser traduzido após as tentativas. Confira o log do Action antes de considerar a legenda concluída.
+- O mecanismo local baixa um modelo GGUF de aproximadamente 5 GB na primeira execução; o GitHub Actions tenta reutilizar o modelo e o binário llama.cpp pelo cache.
 - Os workflows usam FTP simples (`ftp://`), que não criptografa credenciais nem arquivos. Use uma conexão FTPS/SFTP no servidor e adapte os comandos de transferência antes de enviar dados por uma rede não confiável.
