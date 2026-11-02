@@ -140,7 +140,7 @@ jobs:
         if: inputs.translator == 'local'
         uses: actions/cache@v4
         with:
-          path: models/qwen3-8b-q4_k_m.gguf
+          path: models/Qwen3-8B-Q4_K_M.gguf
           key: qwen3-8b-q4-k-m-v1
 
       - name: Cache do servidor llama.cpp
@@ -155,10 +155,10 @@ jobs:
         run: |
           rm -f input.wav
           mkdir -p models
-          if [ ! -s models/qwen3-8b-q4_k_m.gguf ]; then
+          if [ ! -s models/Qwen3-8B-Q4_K_M.gguf ]; then
             curl --fail --location --retry 4 --retry-delay 3 \
-              "https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/qwen3-8b-q4_k_m.gguf?download=true" \
-              -o models/qwen3-8b-q4_k_m.gguf
+              "https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q4_K_M.gguf?download=true" \
+              -o models/Qwen3-8B-Q4_K_M.gguf
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
             git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
@@ -166,7 +166,7 @@ jobs:
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
           nohup llama.cpp/build/bin/llama-server \
-            -m models/qwen3-8b-q4_k_m.gguf \
+            -m models/Qwen3-8B-Q4_K_M.gguf \
             --alias qwen3-8b-local --host 127.0.0.1 --port 8080 \
             --ctx-size 4096 --threads 4 --parallel 1 --reasoning off --jinja \
             > llama-server.log 2>&1 &
