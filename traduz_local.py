@@ -111,7 +111,7 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
         "max_tokens": 2048,
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_prompt + "\n/no_think"},
+            {"role": "user", "content": user_prompt + ("\n/no_think" if "qwen" in MODEL.lower() else "")},
         ],
     }
     payload["response_format"] = {"type": "json_object"}
