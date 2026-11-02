@@ -29,4 +29,5 @@ O workflow de legendagem também aceita `GROK_API_KEY` como alternativa a `GROQ_
 
 - Os mecanismos de tradução falham explicitamente se a resposta omitir falas ou se um lote não puder ser traduzido após as tentativas. Confira o log do Action antes de considerar a legenda concluída.
 - O mecanismo local baixa um modelo GGUF de aproximadamente 5 GB na primeira execução; o GitHub Actions tenta reutilizar o modelo e o binário llama.cpp pelo cache.
+- No workflow de teste, Aya 23 usa a API nativa `/completion` do llama.cpp com os tokens de conversa Cohere e JSON Schema. Isso evita o parser de saída de chat `peg-native`. Os IDs são validados explicitamente; falhas definitivas interrompem o shard sem substituir traduções pelo texto original. Checkpoints anteriores a essa correção são descartados para não reutilizar resultados inválidos.
 - Os workflows usam FTP simples (`ftp://`), que não criptografa credenciais nem arquivos. Use uma conexão FTPS/SFTP no servidor e adapte os comandos de transferência antes de enviar dados por uma rede não confiável.

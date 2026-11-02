@@ -170,7 +170,8 @@ jobs:
             "aya-23-8b")
               echo "MODEL_FILE=models/aya-23-8B-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=aya-23-8b-local" >> "$GITHUB_ENV"
-              echo "SERVER_ARGS=--ctx-size 3072 --threads 2 --threads-batch 2 --parallel 1 --chat-template-file $GITHUB_WORKSPACE/templates/aya.jinja --jinja" >> "$GITHUB_ENV"
+              # Aya uses /completion with its explicit Cohere prompt in traduz_local.py.
+              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1" >> "$GITHUB_ENV"
               ;;
             "llama-3.1-8b")
               echo "MODEL_FILE=models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf" >> "$GITHUB_ENV"
@@ -200,9 +201,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: part-${{ matrix.part }}.ckpt.json
-          key: ckpt-test-${{ inputs.model }}-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
+          key: ckpt-test-v4-${{ inputs.model }}-${{ inputs.srt_filename }}-${{ matrix.part }}-run-${{ github.run_id }}-attempt-${{ github.run_attempt }}
           restore-keys: |
-            ckpt-test-${{ inputs.model }}-${{ inputs.srt_filename }}-${{ matrix.part }}-
+            ckpt-test-v4-${{ inputs.model }}-${{ inputs.srt_filename }}-${{ matrix.part }}-
 
       - name: Baixar SRT de entrada
         uses: actions/download-artifact@v4
@@ -268,7 +269,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: part-${{ matrix.part }}.ckpt.json
-          key: ckpt-test-${{ inputs.model }}-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
+          key: ckpt-test-v4-${{ inputs.model }}-${{ inputs.srt_filename }}-${{ matrix.part }}-run-${{ github.run_id }}-attempt-${{ github.run_attempt }}
 
       - name: Salvar shard traduzido
         uses: actions/upload-artifact@v4

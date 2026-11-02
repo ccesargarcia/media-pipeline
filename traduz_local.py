@@ -9,11 +9,16 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import urllib.parse
 from pathlib import Path
 
 API_URL = os.environ.get("LOCAL_LLM_URL", "http://127.0.0.1:8080/v1/chat/completions")
 MODEL = os.environ.get("LOCAL_LLM_MODEL", "qwen3-8b-local")
-TRANSLATION_CACHE_VERSION = "3"
+TRANSLATION_CACHE_VERSION = "4"
+
+
+class LocalServerConfigurationError(RuntimeError):
+    """Falha permanente do servidor; repetir cada fala não resolve."""
 
 
 class InvalidModelResponse(RuntimeError):
@@ -75,103 +80,41 @@ def parse_json_from_text(raw_text: str):
     raise ValueError(f"Não foi possível extrair JSON do texto retornado: {raw_text[:300]}")
 
 
+def translation_schema(batch: list[dict]) -> dict:
+    """Restringe a geração aos campos e IDs esperados pelo tradutor."""
+    return {
+        "type": "object",
+        "properties": {"subtitles": {
+            "type": "array", "minItems": len(batch), "maxItems": len(batch),
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "integer", "enum": [item["id"] for item in batch]},
+                    "text": {"type": "string", "minLength": 1},
+                },
+                "required": ["id", "text"], "additionalProperties": False,
+            },
+        }},
+        "required": ["subtitles"], "additionalProperties": False,
+    }
+
+
 def extract_translations(result, batch: list[dict]) -> dict[int, str]:
-    """Interpreta múltiplos formatos de JSON retornados por diferentes LLMs."""
-    expected_ids = {x["id"] for x in batch}
-    expected_str_ids = {str(x["id"]) for x in batch}
-
-    # Caso 1: Dicionário direto mapeando IDs para textos: {"1": "tradução", "2": "..."}
-    if isinstance(result, dict):
-        keys_set = set(result.keys())
-        if keys_set & expected_str_ids or keys_set & expected_ids:
-            direct = {}
-            for k, v in result.items():
-                try:
-                    ik = int(k)
-                except (ValueError, TypeError):
-                    continue
-                if ik in expected_ids:
-                    if isinstance(v, str):
-                        direct[ik] = v.strip()
-                    elif isinstance(v, dict):
-                        for tk in ("text", "translation", "traducao", "pt_br", "pt", "target", "translated", "content", "fala"):
-                            if tk in v and v[tk] is not None:
-                                direct[ik] = str(v[tk]).strip()
-                                break
-            if len(direct) == len(expected_ids):
-                return direct
-
-    # Caso 2: Procura lista de linhas em chaves conhecidas
-    rows = None
-    if isinstance(result, list):
-        rows = result
-    elif isinstance(result, dict):
-        KNOWN_KEYS = (
-            "subtitles", "translations", "translation", "legendas", "items", "data",
-            "lines", "dialogue", "dialogues", "results", "falas", "output", "sub_titles"
-        )
-        for k in KNOWN_KEYS:
-            if k in result and isinstance(result[k], list):
-                rows = result[k]
-                break
-        if rows is None:
-            # Pega o primeiro valor do dict que seja uma lista
-            for v in result.values():
-                if isinstance(v, list):
-                    rows = v
-                    break
-        if rows is None and len(batch) == 1:
-            for tk in ("text", "translation", "traducao", "pt_br", "content"):
-                if tk in result:
-                    return {batch[0]["id"]: str(result[tk]).strip()}
-
-    if not isinstance(rows, list):
-        keys = list(result.keys()) if isinstance(result, dict) else type(result).__name__
-        raise ValueError(f"O modelo retornou JSON sem lista de falas ou chaves esperadas (chaves encontradas: {keys}). Dados: {str(result)[:300]}")
-
+    """Valida IDs explícitos; nunca associa uma lista arbitrária por posição."""
+    if not isinstance(result, dict) or not isinstance(result.get("subtitles"), list):
+        raise ValueError(f"Resposta sem a lista 'subtitles': {str(result)[:300]}")
     translated = {}
-    ID_KEYS = ("id", "ID", "idx", "index", "line", "number")
-    TEXT_KEYS = ("text", "translation", "traducao", "pt_br", "pt", "target", "translated", "content", "fala", "legenda")
-
-    for idx, row in enumerate(rows):
-        if isinstance(row, dict):
-            row_id = None
-            for ik in ID_KEYS:
-                if ik in row:
-                    try:
-                        row_id = int(row[ik])
-                        break
-                    except (ValueError, TypeError):
-                        pass
-            if row_id is None and len(rows) == len(batch):
-                row_id = batch[idx]["id"]
-
-            row_text = None
-            for tk in TEXT_KEYS:
-                if tk in row and row[tk] is not None:
-                    row_text = str(row[tk]).strip()
-                    break
-            if row_text is None and len(row) == 1:
-                k, v = next(iter(row.items()))
-                try:
-                    row_id = int(k)
-                    row_text = str(v).strip()
-                except ValueError:
-                    pass
-            if row_id is not None and row_text is not None:
-                translated[row_id] = row_text
-        elif isinstance(row, str) and len(rows) == len(batch):
-            translated[batch[idx]["id"]] = row.strip()
-
-    if set(translated) != expected_ids or any(not translated[i] for i in expected_ids):
-        missing = expected_ids - set(translated)
-        unexpected = set(translated) - expected_ids
-        empty = {i for i in expected_ids if i in translated and not translated[i]}
-        raise ValueError(
-            f"IDs inconsistentes na tradução: faltam={sorted(missing)}, "
-            f"inesperados={sorted(unexpected)}, vazios={sorted(empty)}. "
-            f"Dados brutos: {str(result)[:300]}"
-        )
+    for row in result["subtitles"]:
+        if (not isinstance(row, dict) or type(row.get("id")) is not int
+                or not isinstance(row.get("text"), str)):
+            raise ValueError("Cada fala deve conter id inteiro e text textual.")
+        key = row["id"]
+        if key in translated:
+            raise ValueError(f"A resposta repetiu o ID {key}.")
+        translated[key] = row["text"].strip()
+    expected = {item["id"] for item in batch}
+    if set(translated) != expected or any(not text for text in translated.values()):
+        raise ValueError("A resposta omitiu IDs, incluiu IDs inesperados ou texto vazio.")
     return translated
 
 
@@ -253,8 +196,26 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
             {"role": "user", "content": user_prompt + ("\n/no_think" if "qwen" in MODEL.lower() else "")},
         ],
     }
-    payload["response_format"] = {"type": "json_object"}
-    req = urllib.request.Request(API_URL, data=json.dumps(payload, ensure_ascii=False).encode(), headers={"Content-Type": "application/json"}, method="POST")
+    is_aya = MODEL.startswith("aya-23-")
+    request_url = API_URL
+    schema = translation_schema(batch)
+    if is_aya:
+        # Aya 23 uses the original Cohere turn tokens. Native completion accepts
+        # the formatted prompt directly and bypasses the chat/PEG output parser.
+        prompt = (
+            "<BOS_TOKEN><|START_OF_TURN_TOKEN|><|SYSTEM_TOKEN|>" + SYSTEM_PROMPT
+            + "<|END_OF_TURN_TOKEN|><|START_OF_TURN_TOKEN|><|USER_TOKEN|>" + user_prompt
+            + "<|END_OF_TURN_TOKEN|><|START_OF_TURN_TOKEN|><|CHATBOT_TOKEN|>"
+        )
+        request_url = urllib.parse.urljoin(API_URL, "/completion")
+        payload = {
+            "prompt": prompt, "temperature": 0.2, "n_predict": 2048,
+            "stream": False, "json_schema": schema,
+            "stop": ["<|END_OF_TURN_TOKEN|>", "<|END_OF_TEXT_TOKEN|>"],
+        }
+    else:
+        payload["response_format"] = {"type": "json_object", "schema": schema}
+    req = urllib.request.Request(request_url, data=json.dumps(payload, ensure_ascii=False).encode(), headers={"Content-Type": "application/json"}, method="POST")
     try:
         with urllib.request.urlopen(req, timeout=600) as response:
             response_body = response.read().decode("utf-8", errors="replace")
@@ -263,35 +224,46 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
             err_content = exc.read().decode("utf-8", errors="replace")
         except Exception:
             err_content = ""
-        raise RuntimeError(f"Servidor retornou HTTP {exc.code} {exc.reason}: {err_content[:500]}") from exc
+        message = f"Servidor retornou HTTP {exc.code} {exc.reason}: {err_content[:500]}"
+        if "peg-" in err_content or exc.code in (401, 403, 404):
+            raise LocalServerConfigurationError(message) from exc
+        raise RuntimeError(message) from exc
     try:
         data = json.loads(response_body)
     except json.JSONDecodeError as exc:
         excerpt = response_body[:500].replace("\n", "\\n") or "<resposta vazia>"
         raise InvalidModelResponse(f"O servidor local retornou HTTP 200 sem JSON válido na resposta da API: {excerpt}") from exc
     try:
-        choice = data["choices"][0]
+        if is_aya:
+            choice = {
+                "message": {"content": data["content"]},
+                "finish_reason": "length" if data.get("stopped_limit") else "stop",
+            }
+        else:
+            choice = data["choices"][0]
         text = choice["message"]["content"].strip()
     except (KeyError, IndexError, TypeError, AttributeError) as exc:
-        raise InvalidModelResponse(f"Resposta da API sem choices[0].message.content: {str(data)[:500]}") from exc
+        raise InvalidModelResponse(f"Resposta da API sem conteúdo textual de tradução: {str(data)[:500]}") from exc
 
+    if choice.get("finish_reason") == "length":
+        raise ValueError("Saída truncada pelo limite de tokens; é necessário reduzir o lote.")
     try:
         result = parse_json_from_text(text)
     except Exception as exc:
         excerpt = text[:500].replace("\n", "\\n") or "<conteúdo vazio>"
-        if choice.get("finish_reason") == "length":
-            raise ValueError(f"Saída JSON truncada pelo limite de tokens: {excerpt}") from exc
         raise InvalidModelResponse(f"O modelo não retornou JSON decodificável ({exc}): {excerpt}") from exc
 
     return extract_translations(result, batch)
 
 
 def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> dict[int, str]:
-    """Traduz lote com divisão dinâmica (split) e fallback para nunca travar."""
+    """Reduz lotes inválidos e falha se não conseguir traduzir uma fala."""
     last_error = None
     for attempt in range(1, 3):
         try:
             return request_batch(context, batch)
+        except LocalServerConfigurationError:
+            raise
         except Exception as exc:
             last_error = exc
             if attempt < 2:
@@ -325,14 +297,18 @@ def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> di
                 if val:
                     translated_text = val
                     break
+            except LocalServerConfigurationError:
+                raise
             except Exception as exc:
+                last_error = exc
                 print(f"Tentativa {attempt}/3 para fala individual {item_id} falhou: {exc}", file=sys.stderr, flush=True)
                 time.sleep(attempt)
 
-        # Fallback de emergência para não abortar o runner
         if not translated_text:
-            print(f"[AVISO] Fala {item_id} manteve texto original para evitar interrupção do pipeline.", file=sys.stderr, flush=True)
-            translated_text = item["text"]
+            raise RuntimeError(
+                f"Não foi possível traduzir a fala {item_id}; o shard está incompleto. "
+                f"Os lotes anteriores permanecem no checkpoint. Último erro: {last_error}"
+            ) from last_error
 
         results[item_id] = translated_text
         curr_context.append({"id": item["id"], "text": item["text"], "translation": translated_text})
