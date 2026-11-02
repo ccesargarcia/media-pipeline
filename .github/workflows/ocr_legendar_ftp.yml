@@ -88,6 +88,23 @@ jobs:
           
           rm -f input_media.mp4  # Libera espaço imediatamente
 
+      - name: Enviar IMEDIATAMENTE backup da legenda em inglês (.en.srt) para o FTP
+        run: |
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
+          
+          echo "==> Enviando arquivo extraído em inglês (${{ env.STEM }}.en.srt) imediatamente para o FTP..."
+          curl -# --fail --ftp-pasv \
+            --retry 5 --retry-delay 5 --retry-connrefused \
+            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
+            -T "${{ env.STEM }}.en.srt" \
+            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
+
+      - name: Salvar Backup da Legenda em Inglês (.en.srt) como Artifact no GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocr-english-${{ env.STEM }}
+          path: ${{ env.STEM }}.en.srt
+
       - name: Traduzir Legenda de Inglês para PT-BR (${{ inputs.translator }})
         env:
           PYTHONUNBUFFERED: "1"
@@ -109,15 +126,15 @@ jobs:
 
       - name: Normalizar Timings e Gerar Legendas .ass
         run: |
-          echo "Normalizando tempos e gerando formato .ass com tarja preta e texto amarelo..."
+          echo "Normalizando tempos e gerando formato .ass com fundo preto delimitado e texto amarelo..."
           python3 normalizar_timings.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.pt-BR.srt"
           python3 srt_para_ass.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.ass"
 
-      - name: Enviar legendas para o FTP (.en.srt, .pt-BR.srt e .ass)
+      - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) para o FTP
         run: |
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
           
-          echo "Enviando legendas geradas para o FTP..."
+          echo "Enviando legendas PT-BR geradas para o FTP..."
           
           # Envia .pt-BR.srt
           curl -# --fail --ftp-pasv \
@@ -133,18 +150,11 @@ jobs:
             -T "${{ env.STEM }}.ass" \
             "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/"
 
-          # Envia cópia do inglês extraído
-          curl -# --fail --ftp-pasv \
-            --retry 5 --retry-delay 5 --retry-connrefused \
-            -u "${{ secrets.FTP_USER }}:${{ secrets.FTP_PASSWORD }}" \
-            -T "${{ env.STEM }}.en.srt" \
-            "ftp://${{ secrets.FTP_HOST }}:${{ secrets.FTP_PORT }}${ENCODED_DIR}/" || true
-
-      - name: Salvar Legendas como Artifact de Backup no GitHub
+      - name: Salvar Legendas Finais como Artifact de Backup no GitHub
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: legendas-ocr-${{ env.STEM }}
+          name: legendas-completas-${{ env.STEM }}
           path: |
             ${{ env.STEM }}.en.srt
             ${{ env.STEM }}.pt-BR.srt

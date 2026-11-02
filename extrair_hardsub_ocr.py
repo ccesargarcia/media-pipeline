@@ -3,9 +3,11 @@
 extrair_hardsub_ocr.py
 Extrai legendas hardcoded (burned-in) em inglês de vídeos usando FFmpeg + Tesseract OCR.
 Otimizado com streaming em memória (sem salvar frames em disco), pré-filtragem por limiar
-de luminância (branco puro com borda preta) e detecção de mudança de cena para máxima velocidade.
+de luminância (branco puro com borda preta), fusão inteligente de frames similares e
+consolidação temporal com difflib para evitar duplicatas e fragmentação.
 """
 import argparse
+import difflib
 import json
 import os
 import re
@@ -64,8 +66,8 @@ def clean_ocr_text(text: str) -> str:
     clean_lines = []
     for line in lines:
         # Remove caracteres espúrios no início ou fim
-        line = re.sub(r"^[\s|~._\-=—]+", "", line)
-        line = re.sub(r"[\s|~_\-=—]+$", "", line)
+        line = re.sub(r"^[\s|~._\-=—*]+", "", line)
+        line = re.sub(r"[\s|~_\-=—*]+$", "", line)
         # Corrige aspas curvas comuns
         line = line.replace("“", '"').replace("”", '"').replace("’", "'").replace("`", "'")
         # Remove espaços múltiplos
@@ -75,17 +77,25 @@ def clean_ocr_text(text: str) -> str:
     return "\n".join(clean_lines)
 
 
+def text_similarity(s1: str, s2: str) -> float:
+    """Retorna o índice de similaridade (0.0 a 1.0) entre duas strings de legenda."""
+    s1_norm = " ".join(s1.lower().split())
+    s2_norm = " ".join(s2.lower().split())
+    if s1_norm == s2_norm:
+        return 1.0
+    return difflib.SequenceMatcher(None, s1_norm, s2_norm).ratio()
+
+
 def frame_diff_ratio(bytes1: bytes, bytes2: bytes, threshold: int = 200) -> float:
-    """Calcula a proporção de diferença entre dois frames binários binarizados."""
+    """Calcula a proporção de diferença entre dois frames binarizados."""
     if len(bytes1) != len(bytes2) or len(bytes1) == 0:
         return 1.0
     
-    # Amostra a cada 4 bytes para aceleração
     diff_count = 0
     total_samples = 0
     for i in range(0, len(bytes1), 4):
-        b1 = 1 if bytes1[i] > threshold else 0
-        b2 = 1 if bytes2[i] > threshold else 0
+        b1 = 1 if bytes1[i] >= threshold else 0
+        b2 = 1 if bytes2[i] >= threshold else 0
         if b1 != b2:
             diff_count += 1
         total_samples += 1
@@ -95,7 +105,7 @@ def frame_diff_ratio(bytes1: bytes, bytes2: bytes, threshold: int = 200) -> floa
 
 def extract_hardsub(video_path: str, output_srt: str, fps: float = 2.0,
                     crop_pct: float = 0.20, threshold: int = 200,
-                    min_white_pixels: int = 80, debug: bool = False):
+                    min_white_pixels: int = 90, debug: bool = False):
     """
     Executa a extração completa de hardsubs via streaming de frames e OCR.
     """
@@ -103,7 +113,6 @@ def extract_hardsub(video_path: str, output_srt: str, fps: float = 2.0,
     width, height, duration = get_video_info(video_path)
     
     crop_h = int(height * crop_pct)
-    # Garante altura par para o ffmpeg
     if crop_h % 2 != 0:
         crop_h += 1
     crop_y = height - crop_h
@@ -112,7 +121,6 @@ def extract_hardsub(video_path: str, output_srt: str, fps: float = 2.0,
     print(f"[*] Faixa de Legenda: Altura={crop_h}px, Y={crop_y} (últimos {int(crop_pct*100)}% da imagem)")
     print(f"[*] Amostragem: {fps} frames/segundo | Limiar de Luminância: >={threshold}")
     
-    # Inicia streaming FFmpeg em escala de cinza raw
     ffmpeg_cmd = [
         "ffmpeg", "-hide_banner", "-loglevel", "error",
         "-i", video_path,
@@ -125,7 +133,7 @@ def extract_hardsub(video_path: str, output_srt: str, fps: float = 2.0,
     proc = subprocess.Popen(ffmpeg_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     frame_bytes_len = width * crop_h
     
-    subtitles = []
+    raw_subtitles = []
     active_sub = None
     last_text_frame_raw = None
     
@@ -142,52 +150,40 @@ def extract_hardsub(video_path: str, output_srt: str, fps: float = 2.0,
             timestamp = frame_idx * sec_per_frame
             frame_idx += 1
             
-            # Conta pixels brancos (> threshold)
-            # Amostra rápida: conta quantos pixels ultrapassam o limiar de brilho
             white_count = sum(1 for b in raw[::2] if b >= threshold) * 2
-            
             has_text = white_count >= min_white_pixels
             
             if not has_text:
                 if active_sub is not None:
-                    # Legenda saiu da tela: fecha a legenda ativa
                     active_sub["end"] = timestamp
-                    subtitles.append(active_sub)
+                    raw_subtitles.append(active_sub)
                     if debug:
                         print(f"[{format_srt_time(active_sub['start'])} --> {format_srt_time(active_sub['end'])}] {repr(active_sub['text'])}")
                     active_sub = None
                     last_text_frame_raw = None
                 continue
             
-            # Há pixels de texto na tela:
             is_same = False
             if active_sub is not None and last_text_frame_raw is not None:
-                # Compara se o frame atual é idêntico/similar ao anterior
                 diff = frame_diff_ratio(raw, last_text_frame_raw, threshold=threshold)
-                if diff < 0.04:  # Menos de 4% de diferença nos pixels da área de texto
+                if diff < 0.08:  # Até 8% de variação entre quadros = mesma fala
                     is_same = True
                     active_sub["end"] = timestamp + sec_per_frame
             
             if is_same:
                 continue
             
-            # Se for uma legenda diferente ou nova:
-            # 1. Fecha a anterior caso aberta
             if active_sub is not None:
                 active_sub["end"] = timestamp
-                subtitles.append(active_sub)
-                if debug:
-                    print(f"[{format_srt_time(active_sub['start'])} --> {format_srt_time(active_sub['end'])}] {repr(active_sub['text'])}")
+                raw_subtitles.append(active_sub)
                 active_sub = None
             
-            # 2. Executa OCR no novo frame
+            # Executa OCR no novo quadro
             img = Image.frombytes("L", (width, crop_h), raw)
-            # Binariza: texto preto (0) sobre fundo branco (255) para máxima precisão do Tesseract
             thresh_img = img.point(lambda p: 0 if p >= threshold else 255)
             
             ocr_text = ""
             if pytesseract:
-                # psm 6: Bloco de texto uniforme (ótimo para 1-2 linhas de legendas)
                 ocr_text = pytesseract.image_to_string(thresh_img, lang="eng", config="--psm 6")
                 ocr_calls += 1
             
@@ -206,31 +202,46 @@ def extract_hardsub(video_path: str, output_srt: str, fps: float = 2.0,
             if frame_idx % int(fps * 60) == 0:
                 elapsed = time.time() - start_wall_time
                 pos_pct = (timestamp / duration * 100) if duration > 0 else 0
-                print(f"[*] Progresso: {pos_pct:5.1f}% ({format_srt_time(timestamp)} / {format_srt_time(duration)}) - {len(subtitles)} legendas, {ocr_calls} OCRs, tempo: {elapsed:.1f}s")
+                print(f"[*] Progresso: {pos_pct:5.1f}% ({format_srt_time(timestamp)} / {format_srt_time(duration)}) - {len(raw_subtitles)} blocos, {ocr_calls} OCRs, tempo: {elapsed:.1f}s")
                 
     finally:
         proc.stdout.close()
         proc.wait()
         
-    # Se restou legenda ativa ao final
     if active_sub is not None:
-        subtitles.append(active_sub)
+        raw_subtitles.append(active_sub)
     
-    print(f"[*] Extração bruta concluída: {len(subtitles)} blocos em {time.time() - start_wall_time:.1f}s")
+    print(f"[*] Extração bruta: {len(raw_subtitles)} blocos brutos em {time.time() - start_wall_time:.1f}s")
     
-    # Pós-processamento e unificação de legendas duplicadas consecutivas
+    # Consolidação inteligente com fusão por similaridade e eliminação de ruídos
     consolidated = []
-    for sub in subtitles:
+    for sub in raw_subtitles:
         txt = sub["text"].strip()
+        dur = sub["end"] - sub["start"]
+        
+        # Ignora ruídos ultracurtos (< 0.5s e menos de 4 letras)
+        if dur < 0.5 and len(txt) < 4:
+            continue
+            
         if not txt:
             continue
-        # Se for continuação exata da anterior com intervalo curto (< 0.6s)
-        if consolidated and consolidated[-1]["text"] == txt and (sub["start"] - consolidated[-1]["end"]) <= 0.6:
-            consolidated[-1]["end"] = sub["end"]
-        else:
-            consolidated.append(sub)
+            
+        if consolidated:
+            prev = consolidated[-1]
+            gap = sub["start"] - prev["end"]
+            sim = text_similarity(prev["text"], txt)
+            
+            # Se a legenda for igual ou muito similar (>= 75%) e o intervalo for menor que 1.2s:
+            if sim >= 0.75 and gap <= 1.2:
+                # Mantém o texto mais longo/completo e estende o fim
+                if len(txt) > len(prev["text"]):
+                    prev["text"] = txt
+                prev["end"] = sub["end"]
+                continue
+                
+        consolidated.append(sub)
     
-    # Grava no formato .srt
+    # Formata e grava o arquivo SRT
     with open(output_srt, "w", encoding="utf-8") as f:
         for idx, sub in enumerate(consolidated, 1):
             start_str = format_srt_time(sub["start"])
@@ -238,8 +249,8 @@ def extract_hardsub(video_path: str, output_srt: str, fps: float = 2.0,
             f.write(f"{idx}\n{start_str} --> {end_str}\n{sub['text']}\n\n")
             
     total_time = time.time() - start_wall_time
-    print(f"[✓] Sucesso! Gerado arquivo SRT com {len(consolidated)} legendas: {output_srt}")
-    print(f"[✓] Tempo total de processamento: {total_time:.1f}s ({total_time/60:.1f} min)")
+    print(f"[✓] Sucesso! Gerado arquivo SRT consolidado com {len(consolidated)} legendas: {output_srt}")
+    print(f"[✓] Tempo total de OCR: {total_time:.1f}s ({total_time/60:.1f} min)")
 
 
 def main():
