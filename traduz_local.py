@@ -13,7 +13,12 @@ from pathlib import Path
 
 API_URL = os.environ.get("LOCAL_LLM_URL", "http://127.0.0.1:8080/v1/chat/completions")
 MODEL = os.environ.get("LOCAL_LLM_MODEL", "qwen3-8b-local")
-TRANSLATION_CACHE_VERSION = "2"
+TRANSLATION_CACHE_VERSION = "3"
+
+
+class InvalidModelResponse(RuntimeError):
+    """Resposta do servidor/modelo inutilizável; não deve ser repetida às cegas."""
+
 
 SYSTEM_PROMPT = """Você é tradutor profissional de diálogos de séries turcas para português brasileiro.
 Traduza com precisão, naturalidade e concisão, mantendo o tom e as relações entre personagens.
@@ -48,6 +53,49 @@ def parse_srt(content: str) -> list[dict]:
 
 
 def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
+    is_translategemma = MODEL.startswith("translategemma")
+    if is_translategemma:
+        # TranslateGemma is a translation model, not a general JSON-following
+        # chat model: send only source text and associate output with IDs here.
+        translated = {}
+        for item in batch:
+            payload = {
+                "model": MODEL,
+                "temperature": 0,
+                "max_tokens": 512,
+                "messages": [{"role": "user", "content": item["text"]}],
+                "chat_template_kwargs": {
+                    "source_lang_code": "tr",
+                    "target_lang_code": "pt-BR",
+                },
+            }
+            req = urllib.request.Request(
+                API_URL,
+                data=json.dumps(payload, ensure_ascii=False).encode(),
+                headers={"Content-Type": "application/json"},
+                method="POST",
+            )
+            with urllib.request.urlopen(req, timeout=600) as response:
+                response_body = response.read().decode("utf-8", errors="replace")
+            try:
+                data = json.loads(response_body)
+                choice = data["choices"][0]
+                text = choice["message"]["content"].strip()
+            except (json.JSONDecodeError, KeyError, IndexError, TypeError, AttributeError) as exc:
+                excerpt = response_body[:500].replace("\n", "\\n") or "<resposta vazia>"
+                raise InvalidModelResponse(
+                    f"Resposta inválida do llama-server para a fala {item['id']}: {excerpt}"
+                ) from exc
+            if not text:
+                if choice.get("finish_reason") == "length":
+                    raise ValueError(f"TranslateGemma truncou a fala {item['id']} no limite de tokens.")
+                raise InvalidModelResponse(
+                    f"TranslateGemma retornou texto vazio para a fala {item['id']} "
+                    f"(finish_reason={choice.get('finish_reason')!r})."
+                )
+            translated[item["id"]] = text
+        return translated
+
     parts = []
     if context:
         parts.append("CONTEXTO ANTERIOR (somente referência; não traduza novamente):\n" + json.dumps(
@@ -57,40 +105,49 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
         [{"id": x["id"], "text": x["text"]} for x in batch], ensure_ascii=False
     ))
     user_prompt = "\n\n".join(parts)
-    is_translategemma = MODEL.startswith("translategemma")
-    if is_translategemma:
-        # TranslateGemma accepts a single user message with source/target language
-        # metadata in llama.cpp's chat template; it does not use a system role.
-        subtitle_rules = """Traduza diálogos de Uzak Şehir do turco para português brasileiro coloquial, natural e conciso.
-Contexto: Alya é mãe de Deniz e esposa de Boran, que está vivo em coma após ser dado como morto. Cihan é irmão de Boran e chefe dos Albora; Sadakat é a matriarca; Kaya é irmão de Cihan e noivo de İpek.
-Preserve o sentido, o tom, as relações e o gênero indicado pelo contexto. O pronome turco "o/onun/ona" não revela gênero. "Gelin" pode ser nora ou noiva conforme quem fala; "damat" pode ser genro ou noivo. Adapte "abi/abla/yenge/ağa/hanım" ao contexto.
-Não invente fatos. Preserve cada ID como uma fala independente, sem omitir, juntar ou reordenar. Responda somente com JSON válido no formato {\"subtitles\":[{\"id\":1,\"text\":\"tradução\"}]} e inclua exatamente todos os IDs das falas a traduzir."""
-        user_prompt = subtitle_rules + "\n\n" + user_prompt
-
     payload = {
         "model": MODEL,
         "temperature": 0.2,
         "max_tokens": 2048,
-        "messages": ([
-            {"role": "user", "content": user_prompt},
-        ] if is_translategemma else [
+        "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt + "\n/no_think"},
-        ]),
+        ],
     }
-    if is_translategemma:
-        payload["chat_template_kwargs"] = {
-            "source_lang_code": "tr",
-            "target_lang_code": "pt-BR",
-        }
-    else:
-        payload["response_format"] = {"type": "json_object"}
+    payload["response_format"] = {"type": "json_object"}
     req = urllib.request.Request(API_URL, data=json.dumps(payload, ensure_ascii=False).encode(), headers={"Content-Type": "application/json"}, method="POST")
     with urllib.request.urlopen(req, timeout=600) as response:
-        data = json.loads(response.read().decode("utf-8"))
-    text = data["choices"][0]["message"]["content"].strip()
+        response_body = response.read().decode("utf-8", errors="replace")
+    try:
+        data = json.loads(response_body)
+    except json.JSONDecodeError as exc:
+        excerpt = response_body[:500].replace("\n", "\\n") or "<resposta vazia>"
+        raise InvalidModelResponse(f"O servidor local retornou HTTP 200 sem JSON válido na resposta da API: {excerpt}") from exc
+    try:
+        choice = data["choices"][0]
+        text = choice["message"]["content"].strip()
+    except (KeyError, IndexError, TypeError, AttributeError) as exc:
+        raise InvalidModelResponse(f"Resposta da API sem choices[0].message.content: {str(data)[:500]}") from exc
     text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.DOTALL).strip()
-    result = json.loads(text)
+    try:
+        result = json.loads(text)
+    except json.JSONDecodeError as exc:
+        # Alguns modelos acrescentam uma frase antes/depois do objeto, mesmo
+        # quando o prompt pede somente JSON. Tenta recuperar o objeto completo.
+        start, end = text.find("{"), text.rfind("}")
+        if start >= 0 and end > start:
+            try:
+                result = json.loads(text[start:end + 1])
+            except json.JSONDecodeError:
+                excerpt = text[:500].replace("\n", "\\n") or "<conteúdo vazio>"
+                if choice.get("finish_reason") == "length":
+                    raise ValueError(f"Saída JSON truncada pelo limite de tokens: {excerpt}") from exc
+                raise InvalidModelResponse(f"O modelo não retornou JSON válido; conteúdo recebido: {excerpt}") from exc
+        else:
+            excerpt = text[:500].replace("\n", "\\n") or "<conteúdo vazio>"
+            if choice.get("finish_reason") == "length":
+                raise ValueError(f"Saída truncada pelo limite de tokens: {excerpt}") from exc
+            raise InvalidModelResponse(f"O modelo não retornou JSON; conteúdo recebido: {excerpt}") from exc
     subtitles = result.get("subtitles") if isinstance(result, dict) else None
     if not isinstance(subtitles, list):
         raise ValueError("O servidor local não retornou a lista 'subtitles'.")
@@ -209,7 +266,7 @@ def main() -> None:
 
     checkpoint = output.with_suffix(".ckpt.json")
     translation_fingerprint = hashlib.sha256(
-        f"{TRANSLATION_CACHE_VERSION}\0{MODEL}\0{args.batch_size}\0{SYSTEM_PROMPT}\0temperature=0.2;max_tokens=2048;json=v1".encode("utf-8")
+        f"{TRANSLATION_CACHE_VERSION}\0{MODEL}\0{args.batch_size}\0{SYSTEM_PROMPT}\0temperature=0.2;max_tokens=2048;json=v1;translategemma-plain-text-v1".encode("utf-8")
     ).hexdigest()
     saved = {}
     if checkpoint.is_file():
