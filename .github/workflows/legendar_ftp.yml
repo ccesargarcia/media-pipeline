@@ -8,6 +8,15 @@ on:
         description: 'Nome do arquivo de vídeo (ex: Uzak_Sehir_-_Episode_31.mp4)'
         required: true
         type: string
+      season:
+        description: 'Temporada'
+        required: true
+        type: choice
+        options:
+          - 'Segunda Temporada'
+          - 'Terceira Temporada'
+          - 'Primeira Temporada'
+        default: 'Segunda Temporada'
       lang:
         description: 'Idioma do áudio original (ex: tr, en, auto)'
         required: false
@@ -17,14 +26,14 @@ on:
         required: true
         type: choice
         options:
+          - 'local'
           - 'gemini'
           - 'groq'
           - 'openrouter'
-          - 'local'
-        default: 'gemini'
+        default: 'local'
 
 jobs:
-  transcribe-and-translate:
+  prepare_audio:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
@@ -33,7 +42,79 @@ jobs:
       - name: Instalar Dependências do Sistema
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg cmake build-essential python3 curl libomp-dev
+          sudo apt-get install -y ffmpeg python3 curl
+
+      - name: Validar Parâmetros e Caminhos
+        env:
+          VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
+          SEASON_INPUT: ${{ inputs.season }}
+        run: |
+          VIDEO_NAME="$VIDEO_NAME_INPUT"
+          case "$VIDEO_NAME" in
+            *.mp4) ;;
+            *) echo "Nome de vídeo inválido: esperado arquivo .mp4" >&2; exit 1 ;;
+          esac
+          if [[ ! "$VIDEO_NAME" =~ ^[A-Za-z0-9_.-]+\.mp4$ ]]; then
+            echo "O nome do vídeo contém caracteres não permitidos." >&2
+            exit 1
+          fi
+          if [ "$VIDEO_NAME" != "$(basename "$VIDEO_NAME")" ]; then
+            echo "Informe somente o nome do arquivo, sem diretórios." >&2
+            exit 1
+          fi
+          STEM="${VIDEO_NAME%.*}"
+          FTP_BASE_DIR="/G/Series/Longe demais - $SEASON_INPUT"
+          echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> "$GITHUB_ENV"
+          echo "VIDEO_NAME=$VIDEO_NAME" >> "$GITHUB_ENV"
+          echo "STEM=$STEM" >> "$GITHUB_ENV"
+
+      - name: Baixar vídeo do FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
+          echo "Baixando vídeo do FTP com reconexão automática..."
+          curl -# --fail --ftp-pasv \
+            --retry 5 --retry-delay 5 --retry-connrefused \
+            -C - \
+            -u "$FTP_USER:$FTP_PASSWORD" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
+            -o input_media
+
+      - name: Extrair áudio e Fatiar em 4 partes por Silêncio
+        run: |
+          ffmpeg -hide_banner -loglevel warning -stats -threads $(nproc) -y \
+            -i input_media -vn -acodec pcm_s16le -ar 16000 -ac 1 input.wav
+          rm -f input_media
+          python3 dividir_audio.py input.wav --parts 4 --output-dir audio_parts
+          rm -f input.wav
+
+      - name: Compartilhar Partes de Áudio
+        uses: actions/upload-artifact@v4
+        with:
+          name: audio-parts
+          path: audio_parts/
+          retention-days: 1
+
+  transcribe_part:
+    needs: prepare_audio
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        part: [0, 1, 2, 3]
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar Dependências do Sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential curl libomp-dev
 
       - name: Cache do Whisper.cpp e Modelos GGML
         id: cache-whisper
@@ -55,105 +136,122 @@ jobs:
           sh ./models/download-ggml-model.sh large-v3-turbo-q8_0
           sh ./models/download-vad-model.sh silero-v6.2.0
 
-      - name: Configurar Caminhos e Variáveis
-        env:
-          VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
-        run: |
-          FTP_BASE_DIR="/G/Series/Longe demais - Segunda Temporada"
-          VIDEO_NAME="$VIDEO_NAME_INPUT"
-          case "$VIDEO_NAME" in
-            *.mp4) ;;
-            *) echo "Nome de vídeo inválido: esperado arquivo .mp4" >&2; exit 1 ;;
-          esac
-          if [[ ! "$VIDEO_NAME" =~ ^[A-Za-z0-9_.-]+\.mp4$ ]]; then
-            echo "O nome do vídeo contém caracteres não permitidos." >&2
-            exit 1
-          fi
-          if [ "$VIDEO_NAME" != "$(basename "$VIDEO_NAME")" ]; then
-            echo "Informe somente o nome do arquivo, sem diretórios." >&2
-            exit 1
-          fi
-          STEM="${VIDEO_NAME%.*}"
-          
-          echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> $GITHUB_ENV
-          echo "VIDEO_NAME=$VIDEO_NAME" >> $GITHUB_ENV
-          echo "STEM=$STEM" >> $GITHUB_ENV
+      - name: Baixar Parte de Áudio
+        uses: actions/download-artifact@v4
+        with:
+          name: audio-parts
+          path: audio_parts
 
-      - name: Baixar vídeo do FTP (Com Barra de Progresso)
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_PORT: ${{ secrets.FTP_PORT }}
-          FTP_USER: ${{ secrets.FTP_USER }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
-          
-          echo "Baixando vídeo do FTP com barra de progresso e reconexão automática..."
-          curl -# --fail --ftp-pasv \
-            --retry 5 --retry-delay 5 --retry-connrefused \
-            -C - \
-            -u "$FTP_USER:$FTP_PASSWORD" \
-            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
-            -o input_media
-
-      - name: Extrair áudio em 16kHz Mono (FFmpeg Multi-thread)
-        run: |
-          ffmpeg -hide_banner -loglevel warning -stats -threads $(nproc) -y \
-            -i input_media -vn -acodec pcm_s16le -ar 16000 -ac 1 input.wav
-          rm -f input_media  # libera espaço no runner
-
-      - name: Transcrever com Whisper Large-v3-Turbo + Silero VAD
+      - name: Transcrever Parte ${{ matrix.part }} com Whisper Large-v3-Turbo
         run: |
           NTHREADS=$(nproc)
-          echo "Rodando Whisper com $NTHREADS núcleos..."
+          echo "Transcrevendo parte ${{ matrix.part }} com $NTHREADS núcleos..."
           ./whisper.cpp/build/bin/whisper-cli \
             -m ./whisper.cpp/models/ggml-large-v3-turbo-q8_0.bin \
             -vm ./whisper.cpp/models/ggml-silero-v6.2.0.bin \
             --vad \
-            -f input.wav \
+            -f "audio_parts/part_${{ matrix.part }}.wav" \
             -l ${{ inputs.lang }} \
             -t $NTHREADS \
             -sns \
             -mc 0 \
             -osrt \
-            -of "${{ env.STEM }}"
+            -of "part_${{ matrix.part }}"
 
-      - name: Salvar Backup da Transcrição Original no FTP (Imediato)
-        if: always()
+      - name: Salvar Transcrição Parcial
+        uses: actions/upload-artifact@v4
+        with:
+          name: whisper-part-${{ matrix.part }}
+          path: part_${{ matrix.part }}.srt
+          retention-days: 1
+
+  merge_transcription:
+    needs: [prepare_audio, transcribe_part]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Baixar Partes Transcritas
+        uses: actions/download-artifact@v4
+        with:
+          pattern: whisper-part-*
+          path: whisper_parts
+          merge-multiple: true
+
+      - name: Baixar Metadados de Áudio
+        uses: actions/download-artifact@v4
+        with:
+          name: audio-parts
+          path: audio_parts
+
+      - name: Mesclar e Normalizar Transcrição Completa
         env:
+          VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
+          SEASON_INPUT: ${{ inputs.season }}
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_PORT: ${{ secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
+          STEM="${VIDEO_NAME_INPUT%.*}"
+          echo "STEM=$STEM" >> "$GITHUB_ENV"
+          FTP_BASE_DIR="/G/Series/Longe demais - $SEASON_INPUT"
+          echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> "$GITHUB_ENV"
+
+          python3 mesclar_transcricao.py audio_parts/offsets.json "$STEM.srt" whisper_parts/part_*.srt
+          python3 normalizar_timings.py "$STEM.srt" "$STEM.srt"
+          cp "$STEM.srt" input.srt
+
+          echo "Enviando arquivo original .srt para o FTP..."
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
-          if [ -f "${{ env.STEM }}.srt" ]; then
-            echo "Enviando arquivo original .srt para o FTP..."
-            curl -# --fail --ftp-pasv \
-              --retry 5 --retry-delay 5 --retry-connrefused \
-              -u "$FTP_USER:$FTP_PASSWORD" \
-              -T "${{ env.STEM }}.srt" \
-              "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/" || true
-          fi
+          curl -# --fail --ftp-pasv \
+            --retry 5 --retry-delay 5 --retry-connrefused \
+            -u "$FTP_USER:$FTP_PASSWORD" \
+            -T "$STEM.srt" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/" || true
+
+      - name: Compartilhar SRT Unificado
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-srt-input
+          path: input.srt
+          retention-days: 1
+
+  prepare_local:
+    if: ${{ inputs.translator == 'local' }}
+    needs: merge_transcription
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
       - name: Cache do modelo local Qwen3-8B Q4
-        if: inputs.translator == 'local'
         uses: actions/cache@v4
         with:
           path: models/Qwen3-8B-Q4_K_M.gguf
           key: qwen3-8b-q4-k-m-v1
 
       - name: Cache do servidor llama.cpp
-        if: inputs.translator == 'local'
         uses: actions/cache@v4
         with:
-          path: llama.cpp/build/bin/llama-server
-          key: llama-server-ubuntu-cpu-v1
+          path: llama.cpp/build
+          key: llama-build-ubuntu-cpu-v2
 
-      - name: Preparar servidor local llama.cpp
-        if: inputs.translator == 'local'
+      - name: Preparar modelo e servidor para os runners
         run: |
-          rm -f input.wav
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential
           mkdir -p models
           if [ ! -s models/Qwen3-8B-Q4_K_M.gguf ]; then
             curl --fail --location --retry 4 --retry-delay 3 \
@@ -165,35 +263,190 @@ jobs:
             cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
+
+  translate_local:
+    if: ${{ inputs.translator == 'local' }}
+    needs: [merge_transcription, prepare_local]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        part: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Restaurar cache do modelo
+        uses: actions/cache@v4
+        with:
+          path: models/Qwen3-8B-Q4_K_M.gguf
+          key: qwen3-8b-q4-k-m-v1
+
+      - name: Restaurar cache do llama.cpp
+        uses: actions/cache@v4
+        with:
+          path: llama.cpp/build
+          key: llama-build-ubuntu-cpu-v2
+
+      - name: Baixar SRT de entrada
+        uses: actions/download-artifact@v4
+        with:
+          name: local-srt-input
+
+      - name: Iniciar modelo local neste runner
+        run: |
+          if [ ! -x llama.cpp/build/bin/llama-server ]; then
+            echo "llama-server não foi encontrado no cache do build." >&2
+            find llama.cpp/build -maxdepth 3 -type f -print 2>/dev/null | head -50 || true
+            exit 1
+          fi
           nohup llama.cpp/build/bin/llama-server \
             -m models/Qwen3-8B-Q4_K_M.gguf \
             --alias qwen3-8b-local --host 127.0.0.1 --port 8080 \
-            --ctx-size 4096 --threads 4 --parallel 1 --reasoning off --jinja \
+            --ctx-size 2048 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \
             > llama-server.log 2>&1 &
-          curl --fail --silent --show-error --retry 60 --retry-delay 2 --retry-connrefused \
-            http://127.0.0.1:8080/health
+          SERVER_PID=$!
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
+              echo "llama-server pronto (PID $SERVER_PID)."
+              exit 0
+            fi
+            if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+              echo "llama-server encerrou durante a inicialização. Log:" >&2
+              cat llama-server.log >&2
+              exit 1
+            fi
+            sleep 2
+          done
+          echo "Timeout aguardando llama-server. Log:" >&2
+          cat llama-server.log >&2
+          exit 1
+
+      - name: Traduzir parte ${{ matrix.part }} de 8
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
+            input.srt "part-${{ matrix.part }}.json"
+
+      - name: Salvar parte traduzida
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-part-${{ matrix.part }}
+          path: part-${{ matrix.part }}.json
+          retention-days: 1
+
+  finalize_local:
+    if: ${{ inputs.translator == 'local' }}
+    needs: translate_local
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Baixar arquivo SRT original
+        uses: actions/download-artifact@v4
+        with:
+          name: local-srt-input
+
+      - name: Baixar as partes traduzidas
+        uses: actions/download-artifact@v4
+        with:
+          pattern: local-part-*
+          path: parts
+          merge-multiple: true
+
+      - name: Reunir tradução e gerar .ass
+        env:
+          VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
+          SEASON_INPUT: ${{ inputs.season }}
+        run: |
+          STEM="${VIDEO_NAME_INPUT%.*}"
+          echo "STEM=$STEM" >> "$GITHUB_ENV"
+          FTP_BASE_DIR="/G/Series/Longe demais - $SEASON_INPUT"
+          echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> "$GITHUB_ENV"
+
+          python3 mesclar_traducao_local.py input.srt "$STEM.pt-BR.srt" parts/part-*.json
+          python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
+
+      - name: Enviar legendas traduzidas de volta para o FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
+          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+            -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.pt-BR.srt" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+            -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.ass" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+
+      - name: Salvar artefatos no GitHub
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legendas-${{ inputs.video_filename }}
+          path: |
+            *.pt-BR.srt
+            *.ass
+
+  translate_api:
+    if: ${{ inputs.translator != 'local' }}
+    needs: merge_transcription
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Baixar SRT de entrada
+        uses: actions/download-artifact@v4
+        with:
+          name: local-srt-input
 
       - name: Traduzir para PT-BR (${{ inputs.translator }}) e Gerar .ass
         env:
           PYTHONUNBUFFERED: "1"
+          VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
+          SEASON_INPUT: ${{ inputs.season }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY || secrets.GROK_API_KEY }}
         run: |
+          STEM="${VIDEO_NAME_INPUT%.*}"
+          echo "STEM=$STEM" >> "$GITHUB_ENV"
+          FTP_BASE_DIR="/G/Series/Longe demais - $SEASON_INPUT"
+          echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> "$GITHUB_ENV"
+
           if [ "${{ inputs.translator }}" = "groq" ]; then
             echo "Traduzindo via Groq..."
-            python3 traduz_groq.py "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_groq.py input.srt "$STEM.pt-BR.srt"
           elif [ "${{ inputs.translator }}" = "openrouter" ]; then
             echo "Traduzindo via OpenRouter..."
-            python3 traduz_openrouter.py "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
-          elif [ "${{ inputs.translator }}" = "local" ]; then
-            echo "Traduzindo com Qwen3-8B local (llama.cpp)..."
-            python3 traduz_local.py -b 8 "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_openrouter.py input.srt "$STEM.pt-BR.srt"
           else
             echo "Traduzindo via Google Gemini..."
-            python3 traduz_gemini.py -b 65 "${{ env.STEM }}.srt" "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_gemini.py -b 65 input.srt "$STEM.pt-BR.srt"
           fi
-          python3 srt_para_ass.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.ass"
+          python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
 
       - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
         env:
@@ -203,25 +456,24 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
-          
           echo "Enviando legendas geradas de volta para o FTP..."
           curl -# --fail --ftp-pasv \
             --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" \
-            -T "${{ env.STEM }}.pt-BR.srt" \
+            -T "$STEM.pt-BR.srt" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
 
           curl -# --fail --ftp-pasv \
             --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" \
-            -T "${{ env.STEM }}.ass" \
+            -T "$STEM.ass" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
 
-      - name: Salvar Legendas como Artifact de Backup no GitHub
+      - name: Salvar artefatos no GitHub
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: legendas-${{ env.STEM }}
+          name: legendas-${{ inputs.video_filename }}
           path: |
-            ${{ env.STEM }}*.srt
-            ${{ env.STEM }}*.ass
+            *.pt-BR.srt
+            *.ass
