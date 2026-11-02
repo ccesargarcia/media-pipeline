@@ -32,6 +32,9 @@ on:
           - 'openrouter'
         default: 'local'
 
+env:
+  FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+
 jobs:
   prepare_audio:
     runs-on: ubuntu-latest
@@ -193,15 +196,15 @@ jobs:
       - name: Mesclar e Normalizar Transcrição Completa
         env:
           VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
-          SEASON_INPUT: ${{ inputs.season }}
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_PORT: ${{ secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          STEM="${VIDEO_NAME_INPUT%.*}"
+          export STEM="${VIDEO_NAME_INPUT%.*}"
           echo "STEM=$STEM" >> "$GITHUB_ENV"
-          FTP_BASE_DIR="/G/Series/Longe demais - $SEASON_INPUT"
+          export FTP_BASE_DIR
           echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> "$GITHUB_ENV"
 
           python3 mesclar_transcricao.py audio_parts/offsets.json "$STEM.srt" whisper_parts/part_*.srt
@@ -382,6 +385,7 @@ jobs:
 
       - name: Enviar legendas traduzidas de volta para o FTP
         env:
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_PORT: ${{ secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
@@ -450,6 +454,7 @@ jobs:
 
       - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
         env:
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_PORT: ${{ secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}

@@ -29,6 +29,9 @@ on:
           - 'local'
         default: 'gemini'
 
+env:
+  FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+
 jobs:
   prepare_local:
     if: ${{ inputs.translator == 'local' }}
@@ -338,6 +341,7 @@ jobs:
 
       - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
         env:
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_PORT: ${{ secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
