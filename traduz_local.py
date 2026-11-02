@@ -82,6 +82,58 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
     return translated
 
 
+def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> dict[int, str]:
+    """Traduz um lote com divisão dinâmica (split) e fallback individual para nunca abortar."""
+    # 1. Tenta traduzir o lote inteiro até 2 vezes
+    for attempt in range(1, 3):
+        try:
+            return request_batch(context, batch)
+        except Exception as exc:
+            print(f"Tentativa {attempt}/2 com lote de {len(batch)} falas falhou: {exc}", file=sys.stderr, flush=True)
+            time.sleep(attempt * 2)
+
+    # 2. Se o lote tem mais de 3 falas, subdivide na metade
+    if len(batch) > 3:
+        mid = len(batch) // 2
+        print(f"Subdividindo lote de {len(batch)} falas em dois sublotes ({mid} e {len(batch) - mid}) para contornar o erro...", flush=True)
+        part1 = batch[:mid]
+        part2 = batch[mid:]
+        res1 = translate_batch_with_fallbacks(context, part1)
+        sub_context = list(context)
+        for item in part1:
+            sub_context.append({"id": item["id"], "text": item["text"], "translation": res1.get(item["id"], "")})
+        res2 = translate_batch_with_fallbacks(sub_context[-4:], part2)
+        return {**res1, **res2}
+
+    # 3. Lote pequeno (<= 3 falas): traduz cada fala individualmente
+    print(f"Processando {len(batch)} fala(s) individualmente para garantir integridade dos IDs...", flush=True)
+    results = {}
+    curr_context = list(context)
+    for item in batch:
+        item_id = item["id"]
+        translated_text = None
+        for attempt in range(1, 4):
+            try:
+                single_res = request_batch(curr_context[-4:], [item])
+                val = single_res.get(item_id, "").strip()
+                if val:
+                    translated_text = val
+                    break
+            except Exception as exc:
+                print(f"Tentativa {attempt}/3 para fala individual {item_id} falhou: {exc}", file=sys.stderr, flush=True)
+                time.sleep(attempt)
+
+        # 4. Fallback de emergência: se o LLM falhar ou recusar a fala, mantém o texto original
+        if not translated_text:
+            print(f"[AVISO] Fala {item_id} manteve texto original para evitar interrupção do pipeline.", file=sys.stderr, flush=True)
+            translated_text = item["text"]
+
+        results[item_id] = translated_text
+        curr_context.append({"id": item["id"], "text": item["text"], "translation": translated_text})
+
+    return results
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Traduz SRT com modelo local via llama.cpp.")
     parser.add_argument("entrada")
@@ -132,23 +184,12 @@ def main() -> None:
             continue
         context = items[max(0, start - 4):start]
         print(f"Lote {start // args.batch_size + 1}/{(len(items) + args.batch_size - 1) // args.batch_size}: falas {start + 1}-{start + len(batch)}", flush=True)
-        last_error = None
-        for attempt in range(1, 4):
-            try:
-                translations = request_batch(context, batch)
-                for item in batch:
-                    item["translation"] = translations[item["id"]]
-                saved.update(translations)
-                checkpoint.parent.mkdir(parents=True, exist_ok=True)
-                checkpoint.write_text(json.dumps({"source_sha256": source_hash, "translations": saved}, ensure_ascii=False), encoding="utf-8")
-                break
-            except (urllib.error.URLError, TimeoutError, ValueError, KeyError, json.JSONDecodeError) as exc:
-                last_error = exc
-                print(f"Tentativa {attempt}/3 falhou: {exc}", file=sys.stderr, flush=True)
-                if attempt < 3:
-                    time.sleep(attempt * 2)
-        else:
-            raise RuntimeError(f"Falha ao traduzir o lote {start // args.batch_size + 1}: {last_error}") from last_error
+        translations = translate_batch_with_fallbacks(context, batch)
+        for item in batch:
+            item["translation"] = translations.get(item["id"], item["text"])
+        saved.update(translations)
+        checkpoint.parent.mkdir(parents=True, exist_ok=True)
+        checkpoint.write_text(json.dumps({"source_sha256": source_hash, "translations": saved}, ensure_ascii=False), encoding="utf-8")
 
     output.parent.mkdir(parents=True, exist_ok=True)
     if args.partial_json:

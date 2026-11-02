@@ -163,12 +163,27 @@ jobs:
           cat llama-server.log >&2
           exit 1
 
+      - name: Restaurar checkpoint de tradução (se houver)
+        uses: actions/cache/restore@v4
+        with:
+          path: part-${{ matrix.part }}.ckpt.json
+          key: ckpt-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
+          restore-keys: |
+            ckpt-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-
+
       - name: Traduzir parte ${{ matrix.part }} de 8
         env:
           PYTHONUNBUFFERED: "1"
         run: |
           python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
             input.srt "part-${{ matrix.part }}.json"
+
+      - name: Salvar checkpoint de tradução
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: part-${{ matrix.part }}.ckpt.json
+          key: ckpt-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
 
       - name: Salvar parte traduzida
         uses: actions/upload-artifact@v4
