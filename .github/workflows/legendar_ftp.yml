@@ -338,6 +338,20 @@ jobs:
         with:
           name: local-srt-input
 
+      - name: Tunar Sistema e Recursos do Runner
+        run: |
+          echo "Otimizando memória e prioridade do runner..."
+          sudo systemctl stop docker mysql containerd 2>/dev/null || true
+          if [ ! -f /swapfile_tune ]; then
+            sudo fallocate -l 8G /swapfile_tune || sudo dd if=/dev/zero of=/swapfile_tune bs=1M count=8192
+            sudo chmod 600 /swapfile_tune
+            sudo mkswap /swapfile_tune
+            sudo swapon /swapfile_tune
+          fi
+          sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
+          sudo sysctl -w vm.swappiness=10
+          free -h
+
       - name: Iniciar modelo local neste runner
         run: |
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
@@ -345,7 +359,7 @@ jobs:
             find llama.cpp/build -maxdepth 3 -type f -print 2>/dev/null | head -50 || true
             exit 1
           fi
-          nohup llama.cpp/build/bin/llama-server \
+          taskset -c 0,1 nice -n -20 nohup llama.cpp/build/bin/llama-server \
             -m models/Qwen3-8B-Q4_K_M.gguf \
             --alias qwen3-8b-local --host 127.0.0.1 --port 8080 \
             --ctx-size 2048 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \

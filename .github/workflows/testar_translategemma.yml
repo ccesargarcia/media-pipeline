@@ -129,7 +129,9 @@ jobs:
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
             git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
-            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release \
+              -DGGML_NATIVE=OFF -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON -DGGML_BMI2=ON \
+              -DLLAMA_BUILD_SERVER=ON -DLLAMA_BUILD_EXAMPLES=OFF -DLLAMA_BUILD_TESTS=OFF -DLLAMA_CURL=OFF
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
 
@@ -163,17 +165,17 @@ jobs:
             "gemma-3-4b")
               echo "MODEL_FILE=models/gemma-3-4b-it-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=gemma-3-4b-it-local" >> "$GITHUB_ENV"
-              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --jinja" >> "$GITHUB_ENV"
+              echo "SERVER_ARGS=--ctx-size 3072 --threads 2 --threads-batch 2 --parallel 1 --jinja" >> "$GITHUB_ENV"
               ;;
             "aya-23-8b")
               echo "MODEL_FILE=models/aya-23-8B-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=aya-23-8b-local" >> "$GITHUB_ENV"
-              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --chat-template command-r" >> "$GITHUB_ENV"
+              echo "SERVER_ARGS=--ctx-size 3072 --threads 2 --threads-batch 2 --parallel 1 --chat-template command-r" >> "$GITHUB_ENV"
               ;;
             "llama-3.1-8b")
               echo "MODEL_FILE=models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=llama-3.1-8b-local" >> "$GITHUB_ENV"
-              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --jinja" >> "$GITHUB_ENV"
+              echo "SERVER_ARGS=--ctx-size 3072 --threads 2 --threads-batch 2 --parallel 1 --jinja" >> "$GITHUB_ENV"
               ;;
             "qwen3-8b")
               echo "MODEL_FILE=models/Qwen3-8B-Q4_K_M.gguf" >> "$GITHUB_ENV"
@@ -207,13 +209,27 @@ jobs:
         with:
           name: test-srt-input
 
+      - name: Tunar Sistema e Recursos do Runner
+        run: |
+          echo "Otimizando memória e prioridade do runner..."
+          sudo systemctl stop docker mysql containerd 2>/dev/null || true
+          if [ ! -f /swapfile_tune ]; then
+            sudo fallocate -l 8G /swapfile_tune || sudo dd if=/dev/zero of=/swapfile_tune bs=1M count=8192
+            sudo chmod 600 /swapfile_tune
+            sudo mkswap /swapfile_tune
+            sudo swapon /swapfile_tune
+          fi
+          sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
+          sudo sysctl -w vm.swappiness=10
+          free -h
+
       - name: Iniciar ${{ inputs.model }} neste runner
         run: |
           if [ ! -s "$MODEL_FILE" ] || [ ! -x llama.cpp/build/bin/llama-server ]; then
             echo "Modelo ou llama-server não foi encontrado no cache." >&2
             exit 1
           fi
-          nohup llama.cpp/build/bin/llama-server \
+          taskset -c 0,1 nice -n -20 nohup llama.cpp/build/bin/llama-server \
             -m "$MODEL_FILE" \
             --alias "$MODEL_ALIAS" --host 127.0.0.1 --port 8080 \
             $SERVER_ARGS \
