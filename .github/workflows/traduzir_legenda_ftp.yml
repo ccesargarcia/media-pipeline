@@ -50,7 +50,7 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          SRT_NAME="$SRT_NAME_INPUT"
+          export SRT_NAME="$SRT_NAME_INPUT"
           if [ "$SRT_NAME" != "$(basename "$SRT_NAME")" ] || [[ ! "$SRT_NAME" =~ ^[A-Za-z0-9_.-]+\.srt$ ]]; then
             echo "Informe somente o nome de um arquivo .srt válido." >&2
             exit 1
