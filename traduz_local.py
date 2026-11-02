@@ -52,7 +52,7 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
     payload = {
         "model": MODEL,
         "temperature": 0.2,
-        "max_tokens": 1536,
+        "max_tokens": 2048,
         "response_format": {"type": "json_object"},
         "messages": [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -86,7 +86,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Traduz SRT com modelo local via llama.cpp.")
     parser.add_argument("entrada")
     parser.add_argument("saida", nargs="?")
-    parser.add_argument("-b", "--batch-size", type=int, default=8)
+    parser.add_argument("-b", "--batch-size", type=int, default=12)
     parser.add_argument("--part-index", type=int, help="Índice da parte distribuída (começa em 0).")
     parser.add_argument("--parts", type=int, default=1, help="Número total de partes do arquivo.")
     parser.add_argument("--partial-json", action="store_true", help="Grava somente as traduções desta parte em JSON.")

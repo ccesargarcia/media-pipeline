@@ -73,7 +73,7 @@ jobs:
           path: llama.cpp/build
           key: llama-build-ubuntu-cpu-v2
 
-      - name: Preparar modelo e servidor para os quatro runners
+      - name: Preparar modelo e servidor para os runners
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake build-essential
@@ -102,9 +102,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 8
       matrix:
-        part: [0, 1, 2, 3]
+        part: [0, 1, 2, 3, 4, 5, 6, 7]
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -141,7 +141,7 @@ jobs:
           nohup llama.cpp/build/bin/llama-server \
             -m models/Qwen3-8B-Q4_K_M.gguf \
             --alias qwen3-8b-local --host 127.0.0.1 --port 8080 \
-            --ctx-size 4096 --threads 2 --parallel 1 --reasoning off --jinja \
+            --ctx-size 2048 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \
             > llama-server.log 2>&1 &
           SERVER_PID=$!
           for attempt in $(seq 1 60); do
@@ -160,11 +160,11 @@ jobs:
           cat llama-server.log >&2
           exit 1
 
-      - name: Traduzir parte ${{ matrix.part }} de 4
+      - name: Traduzir parte ${{ matrix.part }} de 8
         env:
           PYTHONUNBUFFERED: "1"
         run: |
-          python3 traduz_local.py -b 8 --parts 4 --part-index "${{ matrix.part }}" --partial-json \
+          python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
             input.srt "part-${{ matrix.part }}.json"
 
       - name: Salvar parte traduzida
@@ -192,7 +192,7 @@ jobs:
         with:
           name: local-srt-input
 
-      - name: Baixar as quatro partes
+      - name: Baixar as partes traduzidas
         uses: actions/download-artifact@v4
         with:
           pattern: local-part-*
@@ -206,8 +206,7 @@ jobs:
           STEM="${SRT_NAME_INPUT%.srt}"
           STEM="${STEM%.tr}"
           echo "STEM=$STEM" >> "$GITHUB_ENV"
-          python3 mesclar_traducao_local.py input.srt "$STEM.pt-BR.srt" \
-            parts/part-0.json parts/part-1.json parts/part-2.json parts/part-3.json
+          python3 mesclar_traducao_local.py input.srt "$STEM.pt-BR.srt" parts/part-*.json
           python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
 
       - name: Enviar legendas traduzidas de volta para o FTP
