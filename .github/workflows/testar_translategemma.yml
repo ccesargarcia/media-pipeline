@@ -170,7 +170,7 @@ jobs:
             "aya-23-8b")
               echo "MODEL_FILE=models/aya-23-8B-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=aya-23-8b-local" >> "$GITHUB_ENV"
-              echo "SERVER_ARGS=--ctx-size 3072 --threads 2 --threads-batch 2 --parallel 1 --chat-template command-r" >> "$GITHUB_ENV"
+              echo "SERVER_ARGS=--ctx-size 3072 --threads 2 --threads-batch 2 --parallel 1 --chat-template-file $GITHUB_WORKSPACE/templates/aya.jinja --jinja" >> "$GITHUB_ENV"
               ;;
             "llama-3.1-8b")
               echo "MODEL_FILE=models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf" >> "$GITHUB_ENV"
