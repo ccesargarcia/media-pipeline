@@ -30,7 +30,194 @@ on:
         default: 'gemini'
 
 jobs:
+  prepare_local:
+    if: ${{ inputs.translator == 'local' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Baixar arquivo .srt do FTP
+        env:
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+          SRT_NAME_INPUT: ${{ inputs.srt_filename }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          export SRT_NAME="$SRT_NAME_INPUT"
+          if [ "$SRT_NAME" != "$(basename "$SRT_NAME")" ] || [[ ! "$SRT_NAME" =~ ^[A-Za-z0-9_.-]+\.srt$ ]]; then
+            echo "Informe somente o nome de um arquivo .srt válido." >&2
+            exit 1
+          fi
+          ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["SRT_NAME"]))')
+          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+            -u "$FTP_USER:$FTP_PASSWORD" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" -o input.srt
+
+      - name: Cache do modelo local Qwen3-8B Q4
+        uses: actions/cache@v4
+        with:
+          path: models/Qwen3-8B-Q4_K_M.gguf
+          key: qwen3-8b-q4-k-m-v1
+
+      - name: Cache do servidor llama.cpp
+        uses: actions/cache@v4
+        with:
+          path: llama.cpp/build/bin/llama-server
+          key: llama-server-ubuntu-cpu-v1
+
+      - name: Preparar modelo e servidor para os quatro runners
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential
+          mkdir -p models
+          if [ ! -s models/Qwen3-8B-Q4_K_M.gguf ]; then
+            curl --fail --location --retry 4 --retry-delay 3 \
+              "https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q4_K_M.gguf?download=true" \
+              -o models/Qwen3-8B-Q4_K_M.gguf
+          fi
+          if [ ! -x llama.cpp/build/bin/llama-server ]; then
+            git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
+            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+            cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
+          fi
+
+      - name: Compartilhar SRT de entrada
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-srt-input
+          path: input.srt
+          retention-days: 1
+
+  translate_local:
+    if: ${{ inputs.translator == 'local' }}
+    needs: prepare_local
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        part: [0, 1, 2, 3]
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Restaurar cache do modelo
+        uses: actions/cache@v4
+        with:
+          path: models/Qwen3-8B-Q4_K_M.gguf
+          key: qwen3-8b-q4-k-m-v1
+
+      - name: Restaurar cache do llama.cpp
+        uses: actions/cache@v4
+        with:
+          path: llama.cpp/build/bin/llama-server
+          key: llama-server-ubuntu-cpu-v1
+
+      - name: Baixar SRT de entrada
+        uses: actions/download-artifact@v4
+        with:
+          name: local-srt-input
+
+      - name: Iniciar modelo local neste runner
+        run: |
+          nohup llama.cpp/build/bin/llama-server \
+            -m models/Qwen3-8B-Q4_K_M.gguf \
+            --alias qwen3-8b-local --host 127.0.0.1 --port 8080 \
+            --ctx-size 4096 --threads 2 --parallel 1 --reasoning off --jinja \
+            > llama-server.log 2>&1 &
+          curl --fail --silent --show-error --retry 60 --retry-delay 2 --retry-connrefused \
+            http://127.0.0.1:8080/health
+
+      - name: Traduzir parte ${{ matrix.part }} de 4
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python3 traduz_local.py -b 8 --parts 4 --part-index "${{ matrix.part }}" --partial-json \
+            input.srt "part-${{ matrix.part }}.json"
+
+      - name: Salvar parte traduzida
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-part-${{ matrix.part }}
+          path: part-${{ matrix.part }}.json
+          retention-days: 1
+
+  finalize_local:
+    if: ${{ inputs.translator == 'local' }}
+    needs: translate_local
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Baixar arquivo SRT original
+        uses: actions/download-artifact@v4
+        with:
+          name: local-srt-input
+
+      - name: Baixar as quatro partes
+        uses: actions/download-artifact@v4
+        with:
+          pattern: local-part-*
+          path: parts
+          merge-multiple: true
+
+      - name: Reunir tradução e gerar .ass
+        env:
+          SRT_NAME_INPUT: ${{ inputs.srt_filename }}
+        run: |
+          STEM="${SRT_NAME_INPUT%.srt}"
+          STEM="${STEM%.tr}"
+          echo "STEM=$STEM" >> "$GITHUB_ENV"
+          python3 mesclar_traducao_local.py input.srt "$STEM.pt-BR.srt" \
+            parts/part-0.json parts/part-1.json parts/part-2.json parts/part-3.json
+          python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
+
+      - name: Enviar legendas traduzidas de volta para o FTP
+        env:
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
+          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+            -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.pt-BR.srt" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+            -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.ass" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+
+      - name: Salvar legendas como artifact de backup
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legendas-${{ inputs.srt_filename }}
+          path: |
+            *.pt-BR.srt
+            *.ass
+
   translate:
+    if: ${{ inputs.translator != 'local' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório

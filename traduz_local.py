@@ -87,12 +87,19 @@ def main() -> None:
     parser.add_argument("entrada")
     parser.add_argument("saida", nargs="?")
     parser.add_argument("-b", "--batch-size", type=int, default=8)
+    parser.add_argument("--part-index", type=int, help="Índice da parte distribuída (começa em 0).")
+    parser.add_argument("--parts", type=int, default=1, help="Número total de partes do arquivo.")
+    parser.add_argument("--partial-json", action="store_true", help="Grava somente as traduções desta parte em JSON.")
     args = parser.parse_args()
     source = Path(args.entrada).expanduser()
     if not source.is_file():
         raise FileNotFoundError(f"Arquivo não encontrado: {source}")
     if args.batch_size <= 0:
         raise ValueError("O tamanho do lote precisa ser maior que zero.")
+    if args.parts <= 0 or (args.part_index is not None and not 0 <= args.part_index < args.parts):
+        raise ValueError("A parte precisa estar entre 0 e --parts - 1.")
+    if args.partial_json and args.part_index is None:
+        raise ValueError("--partial-json requer --part-index.")
     output = Path(args.saida).expanduser() if args.saida else source.with_name(f"{source.stem}.pt-BR.srt")
     raw = source.read_bytes()
     source_hash = hashlib.sha256(raw).hexdigest()
@@ -116,8 +123,11 @@ def main() -> None:
         if item["id"] in saved:
             item["translation"] = saved[item["id"]]
 
-    for start in range(0, len(items), args.batch_size):
-        batch = items[start:start + args.batch_size]
+    part_index = args.part_index or 0
+    part_start = len(items) * part_index // args.parts
+    part_end = len(items) * (part_index + 1) // args.parts
+    for start in range(part_start, part_end, args.batch_size):
+        batch = items[start:min(start + args.batch_size, part_end)]
         if all("translation" in item for item in batch):
             continue
         context = items[max(0, start - 4):start]
@@ -140,8 +150,13 @@ def main() -> None:
         else:
             raise RuntimeError(f"Falha ao traduzir o lote {start // args.batch_size + 1}: {last_error}") from last_error
 
-    blocks = [f"{x['idx']}\n{x['time']}\n{x['translation']}" for x in items]
     output.parent.mkdir(parents=True, exist_ok=True)
+    if args.partial_json:
+        output.write_text(json.dumps({str(item["id"]): item["translation"] for item in items[part_start:part_end]}, ensure_ascii=False), encoding="utf-8")
+        print(f"Parte local concluída: {output}", flush=True)
+        return
+
+    blocks = [f"{x['idx']}\n{x['time']}\n{x['translation']}" for x in items]
     output.write_text("\n\n".join(blocks) + "\n", encoding="utf-8")
     checkpoint.unlink(missing_ok=True)
     print(f"Tradução local concluída: {output}", flush=True)
