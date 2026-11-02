@@ -68,18 +68,18 @@ jobs:
             --log "$RUNNER_TEMP/openvpn.log"
 
           for attempt in $(seq 1 60); do
-            if grep -Fq 'Initialization Sequence Completed' "$RUNNER_TEMP/openvpn.log"; then
+            if sudo grep -Fq 'Initialization Sequence Completed' "$RUNNER_TEMP/openvpn.log"; then
               echo 'OpenVPN tunnel connected.'
               exit 0
             fi
-            if ! sudo kill -0 "$(cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null; then
+            if ! sudo kill -0 "$(sudo cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null; then
               break
             fi
             sleep 2
           done
 
           echo 'OpenVPN did not establish the tunnel. Relevant client log:' >&2
-          grep -E 'AUTH_FAILED|Options error|Cannot open|TLS Error|Initialization Sequence Completed' \
+          sudo grep -E 'AUTH_FAILED|Options error|Cannot open|TLS Error|Initialization Sequence Completed' \
             "$RUNNER_TEMP/openvpn.log" | tail -n 30 >&2 || true
           exit 1
 
@@ -118,6 +118,6 @@ jobs:
         shell: bash
         run: |
           if [[ -f "$RUNNER_TEMP/openvpn.pid" ]]; then
-            sudo kill "$(cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null || true
+            sudo kill "$(sudo cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null || true
           fi
           rm -f "$RUNNER_TEMP/openvpn.ovpn" "$RUNNER_TEMP/openvpn.pid" "$RUNNER_TEMP/openvpn.log"
