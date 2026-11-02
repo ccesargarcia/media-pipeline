@@ -13,11 +13,12 @@ from pathlib import Path
 
 API_URL = os.environ.get("LOCAL_LLM_URL", "http://127.0.0.1:8080/v1/chat/completions")
 MODEL = os.environ.get("LOCAL_LLM_MODEL", "qwen3-8b-local")
+TRANSLATION_CACHE_VERSION = "2"
 
 SYSTEM_PROMPT = """Você é tradutor profissional de diálogos de séries turcas para português brasileiro.
 Traduza com precisão, naturalidade e concisão, mantendo o tom e as relações entre personagens.
 
-Contexto de Uzak Şehir: Alya é mãe de Deniz e esposa de Boran, que foi dado como morto e depois encontrado vivo em coma. Cihan lidera a família Albora; Sadakat é sua matriarca; Kaya é irmão de Cihan e noivo de İpek. A família rival é a Baybars.
+Contexto de Uzak Şehir: Alya é mãe de Deniz e esposa de Boran, que foi dado como morto e depois encontrado vivo em estado vegetativo e coma crítico. Não trate Boran como falecido depois dessa revelação. Cihan lidera a família Albora; Sadakat é sua matriarca; Kaya é irmão de Cihan e noivo de İpek. A família rival é a Baybars.
 
 Regras:
 - O pronome turco "o" não indica gênero; deduza o gênero pelo contexto e evite inventar quando não houver informação suficiente.
@@ -33,10 +34,16 @@ Responda somente com JSON no formato {"subtitles":[{"id":1,"text":"tradução"}]
 
 def parse_srt(content: str) -> list[dict]:
     items = []
-    for block in re.split(r"\r?\n\s*\r?\n", content.strip()):
+    if not content.strip():
+        return items
+    for block_number, block in enumerate(re.split(r"\r?\n\s*\r?\n", content.strip()), 1):
         lines = block.splitlines()
-        if len(lines) >= 3 and "-->" in lines[1]:
-            items.append({"idx": lines[0].strip(), "time": lines[1].strip(), "text": "\n".join(lines[2:]).strip()})
+        if len(lines) < 3 or "-->" not in lines[1] or not lines[0].strip():
+            raise ValueError(f"Bloco SRT inválido na posição {block_number}.")
+        text = "\n".join(lines[2:]).strip()
+        if not text:
+            raise ValueError(f"Bloco SRT sem texto na posição {block_number}.")
+        items.append({"idx": lines[0].strip(), "time": lines[1].strip(), "text": text})
     return items
 
 
@@ -83,14 +90,32 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
 
 
 def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> dict[int, str]:
-    """Traduz um lote com divisão dinâmica (split) e fallback individual para nunca abortar."""
-    # 1. Tenta traduzir o lote inteiro até 2 vezes
+    """Tenta lotes menores quando a saída do modelo é inválida; nunca mascara falhas."""
+    split_error = None
+    last_error = None
     for attempt in range(1, 3):
         try:
             return request_batch(context, batch)
-        except Exception as exc:
-            print(f"Tentativa {attempt}/2 com lote de {len(batch)} falas falhou: {exc}", file=sys.stderr, flush=True)
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code in (400, 413, 422):
+                split_error = exc
+                break
+            split_error = None
+            retryable = exc.code in (408, 425, 429) or 500 <= exc.code < 600
+            if not retryable:
+                raise RuntimeError(f"Erro HTTP não recuperável do servidor local: {exc.code} {exc.reason}") from exc
+        except (ValueError, json.JSONDecodeError) as exc:
+            last_error = split_error = exc
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last_error = exc
+            split_error = None
+        if attempt < 2:
+            print(f"Tentativa {attempt}/2 com lote de {len(batch)} falas falhou: {last_error}", file=sys.stderr, flush=True)
             time.sleep(attempt * 2)
+
+    if split_error is None:
+        raise RuntimeError(f"Falha temporária ao acessar o servidor local após 2 tentativas: {last_error}") from last_error
 
     # 2. Se o lote tem mais de 3 falas, subdivide na metade
     if len(batch) > 3:
@@ -112,6 +137,7 @@ def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> di
     for item in batch:
         item_id = item["id"]
         translated_text = None
+        last_error = None
         for attempt in range(1, 4):
             try:
                 single_res = request_batch(curr_context[-4:], [item])
@@ -119,14 +145,14 @@ def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> di
                 if val:
                     translated_text = val
                     break
+                last_error = ValueError("resposta vazia")
             except Exception as exc:
+                last_error = exc
                 print(f"Tentativa {attempt}/3 para fala individual {item_id} falhou: {exc}", file=sys.stderr, flush=True)
                 time.sleep(attempt)
 
-        # 4. Fallback de emergência: se o LLM falhar ou recusar a fala, mantém o texto original
         if not translated_text:
-            print(f"[AVISO] Fala {item_id} manteve texto original para evitar interrupção do pipeline.", file=sys.stderr, flush=True)
-            translated_text = item["text"]
+            raise RuntimeError(f"Não foi possível traduzir a fala {item_id}; interrompendo para não publicar texto original como tradução: {last_error}") from last_error
 
         results[item_id] = translated_text
         curr_context.append({"id": item["id"], "text": item["text"], "translation": translated_text})
@@ -163,11 +189,14 @@ def main() -> None:
         item["id"] = i
 
     checkpoint = output.with_suffix(".ckpt.json")
+    translation_fingerprint = hashlib.sha256(
+        f"{TRANSLATION_CACHE_VERSION}\0{MODEL}\0{args.batch_size}\0{SYSTEM_PROMPT}\0temperature=0.2;max_tokens=2048;json=v1".encode("utf-8")
+    ).hexdigest()
     saved = {}
     if checkpoint.is_file():
         try:
             state = json.loads(checkpoint.read_text(encoding="utf-8"))
-            if state.get("source_sha256") == source_hash:
+            if state.get("source_sha256") == source_hash and state.get("translation_fingerprint") == translation_fingerprint:
                 saved = {int(k): str(v) for k, v in state.get("translations", {}).items() if str(v).strip()}
         except (OSError, ValueError, TypeError):
             saved = {}
@@ -185,11 +214,20 @@ def main() -> None:
         context = items[max(0, start - 4):start]
         print(f"Lote {start // args.batch_size + 1}/{(len(items) + args.batch_size - 1) // args.batch_size}: falas {start + 1}-{start + len(batch)}", flush=True)
         translations = translate_batch_with_fallbacks(context, batch)
+        expected_ids = {item["id"] for item in batch}
+        if set(translations) != expected_ids:
+            raise RuntimeError(f"Lote incompleto: esperados={sorted(expected_ids)}, recebidos={sorted(translations)}")
         for item in batch:
-            item["translation"] = translations.get(item["id"], item["text"])
+            item["translation"] = translations[item["id"]]
         saved.update(translations)
         checkpoint.parent.mkdir(parents=True, exist_ok=True)
-        checkpoint.write_text(json.dumps({"source_sha256": source_hash, "translations": saved}, ensure_ascii=False), encoding="utf-8")
+        checkpoint_tmp = checkpoint.with_suffix(checkpoint.suffix + ".tmp")
+        checkpoint_tmp.write_text(json.dumps({
+            "source_sha256": source_hash,
+            "translation_fingerprint": translation_fingerprint,
+            "translations": saved,
+        }, ensure_ascii=False), encoding="utf-8")
+        checkpoint_tmp.replace(checkpoint)
 
     output.parent.mkdir(parents=True, exist_ok=True)
     if args.partial_json:

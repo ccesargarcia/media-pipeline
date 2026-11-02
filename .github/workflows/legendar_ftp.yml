@@ -38,6 +38,8 @@ env:
 jobs:
   prepare_audio:
     runs-on: ubuntu-latest
+    env:
+      LANG_INPUT: ${{ inputs.lang }}
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -52,6 +54,10 @@ jobs:
           VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
           SEASON_INPUT: ${{ inputs.season }}
         run: |
+          if [[ ! "$LANG_INPUT" =~ ^[A-Za-z][A-Za-z0-9_-]{0,15}$ ]]; then
+            echo "Idioma inválido. Use um código simples, como tr, en ou auto." >&2
+            exit 1
+          fi
           VIDEO_NAME="$VIDEO_NAME_INPUT"
           case "$VIDEO_NAME" in
             *.mp4) ;;
@@ -146,6 +152,8 @@ jobs:
           path: audio_parts
 
       - name: Transcrever Parte ${{ matrix.part }} com Whisper Large-v3-Turbo
+        env:
+          LANG_INPUT: ${{ inputs.lang }}
         run: |
           NTHREADS=$(nproc)
           echo "Transcrevendo parte ${{ matrix.part }} com $NTHREADS núcleos..."
@@ -154,7 +162,7 @@ jobs:
             -vm ./whisper.cpp/models/ggml-silero-v6.2.0.bin \
             --vad \
             -f "audio_parts/part_${{ matrix.part }}.wav" \
-            -l ${{ inputs.lang }} \
+            -l "$LANG_INPUT" \
             -t $NTHREADS \
             -sns \
             -mc 0 \
@@ -217,7 +225,7 @@ jobs:
             --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" \
             -T "$STEM.srt" \
-            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/" || true
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
 
       - name: Compartilhar SRT Unificado
         uses: actions/upload-artifact@v4
@@ -249,7 +257,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v2
+          key: llama-build-ubuntu-cpu-b12034
 
       - name: Preparar modelo e servidor para os runners
         run: |
@@ -262,7 +270,7 @@ jobs:
               -o models/Qwen3-8B-Q4_K_M.gguf
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
-            git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
+            git clone --branch b12034 --depth 1 https://github.com/ggml-org/llama.cpp.git
             cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
@@ -295,7 +303,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v2
+          key: llama-build-ubuntu-cpu-b12034
 
       - name: Baixar SRT de entrada
         uses: actions/download-artifact@v4
@@ -335,9 +343,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: part-${{ matrix.part }}.ckpt.json
-          key: ckpt-leg-${{ inputs.video_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
+          key: ckpt-v2-leg-${{ inputs.video_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
           restore-keys: |
-            ckpt-leg-${{ inputs.video_filename }}-${{ matrix.part }}-
+            ckpt-v2-leg-${{ inputs.video_filename }}-${{ matrix.part }}-
 
       - name: Traduzir parte ${{ matrix.part }} de 8
         env:
@@ -347,11 +355,11 @@ jobs:
             input.srt "part-${{ matrix.part }}.json"
 
       - name: Salvar checkpoint de tradução
-        if: always()
+        if: always() && hashFiles('part-*.ckpt.json') != ''
         uses: actions/cache/save@v4
         with:
           path: part-${{ matrix.part }}.ckpt.json
-          key: ckpt-leg-${{ inputs.video_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
+          key: ckpt-v2-leg-${{ inputs.video_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
 
       - name: Salvar parte traduzida
         uses: actions/upload-artifact@v4

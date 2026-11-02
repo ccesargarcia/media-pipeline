@@ -8,10 +8,16 @@ from pathlib import Path
 
 def parse_srt(content: str) -> list[dict[str, str]]:
     items = []
-    for block in re.split(r"\r?\n\s*\r?\n", content.strip()):
+    if not content.strip():
+        return items
+    for block_number, block in enumerate(re.split(r"\r?\n\s*\r?\n", content.strip()), 1):
         lines = block.splitlines()
-        if len(lines) >= 3 and "-->" in lines[1]:
-            items.append({"idx": lines[0].strip(), "time": lines[1].strip(), "text": "\n".join(lines[2:]).strip()})
+        if len(lines) < 3 or "-->" not in lines[1] or not lines[0].strip():
+            raise ValueError(f"Bloco SRT inválido na posição {block_number}.")
+        text = "\n".join(lines[2:]).strip()
+        if not text:
+            raise ValueError(f"Bloco SRT sem texto na posição {block_number}.")
+        items.append({"idx": lines[0].strip(), "time": lines[1].strip(), "text": text})
     return items
 
 

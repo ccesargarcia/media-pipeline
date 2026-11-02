@@ -25,6 +25,8 @@ def detect_silences(path: Path) -> list[tuple[float, float]]:
         "-f", "null", "-"
     ]
     proc = subprocess.run(cmd, capture_output=True, text=True, errors="replace")
+    if proc.returncode != 0:
+        raise RuntimeError(f"ffmpeg não conseguiu detectar silêncios: {proc.stderr[-2000:]}")
     silences = []
     current_start = None
     for line in proc.stderr.splitlines():
@@ -43,20 +45,25 @@ def find_split_points(total_duration: float, silences: list[tuple[float, float]]
     if num_parts <= 1:
         return []
     target_interval = total_duration / num_parts
+    min_segment = min(30.0, target_interval / 2.0)
     split_points = []
+    previous = 0.0
     for i in range(1, num_parts):
         target = target_interval * i
-        # Procura um silêncio na janela de +/- 60 segundos do ponto ideal
-        best_point = target
-        best_diff = float("inf")
-        for s_start, s_end in silences:
-            mid = (s_start + s_end) / 2.0
-            diff = abs(mid - target)
-            if diff < best_diff and diff <= 60.0:
-                best_diff = diff
-                best_point = mid
+        remaining_parts = num_parts - i
+        lower = previous + min_segment
+        upper = total_duration - remaining_parts * min_segment
+        candidates = [
+            (s_start + s_end) / 2.0
+            for s_start, s_end in silences
+            if abs((s_start + s_end) / 2.0 - target) <= 60.0
+            and lower <= (s_start + s_end) / 2.0 <= upper
+        ]
+        # Cortes em silêncio precisam ser únicos e manter espaço para as partes seguintes.
+        best_point = min(candidates, key=lambda point: abs(point - target)) if candidates else min(max(target, lower), upper)
         split_points.append(best_point)
-    return sorted(split_points)
+        previous = best_point
+    return split_points
 
 
 def main() -> None:
@@ -71,6 +78,10 @@ def main() -> None:
         raise FileNotFoundError(f"Arquivo WAV não encontrado: {input_path}")
 
     duration = get_wav_duration(input_path)
+    if args.parts <= 0:
+        raise ValueError("--parts precisa ser maior que zero.")
+    if duration <= 0 or duration < args.parts:
+        raise ValueError("O áudio é curto demais para ser dividido em partes não vazias.")
     print(f"Duração total do áudio: {duration:.2f}s ({duration/60:.2f} min)", flush=True)
 
     silences = detect_silences(input_path)
@@ -93,9 +104,8 @@ def main() -> None:
 
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
-            "-ss", f"{start_t:.3f}",
-            "-to", f"{end_t:.3f}",
-            "-i", str(input_path),
+            "-ss", f"{start_t:.3f}", "-i", str(input_path),
+            "-t", f"{end_t - start_t:.3f}",
             "-c", "copy",
             str(part_wav)
         ]

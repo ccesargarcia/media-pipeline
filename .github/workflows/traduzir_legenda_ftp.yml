@@ -74,7 +74,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v2
+          key: llama-build-ubuntu-cpu-b12034
 
       - name: Preparar modelo e servidor para os runners
         run: |
@@ -87,7 +87,7 @@ jobs:
               -o models/Qwen3-8B-Q4_K_M.gguf
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
-            git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
+            git clone --branch b12034 --depth 1 https://github.com/ggml-org/llama.cpp.git
             cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
@@ -127,7 +127,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v2
+          key: llama-build-ubuntu-cpu-b12034
 
       - name: Baixar SRT de entrada
         uses: actions/download-artifact@v4
@@ -167,9 +167,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: part-${{ matrix.part }}.ckpt.json
-          key: ckpt-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
+          key: ckpt-v2-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
           restore-keys: |
-            ckpt-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-
+            ckpt-v2-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-
 
       - name: Traduzir parte ${{ matrix.part }} de 8
         env:
@@ -179,11 +179,11 @@ jobs:
             input.srt "part-${{ matrix.part }}.json"
 
       - name: Salvar checkpoint de tradução
-        if: always()
+        if: always() && hashFiles('part-*.ckpt.json') != ''
         uses: actions/cache/save@v4
         with:
           path: part-${{ matrix.part }}.ckpt.json
-          key: ckpt-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
+          key: ckpt-v2-trans-${{ inputs.srt_filename }}-${{ matrix.part }}-attempt-${{ github.run_attempt }}
 
       - name: Salvar parte traduzida
         uses: actions/upload-artifact@v4
@@ -294,44 +294,6 @@ jobs:
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
             -o input.srt
 
-      - name: Cache do modelo local Qwen3-8B Q4
-        if: inputs.translator == 'local'
-        uses: actions/cache@v4
-        with:
-          path: models/Qwen3-8B-Q4_K_M.gguf
-          key: qwen3-8b-q4-k-m-v1
-
-      - name: Cache do servidor llama.cpp
-        if: inputs.translator == 'local'
-        uses: actions/cache@v4
-        with:
-          path: llama.cpp/build/bin/llama-server
-          key: llama-server-ubuntu-cpu-v1
-
-      - name: Preparar servidor local llama.cpp
-        if: inputs.translator == 'local'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake build-essential
-          mkdir -p models
-          if [ ! -s models/Qwen3-8B-Q4_K_M.gguf ]; then
-            curl --fail --location --retry 4 --retry-delay 3 \
-              "https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q4_K_M.gguf?download=true" \
-              -o models/Qwen3-8B-Q4_K_M.gguf
-          fi
-          if [ ! -x llama.cpp/build/bin/llama-server ]; then
-            git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
-            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
-            cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
-          fi
-          nohup llama.cpp/build/bin/llama-server \
-            -m models/Qwen3-8B-Q4_K_M.gguf \
-            --alias qwen3-8b-local --host 127.0.0.1 --port 8080 \
-            --ctx-size 4096 --threads 4 --parallel 1 --reasoning off --jinja \
-            > llama-server.log 2>&1 &
-          curl --fail --silent --show-error --retry 60 --retry-delay 2 --retry-connrefused \
-            http://127.0.0.1:8080/health
-
       - name: Traduzir para PT-BR (${{ inputs.translator }}) e Gerar .ass
         env:
           PYTHONUNBUFFERED: "1"
@@ -345,9 +307,6 @@ jobs:
           elif [ "${{ inputs.translator }}" = "openrouter" ]; then
             echo "Traduzindo via OpenRouter..."
             python3 traduz_openrouter.py input.srt "${{ env.STEM }}.pt-BR.srt"
-          elif [ "${{ inputs.translator }}" = "local" ]; then
-            echo "Traduzindo com Qwen3-8B local (llama.cpp)..."
-            python3 traduz_local.py -b 8 input.srt "${{ env.STEM }}.pt-BR.srt"
           else
             echo "Traduzindo via Google Gemini..."
             python3 traduz_gemini.py -b 65 input.srt "${{ env.STEM }}.pt-BR.srt"

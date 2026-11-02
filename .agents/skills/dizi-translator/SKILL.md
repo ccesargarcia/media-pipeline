@@ -19,8 +19,8 @@ A série se passa em Mardin e gira em torno da rivalidade entre as famílias **A
 ### Família Albora:
 - **Cihan Albora (Masculino):** O patriarca/chefe honrado da família. Voz de autoridade, leal e protetor.
 - **Sadakat Albora (Feminino):** Matriarca impiedosa, tradicional e manipuladora. Deseja a guarda do neto Deniz e inferniza a nora Alya.
-- **Alya Albora (Feminino):** Médica pediatra, viúva de Boran, mãe protetora de Deniz. Luta com firmeza contra Sadakat para defender o filho.
-- **Boran Albora (Masculino):** Irmão falecido de Cihan e marido de Alya (cuja morte desencadeia a trama).
+- **Alya Albora (Feminino):** Médica pediatra, mãe protetora de Deniz e esposa de Boran. Luta com firmeza contra Sadakat para defender o filho.
+- **Boran Albora (Masculino):** Irmão de Cihan e marido de Alya. É dado como morto, mas reaparece vivo em estado vegetativo e coma crítico; não o trate como falecido depois dessa revelação.
 - **Kaya Albora (Masculino):** Irmão mais novo de Cihan. Jovem impetuoso, impulsivo e passional, noivo de İpek.
 - **İpek (Feminino):** Noiva de Kaya e futura NORA de Dona Sadakat.
 - **Şahin Albora (Masculino):** Primo de Cihan (filho de Ecmel e Fidan). Apaixonado por Nare, dividido entre o amor e a lealdade familiar.

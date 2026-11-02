@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def parse_time(time_str: str) -> float:
-    match = re.match(r"(\d+):(\d+):(\d+)[,\.](\d+)", time_str.strip())
+    match = re.fullmatch(r"(\d+):(\d+):(\d+)[,\.](\d+)", time_str.strip())
     if not match:
         raise ValueError(f"Timestamp inválido: {time_str}")
     h, m, s, ms = match.groups()
@@ -35,15 +35,20 @@ def format_time(seconds: float) -> str:
 
 def parse_srt(content: str) -> list[dict]:
     items = []
-    for block in re.split(r"\r?\n\s*\r?\n", content.strip()):
+    if not content.strip():
+        return items
+    for block_number, block in enumerate(re.split(r"\r?\n\s*\r?\n", content.strip()), 1):
         lines = block.splitlines()
-        if len(lines) >= 3 and "-->" in lines[1]:
-            time_parts = lines[1].split("-->")
-            items.append({
-                "start": parse_time(time_parts[0]),
-                "end": parse_time(time_parts[1]),
-                "text": "\n".join(lines[2:]).strip()
-            })
+        if len(lines) < 3 or "-->" not in lines[1] or not lines[0].strip():
+            raise ValueError(f"Bloco SRT inválido na posição {block_number}.")
+        time_parts = lines[1].split("-->", 1)
+        text = "\n".join(lines[2:]).strip()
+        if len(time_parts) != 2 or not text:
+            raise ValueError(f"Bloco SRT incompleto na posição {block_number}.")
+        start, end = parse_time(time_parts[0]), parse_time(time_parts[1])
+        if end <= start:
+            raise ValueError(f"Bloco SRT com intervalo inválido na posição {block_number}.")
+        items.append({"start": start, "end": end, "text": text})
     return items
 
 
@@ -56,6 +61,11 @@ def main() -> None:
 
     offsets_info = json.loads(Path(args.offsets_json).read_text(encoding="utf-8"))
     offset_by_part = {item["part"]: item["start"] for item in offsets_info}
+    expected_parts = set(offset_by_part)
+    if len(expected_parts) != len(offsets_info) or not expected_parts:
+        raise ValueError("Metadados de áudio inválidos: índices de parte ausentes ou duplicados.")
+    if expected_parts != set(range(len(offsets_info))):
+        raise ValueError("Metadados de áudio inválidos: os índices das partes precisam ser contínuos a partir de zero.")
 
     # Mapear arquivos srt por índice de parte
     # Espera nomes como part_0.srt, part-0.srt, ou lista ordenada
@@ -65,13 +75,17 @@ def main() -> None:
         match = re.search(r"part[_-](\d+)", p.stem)
         if match:
             part_idx = int(match.group(1))
+            if part_idx in srt_by_part:
+                raise ValueError(f"Mais de um SRT recebido para a parte {part_idx}.")
             srt_by_part[part_idx] = p
         else:
-            print(f"Aviso: não foi possível identificar o índice da parte em {p.name}", flush=True)
+            raise ValueError(f"Não foi possível identificar o índice da parte em {p.name}.")
 
-    # Se não foi possível mapear por regex, assume ordem dos argumentos
-    if len(srt_by_part) != len(args.partes_srt):
-        srt_by_part = {i: Path(p) for i, p in enumerate(args.partes_srt)}
+    received_parts = set(srt_by_part)
+    if received_parts != expected_parts:
+        missing = sorted(expected_parts - received_parts)
+        unexpected = sorted(received_parts - expected_parts)
+        raise ValueError(f"Transcrições parciais incompletas; ausentes={missing}, inesperadas={unexpected}.")
 
     combined_cues = []
     for part_idx in sorted(srt_by_part.keys()):
@@ -88,6 +102,8 @@ def main() -> None:
 
     # Ordenar por tempo de início e re-indexar
     combined_cues.sort(key=lambda x: x["start"])
+    if not combined_cues:
+        raise ValueError("As partes foram recebidas, mas nenhuma fala foi transcrita.")
 
     blocks = []
     for idx, cue in enumerate(combined_cues, 1):
