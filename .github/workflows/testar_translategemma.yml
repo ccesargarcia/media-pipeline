@@ -112,11 +112,11 @@ jobs:
           path: models
           key: model-cache-${{ inputs.model }}-v1
 
-      - name: Cache do llama.cpp v0.8.0
+      - name: Cache do llama.cpp
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v0.8.0
+          key: llama-build-ubuntu-cpu-v2
 
       - name: Baixar Modelo e Compilar llama.cpp
         run: |
@@ -128,7 +128,7 @@ jobs:
             curl --fail --location --retry 4 --retry-delay 3 "$MODEL_URL" -o "$MODEL_FILE"
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
-            git clone --branch v0.8.0 --depth 1 https://github.com/ggml-org/llama.cpp.git
+            git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
             cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
@@ -168,7 +168,7 @@ jobs:
             "aya-23-8b")
               echo "MODEL_FILE=models/aya-23-8B-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=aya-23-8b-local" >> "$GITHUB_ENV"
-              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --jinja" >> "$GITHUB_ENV"
+              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --chat-template command-r" >> "$GITHUB_ENV"
               ;;
             "llama-3.1-8b")
               echo "MODEL_FILE=models/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf" >> "$GITHUB_ENV"
@@ -192,7 +192,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v0.8.0
+          key: llama-build-ubuntu-cpu-v2
 
       - name: Restaurar checkpoint de tradução (se houver)
         uses: actions/cache/restore@v4
@@ -240,6 +240,12 @@ jobs:
           : "${MODEL_ALIAS:?MODEL_ALIAS não foi configurado}"
           LOCAL_LLM_MODEL="$MODEL_ALIAS" PYTHONUNBUFFERED=1 python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
             input.srt "part-${{ matrix.part }}.json"
+
+      - name: Exibir log do llama-server em caso de falha
+        if: failure()
+        run: |
+          echo "=== LLAMA-SERVER.LOG ==="
+          cat llama-server.log 2>/dev/null | tail -n 80 || true
 
       - name: Salvar checkpoint de tradução
         if: always()

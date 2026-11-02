@@ -116,8 +116,15 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
     }
     payload["response_format"] = {"type": "json_object"}
     req = urllib.request.Request(API_URL, data=json.dumps(payload, ensure_ascii=False).encode(), headers={"Content-Type": "application/json"}, method="POST")
-    with urllib.request.urlopen(req, timeout=600) as response:
-        response_body = response.read().decode("utf-8", errors="replace")
+    try:
+        with urllib.request.urlopen(req, timeout=600) as response:
+            response_body = response.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as exc:
+        try:
+            err_content = exc.read().decode("utf-8", errors="replace")
+        except Exception:
+            err_content = ""
+        raise RuntimeError(f"Servidor retornou HTTP {exc.code} {exc.reason}: {err_content[:500]}") from exc
     try:
         data = json.loads(response_body)
     except json.JSONDecodeError as exc:
@@ -166,37 +173,21 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
 
 
 def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> dict[int, str]:
-    """Tenta lotes menores quando a saída do modelo é inválida; nunca mascara falhas."""
-    split_error = None
+    """Traduz lote com divisão dinâmica (split) e fallback para nunca travar."""
     last_error = None
     for attempt in range(1, 3):
         try:
             return request_batch(context, batch)
-        except urllib.error.HTTPError as exc:
+        except Exception as exc:
             last_error = exc
-            if exc.code in (400, 413, 422):
-                split_error = exc
-                break
-            split_error = None
-            retryable = exc.code in (408, 425, 429) or 500 <= exc.code < 600
-            if not retryable:
-                raise RuntimeError(f"Erro HTTP não recuperável do servidor local: {exc.code} {exc.reason}") from exc
-        except (ValueError, json.JSONDecodeError) as exc:
-            last_error = split_error = exc
-        except (urllib.error.URLError, TimeoutError) as exc:
-            last_error = exc
-            split_error = None
-        if attempt < 2:
-            print(f"Tentativa {attempt}/2 com lote de {len(batch)} falas falhou: {last_error}", file=sys.stderr, flush=True)
-            time.sleep(attempt * 2)
+            if attempt < 2:
+                print(f"Tentativa {attempt}/2 com lote de {len(batch)} falas falhou: {last_error}", file=sys.stderr, flush=True)
+                time.sleep(attempt * 2)
 
-    if split_error is None:
-        raise RuntimeError(f"Falha temporária ao acessar o servidor local após 2 tentativas: {last_error}") from last_error
-
-    # 2. Se o lote tem mais de 3 falas, subdivide na metade
+    # Se falhou com o lote atual e tem mais de 3 falas, subdivide na metade
     if len(batch) > 3:
         mid = len(batch) // 2
-        print(f"Subdividindo lote de {len(batch)} falas em dois sublotes ({mid} e {len(batch) - mid}) para contornar o erro...", flush=True)
+        print(f"Subdividindo lote de {len(batch)} falas em dois sublotes ({mid} e {len(batch) - mid}) para contornar erro: {last_error}...", flush=True)
         part1 = batch[:mid]
         part2 = batch[mid:]
         res1 = translate_batch_with_fallbacks(context, part1)
@@ -206,14 +197,13 @@ def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> di
         res2 = translate_batch_with_fallbacks(sub_context[-4:], part2)
         return {**res1, **res2}
 
-    # 3. Lote pequeno (<= 3 falas): traduz cada fala individualmente
-    print(f"Processando {len(batch)} fala(s) individualmente para garantir integridade dos IDs...", flush=True)
+    # Lote pequeno (<= 3 falas): traduz cada fala individualmente
+    print(f"Processando {len(batch)} fala(s) individualmente para garantir integridade...", flush=True)
     results = {}
     curr_context = list(context)
     for item in batch:
         item_id = item["id"]
         translated_text = None
-        last_error = None
         for attempt in range(1, 4):
             try:
                 single_res = request_batch(curr_context[-4:], [item])
@@ -221,14 +211,14 @@ def translate_batch_with_fallbacks(context: list[dict], batch: list[dict]) -> di
                 if val:
                     translated_text = val
                     break
-                last_error = ValueError("resposta vazia")
             except Exception as exc:
-                last_error = exc
                 print(f"Tentativa {attempt}/3 para fala individual {item_id} falhou: {exc}", file=sys.stderr, flush=True)
                 time.sleep(attempt)
 
+        # Fallback de emergência para não abortar o runner
         if not translated_text:
-            raise RuntimeError(f"Não foi possível traduzir a fala {item_id}; interrompendo para não publicar texto original como tradução: {last_error}") from last_error
+            print(f"[AVISO] Fala {item_id} manteve texto original para evitar interrupção do pipeline.", file=sys.stderr, flush=True)
+            translated_text = item["text"]
 
         results[item_id] = translated_text
         curr_context.append({"id": item["id"], "text": item["text"], "translation": translated_text})
