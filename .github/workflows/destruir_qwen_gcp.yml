@@ -1,0 +1,39 @@
+name: Destruir Stack Qwen no GCP
+run-name: "🗑️ Destruir Stack Qwen no GCP"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  destroy-qwen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Autenticar no Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Configurar gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Excluir Servico Cloud Run qwen-translator
+        run: |
+          echo "Excluindo servico Cloud Run qwen-translator..."
+          gcloud run services delete qwen-translator \
+            --region=us-central1 \
+            --project=${{ secrets.GCP_PROJECT_ID }} \
+            --quiet || true
+
+      - name: Excluir Repositorio no Artifact Registry
+        run: |
+          echo "Excluindo repositorio media-repo no Artifact Registry..."
+          gcloud artifacts repositories delete media-repo \
+            --location=us-central1 \
+            --project=${{ secrets.GCP_PROJECT_ID }} \
+            --quiet || true
+
+      - name: Confirmacao de Conclusao
+        run: |
+          echo "=========================================================="
+          echo "✓ Stack do Qwen no GCP (Cloud Run + Artifact Registry) removida com sucesso!"
+          echo "=========================================================="
