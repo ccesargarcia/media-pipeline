@@ -29,6 +29,9 @@ jobs:
       FTP_BASE_DIR: /G/Series/Longe demais - ${{ inputs.season }}
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Validate required secrets
         shell: bash
         run: |
@@ -46,46 +49,10 @@ jobs:
         env:
           OPENVPN_CONFIG: ${{ secrets.OPENVPN_CONFIG }}
 
-      - name: Install OpenVPN
-        run: |
-          sudo apt-get update
-          sudo apt-get install --yes openvpn
-
-      - name: Write OpenVPN profile
-        shell: bash
-        env:
-          OPENVPN_CONFIG: ${{ secrets.OPENVPN_CONFIG }}
-        run: |
-          set -euo pipefail
-          umask 077
-          printf '%s' "$OPENVPN_CONFIG" > "$RUNNER_TEMP/openvpn.ovpn"
-          test -s "$RUNNER_TEMP/openvpn.ovpn"
-
       - name: Connect to OpenVPN
-        shell: bash
-        run: |
-          set -euo pipefail
-          sudo openvpn \
-            --config "$RUNNER_TEMP/openvpn.ovpn" \
-            --daemon \
-            --writepid "$RUNNER_TEMP/openvpn.pid" \
-            --log "$RUNNER_TEMP/openvpn.log"
-
-          for attempt in $(seq 1 60); do
-            if sudo grep -Fq 'Initialization Sequence Completed' "$RUNNER_TEMP/openvpn.log"; then
-              echo 'OpenVPN tunnel connected.'
-              exit 0
-            fi
-            if ! sudo kill -0 "$(sudo cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null; then
-              break
-            fi
-            sleep 2
-          done
-
-          echo 'OpenVPN did not establish the tunnel. Relevant client log:' >&2
-          sudo grep -E 'AUTH_FAILED|Options error|Cannot open|TLS Error|Initialization Sequence Completed' \
-            "$RUNNER_TEMP/openvpn.log" | tail -n 30 >&2 || true
-          exit 1
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
 
       - name: Verify FTP login and directory listing
         shell: bash
@@ -129,9 +96,4 @@ jobs:
 
       - name: Stop OpenVPN
         if: always()
-        shell: bash
-        run: |
-          if [[ -f "$RUNNER_TEMP/openvpn.pid" ]]; then
-            sudo kill "$(sudo cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null || true
-          fi
-          rm -f "$RUNNER_TEMP/openvpn.ovpn" "$RUNNER_TEMP/openvpn.pid" "$RUNNER_TEMP/openvpn.log"
+        uses: ./.github/actions/openvpn-disconnect

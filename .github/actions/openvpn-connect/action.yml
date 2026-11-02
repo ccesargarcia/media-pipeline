@@ -1,0 +1,48 @@
+name: Connect to Home OpenVPN
+description: Establishes the OpenVPN tunnel from a GitHub-hosted runner.
+inputs:
+  config:
+    description: OpenVPN profile stored in the OPENVPN_CONFIG repository secret.
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Start OpenVPN tunnel
+      shell: bash
+      env:
+        OPENVPN_CONFIG: ${{ inputs.config }}
+      run: |
+        set -euo pipefail
+        if [[ -z "$OPENVPN_CONFIG" ]]; then
+          echo 'The OPENVPN_CONFIG Actions secret is not configured.' >&2
+          exit 1
+        fi
+
+        if ! command -v openvpn >/dev/null 2>&1; then
+          sudo apt-get update
+          sudo apt-get install --yes openvpn
+        fi
+
+        umask 077
+        printf '%s' "$OPENVPN_CONFIG" > "$RUNNER_TEMP/openvpn.ovpn"
+        sudo openvpn \
+          --config "$RUNNER_TEMP/openvpn.ovpn" \
+          --daemon \
+          --writepid "$RUNNER_TEMP/openvpn.pid" \
+          --log "$RUNNER_TEMP/openvpn.log"
+
+        for attempt in $(seq 1 60); do
+          if sudo grep -Fq 'Initialization Sequence Completed' "$RUNNER_TEMP/openvpn.log"; then
+            echo 'OpenVPN tunnel connected.'
+            exit 0
+          fi
+          if ! sudo kill -0 "$(sudo cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null; then
+            break
+          fi
+          sleep 2
+        done
+
+        echo 'OpenVPN did not establish the tunnel. Relevant client log:' >&2
+        sudo grep -E 'AUTH_FAILED|Options error|Cannot open|TLS Error|Initialization Sequence Completed' \
+          "$RUNNER_TEMP/openvpn.log" | tail -n 30 >&2 || true
+        exit 1

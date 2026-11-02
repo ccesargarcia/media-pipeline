@@ -1,5 +1,5 @@
 name: Legendar Série via FTP
-run-name: "🎬 Legendar: ${{ inputs.video_filename }} [${{ inputs.translator }}]"
+run-name: "🎬 Legendar: ${{ inputs.video_filename }} [${{ inputs.translator }}] · ${{ inputs.network_mode }}"
 
 on:
   workflow_dispatch:
@@ -31,6 +31,14 @@ on:
           - 'groq'
           - 'openrouter'
         default: 'local'
+      network_mode:
+        description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
+        required: true
+        type: choice
+        options:
+          - vpn
+          - direct
+        default: vpn
 
 env:
   FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
@@ -77,6 +85,12 @@ jobs:
           echo "VIDEO_NAME=$VIDEO_NAME" >> "$GITHUB_ENV"
           echo "STEM=$STEM" >> "$GITHUB_ENV"
 
+      - name: Conectar à VPN para acessar o FTP
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
       - name: Baixar vídeo do FTP
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
@@ -92,6 +106,10 @@ jobs:
             -u "$FTP_USER:$FTP_PASSWORD" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
             -o input_media
+
+      - name: Desconectar da VPN após o download
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Extrair áudio e Fatiar em 4 partes por Silêncio
         run: |
@@ -201,6 +219,12 @@ jobs:
           name: audio-parts
           path: audio_parts
 
+      - name: Conectar à VPN para acessar o FTP
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
       - name: Mesclar e Normalizar Transcrição Completa
         env:
           VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
@@ -226,6 +250,10 @@ jobs:
             -u "$FTP_USER:$FTP_PASSWORD" \
             -T "$STEM.srt" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+
+      - name: Desconectar da VPN
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Compartilhar SRT Unificado
         uses: actions/upload-artifact@v4
@@ -406,6 +434,12 @@ jobs:
           python3 mesclar_traducao_local.py input.srt "$STEM.pt-BR.srt" parts/part-*.json
           python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
 
+      - name: Conectar à VPN para enviar as legendas
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
       - name: Enviar legendas traduzidas de volta para o FTP
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
@@ -421,6 +455,10 @@ jobs:
           curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.ass" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+
+      - name: Desconectar da VPN
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar artefatos no GitHub
         if: always()
@@ -475,6 +513,12 @@ jobs:
           fi
           python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
 
+      - name: Conectar à VPN para enviar as legendas
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
       - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
@@ -496,6 +540,10 @@ jobs:
             -u "$FTP_USER:$FTP_PASSWORD" \
             -T "$STEM.ass" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+
+      - name: Desconectar da VPN
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar artefatos no GitHub
         if: always()

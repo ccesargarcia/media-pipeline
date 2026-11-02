@@ -1,5 +1,5 @@
 name: Traduzir Legenda Existente do FTP
-run-name: "📝 Traduzir: ${{ inputs.srt_filename }} [${{ inputs.translator }}]"
+run-name: "📝 Traduzir: ${{ inputs.srt_filename }} [${{ inputs.translator }}] · ${{ inputs.network_mode }}"
 
 on:
   workflow_dispatch:
@@ -28,6 +28,14 @@ on:
           - 'openrouter'
           - 'local'
         default: 'gemini'
+      network_mode:
+        description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
+        required: true
+        type: choice
+        options:
+          - vpn
+          - direct
+        default: vpn
 
 env:
   FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
@@ -44,6 +52,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Conectar à VPN para baixar a legenda
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
 
       - name: Baixar arquivo .srt do FTP
         env:
@@ -63,6 +77,10 @@ jobs:
           curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" -o input.srt
+
+      - name: Desconectar da VPN após o download
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Cache do modelo local Qwen3-8B Q4
         uses: actions/cache@v4
@@ -227,6 +245,12 @@ jobs:
           python3 mesclar_traducao_local.py input.srt "$STEM.pt-BR.srt" parts/part-*.json
           python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
 
+      - name: Conectar à VPN para enviar as legendas
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
       - name: Enviar legendas traduzidas de volta para o FTP
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
@@ -242,6 +266,10 @@ jobs:
           curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.ass" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+
+      - name: Desconectar da VPN
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar legendas como artifact de backup
         if: always()
@@ -263,6 +291,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Conectar à VPN para baixar a legenda
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
 
       - name: Baixar arquivo .srt do FTP
         env:
@@ -294,6 +328,10 @@ jobs:
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
             -o input.srt
 
+      - name: Desconectar da VPN após o download
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
+
       - name: Traduzir para PT-BR (${{ inputs.translator }}) e Gerar .ass
         env:
           PYTHONUNBUFFERED: "1"
@@ -312,6 +350,12 @@ jobs:
             python3 traduz_gemini.py -b 65 input.srt "${{ env.STEM }}.pt-BR.srt"
           fi
           python3 srt_para_ass.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.ass"
+
+      - name: Conectar à VPN para enviar as legendas
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
 
       - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
         env:
@@ -335,6 +379,10 @@ jobs:
             -u "$FTP_USER:$FTP_PASSWORD" \
             -T "${{ env.STEM }}.ass" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+
+      - name: Desconectar da VPN após o envio
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar Legendas como Artifact de Backup no GitHub
         if: always()

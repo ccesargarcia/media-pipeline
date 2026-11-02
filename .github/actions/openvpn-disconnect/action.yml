@@ -1,0 +1,12 @@
+name: Disconnect from Home OpenVPN
+description: Stops the OpenVPN tunnel and removes its temporary profile and logs.
+runs:
+  using: composite
+  steps:
+    - name: Stop OpenVPN tunnel
+      shell: bash
+      run: |
+        if [[ -f "$RUNNER_TEMP/openvpn.pid" ]]; then
+          sudo kill "$(sudo cat "$RUNNER_TEMP/openvpn.pid")" 2>/dev/null || true
+        fi
+        rm -f "$RUNNER_TEMP/openvpn.ovpn" "$RUNNER_TEMP/openvpn.pid" "$RUNNER_TEMP/openvpn.log"

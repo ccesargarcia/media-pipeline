@@ -1,6 +1,6 @@
 name: Sincronizar Legendas com FTP
 
-run-name: 📤 Sincronizar Legendas Prontas (Ep 31, 32, 33) para o FTP
+run-name: "📤 Sincronizar Legendas Prontas (Ep 31, 32, 33) para o FTP · ${{ inputs.network_mode }}"
 
 on:
   workflow_dispatch:
@@ -9,6 +9,14 @@ on:
         description: 'Diretório no FTP'
         required: false
         default: '/G/Series/Longe demais - Segunda Temporada'
+      network_mode:
+        description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
+        required: true
+        type: choice
+        options:
+          - vpn
+          - direct
+        default: vpn
 
 jobs:
   upload:
@@ -16,6 +24,12 @@ jobs:
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
+
+      - name: Conectar à VPN para acessar o FTP
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
 
       - name: Enviar legendas para o FTP
         env:
@@ -42,6 +56,10 @@ jobs:
             fi
           done
           echo "Todos os arquivos foram enviados com sucesso!"
+
+      - name: Desconectar da VPN
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar Artifact de Backup no GitHub
         if: always()
