@@ -56,16 +56,35 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
     parts.append("Traduza estas falas:\n" + json.dumps(
         [{"id": x["id"], "text": x["text"]} for x in batch], ensure_ascii=False
     ))
+    user_prompt = "\n\n".join(parts)
+    is_translategemma = MODEL.startswith("translategemma")
+    if is_translategemma:
+        # TranslateGemma accepts a single user message with source/target language
+        # metadata in llama.cpp's chat template; it does not use a system role.
+        subtitle_rules = """Traduza diálogos de Uzak Şehir do turco para português brasileiro coloquial, natural e conciso.
+Contexto: Alya é mãe de Deniz e esposa de Boran, que está vivo em coma após ser dado como morto. Cihan é irmão de Boran e chefe dos Albora; Sadakat é a matriarca; Kaya é irmão de Cihan e noivo de İpek.
+Preserve o sentido, o tom, as relações e o gênero indicado pelo contexto. O pronome turco "o/onun/ona" não revela gênero. "Gelin" pode ser nora ou noiva conforme quem fala; "damat" pode ser genro ou noivo. Adapte "abi/abla/yenge/ağa/hanım" ao contexto.
+Não invente fatos. Preserve cada ID como uma fala independente, sem omitir, juntar ou reordenar. Responda somente com JSON válido no formato {\"subtitles\":[{\"id\":1,\"text\":\"tradução\"}]} e inclua exatamente todos os IDs das falas a traduzir."""
+        user_prompt = subtitle_rules + "\n\n" + user_prompt
+
     payload = {
         "model": MODEL,
         "temperature": 0.2,
         "max_tokens": 2048,
-        "response_format": {"type": "json_object"},
-        "messages": [
+        "messages": ([
+            {"role": "user", "content": user_prompt},
+        ] if is_translategemma else [
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": "\n\n".join(parts) + "\n/no_think"},
-        ],
+            {"role": "user", "content": user_prompt + "\n/no_think"},
+        ]),
     }
+    if is_translategemma:
+        payload["chat_template_kwargs"] = {
+            "source_lang_code": "tr",
+            "target_lang_code": "pt-BR",
+        }
+    else:
+        payload["response_format"] = {"type": "json_object"}
     req = urllib.request.Request(API_URL, data=json.dumps(payload, ensure_ascii=False).encode(), headers={"Content-Type": "application/json"}, method="POST")
     with urllib.request.urlopen(req, timeout=600) as response:
         data = json.loads(response.read().decode("utf-8"))
