@@ -124,17 +124,17 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            whisper.cpp/build/bin
+            whisper.cpp/build
             whisper.cpp/models/ggml-large-v3-turbo-q8_0.bin
             whisper.cpp/models/ggml-silero-v6.2.0.bin
-          key: whisper-turbo-q8-vad-v3
+          key: whisper-turbo-q8-vad-v4-nonative
 
       - name: Compilar whisper.cpp (Otimizado OpenMP) e Baixar Modelos
         if: steps.cache-whisper.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 https://github.com/ggerganov/whisper.cpp.git
           cd whisper.cpp
-          cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_OPENMP=ON
+          cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_OPENMP=ON -DGGML_NATIVE=OFF -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON
           cmake --build build --config Release -j$(nproc)
           sh ./models/download-ggml-model.sh large-v3-turbo-q8_0
           sh ./models/download-vad-model.sh silero-v6.2.0
