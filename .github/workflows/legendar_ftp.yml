@@ -22,15 +22,16 @@ on:
         required: false
         default: 'tr'
       translator:
-        description: 'Motor de tradução'
+        description: 'Motor de tradução (escolha "none" para apenas transcrever e subir o SRT original)'
         required: true
         type: choice
         options:
+          - 'none'
           - 'local'
           - 'gemini'
           - 'groq'
           - 'openrouter'
-        default: 'local'
+        default: 'none'
       network_mode:
         description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
         required: true
@@ -243,19 +244,35 @@ jobs:
           python3 normalizar_timings.py "$STEM.srt" "$STEM.srt"
           cp "$STEM.srt" input.srt
 
-          echo "Enviando arquivo original .srt para o FTP..."
+          echo "Enviando arquivo original .srt para o FTP/SFTP..."
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
-          curl -# --fail --ftp-pasv \
-            --retry 5 --retry-delay 5 --retry-connrefused \
-            -u "$FTP_USER:$FTP_PASSWORD" \
-            -T "$STEM.srt" \
-            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+          if [ "$FTP_PORT" = "22" ]; then
+            curl -# --fail -k \
+              --retry 5 --retry-delay 5 --retry-connrefused \
+              -u "$FTP_USER:$FTP_PASSWORD" \
+              -T "$STEM.srt" \
+              "sftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+          else
+            curl -# --fail --ftp-pasv \
+              --retry 5 --retry-delay 5 --retry-connrefused \
+              -u "$FTP_USER:$FTP_PASSWORD" \
+              -T "$STEM.srt" \
+              "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+          fi
 
       - name: Desconectar da VPN
         if: ${{ always() && inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-disconnect
 
+      - name: Salvar SRT original no GitHub Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: srt-${{ inputs.video_filename }}
+          path: "*.srt"
+          retention-days: 7
+
       - name: Compartilhar SRT Unificado
+        if: ${{ inputs.translator != 'none' }}
         uses: actions/upload-artifact@v4
         with:
           name: local-srt-input
@@ -484,7 +501,7 @@ jobs:
             *.ass
 
   translate_api:
-    if: ${{ inputs.translator != 'local' }}
+    if: ${{ inputs.translator != 'local' && inputs.translator != 'none' }}
     needs: merge_transcription
     runs-on: ubuntu-latest
     steps:
