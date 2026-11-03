@@ -34,8 +34,8 @@ jobs:
       - name: Enviar legendas para o FTP
         env:
           FTP_BASE_DIR: ${{ inputs.ftp_dir }}
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_PORT: ${{ secrets.FTP_PORT }}
+          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |

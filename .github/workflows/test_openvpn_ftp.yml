@@ -22,8 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      FTP_HOST: ${{ secrets.FTP_HOST }}
-      FTP_PORT: ${{ secrets.FTP_PORT }}
+      FTP_HOST: 192.168.0.1
+      FTP_PORT: "21"
       FTP_USER: ${{ secrets.FTP_USER }}
       FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
       FTP_BASE_DIR: /G/Series/Longe demais - ${{ inputs.season }}
@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           missing=()
-          for name in OPENVPN_CONFIG FTP_HOST FTP_PORT FTP_USER FTP_PASSWORD; do
+          for name in OPENVPN_CONFIG FTP_USER FTP_PASSWORD; do
             if [[ -z "${!name:-}" ]]; then
               missing+=("$name")
             fi
