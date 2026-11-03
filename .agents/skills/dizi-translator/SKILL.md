@@ -88,7 +88,18 @@ Para traduzir episódios completos (~2.000 a 2.100 falas) com velocidade e sem s
 
 ---
 
-## 5. Geração de Legenda Estilizada (.ass)
+## 5. Regra Obrigatória: Sempre Gerar Duas Versões de Legenda
+
+Para cada episódio traduzido, devem ser geradas **SEMPRE duas versões completas** (tanto em `.srt` quanto em `.ass` estilizado):
+1. **Versão com Identificação de Orador (`.com_orador.pt-BR.srt` e `.com_orador.ass`):**
+   - Cada fala inicia com o nome de quem fala na cena (ex: `Cihan: ...`, `Alya: ...`, `Dona Sadakat: ...`, `Kaya: ...`, `[Policial]: ...`).
+   - Essencial para acompanhar diálogos rápidos, conflitos acalorados ou falas em *off* (fora da tela).
+2. **Versão Pura Cinematográfica (`.pt-BR.srt` e `.ass`):**
+   - Legenda limpa tradicional sem os nomes dos oradores, focada na imersão direta e estética padrão de cinema/TV.
+
+---
+
+## 6. Geração de Legenda Estilizada (.ass)
 
 Para garantir visualização confortável e cobrir os hardsubs em inglês originais, converter o SRT para ASS usando:
 - **Tarja preta delimitada por linha (Box / BorderStyle 3):** ajustada ao tamanho exato do texto, sem criar uma faixa preta vazia na tela.
