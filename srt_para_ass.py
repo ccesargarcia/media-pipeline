@@ -62,12 +62,12 @@ def converter_srt_para_ass(srt_path: Path, ass_path: Path = None, atualizar_srt:
         clean_text = re.sub(r"<[^>]+>", "", item["text"]).strip()
         num_chars = len(clean_text)
 
-        # Tempo ideal de leitura humana
-        dur_ideal = max(1.8, num_chars * 0.065 + 0.6)
-        dur_maxima = 7.5 if num_chars > 85 else 6.0
+        # Tempo confortável de tela sem cortar falas antes da cena terminar
+        dur_ideal = max(3.5, num_chars * 0.075 + 1.0)
+        dur_maxima = 8.5 if num_chars > 85 else 7.0
         dur_ajustada = min(dur_ideal, dur_maxima)
 
-        # Se a legenda foi esticada sobre a música ou silêncio, corta no fim natural da fala
+        # Se a legenda foi esticada sobre música ou silêncio longo, limita ao tempo ajustado
         if (item["end"] - item["start"]) > dur_ajustada:
             item["end"] = item["start"] + dur_ajustada
 

@@ -1,0 +1,216 @@
+name: Legendar via Gemini Áudio (Multimodal)
+run-name: "🎧 Gemini Áudio: ${{ inputs.video_filename }} · ${{ inputs.network_mode }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_filename:
+        description: 'Nome do arquivo de vídeo (ex: Uzak_Sehir_-_Episode_34.mp4)'
+        required: true
+        type: string
+        default: 'Uzak_Sehir_-_Episode_34.mp4'
+      season:
+        description: 'Temporada'
+        required: true
+        type: choice
+        options:
+          - 'Segunda Temporada'
+          - 'Terceira Temporada'
+          - 'Primeira Temporada'
+        default: 'Segunda Temporada'
+      network_mode:
+        description: Use OpenVPN (recomendado) ou conexão direta
+        required: true
+        type: choice
+        options:
+          - vpn
+          - direct
+        default: vpn
+
+env:
+  FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+
+jobs:
+  prepare_audio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar Dependências do Sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg python3 curl
+
+      - name: Validar Parâmetros
+        env:
+          VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
+          SEASON_INPUT: ${{ inputs.season }}
+        run: |
+          VIDEO_NAME="$VIDEO_NAME_INPUT"
+          case "$VIDEO_NAME" in
+            *.mp4) ;;
+            *) echo "Nome de vídeo inválido: esperado .mp4" >&2; exit 1 ;;
+          esac
+          STEM="${VIDEO_NAME%.*}"
+          echo "STEM=$STEM" >> "$GITHUB_ENV"
+          echo "VIDEO_NAME=$VIDEO_NAME" >> "$GITHUB_ENV"
+
+      - name: Conectar à VPN para acessar o FTP
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Baixar vídeo do FTP
+        env:
+          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
+          echo "Baixando vídeo do FTP..."
+          curl -# --fail --ftp-pasv \
+            --retry 5 --retry-delay 5 --retry-connrefused \
+            -C - \
+            -u "$FTP_USER:$FTP_PASSWORD" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
+            -o input_media
+
+      - name: Desconectar da VPN após o download
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
+
+      - name: Extrair áudio e Fatiar em 4 partes por Silêncio
+        run: |
+          ffmpeg -hide_banner -loglevel warning -stats -threads $(nproc) -y \
+            -i input_media -vn -af "highpass=f=150,lowpass=f=4000,volume=1.3" \
+            -acodec pcm_s16le -ar 16000 -ac 1 input.wav
+          rm -f input_media
+          python3 dividir_audio.py input.wav --parts 4 --output-dir audio_parts
+          rm -f input.wav
+
+      - name: Compartilhar Partes de Áudio
+        uses: actions/upload-artifact@v4
+        with:
+          name: audio-parts
+          path: audio_parts/
+          retention-days: 1
+
+  transcribe_gemini:
+    needs: prepare_audio
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        part: [0, 1, 2, 3]
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar FFmpeg e Python
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg python3
+
+      - name: Baixar Parte de Áudio
+        uses: actions/download-artifact@v4
+        with:
+          name: audio-parts
+          path: audio_parts
+
+      - name: Transcrever e Traduzir Parte ${{ matrix.part }} via Gemini Áudio
+        env:
+          GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
+        run: |
+          echo "Processando parte ${{ matrix.part }} diretamente na API Multimodal do Gemini..."
+          python3 transcrever_gemini_audio.py "audio_parts/part_${{ matrix.part }}.wav" "part_${{ matrix.part }}.srt"
+
+      - name: Salvar Transcrição Parcial
+        uses: actions/upload-artifact@v4
+        with:
+          name: gemini-part-${{ matrix.part }}
+          path: part_${{ matrix.part }}.srt
+          retention-days: 1
+
+  merge_and_deliver:
+    needs: [prepare_audio, transcribe_gemini]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Baixar Partes Traduzidas do Gemini
+        uses: actions/download-artifact@v4
+        with:
+          pattern: gemini-part-*
+          path: gemini_parts
+          merge-multiple: true
+
+      - name: Baixar Metadados de Áudio
+        uses: actions/download-artifact@v4
+        with:
+          name: audio-parts
+          path: audio_parts
+
+      - name: Mesclar Partes e Gerar as Duas Versões
+        env:
+          VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
+        run: |
+          STEM="${VIDEO_NAME_INPUT%.*}"
+          echo "STEM=$STEM" >> "$GITHUB_ENV"
+
+          python3 mesclar_transcricao.py audio_parts/offsets.json "merged_raw.srt" gemini_parts/part_*.srt
+          python3 gerar_versoes_legendas.py "merged_raw.srt" "$STEM" .
+
+      - name: Conectar à VPN para enviar as legendas
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Enviar todas as versões de legendas para o FTP/SFTP
+        env:
+          FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
+          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
+          echo "Enviando os 4 arquivos de legenda (.srt e .ass) para o servidor..."
+
+          upload_file() {
+            local f="$1"
+            if [ "$FTP_PORT" = "22" ]; then
+              curl -# --fail -k --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "sftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+            else
+              curl -# --fail --ftp-pasv --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+            fi
+          }
+
+          upload_file "$STEM.com_orador.pt-BR.srt"
+          upload_file "$STEM.pt-BR.srt"
+          upload_file "$STEM.com_orador.ass"
+          upload_file "$STEM.ass"
+
+      - name: Desconectar da VPN
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect
+
+      - name: Salvar Artefatos Finais no GitHub
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legendas-gemini-audio-${{ inputs.video_filename }}
+          path: |
+            *.srt
+            *.ass
+          retention-days: 7

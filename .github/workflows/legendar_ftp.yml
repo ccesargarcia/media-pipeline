@@ -115,7 +115,7 @@ jobs:
       - name: Extrair áudio e Fatiar em 4 partes por Silêncio
         run: |
           ffmpeg -hide_banner -loglevel warning -stats -threads $(nproc) -y \
-            -i input_media -vn -acodec pcm_s16le -ar 16000 -ac 1 input.wav
+            -i input_media -vn -af "highpass=f=200,lowpass=f=3500,volume=1.5" -acodec pcm_s16le -ar 16000 -ac 1 input.wav
           rm -f input_media
           python3 dividir_audio.py input.wav --parts 4 --output-dir audio_parts
           rm -f input.wav
@@ -185,6 +185,7 @@ jobs:
             -t $NTHREADS \
             -sns \
             -mc 0 \
+            --prompt "Uzak Şehir, Cihan, Alya, Dona Sadakat, Boran, Kaya, İpek, Şahin, Nare, Demir, Ecmel, Mardin" \
             -osrt \
             -of "part_${{ matrix.part }}"
 
