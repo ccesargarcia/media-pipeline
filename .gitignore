@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+ENV/
+*.wav
+*.mp3
+*.mp4
+ep*_*/
+gemini_part*/
