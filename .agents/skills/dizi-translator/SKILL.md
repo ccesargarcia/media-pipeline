@@ -70,6 +70,7 @@ A série se passa em Mardin e gira em torno da rivalidade entre as famílias **A
 
 ### E. Adaptação de Termos Culturais e Relações de Parentesco
 - *"Sadakat Hanım"* ➔ *"Dona Sadakat"*
+- **Apenas Dona Sadakat é a "Vovó" (Parentesco Exclusivo):** Dona Sadakat é a única avó de Deniz na trama. Senhoras idosas acolhedoras ou secundárias (ex: a mãe de Pakize na casa de campo da vila) NUNCA devem ser chamadas de *"vovó"* por Deniz, mesmo que o turco use expressões coloquiais como *"anneanne"*. Traduza sempre como *"a senhora"*, *"dona"* ou *"peça a bênção para a senhora"*. Isso preserva a lógica familiar e evita confusão com a matriarca Sadakat.
 - *"Gelin"* / *"Gelinim"* ➔ Se dita pela sogra ou família do noivo (ex: Dona Sadakat para İpek), traduza OBRIGATORIAMENTE como *"Nora"* / *"Minha nora"* (NUNCA "minha noiva"). Se dita pelo próprio noivo (Kaya), traduza como *"Noiva"*.
 - *"Damat"* / *"Damadım"* ➔ Se dita pelos sogros/família, traduza como *"Genro"* / *"Nosso genro"*. Se dita pela noiva, traduza como *"Noivo"*.
 - *"Anne diyeceksin bana"* ➔ *"Vai me chamar de mãe"* (exigência tradicional da sogra para a nora na Turquia).
