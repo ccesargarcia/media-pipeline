@@ -247,15 +247,22 @@ def main():
     else:
         saida = entrada.with_name(f"{entrada.stem}.pt-BR.srt")
 
-    api_key = (
-        os.environ.get("GEMINI_TRANSLATE_KEY")
+    raw_keys = (
+        os.environ.get("GEMINI_TRANSLATE_KEYS")
+        or os.environ.get("GEMINI_TRANSLATE_KEY")
         or os.environ.get("GEMINI_API_KEY")
         or getpass.getpass("Cole sua GEMINI_TRANSLATE_KEY (não aparecerá na tela): ")
     )
-    api_key = api_key.strip()
-    if not api_key:
-        print("Erro: É necessária uma GEMINI_TRANSLATE_KEY (obtenha em https://aistudio.google.com/apikey).", file=sys.stderr)
+    # Suporta múltiplas chaves separadas por vírgula, ponto-e-vírgula ou nova linha
+    api_keys = [k.strip() for k in re.split(r"[,;\n]+", raw_keys) if k.strip()]
+    if not api_keys:
+        print("Erro: É necessária ao menos uma GEMINI_TRANSLATE_KEY (obtenha em https://aistudio.google.com/apikey).", file=sys.stderr)
         sys.exit(1)
+
+    key_index = 0
+    api_key = api_keys[key_index]
+    if len(api_keys) > 1:
+        print(f"==> Pool de chaves Gemini ativado com {len(api_keys)} chaves para rotação automática.", flush=True)
 
     if args.model == "auto":
         print("==> Consultando modelos disponíveis na sua conta Gemini...", flush=True)
@@ -344,13 +351,21 @@ def main():
                 detalhe = e.read().decode("utf-8", "replace")[:300]
                 if e.code in (429, 500, 502, 503, 504) and tentativa < 9:
                     espera = 25 + (tentativa * 10)
+                    # 1. Tenta rotacionar para próxima chave do pool primeiro (evita espera se houver outra chave disponível)
+                    if len(api_keys) > 1:
+                        key_index = (key_index + 1) % len(api_keys)
+                        api_key = api_keys[key_index]
+                        print(f"Instabilidade/Cota (HTTP {e.code}). Alternando para chave #{key_index + 1}/{len(api_keys)} do pool...", file=sys.stderr, flush=True)
+                        espera = 5  # Espera reduzida porque estamos usando uma conta/chave diferente!
+
+                    # 2. Rotaciona modelo se aplicável
                     modelo_antigo = modelo
                     if len(modelos_disponiveis) > 1:
                         idx_atual = modelos_disponiveis.index(modelo) if modelo in modelos_disponiveis else 0
                         modelo = modelos_disponiveis[(idx_atual + 1) % len(modelos_disponiveis)]
-                        print(f"Instabilidade/Cota (HTTP {e.code}) em '{modelo_antigo}'. Rotacionando para '{modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
+                        print(f"Rotacionando de '{modelo_antigo}' para '{modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
                     else:
-                        print(f"Instabilidade/Cota (HTTP {e.code}). Aguardando {espera}s...", file=sys.stderr, flush=True)
+                        print(f"Aguardando {espera}s para recuperação...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 elif tentativa < 9:
                     espera = 10 * (tentativa + 1)

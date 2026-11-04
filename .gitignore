@@ -10,3 +10,17 @@ ENV/
 *.mp4
 ep*_*/
 gemini_part*/
+
+# Diretórios de trabalho e builds temporários
+ep*_work/
+ep*_subagents/
+ep*_new_pipeline/
+ep*_test/
+gemini_run_*/
+legendas_tmp/
+*.ckpt.json
+.st/
+.aye_consciousness.m8
+*.m8
+MAPA_NEURAL_MEDIA_PIPELINE.md
+MAPA_NEURAL_MEDIA_PIPELINE.html
