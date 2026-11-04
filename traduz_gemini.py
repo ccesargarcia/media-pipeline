@@ -316,6 +316,8 @@ def main():
                     f"Concluídas: {fim}/{len(itens)} | Tempo: {el_m:02d}:{el_s:02d} | ETA: {eta_m:02d}:{eta_s:02d} ({velocidade:.1f} falas/s)",
                     flush=True,
                 )
+                # Espaçamento de 4.2s para manter a taxa abaixo de 15 RPM (cota gratuita do Google AI Studio)
+                time.sleep(4.2)
                 break
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
