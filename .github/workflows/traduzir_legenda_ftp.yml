@@ -354,15 +354,16 @@ jobs:
         run: |
           if [ "${{ inputs.translator }}" = "groq" ]; then
             echo "Traduzindo via Groq..."
-            python3 traduz_groq.py input.srt "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_groq.py input.srt "traducao_raw.srt"
           elif [ "${{ inputs.translator }}" = "openrouter" ]; then
             echo "Traduzindo via OpenRouter..."
-            python3 traduz_openrouter.py input.srt "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_openrouter.py input.srt "traducao_raw.srt"
           else
             echo "Traduzindo via Google Gemini..."
-            python3 traduz_gemini.py -b 65 input.srt "${{ env.STEM }}.pt-BR.srt"
+            python3 traduz_gemini.py -b 65 input.srt "traducao_raw.srt"
           fi
-          python3 srt_para_ass.py "${{ env.STEM }}.pt-BR.srt" "${{ env.STEM }}.ass"
+          echo "Gerando as duas versões de legendas (.com_orador e pura) em .srt e .ass..."
+          python3 gerar_versoes_legendas.py "traducao_raw.srt" "${{ env.STEM }}" .
 
       - name: Conectar à VPN para enviar as legendas
         if: ${{ inputs.network_mode == 'vpn' }}
@@ -380,18 +381,17 @@ jobs:
         run: |
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
           
-          echo "Enviando legendas geradas de volta para o FTP..."
-          curl -# --fail --ftp-pasv \
-            --retry 5 --retry-delay 5 --retry-connrefused \
-            -u "$FTP_USER:$FTP_PASSWORD" \
-            -T "${{ env.STEM }}.pt-BR.srt" \
-            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
-
-          curl -# --fail --ftp-pasv \
-            --retry 5 --retry-delay 5 --retry-connrefused \
-            -u "$FTP_USER:$FTP_PASSWORD" \
-            -T "${{ env.STEM }}.ass" \
-            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+          echo "Enviando todas as versões de legendas geradas (.srt e .ass) para o FTP..."
+          for file in "${{ env.STEM }}"*.srt "${{ env.STEM }}"*.ass; do
+            if [ -f "$file" ]; then
+              echo "-> Enviando $file..."
+              curl -# --fail --ftp-pasv \
+                --retry 5 --retry-delay 5 --retry-connrefused \
+                -u "$FTP_USER:$FTP_PASSWORD" \
+                -T "$file" \
+                "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+            fi
+          done
 
       - name: Desconectar da VPN após o envio
         if: ${{ always() && inputs.network_mode == 'vpn' }}
@@ -403,5 +403,5 @@ jobs:
         with:
           name: legendas-${{ env.STEM }}
           path: |
-            ${{ env.STEM }}.pt-BR.srt
-            ${{ env.STEM }}.ass
+            ${{ env.STEM }}*.srt
+            ${{ env.STEM }}*.ass
