@@ -1,5 +1,4 @@
 name: Legendar Série via FTP
-run-name: "🎬 Legendar: ${{ inputs.video_filename }} [${{ inputs.whisper_model }} / ${{ inputs.translator }}] · ${{ inputs.network_mode }}"
 
 on:
   workflow_dispatch:
