@@ -342,15 +342,15 @@ def main():
                 break
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
-                if e.code == 429 and tentativa < 9:
+                if e.code in (429, 500, 502, 503, 504) and tentativa < 9:
                     espera = 15
                     modelo_antigo = modelo
                     if len(modelos_disponiveis) > 1:
                         idx_atual = modelos_disponiveis.index(modelo) if modelo in modelos_disponiveis else 0
                         modelo = modelos_disponiveis[(idx_atual + 1) % len(modelos_disponiveis)]
-                        print(f"Limite de cota (HTTP 429) em '{modelo_antigo}'. Rotacionando para '{modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
+                        print(f"Instabilidade/Cota (HTTP {e.code}) em '{modelo_antigo}'. Rotacionando para '{modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
                     else:
-                        print(f"Limite de requisições (HTTP 429). Aguardando {espera}s...", file=sys.stderr, flush=True)
+                        print(f"Instabilidade/Cota (HTTP {e.code}). Aguardando {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 elif tentativa < 9:
                     espera = 10 * (tentativa + 1)
