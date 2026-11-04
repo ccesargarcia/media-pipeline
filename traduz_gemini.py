@@ -64,9 +64,12 @@ CORREÇÃO DE ALUCINAÇÕES FONÉTICAS DO WHISPER NO TURCO:
 
 REGRAS DE LEGENDA:
 1. Português do Brasil coloquial dramático, sonoro e natural (como em dublagem/legendagem profissional de streaming).
-2. Respeite pontuação de suspense, exclamações e quebras de frase.
-3. Não resuma nem invente fatos fora do contexto; apenas traduza com exatidão e naturalidade.
-4. Responda EXCLUSIVAMENTE em formato JSON:
+2. Identificação de orador: Sempre que o diálogo indicar quem fala na cena, inicie a fala com o nome do personagem (ex: "Cihan: ...", "Alya: ...", "Dona Sadakat: ...", "Kaya: ...", "[Policial]: ...").
+3. Contexto especial Deniz vs Cihan: Deniz é o menino de 5 anos, filho de Alya (chamado de Deniz somente pela mãe Alya; Dona Sadakat e parentes o chamam de Cihan ou meu neto). Cihan Albora é o tio/patriarca adulto.
+4. Vocativos afetivos: Nare e Şahin são amantes ('meu amor', 'meu bem', NUNCA 'filho'). O termo 'filho' só é usado quando uma mãe fala com seu filho biológico.
+5. Respeite pontuação de suspense, exclamações e quebras de frase.
+6. Não resuma nem invente fatos fora do contexto; apenas traduza com exatidão e naturalidade.
+7. Responda EXCLUSIVAMENTE em formato JSON:
    [{"id": <numero>, "text": "<tradução em PT-BR>"}]"""
 
 
