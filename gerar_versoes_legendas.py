@@ -69,12 +69,24 @@ SPEAKER_PATTERN = r'(?:\[[^\]]+\]|[A-ZÀ-ÖØ-Þ\u0100-\u017F][A-Za-zÀ-öø-ÿ\
 
 
 def strip_speaker_tags(text: str) -> str:
-    # 1. Início de linha
-    text = re.sub(r'^(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', '', text)
+    # 1. Início de linha (trata tags simples e duplicadas)
+    while True:
+        novo = re.sub(r'^(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', '', text)
+        if novo == text:
+            break
+        text = novo
     # 2. Após quebra de linha (\n ou \N)
-    text = re.sub(r'(\\N|\n)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+    while True:
+        novo = re.sub(r'(\\N|\n)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+        if novo == text:
+            break
+        text = novo
     # 3. Após barra divisória /
-    text = re.sub(r'(\s*/\s*)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+    while True:
+        novo = re.sub(r'(\s*/\s*)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+        if novo == text:
+            break
+        text = novo
     return text.strip()
 
 
