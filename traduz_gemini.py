@@ -64,12 +64,14 @@ CORREÇÃO DE ALUCINAÇÕES FONÉTICAS DO WHISPER NO TURCO:
 
 REGRAS DE LEGENDA:
 1. Português do Brasil coloquial dramático, sonoro e natural (como em dublagem/legendagem profissional de streaming).
-2. Identificação de orador: Sempre que o diálogo indicar quem fala na cena, inicie a fala com o nome do personagem (ex: "Cihan: ...", "Alya: ...", "Dona Sadakat: ...", "Kaya: ...", "[Policial]: ...").
-3. Contexto especial Deniz vs Cihan: Deniz é o menino de 5 anos, filho de Alya (chamado de Deniz somente pela mãe Alya; Dona Sadakat e parentes o chamam de Cihan ou meu neto). Cihan Albora é o tio/patriarca adulto.
-4. Vocativos afetivos: Nare e Şahin são amantes ('meu amor', 'meu bem', NUNCA 'filho'). O termo 'filho' só é usado quando uma mãe fala com seu filho biológico.
-5. Respeite pontuação de suspense, exclamações e quebras de frase.
-6. Não resuma nem invente fatos fora do contexto; apenas traduza com exatidão e naturalidade.
-7. Responda EXCLUSIVAMENTE em formato JSON:
+2. TRADUÇÃO TOTAL: É ESTRITAMENTE PROIBIDO deixar falas ou palavras em turco na saída (ex: "tamam", "ne oluyor", "vay be", etc.). Todas as falas devem ser traduzidas 100% para o Português do Brasil.
+3. GÊNERO E DONA SADAKAT: Sadakat / Dona Sadakat é a matriarca (MULHER). NUNCA se dirija ou se refira a ela como "ele" ou "dele". Use sempre "ela", "dela" ou "a senhora". Quando Cihan ou outro filho fala com ela, use "a senhora" ou "mãe".
+4. Identificação de orador segura: Inclua o nome do personagem antes da fala (ex: "Cihan: ...", "Alya: ...", "Dona Sadakat: ...") SOMENTE quando o contexto ou a menção explícita no diálogo der certeza absoluta de quem está falando. Se estiver em dúvida entre Cihan, Şahin ou Kaya, NÃO CHUTE: escreva apenas o diálogo traduzido sem prefixo de orador.
+5. Contexto especial Deniz vs Cihan: Deniz é o menino de 5 anos, filho de Alya (chamado de Deniz somente pela mãe Alya; Dona Sadakat e parentes o chamam de Cihan ou meu neto). Cihan Albora é o tio/patriarca adulto.
+6. Vocativos afetivos: Nare e Şahin são amantes ('meu amor', 'meu bem', NUNCA 'filho'). O termo 'filho' só é usado quando uma mãe fala com seu filho biológico.
+7. Respeite pontuação de suspense, exclamações e quebras de frase.
+8. Não resuma nem invente fatos fora do contexto; apenas traduza com exatidão e naturalidade.
+9. Responda EXCLUSIVAMENTE em formato JSON:
    [{"id": <numero>, "text": "<tradução em PT-BR>"}]"""
 
 

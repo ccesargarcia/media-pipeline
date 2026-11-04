@@ -65,21 +65,17 @@ def srt_to_ass(srt_path: Path, ass_path: Path):
     print(f"Gerado {ass_path.name} com {len(events)} eventos.", flush=True)
 
 
+SPEAKER_PATTERN = r'(?:\[[^\]]+\]|[A-ZÀ-ÖØ-Þ\u0100-\u017F][A-Za-zÀ-öø-ÿ\u0100-\u017F\.\'\-]+(?:\s+[A-Za-zÀ-öø-ÿ\u0100-\u017F\.\'\-]+){0,2})'
+
+
 def strip_speaker_tags(text: str) -> str:
-    lines = text.split("\n")
-    cleaned_lines = []
-    for line in lines:
-        m = re.match(r"^(-\s*)?(\[[^\]]+\]|[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\.\'\-]+):\s*(.*)$", line)
-        if m:
-            dash = m.group(1) or ""
-            rest = m.group(3)
-            if dash and not rest.startswith("-"):
-                cleaned_lines.append(f"{dash}{rest}")
-            else:
-                cleaned_lines.append(rest)
-        else:
-            cleaned_lines.append(line)
-    return "\n".join(cleaned_lines).strip()
+    # 1. Início de linha
+    text = re.sub(r'^(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', '', text)
+    # 2. Após quebra de linha (\n ou \N)
+    text = re.sub(r'(\\N|\n)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+    # 3. Após barra divisória /
+    text = re.sub(r'(\s*/\s*)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+    return text.strip()
 
 
 def gerar_versoes(input_srt: Path, base_stem: str, output_dir: Path):
