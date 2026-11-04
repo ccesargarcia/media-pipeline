@@ -1,5 +1,5 @@
 name: Legendar Série via FTP
-run-name: "🎬 Legendar: ${{ inputs.video_filename }} [${{ inputs.translator }}] · ${{ inputs.network_mode }}"
+run-name: "🎬 Legendar: ${{ inputs.video_filename }} [${{ inputs.whisper_model }} / ${{ inputs.translator }}] · ${{ inputs.network_mode }}"
 
 on:
   workflow_dispatch:
@@ -17,6 +17,15 @@ on:
           - 'Terceira Temporada'
           - 'Primeira Temporada'
         default: 'Segunda Temporada'
+      whisper_model:
+        description: 'Modelo Whisper ASR (large-v3-q5_0 = Máxima Precisão 32 camadas; turbo = Mais Rápido)'
+        required: true
+        type: choice
+        options:
+          - 'large-v3-q5_0'
+          - 'large-v3-turbo-q8_0'
+          - 'large-v3'
+        default: 'large-v3-q5_0'
       lang:
         description: 'Idioma do áudio original (ex: tr, en, auto)'
         required: false
@@ -150,9 +159,9 @@ jobs:
         with:
           path: |
             whisper.cpp/build
-            whisper.cpp/models/ggml-large-v3-turbo-q8_0.bin
+            whisper.cpp/models/ggml-${{ inputs.whisper_model }}.bin
             whisper.cpp/models/ggml-silero-v6.2.0.bin
-          key: whisper-turbo-q8-vad-v4-nonative
+          key: whisper-${{ inputs.whisper_model }}-vad-v4-nonative
 
       - name: Compilar whisper.cpp (Otimizado OpenMP) e Baixar Modelos
         if: steps.cache-whisper.outputs.cache-hit != 'true'
@@ -161,7 +170,7 @@ jobs:
           cd whisper.cpp
           cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_OPENMP=ON -DGGML_NATIVE=OFF -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON
           cmake --build build --config Release -j$(nproc)
-          sh ./models/download-ggml-model.sh large-v3-turbo-q8_0
+          sh ./models/download-ggml-model.sh ${{ inputs.whisper_model }}
           sh ./models/download-vad-model.sh silero-v6.2.0
 
       - name: Baixar Parte de Áudio
@@ -170,14 +179,14 @@ jobs:
           name: audio-parts
           path: audio_parts
 
-      - name: Transcrever Parte ${{ matrix.part }} com Whisper Large-v3-Turbo
+      - name: Transcrever Parte ${{ matrix.part }} com Whisper ${{ inputs.whisper_model }}
         env:
           LANG_INPUT: ${{ inputs.lang }}
         run: |
           NTHREADS=$(nproc)
-          echo "Transcrevendo parte ${{ matrix.part }} com $NTHREADS núcleos..."
+          echo "Transcrevendo parte ${{ matrix.part }} com $NTHREADS núcleos usando ${{ inputs.whisper_model }}..."
           ./whisper.cpp/build/bin/whisper-cli \
-            -m ./whisper.cpp/models/ggml-large-v3-turbo-q8_0.bin \
+            -m ./whisper.cpp/models/ggml-${{ inputs.whisper_model }}.bin \
             -vm ./whisper.cpp/models/ggml-silero-v6.2.0.bin \
             --vad \
             -f "audio_parts/part_${{ matrix.part }}.wav" \
@@ -185,7 +194,7 @@ jobs:
             -t $NTHREADS \
             -sns \
             -mc 0 \
-            --prompt "Uzak Şehir, Cihan, Alya, Dona Sadakat, Boran, Kaya, İpek, Şahin, Nare, Demir, Ecmel, Mardin" \
+            --prompt "Uzak Şehir, Cihan, Alya, Dona Sadakat, Boran, Kaya, İpek, Şahin, Nare, Demir, Ecmel, Zerrin, Hamada, Fidan, Mardin" \
             -osrt \
             -of "part_${{ matrix.part }}"
 
