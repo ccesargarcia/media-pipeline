@@ -56,7 +56,7 @@ TRATAMENTOS CULTURAIS E VOCABULÁRIO:
 CORREÇÃO DE ALUCINAÇÕES FONÉTICAS DO WHISPER NO TURCO:
 - O áudio turco gravado com vento ou música tem erros fonéticos comuns:
   * "tersiz / telsiz / tersizmez" refere-se a RÁDIO / COMUNICADOR (walkie-talkie do menino Deniz). NUNCA traduza como fogo!
-  * "Ali Hanım" ou "Hamada" refere-se a "Dona Alya" ou "Alya".
+  * "Ali Hanım" refere-se a "Dona Alya" ou "Alya". "Hamada" refere-se ao personagem Hamada (assassinado no passado); NUNCA confunda Hamada com Alya!
   * "Memardik" ou "De Mardin" é sobre Mardin ou a canção de abertura.
 
 REGRAS DE LEGENDA:

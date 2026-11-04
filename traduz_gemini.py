@@ -59,20 +59,46 @@ TRATAMENTOS CULTURAIS E VOCABULÁRIO:
 CORREÇÃO DE ALUCINAÇÕES FONÉTICAS DO WHISPER NO TURCO:
 - O áudio turco gravado com vento ou música tem erros fonéticos comuns:
   * "tersiz / telsiz / tersizmez" refere-se a RÁDIO / COMUNICADOR (walkie-talkie do menino Deniz). NUNCA traduza como fogo!
-  * "Ali Hanım" ou "Hamada" refere-se a "Dona Alya" ou "Alya".
+  * "Ali Hanım" refere-se a "Dona Alya" ou "Alya".
+  * "Hamada" refere-se a HAMADA (personagem assassinado no passado, cujo pai busca vingança). NUNCA confunda Hamada com Alya!
+  * "Zerrin" é a filha de Ecmel e Fidan, irmã de Şahin. NUNCA traduza como Serin ou ouro!
   * "Memardik" ou "De Mardin" é sobre Mardin ou a canção de abertura.
 
 REGRAS DE LEGENDA:
 1. Português do Brasil coloquial dramático, sonoro e natural (como em dublagem/legendagem profissional de streaming).
 2. TRADUÇÃO TOTAL: É ESTRITAMENTE PROIBIDO deixar falas ou palavras em turco na saída (ex: "tamam", "ne oluyor", "vay be", etc.). Todas as falas devem ser traduzidas 100% para o Português do Brasil.
 3. GÊNERO E DONA SADAKAT: Sadakat / Dona Sadakat é a matriarca (MULHER). NUNCA se dirija ou se refira a ela como "ele" ou "dele". Use sempre "ela", "dela" ou "a senhora". Quando Cihan ou outro filho fala com ela, use "a senhora" ou "mãe".
-4. Identificação de orador segura: Inclua o nome do personagem antes da fala (ex: "Cihan: ...", "Alya: ...", "Dona Sadakat: ...") SOMENTE quando o contexto ou a menção explícita no diálogo der certeza absoluta de quem está falando. Se estiver em dúvida entre Cihan, Şahin ou Kaya, NÃO CHUTE: escreva apenas o diálogo traduzido sem prefixo de orador.
-5. Contexto especial Deniz vs Cihan: Deniz é o menino de 5 anos, filho de Alya (chamado de Deniz somente pela mãe Alya; Dona Sadakat e parentes o chamam de Cihan ou meu neto). Cihan Albora é o tio/patriarca adulto.
-6. Vocativos afetivos: Nare e Şahin são amantes ('meu amor', 'meu bem', NUNCA 'filho'). O termo 'filho' só é usado quando uma mãe fala com seu filho biológico.
-7. Respeite pontuação de suspense, exclamações e quebras de frase.
-8. Não resuma nem invente fatos fora do contexto; apenas traduza com exatidão e naturalidade.
-9. Responda EXCLUSIVAMENTE em formato JSON:
+4. PARENTESCO DE DENIZ: Dona Sadakat é a ÚNICA avó de Deniz na série. Senhoras idosas secundárias (como a mãe de Pakize na vila) NUNCA devem ser chamadas de "vovó" por Deniz (use "a senhora" ou "titia").
+5. Identificação de orador segura: Inclua o nome do personagem antes da fala (ex: "Cihan: ...", "Alya: ...", "Dona Sadakat: ...") SOMENTE quando o contexto ou a menção explícita no diálogo der certeza absoluta de quem está falando. Se estiver em dúvida entre Cihan, Şahin ou Kaya, NÃO CHUTE: escreva apenas o diálogo traduzido sem prefixo de orador.
+6. Contexto especial Deniz vs Cihan: Deniz é o menino de 5 anos, filho de Alya (chamado de Deniz somente pela mãe Alya; Dona Sadakat e parentes o chamam de Cihan ou meu neto). Cihan Albora é o tio/patriarca adulto.
+7. Vocativos afetivos: Nare e Şahin são amantes ('meu amor', 'meu bem', NUNCA 'filho'). O termo 'filho' só é usado quando uma mãe fala com seu filho biológico.
+8. Respeite pontuação de suspense, exclamações e quebras de frase.
+9. Não resuma nem invente fatos fora do contexto; apenas traduza com exatidão e naturalidade.
+10. Responda EXCLUSIVAMENTE em formato JSON:
    [{"id": <numero>, "text": "<tradução em PT-BR>"}]"""
+
+def carregar_prompt_sistema() -> str:
+    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    skill_paths = [
+        Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
+        Path.home() / ".agents/skills/dizi-translator/SKILL.md",
+    ]
+    for sp in skill_paths:
+        if sp.is_file():
+            try:
+                conteudo = sp.read_text(encoding="utf-8")
+                conteudo = re.sub(r"^---
+.*?
+---
+", "", conteudo, flags=re.DOTALL).strip()
+                print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
+                return f"{SYSTEM_PROMPT}
+
+--- DIRETRIZES DA SKILL DIZI-TRANSLATOR ---
+{conteudo}"
+            except Exception as e:
+                print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
+    return SYSTEM_PROMPT
 
 
 def listar_modelos_flash(api_key: str) -> list[str]:
@@ -159,7 +185,7 @@ def traduzir_lote(api_key: str, modelo: str, contexto_anterior: list, lote_atual
     }
 
     payload = {
-        "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+        "systemInstruction": {"parts": [{"text": carregar_prompt_sistema()}]},
         "contents": [{"role": "user", "parts": [{"text": "\n".join(prompt_partes)}]}],
         "generationConfig": gen_config,
     }

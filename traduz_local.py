@@ -36,7 +36,7 @@ Regras:
 - "Gelin" pode significar nora ou noiva. Use "nora" quando a fala vier da sogra ou da família do noivo; use "noiva" quando o próprio noivo falar.
 - "Damat" pode significar genro ou noivo. Use a relação indicada pela cena.
 - Adapte formas de tratamento e expressões culturais pelo contexto: "yenge", "abi", "abla", "ağa", "hanım", "başım üstüne", "Allah aşkına" e "geçmiş olsun".
-- Se houver provável erro de reconhecimento de fala, use o contexto: "telsiz" pode ser rádio/comunicador; "Ali Hanım" ou "Hamada" pode referir-se a Alya; "Mardin" pode aparecer em nomes ou na canção de abertura. Não force essas correções quando a cena não sustentar a hipótese.
+- Se houver provável erro de reconhecimento de fala, use o contexto: "telsiz" pode ser rádio/comunicador; "Ali Hanım" pode referir-se a Alya; "Hamada" é o personagem assassinado no passado (não confunda com Alya); "Mardin" pode aparecer em nomes ou na canção de abertura. Não force essas correções quando a cena não sustentar a hipótese.
 - Preserve cada ID como uma fala independente. Mantenha a ordem, não junte nem omita blocos, não acrescente explicações e preserve quebras de linha úteis.
 - Use português brasileiro coloquial e legível para legendas. Não acrescente fatos ausentes do diálogo ou do contexto.
 
