@@ -103,7 +103,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 2
       matrix:
         part: [0, 1, 2, 3]
     steps:
@@ -125,6 +125,8 @@ jobs:
         env:
           GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
         run: |
+          # Pequeno escalonamento para evitar pico de concorrência instantânea
+          sleep $(( ${{ matrix.part }} * 5 ))
           echo "Processando parte ${{ matrix.part }} diretamente na API Multimodal do Gemini..."
           python3 transcrever_gemini_audio.py "audio_parts/part_${{ matrix.part }}.wav" "part_${{ matrix.part }}.srt"
 

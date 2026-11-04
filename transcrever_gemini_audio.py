@@ -21,7 +21,6 @@ UPLOAD_BASE = "https://generativelanguage.googleapis.com/upload/v1beta/files"
 
 # Modelos em conformidade com as regras de disponibilidade Gemini (versão 3.x)
 PREFERRED_MODELS = [
-    "gemini-3.0-flash",
     "gemini-3-flash-preview",
     "gemini-flash-latest",
 ]
@@ -203,20 +202,35 @@ def main():
     try:
         srt_text = None
         for model in PREFERRED_MODELS:
-            print(f"Tentando transcrever e traduzir com o modelo {model}...", flush=True)
-            try:
-                srt_text = transcrever_com_gemini(file_uri, api_key, model)
-                print(f"Sucesso com o modelo {model}!", flush=True)
+            print(f"==> Iniciando processamento com o modelo {model}...", flush=True)
+            max_attempts = 6
+            for tentativa in range(1, max_attempts + 1):
+                try:
+                    print(f"[{model}] Tentativa {tentativa}/{max_attempts}...", flush=True)
+                    srt_text = transcrever_com_gemini(file_uri, api_key, model)
+                    print(f"Sucesso absoluto com o modelo {model}!", flush=True)
+                    break
+                except urllib.error.HTTPError as he:
+                    err_body = he.read().decode('utf-8', errors='replace')[:300]
+                    print(f"[{model}] Erro HTTP {he.code}: {err_body}", file=sys.stderr)
+                    if he.code in (429, 503):
+                        wait_time = min(60, 5 * (2 ** (tentativa - 1)))
+                        print(f"[{model}] Alta demanda temporária na Google API (HTTP {he.code}). Aguardando {wait_time}s para retry...", flush=True)
+                        time.sleep(wait_time)
+                    elif he.code == 404:
+                        print(f"[{model}] Modelo não encontrado (404), avançando para o próximo...", flush=True)
+                        break
+                    else:
+                        time.sleep(5)
+                except Exception as e:
+                    print(f"[{model}] Erro: {e}", file=sys.stderr)
+                    time.sleep(5)
+
+            if srt_text:
                 break
-            except urllib.error.HTTPError as he:
-                print(f"Erro HTTP {he.code} ao chamar {model}: {he.read().decode('utf-8', errors='replace')[:300]}", file=sys.stderr)
-                time.sleep(2)
-            except Exception as e:
-                print(f"Erro ao tentar modelo {model}: {e}", file=sys.stderr)
-                time.sleep(2)
 
         if not srt_text:
-            raise RuntimeError("Nenhum modelo Gemini conseguiu processar o áudio com sucesso.")
+            raise RuntimeError("Nenhum modelo Gemini conseguiu processar o áudio após todas as tentativas de retry.")
 
         cleaned_srt = clean_srt_response(srt_text)
         saida_srt.write_text(cleaned_srt + "\n", encoding="utf-8")
