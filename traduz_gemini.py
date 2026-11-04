@@ -343,7 +343,7 @@ def main():
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
                 if e.code in (429, 500, 502, 503, 504) and tentativa < 9:
-                    espera = 15
+                    espera = 25 + (tentativa * 10)
                     modelo_antigo = modelo
                     if len(modelos_disponiveis) > 1:
                         idx_atual = modelos_disponiveis.index(modelo) if modelo in modelos_disponiveis else 0
