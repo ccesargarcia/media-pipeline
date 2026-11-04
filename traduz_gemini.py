@@ -86,15 +86,9 @@ def carregar_prompt_sistema() -> str:
         if sp.is_file():
             try:
                 conteudo = sp.read_text(encoding="utf-8")
-                conteudo = re.sub(r"^---
-.*?
----
-", "", conteudo, flags=re.DOTALL).strip()
+                conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
                 print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
-                return f"{SYSTEM_PROMPT}
-
---- DIRETRIZES DA SKILL DIZI-TRANSLATOR ---
-{conteudo}"
+                return f"{SYSTEM_PROMPT}\n\n--- DIRETRIZES DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
             except Exception as e:
                 print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
     return SYSTEM_PROMPT
