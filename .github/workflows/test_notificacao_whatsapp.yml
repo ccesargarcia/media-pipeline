@@ -1,0 +1,94 @@
+name: Testar Notificação WhatsApp (Evolution API)
+run-name: "📲 Teste WhatsApp: ${{ inputs.status }} · ${{ inputs.recipient != '' && inputs.recipient || 'Destinatário Padrão' }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      mensagem:
+        description: 'Texto da notificação a enviar'
+        required: true
+        type: string
+        default: 'Teste de envio de notificação do Media Pipeline via Evolution API realizado com sucesso! 🚀'
+      status:
+        description: 'Tipo/Status da notificação (ícone e cabeçalho)'
+        required: true
+        type: choice
+        options:
+          - success
+          - info
+          - warning
+          - error
+        default: success
+      recipient:
+        description: 'Número customizado com DDI e DDD (opcional, deixe vazio para usar o secret padrão)'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  test_whatsapp:
+    name: Enviar Notificação de Teste
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validar Secrets Necessários
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${EVOLUTION_API_KEY:-}" ]]; then
+            echo "❌ Erro: Secret EVOLUTION_API_KEY não está configurado no repositório." >&2
+            exit 1
+          fi
+          
+          TARGET_RECIPIENT="${CUSTOM_RECIPIENT:-$DEFAULT_RECIPIENT}"
+          if [[ -z "${TARGET_RECIPIENT:-}" ]]; then
+            echo "❌ Erro: Nenhum destinatário informado e secret WHATSAPP_RECIPIENT não configurado." >&2
+            exit 1
+          fi
+          
+          echo "✅ Secrets e parâmetros validados com sucesso."
+          echo "   API URL: ${EVOLUTION_API_URL}"
+          echo "   Instância: ${EVOLUTION_INSTANCE}"
+          echo "   Destinatário configurado (final): ...${TARGET_RECIPIENT: -4}"
+        env:
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          DEFAULT_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          CUSTOM_RECIPIENT: ${{ inputs.recipient }}
+
+      - name: Executar Envio da Notificação
+        shell: bash
+        env:
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+        run: |
+          set -euo pipefail
+          
+          ARGS=(
+            "${{ inputs.mensagem }}"
+            "--status" "${{ inputs.status }}"
+            "--fail-on-error"
+          )
+          
+          if [[ -n "${{ inputs.recipient }}" ]]; then
+            ARGS+=("--to" "${{ inputs.recipient }}")
+          fi
+          
+          echo "Enviando mensagem..."
+          python3 notificar_whatsapp.py "${ARGS[@]}"
+          echo "🎉 Envio concluído com sucesso!"
