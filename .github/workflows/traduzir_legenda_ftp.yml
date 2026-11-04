@@ -1,4 +1,5 @@
 name: Traduzir Legenda Existente do FTP
+run-name: "📝 Traduzir: ${{ inputs.srt_filename }} [${{ inputs.translator }}] · ${{ inputs.network_mode }}"
 
 on:
   workflow_dispatch:
@@ -411,8 +412,8 @@ jobs:
         if: ${{ success() }}
         env:
           EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
-          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || https://wa.luisices.com.br }}
-          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || homeassistant }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
         run: |
           MSG="🎉 *${{ env.STEM }}* legendado com sucesso!\n📁 Arquivos .srt e .ass enviados para o FTP (${{ inputs.season }})."
@@ -422,8 +423,8 @@ jobs:
         if: ${{ failure() }}
         env:
           EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
-          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || https://wa.luisices.com.br }}
-          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || homeassistant }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
         run: |
           MSG="⚠️ Falha ao processar legendas de *${{ env.STEM }}* no workflow GitHub Actions."
