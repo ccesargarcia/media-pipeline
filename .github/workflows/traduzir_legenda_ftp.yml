@@ -349,6 +349,7 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GEMINI_TRANSLATE_KEYS: ${{ secrets.GEMINI_TRANSLATE_KEYS }}
           GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: |
@@ -365,7 +366,7 @@ jobs:
           echo "Gerando as duas versões de legendas (.com_orador e pura) em .srt e .ass..."
           python3 gerar_versoes_legendas.py "traducao_raw.srt" "${{ env.STEM }}" .
           echo "Executando Quality Gate (Linter de Legendas)..."
-          python3 lint_legendas.py "${{ env.STEM }}.pt-BR.srt" -o input.srt -a "${{ env.STEM }}.ass" || true
+          python3 lint_legendas.py "${{ env.STEM }}.pt-BR.srt" -o input.srt -a "${{ env.STEM }}.ass"
 
       - name: Conectar à VPN para enviar as legendas
         if: ${{ inputs.network_mode == 'vpn' }}
@@ -415,8 +416,10 @@ jobs:
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          SUBTITLE_STEM: ${{ env.STEM }}
+          SEASON_INPUT: ${{ inputs.season }}
         run: |
-          MSG="🎉 *${{ env.STEM }}* legendado com sucesso!\n📁 Arquivos .srt e .ass enviados para o FTP (${{ inputs.season }})."
+          MSG="🎉 *$SUBTITLE_STEM* legendado com sucesso!\n📁 Arquivos .srt e .ass enviados para o FTP ($SEASON_INPUT)."
           python3 notificar_whatsapp.py "$MSG" --status success || true
 
       - name: Notificar Falha via WhatsApp (Evolution API)
@@ -426,6 +429,7 @@ jobs:
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          SUBTITLE_STEM: ${{ env.STEM }}
         run: |
-          MSG="⚠️ Falha ao processar legendas de *${{ env.STEM }}* no workflow GitHub Actions."
+          MSG="⚠️ Falha ao processar legendas de *$SUBTITLE_STEM* no workflow GitHub Actions."
           python3 notificar_whatsapp.py "$MSG" --status error || true

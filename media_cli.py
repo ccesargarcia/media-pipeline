@@ -27,22 +27,23 @@ def run_command(cmd, desc=""):
 
 
 def cmd_lint(args):
-    pt_path = Path(args.ptbr_srt).expanduser()
+    pt_path = Path(args.ptbr_srt).expanduser().resolve()
     cmd = [sys.executable, str(BASE_DIR / "lint_legendas.py"), str(pt_path)]
     if args.original:
-        cmd.extend(["-o", str(Path(args.original).expanduser())])
+        cmd.extend(["-o", str(Path(args.original).expanduser().resolve())])
     if args.ass:
-        cmd.extend(["-a", str(Path(args.ass).expanduser())])
+        cmd.extend(["-a", str(Path(args.ass).expanduser().resolve())])
     if args.strict:
         cmd.append("--strict")
     return run_command(cmd, f"Validando qualidade de {pt_path.name}")
 
 
 def cmd_render(args):
-    srt_path = Path(args.srt).expanduser()
-    cmd = [sys.executable, str(BASE_DIR / "gerar_versoes_legendas.py"), str(srt_path)]
-    if args.out_dir:
-        cmd.extend(["--out-dir", str(Path(args.out_dir).expanduser())])
+    srt_path = Path(args.srt).expanduser().resolve()
+    base_name = srt_path.name.removesuffix(".pt-BR.srt").removesuffix(".srt")
+    out_dir = Path(args.out_dir).expanduser().resolve() if args.out_dir else srt_path.parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+    cmd = [sys.executable, str(BASE_DIR / "gerar_versoes_legendas.py"), str(srt_path), base_name, str(out_dir)]
     return run_command(cmd, f"Gerando 4 variantes de legendas para {srt_path.name}")
 
 
@@ -54,12 +55,12 @@ def cmd_notify(args):
 
 
 def cmd_run(args):
-    input_file = Path(args.input_srt).expanduser()
+    input_file = Path(args.input_srt).expanduser().resolve()
     if not input_file.is_file():
         print(f"Erro: Arquivo de entrada não encontrado: {input_file}", file=sys.stderr)
         return False
 
-    out_dir = Path(args.out_dir).expanduser() if args.out_dir else BASE_DIR / "legendas_prontas"
+    out_dir = Path(args.out_dir).expanduser().resolve() if args.out_dir else BASE_DIR / "legendas_prontas"
     out_dir.mkdir(parents=True, exist_ok=True)
     base_name = input_file.name.replace(".pt-BR.srt", "").replace(".srt", "")
 
@@ -81,7 +82,13 @@ def cmd_run(args):
                 return False
 
     # 2. Renderização das 4 variantes
-    render_cmd = [sys.executable, str(BASE_DIR / "gerar_versoes_legendas.py"), str(translated_srt), "--out-dir", str(out_dir)]
+    render_cmd = [
+        sys.executable,
+        str(BASE_DIR / "gerar_versoes_legendas.py"),
+        str(translated_srt.resolve()),
+        base_name,
+        str(out_dir),
+    ]
     if not run_command(render_cmd, f"Gerando 4 variantes em {out_dir}"):
         return False
 
@@ -91,7 +98,8 @@ def cmd_run(args):
     if ass_path.is_file():
         lint_cmd.extend(["-a", str(ass_path)])
     if not run_command(lint_cmd, "Executando Quality Gate (Linter 1:1)"):
-        print("⚠️ Aviso: O linter encontrou divergências.", file=sys.stderr)
+        print("❌ Quality Gate reprovado; a notificação de sucesso foi cancelada.", file=sys.stderr)
+        return False
 
     # 4. Notificação WhatsApp se configurada
     if args.notify:

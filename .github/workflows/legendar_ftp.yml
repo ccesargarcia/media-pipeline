@@ -533,6 +533,7 @@ jobs:
           VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
           SEASON_INPUT: ${{ inputs.season }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GEMINI_TRANSLATE_KEYS: ${{ secrets.GEMINI_TRANSLATE_KEYS }}
           GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY || secrets.GROK_API_KEY }}
         run: |
@@ -554,7 +555,7 @@ jobs:
           echo "Gerando as duas versões de legendas (.com_orador e pura) em .srt e .ass..."
           python3 gerar_versoes_legendas.py "traducao_raw.srt" "$STEM" .
           echo "Executando Quality Gate (Linter de Legendas)..."
-          python3 lint_legendas.py "$STEM.pt-BR.srt" -o input.srt -a "$STEM.ass" || true
+          python3 lint_legendas.py "$STEM.pt-BR.srt" -o input.srt -a "$STEM.ass"
 
       - name: Conectar à VPN para enviar as legendas
         if: ${{ inputs.network_mode == 'vpn' }}
@@ -609,8 +610,10 @@ jobs:
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          VIDEO_FILENAME_INPUT: ${{ inputs.video_filename }}
+          SEASON_INPUT: ${{ inputs.season }}
         run: |
-          MSG="🎉 Episódio *${{ inputs.video_filename }}* legendado com sucesso!\n📁 4 versões (.srt e .ass) sincronizadas no FTP (${{ inputs.season }})."
+          MSG="🎉 Episódio *$VIDEO_FILENAME_INPUT* legendado com sucesso!\n📁 4 versões (.srt e .ass) sincronizadas no FTP ($SEASON_INPUT)."
           python3 notificar_whatsapp.py "$MSG" --status success || true
 
       - name: Notificar Falha via WhatsApp (Evolution API)
@@ -620,6 +623,7 @@ jobs:
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          VIDEO_FILENAME_INPUT: ${{ inputs.video_filename }}
         run: |
-          MSG="⚠️ Falha ao legendar *${{ inputs.video_filename }}* no workflow GitHub Actions."
+          MSG="⚠️ Falha ao legendar *$VIDEO_FILENAME_INPUT* no workflow GitHub Actions."
           python3 notificar_whatsapp.py "$MSG" --status error || true

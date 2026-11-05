@@ -76,17 +76,20 @@ jobs:
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          NOTIFICATION_MESSAGE: ${{ inputs.mensagem }}
+          NOTIFICATION_STATUS: ${{ inputs.status }}
+          CUSTOM_RECIPIENT: ${{ inputs.recipient }}
         run: |
           set -euo pipefail
           
           ARGS=(
-            "${{ inputs.mensagem }}"
-            "--status" "${{ inputs.status }}"
+            "$NOTIFICATION_MESSAGE"
+            "--status" "$NOTIFICATION_STATUS"
             "--fail-on-error"
           )
           
-          if [[ -n "${{ inputs.recipient }}" ]]; then
-            ARGS+=("--to" "${{ inputs.recipient }}")
+          if [[ -n "$CUSTOM_RECIPIENT" ]]; then
+            ARGS+=("--to" "$CUSTOM_RECIPIENT")
           fi
           
           echo "Enviando mensagem..."

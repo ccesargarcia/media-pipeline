@@ -8,6 +8,7 @@ import json
 import os
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 
@@ -34,7 +35,7 @@ def enviar_mensagem_whatsapp(
 
     numero_limpo = "".join(filter(str.isdigit, destinatario))
     if not numero_limpo:
-        print(f"[WhatsApp] Erro: Destinatário inválido: {destinatario}", file=sys.stderr)
+        print("[WhatsApp] Erro: Destinatário inválido.", file=sys.stderr)
         return False
 
     endpoint = f"{api_url}/message/sendText/{urllib.parse.quote(instance)}"
@@ -54,7 +55,8 @@ def enviar_mensagem_whatsapp(
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             if resp.status in (200, 201):
-                print(f"[WhatsApp] Notificação enviada com sucesso para {numero_limpo}.", flush=True)
+                sufixo = numero_limpo[-4:] if len(numero_limpo) >= 4 else "****"
+                print(f"[WhatsApp] Notificação enviada com sucesso para o número terminado em {sufixo}.", flush=True)
                 return True
             else:
                 print(f"[WhatsApp] Resposta inesperada: HTTP {resp.status}", file=sys.stderr)

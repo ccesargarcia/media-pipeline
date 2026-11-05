@@ -65,25 +65,33 @@ def srt_to_ass(srt_path: Path, ass_path: Path):
     print(f"Gerado {ass_path.name} com {len(events)} eventos.", flush=True)
 
 
-SPEAKER_PATTERN = r'(?:\[[^\]]+\]|[A-ZÀ-ÖØ-Þ\u0100-\u017F][A-Za-zÀ-öø-ÿ\u0100-\u017F\.\'\-]+(?:\s+[A-Za-zÀ-öø-ÿ\u0100-\u017F\.\'\-]+){0,2})'
+SPEAKER_NAMES = (
+    "Dona Sadakat", "Senhora Sadakat", "Sadakat Hanım", "Cihan Albora", "Alya Albora",
+    "Boran Albora", "Kaya Albora", "Şahin Albora", "Nare Albora", "Deniz Albora",
+    "Demir Baybars", "Ecmel Albora", "Güler Haşmetlioğlu", "Dr. Yalçın", "Fidan Albora",
+    "Cihan", "Sadakat", "Alya", "Boran", "Kaya", "İpek", "Şahin", "Nare", "Deniz",
+    "Demir", "Ecmel", "Fidan", "Zerrin", "Güler", "Mine", "Yalçın", "Pakize",
+    "Kadir", "Muzaffer", "Halis", "Özkan", "Hamada",
+)
+SPEAKER_PATTERN = r'(?:\[[^\]\n]+\]|' + '|'.join(re.escape(name) for name in SPEAKER_NAMES) + r')'
 
 
 def strip_speaker_tags(text: str) -> str:
     # 1. Início de linha (trata tags simples e duplicadas)
     while True:
-        novo = re.sub(r'^(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', '', text)
+        novo = re.sub(r'^(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', '', text, flags=re.IGNORECASE)
         if novo == text:
             break
         text = novo
     # 2. Após quebra de linha (\n ou \N)
     while True:
-        novo = re.sub(r'(\\N|\n)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+        novo = re.sub(r'(\\N|\n)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text, flags=re.IGNORECASE)
         if novo == text:
             break
         text = novo
     # 3. Após barra divisória /
     while True:
-        novo = re.sub(r'(\s*/\s*)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text)
+        novo = re.sub(r'(\s*/\s*)(?:-\s*)?' + SPEAKER_PATTERN + r':\s*', r'\1', text, flags=re.IGNORECASE)
         if novo == text:
             break
         text = novo

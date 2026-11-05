@@ -8272,7 +8272,7 @@ Gritaram!
 
 2069
 02:05:22,043 --> 02:05:23,103
-"Seu pai é um assassino!"
+Dizendo: "Seu pai é um assassino!"
 
 2070
 02:05:23,913 --> 02:05:24,953

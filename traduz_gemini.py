@@ -351,12 +351,12 @@ def main():
                 detalhe = e.read().decode("utf-8", "replace")[:300]
                 if e.code in (429, 500, 502, 503, 504) and tentativa < 9:
                     espera = 25 + (tentativa * 10)
-                    # 1. Tenta rotacionar para próxima chave do pool primeiro (evita espera se houver outra chave disponível)
-                    if len(api_keys) > 1:
+                    # Só cota negada justifica trocar a chave; chaves do mesmo projeto podem compartilhar a cota.
+                    # O backoff progressivo continua ativo para não martelar uma cota compartilhada ou um serviço indisponível.
+                    if e.code == 429 and len(api_keys) > 1:
                         key_index = (key_index + 1) % len(api_keys)
                         api_key = api_keys[key_index]
                         print(f"Instabilidade/Cota (HTTP {e.code}). Alternando para chave #{key_index + 1}/{len(api_keys)} do pool...", file=sys.stderr, flush=True)
-                        espera = 5  # Espera reduzida porque estamos usando uma conta/chave diferente!
 
                     # 2. Rotaciona modelo se aplicável
                     modelo_antigo = modelo
