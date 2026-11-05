@@ -1,0 +1,2247 @@
+[Script Info]
+Title: Legenda PT-BR (Tarja Preta Delimitada + Amarelo)
+ScriptType: v4.00+
+PlayResX: 1280
+PlayResY: 720
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,36,&H0000FFFF,&H0000FFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,3,10,0,2,40,40,68,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:07.14,0:00:08.94,Default,,0,0,0,,Eu o mato.
+Dialogue: 0,0:01:36.26,0:01:38.62,Default,,0,0,0,,Ele não tentaria me matar.
+Dialogue: 0,0:01:39.20,0:01:40.06,Default,,0,0,0,,Você está enganado.
+Dialogue: 0,0:01:40.14,0:01:41.46,Default,,0,0,0,,Eu não teria ficado nesse estado.
+Dialogue: 0,0:01:41.54,0:01:42.68,Default,,0,0,0,,Olha, você não o conhece.
+Dialogue: 0,0:01:43.10,0:01:44.72,Default,,0,0,0,,Eu não teria perdido a Alya.
+Dialogue: 0,0:01:45.59,0:01:47.09,Default,,0,0,0,,Eu não teria perdido meu filho.
+Dialogue: 0,0:01:47.88,0:01:49.46,Default,,0,0,0,,Eu não teria chegado a esse ponto.
+Dialogue: 0,0:01:49.56,0:01:51.04,Default,,0,0,0,,Vocês roubaram tudo de mim, tudo.
+Dialogue: 0,0:01:51.12,0:01:52.52,Default,,0,0,0,,Vocês roubaram a minha vida.
+Dialogue: 0,0:01:52.66,0:01:54.02,Default,,0,0,0,,Vocês roubaram a minha vida.
+Dialogue: 0,0:01:54.16,0:01:55.50,Default,,0,0,0,,Vocês roubaram tudo o que eu tinha.
+Dialogue: 0,0:01:56.52,0:01:58.44,Default,,0,0,0,,Quero tudo de volta, tudo.
+Dialogue: 0,0:01:58.66,0:01:59.26,Default,,0,0,0,,Tudo.
+Dialogue: 0,0:01:59.74,0:02:00.47,Default,,0,0,0,,Tudo.
+Dialogue: 0,0:02:01.20,0:02:02.97,Default,,0,0,0,,Quero tudo de volta.
+Dialogue: 0,0:02:04.01,0:02:04.81,Default,,0,0,0,,Quero de volta.
+Dialogue: 0,0:02:04.83,0:02:07.19,Default,,0,0,0,,Você estava planejando o amanhã, meu querido.
+Dialogue: 0,0:02:16.26,0:02:18.06,Default,,0,0,0,,Tomei minha decisão.
+Dialogue: 0,0:02:23.25,0:02:26.19,Default,,0,0,0,,Alya é minha esposa, Deniz é meu filho.
+Dialogue: 0,0:02:29.89,0:02:32.83,Default,,0,0,0,,Alya é minha esposa, Deniz é meu filho.
+Dialogue: 0,0:02:36.94,0:02:39.03,Default,,0,0,0,,Não vou deixá-los.
+Dialogue: 0,0:02:43.44,0:02:45.81,Default,,0,0,0,,Ninguém vai tirá-los de mim, ninguém.
+Dialogue: 0,0:02:56.62,0:02:58.42,Default,,0,0,0,,Aqui.
+Dialogue: 0,0:03:15.29,0:03:17.65,Default,,0,0,0,,Quero minha esposa de volta, Nare.
+Dialogue: 0,0:03:18.59,0:03:20.61,Default,,0,0,0,,Quero meu filho e minha esposa de volta.
+Dialogue: 0,0:03:39.83,0:03:41.73,Default,,0,0,0,,Não sou sua esposa.
+Dialogue: 0,0:03:52.78,0:03:55.42,Default,,0,0,0,,Na verdade, legalmente, você ainda é a esposa dele.
+Dialogue: 0,0:03:55.90,0:03:57.70,Default,,0,0,0,,Minha mãe, minha irmã.
+Dialogue: 0,0:04:06.87,0:04:10.80,Default,,0,0,0,,Alya, o que você não quis? Quanto mais ele vai dizer, quanto mais vai forçar?
+Dialogue: 0,0:04:13.40,0:04:15.88,Default,,0,0,0,,Então você continuará casada com ele.
+Dialogue: 0,0:04:20.16,0:04:21.86,Default,,0,0,0,,Você ficaria muito feliz se eu não tivesse sobrevivido, não é, Cihan?
+Dialogue: 0,0:04:21.94,0:04:25.20,Default,,0,0,0,,Ele foi até Istambul para te salvar.
+Dialogue: 0,0:04:36.51,0:04:38.06,Default,,0,0,0,,Ele te trouxe para te manter vivo.
+Dialogue: 0,0:04:38.85,0:04:41.71,Default,,0,0,0,,Os dois arriscaram a vida para você viver, não faça isso.
+Dialogue: 0,0:04:42.14,0:04:43.08,Default,,0,0,0,,Não faça isso, irmão.
+Dialogue: 0,0:04:43.81,0:04:48.83,Default,,0,0,0,,Enquanto você dormia, enquanto você dormia, esse homem, mesmo doente, encarou a morte...
+Dialogue: 0,0:04:50.04,0:04:52.32,Default,,0,0,0,,...se sacrificou e tentou te dar o rim dele.
+Dialogue: 0,0:04:52.75,0:04:53.73,Default,,0,0,0,,Ele quase morreu na mesa de cirurgia.
+Dialogue: 0,0:04:53.89,0:04:57.05,Default,,0,0,0,,Se não fosse pela Alya, talvez nenhum de vocês estivesse aqui. Alya te deu o rim dela.
+Dialogue: 0,0:04:58.74,0:05:00.16,Default,,0,0,0,,Você está sendo injusto, irmão, não faça isso.
+Dialogue: 0,0:05:02.33,0:05:04.81,Default,,0,0,0,,Você me deu o seu rim?
+Dialogue: 0,0:05:07.04,0:05:09.13,Default,,0,0,0,,Dei, claro que dei.
+Dialogue: 0,0:05:10.42,0:05:13.15,Default,,0,0,0,,Você é o pai do meu filho, é claro que eu dei.
+Dialogue: 0,0:05:13.63,0:05:16.35,Default,,0,0,0,,Quer você acordasse ou não, eu sempre quis que você vivesse.
+Dialogue: 0,0:05:16.73,0:05:18.37,Default,,0,0,0,,Eu quis muito que você vivesse.
+Dialogue: 0,0:05:18.51,0:05:19.57,Default,,0,0,0,,Claro que eu dei.
+Dialogue: 0,0:05:22.05,0:05:24.67,Default,,0,0,0,,Você é o pai do meu Deniz.
+Dialogue: 0,0:05:27.77,0:05:28.47,Default,,0,0,0,,Caia na real.
+Dialogue: 0,0:05:33.94,0:05:35.88,Default,,0,0,0,,Mas eu não sou a mulher que você deixou.
+Dialogue: 0,0:05:35.96,0:05:37.38,Default,,0,0,0,,Eu já disse isso várias vezes.
+Dialogue: 0,0:05:37.70,0:05:39.99,Default,,0,0,0,,Não sou aquela Alya que você deixou para trás.
+Dialogue: 0,0:05:42.22,0:05:44.86,Default,,0,0,0,,Por favor, vamos resolver isso sem destruir tudo.
+Dialogue: 0,0:05:45.34,0:05:46.14,Default,,0,0,0,,Por favor.
+Dialogue: 0,0:05:45.74,0:05:48.10,Default,,0,0,0,,Olha, você é o pai do Deniz.
+Dialogue: 0,0:05:49.17,0:05:51.92,Default,,0,0,0,,Mas agora eu sou a esposa do Cihan.
+Dialogue: 0,0:05:59.37,0:06:01.65,Default,,0,0,0,,Por favor, não vamos destruir o nosso filho.
+Dialogue: 0,0:06:02.43,0:06:02.95,Default,,0,0,0,,Por favor.
+Dialogue: 0,0:06:03.92,0:06:05.83,Default,,0,0,0,,Por favor, que ninguém saia ferido.
+Dialogue: 0,0:06:05.91,0:06:06.85,Default,,0,0,0,,Que ninguém sofra.
+Dialogue: 0,0:06:06.97,0:06:08.19,Default,,0,0,0,,Que ninguém fique com raiva.
+Dialogue: 0,0:06:08.77,0:06:10.26,Default,,0,0,0,,Por favor.
+Dialogue: 0,0:06:11.76,0:06:17.28,Default,,0,0,0,,Fique conosco como pai do nosso filho, mas deixe-me ficar ao lado do Cihan como esposa.
+Dialogue: 0,0:06:17.42,0:06:18.74,Default,,0,0,0,,Por favor, caia na real.
+Dialogue: 0,0:06:19.22,0:06:21.62,Default,,0,0,0,,Olha, para que nosso filho não sofra por nenhum dos lados.
+Dialogue: 0,0:06:22.04,0:06:23.58,Default,,0,0,0,,Que nosso filho não seja destruído.
+Dialogue: 0,0:06:23.70,0:06:26.31,Default,,0,0,0,,Que nosso filho não sofra, Boran, por favor.
+Dialogue: 0,0:06:43.12,0:06:43.40,Default,,0,0,0,,Não.
+Dialogue: 0,0:06:45.04,0:06:47.46,Default,,0,0,0,,Eu nunca vou te deixar, Alya.
+Dialogue: 0,0:06:48.40,0:06:49.24,Default,,0,0,0,,Vamos esquecer tudo.
+Dialogue: 0,0:06:49.40,0:06:50.42,Default,,0,0,0,,Podemos começar de novo.
+Dialogue: 0,0:06:50.50,0:06:51.20,Default,,0,0,0,,Eu não quero.
+Dialogue: 0,0:06:51.72,0:06:53.17,Default,,0,0,0,,Eu não quero!
+Dialogue: 0,0:06:53.29,0:06:54.67,Default,,0,0,0,,Não posso continuar casada com você.
+Dialogue: 0,0:06:55.17,0:06:56.73,Default,,0,0,0,,Eu nem te conheço mais.
+Dialogue: 0,0:06:57.68,0:06:58.16,Default,,0,0,0,,Por favor.
+Dialogue: 0,0:06:58.60,0:06:59.86,Default,,0,0,0,,Eu não quero.
+Dialogue: 0,0:06:59.94,0:07:01.74,Default,,0,0,0,,O que eu faço então?
+Dialogue: 0,0:07:01.90,0:07:03.16,Default,,0,0,0,,O que eu faço?
+Dialogue: 0,0:07:03.24,0:07:04.57,Default,,0,0,0,,Me divorcio de você?
+Dialogue: 0,0:07:04.65,0:07:06.37,Default,,0,0,0,,E você vai e se casa com o Cihan, é isso?
+Dialogue: 0,0:07:06.45,0:07:07.51,Default,,0,0,0,,Nada disso.
+Dialogue: 0,0:07:07.59,0:07:10.66,Default,,0,0,0,,Eu não vou aceitar vocês ficarem juntos.
+Dialogue: 0,0:07:11.63,0:07:14.44,Default,,0,0,0,,Não vou permitir que continuem casados.
+Dialogue: 0,0:07:15.05,0:07:17.21,Default,,0,0,0,,Cihan, você vai se divorciar, Cihan.
+Dialogue: 0,0:07:20.51,0:07:21.90,Default,,0,0,0,,Vai se divorciar.
+Dialogue: 0,0:07:21.98,0:07:25.18,Default,,0,0,0,,Alya, Alya, não vou permitir que continuem casados.
+Dialogue: 0,0:07:25.26,0:07:27.36,Default,,0,0,0,,Não vai permitir, é?
+Dialogue: 0,0:07:28.36,0:07:30.16,Default,,0,0,0,,Pois bem, já que é assim...
+Dialogue: 0,0:07:30.94,0:07:33.49,Default,,0,0,0,,Vá e recupere sua antiga identidade.
+Dialogue: 0,0:07:34.80,0:07:37.87,Default,,0,0,0,,Eu vivo com a identidade de Ömer Bakır.
+Dialogue: 0,0:07:44.42,0:07:47.94,Default,,0,0,0,,Vai continuar casado com a minha mulher só porque eu não posso aparecer?
+Dialogue: 0,0:07:48.02,0:07:49.82,Default,,0,0,0,,Não, já que é assim...
+Dialogue: 0,0:07:51.33,0:07:53.88,Default,,0,0,0,,Vá e recupere sua antiga identidade.
+Dialogue: 0,0:07:55.35,0:07:57.10,Default,,0,0,0,,Aí sim conversaremos.
+Dialogue: 0,0:07:57.18,0:08:00.90,Default,,0,0,0,,Pela primeira vez, assuma a responsabilidade e faça isso.
+Dialogue: 0,0:08:04.93,0:08:09.69,Default,,0,0,0,,Mas mesmo que você deixe o Ömer Bakır de lado e assuma quem você é...
+Dialogue: 0,0:08:09.97,0:08:13.77,Default,,0,0,0,,Mesmo que saia desta mansão e grite que é o Boran Albora...
+Dialogue: 0,0:08:13.85,0:08:15.89,Default,,0,0,0,,Mesmo que aceite tudo...
+Dialogue: 0,0:08:15.97,0:08:17.17,Default,,0,0,0,,Acabou.
+Dialogue: 0,0:08:17.25,0:08:19.15,Default,,0,0,0,,Eu não te quero.
+Dialogue: 0,0:08:23.53,0:08:26.73,Default,,0,0,0,,Não tem nada a ver com a sua identidade, eu simplesmente não te quero.
+Dialogue: 0,0:08:26.81,0:08:28.71,Default,,0,0,0,,Eu não te conheço.
+Dialogue: 0,0:08:29.02,0:08:31.60,Default,,0,0,0,,Eu disse que não te conheço, por isso não te quero.
+Dialogue: 0,0:08:31.68,0:08:34.03,Default,,0,0,0,,Vá buscar sua identidade de Boran Albora.
+Dialogue: 0,0:08:34.98,0:08:36.78,Default,,0,0,0,,Traga ela e conversaremos.
+Dialogue: 0,0:08:38.13,0:08:39.27,Default,,0,0,0,,Se tiver coragem, é claro.
+Dialogue: 0,0:08:41.51,0:08:44.37,Default,,0,0,0,,Não vai sentir medo nem se esconder, como fez no momento do acidente.
+Dialogue: 0,0:08:45.31,0:08:48.90,Default,,0,0,0,,Eu te dou minha palavra aqui, na frente de todos.
+Dialogue: 0,0:08:50.00,0:08:50.70,Default,,0,0,0,,Eu vou te proteger.
+Dialogue: 0,0:08:52.29,0:08:53.07,Default,,0,0,0,,Eu vou te proteger.
+Dialogue: 0,0:08:54.31,0:08:55.93,Default,,0,0,0,,Mas não se esqueça disto, guarde bem.
+Dialogue: 0,0:08:56.91,0:09:01.28,Default,,0,0,0,,No dia em que você assumir ser o Boran Albora, a Alya vai se divorciar de você.
+Dialogue: 0,0:09:41.12,0:09:43.93,Default,,0,0,0,,Vamos começar vendo o meu filho.
+Dialogue: 0,0:09:46.44,0:09:48.07,Default,,0,0,0,,Como é?
+Dialogue: 0,0:09:50.37,0:09:52.73,Default,,0,0,0,,Meu filho vai saber que estou vivo.
+Dialogue: 0,0:09:54.14,0:09:54.64,Default,,0,0,0,,Boran.
+Dialogue: 0,0:09:54.88,0:09:56.54,Default,,0,0,0,,É claro que ele vai saber, Boran.
+Dialogue: 0,0:09:57.18,0:09:58.83,Default,,0,0,0,,Boran, o que você está pensando?
+Dialogue: 0,0:09:58.91,0:10:02.11,Default,,0,0,0,,Acha que alguém aqui não quer que você o veja?
+Dialogue: 0,0:10:02.33,0:10:05.28,Default,,0,0,0,,Você é o pai dele, como poderia ser diferente?
+Dialogue: 0,0:10:05.36,0:10:07.02,Default,,0,0,0,,Claro que vai vê-lo, ele é seu filho.
+Dialogue: 0,0:10:07.50,0:10:09.86,Default,,0,0,0,,Mas estou dizendo que não pode ser assim.
+Dialogue: 0,0:10:11.22,0:10:11.90,Default,,0,0,0,,Veja o que a Alya disse.
+Dialogue: 0,0:10:12.52,0:10:14.34,Default,,0,0,0,,"sem destruir a vida daquela criança".
+Dialogue: 0,0:10:14.68,0:10:15.02,Default,,0,0,0,,Não.
+Dialogue: 0,0:10:15.92,0:10:17.70,Default,,0,0,0,,"sem arruinar a vida daquela criança".
+Dialogue: 0,0:10:17.82,0:10:18.66,Default,,0,0,0,,Ela falou com toda a calma.
+Dialogue: 0,0:10:19.29,0:10:22.11,Default,,0,0,0,,Se for para ter uma conversa sobre isso, não será você.
+Dialogue: 0,0:10:22.83,0:10:24.09,Default,,0,0,0,,Nem eu, nem ninguém daqui.
+Dialogue: 0,0:10:24.50,0:10:25.10,Default,,0,0,0,,Alya vai.
+Dialogue: 0,0:10:25.51,0:10:27.19,Default,,0,0,0,,É direito dela, afinal, ela é a mãe.
+Dialogue: 0,0:10:27.83,0:10:31.16,Default,,0,0,0,,Olha, eu tenho uma responsabilidade com aquela criança.
+Dialogue: 0,0:10:32.50,0:10:36.75,Default,,0,0,0,,Aquela criança não vai ser vítima da ambição de ninguém e ter a vida virada do avesso.
+Dialogue: 0,0:10:36.83,0:10:38.73,Default,,0,0,0,,Aonde vocês vão?
+Dialogue: 0,0:10:42.58,0:10:45.02,Default,,0,0,0,,Alya, você é minha esposa, Alya.
+Dialogue: 0,0:10:45.83,0:10:46.72,Default,,0,0,0,,Olha.
+Dialogue: 0,0:10:47.34,0:10:50.41,Default,,0,0,0,,O casamento civil se assina, o tribunal desfaz.
+Dialogue: 0,0:10:52.22,0:10:55.48,Default,,0,0,0,,Mas a pessoa escolhe com quem vai ficar de costas dadas, como a Alya.
+Dialogue: 0,0:10:56.87,0:10:57.81,Default,,0,0,0,,Vamos, Alya.
+Dialogue: 0,0:10:58.91,0:10:59.93,Default,,0,0,0,,Alya, você não pode ir.
+Dialogue: 0,0:11:00.01,0:11:00.55,Default,,0,0,0,,Tá bom, chega.
+Dialogue: 0,0:11:00.83,0:11:01.15,Default,,0,0,0,,Alya.
+Dialogue: 0,0:11:01.45,0:11:02.97,Default,,0,0,0,,Alya, você não pode ir, Alya.
+Dialogue: 0,0:11:03.63,0:11:04.27,Default,,0,0,0,,Alya.
+Dialogue: 0,0:11:04.59,0:11:05.07,Default,,0,0,0,,Irmão.
+Dialogue: 0,0:11:06.88,0:11:08.68,Default,,0,0,0,,Alya.
+Dialogue: 0,0:11:11.56,0:11:13.51,Default,,0,0,0,,Me leve para algum lugar longe DAQUELA casa, por favor.
+Dialogue: 0,0:11:14.20,0:11:14.44,Default,,0,0,0,,Tá bom.
+Dialogue: 0,0:11:14.60,0:11:14.91,Default,,0,0,0,,Tá bom.
+Dialogue: 0,0:11:15.17,0:11:16.80,Default,,0,0,0,,Vou pegar nossos casacos.
+Dialogue: 0,0:11:19.90,0:11:22.19,Default,,0,0,0,,Alya, nós vamos saindo agora.
+Dialogue: 0,0:11:24.07,0:11:29.31,Default,,0,0,0,,Cihan está dormindo no quarto, não saia de perto dele, viu? Fique lá ou diga para não deixarem ninguém entrar e tranque a porta.
+Dialogue: 0,0:11:29.39,0:11:30.19,Default,,0,0,0,,Pode deixar, irmão.
+Dialogue: 0,0:11:30.23,0:11:31.03,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:11:30.57,0:11:32.37,Default,,0,0,0,,Obrigado.
+Dialogue: 0,0:11:33.05,0:11:34.31,Default,,0,0,0,,O Deniz está sob sua responsabilidade.
+Dialogue: 0,0:11:34.39,0:11:35.69,Default,,0,0,0,,Não se preocupe.
+Dialogue: 0,0:11:35.77,0:11:37.57,Default,,0,0,0,,Vamos, vamos, vamos.
+Dialogue: 0,0:11:37.68,0:11:39.48,Default,,0,0,0,,Alya.
+Dialogue: 0,0:11:45.75,0:11:46.55,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:11:46.46,0:11:47.26,Default,,0,0,0,,Irmão, chega.
+Dialogue: 0,0:11:47.24,0:11:48.40,Default,,0,0,0,,Nem olha para trás, vamos.
+Dialogue: 0,0:11:48.48,0:11:49.28,Default,,0,0,0,,Não vai acontecer nada.
+Dialogue: 0,0:11:49.28,0:11:50.74,Default,,0,0,0,,Pelo amor de Deus.
+Dialogue: 0,0:11:50.82,0:11:51.62,Default,,0,0,0,,Cihan.
+Dialogue: 0,0:11:51.48,0:11:52.82,Default,,0,0,0,,Tá bom, tá bom, tá bom.
+Dialogue: 0,0:11:52.90,0:11:54.74,Default,,0,0,0,,Cuidado, olha lá, vai cair.
+Dialogue: 0,0:11:56.64,0:11:58.02,Default,,0,0,0,,Com você não acontece nada.
+Dialogue: 0,0:11:58.10,0:11:58.90,Default,,0,0,0,,Devagar.
+Dialogue: 0,0:11:58.90,0:12:00.30,Default,,0,0,0,,Mãe, devagar, devagar.
+Dialogue: 0,0:12:00.38,0:12:02.10,Default,,0,0,0,,Alya, aonde você vai, Alya?
+Dialogue: 0,0:12:02.18,0:12:04.27,Default,,0,0,0,,Alya, você é minha esposa!
+Dialogue: 0,0:12:04.71,0:12:05.54,Default,,0,0,0,,Cihan!
+Dialogue: 0,0:12:05.62,0:12:08.17,Default,,0,0,0,,Cihan, para onde você está levando ele?
+Dialogue: 0,0:12:09.18,0:12:10.98,Default,,0,0,0,,Cihan!
+Dialogue: 0,0:12:12.57,0:12:14.37,Default,,0,0,0,,Cihan!
+Dialogue: 0,0:12:20.96,0:12:24.49,Default,,0,0,0,,Meu filho, meu filho, ninguém vai tirar ele de mim.
+Dialogue: 0,0:12:25.93,0:12:26.85,Default,,0,0,0,,O que você está fazendo?
+Dialogue: 0,0:12:26.93,0:12:27.85,Default,,0,0,0,,Para, o que você tá fazendo?
+Dialogue: 0,0:12:27.93,0:12:31.13,Default,,0,0,0,,Vou tomar meu luto e minha dor à força.
+Dialogue: 0,0:12:34.69,0:12:36.52,Default,,0,0,0,,Vou tirar isso à força.
+Dialogue: 0,0:12:38.89,0:12:40.69,Default,,0,0,0,,Deixe-o relaxar.
+Dialogue: 0,0:12:41.16,0:12:42.10,Default,,0,0,0,,Deixe-o relaxar.
+Dialogue: 0,0:12:42.18,0:12:43.98,Default,,0,0,0,,Irmão.
+Dialogue: 0,0:12:44.90,0:12:45.82,Default,,0,0,0,,Ah, Ayşen, ah.
+Dialogue: 0,0:12:45.90,0:12:47.80,Default,,0,0,0,,Só eu devo procurar?
+Dialogue: 0,0:14:11.42,0:14:13.64,Default,,0,0,0,,Devo chorar pelos dias que se foram?
+Dialogue: 0,0:14:16.03,0:14:18.51,Default,,0,0,0,,Sou uma ferida aberta que não fecha.
+Dialogue: 0,0:14:20.82,0:14:22.62,Default,,0,0,0,,É aqui?
+Dialogue: 0,0:14:39.06,0:14:40.86,Default,,0,0,0,,Uhum.
+Dialogue: 0,0:14:43.96,0:14:46.97,Default,,0,0,0,,Vou sentar um pouco. Muito obrigado.
+Dialogue: 0,0:14:54.15,0:14:56.07,Default,,0,0,0,,Sejam bem-vindos, senhora mãe. Sejam bem-vindo, Cihan Bey.
+Dialogue: 0,0:14:56.15,0:14:57.07,Default,,0,0,0,,Boa noite.
+Dialogue: 0,0:14:57.15,0:14:58.29,Default,,0,0,0,,Gostariam de um xarope de Reyhan?
+Dialogue: 0,0:14:58.37,0:14:59.42,Default,,0,0,0,,Pode ser.
+Dialogue: 0,0:14:59.50,0:15:01.34,Default,,0,0,0,,O que desejam pedir?
+Dialogue: 0,0:15:04.31,0:15:06.26,Default,,0,0,0,,Algumas das melhores comidas, por favor.
+Dialogue: 0,0:15:06.34,0:15:10.64,Default,,0,0,0,,Lembra do jantar que comemos a sós? O jantar.
+Dialogue: 0,0:15:19.88,0:15:21.73,Default,,0,0,0,,Nosso primeiro jantar a sós.
+Dialogue: 0,0:15:21.81,0:15:25.86,Default,,0,0,0,,Primeiro? Vamos chamar de nosso único jantar a sós.
+Dialogue: 0,0:15:26.73,0:15:28.09,Default,,0,0,0,,Verdade.
+Dialogue: 0,0:15:28.17,0:15:33.41,Default,,0,0,0,,Lembro, claro. Você acha mesmo que eu ia ficar te encarando desse jeito, comendo na sua frente?
+Dialogue: 0,0:15:33.49,0:15:35.41,Default,,0,0,0,,Eu até cheguei a dizer algo como: "Você não deve estar acreditando nisso".
+Dialogue: 0,0:15:35.49,0:15:36.43,Default,,0,0,0,,Foi o que eu disse.
+Dialogue: 0,0:15:36.51,0:15:38.02,Default,,0,0,0,,Lembro muito bem.
+Dialogue: 0,0:15:38.56,0:15:39.66,Default,,0,0,0,,Mas você tinha razão.
+Dialogue: 0,0:15:41.10,0:15:46.95,Default,,0,0,0,,Porque, depois que comecei a te conhecer, entendi que ainda bem que você não botou aquele lugar abaixo.
+Dialogue: 0,0:15:47.05,0:15:49.01,Default,,0,0,0,,Porque naquele dia você era capaz de fazer isso.
+Dialogue: 0,0:15:52.83,0:15:54.73,Default,,0,0,0,,E eu também tinha dito outra coisa.
+Dialogue: 0,0:15:56.19,0:16:00.09,Default,,0,0,0,,Acha que vai me trazer a lugares chiques e bonitos para me impressionar?
+Dialogue: 0,0:16:00.45,0:16:02.25,Default,,0,0,0,,"Você é adolescente, é?"
+Dialogue: 0,0:16:02.49,0:16:03.29,Default,,0,0,0,,"Bem adolescente."
+Dialogue: 0,0:16:03.66,0:16:04.73,Default,,0,0,0,,"Eu sou adolescente?"
+Dialogue: 0,0:16:04.99,0:16:05.41,Default,,0,0,0,,"É."
+Dialogue: 0,0:16:05.59,0:16:06.15,Default,,0,0,0,,Eu tinha dito isso.
+Dialogue: 0,0:16:10.12,0:16:11.91,Default,,0,0,0,,Eu não tinha comido uma única garfada.
+Dialogue: 0,0:16:12.09,0:16:12.75,Default,,0,0,0,,Não tinha comido nem bebido nada.
+Dialogue: 0,0:16:13.84,0:16:14.36,Default,,0,0,0,,Como eu ia comer?
+Dialogue: 0,0:16:15.17,0:16:19.06,Default,,0,0,0,,Você disse que ali eram os melhores pratos de Mardin, mas mesmo assim eu não comi.
+Dialogue: 0,0:16:19.14,0:16:24.33,Default,,0,0,0,,Quer dizer, lá eles fazem comida muito boa, claro, mas os melhores pratos de Mardin na verdade são estes aqui.
+Dialogue: 0,0:16:25.30,0:16:27.85,Default,,0,0,0,,Seus pratos principais estão sendo preparados.
+Dialogue: 0,0:16:32.86,0:16:33.38,Default,,0,0,0,,Certo, olhe só.
+Dialogue: 0,0:16:33.66,0:16:35.54,Default,,0,0,0,,Eu disse que os melhores pratos de Mardin eram estes.
+Dialogue: 0,0:16:35.80,0:16:36.94,Default,,0,0,0,,Considerando isso, está certo.
+Dialogue: 0,0:16:37.16,0:16:37.44,Default,,0,0,0,,Vamos lá.
+Dialogue: 0,0:16:40.18,0:16:41.52,Default,,0,0,0,,Vou experimentar isso, vou experimentar.
+Dialogue: 0,0:16:44.59,0:16:45.15,Default,,0,0,0,,Posso começar?
+Dialogue: 0,0:16:51.08,0:16:55.06,Default,,0,0,0,,Depois passei a amar muito tudo o que eu dizia que não gostava.
+Dialogue: 0,0:16:59.86,0:17:01.06,Default,,0,0,0,,Talvez eu goste da comida também.
+Dialogue: 0,0:17:02.43,0:17:02.99,Default,,0,0,0,,Você vai gostar.
+Dialogue: 0,0:17:08.05,0:17:09.85,Default,,0,0,0,,Não é.
+Dialogue: 0,0:17:12.88,0:17:13.69,Default,,0,0,0,,Tá bom.
+Dialogue: 0,0:17:14.73,0:17:15.61,Default,,0,0,0,,Muito bom.
+Dialogue: 0,0:17:16.32,0:17:18.58,Default,,0,0,0,,Mas a comida não importa mesmo.
+Dialogue: 0,0:17:19.70,0:17:20.88,Default,,0,0,0,,O que importa é com quem você compartilha.
+Dialogue: 0,0:17:22.05,0:17:24.29,Default,,0,0,0,,Diante de quem essa comida desce pela sua garganta.
+Dialogue: 0,0:17:25.92,0:17:26.72,Default,,0,0,0,,Isso é que importa.
+Dialogue: 0,0:17:26.52,0:17:28.48,Default,,0,0,0,,Sendo bom, qualquer coisa serve.
+Dialogue: 0,0:17:29.32,0:17:30.46,Default,,0,0,0,,Bom apetite.
+Dialogue: 0,0:17:30.54,0:17:33.35,Default,,0,0,0,,Estávamos sentados a uma mesa parecida.
+Dialogue: 0,0:17:34.81,0:17:37.88,Default,,0,0,0,,Aí eu te disse: case-se comigo.
+Dialogue: 0,0:17:39.52,0:17:41.55,Default,,0,0,0,,Insisti, para falar a verdade.
+Dialogue: 0,0:17:42.64,0:17:44.44,Default,,0,0,0,,E você recusou.
+Dialogue: 0,0:17:44.76,0:17:49.71,Default,,0,0,0,,Quando você recusou, eu soltei aquela história de que a geografia é o destino e tudo mais.
+Dialogue: 0,0:17:52.97,0:17:54.49,Default,,0,0,0,,Disfarcei.
+Dialogue: 0,0:17:54.57,0:17:56.37,Default,,0,0,0,,Você tinha razão.
+Dialogue: 0,0:17:59.37,0:18:02.44,Default,,0,0,0,,Você estava com toda a razão em insistir e em recusar.
+Dialogue: 0,0:18:05.02,0:18:08.09,Default,,0,0,0,,Porque isso não foi uma escolha para nós.
+Dialogue: 0,0:18:11.56,0:18:12.48,Default,,0,0,0,,Foi uma obrigação.
+Dialogue: 0,0:18:12.56,0:18:16.09,Default,,0,0,0,,Mas, dentro desse destino, eu amei tanto você, Alya.
+Dialogue: 0,0:18:22.72,0:18:26.38,Default,,0,0,0,,Juro por Deus que amei demais, juro mesmo.
+Dialogue: 0,0:18:26.61,0:18:29.88,Default,,0,0,0,,Porque esse destino trouxe você para esta terra.
+Dialogue: 0,0:18:31.29,0:18:33.09,Default,,0,0,0,,Trouxe para mim.
+Dialogue: 0,0:18:35.64,0:18:42.61,Default,,0,0,0,,E agora, sem querer, tendo que obedecer de novo, à força, sou obrigado a dizer uma frase que eu nunca quis.
+Dialogue: 0,0:18:54.76,0:18:55.64,Default,,0,0,0,,Precisamos nos separar.
+Dialogue: 0,0:18:58.74,0:19:01.10,Default,,0,0,0,,Nesta família, não existe amor feliz.
+Dialogue: 0,0:19:14.01,0:19:14.97,Default,,0,0,0,,Meu bem.
+Dialogue: 0,0:19:17.97,0:19:20.39,Default,,0,0,0,,Eu te disse para não soltar a minha mão.
+Dialogue: 0,0:19:23.28,0:19:25.17,Default,,0,0,0,,Essa minha frase não é mentira.
+Dialogue: 0,0:19:25.94,0:19:27.10,Default,,0,0,0,,É uma frase que vem do coração.
+Dialogue: 0,0:19:27.90,0:19:29.68,Default,,0,0,0,,Porque o nosso caminho é difícil.
+Dialogue: 0,0:19:31.20,0:19:32.39,Default,,0,0,0,,O nosso caminho é árduo.
+Dialogue: 0,0:19:32.53,0:19:34.63,Default,,0,0,0,,Até para alguns, o nosso caminho é muito errado.
+Dialogue: 0,0:19:36.60,0:19:42.34,Default,,0,0,0,,Mas se me perguntar, no meio de tantos erros, o nosso caminho é muito limpo.
+Dialogue: 0,0:19:47.28,0:19:53.21,Default,,0,0,0,,Se ficar ao meu lado neste caminho difícil, talvez essa minha maldição desapareça.
+Dialogue: 0,0:19:55.13,0:19:59.63,Default,,0,0,0,,E eu poderei continuar amando a mulher que amo sem perdê-la.
+Dialogue: 0,0:20:06.02,0:20:11.11,Default,,0,0,0,,Alya, você me fez perder o controle para que esse divórcio seja o nosso recomeço.
+Dialogue: 0,0:20:13.88,0:20:17.92,Default,,0,0,0,,Boran, fiquei com tanto medo de você se atrapalhar quando o Boran acordasse.
+Dialogue: 0,0:20:23.46,0:20:25.24,Default,,0,0,0,,Não vou mentir, fiquei com muito medo mesmo.
+Dialogue: 0,0:20:26.54,0:20:27.76,Default,,0,0,0,,Nossos pesos eram muito pesados.
+Dialogue: 0,0:20:28.76,0:20:31.77,Default,,0,0,0,,O seu peso eram responsabilidades totalmente diferentes.
+Dialogue: 0,0:20:35.29,0:20:40.63,Default,,0,0,0,,Fiquei com medo, mas você foi tão corajosa sob todo esse peso que lidamos muito bem.
+Dialogue: 0,0:20:48.34,0:20:49.79,Default,,0,0,0,,Você ficou com muito medo.
+Dialogue: 0,0:20:50.23,0:20:52.59,Default,,0,0,0,,Não é coragem, não é pecado.
+Dialogue: 0,0:20:53.97,0:20:55.77,Default,,0,0,0,,Isso é amor.
+Dialogue: 0,0:21:07.54,0:21:10.72,Default,,0,0,0,,É exatamente por isso que precisamos nos divorciar.
+Dialogue: 0,0:21:12.00,0:21:13.80,Default,,0,0,0,,O Alcorão está vivo.
+Dialogue: 0,0:21:16.10,0:21:21.34,Default,,0,0,0,,O que convém à nossa coragem, ao nosso pecado, à nossa recompensa, ao nosso amor,
+Dialogue: 0,0:21:22.24,0:21:23.62,Default,,0,0,0,,e também ao nosso bom senso, é isso.
+Dialogue: 0,0:21:25.82,0:21:26.68,Default,,0,0,0,,Precisamos nos divorciar.
+Dialogue: 0,0:21:29.89,0:21:31.98,Default,,0,0,0,,Sim, temos que nos divorciar.
+Dialogue: 0,0:21:48.18,0:21:50.99,Default,,0,0,0,,Afinal, nunca fomos um casamento de verdade.
+Dialogue: 0,0:21:53.09,0:21:54.85,Default,,0,0,0,,O nosso também é um casamento só no papel.
+Dialogue: 0,0:21:56.29,0:21:58.51,Default,,0,0,0,,Que o nosso divórcio também seja no papel.
+Dialogue: 0,0:21:59.64,0:22:00.46,Default,,0,0,0,,Vai ser assim.
+Dialogue: 0,0:22:03.29,0:22:04.76,Default,,0,0,0,,Não éramos um casamento de verdade.
+Dialogue: 0,0:22:07.28,0:22:09.08,Default,,0,0,0,,De um jeito ou de outro.
+Dialogue: 0,0:22:11.51,0:22:14.17,Default,,0,0,0,,Desde o início, você não pôde me abraçar como queria.
+Dialogue: 0,0:22:17.90,0:22:18.70,Default,,0,0,0,,Nem eu a você.
+Dialogue: 0,0:22:18.50,0:22:22.09,Default,,0,0,0,,Mas um dia eu vou sentar de novo na mesa de casamento.
+Dialogue: 0,0:22:34.00,0:22:36.03,Default,,0,0,0,,Com você, ao seu lado.
+Dialogue: 0,0:22:40.71,0:22:43.44,Default,,0,0,0,,E vou gritar com toda a minha voz.
+Dialogue: 0,0:22:52.96,0:22:55.06,Default,,0,0,0,,Porque só assim poderemos
+Dialogue: 0,0:23:00.05,0:23:03.84,Default,,0,0,0,,nos abraçar como o nosso coração deseja.
+Dialogue: 0,0:23:04.86,0:23:05.78,Default,,0,0,0,,Eu sei.
+Dialogue: 0,0:23:07.05,0:23:10.58,Default,,0,0,0,,Só então poderemos falar o que sentimos.
+Dialogue: 0,0:23:17.17,0:23:19.20,Default,,0,0,0,,Morrer, saciar-se comigo.
+Dialogue: 0,0:23:34.97,0:23:37.26,Default,,0,0,0,,Mas é aí que talvez isso...
+Dialogue: 0,0:23:40.87,0:23:41.57,Default,,0,0,0,,Nós podemos dizer.
+Dialogue: 0,0:23:44.95,0:23:46.24,Default,,0,0,0,,Podemos dizer o que dissemos.
+Dialogue: 0,0:24:23.20,0:24:23.84,Default,,0,0,0,,Deixe-me pensar.
+Dialogue: 0,0:24:25.72,0:24:28.77,Default,,0,0,0,,Tem aquela frase absurda de que a morte mata o amor.
+Dialogue: 0,0:24:28.85,0:24:31.08,Default,,0,0,0,,Então, na separação...
+Dialogue: 0,0:24:36.46,0:24:38.88,Default,,0,0,0,,Que seu nome também esteja ao meu lado
+Dialogue: 0,0:24:52.94,0:24:54.90,Default,,0,0,0,,A promessa que você fez agorinha
+Dialogue: 0,0:24:56.83,0:24:57.93,Default,,0,0,0,,Olha só, vou te lembrar
+Dialogue: 0,0:24:58.01,0:24:59.58,Default,,0,0,0,,Vou te lembrar
+Dialogue: 0,0:24:59.66,0:25:01.49,Default,,0,0,0,,Segundo as crenças, a morte
+Dialogue: 0,0:25:08.71,0:25:10.51,Default,,0,0,0,,Até o inferno
+Dialogue: 0,0:25:11.60,0:25:13.40,Default,,0,0,0,,Morrer não amou
+Dialogue: 0,0:25:20.12,0:25:21.92,Default,,0,0,0,,Como foi?
+Dialogue: 0,0:25:35.33,0:25:38.27,Default,,0,0,0,,Eu te fiz uma pergunta, Şahin, como você estava?
+Dialogue: 0,0:25:42.07,0:25:43.98,Default,,0,0,0,,Se tiver coragem, vá perguntar para ele você mesma.
+Dialogue: 0,0:25:44.06,0:25:47.90,Default,,0,0,0,,Rapaz, olhe bem, fale comigo que nem gente ou eu te passo por cima!
+Dialogue: 0,0:25:47.98,0:25:48.78,Default,,0,0,0,,Venha passar.
+Dialogue: 0,0:25:48.78,0:25:50.01,Default,,0,0,0,,Venha, venha pegar.
+Dialogue: 0,0:25:50.09,0:25:51.23,Default,,0,0,0,,Ele também quer, não é?
+Dialogue: 0,0:25:51.31,0:25:52.55,Default,,0,0,0,,Chega, pai, pai!
+Dialogue: 0,0:25:52.63,0:25:53.71,Default,,0,0,0,,Nós temos paciência, mas...
+Dialogue: 0,0:25:53.79,0:25:56.63,Default,,0,0,0,,Palavra se diz a homem. O que eu vou te dizer?
+Dialogue: 0,0:25:57.12,0:25:58.60,Default,,0,0,0,,Para você, só se pode desejar pragas.
+Dialogue: 0,0:25:58.84,0:26:02.40,Default,,0,0,0,,Enquanto eu lamentava no que você transformou o Şahin, você atentou contra a vida do Boran.
+Dialogue: 0,0:26:02.88,0:26:04.70,Default,,0,0,0,,Você é um carrasco de filhos.
+Dialogue: 0,0:26:05.16,0:26:09.72,Default,,0,0,0,,Que Deus, tomara, meu Deus, tomara que até o inferno cuspa você para fora.
+Dialogue: 0,0:26:10.84,0:26:13.85,Default,,0,0,0,,Eu não matei o rapaz. Ele não morreu. Eu não o matei.
+Dialogue: 0,0:26:14.42,0:26:15.34,Default,,0,0,0,,Como assim, pai Ecmel?
+Dialogue: 0,0:26:17.41,0:26:18.33,Default,,0,0,0,,Quem será que você não matou?
+Dialogue: 0,0:26:25.71,0:26:28.26,Default,,0,0,0,,Eu só perguntei como o Şahin está.
+Dialogue: 0,0:26:28.82,0:26:33.32,Default,,0,0,0,,"ah, você estava quase matando o menino", "ah, ele estava quase morrendo", sei lá o quê.
+Dialogue: 0,0:26:33.64,0:26:35.92,Default,,0,0,0,,Fica falando pelos cotovelos como sempre.
+Dialogue: 0,0:26:36.31,0:26:37.17,Default,,0,0,0,,Está batendo o remorso?
+Dialogue: 0,0:26:43.40,0:26:48.94,Default,,0,0,0,,Juro que achei que o Şahin ia te matar, mas graças a Deus você está vivo e bem.
+Dialogue: 0,0:26:49.96,0:26:52.22,Default,,0,0,0,,Aquilo lá já tinha enlouquecido de vez quando raptou aquele bebê.
+Dialogue: 0,0:26:53.77,0:26:56.11,Default,,0,0,0,,Se ele souber que você tentou dar cabo do próprio filho, então...
+Dialogue: 0,0:26:56.63,0:26:58.05,Default,,0,0,0,,Ai, ai, ai.
+Dialogue: 0,0:26:59.01,0:26:59.81,Default,,0,0,0,,Mais ai ainda.
+Dialogue: 0,0:27:00.22,0:27:01.42,Default,,0,0,0,,Chega, não começa você também.
+Dialogue: 0,0:27:02.40,0:27:03.90,Default,,0,0,0,,Zerrin, anda, vamos embora.
+Dialogue: 0,0:27:04.58,0:27:05.53,Default,,0,0,0,,Não vamos.
+Dialogue: 0,0:27:05.83,0:27:05.95,Default,,0,0,0,,O quê?
+Dialogue: 0,0:27:06.30,0:27:08.14,Default,,0,0,0,,Eu não vou, vou ficar aqui até meu irmão voltar.
+Dialogue: 0,0:27:08.22,0:27:08.90,Default,,0,0,0,,Você vai sim.
+Dialogue: 0,0:27:08.98,0:27:09.44,Default,,0,0,0,,Não vou.
+Dialogue: 0,0:27:09.52,0:27:16.10,Default,,0,0,0,,Você vai. — Não vou. — Já que é assim, eu também fico aqui então. — Você não pode ficar. — Por que não vou poder? — Não sou seu marido, minha filha? Deixe-a ficar aqui com você. — Ela não pode ficar no meu quarto. — Por que eu não poderia ficar no meu quarto?
+Dialogue: 0,0:27:16.86,0:27:21.68,Default,,0,0,0,,Não sou seu marido, minha filha? Deixe-a ficar aqui com você. — Ela não pode ficar no meu quarto. — Por que eu não poderia ficar no meu quarto?
+Dialogue: 0,0:27:21.76,0:27:27.95,Default,,0,0,0,,Dona Zerrin, sabe por quê? Porque quem está ficando no quarto da Zerrin sou eu. — Ah, é mesmo? Então eu vou ficar no quarto do meu sogro! — Rapaz, vocês perderam o juízo! O meu lado...
+Dialogue: 0,0:27:35.54,0:27:41.82,Default,,0,0,0,,O lugar dela é ao lado do marido!
+Dialogue: 0,0:27:41.90,0:27:43.82,Default,,0,0,0,,O lugar dela é ao lado do marido!
+Dialogue: 0,0:27:43.90,0:27:44.88,Default,,0,0,0,,Não tirem este homem do sério!
+Dialogue: 0,0:27:44.96,0:27:45.88,Default,,0,0,0,,Ande, vá andando!
+Dialogue: 0,0:27:45.96,0:27:47.76,Default,,0,0,0,,Vire-se!
+Dialogue: 0,0:27:48.27,0:27:50.25,Default,,0,0,0,,Continue abraçada ao seu travesseiro!
+Dialogue: 0,0:27:50.33,0:27:53.25,Default,,0,0,0,,Você acha mesmo que depois de hoje eu vou pisar no seu quarto de novo?!
+Dialogue: 0,0:27:53.33,0:27:55.13,Default,,0,0,0,,Não sobrou quarto vazio!
+Dialogue: 0,0:27:58.77,0:27:59.88,Default,,0,0,0,,Agora vão com Deus!
+Dialogue: 0,0:27:59.96,0:28:01.76,Default,,0,0,0,,Você não ouviu a Zerrin!
+Dialogue: 0,0:28:04.74,0:28:07.66,Default,,0,0,0,,Ela vai ficar comigo até o irmão voltar, hein!
+Dialogue: 0,0:28:07.74,0:28:10.16,Default,,0,0,0,,Olha que o meu gênio é péssimo, hein!
+Dialogue: 0,0:28:11.05,0:28:14.38,Default,,0,0,0,,Fico quieto parecendo uma flor, mas bato como uma estaca!
+Dialogue: 0,0:28:14.97,0:28:16.77,Default,,0,0,0,,Dá o fora daqui!
+Dialogue: 0,0:28:16.86,0:28:17.78,Default,,0,0,0,,Ai, ai, ai, ai, ai!
+Dialogue: 0,0:28:17.86,0:28:18.79,Default,,0,0,0,,Mãe Fidan!
+Dialogue: 0,0:28:18.87,0:28:20.35,Default,,0,0,0,,Olha só!
+Dialogue: 0,0:28:20.43,0:28:22.29,Default,,0,0,0,,Só não digo nada por causa do respeito que tenho pela senhora, hein!
+Dialogue: 0,0:28:22.37,0:28:25.89,Default,,0,0,0,,Zerrin, amanhã venho te buscar, ouviu?
+Dialogue: 0,0:28:26.94,0:28:28.97,Default,,0,0,0,,Até mais ver, şevbaş.
+Dialogue: 0,0:28:29.37,0:28:31.17,Default,,0,0,0,,Anda, minha filha, anda.
+Dialogue: 0,0:28:32.19,0:28:33.99,Default,,0,0,0,,Essa sua praga...
+Dialogue: 0,0:28:36.26,0:28:38.06,Default,,0,0,0,,Nem ouse piar.
+Dialogue: 0,0:28:38.56,0:28:40.17,Default,,0,0,0,,É.
+Dialogue: 0,0:28:40.25,0:28:42.05,Default,,0,0,0,,Tem abóbora na despensa.
+Dialogue: 0,0:28:42.21,0:28:44.95,Default,,0,0,0,,Come um pouco para te ajudar na digestão.
+Dialogue: 0,0:28:46.81,0:28:48.84,Default,,0,0,0,,Rapaz, eu vou te dar essa abóbora...
+Dialogue: 0,0:28:57.57,0:28:59.18,Default,,0,0,0,,Me dê o aval.
+Dialogue: 0,0:28:59.26,0:29:03.43,Default,,0,0,0,,Eu aviso o Erol, ele prepara o protocolo de divórcio consensual.
+Dialogue: 0,0:29:31.11,0:29:35.15,Default,,0,0,0,,Aí, depois que a gente assinar, é só dar entrada no processo.
+Dialogue: 0,0:29:36.54,0:29:38.01,Default,,0,0,0,,Combinado.
+Dialogue: 0,0:29:38.09,0:29:42.20,Default,,0,0,0,,Amanhã de manhã também contamos que o pai do Cihan está vivo.
+Dialogue: 0,0:29:44.86,0:29:46.66,Default,,0,0,0,,Vamos contar.
+Dialogue: 0,0:29:49.02,0:29:52.15,Default,,0,0,0,,Vamos contar, mas eu estou com tanto medo, Cihan.
+Dialogue: 0,0:29:54.96,0:29:56.21,Default,,0,0,0,,Estou com muito medo.
+Dialogue: 0,0:29:57.23,0:30:00.81,Default,,0,0,0,,Quando chegarmos diante dele e dissemos que o seu pai na verdade não morreu, que está vivo... O garoto...
+Dialogue: 0,0:30:03.07,0:30:05.23,Default,,0,0,0,,O que ele vai sentir? Será que vai aguentar?
+Dialogue: 0,0:30:05.85,0:30:08.80,Default,,0,0,0,,Será que vai perder a fé que tem em nós? O que vai ser dele?
+Dialogue: 0,0:30:09.80,0:30:11.24,Default,,0,0,0,,Estou com tanto medo.
+Dialogue: 0,0:30:12.14,0:30:15.53,Default,,0,0,0,,Você tem razão de ter medo. Eu também estou com medo, Cihan.
+Dialogue: 0,0:30:16.83,0:30:20.36,Default,,0,0,0,,Mas o Cihan é um menino muito forte. De verdade, ele é.
+Dialogue: 0,0:30:22.68,0:30:23.13,Default,,0,0,0,,É sim.
+Dialogue: 0,0:30:24.34,0:30:30.79,Default,,0,0,0,,Tá, talvez essa notícia vá abrir uma ferida no coração dele, mas nós vamos superar essa ferida juntos.
+Dialogue: 0,0:30:31.06,0:30:36.86,Default,,0,0,0,,Porque eu não quero que você carregue um peso tão grande sozinha nas costas.
+Dialogue: 0,0:30:39.67,0:30:40.65,Default,,0,0,0,,Não permita uma coisa dessas.
+Dialogue: 0,0:30:41.87,0:30:43.52,Default,,0,0,0,,Eu também estou aqui.
+Dialogue: 0,0:30:45.02,0:30:45.54,Default,,0,0,0,,Eu estou aqui.
+Dialogue: 0,0:30:50.82,0:30:52.62,Default,,0,0,0,,Ainda bem que você existe.
+Dialogue: 0,0:31:46.15,0:31:48.63,Default,,0,0,0,,Mas como ele ainda está dormindo, não ouviu.
+Dialogue: 0,0:32:04.72,0:32:06.38,Default,,0,0,0,,E parece tranquilo, não se preocupe.
+Dialogue: 0,0:32:07.64,0:32:08.46,Default,,0,0,0,,Que bom.
+Dialogue: 0,0:32:08.81,0:32:11.22,Default,,0,0,0,,Espero que ele sempre durma assim em paz e acorde em paz.
+Dialogue: 0,0:32:11.70,0:32:12.29,Default,,0,0,0,,Amém.
+Dialogue: 0,0:32:16.02,0:32:17.82,Default,,0,0,0,,Muito obrigado.
+Dialogue: 0,0:32:19.81,0:32:21.17,Default,,0,0,0,,Você se importou, ficou do lado dele.
+Dialogue: 0,0:32:21.63,0:32:22.20,Default,,0,0,0,,Imagina.
+Dialogue: 0,0:32:23.52,0:32:25.22,Default,,0,0,0,,Quem dera eu pudesse fazer mais.
+Dialogue: 0,0:32:29.43,0:32:31.79,Default,,0,0,0,,Vou pegar minhas coisas.
+Dialogue: 0,0:32:33.86,0:32:35.06,Default,,0,0,0,,Eu já havia arrumado tudo.
+Dialogue: 0,0:33:12.07,0:33:13.95,Default,,0,0,0,,Vou olhar nos armários para ver se não ficou nada.
+Dialogue: 0,0:33:21.21,0:33:23.11,Default,,0,0,0,,Deixa eu olhar os cantos também.
+Dialogue: 0,0:33:32.61,0:33:33.01,Default,,0,0,0,,Por fim.
+Dialogue: 0,0:33:38.49,0:33:40.29,Default,,0,0,0,,Quais são para achar?
+Dialogue: 0,0:33:48.22,0:33:50.38,Default,,0,0,0,,Que fique comigo, pelo menos.
+Dialogue: 0,0:34:13.72,0:34:18.03,Default,,0,0,0,,Vou pegar os que estão lá em cima, mas acho que eles não arrumaram esses.
+Dialogue: 0,0:34:20.55,0:34:22.35,Default,,0,0,0,,Tudo bem.
+Dialogue: 0,0:34:23.83,0:34:25.63,Default,,0,0,0,,Você pegou o Mehmet.
+Dialogue: 0,0:34:31.23,0:34:32.27,Default,,0,0,0,,Em nome de Deus, o Clemente, o Misericordioso.
+Dialogue: 0,0:34:32.35,0:34:34.15,Default,,0,0,0,,Minha querida.
+Dialogue: 0,0:34:42.31,0:34:44.11,Default,,0,0,0,,Aconteceu alguma coisa?
+Dialogue: 0,0:35:30.87,0:35:32.70,Default,,0,0,0,,O que vocês estão arrumando?
+Dialogue: 0,0:35:33.79,0:35:38.36,Default,,0,0,0,,Tudo está como deve ser, cada um no seu devido lugar.
+Dialogue: 0,0:35:41.92,0:35:43.57,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:35:43.65,0:35:45.88,Default,,0,0,0,,Vamos, minha filha, vamos, meu bem.
+Dialogue: 0,0:35:46.47,0:35:48.05,Default,,0,0,0,,Boa noite.
+Dialogue: 0,0:35:48.13,0:35:49.60,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:36:39.49,0:36:42.39,Default,,0,0,0,,Pareço pequena, mas atiro como um tanque.
+Dialogue: 0,0:36:42.55,0:36:44.57,Default,,0,0,0,,sei lá, caiu na mão.
+Dialogue: 0,0:36:56.26,0:37:01.53,Default,,0,0,0,,Olha, a carga desse tanque pequeno vai ser suficiente para nos livrar dos nossos problemas.
+Dialogue: 0,0:37:07.64,0:37:08.28,Default,,0,0,0,,Sinceramente, não está sendo.
+Dialogue: 0,0:37:08.74,0:37:09.97,Default,,0,0,0,,Estou de olho.
+Dialogue: 0,0:37:10.89,0:37:11.68,Default,,0,0,0,,Şahin vai vir.
+Dialogue: 0,0:37:13.72,0:37:15.95,Default,,0,0,0,,Como ele vai encarar o passado?
+Dialogue: 0,0:37:17.09,0:37:20.35,Default,,0,0,0,,E como vai ser a questão com o nosso irmão francês?
+Dialogue: 0,0:37:21.38,0:37:22.55,Default,,0,0,0,,Sinceramente, eu não sei, mãe.
+Dialogue: 0,0:37:24.97,0:37:26.57,Default,,0,0,0,,E o que vai ser de mim?
+Dialogue: 0,0:37:28.91,0:37:30.74,Default,,0,0,0,,Mãe, eu juro.
+Dialogue: 0,0:37:31.95,0:37:33.57,Default,,0,0,0,,Eu juro que não quero.
+Dialogue: 0,0:37:34.03,0:37:35.64,Default,,0,0,0,,Não quero voltar para aquela mansão.
+Dialogue: 0,0:37:35.72,0:37:37.69,Default,,0,0,0,,Mas filha, ele é seu marido.
+Dialogue: 0,0:37:38.70,0:37:40.99,Default,,0,0,0,,Se você não quiser, ele vai te querer.
+Dialogue: 0,0:37:43.47,0:37:44.97,Default,,0,0,0,,Nós nunca ficamos juntos, eu e o Demir.
+Dialogue: 0,0:37:46.70,0:37:48.49,Default,,0,0,0,,Você já tinha percebido.
+Dialogue: 0,0:37:49.55,0:37:50.22,Default,,0,0,0,,Como percebeu?
+Dialogue: 0,0:37:51.74,0:37:53.43,Default,,0,0,0,,Nós também não somos mulheres de ontem.
+Dialogue: 0,0:37:53.84,0:37:54.93,Default,,0,0,0,,A gente entende das coisas.
+Dialogue: 0,0:37:55.57,0:37:56.16,Default,,0,0,0,,Desculpe.
+Dialogue: 0,0:37:58.95,0:38:01.11,Default,,0,0,0,,Você disse aquilo do meu Kaya...
+Dialogue: 0,0:38:03.09,0:38:04.59,Default,,0,0,0,,Até um cego enxergaria.
+Dialogue: 0,0:38:06.57,0:38:09.59,Default,,0,0,0,,Você diz que não quer voltar para o Demir.
+Dialogue: 0,0:38:10.41,0:38:12.11,Default,,0,0,0,,Mas não podemos contar para o Kaya.
+Dialogue: 0,0:38:12.80,0:38:13.47,Default,,0,0,0,,É.
+Dialogue: 0,0:38:14.34,0:38:14.86,Default,,0,0,0,,Está se revirando.
+Dialogue: 0,0:38:21.86,0:38:23.66,Default,,0,0,0,,Mãe.
+Dialogue: 0,0:38:27.09,0:38:27.78,Default,,0,0,0,,O que foi, minha filha?
+Dialogue: 0,0:38:29.05,0:38:30.26,Default,,0,0,0,,Eu tenho uma solução.
+Dialogue: 0,0:38:31.55,0:38:32.91,Default,,0,0,0,,Como?
+Dialogue: 0,0:38:33.36,0:38:34.24,Default,,0,0,0,,Primeiro, me prometa.
+Dialogue: 0,0:38:34.62,0:38:35.68,Default,,0,0,0,,Não diga logo que não.
+Dialogue: 0,0:38:35.95,0:38:37.36,Default,,0,0,0,,Menina, eu nem sei o que é.
+Dialogue: 0,0:38:37.45,0:38:40.84,Default,,0,0,0,,É o caminho para salvar sua filha. Você não quer que ela se salve?
+Dialogue: 0,0:38:40.93,0:38:43.09,Default,,0,0,0,,Pelo Alcorão, eu quero muito.
+Dialogue: 0,0:38:43.34,0:38:43.93,Default,,0,0,0,,Então pronto, vamos lá.
+Dialogue: 0,0:38:44.05,0:38:44.82,Default,,0,0,0,,Então me dê sua palavra.
+Dialogue: 0,0:38:46.32,0:38:47.74,Default,,0,0,0,,Tá, eu dou.
+Dialogue: 0,0:38:48.36,0:38:48.59,Default,,0,0,0,,Fala.
+Dialogue: 0,0:38:51.18,0:38:52.97,Default,,0,0,0,,Como?
+Dialogue: 0,0:38:53.62,0:38:55.34,Default,,0,0,0,,Difícil, acalme-se.
+Dialogue: 0,0:38:56.14,0:38:58.18,Default,,0,0,0,,Mas agora vai fazer sentido para você.
+Dialogue: 0,0:38:58.99,0:38:59.78,Default,,0,0,0,,Pois não, irmão.
+Dialogue: 0,0:39:00.64,0:39:00.99,Default,,0,0,0,,Obrigado.
+Dialogue: 0,0:39:02.51,0:39:04.41,Default,,0,0,0,,Irmão, o que vai acontecer agora?
+Dialogue: 0,0:39:06.89,0:39:08.01,Default,,0,0,0,,O que vai acontecer o quê?
+Dialogue: 0,0:39:11.57,0:39:13.45,Default,,0,0,0,,Se estiver falando sobre o divórcio.
+Dialogue: 0,0:39:15.18,0:39:15.78,Default,,0,0,0,,Vamos nos divorciar.
+Dialogue: 0,0:39:16.97,0:39:18.78,Default,,0,0,0,,Sim, mas...
+Dialogue: 0,0:39:25.24,0:39:29.36,Default,,0,0,0,,Quer dizer, para mim, o irmão Boran ainda está traumatizado pelo que viveu.
+Dialogue: 0,0:39:30.26,0:39:31.09,Default,,0,0,0,,Ele não sabe o que está fazendo.
+Dialogue: 0,0:39:31.20,0:39:32.14,Default,,0,0,0,,Não sabe o que quer.
+Dialogue: 0,0:39:32.78,0:39:33.84,Default,,0,0,0,,Não sabe o que está sentindo.
+Dialogue: 0,0:39:34.01,0:39:35.49,Default,,0,0,0,,Dá para ver que não é o mesmo Boran.
+Dialogue: 0,0:39:35.57,0:39:35.95,Default,,0,0,0,,Não é bem assim.
+Dialogue: 0,0:39:36.26,0:39:37.07,Default,,0,0,0,,Mas ele vai entender.
+Dialogue: 0,0:39:37.14,0:39:39.50,Default,,0,0,0,,Quer dizer, vai chegar o dia em que ele vai entender.
+Dialogue: 0,0:39:39.78,0:39:42.09,Default,,0,0,0,,Vai entender o que é certo, o que é real, meu irmão.
+Dialogue: 0,0:39:42.45,0:39:43.99,Default,,0,0,0,,E vai se divorciar da cunhada para ficar com a Alya.
+Dialogue: 0,0:39:44.12,0:39:44.99,Default,,0,0,0,,Mas a mulher não quer.
+Dialogue: 0,0:39:46.07,0:39:47.26,Default,,0,0,0,,Irmão, pois é.
+Dialogue: 0,0:39:47.76,0:39:49.39,Default,,0,0,0,,Quer dizer, mesmo se vocês se separarem, o que importa?
+Dialogue: 0,0:39:49.47,0:39:50.47,Default,,0,0,0,,Vocês não podem mais ficar separados.
+Dialogue: 0,0:39:50.57,0:39:52.09,Default,,0,0,0,,Mais dia, menos dia, vocês vão ficar juntos de novo.
+Dialogue: 0,0:39:52.34,0:39:53.18,Default,,0,0,0,,Ele também vai entender isso.
+Dialogue: 0,0:39:53.80,0:39:54.82,Default,,0,0,0,,Olha, tudo bem.
+Dialogue: 0,0:39:56.30,0:39:57.43,Default,,0,0,0,,Vocês têm razão, mas vejam só.
+Dialogue: 0,0:39:58.34,0:40:00.03,Default,,0,0,0,,Eu também estou tentando entender isso.
+Dialogue: 0,0:40:00.59,0:40:01.84,Default,,0,0,0,,Me coloco no lugar dele.
+Dialogue: 0,0:40:02.55,0:40:04.12,Default,,0,0,0,,Mas há algo que eu não consigo entender.
+Dialogue: 0,0:40:04.24,0:40:05.55,Default,,0,0,0,,Há algo que não sai da minha cabeça.
+Dialogue: 0,0:40:05.78,0:40:05.99,Default,,0,0,0,,O quê?
+Dialogue: 0,0:40:06.47,0:40:07.51,Default,,0,0,0,,Esquece tudo isso.
+Dialogue: 0,0:40:07.59,0:40:11.51,Default,,0,0,0,,Por que ele pediria para se esconder justamente no momento daquele acidente?
+Dialogue: 0,0:40:11.82,0:40:12.28,Default,,0,0,0,,Ora veja só.
+Dialogue: 0,0:40:13.41,0:40:14.47,Default,,0,0,0,,Eu não consigo engolir isso.
+Dialogue: 0,0:40:14.62,0:40:19.58,Default,,0,0,0,,Não consigo aceitar. Por que ele fugiu daquele jeito no acidente e se escondeu?
+Dialogue: 0,0:40:21.14,0:40:23.86,Default,,0,0,0,,Aí eu dou voltas e volto para o mesmo lugar. Tem outra coisa aí.
+Dialogue: 0,0:40:25.05,0:40:25.84,Default,,0,0,0,,Que tipo de assunto?
+Dialogue: 0,0:40:26.89,0:40:30.84,Default,,0,0,0,,Sei lá, o que ele disse quando acordou? Falou em búlgaros ou alguma coisa assim.
+Dialogue: 0,0:40:31.24,0:40:34.43,Default,,0,0,0,,Ah, é, falou dos búlgaros. Disse que os búlgaros fizeram aquilo.
+Dialogue: 0,0:40:34.62,0:40:35.86,Default,,0,0,0,,Que búlgaros o quê? Eu não sei.
+Dialogue: 0,0:40:35.95,0:40:39.76,Default,,0,0,0,,Ele disse algo como "os búlgaros me mataram". Mas não foi isso.
+Dialogue: 0,0:40:40.18,0:40:40.95,Default,,0,0,0,,Foi o Ecmel.
+Dialogue: 0,0:40:41.18,0:40:42.66,Default,,0,0,0,,Tá, mas quem quer que tenha sido...
+Dialogue: 0,0:40:43.20,0:40:47.66,Default,,0,0,0,,No fim das contas, no momento do acidente, ele diz para o Burgun: "Me sequestre, me esconde".
+Dialogue: 0,0:40:48.82,0:40:52.86,Default,,0,0,0,,Boran deixaria a Alya ali sozinha no momento daquele acidente?
+Dialogue: 0,0:40:53.72,0:40:56.66,Default,,0,0,0,,Ele diria para o Burgun: "Me pegue, me leve e me esconda"?
+Dialogue: 0,0:40:58.11,0:40:59.51,Default,,0,0,0,,Isso faz algum sentido?
+Dialogue: 0,0:41:02.09,0:41:02.89,Default,,0,0,0,,Tem outra coisa aí.
+Dialogue: 0,0:41:03.28,0:41:04.45,Default,,0,0,0,,Tem algo que ele está escondendo.
+Dialogue: 0,0:41:05.70,0:41:06.05,Default,,0,0,0,,Sei lá.
+Dialogue: 0,0:41:06.49,0:41:08.53,Default,,0,0,0,,Ele não está escondendo nada.
+Dialogue: 0,0:41:19.57,0:41:23.11,Default,,0,0,0,,Você está tentando aliviar sua consciência pensando assim.
+Dialogue: 0,0:41:24.91,0:41:29.72,Default,,0,0,0,,Está tentando fazer Boran parecer errado para poder dizer tranquilamente que a Alya é sua esposa.
+Dialogue: 0,0:41:29.80,0:41:32.74,Default,,0,0,0,,Olha, mãe, se ele é seu filho, ele é meu irmão.
+Dialogue: 0,0:41:33.39,0:41:36.91,Default,,0,0,0,,Mas eu estou tentando alcançar uma verdade, uma realidade.
+Dialogue: 0,0:41:37.05,0:41:39.55,Default,,0,0,0,,Não o que os outros dizem e acreditam.
+Dialogue: 0,0:41:40.47,0:41:43.45,Default,,0,0,0,,Só estou tentando chegar à verdade, seja ela qual for.
+Dialogue: 0,0:41:44.64,0:41:47.89,Default,,0,0,0,,Deixa eu te falar a verdade. A verdade está bem clara.
+Dialogue: 0,0:41:49.57,0:41:50.51,Default,,0,0,0,,Fala. Fala.
+Dialogue: 0,0:41:50.91,0:41:56.18,Default,,0,0,0,,Aquele maldito, aquele desgraçado do Ecmel tentou matar o meu filho.
+Dialogue: 0,0:41:57.14,0:41:58.24,Default,,0,0,0,,Roubou a vida dele.
+Dialogue: 0,0:41:58.84,0:42:00.93,Default,,0,0,0,,Mas e a vida roubada da Alya, como fica?
+Dialogue: 0,0:42:01.64,0:42:04.22,Default,,0,0,0,,Ela não merecia nada disso, e a vida dela, mãe?
+Dialogue: 0,0:42:04.30,0:42:05.95,Default,,0,0,0,,Ah, então o Boran merecia.
+Dialogue: 0,0:42:06.34,0:42:08.45,Default,,0,0,0,,Mãe, eu não estou dizendo que ele mereceu, mãe.
+Dialogue: 0,0:42:09.22,0:42:11.72,Default,,0,0,0,,Me escuta de uma vez. Pelo amor de Deus, me ouve.
+Dialogue: 0,0:42:13.76,0:42:17.86,Default,,0,0,0,,O Boran foi lá, atirou no Süleyman, matou e voltou para casa.
+Dialogue: 0,0:42:18.64,0:42:22.70,Default,,0,0,0,,Todos nós arcamos com esse peso e mandamos o Boran para o exterior, não foi?
+Dialogue: 0,0:42:23.45,0:42:25.28,Default,,0,0,0,,Então por que o Boran não arcou com o peso dele?
+Dialogue: 0,0:42:26.47,0:42:31.11,Default,,0,0,0,,Por que ele deixou a esposa e o filho e disse para esconderem ele após o acidente, para sumirem com ele?
+Dialogue: 0,0:42:31.53,0:42:32.68,Default,,0,0,0,,Por que ele diria uma coisa dessas?
+Dialogue: 0,0:42:33.26,0:42:34.72,Default,,0,0,0,,A esposa dele não estava lá com ele no momento do acidente?
+Dialogue: 0,0:42:35.34,0:42:37.30,Default,,0,0,0,,A vida daquela moça não importa? Só a do Boran vale?
+Dialogue: 0,0:42:37.38,0:42:40.38,Default,,0,0,0,,Por que ele pareceu tão assustado e pediu para o esconderem?
+Dialogue: 0,0:42:40.61,0:42:42.11,Default,,0,0,0,,Parece até que ele fugiu e abandonou tudo, mãe.
+Dialogue: 0,0:42:42.68,0:42:43.82,Default,,0,0,0,,Pensa nisso, pensa bem.
+Dialogue: 0,0:42:44.59,0:42:47.70,Default,,0,0,0,,Desde que acordou, o homem só diz que quer a esposa e o filho.
+Dialogue: 0,0:42:48.07,0:42:52.16,Default,,0,0,0,,Mas se você queria tanto, por que despachou e largou todo mundo na hora do acidente?
+Dialogue: 0,0:42:52.78,0:42:55.45,Default,,0,0,0,,Pensa bem, juro que eu não faria uma coisa dessas, mãe.
+Dialogue: 0,0:42:56.11,0:42:58.24,Default,,0,0,0,,Você também não faria, o Agha não faria, o Cihan não faria.
+Dialogue: 0,0:42:58.95,0:42:59.93,Default,,0,0,0,,Por que o Boran fez?
+Dialogue: 0,0:43:04.12,0:43:05.95,Default,,0,0,0,,Mãe, é isso que estou tentando te explicar.
+Dialogue: 0,0:43:06.53,0:43:07.89,Default,,0,0,0,,Me escuta e me entende de uma vez.
+Dialogue: 0,0:43:08.51,0:43:11.64,Default,,0,0,0,,Não, vocês nunca vão me entender mesmo.
+Dialogue: 0,0:43:14.20,0:43:15.97,Default,,0,0,0,,Eu digo uma coisa e você entende outra.
+Dialogue: 0,0:43:16.53,0:43:17.09,Default,,0,0,0,,Meus parabéns.
+Dialogue: 0,0:43:19.16,0:43:20.68,Default,,0,0,0,,Juro por Deus que eu já desisti.
+Dialogue: 0,0:43:58.97,0:44:00.88,Default,,0,0,0,,Onde foi que a gente veio parar?
+Dialogue: 0,0:44:38.09,0:44:42.66,Default,,0,0,0,,E eu achando que ninguém mais podia separar o Cihan Agha da Dona Alya...
+Dialogue: 0,0:44:43.11,0:44:46.18,Default,,0,0,0,,Tá bom, calma, se acalma, não se martirize.
+Dialogue: 0,0:44:46.74,0:44:48.91,Default,,0,0,0,,Com certeza vai aparecer uma solução.
+Dialogue: 0,0:44:49.39,0:44:51.09,Default,,0,0,0,,Pai, como vai ser isso?
+Dialogue: 0,0:44:51.57,0:44:55.20,Default,,0,0,0,,Já foi um sufoco lidar com a Dona Sadakat, mal conseguimos segurar ela.
+Dialogue: 0,0:44:55.61,0:44:57.47,Default,,0,0,0,,E agora, como vão lidar com o tal do Boran?
+Dialogue: 0,0:44:58.09,0:44:59.70,Default,,0,0,0,,Afinal, o homem é o marido dela.
+Dialogue: 0,0:45:00.49,0:45:01.41,Default,,0,0,0,,Querem saber de uma coisa?
+Dialogue: 0,0:45:01.84,0:45:03.88,Default,,0,0,0,,Eu tô sentindo uma coisa aqui.
+Dialogue: 0,0:45:04.43,0:45:07.14,Default,,0,0,0,,Sentindo o quê? Que papo é esse?
+Dialogue: 0,0:45:07.24,0:45:10.09,Default,,0,0,0,,Vibe? Que vibe o quê? Fala português direito, pelo amor de Deus.
+Dialogue: 0,0:45:10.16,0:45:11.74,Default,,0,0,0,,Fala direito, meu filho, fala turco.
+Dialogue: 0,0:45:12.24,0:45:13.84,Default,,0,0,0,,Ah, eu ouvi na televisão.
+Dialogue: 0,0:45:14.39,0:45:15.47,Default,,0,0,0,,A galera chique que fala assim.
+Dialogue: 0,0:45:15.80,0:45:18.41,Default,,0,0,0,,É tipo um pressentimento, sabe?
+Dialogue: 0,0:45:19.18,0:45:19.99,Default,,0,0,0,,Um pressentimento.
+Dialogue: 0,0:45:19.76,0:45:21.26,Default,,0,0,0,,Não é cheirar nada, não.
+Dialogue: 0,0:45:21.45,0:45:21.97,Default,,0,0,0,,Cheirar.
+Dialogue: 0,0:45:22.07,0:45:23.28,Default,,0,0,0,,Estou sentindo o cheiro de algo.
+Dialogue: 0,0:45:23.36,0:45:23.55,Default,,0,0,0,,Isso.
+Dialogue: 0,0:45:23.68,0:45:24.95,Default,,0,0,0,,Então fala assim, meu filho, pronto.
+Dialogue: 0,0:45:25.03,0:45:26.26,Default,,0,0,0,,Pronto, o que é que você está sentindo?
+Dialogue: 0,0:45:26.34,0:45:26.84,Default,,0,0,0,,Vai, desembucha.
+Dialogue: 0,0:45:27.22,0:45:29.14,Default,,0,0,0,,Olha, meu pressentimento é esse, tomara que eu esteja errado.
+Dialogue: 0,0:45:29.57,0:45:32.84,Default,,0,0,0,,Nas veias desse tal de Boran corre o sangue do Ecmel.
+Dialogue: 0,0:45:33.61,0:45:34.78,Default,,0,0,0,,Ferve que é uma beleza.
+Dialogue: 0,0:45:34.91,0:45:36.28,Default,,0,0,0,,Corre nas veias com tudo.
+Dialogue: 0,0:45:36.68,0:45:38.72,Default,,0,0,0,,E quando isso se misturar com o sangue da Dona Sadakat...
+Dialogue: 0,0:45:39.09,0:45:40.99,Default,,0,0,0,,Hahaha, imagina só o estrago.
+Dialogue: 0,0:45:41.07,0:45:47.26,Default,,0,0,0,,O filho que nascer dessa união de duas pessoas ruins não vai ficar atrás nem do anticristo do Ecmel nem da megera da Sadakat.
+Dialogue: 0,0:45:48.03,0:45:51.09,Default,,0,0,0,,Acho que estamos diante de uma nova espécie.
+Dialogue: 0,0:45:52.05,0:45:53.12,Default,,0,0,0,,Deixe disso, Kadir.
+Dialogue: 0,0:45:53.20,0:45:57.03,Default,,0,0,0,,Não é nem questão de deixar, mas o que adianta eu falar.
+Dialogue: 0,0:45:57.47,0:45:57.88,Default,,0,0,0,,Eu não sei.
+Dialogue: 0,0:45:58.38,0:45:59.74,Default,,0,0,0,,Tomara que o medo que eu tenho não aconteça.
+Dialogue: 0,0:46:00.51,0:46:01.30,Default,,0,0,0,,Tomara.
+Dialogue: 0,0:46:21.26,0:46:22.84,Default,,0,0,0,,Bom dia, Boran Bey.
+Dialogue: 0,0:46:23.45,0:46:26.95,Default,,0,0,0,,Bom dia, parece que chegamos cedo para o café da manhã.
+Dialogue: 0,0:46:28.64,0:46:28.89,Default,,0,0,0,,Tudo bem.
+Dialogue: 0,0:46:42.11,0:46:45.64,Default,,0,0,0,,Deixem isso por enquanto, depois vocês terminam. Vamos, saiam daqui.
+Dialogue: 0,0:46:46.05,0:46:47.32,Default,,0,0,0,,Recolham isso daqui também.
+Dialogue: 0,0:46:48.64,0:46:49.86,Default,,0,0,0,,Tá bom, tá bom.
+Dialogue: 0,0:46:50.47,0:46:52.28,Default,,0,0,0,,Vamos, minha filha, isso.
+Dialogue: 0,0:46:57.61,0:46:59.57,Default,,0,0,0,,Bom dia, minha mãe.
+Dialogue: 0,0:47:06.16,0:47:07.41,Default,,0,0,0,,Bom dia.
+Dialogue: 0,0:47:07.49,0:47:09.78,Default,,0,0,0,,Escuta, quero te dizer uma coisa.
+Dialogue: 0,0:47:13.91,0:47:15.88,Default,,0,0,0,,Alya separou os quartos.
+Dialogue: 0,0:47:17.89,0:47:19.45,Default,,0,0,0,,Ficou no quarto do menino.
+Dialogue: 0,0:47:20.43,0:47:22.28,Default,,0,0,0,,Pegou as coisas dela e foi para lá.
+Dialogue: 0,0:47:24.45,0:47:26.26,Default,,0,0,0,,Vão se divorciar em comum acordo.
+Dialogue: 0,0:47:27.62,0:47:28.95,Default,,0,0,0,,Acho que não vai demorar muito.
+Dialogue: 0,0:47:31.55,0:47:34.43,Default,,0,0,0,,Mãe, eu sei que a senhora está brava comigo.
+Dialogue: 0,0:47:37.05,0:47:37.84,Default,,0,0,0,,E tem razão.
+Dialogue: 0,0:47:39.05,0:47:41.66,Default,,0,0,0,,Mas como é que se diz uma coisa dessas, mãe?
+Dialogue: 0,0:47:43.39,0:47:44.78,Default,,0,0,0,,Qual era o lugar ou o momento adequado?
+Dialogue: 0,0:47:44.86,0:47:48.18,Default,,0,0,0,,Como eu ia dizer que sou filho do Ecmel?
+Dialogue: 0,0:47:50.80,0:47:52.24,Default,,0,0,0,,Uma coisa dessas não é fácil de dizer.
+Dialogue: 0,0:47:55.36,0:47:57.84,Default,,0,0,0,,Mas estou aqui, olha, estou do seu lado hoje, mãe.
+Dialogue: 0,0:48:00.07,0:48:01.49,Default,,0,0,0,,Quando vou poder ver meu filho?
+Dialogue: 0,0:48:02.51,0:48:03.47,Default,,0,0,0,,Vou ter que esperar até quando?
+Dialogue: 0,0:48:07.76,0:48:09.95,Default,,0,0,0,,O menino está tomando o café dele lá embaixo.
+Dialogue: 0,0:48:10.09,0:48:11.57,Default,,0,0,0,,Assim que terminar, eles vão conversar.
+Dialogue: 0,0:48:11.99,0:48:12.59,Default,,0,0,0,,Que se apressem.
+Dialogue: 0,0:48:13.28,0:48:14.39,Default,,0,0,0,,É melhor se apressem.
+Dialogue: 0,0:48:14.49,0:48:15.49,Default,,0,0,0,,Eu já não tenho paciência.
+Dialogue: 0,0:48:28.26,0:48:30.05,Default,,0,0,0,,Bom dia.
+Dialogue: 0,0:48:48.91,0:48:49.82,Default,,0,0,0,,Bom dia.
+Dialogue: 0,0:48:50.61,0:48:51.51,Default,,0,0,0,,Como vai? Está melhor?
+Dialogue: 0,0:48:52.49,0:48:55.24,Default,,0,0,0,,Quando a Alya voltar a ser minha esposa...
+Dialogue: 0,0:48:56.74,0:48:58.32,Default,,0,0,0,,Aí sim, eu vou estar melhor.
+Dialogue: 0,0:49:00.66,0:49:03.86,Default,,0,0,0,,Boran, foi você quem pediu para eu te esconder daquele acidente.
+Dialogue: 0,0:49:06.05,0:49:06.26,Default,,0,0,0,,Cala a boca.
+Dialogue: 0,0:49:06.47,0:49:06.91,Default,,0,0,0,,Cala a boca o quê?
+Dialogue: 0,0:49:07.26,0:49:08.01,Default,,0,0,0,,Cala a boca.
+Dialogue: 0,0:49:08.32,0:49:10.32,Default,,0,0,0,,Como assim cala a boca? Quem fugiu foi você, Boran.
+Dialogue: 0,0:49:10.61,0:49:11.66,Default,,0,0,0,,Olha, você está fazendo errado.
+Dialogue: 0,0:49:12.74,0:49:14.24,Default,,0,0,0,,Continue como Ömer Bakır.
+Dialogue: 0,0:49:14.97,0:49:16.68,Default,,0,0,0,,Eu arrumo um país para você.
+Dialogue: 0,0:49:17.18,0:49:18.24,Default,,0,0,0,,Você começa uma vida nova.
+Dialogue: 0,0:49:18.43,0:49:18.61,Default,,0,0,0,,Olha.
+Dialogue: 0,0:49:19.05,0:49:20.82,Default,,0,0,0,,Se eu fugi, eu fugi.
+Dialogue: 0,0:49:20.91,0:49:22.55,Default,,0,0,0,,Eu não vou desistir da Alya.
+Dialogue: 0,0:49:22.62,0:49:24.91,Default,,0,0,0,,Vou pagar o preço que for e vou ficar.
+Dialogue: 0,0:49:25.34,0:49:28.74,Default,,0,0,0,,Os Baybars não estão de brincadeira, você sabe, não é?
+Dialogue: 0,0:49:30.49,0:49:32.30,Default,,0,0,0,,Bom dia.
+Dialogue: 0,0:49:43.01,0:49:44.80,Default,,0,0,0,,Boran, você está bem?
+Dialogue: 0,0:49:45.51,0:49:48.18,Default,,0,0,0,,Vem, vamos dar uma olhada em como você está.
+Dialogue: 0,0:49:49.36,0:49:51.46,Default,,0,0,0,,Vou esperar lá embaixo.
+Dialogue: 0,0:49:52.26,0:49:54.05,Default,,0,0,0,,Vamos, Boran.
+Dialogue: 0,0:49:58.34,0:50:00.70,Default,,0,0,0,,Venha, deixe um médico te examinar.
+Dialogue: 0,0:50:01.16,0:50:02.97,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:50:08.07,0:50:09.86,Default,,0,0,0,,Ovo?
+Dialogue: 0,0:50:17.49,0:50:18.78,Default,,0,0,0,,Isso.
+Dialogue: 0,0:50:18.86,0:50:21.16,Default,,0,0,0,,Tá bom. Espera, mas eu que vou escolher.
+Dialogue: 0,0:50:21.45,0:50:22.95,Default,,0,0,0,,Tá bom.
+Dialogue: 0,0:50:23.03,0:50:24.84,Default,,0,0,0,,Tá bom, segura.
+Dialogue: 0,0:50:25.22,0:50:26.03,Default,,0,0,0,,Pronto?
+Dialogue: 0,0:50:26.07,0:50:27.03,Default,,0,0,0,,Isso.
+Dialogue: 0,0:50:27.11,0:50:28.70,Default,,0,0,0,,Ah, errei o tiro.
+Dialogue: 0,0:50:28.78,0:50:29.61,Default,,0,0,0,,Ih, quebrou.
+Dialogue: 0,0:50:31.05,0:50:32.78,Default,,0,0,0,,Não vou dar daqui.
+Dialogue: 0,0:50:33.22,0:50:34.20,Default,,0,0,0,,Tá bom, espera.
+Dialogue: 0,0:50:34.28,0:50:35.09,Default,,0,0,0,,Espera.
+Dialogue: 0,0:50:35.07,0:50:37.11,Default,,0,0,0,,E aí, você foi até lá, irmão.
+Dialogue: 0,0:50:37.72,0:50:39.55,Default,,0,0,0,,O quê? O quê? O quê? O quê? O quê?
+Dialogue: 0,0:51:10.38,0:51:10.99,Default,,0,0,0,,Me dá um ovo seu aí.
+Dialogue: 0,0:51:11.36,0:51:11.82,Default,,0,0,0,,Dá, dá.
+Dialogue: 0,0:51:11.97,0:51:12.82,Default,,0,0,0,,A cunhada não quer dar.
+Dialogue: 0,0:51:13.01,0:51:13.51,Default,,0,0,0,,Tá bom, tá bom.
+Dialogue: 0,0:51:13.59,0:51:13.80,Default,,0,0,0,,Um minuto.
+Dialogue: 0,0:51:15.78,0:51:16.80,Default,,0,0,0,,Bate com uma pedra.
+Dialogue: 0,0:51:17.59,0:51:18.38,Default,,0,0,0,,Aquela pedra ali.
+Dialogue: 0,0:51:18.64,0:51:19.24,Default,,0,0,0,,Pedra?
+Dialogue: 0,0:51:19.61,0:51:20.66,Default,,0,0,0,,Olha só, eu tô sabendo.
+Dialogue: 0,0:51:20.76,0:51:21.43,Default,,0,0,0,,Você fez isso de propósito.
+Dialogue: 0,0:51:21.80,0:51:23.18,Default,,0,0,0,,Tá ensinando esse menino a trapacear.
+Dialogue: 0,0:51:23.28,0:51:24.07,Default,,0,0,0,,Tá todo feliz, né?
+Dialogue: 0,0:51:23.95,0:51:25.20,Default,,0,0,0,,O menino acabou saindo esperto.
+Dialogue: 0,0:51:25.30,0:51:25.86,Default,,0,0,0,,Você que foi o bobo.
+Dialogue: 0,0:51:26.05,0:51:26.43,Default,,0,0,0,,Não, não.
+Dialogue: 0,0:51:27.05,0:51:28.61,Default,,0,0,0,,Caramba, a voz de vocês dá pra ouvir lá fora.
+Dialogue: 0,0:51:28.70,0:51:31.09,Default,,0,0,0,,Venha cá, vamos bater ovos com você também.
+Dialogue: 0,0:51:31.18,0:51:31.89,Default,,0,0,0,,Ah, é um jogo.
+Dialogue: 0,0:51:32.39,0:51:32.74,Default,,0,0,0,,Vem.
+Dialogue: 0,0:51:33.16,0:51:34.84,Default,,0,0,0,,Tá tentando ganhar o jogo na malandragem.
+Dialogue: 0,0:51:34.95,0:51:36.86,Default,,0,0,0,,Fez um ovo de pedra.
+Dialogue: 0,0:51:37.22,0:51:38.09,Default,,0,0,0,,O que é que ele fez de pedra?
+Dialogue: 0,0:51:38.61,0:51:39.18,Default,,0,0,0,,Olha, cadê?
+Dialogue: 0,0:51:39.70,0:51:46.55,Default,,0,0,0,,Não é muito legal, não, o pai dele, nada legal. Juro por Deus, olha, nem passaria pela minha cabeça, que absurdo.
+Dialogue: 0,0:51:55.45,0:52:02.22,Default,,0,0,0,,Não é legal mesmo, rapaz, faz uma coisa dessas? Ele não entende de brincadeira de jeito nenhum.
+Dialogue: 0,0:52:08.32,0:52:14.49,Default,,0,0,0,,Mas a mãe tem razão, dá pra vencer com trapaça? Não dá. Vamos fazer do jeito certo? Beleza, então.
+Dialogue: 0,0:52:14.57,0:52:16.36,Default,,0,0,0,,Afa, sei não.
+Dialogue: 0,0:52:16.57,0:52:18.36,Default,,0,0,0,,Vamos lá ver.
+Dialogue: 0,0:52:19.53,0:52:21.32,Default,,0,0,0,,Vai, bate.
+Dialogue: 0,0:52:39.26,0:52:41.07,Default,,0,0,0,,O café da manhã acabou?
+Dialogue: 0,0:52:43.22,0:52:44.14,Default,,0,0,0,,Sim, acabou.
+Dialogue: 0,0:52:44.22,0:52:46.01,Default,,0,0,0,,Vamos, dá cá.
+Dialogue: 0,0:52:46.28,0:52:50.78,Default,,0,0,0,,Nós precisamos conversar sobre um assunto sério agora.
+Dialogue: 0,0:52:50.99,0:52:52.78,Default,,0,0,0,,O que a gente vai conversar?
+Dialogue: 0,0:52:52.97,0:52:54.24,Default,,0,0,0,,Vamos subir pro quarto?
+Dialogue: 0,0:52:54.32,0:52:55.24,Default,,0,0,0,,Vem, vamos subir, vem.
+Dialogue: 0,0:52:55.32,0:52:56.24,Default,,0,0,0,,O que a gente vai conversar?
+Dialogue: 0,0:52:56.32,0:52:59.93,Default,,0,0,0,,Chefe, vamos vestir esse casaco também. Porque estava meio fresco, né?
+Dialogue: 0,0:53:00.39,0:53:02.51,Default,,0,0,0,,Venha, vamos tomar um chá até esquentar, venha.
+Dialogue: 0,0:53:04.09,0:53:05.91,Default,,0,0,0,,Muito obrigado pelo trabalho.
+Dialogue: 0,0:53:12.20,0:53:14.43,Default,,0,0,0,,Que Deus os ajude.
+Dialogue: 0,0:53:22.84,0:53:23.78,Default,,0,0,0,,Amém, amém.
+Dialogue: 0,0:53:24.49,0:53:25.18,Default,,0,0,0,,Amém.
+Dialogue: 0,0:53:26.09,0:53:28.12,Default,,0,0,0,,Eu acabei perdendo, né?
+Dialogue: 0,0:53:31.47,0:53:33.70,Default,,0,0,0,,Bom dia, meu patrão, bom dia.
+Dialogue: 0,0:53:35.11,0:53:36.28,Default,,0,0,0,,Bom dia, irmã.
+Dialogue: 0,0:53:37.41,0:53:43.74,Default,,0,0,0,,Eu ia bater ovos com você no café da manhã, mas meus pais disseram que precisam conversar comigo.
+Dialogue: 0,0:53:46.01,0:53:48.95,Default,,0,0,0,,Ah, tudo bem, a gente bate amanhã, pode ser?
+Dialogue: 0,0:53:49.05,0:53:53.09,Default,,0,0,0,,Tá bom. Mas com certeza o seu ovo vai estourar com um estalos.
+Dialogue: 0,0:53:54.03,0:53:54.84,Default,,0,0,0,,Com certeza.
+Dialogue: 0,0:53:54.43,0:53:57.09,Default,,0,0,0,,Olha só pra ele. Vamos ver isso, vamos ver.
+Dialogue: 0,0:53:57.49,0:53:57.84,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:54:19.66,0:54:23.51,Default,,0,0,0,,Deixa pra lá, vamos tirar enquanto está quente. Vem cá, meu amor.
+Dialogue: 0,0:54:37.03,0:54:40.36,Default,,0,0,0,,Vocês quebraram outro ovo de brincadeira?
+Dialogue: 0,0:54:42.34,0:54:44.16,Default,,0,0,0,,Não, pai, foi brincadeira.
+Dialogue: 0,0:54:44.80,0:54:47.20,Default,,0,0,0,,Foi brincadeira. Era só uma brincadeira, não tem problema.
+Dialogue: 0,0:54:48.16,0:54:50.39,Default,,0,0,0,,Mas agora vamos conversar sobre algo mais sério com você.
+Dialogue: 0,0:54:51.22,0:54:53.64,Default,,0,0,0,,O que foi? Por que vocês estão quietos?
+Dialogue: 0,0:54:58.36,0:54:59.18,Default,,0,0,0,,Nós vamos conversar.
+Dialogue: 0,0:54:59.26,0:55:04.21,Default,,0,0,0,,É só que o que nós vamos conversar com você agora é um pouco difícil.
+Dialogue: 0,0:55:07.72,0:55:11.89,Default,,0,0,0,,Por isso, qualquer coisa que você sentir, qualquer coisa que aconteça, é totalmente normal.
+Dialogue: 0,0:55:16.22,0:55:17.86,Default,,0,0,0,,E nós estamos sempre juntos.
+Dialogue: 0,0:55:18.01,0:55:18.89,Default,,0,0,0,,O importante é isso, tá bom?
+Dialogue: 0,0:55:18.97,0:55:21.11,Default,,0,0,0,,Claro, se você tiver perguntas, faça, tá bom?
+Dialogue: 0,0:55:21.59,0:55:23.70,Default,,0,0,0,,Como você estiver se sentindo, conte pra gente.
+Dialogue: 0,0:55:26.24,0:55:28.07,Default,,0,0,0,,Meu querido, sabe quando nós...
+Dialogue: 0,0:55:36.11,0:55:37.91,Default,,0,0,0,,Irmão.
+Dialogue: 0,0:55:42.78,0:55:45.79,Default,,0,0,0,,Orhan, mãe, o que vocês estão fazendo aqui?
+Dialogue: 0,0:55:47.32,0:55:48.49,Default,,0,0,0,,Quando ele vai me ver?
+Dialogue: 0,0:55:48.57,0:55:50.24,Default,,0,0,0,,Eles estão conversando bem, minha mãe.
+Dialogue: 0,0:55:50.57,0:55:52.53,Default,,0,0,0,,O que estão conversando? O que ainda estão conversando?
+Dialogue: 0,0:55:52.61,0:55:54.49,Default,,0,0,0,,Vem, deixa eles me mostrarem, já chega.
+Dialogue: 0,0:55:54.61,0:55:56.28,Default,,0,0,0,,Tá bom, irmão, eles já vão mostrar.
+Dialogue: 0,0:55:56.72,0:55:57.28,Default,,0,0,0,,Boran.
+Dialogue: 0,0:55:57.80,0:55:58.97,Default,,0,0,0,,Mas assim não dá.
+Dialogue: 0,0:55:59.38,0:56:00.97,Default,,0,0,0,,Como assim não dá?
+Dialogue: 0,0:56:01.49,0:56:02.91,Default,,0,0,0,,Ele é meu filho.
+Dialogue: 0,0:56:03.16,0:56:04.22,Default,,0,0,0,,Eu sei, você tem razão.
+Dialogue: 0,0:56:04.64,0:56:05.74,Default,,0,0,0,,Irmão, assim não dá.
+Dialogue: 0,0:56:05.89,0:56:06.24,Default,,0,0,0,,Deniz.
+Dialogue: 0,0:56:07.36,0:56:08.28,Default,,0,0,0,,Olha, pelo amor de Deus.
+Dialogue: 0,0:56:08.36,0:56:08.70,Default,,0,0,0,,Deniz.
+Dialogue: 0,0:56:09.76,0:56:12.30,Default,,0,0,0,,Olha, se você não se acalmar, vai estragar tudo.
+Dialogue: 0,0:56:15.43,0:56:16.24,Default,,0,0,0,,Não faça isso, mãe.
+Dialogue: 0,0:56:15.93,0:56:16.55,Default,,0,0,0,,Não se intrometam.
+Dialogue: 0,0:56:17.16,0:56:17.64,Default,,0,0,0,,Não se intrometam.
+Dialogue: 0,0:56:18.34,0:56:19.78,Default,,0,0,0,,Quem está me chamando?
+Dialogue: 0,0:56:20.01,0:56:20.45,Default,,0,0,0,,O que ele está fazendo?
+Dialogue: 0,0:56:21.26,0:56:22.78,Default,,0,0,0,,Boran, vocês não saiam DAQUI, tá bom?
+Dialogue: 0,0:56:22.88,0:56:23.36,Default,,0,0,0,,Vocês não saiam.
+Dialogue: 0,0:56:25.89,0:56:26.91,Default,,0,0,0,,Ah, não grita.
+Dialogue: 0,0:56:27.18,0:56:28.95,Default,,0,0,0,,Boran, Boran, cala a boca, Boran, cala a boca.
+Dialogue: 0,0:56:29.07,0:56:30.26,Default,,0,0,0,,O que você está fazendo? Enlouqueceu?
+Dialogue: 0,0:56:30.64,0:56:31.95,Default,,0,0,0,,Cihan, me mostra meu filho agora.
+Dialogue: 0,0:56:32.38,0:56:35.26,Default,,0,0,0,,Ah, tá bom, Alya vai falar, dissemos para ela falar com a mãe, Boran.
+Dialogue: 0,0:56:35.49,0:56:36.43,Default,,0,0,0,,Primeiro eu vou falar.
+Dialogue: 0,0:56:36.95,0:56:37.95,Default,,0,0,0,,Primeiro eu vou falar.
+Dialogue: 0,0:56:38.03,0:56:39.30,Default,,0,0,0,,Quem sabe o que vocês falaram com aquela criança?
+Dialogue: 0,0:56:39.38,0:56:40.61,Default,,0,0,0,,Com o que vocês encheram a cabeça dele?
+Dialogue: 0,0:56:40.82,0:56:42.47,Default,,0,0,0,,Ah, que porcaria você está dizendo, pelo amor de Deus, solta.
+Dialogue: 0,0:56:42.55,0:56:43.95,Default,,0,0,0,,Ela vai falar com a mãe, você já vai ver.
+Dialogue: 0,0:56:44.03,0:56:45.20,Default,,0,0,0,,Deniz, irmão, não faça isso.
+Dialogue: 0,0:56:45.84,0:56:47.14,Default,,0,0,0,,Irmão, vem cá, pelo amor de Deus, olha.
+Dialogue: 0,0:56:47.22,0:56:48.89,Default,,0,0,0,,Boran, Boran, não faça isso.
+Dialogue: 0,0:56:49.34,0:56:51.36,Default,,0,0,0,,Deniz! Alya, traz o Deniz!
+Dialogue: 0,0:56:51.45,0:56:54.12,Default,,0,0,0,,Mãe, quem está perguntando pelo meu trabalho?
+Dialogue: 0,0:56:54.20,0:56:56.53,Default,,0,0,0,,O que aconteceu? Por que você está tapando meu ouvido?
+Dialogue: 0,0:56:56.61,0:56:57.41,Default,,0,0,0,,Espera, espera, espera.
+Dialogue: 0,0:56:57.36,0:56:58.88,Default,,0,0,0,,Claro, deixa que eu vejo.
+Dialogue: 0,0:56:58.95,0:57:01.09,Default,,0,0,0,,Meu filho, por favor, Deniz, eu vou explicar.
+Dialogue: 0,0:57:01.18,0:57:02.89,Default,,0,0,0,,Por favor, para, por favor, para.
+Dialogue: 0,0:57:02.97,0:57:04.55,Default,,0,0,0,,Tá bom, espera, espera.
+Dialogue: 0,0:57:04.64,0:57:06.43,Default,,0,0,0,,Espera, espera.
+Dialogue: 0,0:57:07.84,0:57:10.46,Default,,0,0,0,,Vai lá que nós vamos sair, tá bom?
+Dialogue: 0,0:57:11.09,0:57:12.45,Default,,0,0,0,,Tá bom.
+Dialogue: 0,0:57:12.53,0:57:14.36,Default,,0,0,0,,Eu amo muito você.
+Dialogue: 0,0:57:18.22,0:57:19.01,Default,,0,0,0,,Alya!
+Dialogue: 0,0:57:18.86,0:57:19.82,Default,,0,0,0,,Traz meu filho!
+Dialogue: 0,0:57:19.89,0:57:20.93,Default,,0,0,0,,Deniz!
+Dialogue: 0,0:57:21.01,0:57:22.43,Default,,0,0,0,,Alya, traz o Deniz!
+Dialogue: 0,0:57:22.51,0:57:23.66,Default,,0,0,0,,Deniz!
+Dialogue: 0,0:57:23.74,0:57:24.86,Default,,0,0,0,,Irmão, vem cá.
+Dialogue: 0,0:57:24.93,0:57:26.74,Default,,0,0,0,,Papai!
+Dialogue: 0,0:57:53.22,0:57:55.03,Default,,0,0,0,,Você ouviu.
+Dialogue: 0,0:58:27.43,0:58:29.66,Default,,0,0,0,,Vamos para o quarto, para o quarto, para o quarto.
+Dialogue: 0,0:58:33.51,0:58:34.11,Default,,0,0,0,,Entre aqui.
+Dialogue: 0,0:58:36.07,0:58:37.88,Default,,0,0,0,,Gostou?
+Dialogue: 0,0:58:38.30,0:58:38.57,Default,,0,0,0,,É?
+Dialogue: 0,0:58:39.61,0:58:41.34,Default,,0,0,0,,O que aconteceu com o que você queria?
+Dialogue: 0,0:58:41.89,0:58:42.93,Default,,0,0,0,,Você ficava dizendo Deniz, Deniz, né?
+Dialogue: 0,0:58:44.14,0:58:45.09,Default,,0,0,0,,O que aconteceu com o que você queria?
+Dialogue: 0,0:58:45.99,0:58:47.64,Default,,0,0,0,,É assim que se aborda uma criança, hein?
+Dialogue: 0,0:58:48.62,0:58:50.28,Default,,0,0,0,,Você sabe tudo, não é?
+Dialogue: 0,0:58:52.36,0:58:54.26,Default,,0,0,0,,Nós te dissemos, senhora.
+Dialogue: 0,0:58:56.43,0:58:57.68,Default,,0,0,0,,Eu disse para ter cautela.
+Dialogue: 0,0:58:57.99,0:58:58.99,Default,,0,0,0,,Tenha cautela, mãe.
+Dialogue: 0,0:58:59.20,0:59:01.01,Default,,0,0,0,,A criança ficou com muito medo.
+Dialogue: 0,0:59:02.61,0:59:03.43,Default,,0,0,0,,Meu amor.
+Dialogue: 0,0:59:03.91,0:59:05.70,Default,,0,0,0,,Vem pra cá, mãe.
+Dialogue: 0,0:59:05.86,0:59:06.18,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:59:06.55,0:59:08.32,Default,,0,0,0,,Vamos para a sala, mãe.
+Dialogue: 0,0:59:08.78,0:59:09.57,Default,,0,0,0,,Vamos, irmão.
+Dialogue: 0,0:59:09.14,0:59:10.30,Default,,0,0,0,,Vamos levá-lo para a sala.
+Dialogue: 0,0:59:10.43,0:59:10.70,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:59:10.82,0:59:11.07,Default,,0,0,0,,Levanta.
+Dialogue: 0,0:59:11.74,0:59:12.64,Default,,0,0,0,,Levanta, meu irmão.
+Dialogue: 0,0:59:12.93,0:59:14.47,Default,,0,0,0,,Meninas, o que vocês estão fazendo aqui?
+Dialogue: 0,0:59:14.55,0:59:15.86,Default,,0,0,0,,Vamos, terminem o que falta.
+Dialogue: 0,0:59:15.95,0:59:16.22,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:59:16.32,0:59:16.80,Default,,0,0,0,,Vamos.
+Dialogue: 0,0:59:16.97,0:59:17.86,Default,,0,0,0,,Vamos, meu filho.
+Dialogue: 0,0:59:17.95,0:59:18.99,Default,,0,0,0,,Para a sala, para a sala.
+Dialogue: 0,0:59:19.32,0:59:19.86,Default,,0,0,0,,Agora não.
+Dialogue: 0,0:59:19.95,0:59:20.28,Default,,0,0,0,,Para cima.
+Dialogue: 0,0:59:21.49,0:59:22.86,Default,,0,0,0,,Cihan.
+Dialogue: 0,0:59:23.43,0:59:24.39,Default,,0,0,0,,Parece que foi assim.
+Dialogue: 0,0:59:25.20,0:59:25.91,Default,,0,0,0,,Está vendo, pai?
+Dialogue: 0,0:59:26.99,0:59:27.59,Default,,0,0,0,,Pode se sentar.
+Dialogue: 0,0:59:27.66,0:59:28.99,Default,,0,0,0,,Muito obrigado.
+Dialogue: 0,0:59:29.76,0:59:31.01,Default,,0,0,0,,Mãe.
+Dialogue: 0,0:59:31.28,0:59:31.70,Default,,0,0,0,,Cihan.
+Dialogue: 0,0:59:33.18,0:59:34.22,Default,,0,0,0,,Era o seu pai?
+Dialogue: 0,0:59:35.62,0:59:37.05,Default,,0,0,0,,Era o seu pai.
+Dialogue: 0,0:59:37.88,0:59:38.11,Default,,0,0,0,,Sim.
+Dialogue: 0,0:59:38.84,0:59:40.93,Default,,0,0,0,,Mas ele morreu, ele não pode estar vivo.
+Dialogue: 0,0:59:42.41,0:59:43.30,Default,,0,0,0,,Ele está vivo, meu bem.
+Dialogue: 0,0:59:44.01,0:59:44.76,Default,,0,0,0,,Seu pai está vivo.
+Dialogue: 0,0:59:44.88,0:59:47.82,Default,,0,0,0,,Aliás, íamos conversar sobre isso com você.
+Dialogue: 0,0:59:48.53,0:59:49.03,Default,,0,0,0,,Ele está vivo.
+Dialogue: 0,0:59:49.39,0:59:51.61,Default,,0,0,0,,Mas nós viemos com o funeral.
+Dialogue: 0,0:59:54.70,0:59:55.26,Default,,0,0,0,,Você tem razão.
+Dialogue: 0,0:59:56.68,1:00:00.14,Default,,0,0,0,,Nós fomos juntos buscar o corpo e trouxemos.
+Dialogue: 0,1:00:02.89,1:00:04.78,Default,,0,0,0,,Depois até o enterramos aqui, não foi?
+Dialogue: 0,1:00:04.93,1:00:07.28,Default,,0,0,0,,Depois fomos visitar o túmulo.
+Dialogue: 0,1:00:07.80,1:00:10.42,Default,,0,0,0,,Mas houve um mal-entendido.
+Dialogue: 0,1:00:11.18,1:00:12.91,Default,,0,0,0,,Quer dizer, aquele não era o seu pai.
+Dialogue: 0,1:00:13.74,1:00:15.49,Default,,0,0,0,,Seu pai está vivo.
+Dialogue: 0,1:00:16.14,1:00:18.68,Default,,0,0,0,,Quer dizer que meu pai realmente está vivo?
+Dialogue: 0,1:00:19.14,1:00:20.51,Default,,0,0,0,,Nós cometemos um erro.
+Dialogue: 0,1:00:21.18,1:00:22.88,Default,,0,0,0,,Cometemos um erro assim.
+Dialogue: 0,1:00:22.95,1:00:24.74,Default,,0,0,0,,Seu pai não nos disse que estava vivo.
+Dialogue: 0,1:00:25.03,1:00:26.09,Default,,0,0,0,,Quer dizer, ele não pôde dizer.
+Dialogue: 0,1:00:26.59,1:00:27.36,Default,,0,0,0,,Ele não pôde.
+Dialogue: 0,1:00:28.11,1:00:29.80,Default,,0,0,0,,E nós soubemos depois.
+Dialogue: 0,1:00:29.88,1:00:30.78,Default,,0,0,0,,Acontece que seu pai está vivo.
+Dialogue: 0,1:00:31.51,1:00:32.95,Default,,0,0,0,,Aquele que você viu era o seu pai.
+Dialogue: 0,1:00:34.61,1:00:37.23,Default,,0,0,0,,Mãe, quer dizer que ele realmente está vivo?
+Dialogue: 0,1:00:38.07,1:00:38.72,Default,,0,0,0,,Está.
+Dialogue: 0,1:00:39.30,1:00:40.09,Default,,0,0,0,,Está vivo.
+Dialogue: 0,1:00:39.76,1:00:42.18,Default,,0,0,0,,Quer dizer que tudo isso é verdade?
+Dialogue: 0,1:00:42.93,1:00:44.24,Default,,0,0,0,,É verdade, sim.
+Dialogue: 0,1:00:46.24,1:00:47.55,Default,,0,0,0,,É verdade.
+Dialogue: 0,1:00:48.34,1:00:50.09,Default,,0,0,0,,Olha, vou te dizer uma coisa agora.
+Dialogue: 0,1:00:51.78,1:00:54.97,Default,,0,0,0,,É muito normal você estar com medo, é muito normal se assustar.
+Dialogue: 0,1:00:55.45,1:00:57.16,Default,,0,0,0,,Se você ficar feliz, também é muito normal.
+Dialogue: 0,1:00:58.32,1:01:03.97,Default,,0,0,0,,Tudo é muito normal agora, e você pode agir do jeito que quiser, não pode?
+Dialogue: 0,1:01:05.74,1:01:08.30,Default,,0,0,0,,Você pode sentir medo, pode chorar.
+Dialogue: 0,1:01:08.55,1:01:09.03,Default,,0,0,0,,Sim.
+Dialogue: 0,1:01:09.97,1:01:12.93,Default,,0,0,0,,Pode ficar chateado, pode ficar em silêncio se quiser.
+Dialogue: 0,1:01:14.16,1:01:17.38,Default,,0,0,0,,Não importa o que aconteça, não importa o que você sinta, nós estamos do seu lado, tá bom?
+Dialogue: 0,1:01:17.45,1:01:18.64,Default,,0,0,0,,Sempre.
+Dialogue: 0,1:01:21.22,1:01:24.87,Default,,0,0,0,,Por que você nunca me disse isso antes, pai?
+Dialogue: 0,1:01:27.34,1:01:29.11,Default,,0,0,0,,É que a gente também não sabia.
+Dialogue: 0,1:01:30.07,1:01:31.53,Default,,0,0,0,,A gente soube há muito pouco tempo.
+Dialogue: 0,1:01:31.61,1:01:32.51,Default,,0,0,0,,Tudo é muito recente.
+Dialogue: 0,1:01:33.30,1:01:34.95,Default,,0,0,0,,Scha que a gente não te diria?
+Dialogue: 0,1:01:35.97,1:01:39.05,Default,,0,0,0,,Meu pai... Por que meu pai não veio antes?
+Dialogue: 0,1:01:39.78,1:01:41.26,Default,,0,0,0,,Porque seu pai estava doente.
+Dialogue: 0,1:01:42.53,1:01:43.20,Default,,0,0,0,,Ele não pôde vir.
+Dialogue: 0,1:01:45.01,1:01:47.53,Default,,0,0,0,,Agora ele ainda está um pouco doente, mas está se recuperando.
+Dialogue: 0,1:01:47.64,1:01:48.28,Default,,0,0,0,,Ele vai ficar muito bem.
+Dialogue: 0,1:01:48.43,1:01:50.47,Default,,0,0,0,,Na verdade, assim que pôde, seu pai veio.
+Dialogue: 0,1:01:50.80,1:01:52.99,Default,,0,0,0,,A gente na verdade queria conversar sobre isso com você hoje.
+Dialogue: 0,1:01:53.07,1:01:54.01,Default,,0,0,0,,Queríamos te contar.
+Dialogue: 0,1:01:54.18,1:01:56.34,Default,,0,0,0,,Sua mãe ia te contar tudo.
+Dialogue: 0,1:01:57.09,1:02:02.89,Default,,0,0,0,,Ela ia conversar com você. Boran ia te ver assim, mas como seu pai estava com tantas saudades...
+Dialogue: 0,1:02:03.99,1:02:05.07,Default,,0,0,0,,Ele sentiu tanta saudade.
+Dialogue: 0,1:02:05.24,1:02:07.28,Default,,0,0,0,,Ele agiu sem paciência.
+Dialogue: 0,1:02:07.57,1:02:09.72,Default,,0,0,0,,Ele agiu sem paciência. Apressou as coisas.
+Dialogue: 0,1:02:10.28,1:02:13.32,Default,,0,0,0,,Ele quis te ver, ficou animado. Por isso você se assustou.
+Dialogue: 0,1:02:13.84,1:02:15.51,Default,,0,0,0,,A gente ia conversar com você antes.
+Dialogue: 0,1:02:16.59,1:02:18.05,Default,,0,0,0,,Mas não se preocupe de jeito nenhum.
+Dialogue: 0,1:02:18.70,1:02:21.31,Default,,0,0,0,,Agora não precisa ter pressa.
+Dialogue: 0,1:02:22.12,1:02:23.84,Default,,0,0,0,,Você pode ver seu pai quando quiser.
+Dialogue: 0,1:02:25.99,1:02:27.96,Default,,0,0,0,,Eu quero ver.
+Dialogue: 0,1:02:28.39,1:02:30.55,Default,,0,0,0,,Mas ainda estou com muito medo.
+Dialogue: 0,1:02:31.57,1:02:36.47,Default,,0,0,0,,Ah, meu amor, é muito normal. Como eu disse agora há pouco, é muito normal, não tenha medo.
+Dialogue: 0,1:02:36.74,1:02:40.20,Default,,0,0,0,,A gente não tem pressa nenhuma, seu pai está te esperando.
+Dialogue: 0,1:02:40.74,1:02:44.12,Default,,0,0,0,,Quando você se sentir pronto, nós vamos.
+Dialogue: 0,1:02:44.20,1:02:46.36,Default,,0,0,0,,E você vai ver o seu pai, tá bom?
+Dialogue: 0,1:02:46.45,1:02:48.61,Default,,0,0,0,,Quer dormir um pouco?
+Dialogue: 0,1:02:48.70,1:02:52.16,Default,,0,0,0,,Tá bom, tá bom. Vamos, fecha os olhos, descansa um pouco.
+Dialogue: 0,1:02:52.24,1:02:53.05,Default,,0,0,0,,Deixa eu dar isso também para ele não passar frio.
+Dialogue: 0,1:02:53.12,1:02:54.93,Default,,0,0,0,,Claro, claro, dá, dá, dá.
+Dialogue: 0,1:02:55.01,1:02:55.80,Default,,0,0,0,,Olha, para ele não passar frio.
+Dialogue: 0,1:02:55.82,1:02:56.62,Default,,0,0,0,,Isso.
+Dialogue: 0,1:02:56.47,1:02:57.28,Default,,0,0,0,,Para não passar frio, vai.
+Dialogue: 0,1:02:57.24,1:03:01.11,Default,,0,0,0,,Para não passar frio. Abraça ele, abraça ele bem forte, abraça ele.
+Dialogue: 0,1:03:05.80,1:03:09.01,Default,,0,0,0,,Boran, meu filho, meu querido, se acalma um pouco.
+Dialogue: 0,1:03:21.91,1:03:25.20,Default,,0,0,0,,Olha, se você se acalmar um pouco, tudo vai se resolver.
+Dialogue: 0,1:03:26.80,1:03:28.30,Default,,0,0,0,,Tudo vai dar certo, meu filho, se acalma.
+Dialogue: 0,1:03:29.26,1:03:30.45,Default,,0,0,0,,Boran, eu não acredito em você.
+Dialogue: 0,1:03:31.11,1:03:35.11,Default,,0,0,0,,Boran, eu digo que não te conheço, mas você não era assim a esse ponto.
+Dialogue: 0,1:03:35.20,1:03:36.38,Default,,0,0,0,,Que tipo de coisa é essa?
+Dialogue: 0,1:03:36.74,1:03:39.07,Default,,0,0,0,,Como um pai pode fazer isso com o próprio filho?
+Dialogue: 0,1:03:39.18,1:03:40.07,Default,,0,0,0,,Por que você está fazendo isso?
+Dialogue: 0,1:03:40.80,1:03:41.95,Default,,0,0,0,,Olha, não coloque tanta culpa.
+Dialogue: 0,1:03:42.11,1:03:44.78,Default,,0,0,0,,Tá bom, ele também viu o filho, viu o quanto ele ficou chateado.
+Dialogue: 0,1:03:45.26,1:03:47.18,Default,,0,0,0,,Você não está vendo o quanto ele está arrasado?
+Dialogue: 0,1:03:47.26,1:03:48.55,Default,,0,0,0,,O filho de vocês ficou muito arrasado?
+Dialogue: 0,1:03:48.62,1:03:49.62,Default,,0,0,0,,E o meu filho?
+Dialogue: 0,1:03:50.24,1:03:52.61,Default,,0,0,0,,Você pensou se o seu filho ficou arrasado?
+Dialogue: 0,1:03:52.95,1:03:53.61,Default,,0,0,0,,Ele ficou chateado?
+Dialogue: 0,1:03:53.76,1:03:58.74,Default,,0,0,0,,Quando ele viu de repente o pai que achava estar morto bem na sua frente, gritando, o que ele sentiu, o que pensou?
+Dialogue: 0,1:03:59.05,1:04:00.95,Default,,0,0,0,,Você já pensou em como está o coração dele?
+Dialogue: 0,1:04:01.41,1:04:03.47,Default,,0,0,0,,Já pensou como ficou a alma dele?
+Dialogue: 0,1:04:05.09,1:04:06.66,Default,,0,0,0,,Boran, por que você está fazendo isso?
+Dialogue: 0,1:04:07.39,1:04:08.91,Default,,0,0,0,,Boran, isso é jeito de ser pai?
+Dialogue: 0,1:04:09.47,1:04:11.12,Default,,0,0,0,,Olha, não me faça falar, mas...
+Dialogue: 0,1:04:11.20,1:04:12.07,Default,,0,0,0,,O Cihan é o pai dele?
+Dialogue: 0,1:04:13.22,1:04:14.93,Default,,0,0,0,,O que você está dizendo, hein?
+Dialogue: 0,1:04:16.61,1:04:18.39,Default,,0,0,0,,Estou perguntando se o Cihan é o pai dele.
+Dialogue: 0,1:04:18.47,1:04:19.41,Default,,0,0,0,,Boran, o que você está dizendo?
+Dialogue: 0,1:04:20.74,1:04:22.24,Default,,0,0,0,,Ele é um pai melhor do que eu.
+Dialogue: 0,1:04:22.51,1:04:23.68,Default,,0,0,0,,É isso que você está tentando dizer, não é?
+Dialogue: 0,1:04:24.76,1:04:26.38,Default,,0,0,0,,Fala logo para acabar com isso que você vai fazer.
+Dialogue: 0,1:04:26.45,1:04:27.78,Default,,0,0,0,,Não fale asneiras.
+Dialogue: 0,1:04:28.24,1:04:29.41,Default,,0,0,0,,Bobagem.
+Dialogue: 0,1:04:31.61,1:04:34.87,Default,,0,0,0,,Boran, você não tem noção do que está dizendo.
+Dialogue: 0,1:04:39.59,1:04:40.70,Default,,0,0,0,,Você não vai se meter.
+Dialogue: 0,1:04:41.36,1:04:42.12,Default,,0,0,0,,Estou falando com a família.
+Dialogue: 0,1:04:42.53,1:04:43.74,Default,,0,0,0,,Você está metendo o meu nome no meio.
+Dialogue: 0,1:04:43.86,1:04:44.70,Default,,0,0,0,,Você vai falar comigo.
+Dialogue: 0,1:04:44.80,1:04:45.68,Default,,0,0,0,,Vai falar com quem mais?
+Dialogue: 0,1:04:45.99,1:04:47.30,Default,,0,0,0,,Olha, não façam isso, vocês dois são irmãos.
+Dialogue: 0,1:04:47.38,1:04:48.26,Default,,0,0,0,,Não falem assim, meus filhos.
+Dialogue: 0,1:04:48.34,1:04:48.97,Default,,0,0,0,,Um com o outro, hein?
+Dialogue: 0,1:04:49.18,1:04:50.09,Default,,0,0,0,,Tá bom, estamos calmos.
+Dialogue: 0,1:04:50.20,1:04:50.88,Default,,0,0,0,,Se você diz que não vai se envolver.
+Dialogue: 0,1:04:51.51,1:04:53.51,Default,,0,0,0,,Boran, você não sabe o que está dizendo.
+Dialogue: 0,1:04:53.66,1:04:55.49,Default,,0,0,0,,Olha onde essas suas atitudes estão te levando.
+Dialogue: 0,1:04:55.57,1:04:56.32,Default,,0,0,0,,Você não tem noção.
+Dialogue: 0,1:04:56.41,1:04:56.68,Default,,0,0,0,,Não faça isso.
+Dialogue: 0,1:04:56.78,1:04:57.80,Default,,0,0,0,,Ele é meu filho.
+Dialogue: 0,1:04:58.70,1:04:59.68,Default,,0,0,0,,Meu filho, ele é meu filho.
+Dialogue: 0,1:04:59.86,1:05:00.84,Default,,0,0,0,,Vocês já pararam para pensar?
+Dialogue: 0,1:05:00.95,1:05:02.05,Default,,0,0,0,,Sim, é seu filho.
+Dialogue: 0,1:05:02.16,1:05:03.30,Default,,0,0,0,,Sim, é seu filho.
+Dialogue: 0,1:05:03.38,1:05:05.70,Default,,0,0,0,,Eu estou há dias esperando para poder vê-lo.
+Dialogue: 0,1:05:06.24,1:05:07.86,Default,,0,0,0,,Eu vivo por causa do meu filho, respiro por ele.
+Dialogue: 0,1:05:08.24,1:05:11.55,Default,,0,0,0,,Tá, é, tudo bem, você aguentou tanto tempo, por que não aguentou só mais um pouco?
+Dialogue: 0,1:05:12.24,1:05:15.61,Default,,0,0,0,,Se você tivesse aguentado mais cinco minutos, dez minutos, um dia, dois dias, o que teria acontecido?
+Dialogue: 0,1:05:16.28,1:05:17.64,Default,,0,0,0,,Por que você agiu de forma tão egoísta, Boran?
+Dialogue: 0,1:05:19.70,1:05:21.61,Default,,0,0,0,,Querer ver o meu filho é ser egoísta, hein?
+Dialogue: 0,1:05:22.18,1:05:24.01,Default,,0,0,0,,Não, a questão não é essa.
+Dialogue: 0,1:05:25.91,1:05:27.43,Default,,0,0,0,,Deixa eu te dizer o que é egoísmo.
+Dialogue: 0,1:05:27.51,1:05:29.80,Default,,0,0,0,,Lembra quando você disse para quem te resgatou...
+Dialogue: 0,1:05:30.76,1:05:32.01,Default,,0,0,0,,"Me sequestre, me esconda"?
+Dialogue: 0,1:05:32.55,1:05:34.18,Default,,0,0,0,,Pois é, o que a criança soube naquela hora?
+Dialogue: 0,1:05:34.62,1:05:35.86,Default,,0,0,0,,Ele achou que o pai dele tinha morrido, não foi?
+Dialogue: 0,1:05:36.88,1:05:39.36,Default,,0,0,0,,E depois a mãe pegou a criança pela mão e a trouxe até a mansão.
+Dialogue: 0,1:05:40.93,1:05:42.74,Default,,0,0,0,,Com quem? Junto com o seu funeral.
+Dialogue: 0,1:05:43.03,1:05:46.03,Default,,0,0,0,,Olha, não tire isso da cabeça: junto com o seu próprio funeral.
+Dialogue: 0,1:05:46.64,1:05:48.36,Default,,0,0,0,,Aquele menino sabe que você morreu, Boran.
+Dialogue: 0,1:05:48.99,1:05:50.09,Default,,0,0,0,,Qual foi o seu ato de egoísmo?
+Dialogue: 0,1:05:50.55,1:05:55.22,Default,,0,0,0,,Agir sem pensar em qual seria a reação da criança ao ver o pai morto bem na frente dele.
+Dialogue: 0,1:05:55.89,1:05:59.66,Default,,0,0,0,,Ignorar os sentimentos do menino só porque você queria vê-lo.
+Dialogue: 0,1:05:59.97,1:06:00.51,Default,,0,0,0,,Entendeu?
+Dialogue: 0,1:06:00.95,1:06:02.53,Default,,0,0,0,,E se a criança tivesse desmaiado ali mesmo?
+Dialogue: 0,1:06:03.36,1:06:04.36,Default,,0,0,0,,O que teria acontecido depois?
+Dialogue: 0,1:06:04.93,1:06:05.88,Default,,0,0,0,,Ah, você pensou nisso alguma vez?
+Dialogue: 0,1:06:06.30,1:06:07.09,Default,,0,0,0,,Isso é egoísmo.
+Dialogue: 0,1:06:07.89,1:06:08.86,Default,,0,0,0,,O que você fez é egoísmo.
+Dialogue: 0,1:06:09.24,1:06:12.57,Default,,0,0,0,,Alem disso, ninguém aqui levantou para dizer que você não pode ver o seu filho.
+Dialogue: 0,1:06:12.64,1:06:13.36,Default,,0,0,0,,Quem disse isso aqui?
+Dialogue: 0,1:06:13.61,1:06:19.55,Default,,0,0,0,,Foi sua mãe? Foi a Alya? Foi o Kaya? Foi a Nare? Quem disse, quem te disse que você não podia ver a criança?
+Dialogue: 0,1:06:19.64,1:06:25.93,Default,,0,0,0,,Dissemos o que fazer: deixe a mãe falar, deixe a mãe explicar ou eu explico, façamos alguma coisa.
+Dialogue: 0,1:06:26.01,1:06:32.03,Default,,0,0,0,,Mas dissemos para falar com a criança antes, só que você não teve paciência e agiu com egoísmo. Contou isso a ele também?
+Dialogue: 0,1:06:32.11,1:06:38.68,Default,,0,0,0,,O que você disse? Que o seu pai te abandonou e foi embora? Que aquele não é o seu pai, mas sim eu? Foi assim que você
+Dialogue: 0,1:06:38.76,1:06:40.07,Default,,0,0,0,,levou a criança, hein?
+Dialogue: 0,1:06:40.45,1:06:42.22,Default,,0,0,0,,O que você está dizendo agora? É mentira?
+Dialogue: 0,1:06:42.53,1:06:45.05,Default,,0,0,0,,Boran, irmão, o que você está dizendo, meu irmão?
+Dialogue: 0,1:06:45.57,1:06:46.57,Default,,0,0,0,,Por favor, Boran!
+Dialogue: 0,1:06:46.82,1:06:48.79,Default,,0,0,0,,Cihan quer tirar minha mulher
+Dialogue: 0,1:06:49.20,1:06:50.91,Default,,0,0,0,,e meu filho de mim. Cala a boca!
+Dialogue: 0,1:06:56.97,1:06:59.58,Default,,0,0,0,,Boran, olha, eu estou relevando essas suas atitudes
+Dialogue: 0,1:07:01.88,1:07:04.28,Default,,0,0,0,,por causa dos meses que você passou naquilo que passou.
+Dialogue: 0,1:07:04.43,1:07:05.99,Default,,0,0,0,,Estou relevando a raiva
+Dialogue: 0,1:07:06.07,1:07:07.97,Default,,0,0,0,,nos seus olhos por causa de tudo o que você passou.
+Dialogue: 0,1:07:10.03,1:07:11.70,Default,,0,0,0,,Essas palavras não são nada bonitas, hein.
+Dialogue: 0,1:07:12.57,1:07:15.03,Default,,0,0,0,,Você é o pai dele, mas para aquela criança
+Dialogue: 0,1:07:15.11,1:07:17.20,Default,,0,0,0,,quem fez o papel de pai na sua ausência fui eu.
+Dialogue: 0,1:07:17.72,1:07:20.34,Default,,0,0,0,,Mais ninguém. E eu amo
+Dialogue: 0,1:07:20.43,1:07:22.74,Default,,0,0,0,,essa criança, Boran. Se você agir de novo
+Dialogue: 0,1:07:22.82,1:07:25.20,Default,,0,0,0,,por conta própria na frente dele desse jeito,
+Dialogue: 0,1:07:25.28,1:07:27.51,Default,,0,0,0,,o pouco de laço
+Dialogue: 0,1:07:27.95,1:07:30.24,Default,,0,0,0,,que ainda existe entre nós, você vai romper
+Dialogue: 0,1:07:30.32,1:07:32.66,Default,,0,0,0,,e eu serei obrigado a falar com você
+Dialogue: 0,1:07:32.74,1:07:34.76,Default,,0,0,0,,de um jeito que nunca falei antes. Não me faça isso.
+Dialogue: 0,1:07:35.64,1:07:36.84,Default,,0,0,0,,Entendeu?
+Dialogue: 0,1:07:40.89,1:07:43.95,Default,,0,0,0,,Quando vocês vão dar entrada no pedido de divórcio?
+Dialogue: 0,1:07:47.91,1:07:50.09,Default,,0,0,0,,Não demorem mais. Ninguém está
+Dialogue: 0,1:07:50.18,1:07:52.18,Default,,0,0,0,,adiando nada. Ninguém está fugindo de nada.
+Dialogue: 0,1:07:52.93,1:07:54.70,Default,,0,0,0,,Como você mesmo disse, vai chegar o dia
+Dialogue: 0,1:07:54.78,1:07:56.70,Default,,0,0,0,,em que todos nós veremos o que vai acontecer,
+Dialogue: 0,1:07:56.78,1:07:58.59,Default,,0,0,0,,Bora. Vamos ver.
+Dialogue: 0,1:08:05.39,1:08:07.20,Default,,0,0,0,,Bora o quê?
+Dialogue: 0,1:08:09.16,1:08:10.97,Default,,0,0,0,,Eu já
+Dialogue: 0,1:08:17.97,1:08:19.23,Default,,0,0,0,,sabia.
+Dialogue: 0,1:08:21.53,1:08:23.89,Default,,0,0,0,,Filha, minhas mãos e meus pés estão tremendo.
+Dialogue: 0,1:08:24.16,1:08:25.97,Default,,0,0,0,,Ainda?
+Dialogue: 0,1:08:26.40,1:08:28.50,Default,,0,0,0,,Sabe, o que posso dizer, tia?
+Dialogue: 0,1:08:28.80,1:08:31.35,Default,,0,0,0,,Eu juro que não sei o que dizer.
+Dialogue: 0,1:08:32.95,1:08:36.22,Default,,0,0,0,,Mas acho que dias ainda mais difíceis nos esperam.
+Dialogue: 0,1:08:37.95,1:08:39.76,Default,,0,0,0,,Ele se machucou.
+Dialogue: 0,1:08:39.98,1:08:44.95,Default,,0,0,0,,Cihan se machucou, mas eu vou fazer o impossível para que Cihan não se machuque de novo.
+Dialogue: 0,1:08:45.03,1:08:48.03,Default,,0,0,0,,O Bora também tem que se esforçar um pouco, não acha?
+Dialogue: 0,1:08:48.11,1:08:51.22,Default,,0,0,0,,Ele não tem que pensar um pouco? Que tipo de situação é essa, eu não entendi.
+Dialogue: 0,1:08:51.30,1:08:54.12,Default,,0,0,0,,Estou com medo, estou com medo de verdade agora.
+Dialogue: 0,1:08:54.20,1:08:56.56,Default,,0,0,0,,Tenho medo do meu filho, desse comportamento dele.
+Dialogue: 0,1:08:56.64,1:08:58.47,Default,,0,0,0,,Você tem razão, tem razão.
+Dialogue: 0,1:08:59.70,1:09:01.85,Default,,0,0,0,,Mas não temos outra escolha a não ser resistir.
+Dialogue: 0,1:09:01.94,1:09:03.72,Default,,0,0,0,,Vamos resistir.
+Dialogue: 0,1:09:03.80,1:09:05.76,Default,,0,0,0,,Eu sei, eu sei.
+Dialogue: 0,1:09:08.15,1:09:11.12,Default,,0,0,0,,Se não resistirmos, nós dois vamos perder tudo de qualquer forma.
+Dialogue: 0,1:09:12.59,1:09:13.20,Default,,0,0,0,,Vamos resistir.
+Dialogue: 0,1:09:19.73,1:09:21.53,Default,,0,0,0,,Desculpe.
+Dialogue: 0,1:09:24.66,1:09:26.44,Default,,0,0,0,,Isso vai se resolver o mais rápido possível.
+Dialogue: 0,1:09:27.93,1:09:29.84,Default,,0,0,0,,Porque é impossível acreditar nesse estado dele.
+Dialogue: 0,1:09:31.30,1:09:33.02,Default,,0,0,0,,A propósito, vou pedir licença no hospital.
+Dialogue: 0,1:09:33.52,1:09:35.74,Default,,0,0,0,,Vou passar alguns dias sem deixar o Deniz sozinho.
+Dialogue: 0,1:09:36.06,1:09:36.40,Default,,0,0,0,,Certo.
+Dialogue: 0,1:09:38.10,1:09:40.57,Default,,0,0,0,,Irmão, eu também preciso ir ver o Şahin agora.
+Dialogue: 0,1:09:40.99,1:09:43.02,Default,,0,0,0,,Certo, vá. Nós também temos reuniões na empresa.
+Dialogue: 0,1:09:43.27,1:09:44.27,Default,,0,0,0,,Vamos entrar em algo complicado mais cedo.
+Dialogue: 0,1:09:44.44,1:09:44.68,Default,,0,0,0,,Certo.
+Dialogue: 0,1:09:47.65,1:09:50.14,Default,,0,0,0,,Se acontecer alguma coisa, me ligue imediatamente.
+Dialogue: 0,1:09:50.90,1:09:51.77,Default,,0,0,0,,Tá bom.
+Dialogue: 0,1:09:52.69,1:09:52.94,Default,,0,0,0,,Certo.
+Dialogue: 0,1:09:53.93,1:09:54.23,Default,,0,0,0,,Vamos.
+Dialogue: 0,1:09:56.40,1:09:57.23,Default,,0,0,0,,Pai!
+Dialogue: 0,1:09:58.34,1:09:58.84,Default,,0,0,0,,Filho?
+Dialogue: 0,1:09:59.27,1:09:59.90,Default,,0,0,0,,Não vá!
+Dialogue: 0,1:10:00.36,1:10:00.66,Default,,0,0,0,,O quê?
+Dialogue: 0,1:10:00.95,1:10:01.69,Default,,0,0,0,,Não vá!
+Dialogue: 0,1:10:02.88,1:10:04.68,Default,,0,0,0,,Não vou?
+Dialogue: 0,1:10:06.15,1:10:07.40,Default,,0,0,0,,Eu também quero ir.
+Dialogue: 0,1:10:08.38,1:10:09.48,Default,,0,0,0,,Quer vir para a empresa?
+Dialogue: 0,1:10:09.81,1:10:10.18,Default,,0,0,0,,Sim.
+Dialogue: 0,1:10:10.84,1:10:11.90,Default,,0,0,0,,Ainda estou com medo.
+Dialogue: 0,1:10:14.10,1:10:15.70,Default,,0,0,0,,Vamos nós também.
+Dialogue: 0,1:10:16.84,1:10:18.15,Default,,0,0,0,,Ah, tá bom, venham vocês também então.
+Dialogue: 0,1:10:18.64,1:10:21.30,Default,,0,0,0,,Vamos para a empresa, passamos um tempo juntos, curtimos um pouco.
+Dialogue: 0,1:10:22.11,1:10:24.34,Default,,0,0,0,,Tem uma mesa de bilhar na minha sala, vamos jogar bilhar.
+Dialogue: 0,1:10:24.41,1:10:25.10,Default,,0,0,0,,É? Meu chapa.
+Dialogue: 0,1:10:25.60,1:10:26.03,Default,,0,0,0,,Tá bom.
+Dialogue: 0,1:10:26.69,1:10:28.44,Default,,0,0,0,,Talvez meu medo passe também.
+Dialogue: 0,1:10:28.69,1:10:31.47,Default,,0,0,0,,Meu filho, você não tem medo de nada, você é um garoto corajoso como um leão.
+Dialogue: 0,1:10:31.82,1:10:33.24,Default,,0,0,0,,Então vai lá com a sua mãe e...
+Dialogue: 0,1:10:33.55,1:10:34.02,Default,,0,0,0,,Se arrumem.
+Dialogue: 0,1:10:39.62,1:10:41.98,Default,,0,0,0,,Olhem só quem chegou, olhem.
+Dialogue: 0,1:10:46.74,1:10:50.06,Default,,0,0,0,,O chefe chegou, temos um visitante que é um verdadeiro visitante.
+Dialogue: 0,1:10:50.56,1:10:52.02,Default,,0,0,0,,O chefe chegou, o chefe.
+Dialogue: 0,1:10:52.14,1:10:54.11,Default,,0,0,0,,Ooo, o pequeno chefe, seja muito bem-vindo.
+Dialogue: 0,1:10:54.52,1:10:57.13,Default,,0,0,0,,Ora, seja muito bem-vindo, meu sobrinho.
+Dialogue: 0,1:10:58.72,1:10:59.68,Default,,0,0,0,,Vamos, que a paz esteja com vocês.
+Dialogue: 0,1:11:00.02,1:11:01.10,Default,,0,0,0,,A paz esteja com vocês.
+Dialogue: 0,1:11:01.18,1:11:03.07,Default,,0,0,0,,E com você também, a paz esteja com você.
+Dialogue: 0,1:11:03.15,1:11:03.85,Default,,0,0,0,,Bom trabalho.
+Dialogue: 0,1:11:04.18,1:11:05.38,Default,,0,0,0,,Obrigado, seja bem-vindo.
+Dialogue: 0,1:11:06.12,1:11:09.52,Default,,0,0,0,,Estendíamos tapetes, tocavam tambor, fazíamos churrasco, era fácil.
+Dialogue: 0,1:11:09.76,1:11:10.68,Default,,0,0,0,,Gostou da empresa?
+Dialogue: 0,1:11:11.06,1:11:12.22,Default,,0,0,0,,Sim, é bonita.
+Dialogue: 0,1:11:12.30,1:11:16.11,Default,,0,0,0,,Tem uma fonte ali, uma piscina ali, tem um prédio enorme aqui.
+Dialogue: 0,1:11:16.47,1:11:19.88,Default,,0,0,0,,Claro, ainda vamos passear mais. Tem bilhar na minha sala, vamos jogar bilhar.
+Dialogue: 0,1:11:20.06,1:11:21.65,Default,,0,0,0,,Mas eu não sei jogar.
+Dialogue: 0,1:11:21.73,1:11:23.11,Default,,0,0,0,,Não tem problema, seu tio também não sabe.
+Dialogue: 0,1:11:23.19,1:11:24.95,Default,,0,0,0,,Rapaz, eu te uso de bola de bilhar, hein.
+Dialogue: 0,1:11:25.03,1:11:25.84,Default,,0,0,0,,He he.
+Dialogue: 0,1:11:25.61,1:11:26.41,Default,,0,0,0,,Meu filho, agora...
+Dialogue: 0,1:11:26.49,1:11:28.68,Default,,0,0,0,,Certo, mas primeiro vamos passear, não é?
+Dialogue: 0,1:11:28.76,1:11:29.56,Default,,0,0,0,,Vamos.
+Dialogue: 0,1:11:29.10,1:11:30.27,Default,,0,0,0,,Vamos dar outra volta.
+Dialogue: 0,1:11:30.35,1:11:31.15,Default,,0,0,0,,Pois é, claro.
+Dialogue: 0,1:11:31.14,1:11:31.94,Default,,0,0,0,,Venha.
+Dialogue: 0,1:11:31.60,1:11:32.40,Default,,0,0,0,,O tio...
+Dialogue: 0,1:11:32.10,1:11:32.94,Default,,0,0,0,,Venha, Kadir, venha.
+Dialogue: 0,1:11:33.02,1:11:34.35,Default,,0,0,0,,Lugar apertado, venha você também, tio.
+Dialogue: 0,1:11:34.43,1:11:35.23,Default,,0,0,0,,Chegamos.
+Dialogue: 0,1:11:35.14,1:11:36.94,Default,,0,0,0,,Olha só, 3, 2, 1.
+Dialogue: 0,1:11:38.27,1:11:40.07,Default,,0,0,0,,Uuuu.
+Dialogue: 0,1:11:40.64,1:11:41.77,Default,,0,0,0,,He he he.
+Dialogue: 0,1:11:41.85,1:11:43.65,Default,,0,0,0,,Muito bem.
+Dialogue: 0,1:11:47.10,1:11:48.90,Default,,0,0,0,,Ele não vai ficar entediado?
+Dialogue: 0,1:11:55.07,1:11:55.64,Default,,0,0,0,,Que vida amarga.
+Dialogue: 0,1:11:57.44,1:11:59.45,Default,,0,0,0,,Mas este mundo dura apenas três dias mesmo.
+Dialogue: 0,1:12:00.78,1:12:02.12,Default,,0,0,0,,Quando você sorri, tudo passa.
+Dialogue: 0,1:12:03.49,1:12:05.65,Default,,0,0,0,,E passou de novo agora.
+Dialogue: 0,1:12:12.34,1:12:13.15,Default,,0,0,0,,Isso.
+Dialogue: 0,1:12:17.41,1:12:21.85,Default,,0,0,0,,Mas eu escondi a verdade sobre o meu irmão, eu devia ter contado.
+Dialogue: 0,1:12:30.41,1:12:32.02,Default,,0,0,0,,Você nunca escondeu o seu coração de mim.
+Dialogue: 0,1:12:33.02,1:12:34.56,Default,,0,0,0,,Sempre o mantive aberto.
+Dialogue: 0,1:12:36.02,1:12:37.49,Default,,0,0,0,,Isso é uma tolice minha.
+Dialogue: 0,1:12:39.40,1:12:41.81,Default,,0,0,0,,Eu, que fui tão corajosa.
+Dialogue: 0,1:12:46.34,1:12:49.60,Default,,0,0,0,,Você tanto me implorou para eu mostrar essa coragem.
+Dialogue: 0,1:12:54.70,1:12:56.51,Default,,0,0,0,,Eu estava sozinha, Nare.
+Dialogue: 0,1:12:58.41,1:13:00.38,Default,,0,0,0,,Eu não tinha a quem recorrer.
+Dialogue: 0,1:13:03.38,1:13:04.26,Default,,0,0,0,,Eu quis confiar.
+Dialogue: 0,1:13:05.35,1:13:07.02,Default,,0,0,0,,Mas toda vez que eu confiava, ele me destruía.
+Dialogue: 0,1:13:07.10,1:13:09.01,Default,,0,0,0,,Não consegui proteger o meu mundo.
+Dialogue: 0,1:13:12.77,1:13:15.91,Default,,0,0,0,,Eu tive medo do Kaya, do Cihan, Nare.
+Dialogue: 0,1:13:21.81,1:13:23.61,Default,,0,0,0,,Eu me agarrei a isso.
+Dialogue: 0,1:13:25.69,1:13:26.61,Default,,0,0,0,,Me desculpe.
+Dialogue: 0,1:13:28.43,1:13:31.15,Default,,0,0,0,,Me desculpe por não ter estado ao seu lado.
+Dialogue: 0,1:13:31.99,1:13:32.98,Default,,0,0,0,,Me desculpe.
+Dialogue: 0,1:13:33.32,1:13:37.03,Default,,0,0,0,,Se eu estivesse ao seu lado, talvez você não puxasse o gatilho e desistisse da vida.
+Dialogue: 0,1:13:38.64,1:13:40.41,Default,,0,0,0,,Eu também tenho culpa, me desculpe.
+Dialogue: 0,1:13:40.68,1:13:41.77,Default,,0,0,0,,Você não tem culpa nenhuma.
+Dialogue: 0,1:13:42.88,1:13:43.98,Default,,0,0,0,,Você não tem culpa de nada.
+Dialogue: 0,1:13:44.10,1:13:45.49,Default,,0,0,0,,Meu pai nos deixou essa herança.
+Dialogue: 0,1:13:45.99,1:13:47.23,Default,,0,0,0,,Não se culpe tanto.
+Dialogue: 0,1:13:51.20,1:13:53.01,Default,,0,0,0,,Esqueça isso, anda.
+Dialogue: 0,1:14:02.78,1:14:04.88,Default,,0,0,0,,Você não é mãe.
+Dialogue: 0,1:14:10.94,1:14:12.06,Default,,0,0,0,,A enfermeira já vem, espera.
+Dialogue: 0,1:14:12.14,1:14:14.30,Default,,0,0,0,,Saímos há pouco, ela não vem por uma hora.
+Dialogue: 0,1:14:14.69,1:14:15.38,Default,,0,0,0,,Vem aqui perto de mim.
+Dialogue: 0,1:14:16.20,1:14:17.73,Default,,0,0,0,,Eu disse pra vir, vem logo.
+Dialogue: 0,1:14:19.55,1:14:21.70,Default,,0,0,0,,Tá bom, mas se ela vier, você assume.
+Dialogue: 0,1:14:25.49,1:14:26.68,Default,,0,0,0,,Diga que você me conhecia.
+Dialogue: 0,1:14:27.14,1:14:29.49,Default,,0,0,0,,Se sua mãe vier, diga que não me conhece.
+Dialogue: 0,1:14:29.57,1:14:30.38,Default,,0,0,0,,O quê?
+Dialogue: 0,1:14:29.98,1:14:31.40,Default,,0,0,0,,Vamos resolver isso.
+Dialogue: 0,1:14:31.48,1:14:32.40,Default,,0,0,0,,Sente-se.
+Dialogue: 0,1:14:32.48,1:14:33.95,Default,,0,0,0,,Vamos resolver.
+Dialogue: 0,1:14:39.49,1:14:41.30,Default,,0,0,0,,Chega.
+Dialogue: 0,1:14:51.97,1:14:54.97,Default,,0,0,0,,Chega, cunhada, não é nada, a gente estava conversando.
+Dialogue: 0,1:14:57.03,1:14:59.78,Default,,0,0,0,,Por que vocês não deixam esse menino em paz?
+Dialogue: 0,1:15:01.62,1:15:02.43,Default,,0,0,0,,Passa logo.
+Dialogue: 0,1:15:01.94,1:15:02.74,Default,,0,0,0,,Ah, mãe.
+Dialogue: 0,1:15:02.81,1:15:04.47,Default,,0,0,0,,Alya é sério.
+Dialogue: 0,1:15:04.55,1:15:06.35,Default,,0,0,0,,Deixa eu sentar.
+Dialogue: 0,1:15:10.18,1:15:11.15,Default,,0,0,0,,Senta logo, anda.
+Dialogue: 0,1:15:11.23,1:15:13.03,Default,,0,0,0,,Seja bem-vinda.
+Dialogue: 0,1:15:14.01,1:15:15.81,Default,,0,0,0,,Como vai?
+Dialogue: 0,1:15:22.73,1:15:24.52,Default,,0,0,0,,Certo.
+Dialogue: 0,1:15:25.81,1:15:27.60,Default,,0,0,0,,Eu já estou bem.
+Dialogue: 0,1:15:31.23,1:15:33.03,Default,,0,0,0,,Vem, vem, vem, vem.
+Dialogue: 0,1:15:36.45,1:15:38.26,Default,,0,0,0,,É bonito?
+Dialogue: 0,1:15:40.32,1:15:43.46,Default,,0,0,0,,É muito bonito, mas não é tão bonito quanto a nossa casa.
+Dialogue: 0,1:15:44.56,1:15:46.35,Default,,0,0,0,,É bonito, adorável.
+Dialogue: 0,1:15:47.20,1:15:50.03,Default,,0,0,0,,Olha só, tem gente ali, você viu no bazar?
+Dialogue: 0,1:15:50.11,1:15:52.53,Default,,0,0,0,,É, tinha um monte de gente.
+Dialogue: 0,1:15:52.95,1:15:55.41,Default,,0,0,0,,É, a gente comprou sorvete lá da outra vez, lembra?
+Dialogue: 0,1:15:55.49,1:15:57.33,Default,,0,0,0,,Você com o meu tio Kaya...
+Dialogue: 0,1:15:57.85,1:15:59.65,Default,,0,0,0,,Paşa!
+Dialogue: 0,1:16:04.41,1:16:06.32,Default,,0,0,0,,Ei, vamos jogar bilhar?
+Dialogue: 0,1:16:06.40,1:16:08.69,Default,,0,0,0,,Prepare aquele protocolo para mim.
+Dialogue: 0,1:16:22.41,1:16:24.84,Default,,0,0,0,,Primeiro, preciso que vocês dois assinem.
+Dialogue: 0,1:16:28.98,1:16:31.86,Default,,0,0,0,,Que esses dias estranhos passem assim.
+Dialogue: 0,1:16:33.98,1:16:36.93,Default,,0,0,0,,Que a solidão volte a queimar o meu peito.
+Dialogue: 0,1:16:38.32,1:16:41.20,Default,,0,0,0,,Os dias em que eu olhava para você cheia de amor.
+Dialogue: 0,1:16:42.99,1:16:46.06,Default,,0,0,0,,Você achou que eu era sua esposa nessa separação mentirosa.
+Dialogue: 0,1:16:48.48,1:16:51.28,Default,,0,0,0,,Que esses dias estranhos passem assim.
+Dialogue: 0,1:16:53.35,1:16:56.28,Default,,0,0,0,,Que a solidão volte a queimar o meu peito.
+Dialogue: 0,1:16:58.24,1:17:00.27,Default,,0,0,0,,Quando eu olho para o seu caminho,
+Dialogue: 0,1:17:01.48,1:17:04.09,Default,,0,0,0,,Taş, ser a pessoa que fará vocês assinarem isso
+Dialogue: 0,1:17:07.76,1:17:10.89,Default,,0,0,0,,é a última coisa que eu gostaria na vida.
+Dialogue: 0,1:17:11.35,1:17:12.85,Default,,0,0,0,,O que eu digo sobre isso?
+Dialogue: 0,1:17:14.66,1:17:15.65,Default,,0,0,0,,É só mais uma loucura dele.
+Dialogue: 0,1:17:15.73,1:17:18.08,Default,,0,0,0,,Quem dera houvesse outro jeito.
+Dialogue: 0,1:17:19.16,1:17:21.65,Default,,0,0,0,,Estou sufocado, sinto sua falta a cada segundo.
+Dialogue: 0,1:17:36.73,1:17:39.40,Default,,0,0,0,,O amor pela minha morena nunca me tocou
+Dialogue: 0,1:17:42.60,1:17:45.40,Default,,0,0,0,,As pegadas dos seus passos atrás de mim todos os dias
+Dialogue: 0,1:17:47.69,1:17:50.17,Default,,0,0,0,,Sua partida para o meu coração nunca me tocou
+Dialogue: 0,1:17:52.02,1:17:54.84,Default,,0,0,0,,As pegadas dos seus passos atrás de mim todos os dias
+Dialogue: 0,1:17:57.28,1:17:59.77,Default,,0,0,0,,Sua partida para o meu coração nunca me tocou
+Dialogue: 0,1:18:01.78,1:18:04.53,Default,,0,0,0,,Que seja assim, que passe com um coração mentiroso
+Dialogue: 0,1:18:07.15,1:18:09.89,Default,,0,0,0,,Que a solidão leve minha vida de novo, ainda estou sozinho
+Dialogue: 0,1:18:11.86,1:18:14.28,Default,,0,0,0,,Rosas no seu vaso enquanto você me dá isso
+Dialogue: 0,1:18:17.07,1:18:20.08,Default,,0,0,0,,Você achou que eu acreditaria nesta falsa separação?
+Dialogue: 0,1:18:22.01,1:18:24.81,Default,,0,0,0,,Que seja assim, que passem esses dias mentirosos
+Dialogue: 0,1:18:27.05,1:18:29.92,Default,,0,0,0,,Que a solidão leve minha vida de novo
+Dialogue: 0,1:18:31.62,1:18:34.50,Default,,0,0,0,,Você achou que eu cairia nessa falsa separação?
+Dialogue: 0,1:18:41.62,1:18:44.44,Default,,0,0,0,,Que seja assim, que passem esses dias mentirosos
+Dialogue: 0,1:18:46.47,1:18:49.60,Default,,0,0,0,,Você será testemunha do nosso casamento de verdade
+Dialogue: 0,1:18:58.56,1:19:00.36,Default,,0,0,0,,vamos ver então
+Dialogue: 0,1:19:03.72,1:19:06.91,Default,,0,0,0,,foi tão difícil pegar a caneta no meu lugar
+Dialogue: 0,1:19:27.60,1:19:28.62,Default,,0,0,0,,foi tão difícil
+Dialogue: 0,1:19:28.70,1:19:31.26,Default,,0,0,0,,já ficou assim normal para nós
+Dialogue: 0,1:19:32.84,1:19:33.95,Default,,0,0,0,,o que é que já foi fácil para nós?
+Dialogue: 0,1:19:34.03,1:19:35.22,Default,,0,0,0,,é verdade
+Dialogue: 0,1:19:35.30,1:19:37.13,Default,,0,0,0,,criamos imunidade
+Dialogue: 0,1:19:38.73,1:19:41.22,Default,,0,0,0,,pera, vamos ficar te esperando?
+Dialogue: 0,1:19:48.68,1:19:49.48,Default,,0,0,0,,pois é
+Dialogue: 0,1:19:49.19,1:19:50.57,Default,,0,0,0,,vamos ficar te esperando aqui?
+Dialogue: 0,1:19:50.65,1:19:52.39,Default,,0,0,0,,é mesmo
+Dialogue: 0,1:19:52.47,1:19:54.86,Default,,0,0,0,,não é nessa área branca, é para este lado?
+Dialogue: 0,1:19:54.94,1:19:56.55,Default,,0,0,0,,pega agora, que beleza
+Dialogue: 0,1:19:56.62,1:19:57.59,Default,,0,0,0,,agora segura assim
+Dialogue: 0,1:19:57.66,1:19:58.47,Default,,0,0,0,,como você está aqui
+Dialogue: 0,1:19:58.32,1:19:59.12,Default,,0,0,0,,olha para cá
+Dialogue: 0,1:19:58.86,1:19:59.82,Default,,0,0,0,,segura bem firme
+Dialogue: 0,1:19:59.90,1:20:00.70,Default,,0,0,0,,quem diz não
+Dialogue: 0,1:20:00.59,1:20:01.39,Default,,0,0,0,,a mão assim
+Dialogue: 0,1:20:01.12,1:20:01.93,Default,,0,0,0,,aqui
+Dialogue: 0,1:20:01.78,1:20:02.59,Default,,0,0,0,,aqui
+Dialogue: 0,1:20:02.51,1:20:03.31,Default,,0,0,0,,segura firme
+Dialogue: 0,1:20:03.06,1:20:03.86,Default,,0,0,0,,segura firme
+Dialogue: 0,1:20:03.56,1:20:04.36,Default,,0,0,0,,isso assim
+Dialogue: 0,1:20:04.44,1:20:05.24,Default,,0,0,0,,aqui
+Dialogue: 0,1:20:05.32,1:20:06.70,Default,,0,0,0,,você vai bater assim
+Dialogue: 0,1:20:06.78,1:20:07.81,Default,,0,0,0,,Como?
+Dialogue: 0,1:20:07.89,1:20:08.81,Default,,0,0,0,,Opa!
+Dialogue: 0,1:20:08.89,1:20:10.69,Default,,0,0,0,,Vamos!
+Dialogue: 0,1:20:14.16,1:20:15.52,Default,,0,0,0,,Tá curtindo, hein, garoto?
+Dialogue: 0,1:20:15.60,1:20:17.40,Default,,0,0,0,,Vamos!
+Dialogue: 0,1:20:17.78,1:20:18.77,Default,,0,0,0,,Que gracinha!
+Dialogue: 0,1:20:18.85,1:20:20.23,Default,,0,0,0,,Que gracinha!
+Dialogue: 0,1:20:20.31,1:20:21.59,Default,,0,0,0,,Papai!
+Dialogue: 0,1:20:21.66,1:20:23.50,Default,,0,0,0,,Meu medo passou.
+Dialogue: 0,1:20:24.27,1:20:25.19,Default,,0,0,0,,Posso ver meu pai.
+Dialogue: 0,1:20:25.27,1:20:27.56,Default,,0,0,0,,Vocês dois também estarão comigo.
+Dialogue: 0,1:20:39.49,1:20:40.70,Default,,0,0,0,,Tá bom, amanhã.
+Dialogue: 0,1:20:40.78,1:20:43.14,Default,,0,0,0,,Nós dois vamos estar com você.
+Dialogue: 0,1:20:44.26,1:20:46.35,Default,,0,0,0,,Vamos agora?
+Dialogue: 0,1:20:46.93,1:20:47.85,Default,,0,0,0,,Comemorar!
+Dialogue: 0,1:20:47.93,1:20:48.85,Default,,0,0,0,,Vamos comemorar, venha cá.
+Dialogue: 0,1:20:48.93,1:20:49.85,Default,,0,0,0,,Vamos, vamos!
+Dialogue: 0,1:20:49.93,1:20:50.85,Default,,0,0,0,,Vamos, vamos!
+Dialogue: 0,1:20:50.93,1:20:51.85,Default,,0,0,0,,Vamos, vamos!
+Dialogue: 0,1:20:51.93,1:20:53.73,Default,,0,0,0,,viu só?
+Dialogue: 0,1:20:59.52,1:21:00.44,Default,,0,0,0,,Quem sabia disso de propósito, hein?
+Dialogue: 0,1:21:00.52,1:21:02.44,Default,,0,0,0,,Meu filho, o que é que você sabe, afinal?
+Dialogue: 0,1:21:02.52,1:21:04.40,Default,,0,0,0,,Você. Ele não sabe de nada disso.
+Dialogue: 0,1:21:04.80,1:21:06.34,Default,,0,0,0,,Minha mão é que escorregou
+Dialogue: 0,1:21:06.41,1:21:07.91,Default,,0,0,0,,e por isso ele conseguiu meter aquela bola.
+Dialogue: 0,1:21:07.99,1:21:09.77,Default,,0,0,0,,Minha mão escorregou.
+Dialogue: 0,1:21:10.90,1:21:12.40,Default,,0,0,0,,Isso dá até romance.
+Dialogue: 0,1:21:12.53,1:21:14.26,Default,,0,0,0,,Vai dar. A gente dá um jeito no Şahin.
+Dialogue: 0,1:21:14.94,1:21:16.27,Default,,0,0,0,,Depois a gente se fala.
+Dialogue: 0,1:21:16.53,1:21:17.57,Default,,0,0,0,,Tá bom, até mais.
+Dialogue: 0,1:21:21.28,1:21:23.84,Default,,0,0,0,,Alya, se alguma coisa der errado,
+Dialogue: 0,1:21:24.03,1:21:26.39,Default,,0,0,0,,me avise. Tá bom, não se preocupe.
+Dialogue: 0,1:21:27.18,1:21:29.60,Default,,0,0,0,,Você vai dizer. Vai dizer que vai fazer
+Dialogue: 0,1:21:29.69,1:21:30.52,Default,,0,0,0,,mas eu não vou fazer.
+Dialogue: 0,1:21:31.93,1:21:34.15,Default,,0,0,0,,Vamos vencer o meu irmão Kadir também.
+Dialogue: 0,1:21:36.10,1:21:38.26,Default,,0,0,0,,É mesmo? Até mais, pai.
+Dialogue: 0,1:21:43.06,1:21:44.24,Default,,0,0,0,,Até mais. Até mais.
+Dialogue: 0,1:21:44.32,1:21:46.12,Default,,0,0,0,,Até mais, meu querido.
+Dialogue: 0,1:21:47.15,1:21:48.19,Default,,0,0,0,,Até mais, meu chapa.
+Dialogue: 0,1:21:48.27,1:21:51.01,Default,,0,0,0,,Tomara que deem valor a este momento.
+Dialogue: 0,1:22:08.98,1:22:12.57,Default,,0,0,0,,Rapazes, preparem os carros para a gente sair.
+Dialogue: 0,1:22:16.68,1:22:18.48,Default,,0,0,0,,A İpek está ligando.
+Dialogue: 0,1:22:24.10,1:22:25.90,Default,,0,0,0,,Alô.
+Dialogue: 0,1:22:30.89,1:22:32.09,Default,,0,0,0,,Olá, Kaya.
+Dialogue: 0,1:22:32.16,1:22:33.97,Default,,0,0,0,,Senti sua falta.
+Dialogue: 0,1:22:35.56,1:22:38.23,Default,,0,0,0,,Vocês conseguiram decidir o lugar ontem?
+Dialogue: 0,1:22:43.57,1:22:45.03,Default,,0,0,0,,A data está chegando, né?
+Dialogue: 0,1:22:45.11,1:22:47.73,Default,,0,0,0,,Meu pai diz que se for alugar um salão, já estamos atrasados.
+Dialogue: 0,1:22:47.81,1:22:49.30,Default,,0,0,0,,Por isso ele está esperando uma resposta de vocês.
+Dialogue: 0,1:22:49.38,1:22:52.06,Default,,0,0,0,,Poxa, me dê até amanhã, pode ser?
+Dialogue: 0,1:22:52.14,1:22:53.99,Default,,0,0,0,,Quer dizer, eu ainda estou pensando, não consegui decidir.
+Dialogue: 0,1:22:54.07,1:22:55.05,Default,,0,0,0,,Tudo bem.
+Dialogue: 0,1:22:55.12,1:22:57.41,Default,,0,0,0,,Amanhã você tem a prova do vestido de noiva.
+Dialogue: 0,1:22:59.65,1:23:01.01,Default,,0,0,0,,Vai, tá bom?
+Dialogue: 0,1:23:02.31,1:23:04.53,Default,,0,0,0,,Não quero usar um vestido de noiva que você não goste.
+Dialogue: 0,1:23:04.61,1:23:07.03,Default,,0,0,0,,Quero ficar muito linda.
+Dialogue: 0,1:23:10.91,1:23:12.20,Default,,0,0,0,,Para você.
+Dialogue: 0,1:23:12.28,1:23:14.44,Default,,0,0,0,,Eu chego lá por volta das 11.
+Dialogue: 0,1:23:17.43,1:23:19.66,Default,,0,0,0,,Tá bom, eu também chego lá pelas 11.
+Dialogue: 0,1:23:19.74,1:23:22.56,Default,,0,0,0,,Irmão, eu tinha conversado com o pai da İpek
+Dialogue: 0,1:23:29.88,1:23:31.15,Default,,0,0,0,,sobre o local do casamento.
+Dialogue: 0,1:23:31.23,1:23:32.74,Default,,0,0,0,,O homem estava esperando uma resposta minha.
+Dialogue: 0,1:23:32.82,1:23:35.31,Default,,0,0,0,,Quer dizer, pensei que seria na mansão, mas
+Dialogue: 0,1:23:35.40,1:23:36.38,Default,,0,0,0,,agora, na mansão também...
+Dialogue: 0,1:23:36.45,1:23:38.41,Default,,0,0,0,,Não soube como fazer com o Agha na mansão.
+Dialogue: 0,1:23:38.49,1:23:40.78,Default,,0,0,0,,O Agha não anda aparecendo por aí.
+Dialogue: 0,1:23:41.14,1:23:42.27,Default,,0,0,0,,Pode fazer na mansão.
+Dialogue: 0,1:23:42.35,1:23:43.90,Default,,0,0,0,,Não, tudo bem.
+Dialogue: 0,1:23:47.35,1:23:50.12,Default,,0,0,0,,Não, eu estou vendo a cara que você está fazendo.
+Dialogue: 0,1:23:51.69,1:23:52.43,Default,,0,0,0,,Como vamos fazer isso?
+Dialogue: 0,1:23:54.60,1:23:57.85,Default,,0,0,0,,Você não diz para não se meter com o Demir?
+Dialogue: 0,1:23:58.15,1:23:58.61,Default,,0,0,0,,O que foi que ele disse?
+Dialogue: 0,1:23:59.10,1:24:01.41,Default,,0,0,0,,Meu filho, quem vai pirar é você, fica aí brincando.
+Dialogue: 0,1:24:01.77,1:24:02.34,Default,,0,0,0,,Sou eu que vou casar?
+Dialogue: 0,1:24:05.36,1:24:07.16,Default,,0,0,0,,Já falei, eu conversei.
+Dialogue: 0,1:24:08.74,1:24:09.74,Default,,0,0,0,,Falei cem vezes.
+Dialogue: 0,1:24:09.82,1:24:10.81,Default,,0,0,0,,Falei mil vezes.
+Dialogue: 0,1:24:12.24,1:24:13.43,Default,,0,0,0,,Não quero ser mãe.
+Dialogue: 0,1:24:14.55,1:24:16.69,Default,,0,0,0,,Eu não sei, você não sabe o que vai fazer?
+Dialogue: 0,1:24:17.77,1:24:20.06,Default,,0,0,0,,Você vai se arrepender depois.
+Dialogue: 0,1:24:22.51,1:24:23.44,Default,,0,0,0,,Arrependa-se você também.
+Dialogue: 0,1:24:23.56,1:24:24.02,Default,,0,0,0,,Eu não quero.
+Dialogue: 0,1:24:26.81,1:24:28.65,Default,,0,0,0,,Irmão, vamos sair.
+Dialogue: 0,1:24:30.40,1:24:31.68,Default,,0,0,0,,Pode ir.
+Dialogue: 0,1:24:33.56,1:24:35.43,Default,,0,0,0,,Então vamos fazer na mansão?
+Dialogue: 0,1:24:35.52,1:24:37.06,Default,,0,0,0,,Onde você quiser, a gente faz.
+Dialogue: 0,1:24:37.23,1:24:39.85,Default,,0,0,0,,Que Deus me dê muita paciência, tomara.
+Dialogue: 0,1:24:43.53,1:24:46.48,Default,,0,0,0,,Acabamos de tirar você das garras da morte.
+Dialogue: 0,1:24:49.52,1:24:50.77,Default,,0,0,0,,Se acontecer alguma coisa, o que a gente faz?
+Dialogue: 0,1:24:51.44,1:24:53.23,Default,,0,0,0,,Olha para mim, melhore bem antes de sair.
+Dialogue: 0,1:24:53.35,1:24:54.15,Default,,0,0,0,,Ah, por favor.
+Dialogue: 0,1:24:53.88,1:24:55.60,Default,,0,0,0,,Mãe, o médico disse para eu caminhar.
+Dialogue: 0,1:24:55.90,1:24:57.35,Default,,0,0,0,,Eu estou caminhando, já estou de pé.
+Dialogue: 0,1:24:57.65,1:24:59.26,Default,,0,0,0,,Estou bem, me sinto bem.
+Dialogue: 0,1:25:00.02,1:25:01.10,Default,,0,0,0,,Deixe-me ter alta logo.
+Dialogue: 0,1:25:01.23,1:25:02.19,Default,,0,0,0,,Meu Deus, eu não aguento mais.
+Dialogue: 0,1:25:02.30,1:25:03.07,Default,,0,0,0,,Estou entubado... digo, entediado.
+Dialogue: 0,1:25:03.34,1:25:04.03,Default,,0,0,0,,Olha para mim.
+Dialogue: 0,1:25:04.45,1:25:05.06,Default,,0,0,0,,Ele mandou você caminhar.
+Dialogue: 0,1:25:05.14,1:25:06.03,Default,,0,0,0,,Não disse para achar a porta e fugir.
+Dialogue: 0,1:25:06.19,1:25:07.14,Default,,0,0,0,,Ninguém vai fugir, tá bom, vou caminhar.
+Dialogue: 0,1:25:07.22,1:25:08.38,Default,,0,0,0,,O que é isso? Quem está fugindo para onde?
+Dialogue: 0,1:25:09.15,1:25:10.84,Default,,0,0,0,,Ele ia fugir, irmão, ia ter alta.
+Dialogue: 0,1:25:10.95,1:25:11.84,Default,,0,0,0,,Cismou que ia sair agora.
+Dialogue: 0,1:25:11.91,1:25:13.31,Default,,0,0,0,,Mandaram a fatura, meu filho?
+Dialogue: 0,1:25:13.81,1:25:15.41,Default,,0,0,0,,Şahin, não se preocupe com o preço, meu filho.
+Dialogue: 0,1:25:15.49,1:25:16.69,Default,,0,0,0,,Vamos te dar um desconto.
+Dialogue: 0,1:25:16.77,1:25:17.73,Default,,0,0,0,,Vamos dar um bom desconto.
+Dialogue: 0,1:25:17.81,1:25:19.11,Default,,0,0,0,,Tá bom, não fiquem zombando de mim.
+Dialogue: 0,1:25:19.19,1:25:19.85,Default,,0,0,0,,Sejam bem-vindos.
+Dialogue: 0,1:25:20.11,1:25:20.76,Default,,0,0,0,,Bem-encontrados.
+Dialogue: 0,1:25:20.98,1:25:21.64,Default,,0,0,0,,Meus cumprimentos.
+Dialogue: 0,1:25:21.84,1:25:22.57,Default,,0,0,0,,E a você também.
+Dialogue: 0,1:25:22.85,1:25:23.69,Default,,0,0,0,,Que melhore logo.
+Dialogue: 0,1:25:24.15,1:25:25.06,Default,,0,0,0,,E então, o que o médico diz?
+Dialogue: 0,1:25:25.34,1:25:27.86,Default,,0,0,0,,Ele já vem, mas ele não me deixa em paz assim.
+Dialogue: 0,1:25:27.94,1:25:28.48,Default,,0,0,0,,Como não vai deixar?
+Dialogue: 0,1:25:28.69,1:25:29.66,Default,,0,0,0,,Como assim, não deixa?
+Dialogue: 0,1:25:29.74,1:25:30.43,Default,,0,0,0,,Vai deixar sim.
+Dialogue: 0,1:25:30.91,1:25:31.77,Default,,0,0,0,,Que me deixe ir logo.
+Dialogue: 0,1:25:31.85,1:25:32.73,Default,,0,0,0,,Juro que não aguento mais.
+Dialogue: 0,1:25:32.84,1:25:33.99,Default,,0,0,0,,Eu tenho problemas com hospitais.
+Dialogue: 0,1:25:34.41,1:25:34.82,Default,,0,0,0,,É mesmo?
+Dialogue: 0,1:25:35.10,1:25:35.80,Default,,0,0,0,,Eu preciso sair.
+Dialogue: 0,1:25:35.91,1:25:38.14,Default,,0,0,0,,Então, daqui em diante, não vai mais fazer essas loucuras.
+Dialogue: 0,1:25:38.27,1:25:39.95,Default,,0,0,0,,Olha, nós morremos de preocupação aqui, Şahin.
+Dialogue: 0,1:25:40.35,1:25:41.15,Default,,0,0,0,,Pois é, verdade.
+Dialogue: 0,1:25:40.91,1:25:42.99,Default,,0,0,0,,E ainda diz que vai sair, mas está bem.
+Dialogue: 0,1:25:43.10,1:25:43.95,Default,,0,0,0,,Seu pai não está em casa, meu filho?
+Dialogue: 0,1:25:44.65,1:25:45.51,Default,,0,0,0,,Vai ficar na mesma casa?
+Dialogue: 0,1:25:46.20,1:25:47.81,Default,,0,0,0,,O que você vai fazer? Vai apontar uma arma para a cabeça dele?
+Dialogue: 0,1:25:49.20,1:25:51.06,Default,,0,0,0,,Para mim até seria bom, cunhada, me desculpe.
+Dialogue: 0,1:25:51.35,1:25:53.05,Default,,0,0,0,,Mas não quero que ele vire um assassino de pai.
+Dialogue: 0,1:25:53.35,1:25:55.93,Default,,0,0,0,,Não. Não. Ele não faria uma coisa dessas.
+Dialogue: 0,1:25:56.47,1:25:58.86,Default,,0,0,0,,Juro perante Deus, lá no fundo eu bem que queria, mas...
+Dialogue: 0,1:25:59.02,1:25:59.28,Default,,0,0,0,,Cala a boca.
+Dialogue: 0,1:26:00.27,1:26:03.48,Default,,0,0,0,,Enfim. Mas eu vou voltar para aquela mansão, querida.
+Dialogue: 0,1:26:05.23,1:26:06.77,Default,,0,0,0,,Não vou abandonar nem a mansão nem a empresa.
+Dialogue: 0,1:26:06.85,1:26:11.38,Default,,0,0,0,,Não vou mais permitir que ele espalhe aquele veneno nem que derrube vocês.
+Dialogue: 0,1:26:13.01,1:26:14.32,Default,,0,0,0,,Meu pai não pode ser o chefe dos Albora.
+Dialogue: 0,1:26:15.57,1:26:17.67,Default,,0,0,0,,Ouca bem isso, cunhada.
+Dialogue: 0,1:26:18.53,1:26:20.95,Default,,0,0,0,,Há certas verdades que machucam muito a alma.
+Dialogue: 0,1:26:21.51,1:26:25.27,Default,,0,0,0,,Mas este meu filho, apesar de todas essas verdades, sempre ficou do lado certo.
+Dialogue: 0,1:26:25.49,1:26:26.38,Default,,0,0,0,,Deus o abençoe, que continue firme.
+Dialogue: 0,1:26:27.76,1:26:29.15,Default,,0,0,0,,Sempre fomos como irmãos.
+Dialogue: 0,1:26:29.98,1:26:30.66,Default,,0,0,0,,Vocês também.
+Dialogue: 0,1:26:31.73,1:26:32.10,Default,,0,0,0,,Valeu.
+Dialogue: 0,1:26:33.65,1:26:36.60,Default,,0,0,0,,Nare, eu tenho que voltar para os meus estudos.
+Dialogue: 0,1:26:41.14,1:26:42.02,Default,,0,0,0,,Você vem comigo, não vem?
+Dialogue: 0,1:26:45.90,1:26:48.52,Default,,0,0,0,,Por que está olhando para mim? Ele é seu marido.
+Dialogue: 0,1:26:50.24,1:26:52.47,Default,,0,0,0,,Meu lugar é ao seu lado.
+Dialogue: 0,1:26:58.19,1:27:00.80,Default,,0,0,0,,Isso me atingiu em cheio, está doendo.
+Dialogue: 0,1:27:01.44,1:27:02.73,Default,,0,0,0,,O que você disse, irmão?
+Dialogue: 0,1:27:03.22,1:27:04.02,Default,,0,0,0,,Nada não.
+Dialogue: 0,1:27:03.89,1:27:09.69,Default,,0,0,0,,A propósito, enquanto você estava de cama, eu suspendi todas as remessas que você devia assumir.
+Dialogue: 0,1:27:12.19,1:27:15.77,Default,,0,0,0,,Já que você levantou, já que está de pé, confira tudo você mesmo, combinado?
+Dialogue: 0,1:27:16.84,1:27:17.38,Default,,0,0,0,,Não se preocupe.
+Dialogue: 0,1:27:18.23,1:27:20.10,Default,,0,0,0,,Esse veneno não vai passar pela nossa terra.
+Dialogue: 0,1:27:23.45,1:27:26.32,Default,,0,0,0,,Ah, eu também quero ver o Boran.
+Dialogue: 0,1:27:27.10,1:27:27.62,Default,,0,0,0,,Eu também.
+Dialogue: 0,1:27:34.45,1:27:36.14,Default,,0,0,0,,Tá bom, vão lá e vejam.
+Dialogue: 0,1:27:36.35,1:27:36.77,Default,,0,0,0,,O que posso dizer?
+Dialogue: 0,1:27:36.91,1:27:38.48,Default,,0,0,0,,Já que vocês estão com saudades, vão ver, pronto.
+Dialogue: 0,1:27:39.05,1:27:41.48,Default,,0,0,0,,Quando esse médico chegar, diga para ele me dar alta.
+Dialogue: 0,1:27:41.99,1:27:42.23,Default,,0,0,0,,Nossa.
+Dialogue: 0,1:27:42.77,1:27:44.65,Default,,0,0,0,,Depois, na volta, a gente passa para ver o Boran.
+Dialogue: 0,1:27:44.78,1:27:45.39,Default,,0,0,0,,Estou sufocado demais.
+Dialogue: 0,1:27:45.69,1:27:46.98,Default,,0,0,0,,Mas por que você está teimando?
+Dialogue: 0,1:27:47.27,1:27:48.27,Default,,0,0,0,,Teimosia do quê, mãe?
+Dialogue: 0,1:27:48.70,1:27:50.28,Default,,0,0,0,,Seu ferimento mal cicatrizou.
+Dialogue: 0,1:27:50.55,1:27:53.31,Default,,0,0,0,,Olha, ou vocês me tiramdaqui ou eu saio sozinho.
+Dialogue: 0,1:27:53.56,1:27:55.20,Default,,0,0,0,,Juro que não vou ficar aqui.
+Dialogue: 0,1:27:55.28,1:27:56.09,Default,,0,0,0,,Estou sufocado.
+Dialogue: 0,1:27:55.93,1:27:57.65,Default,,0,0,0,,O que você está fazendo sozinho?
+Dialogue: 0,1:27:57.73,1:27:58.52,Default,,0,0,0,,Sufocado o quê?
+Dialogue: 0,1:27:58.32,1:27:59.12,Default,,0,0,0,,Se estou sufocado, estou.
+Dialogue: 0,1:27:59.02,1:28:00.24,Default,,0,0,0,,Me faça andar um pouco assim.
+Dialogue: 0,1:28:00.47,1:28:00.89,Default,,0,0,0,,Entendeu?
+Dialogue: 0,1:28:01.05,1:28:02.56,Default,,0,0,0,,Quando o médico chegar, vai me ver andando.
+Dialogue: 0,1:28:02.65,1:28:04.44,Default,,0,0,0,,Tá bom, anda logo, vamos ver sua postura.
+Dialogue: 0,1:28:04.52,1:28:05.94,Default,,0,0,0,,Vai, anda para eu ver como você anda.
+Dialogue: 0,1:28:06.02,1:28:06.82,Default,,0,0,0,,Venha.
+Dialogue: 0,1:28:06.52,1:28:07.77,Default,,0,0,0,,Ora, vamos ver.
+Dialogue: 0,1:28:07.85,1:28:09.23,Default,,0,0,0,,Obrigado, obrigado, obrigado.
+Dialogue: 0,1:28:09.31,1:28:10.10,Default,,0,0,0,,Devagar.
+Dialogue: 0,1:28:10.01,1:28:12.10,Default,,0,0,0,,Juro que não, eu estou bem.
+Dialogue: 0,1:28:14.85,1:28:16.65,Default,,0,0,0,,Não se aproximem!
+Dialogue: 0,1:28:19.38,1:28:20.19,Default,,0,0,0,,Saiam daqui!
+Dialogue: 0,1:28:20.27,1:28:21.19,Default,,0,0,0,,Shhhhh!
+Dialogue: 0,1:28:21.27,1:28:22.73,Default,,0,0,0,,Nem ousem!
+Dialogue: 0,1:28:22.81,1:28:24.70,Default,,0,0,0,,Devagar, devagar, devagar.
+Dialogue: 0,1:28:25.81,1:28:29.02,Default,,0,0,0,,Eu vim para conversar, não para lutar, meu filho.
+Dialogue: 0,1:28:29.68,1:28:31.27,Default,,0,0,0,,Abaixem as armas, abram o portão.
+Dialogue: 0,1:28:31.35,1:28:32.73,Default,,0,0,0,,Rejmer, pegue isso aqui!
+Dialogue: 0,1:28:32.81,1:28:35.47,Default,,0,0,0,,Você não tem permissão para entrar nesta mansão.
+Dialogue: 0,1:28:35.55,1:28:37.35,Default,,0,0,0,,Olha só para isso.
+Dialogue: 0,1:28:40.05,1:28:41.85,Default,,0,0,0,,Mãe, o que está acontecendo?
+Dialogue: 0,1:28:45.77,1:28:47.87,Default,,0,0,0,,Vá para o lado, faça o favor.
+Dialogue: 0,1:28:48.53,1:28:50.82,Default,,0,0,0,,Tranque o portão assim que eu descer.
+Dialogue: 0,1:28:54.31,1:28:56.98,Default,,0,0,0,,Pegue o carro, não deixe o Deniz ver.
+Dialogue: 0,1:28:59.07,1:29:00.88,Default,,0,0,0,,Uau, uau, uau.
+Dialogue: 0,1:29:01.10,1:29:03.12,Default,,0,0,0,,Olha só quem chegou.
+Dialogue: 0,1:29:03.32,1:29:05.16,Default,,0,0,0,,O herói do Cihan.
+Dialogue: 0,1:29:05.44,1:29:07.12,Default,,0,0,0,,Dê o fora daqui.
+Dialogue: 0,1:29:07.20,1:29:09.23,Default,,0,0,0,,Eu vou ver o Boran.
+Dialogue: 0,1:29:10.85,1:29:13.47,Default,,0,0,0,,Leve esses seus homens e dê o fora daqui.
+Dialogue: 0,1:29:14.06,1:29:17.27,Default,,0,0,0,,Não vou embora sem falar com meu filho, sem vê-lo.
+Dialogue: 0,1:29:17.35,1:29:19.19,Default,,0,0,0,,Ele é meu filho.
+Dialogue: 0,1:29:19.56,1:29:21.35,Default,,0,0,0,,Seu filho?
+Dialogue: 0,1:29:21.48,1:29:23.24,Default,,0,0,0,,Você é pai por acaso?
+Dialogue: 0,1:29:23.32,1:29:25.49,Default,,0,0,0,,Você acha que é pai?
+Dialogue: 0,1:29:25.57,1:29:27.02,Default,,0,0,0,,Dê o fora daqui.
+Dialogue: 0,1:29:27.10,1:29:30.69,Default,,0,0,0,,Vou falar com meu filho e também ver meu neto.
+Dialogue: 0,1:29:34.09,1:29:35.89,Default,,0,0,0,,Me dá isso.
+Dialogue: 0,1:29:36.62,1:29:38.43,Default,,0,0,0,,Pare!
+Dialogue: 0,1:29:39.48,1:29:42.36,Default,,0,0,0,,Olha, nunca mais chame ele de seu filho nem de seu neto!
+Dialogue: 0,1:29:54.36,1:29:56.16,Default,,0,0,0,,Minha esposa!
+Dialogue: 0,1:29:57.91,1:30:00.73,Default,,0,0,0,,Pelo Corão, você virou o próprio Cihan em forma de mulher.
+Dialogue: 0,1:30:04.03,1:30:07.17,Default,,0,0,0,,Mesmo fogo, mesmo ódio, mesma arrogância.
+Dialogue: 0,1:30:11.68,1:30:13.73,Default,,0,0,0,,Mulher, não estou brincando, dê o fora com seu carro.
+Dialogue: 0,1:30:13.81,1:30:16.17,Default,,0,0,0,,Tire o carro, meu filho vai passar.
+Dialogue: 0,1:30:17.19,1:30:18.98,Default,,0,0,0,,Calma.
+Dialogue: 0,1:30:20.31,1:30:21.86,Default,,0,0,0,,Tira, meu filho.
+Dialogue: 0,1:30:21.94,1:30:22.90,Default,,0,0,0,,Tira!
+Dialogue: 0,1:30:22.98,1:30:24.77,Default,,0,0,0,,Saia daqui.
+Dialogue: 0,1:30:25.19,1:30:26.98,Default,,0,0,0,,Saia do caminho.
+Dialogue: 0,1:30:29.02,1:30:30.81,Default,,0,0,0,,Abra a porta.
+Dialogue: 0,1:30:31.05,1:30:32.85,Default,,0,0,0,,Nossa.
+Dialogue: 0,1:30:34.03,1:30:35.35,Default,,0,0,0,,Ora, ora.
+Dialogue: 0,1:30:35.43,1:30:37.23,Default,,0,0,0,,Dá o fora.
+Dialogue: 0,1:30:45.07,1:30:46.88,Default,,0,0,0,,Há! Diga ao Boran!
+Dialogue: 0,1:30:47.07,1:30:50.19,Default,,0,0,0,,Não vou sair daqui sem falar com ele.
+Dialogue: 0,1:30:50.27,1:30:51.98,Default,,0,0,0,,Vou esperar por ele bem aqui.
+Dialogue: 0,1:30:52.06,1:30:53.77,Default,,0,0,0,,Fechem a porta na cara desse homem.
+Dialogue: 0,1:30:55.23,1:30:56.45,Default,,0,0,0,,Fechem.
+Dialogue: 0,1:31:00.78,1:31:04.70,Default,,0,0,0,,Senhor Şahin, agora vamos iniciar os seus procedimentos de alta.
+Dialogue: 0,1:31:10.56,1:31:11.36,Default,,0,0,0,,Melhoras.
+Dialogue: 0,1:31:11.48,1:31:13.62,Default,,0,0,0,,Vamos liberá-lo, mas é claro que tenho algumas condições.
+Dialogue: 0,1:31:14.43,1:31:15.62,Default,,0,0,0,,Não vai fazer esforço.
+Dialogue: 0,1:31:16.19,1:31:20.86,Default,,0,0,0,,Se sentir dor, ardência ou vermelhidão na região do corte, entre em contato conosco.
+Dialogue: 0,1:31:20.94,1:31:22.05,Default,,0,0,0,,Tudo entendido, certo?
+Dialogue: 0,1:31:22.12,1:31:22.69,Default,,0,0,0,,Certo, certo.
+Dialogue: 0,1:31:23.12,1:31:28.61,Default,,0,0,0,,De qualquer forma, você insistiu tanto que acho que ninguém mais consegue te segurar aqui.
+Dialogue: 0,1:31:28.81,1:31:30.38,Default,,0,0,0,,Mesmo assim, ele não vai tomar cuidado.
+Dialogue: 0,1:31:30.84,1:31:31.77,Default,,0,0,0,,Quer dizer, ele que sabe.
+Dialogue: 0,1:31:32.11,1:31:32.68,Default,,0,0,0,,A maca está aqui.
+Dialogue: 0,1:31:33.15,1:31:33.94,Default,,0,0,0,,Se precisar, chamamos de volta.
+Dialogue: 0,1:31:34.27,1:31:35.14,Default,,0,0,0,,Obrigado, doutor.
+Dialogue: 0,1:31:35.23,1:31:36.40,Default,,0,0,0,,Vamos lá, melhoras.
+Dialogue: 0,1:31:36.48,1:31:37.34,Default,,0,0,0,,Obrigado, que Deus o abençoe.
+Dialogue: 0,1:31:37.41,1:31:38.85,Default,,0,0,0,,Melhoras.
+Dialogue: 0,1:31:38.93,1:31:39.73,Default,,0,0,0,,Vamos.
+Dialogue: 0,1:31:39.59,1:31:41.44,Default,,0,0,0,,Vamos sair logo deste hospital.
+Dialogue: 0,1:31:41.52,1:31:43.94,Default,,0,0,0,,Você ajuntou as coisas, onde estão os sapatos dele?
+Dialogue: 0,1:31:44.02,1:31:44.81,Default,,0,0,0,,Ali.
+Dialogue: 0,1:31:44.53,1:31:46.10,Default,,0,0,0,,Não olhe assim para mim, não olhe.
+Dialogue: 0,1:31:46.18,1:31:47.35,Default,,0,0,0,,Estou bem, pare com isso.
+Dialogue: 0,1:31:47.44,1:31:50.28,Default,,0,0,0,,Se a gente fizer o que mandaram, não tem problema, estou bem.
+Dialogue: 0,1:31:50.36,1:31:53.24,Default,,0,0,0,,Pronto, já calçou os sapatos dele também.
+Dialogue: 0,1:31:53.43,1:31:58.84,Default,,0,0,0,,Já estou no meu limite, vou contar isso ao Kaya, chega.
+Dialogue: 0,1:31:59.19,1:32:00.72,Default,,0,0,0,,Ah, irmão, e quanto a você...
+Dialogue: 0,1:32:00.80,1:32:02.60,Default,,0,0,0,,Porque olha, é uma pena, veja só.
+Dialogue: 0,1:32:02.68,1:32:04.35,Default,,0,0,0,,Eu vejo lá dentro como o garoto me olha...
+Dialogue: 0,1:32:04.44,1:32:07.15,Default,,0,0,0,,O Demir não vai me deixar em paz, veja bem, ele vai tirar esse bebê de mim também.
+Dialogue: 0,1:32:07.23,1:32:09.35,Default,,0,0,0,,Zerrin, olha, se você me deixar cuidar daquele Demir...
+Dialogue: 0,1:32:09.44,1:32:10.53,Default,,0,0,0,,Quem é esse Demir, afinal?
+Dialogue: 0,1:32:10.93,1:32:11.73,Default,,0,0,0,,Quem é esse Demir?
+Dialogue: 0,1:32:11.73,1:32:12.52,Default,,0,0,0,,Você não sabe.
+Dialogue: 0,1:32:12.23,1:32:13.56,Default,,0,0,0,,Eu não vou permitir uma coisa dessas.
+Dialogue: 0,1:32:13.82,1:32:14.62,Default,,0,0,0,,Entendeu?
+Dialogue: 0,1:32:14.39,1:32:15.28,Default,,0,0,0,,Não contei naquela hora.
+Dialogue: 0,1:32:16.81,1:32:17.38,Default,,0,0,0,,O que está acontecendo?
+Dialogue: 0,1:32:17.53,1:32:19.26,Default,,0,0,0,,Diz que vai contar para o Kaya, meu filho.
+Dialogue: 0,1:32:19.65,1:32:21.55,Default,,0,0,0,,Serkun, isso vai ser bom para mim.
+Dialogue: 0,1:32:21.78,1:32:22.52,Default,,0,0,0,,Não está congelando aí?
+Dialogue: 0,1:32:22.73,1:32:23.36,Default,,0,0,0,,Ficou com nojo.
+Dialogue: 0,1:32:24.90,1:32:27.26,Default,,0,0,0,,Dizendo que o Demir não vai deixar ele em paz.
+Dialogue: 0,1:32:27.64,1:32:29.36,Default,,0,0,0,,Quem vai criar essa criança não é o Demir.
+Dialogue: 0,1:32:29.47,1:32:30.55,Default,,0,0,0,,Olha, não me tirem do sério.
+Dialogue: 0,1:32:30.70,1:32:31.66,Default,,0,0,0,,Ele é meu sobrinho.
+Dialogue: 0,1:32:31.78,1:32:32.73,Default,,0,0,0,,Eu não vou permitir uma coisa dessas.
+Dialogue: 0,1:32:32.81,1:32:34.06,Default,,0,0,0,,Eu tenho uma solução.
+Dialogue: 0,1:32:34.32,1:32:36.10,Default,,0,0,0,,Ótimo, se for melhor que a minha solução, por que não tentamos?
+Dialogue: 0,1:32:36.19,1:32:36.43,Default,,0,0,0,,Vamos lá.
+Dialogue: 0,1:32:37.06,1:32:37.86,Default,,0,0,0,,Você está pronto, só um segundo.
+Dialogue: 0,1:32:37.93,1:32:38.27,Default,,0,0,0,,Devagar.
+Dialogue: 0,1:32:38.55,1:32:39.09,Default,,0,0,0,,Vamos, tudo bem.
+Dialogue: 0,1:32:39.28,1:32:40.12,Default,,0,0,0,,Vocês vão devagar.
+Dialogue: 0,1:32:41.16,1:32:41.90,Default,,0,0,0,,Diga ao Şahin que venha.
+Dialogue: 0,1:32:44.56,1:32:44.98,Default,,0,0,0,,Certo, desligue.
+Dialogue: 0,1:32:45.94,1:32:46.89,Default,,0,0,0,,O que foi, irmão, o que aconteceu?
+Dialogue: 0,1:32:46.97,1:32:48.32,Default,,0,0,0,,Mecmen, queimou até na porta do Corão.
+Dialogue: 0,1:32:48.40,1:32:48.66,Default,,0,0,0,,Vamos, vamos.
+Dialogue: 0,1:32:49.01,1:32:50.55,Default,,0,0,0,,Venha devagar, devagar, devagar.
+Dialogue: 0,1:32:50.81,1:32:51.98,Default,,0,0,0,,Eu também vou, Şahin.
+Dialogue: 0,1:32:52.24,1:32:53.05,Default,,0,0,0,,Vamos, vamos.
+Dialogue: 0,1:32:52.78,1:32:53.28,Default,,0,0,0,,Şahin, devagar.
+Dialogue: 0,1:32:53.93,1:32:54.77,Default,,0,0,0,,Dona Alya.
+Dialogue: 0,1:32:57.90,1:32:58.39,Default,,0,0,0,,Não foi?
+Dialogue: 0,1:32:59.40,1:33:00.64,Default,,0,0,0,,Não, ainda está na porta.
+Dialogue: 0,1:33:02.97,1:33:04.23,Default,,0,0,0,,Poderia tirar o Deniz daqui?
+Dialogue: 0,1:33:04.32,1:33:05.10,Default,,0,0,0,,Mãe, o que está acontecendo?
+Dialogue: 0,1:33:05.55,1:33:07.66,Default,,0,0,0,,Não é nada, meu amor, não tem nada a ver com a gente.
+Dialogue: 0,1:33:07.89,1:33:08.27,Default,,0,0,0,,Venha cá.
+Dialogue: 0,1:33:08.39,1:33:08.55,Default,,0,0,0,,Tudo bem.
+Dialogue: 0,1:33:09.10,1:33:10.97,Default,,0,0,0,,Avisou o Cihan?
+Dialogue: 0,1:33:11.09,1:33:12.36,Default,,0,0,0,,Avisei, estão a caminho. Estão chegando.
+Dialogue: 0,1:33:14.16,1:33:14.98,Default,,0,0,0,,Şehemuz, o que está acontecendo?
+Dialogue: 0,1:33:16.10,1:33:17.38,Default,,0,0,0,,O que está acontecendo lá?
+Dialogue: 0,1:33:17.81,1:33:18.55,Default,,0,0,0,,Senhora Sadakat.
+Dialogue: 0,1:33:18.97,1:33:19.60,Default,,0,0,0,,Ecmel Albora.
+Dialogue: 0,1:33:21.24,1:33:23.34,Default,,0,0,0,,Vovó, você vai para o quarto, tá?
+Dialogue: 0,1:33:23.69,1:33:25.43,Default,,0,0,0,,Vamos, rápido, rápido, vamos.
+Dialogue: 0,1:33:29.05,1:33:29.55,Default,,0,0,0,,Meu filho, o que é isso?
+Dialogue: 0,1:33:29.94,1:33:30.64,Default,,0,0,0,,Ecmel Albora.
+Dialogue: 0,1:33:30.94,1:33:32.15,Default,,0,0,0,,Quero falar com o senhor Boran.
+Dialogue: 0,1:33:33.19,1:33:35.29,Default,,0,0,0,,Esse verme desprezível na porta.
+Dialogue: 0,1:33:39.77,1:33:40.38,Default,,0,0,0,,Desgraçado.
+Dialogue: 0,1:33:41.60,1:33:43.85,Default,,0,0,0,,Como ele ousa vir à minha porta, hein?
+Dialogue: 0,1:33:44.32,1:33:45.52,Default,,0,0,0,,Veio até a porta, é?
+Dialogue: 0,1:33:45.82,1:33:46.39,Default,,0,0,0,,Demônio.
+Dialogue: 0,1:33:48.23,1:33:49.48,Default,,0,0,0,,Você não abriu a porta, abriu?
+Dialogue: 0,1:33:49.72,1:33:50.06,Default,,0,0,0,,Está fechada.
+Dialogue: 0,1:33:50.53,1:33:51.11,Default,,0,0,0,,O Cihan está chegando.
+Dialogue: 0,1:33:51.99,1:33:53.23,Default,,0,0,0,,Aquele desgraçado veio até a porta?
+Dialogue: 0,1:33:53.95,1:33:56.26,Default,,0,0,0,,Com que cara esse cachorro desgraçado e infame aparece?
+Dialogue: 0,1:33:56.34,1:33:57.14,Default,,0,0,0,,Boran, onde você vai?
+Dialogue: 0,1:33:56.94,1:33:57.45,Default,,0,0,0,,Senhor Boran.
+Dialogue: 0,1:33:57.66,1:33:58.16,Default,,0,0,0,,Boran.
+Dialogue: 0,1:33:58.47,1:33:59.02,Default,,0,0,0,,Boran.
+Dialogue: 0,1:33:59.14,1:34:00.35,Default,,0,0,0,,Boran, meu filho, espere um pouco.
+Dialogue: 0,1:34:00.44,1:34:00.65,Default,,0,0,0,,Senhor Boran.
+Dialogue: 0,1:34:01.22,1:34:02.81,Default,,0,0,0,,Boran, nem ouse!
+Dialogue: 0,1:34:02.89,1:34:03.69,Default,,0,0,0,,Boran!
+Dialogue: 0,1:34:03.59,1:34:04.39,Default,,0,0,0,,Olha, nem pense nisso.
+Dialogue: 0,1:34:04.44,1:34:05.43,Default,,0,0,0,,Abram a porta!
+Dialogue: 0,1:34:05.51,1:34:06.77,Default,,0,0,0,,Boran, Boran, não faça isso.
+Dialogue: 0,1:34:06.85,1:34:08.09,Default,,0,0,0,,Abram a porta!
+Dialogue: 0,1:34:08.16,1:34:09.09,Default,,0,0,0,,Não abra!
+Dialogue: 0,1:34:09.16,1:34:10.65,Default,,0,0,0,,Abra a porta!
+Dialogue: 0,1:34:10.73,1:34:11.53,Default,,0,0,0,,Boran!
+Dialogue: 0,1:34:11.23,1:34:13.33,Default,,0,0,0,,Ouça o conselho de uma mãe.
+Dialogue: 0,1:34:13.57,1:34:15.38,Default,,0,0,0,,O que foi, hein?
+Dialogue: 0,1:34:16.03,1:34:17.11,Default,,0,0,0,,O que foi?
+Dialogue: 0,1:34:17.19,1:34:18.52,Default,,0,0,0,,Quer que eu estoure seus miolos?
+Dialogue: 0,1:34:18.60,1:34:19.40,Default,,0,0,0,,O que foi?
+Dialogue: 0,1:34:19.30,1:34:22.36,Default,,0,0,0,,Boran, olha, meus homens vão ficar do lado de fora.
+Dialogue: 0,1:34:23.35,1:34:24.85,Default,,0,0,0,,Estou sozinho.
+Dialogue: 0,1:34:24.93,1:34:26.76,Default,,0,0,0,,Vamos apenas conversar.
+Dialogue: 0,1:34:26.93,1:34:29.41,Default,,0,0,0,,Ouça o assunto de mim também.
+Dialogue: 0,1:34:29.70,1:34:34.60,Default,,0,0,0,,Não escute, meu filho, não escute essa cobra, não dê ouvidos a essa víbora.
+Dialogue: 0,1:34:34.69,1:34:37.19,Default,,0,0,0,,A língua dele é venenosa.
+Dialogue: 0,1:34:37.27,1:34:38.82,Default,,0,0,0,,Ele é um diabo.
+Dialogue: 0,1:34:38.90,1:34:43.60,Default,,0,0,0,,Isso é uma praga, não dê ouvidos a esse traidor, a esse inimigo da decência, meu filho.
+Dialogue: 0,1:34:45.52,1:34:45.94,Default,,0,0,0,,Boran!
+Dialogue: 0,1:34:49.62,1:34:51.43,Default,,0,0,0,,Não faça isso!
+Dialogue: 0,1:34:55.74,1:34:57.55,Default,,0,0,0,,Deixe ele falar.
+Dialogue: 0,1:35:00.47,1:35:00.78,Default,,0,0,0,,Entre.
+Dialogue: 0,1:35:01.23,1:35:02.06,Default,,0,0,0,,Ah, Boran!
+Dialogue: 0,1:35:03.94,1:35:05.57,Default,,0,0,0,,O que você vai conseguir?
+Dialogue: 0,1:35:06.01,1:35:07.35,Default,,0,0,0,,Você vai se arrepender amargamente.
+Dialogue: 0,1:35:13.77,1:35:15.86,Default,,0,0,0,,Quem mandou ele entrar?
+Dialogue: 0,1:35:19.23,1:35:19.86,Default,,0,0,0,,Fui eu.
+Dialogue: 0,1:35:24.20,1:35:26.10,Default,,0,0,0,,Ele tem coisas a dizer, deixe que diga.
+Dialogue: 0,1:35:26.66,1:35:26.86,Default,,0,0,0,,Fale.
+Dialogue: 0,1:35:30.97,1:35:33.77,Default,,0,0,0,,Com que cara você teve coragem de vir aqui?
+Dialogue: 0,1:35:35.72,1:35:37.30,Default,,0,0,0,,Com que consciência você apareceu sem vergonha?
+Dialogue: 0,1:35:37.99,1:35:38.99,Default,,0,0,0,,Calem a boca, os dois.
+Dialogue: 0,1:35:39.48,1:35:41.89,Default,,0,0,0,,Vocês dois são meus filhos, vão escutar o pai de vocês.
+Dialogue: 0,1:35:42.77,1:35:43.15,Default,,0,0,0,,Boran!
+Dialogue: 0,1:35:43.89,1:35:44.98,Default,,0,0,0,,Eu não sabia que você era meu filho.
+Dialogue: 0,1:35:45.06,1:35:47.16,Default,,0,0,0,,A Sadakat escondeu isso de mim.
+Dialogue: 0,1:35:49.26,1:35:50.31,Default,,0,0,0,,Essa mulher não me disse nada.
+Dialogue: 0,1:35:50.60,1:35:52.18,Default,,0,0,0,,Seu verme desgraçado.
+Dialogue: 0,1:35:52.45,1:35:54.03,Default,,0,0,0,,Desgraçado, eu vou te despedaçar.
+Dialogue: 0,1:35:54.11,1:35:55.72,Default,,0,0,0,,Eu vou te despedaçar, seu infeliz.
+Dialogue: 0,1:35:55.80,1:35:57.35,Default,,0,0,0,,Eu vou te despedaçar.
+Dialogue: 0,1:35:57.60,1:35:59.77,Default,,0,0,0,,Quando o Boran estava na minha barriga,
+Dialogue: 0,1:35:59.85,1:36:01.72,Default,,0,0,0,,você me jogou do penhasco.
+Dialogue: 0,1:36:02.38,1:36:04.10,Default,,0,0,0,,Boran, eu não sabia, meu filho.
+Dialogue: 0,1:36:04.43,1:36:06.02,Default,,0,0,0,,Eu não sabia. Eu não sabia
+Dialogue: 0,1:36:06.10,1:36:08.72,Default,,0,0,0,,que ela estava grávida. Juro que não sabia.
+Dialogue: 0,1:36:09.20,1:36:10.55,Default,,0,0,0,,Essa mulher me fez muito mal.
+Dialogue: 0,1:36:10.62,1:36:12.52,Default,,0,0,0,,Primeiro me mandou para a cadeia.
+Dialogue: 0,1:36:12.60,1:36:14.80,Default,,0,0,0,,Depois tirou o aşiret de mim.
+Dialogue: 0,1:36:14.88,1:36:16.57,Default,,0,0,0,,Quem dera... eu só queria
+Dialogue: 0,1:36:16.65,1:36:18.34,Default,,0,0,0,,levar... Se não...
+Dialogue: 0,1:36:18.41,1:36:20.40,Default,,0,0,0,,Será que eu faria mal a você?
+Dialogue: 0,1:36:21.26,1:36:22.68,Default,,0,0,0,,Ela fez de tudo.
+Dialogue: 0,1:36:22.99,1:36:24.41,Default,,0,0,0,,Foi tudo por culpa da Sadakat.
+Dialogue: 0,1:36:24.49,1:36:25.41,Default,,0,0,0,,Que sua mão seja quebrada.
+Dialogue: 0,1:36:25.80,1:36:27.38,Default,,0,0,0,,Como você teve coragem de tentar matar o meu filho?
+Dialogue: 0,1:36:27.76,1:36:30.73,Default,,0,0,0,,Você sequestrou uma criança inocente e tentou matá-la.
+Dialogue: 0,1:36:30.81,1:36:33.82,Default,,0,0,0,,Espera, você sequestrou o meu filho?
+Dialogue: 0,1:36:33.94,1:36:35.95,Default,,0,0,0,,Você sequestrou o meu filho?
+Dialogue: 0,1:36:36.27,1:36:37.84,Default,,0,0,0,,Você sequestrou o meu filho?
+Dialogue: 0,1:36:38.19,1:36:38.91,Default,,0,0,0,,Eu não disse isso.
+Dialogue: 0,1:36:39.26,1:36:41.11,Default,,0,0,0,,Foi sem querer, meu filho, me desculpe.
+Dialogue: 0,1:36:42.23,1:36:45.44,Default,,0,0,0,,Se eu não tivesse sequestrado, talvez nunca tivesse te conhecido, meu filho.
+Dialogue: 0,1:36:46.03,1:36:47.61,Default,,0,0,0,,Há um bem em todo mal, já dizem.
+Dialogue: 0,1:36:49.45,1:36:52.33,Default,,0,0,0,,E ainda diz que fez por bem, seu sem vergonha.
+Dialogue: 0,1:36:53.99,1:36:55.10,Default,,0,0,0,,Chega.
+Dialogue: 0,1:36:56.03,1:36:57.34,Default,,0,0,0,,Chega.
+Dialogue: 0,1:36:58.16,1:36:58.69,Default,,0,0,0,,Olhem só para mim.
+Dialogue: 0,1:36:59.64,1:37:01.18,Default,,0,0,0,,Vamos, andem.
+Dialogue: 0,1:37:01.69,1:37:02.48,Default,,0,0,0,,Venham me matar.
+Dialogue: 0,1:37:13.44,1:37:15.02,Default,,0,0,0,,Livrem-se dessa desonra.
+Dialogue: 0,1:37:15.73,1:37:17.36,Default,,0,0,0,,Me tirem dessa e livrem-se disso também.
+Dialogue: 0,1:37:21.52,1:37:22.52,Default,,0,0,0,,Vamos, não fiquem olhando, atirem.
+Dialogue: 0,1:37:24.03,1:37:25.64,Default,,0,0,0,,Não me façam viver mais com essa desonra.
+Dialogue: 0,1:37:31.10,1:37:34.14,Default,,0,0,0,,Me tirem daqui e tirem vocês mesmos dessa desonra.
+Dialogue: 0,1:37:35.01,1:37:36.62,Default,,0,0,0,,Vamos, atirem.
+Dialogue: 0,1:37:36.97,1:37:37.44,Default,,0,0,0,,Saiam daqui.
+Dialogue: 0,1:37:38.32,1:37:39.10,Default,,0,0,0,,Atirem, seus desgraçados.
+Dialogue: 0,1:37:41.48,1:37:43.38,Default,,0,0,0,,Eu cometi um erro.
+Dialogue: 0,1:37:45.18,1:37:46.53,Default,,0,0,0,,Olha, me perdoem, desgraçados.
+Dialogue: 0,1:37:46.61,1:37:48.58,Default,,0,0,0,,Vocês são meus filhos?
+Dialogue: 0,1:38:09.09,1:38:11.11,Default,,0,0,0,,Você é meu filho?
+Dialogue: 0,1:38:16.31,1:38:18.10,Default,,0,0,0,,Saiam daqui!
+Dialogue: 0,1:38:18.27,1:38:20.06,Default,,0,0,0,,Saiam!
+Dialogue: 0,1:38:50.57,1:38:53.71,Default,,0,0,0,,Şahin e Zerrin vieram ver você.
+Dialogue: 0,1:39:27.86,1:39:30.35,Default,,0,0,0,,Vamos, Şahin, vamos, subam.
+Dialogue: 0,1:39:40.07,1:39:41.73,Default,,0,0,0,,Vamos, todos para cima, vamos.
+Dialogue: 0,1:39:41.81,1:39:44.95,Default,,0,0,0,,Olha só como ela vai atrás, hein, tia.
+Dialogue: 0,1:39:45.20,1:39:47.01,Default,,0,0,0,,Você está bem?
+Dialogue: 0,1:39:50.11,1:39:51.91,Default,,0,0,0,,Estou bem.
+Dialogue: 0,1:40:02.88,1:40:04.68,Default,,0,0,0,,Nós ouvimos o barulho.
+Dialogue: 0,1:40:15.85,1:40:17.23,Default,,0,0,0,,Vocês também vão dizer isso.
+Dialogue: 0,1:40:17.31,1:40:19.79,Default,,0,0,0,,Você e seu irmão não são inimigos.
+Dialogue: 0,1:40:20.65,1:40:25.56,Default,,0,0,0,,Dar os filhos do homem que tentou me matar... Irmão não faz isso com irmão.
+Dialogue: 0,1:40:25.64,1:40:27.44,Default,,0,0,0,,O que vocês ouviram?
+Dialogue: 0,1:40:34.02,1:40:35.32,Default,,0,0,0,,Tia, vocês vão sentar.
+Dialogue: 0,1:40:35.40,1:40:37.20,Default,,0,0,0,,Halil.
+Dialogue: 0,1:40:38.06,1:40:39.86,Default,,0,0,0,,Você tem razão, Boran.
+Dialogue: 0,1:40:45.85,1:40:48.52,Default,,0,0,0,,Sua reação é muito justa, nós entendemos você.
+Dialogue: 0,1:40:48.60,1:40:50.40,Default,,0,0,0,,É.
+Dialogue: 0,1:40:51.80,1:40:53.52,Default,,0,0,0,,Nós somos filhos do Ecmel.
+Dialogue: 0,1:40:53.60,1:40:56.94,Default,,0,0,0,,Não há como defender o que ele fez.
+Dialogue: 0,1:40:57.52,1:40:59.97,Default,,0,0,0,,Mas o mais importante agora é que você está vivo.
+Dialogue: 0,1:41:00.31,1:41:02.34,Default,,0,0,0,,Para nós também é muito difícil.
+Dialogue: 0,1:41:03.10,1:41:05.91,Default,,0,0,0,,Mas, ainda assim, no fundo, estamos felizes.
+Dialogue: 0,1:41:06.80,1:41:08.76,Default,,0,0,0,,Agora temos um irmão mais velho.
+Dialogue: 0,1:41:10.99,1:41:15.82,Default,,0,0,0,,Boran, meu irmão, olha, ninguém pode negar o que você passou, todo mundo sabe.
+Dialogue: 0,1:41:17.85,1:41:23.46,Default,,0,0,0,,Nós somos filhos daquele homem, mas não dos atos dele. Por favor, não nos culpe.
+Dialogue: 0,1:41:23.81,1:41:27.23,Default,,0,0,0,,Vocês ficaram do lado dele, ficaram calados, mesmo sabendo o que o Ecmel fez.
+Dialogue: 0,1:41:27.56,1:41:29.69,Default,,0,0,0,,E agora me diz que não vai me culpar.
+Dialogue: 0,1:41:29.99,1:41:32.93,Default,,0,0,0,,Ora, quantas vezes minha mãe disse a vocês que o Ecmel é um assassino?
+Dialogue: 0,1:41:33.14,1:41:34.56,Default,,0,0,0,,Vocês não acreditaram.
+Dialogue: 0,1:41:35.44,1:41:38.31,Default,,0,0,0,,Você realmente falou isso, mãe?
+Dialogue: 0,1:41:40.73,1:41:42.55,Default,,0,0,0,,Quer dizer, você nunca me surpreende, mãe.
+Dialogue: 0,1:41:42.62,1:41:46.12,Default,,0,0,0,,Ah, é? Falei, sim. Eu disse para vocês também.
+Dialogue: 0,1:41:46.56,1:41:49.23,Default,,0,0,0,,Nem vocês acreditaram, nem eles. Acreditaram ou não?
+Dialogue: 0,1:41:49.44,1:41:50.73,Default,,0,0,0,,Quando soubemos, nós também desmoronamos.
+Dialogue: 0,1:41:51.86,1:41:53.94,Default,,0,0,0,,É fácil aceitar que seu pai fez uma coisa dessas?
+Dialogue: 0,1:41:55.51,1:41:57.31,Default,,0,0,0,,Irmão, é o pai deles.
+Dialogue: 0,1:41:59.89,1:42:02.48,Default,,0,0,0,,É o próprio pai deles, não é muito normal não quererem acreditar?
+Dialogue: 0,1:42:03.47,1:42:07.30,Default,,0,0,0,,Eles estão muito tristes. Você... meu irmão, você não era assim. O que aconteceu com você? Não faça isso.
+Dialogue: 0,1:42:08.03,1:42:08.84,Default,,0,0,0,,E olha para você.
+Dialogue: 0,1:42:08.72,1:42:13.69,Default,,0,0,0,,Você foi lá e se casou com o filho daquele assassino. Eles se casaram. É, eles estão casados, com certeza.
+Dialogue: 0,1:42:13.77,1:42:14.02,Default,,0,0,0,,Mãe.
+Dialogue: 0,1:42:14.24,1:42:17.59,Default,,0,0,0,,Que vergonha de você, Nare. Que vergonha.
+Dialogue: 0,1:42:19.55,1:42:22.22,Default,,0,0,0,,Você se casou com o filho do homem que tentou matar o seu irmão?
+Dialogue: 0,1:42:22.38,1:42:23.26,Default,,0,0,0,,O que você está dizendo, Boran?
+Dialogue: 0,1:42:23.57,1:42:24.64,Default,,0,0,0,,Venha até o seu irmão.
+Dialogue: 0,1:42:24.72,1:42:26.07,Default,,0,0,0,,Venha, venha.
+Dialogue: 0,1:42:26.15,1:42:27.41,Default,,0,0,0,,Você não pode culpar a Fidan.
+Dialogue: 0,1:42:27.49,1:42:30.57,Default,,0,0,0,,Venha, deixem-na vir, venha terminar o que o pai dela deixou para trás.
+Dialogue: 0,1:42:30.65,1:42:30.77,Default,,0,0,0,,Venha.
+Dialogue: 0,1:42:31.10,1:42:32.11,Default,,0,0,0,,Que culpa ela tem?
+Dialogue: 0,1:42:32.19,1:42:34.02,Default,,0,0,0,,Por que você desconta toda a sua raiva nos outros?
+Dialogue: 0,1:42:34.23,1:42:34.94,Default,,0,0,0,,Não se intrometa.
+Dialogue: 0,1:42:35.18,1:42:35.49,Default,,0,0,0,,Boran.
+Dialogue: 0,1:42:36.20,1:42:39.44,Default,,0,0,0,,Boran, olhe, você não está em si, não diga coisas das quais vai se arrepender.
+Dialogue: 0,1:42:39.91,1:42:41.98,Default,,0,0,0,,Eu estou mais em si do que nunca.
+Dialogue: 0,1:42:42.70,1:42:46.06,Default,,0,0,0,,E você, como permitiu que eles se casassem sabendo que o Ecmel é um assassino?
+Dialogue: 0,1:42:46.31,1:42:47.10,Default,,0,0,0,,Ela não permitiu.
+Dialogue: 0,1:42:47.05,1:42:48.12,Default,,0,0,0,,Eu me casei em segredo, está legal?
+Dialogue: 0,1:42:48.20,1:42:49.01,Default,,0,0,0,,Se acalme.
+Dialogue: 0,1:42:48.78,1:42:51.59,Default,,0,0,0,,Nós nos amamos desde criança, você sabe disso.
+Dialogue: 0,1:42:51.66,1:42:52.52,Default,,0,0,0,,Você não sabe?
+Dialogue: 0,1:42:52.60,1:42:54.35,Default,,0,0,0,,Por que está fingindo que não sabe?
+Dialogue: 0,1:42:54.43,1:42:57.35,Default,,0,0,0,,O que aconteceu com você? Só porque o seu coração está queimando, o de todo mundo tem que queimar?
+Dialogue: 0,1:42:57.43,1:42:58.70,Default,,0,0,0,,É isso que você quer?
+Dialogue: 0,1:42:58.78,1:43:01.30,Default,,0,0,0,,Ah, deixa para lá, ele não vai entender nada mesmo.
+Dialogue: 0,1:43:01.38,1:43:02.52,Default,,0,0,0,,Vamos embora, hein?
+Dialogue: 0,1:43:02.60,1:43:03.72,Default,,0,0,0,,Maşallah, vamos conversar nós dois.
+Dialogue: 0,1:43:03.80,1:43:05.31,Default,,0,0,0,,Şahin, vamos conversar direito.
+Dialogue: 0,1:43:05.40,1:43:07.31,Default,,0,0,0,,Você engole isso tudo e fica aí aceitando.
+Dialogue: 0,1:43:07.40,1:43:08.80,Default,,0,0,0,,Mãe, não faça isso, não faça.
+Dialogue: 0,1:43:08.88,1:43:11.27,Default,,0,0,0,,Você não pode ir para a casa daqueles que me fizeram sofrer tanto.
+Dialogue: 0,1:43:11.35,1:43:12.23,Default,,0,0,0,,Boran, solta, não puxa.
+Dialogue: 0,1:43:12.31,1:43:13.11,Default,,0,0,0,,Tira a mão.
+Dialogue: 0,1:43:13.03,1:43:13.84,Default,,0,0,0,,Şahin.
+Dialogue: 0,1:43:13.44,1:43:14.23,Default,,0,0,0,,Tira a mão.
+Dialogue: 0,1:43:14.31,1:43:15.27,Default,,0,0,0,,Kaya, meu filho, tira a mão.
+Dialogue: 0,1:43:15.35,1:43:16.72,Default,,0,0,0,,Kaya, solta, solta.
+Dialogue: 0,1:43:16.80,1:43:17.27,Default,,0,0,0,,Solta.
+Dialogue: 0,1:43:17.48,1:43:18.27,Default,,0,0,0,,Vai, vai, vai.
+Dialogue: 0,1:43:18.31,1:43:19.95,Default,,0,0,0,,Anda, vamos logo.
+Dialogue: 0,1:43:20.03,1:43:21.60,Default,,0,0,0,,Andem, vão vocês, eu já vou também, vão.
+Dialogue: 0,1:43:21.73,1:43:23.07,Default,,0,0,0,,Esperem lá embaixo, já estou indo.
+Dialogue: 0,1:43:23.15,1:43:23.34,Default,,0,0,0,,Nare.
+Dialogue: 0,1:43:23.78,1:43:24.69,Default,,0,0,0,,Boran, já chega.
+Dialogue: 0,1:43:24.85,1:43:25.70,Default,,0,0,0,,Eu disse que a Nare não vai.
+Dialogue: 0,1:43:25.78,1:43:26.51,Default,,0,0,0,,Boran, ela vai.
+Dialogue: 0,1:43:26.78,1:43:28.02,Default,,0,0,0,,Boran, ela está indo para a casa do marido.
+Dialogue: 0,1:43:28.10,1:43:28.51,Default,,0,0,0,,Ela não pode.
+Dialogue: 0,1:43:28.59,1:43:29.31,Default,,0,0,0,,Se acalme.
+Dialogue: 0,1:43:29.77,1:43:31.55,Default,,0,0,0,,Cihan, como você permite uma coisa dessas?
+Dialogue: 0,1:43:31.65,1:43:32.94,Default,,0,0,0,,Como permite que ela vá?
+Dialogue: 0,1:43:33.02,1:43:34.31,Default,,0,0,0,,Como permite essa vergonha?
+Dialogue: 0,1:43:34.39,1:43:35.28,Default,,0,0,0,,Deixa que eu digo, minha mãe.
+Dialogue: 0,1:43:35.51,1:43:36.02,Default,,0,0,0,,Deixa que eu digo.
+Dialogue: 0,1:43:36.27,1:43:38.55,Default,,0,0,0,,Assim como a Nare, ela também não quer saber do que aconteceu comigo.
+Dialogue: 0,1:43:38.93,1:43:43.52,Default,,0,0,0,,Se ela se importasse, não teria protegido os filhos do homem que tentou me matar e mandado a Nare junto com eles.
+Dialogue: 0,1:43:43.60,1:43:45.78,Default,,0,0,0,,O que me importa é o que você...
+Dialogue: 0,1:43:45.86,1:43:47.74,Default,,0,0,0,,Não me leve a mal, mas sua cabeça confusa não alcança.
+Dialogue: 0,1:43:47.93,1:43:48.24,Default,,0,0,0,,É mesmo?
+Dialogue: 0,1:43:48.47,1:43:50.31,Default,,0,0,0,,É, vamos conversar direito agora.
+Dialogue: 0,1:43:50.44,1:43:51.15,Default,,0,0,0,,Me escute bem.
+Dialogue: 0,1:43:51.56,1:43:53.98,Default,,0,0,0,,Olha, aquelas pessoas que foram embora, aquelas crianças...
+Dialogue: 0,1:43:54.53,1:43:56.18,Default,,0,0,0,,Elas são seus irmãos de verdade.
+Dialogue: 0,1:43:56.65,1:43:59.02,Default,,0,0,0,,São pessoas que realmente amam você.
+Dialogue: 0,1:43:59.74,1:44:06.52,Default,,0,0,0,,Olha, aquele Şahin, no momento em que soube que o pai dele, o Ecmel, tinha dado a ordem para te matar, no momento em que soube disso...
+Dialogue: 0,1:44:07.73,1:44:10.81,Default,,0,0,0,,De vergonha e de dor, pegou a arma e atirou em si mesmo.
+Dialogue: 0,1:44:11.28,1:44:12.02,Default,,0,0,0,,Estou mentindo, mãe?
+Dialogue: 0,1:44:12.60,1:44:13.22,Default,,0,0,0,,É verdade.
+Dialogue: 0,1:44:13.52,1:44:14.31,Default,,0,0,0,,É verdade.
+Dialogue: 0,1:44:14.19,1:44:17.52,Default,,0,0,0,,Olha, o rapaz soube disso e foi dar um tiro em si mesmo.
+Dialogue: 0,1:44:17.80,1:44:19.27,Default,,0,0,0,,Trouxemos ele de volta à vida a custo de muito esforço.
+Dialogue: 0,1:44:19.38,1:44:21.07,Default,,0,0,0,,Levamos ele para o hospital com muito custo e ele sobreviveu.
+Dialogue: 0,1:44:21.60,1:44:23.69,Default,,0,0,0,,Antes mesmo de ter alta, ele disse: "Vou ver o Boran".
+Dialogue: 0,1:44:24.15,1:44:25.40,Default,,0,0,0,,Ele veio aqui para te ver.
+Dialogue: 0,1:44:25.60,1:44:26.41,Default,,0,0,0,,E agora, o que o rapaz é para você?
+Dialogue: 0,1:44:26.91,1:44:29.81,Default,,0,0,0,,Pense bem em como ele está te olhando agora.
+Dialogue: 0,1:44:30.27,1:44:31.27,Default,,0,0,0,,É com isso que eu me importo.
+Dialogue: 0,1:44:32.05,1:44:34.32,Default,,0,0,0,,Eu me importo quando você magoa esse rapaz desse jeito.
+Dialogue: 0,1:44:34.85,1:44:35.56,Default,,0,0,0,,E aquele Kaya...
+Dialogue: 0,1:44:35.93,1:44:38.35,Default,,0,0,0,,Os olhos do Kaya brilhavam quando ele ouvia seu nome.
+Dialogue: 0,1:44:38.66,1:44:40.73,Default,,0,0,0,,Como ele te admirava, ele te idolatrava.
+Dialogue: 0,1:44:41.20,1:44:43.23,Default,,0,0,0,,Agora ele não quer nem olhar nos seus olhos.
+Dialogue: 0,1:44:43.31,1:44:45.43,Default,,0,0,0,,Ele não quer estar onde você está, Boran.
+Dialogue: 0,1:44:45.51,1:44:47.47,Default,,0,0,0,,Eu me importo com isso, isso é normal?
+Dialogue: 0,1:44:47.55,1:44:49.06,Default,,0,0,0,,Olha só o homem em que você se transformou.
+Dialogue: 0,1:44:49.15,1:44:52.02,Default,,0,0,0,,Alya e Cihan... Olha, se eu machucar eles...
+Dialogue: 0,1:44:53.06,1:44:55.38,Default,,0,0,0,,Se eu me importo com isso, com a paz deles...
+Dialogue: 0,1:44:55.45,1:44:57.23,Default,,0,0,0,,Se você estragar isso, eu vou me importar. Sou obrigado
+Dialogue: 0,1:44:57.31,1:44:59.69,Default,,0,0,0,,a me importar, porque eu não sou egoísta.
+Dialogue: 0,1:44:59.77,1:45:01.44,Default,,0,0,0,,Mas você é egoísta.
+Dialogue: 0,1:45:01.52,1:45:03.56,Default,,0,0,0,,Você chegou ao ponto de não pensar em mais ninguém.
+Dialogue: 0,1:45:03.64,1:45:05.99,Default,,0,0,0,,Não é assim. É por isso que eu digo:
+Dialogue: 0,1:45:06.07,1:45:08.60,Default,,0,0,0,,se você não se importa com ninguém aqui,
+Dialogue: 0,1:45:08.69,1:45:10.65,Default,,0,0,0,,eu não vou me importar com você.
+Dialogue: 0,1:45:10.73,1:45:12.83,Default,,0,0,0,,Fique sabendo disso, mãe, olhe.
+Dialogue: 0,1:45:14.70,1:45:16.99,Default,,0,0,0,,Não faça isso, você está puxando saco. Não faça.
+Dialogue: 0,1:45:17.07,1:45:18.91,Default,,0,0,0,,É uma vergonha. Se é verdade, você tem que
+Dialogue: 0,1:45:18.99,1:45:20.94,Default,,0,0,0,,dizer a verdade. Não importa de quem esteja do lado.
+Dialogue: 0,1:45:21.11,1:45:22.40,Default,,0,0,0,,Ah, fale que está certo, diga que está certo.
+Dialogue: 0,1:45:22.48,1:45:24.41,Default,,0,0,0,,Por que você está sempre do lado do Boran?
+Dialogue: 0,1:45:24.72,1:45:26.65,Default,,0,0,0,,Às vezes, é preciso dizer a verdade, né.
+Dialogue: 0,1:45:26.73,1:45:28.53,Default,,0,0,0,,Tá bom, não é assim. Você está pegando no pé
+Dialogue: 0,1:45:28.61,1:45:30.98,Default,,0,0,0,,deles, irmão. Vocês são irmãos.
+Dialogue: 0,1:45:33.14,1:45:34.38,Default,,0,0,0,,O que aconteceu com o Boran, hein?
+Dialogue: 0,1:45:35.18,1:45:36.73,Default,,0,0,0,,Ele não é o Boran que eu conheço. Virou outra
+Dialogue: 0,1:45:36.81,1:45:38.38,Default,,0,0,0,,pessoa. O problema dele é com a gente.
+Dialogue: 0,1:45:39.18,1:45:41.86,Default,,0,0,0,,Comigo ou com a Alya. Ele não tem problema com vocês,
+Dialogue: 0,1:45:41.94,1:45:43.69,Default,,0,0,0,,mas agir assim... sei lá.
+Dialogue: 0,1:45:44.23,1:45:46.02,Default,,0,0,0,,Ele vai se arrepender de qualquer jeito. Deixe
+Dialogue: 0,1:45:46.10,1:45:48.40,Default,,0,0,0,,o tempo passar. O tempo é assim. Zerrin,
+Dialogue: 0,1:45:49.38,1:45:51.66,Default,,0,0,0,,não fique triste. Eu fico triste.
+Dialogue: 0,1:45:53.10,1:45:54.12,Default,,0,0,0,,Bom, vamos indo nessa.
+Dialogue: 0,1:45:54.61,1:45:56.45,Default,,0,0,0,,Descansa, Şahin, você precisa descansar.
+Dialogue: 0,1:45:56.91,1:45:58.30,Default,,0,0,0,,Já subi pra casa, vou descansar.
+Dialogue: 0,1:45:58.80,1:45:59.49,Default,,0,0,0,,Então, até mais.
+Dialogue: 0,1:45:59.68,1:46:00.23,Default,,0,0,0,,Até.
+Dialogue: 0,1:46:00.48,1:46:01.10,Default,,0,0,0,,Cuidado aí.
+Dialogue: 0,1:46:02.19,1:46:03.45,Default,,0,0,0,,Cuidado.
+Dialogue: 0,1:46:03.60,1:46:03.73,Default,,0,0,0,,O quê?
+Dialogue: 0,1:46:04.12,1:46:04.98,Default,,0,0,0,,Eu acompanho vocês.
+Dialogue: 0,1:46:05.27,1:46:05.62,Default,,0,0,0,,Acredite.
+Dialogue: 0,1:46:05.85,1:46:08.80,Default,,0,0,0,,Cihan, irmão, vou te ligar amanhã de manhã.
+Dialogue: 0,1:46:12.60,1:46:13.49,Default,,0,0,0,,Não vai me dar bolo, hein?
+Dialogue: 0,1:46:13.57,1:46:13.90,Default,,0,0,0,,Por favor.
+Dialogue: 0,1:46:16.38,1:46:18.18,Default,,0,0,0,,Vai com cuidado.
+Dialogue: 0,1:46:22.23,1:46:22.61,Default,,0,0,0,,Ah, ótimo.
+Dialogue: 0,1:46:29.90,1:46:31.69,Default,,0,0,0,,Por que essa armadura toda para você?
+Dialogue: 0,1:46:35.90,1:46:37.81,Default,,0,0,0,,Para não olhar demais com esses olhos bonitos.
+Dialogue: 0,1:46:38.20,1:46:39.06,Default,,0,0,0,,Isso me incomoda, meu patrão.
+Dialogue: 0,1:46:40.51,1:46:41.56,Default,,0,0,0,,Isso vai ser um pouco difícil.
+Dialogue: 0,1:46:45.80,1:46:49.52,Default,,0,0,0,,E agora falta o Cihan ver o Boran.
+Dialogue: 0,1:46:50.03,1:46:53.62,Default,,0,0,0,,Espero que isso não doa tanto quanto aquele reencontro.
+Dialogue: 0,1:46:57.06,1:46:58.85,Default,,0,0,0,,Ela tem tanta razão...
+Dialogue: 0,1:47:02.27,1:47:03.53,Default,,0,0,0,,Seu filho vai rever o pai.
+Dialogue: 0,1:47:03.64,1:47:04.68,Default,,0,0,0,,Eu deveria estar feliz.
+Dialogue: 0,1:47:05.95,1:47:06.68,Default,,0,0,0,,Não consigo ficar feliz.
+Dialogue: 0,1:47:08.98,1:47:09.59,Default,,0,0,0,,Estou com medo.
+Dialogue: 0,1:47:11.16,1:47:12.52,Default,,0,0,0,,Tenho vergonha do meu próprio medo.
+Dialogue: 0,1:47:13.53,1:47:16.23,Default,,0,0,0,,Boran não está agindo assim porque você não dá atenção a ele.
+Dialogue: 0,1:47:17.27,1:47:22.68,Default,,0,0,0,,O problema do Boran é não encontrar a Alya que ele queria ver ao acordar.
+Dialogue: 0,1:47:24.28,1:47:27.48,Default,,0,0,0,,A mente dele... Eu também não gostaria de te perder.
+Dialogue: 0,1:47:30.48,1:47:33.15,Default,,0,0,0,,Se eu te perdesse, provavelmente faria coisa pior.
+Dialogue: 0,1:47:35.27,1:47:35.95,Default,,0,0,0,,Não faria.
+Dialogue: 0,1:47:38.48,1:47:39.85,Default,,0,0,0,,Tem certeza?
+Dialogue: 0,1:47:41.15,1:47:41.84,Default,,0,0,0,,Não faria.
+Dialogue: 0,1:47:43.35,1:47:45.38,Default,,0,0,0,,Você não machucaria ninguém.
+Dialogue: 0,1:47:46.62,1:47:47.81,Default,,0,0,0,,Não faria mal a ninguém.
+Dialogue: 0,1:47:47.89,1:47:49.24,Default,,0,0,0,,Aquele fogo dentro de você...
+Dialogue: 0,1:47:49.73,1:47:52.05,Default,,0,0,0,,Ele se consumiria, mas ainda assim não afetaria os outros.
+Dialogue: 0,1:47:53.38,1:47:54.81,Default,,0,0,0,,Não machucaria.
+Dialogue: 0,1:48:07.40,1:48:09.20,Default,,0,0,0,,Mas não arranque isso também, pai.
+Dialogue: 0,1:48:27.79,1:48:30.00,Default,,0,0,0,,Aquela sua atuação de arrependimento também não cola.
+Dialogue: 0,1:48:30.86,1:48:33.79,Default,,0,0,0,,Mas agora ele está nos fazendo pagar pelos seus pecados.
+Dialogue: 0,1:48:35.37,1:48:36.88,Default,,0,0,0,,Deixe que pense o que quiser.
+Dialogue: 0,1:48:38.28,1:48:39.32,Default,,0,0,0,,Afinal, é seu filho.
+Dialogue: 0,1:48:40.48,1:48:42.00,Default,,0,0,0,,Naquela mansão e com a Dona Sadakat...
+Dialogue: 0,1:48:42.32,1:48:44.16,Default,,0,0,0,,Ele também vai ver a verdadeira face do Cihan.
+Dialogue: 0,1:48:44.70,1:48:48.23,Default,,0,0,0,,Quando a coisa apertar para ele, virá ficar ao lado do pai.
+Dialogue: 0,1:48:49.57,1:48:51.37,Default,,0,0,0,,Mas você, Şahin...
+Dialogue: 0,1:48:53.94,1:48:57.73,Default,,0,0,0,,Nunca conseguiu sair de perto deles em todos esses anos.
+Dialogue: 0,1:48:57.83,1:49:00.22,Default,,0,0,0,,Você está falando com a boca deles.
+Dialogue: 0,1:49:02.01,1:49:06.41,Default,,0,0,0,,Se estivesse do lado da consciência, da verdade e da justiça, eu correria para vir até você.
+Dialogue: 0,1:49:07.48,1:49:09.84,Default,,0,0,0,,Espero que, no fim das contas, ele acredite em mim e não em você.
+Dialogue: 0,1:49:10.51,1:49:15.03,Default,,0,0,0,,Mas daqui em diante, não vou permitir nenhuma das suas traições, nem na empresa nem nesta mansão.
+Dialogue: 0,1:49:15.43,1:49:15.83,Default,,0,0,0,,É mesmo?
+Dialogue: 0,1:49:16.12,1:49:16.47,Default,,0,0,0,,É.
+Dialogue: 0,1:49:17.53,1:49:19.05,Default,,0,0,0,,É o que você pensa.
+Dialogue: 0,1:49:19.98,1:49:22.86,Default,,0,0,0,,Você logo vai ver com quem está se metendo.
+Dialogue: 0,1:49:26.41,1:49:29.15,Default,,0,0,0,,Isso é só o começo, meu caro Şahin.
+Dialogue: 0,1:49:32.84,1:49:34.78,Default,,0,0,0,,Vocês também vão ver o resto muito em breve.
+Dialogue: 0,1:49:38.53,1:49:40.33,Default,,0,0,0,,Enfim.
+Dialogue: 0,1:49:49.02,1:49:50.82,Default,,0,0,0,,Entendo.
+Dialogue: 0,1:49:51.33,1:49:53.75,Default,,0,0,0,,Você grudou em mim.
+Dialogue: 0,1:50:04.69,1:50:05.73,Default,,0,0,0,,Olhe pelo lado bom.
+Dialogue: 0,1:50:06.35,1:50:10.19,Default,,0,0,0,,Pelo menos você não precisa mais se matar de exaustão tentando proteger meu pai.
+Dialogue: 0,1:50:12.31,1:50:14.11,Default,,0,0,0,,Sorria assim.
+Dialogue: 0,1:50:17.28,1:50:19.96,Default,,0,0,0,,Vamos ficar bem, mãe. Vamos ficar bem.
+Dialogue: 0,1:50:21.78,1:50:24.40,Default,,0,0,0,,Eu estou bem, meu filho. O importante é que vocês estejam bem.
+Dialogue: 0,1:50:28.36,1:50:30.51,Default,,0,0,0,,Não quero mais nada além disso.
+Dialogue: 0,1:50:31.50,1:50:32.76,Default,,0,0,0,,Não, não estou sentindo dor.
+Dialogue: 0,1:50:33.75,1:50:34.81,Default,,0,0,0,,Não, mãe, eu estou bem.
+Dialogue: 0,1:50:35.15,1:50:36.43,Default,,0,0,0,,Você precisa descansar, Şahin?
+Dialogue: 0,1:50:37.52,1:50:40.65,Default,,0,0,0,,Vamos. Já foi um sufoco a gente conseguir sair. Vamos, querida.
+Dialogue: 0,1:50:41.75,1:50:41.93,Default,,0,0,0,,Certo.
+Dialogue: 0,1:50:42.55,1:50:43.34,Default,,0,0,0,,Irmão.
+Dialogue: 0,1:50:45.80,1:50:49.06,Default,,0,0,0,,Olha... Eu sei que aconteceu muita coisa junta.
+Dialogue: 0,1:50:49.49,1:50:50.29,Default,,0,0,0,,A história do hospital e tudo mais.
+Dialogue: 0,1:50:50.21,1:50:52.19,Default,,0,0,0,,Mas daqui a pouco o Demir vai bater na porta.
+Dialogue: 0,1:50:52.27,1:50:54.80,Default,,0,0,0,,Antes que isso aconteça, preciso te contar uma coisa.
+Dialogue: 0,1:50:55.02,1:50:55.74,Default,,0,0,0,,É urgente.
+Dialogue: 0,1:50:56.36,1:50:57.86,Default,,0,0,0,,O que foi? O que a gente vai conversar?
+Dialogue: 0,1:50:58.79,1:51:00.55,Default,,0,0,0,,Não dá para falar aqui. Vamos tomar um chá e conversamos lá.
+Dialogue: 0,1:51:02.27,1:51:02.87,Default,,0,0,0,,Tá bom, vamos.
+Dialogue: 0,1:51:03.38,1:51:03.89,Default,,0,0,0,,Vamos.
+Dialogue: 0,1:51:08.59,1:51:10.39,Default,,0,0,0,,Irmão, é o seguinte.
+Dialogue: 0,1:51:13.15,1:51:14.23,Default,,0,0,0,,Fala logo, Zeynep.
+Dialogue: 0,1:51:18.64,1:51:20.44,Default,,0,0,0,,Fala logo.
+Dialogue: 0,1:51:27.97,1:51:30.00,Default,,0,0,0,,O pai do meu bebê é o Kaya.
+Dialogue: 0,1:51:33.73,1:51:35.82,Default,,0,0,0,,O que você está dizendo, Zeynep?
+Dialogue: 0,1:51:40.68,1:51:42.48,Default,,0,0,0,,Que Kaya o quê?
+Dialogue: 0,1:51:43.52,1:51:45.35,Default,,0,0,0,,Eu sou o último a saber?
+Dialogue: 0,1:51:46.61,1:51:50.23,Default,,0,0,0,,Por que eu sou sempre o último a saber de tudo nesta casa?
+Dialogue: 0,1:51:50.31,1:51:50.55,Default,,0,0,0,,Não levanta.
+Dialogue: 0,1:51:51.02,1:51:53.34,Default,,0,0,0,,Por que vocês não me contaram isso antes?
+Dialogue: 0,1:51:53.48,1:51:55.10,Default,,0,0,0,,Irmão, fui eu que pedi. Não brigue com eles.
+Dialogue: 0,1:51:55.48,1:51:56.54,Default,,0,0,0,,Fui eu que insisti.
+Dialogue: 0,1:51:56.62,1:51:57.42,Default,,0,0,0,,Ai, meu irmão...
+Dialogue: 0,1:51:57.46,1:51:58.26,Default,,0,0,0,,Ele é um caso sério.
+Dialogue: 0,1:51:58.34,1:51:59.90,Default,,0,0,0,,Venha sentar aqui e não se irrite, pelo amor de Deus.
+Dialogue: 0,1:52:01.13,1:52:02.51,Default,,0,0,0,,Ah, para com isso.
+Dialogue: 0,1:52:03.71,1:52:06.58,Default,,0,0,0,,Não, a culpa é minha, eu deveria ter percebido.
+Dialogue: 0,1:52:08.13,1:52:10.05,Default,,0,0,0,,O Nadim estava falando a verdade quando chegou à mansão.
+Dialogue: 0,1:52:10.83,1:52:12.65,Default,,0,0,0,,Irmão, ele não pode ter filhos, o Demir.
+Dialogue: 0,1:52:14.99,1:52:16.33,Default,,0,0,0,,Nós nunca ficamos juntos, felizmente.
+Dialogue: 0,1:52:16.67,1:52:18.90,Default,,0,0,0,,Quem mais sabe sobre o bebê?
+Dialogue: 0,1:52:21.41,1:52:22.87,Default,,0,0,0,,A Alya e o meu irmão sabem.
+Dialogue: 0,1:52:24.18,1:52:24.38,Default,,0,0,0,,Entendi.
+Dialogue: 0,1:52:27.55,1:52:30.10,Default,,0,0,0,,E se o Kaya descobrir, o que vai acontecer?
+Dialogue: 0,1:52:32.84,1:52:35.33,Default,,0,0,0,,Irmão, é exatamente por isso que eu quero falar com você.
+Dialogue: 0,1:52:35.43,1:52:37.85,Default,,0,0,0,,Olha, o meu irmão Cihan cismou que vai contar pro Kaya.
+Dialogue: 0,1:52:38.31,1:52:39.25,Default,,0,0,0,,O quê? Ele vai contar mesmo?
+Dialogue: 0,1:52:39.33,1:52:39.57,Default,,0,0,0,,Sim.
+Dialogue: 0,1:52:40.90,1:52:43.18,Default,,0,0,0,,Irmão, olha, eu disse pro Cihan também.
+Dialogue: 0,1:52:43.59,1:52:45.31,Default,,0,0,0,,O Demir não vai me divorciar, não vai me deixar.
+Dialogue: 0,1:52:45.39,1:52:45.85,Default,,0,0,0,,Vai deixar sim.
+Dialogue: 0,1:52:46.41,1:52:46.97,Default,,0,0,0,,Não vai.
+Dialogue: 0,1:52:47.41,1:52:48.53,Default,,0,0,0,,Olha, eu vivo com ele.
+Dialogue: 0,1:52:48.63,1:52:50.63,Default,,0,0,0,,Você não sabe como ele ficou obcecado por mim.
+Dialogue: 0,1:52:50.71,1:52:51.55,Default,,0,0,0,,Ele vai deixar você.
+Dialogue: 0,1:52:51.67,1:52:52.47,Default,,0,0,0,,Eu não vou deixar.
+Dialogue: 0,1:52:52.19,1:52:52.75,Default,,0,0,0,,Vai deixar.
+Dialogue: 0,1:52:53.13,1:52:54.97,Default,,0,0,0,,A partir de agora, você não pode ficar com o Demir.
+Dialogue: 0,1:52:55.09,1:52:56.11,Default,,0,0,0,,Isso vai acabar mal para você.
+Dialogue: 0,1:52:56.90,1:52:57.23,Default,,0,0,0,,Exatamente.
+Dialogue: 0,1:52:58.72,1:52:59.88,Default,,0,0,0,,Por isso eu tenho uma solução.
+Dialogue: 0,1:53:03.47,1:53:04.45,Default,,0,0,0,,Eu já disse pra minha mãe também.
+Dialogue: 0,1:53:05.97,1:53:07.34,Default,,0,0,0,,Que solução?
+Dialogue: 0,1:53:08.18,1:53:09.93,Default,,0,0,0,,Mas você vai ter que aceitar.
+Dialogue: 0,1:53:10.01,1:53:11.49,Default,,0,0,0,,Ah, não me tire do sério, fala logo.
+Dialogue: 0,1:53:15.55,1:53:16.35,Default,,0,0,0,,Eu...
+Dialogue: 0,1:53:16.03,1:53:20.27,Default,,0,0,0,,Olha, irmão, eu te suplico, olha, eu não tenho mais nenhuma saída.
+Dialogue: 0,1:53:41.97,1:53:43.41,Default,,0,0,0,,Por favor, por favor, aceita.
+Dialogue: 0,1:53:43.76,1:53:45.15,Default,,0,0,0,,Irmão, olha, eu vou agora.
+Dialogue: 0,1:53:46.20,1:53:47.88,Default,,0,0,0,,Amanhã de manhã, antes de ir pra aula, vou ligar pro Cihan.
+Dialogue: 0,1:53:47.96,1:53:50.32,Default,,0,0,0,,Vamos todos juntos para convencê-lo.
+Dialogue: 0,1:53:50.50,1:53:52.32,Default,,0,0,0,,Por favor, esse é o único jeito.
+Dialogue: 0,1:54:03.08,1:54:04.88,Default,,0,0,0,,Boa noite.
+Dialogue: 0,1:54:07.85,1:54:08.79,Default,,0,0,0,,Melhoras, Şaho.
+Dialogue: 0,1:54:09.40,1:54:11.14,Default,,0,0,0,,Fico feliz que tenha tido alta cedo.
+Dialogue: 0,1:54:11.51,1:54:14.90,Default,,0,0,0,,Como você não saía, a Zerrin acabou fincando pé aqui.
+Dialogue: 0,1:54:16.41,1:54:20.46,Default,,0,0,0,,Senhora Zerrin, se não tiver mais nenhum motivo, vamos para a nossa mansão.
+Dialogue: 0,1:54:24.82,1:54:25.56,Default,,0,0,0,,Vamos, Şevbaş.
+Dialogue: 0,1:54:37.97,1:54:42.40,Default,,0,0,0,,Se ela conseguiu voltar para esta mansão, significa que o Kaya não soube da verdade.
+Dialogue: 0,1:55:11.03,1:55:12.09,Default,,0,0,0,,Que surpresa.
+Dialogue: 0,1:55:12.45,1:55:13.93,Default,,0,0,0,,Zerrin, entra.
+Dialogue: 0,1:55:14.01,1:55:16.10,Default,,0,0,0,,O que você está dizendo, seu idiota, hein?
+Dialogue: 0,1:55:32.94,1:55:33.70,Default,,0,0,0,,O que você está dizendo?
+Dialogue: 0,1:55:34.07,1:55:37.59,Default,,0,0,0,,O Ecmel me disse: "Seu pai vai fazer algo com você, me avise".
+Dialogue: 0,1:55:38.69,1:55:42.21,Default,,0,0,0,,E eu entendi que ele tem algo em mãos para te amedrontar.
+Dialogue: 0,1:55:44.90,1:55:46.70,Default,,0,0,0,,Você ficou com medo.
+Dialogue: 0,1:55:50.77,1:55:52.21,Default,,0,0,0,,Não tenha medo.
+Dialogue: 0,1:55:53.72,1:55:56.67,Default,,0,0,0,,A verdade tem um péssimo hábito de vir à tona.
+Dialogue: 0,1:55:58.30,1:56:00.36,Default,,0,0,0,,De qualquer forma, vou descobrir o que você está tramando.
+Dialogue: 0,1:56:01.48,1:56:03.12,Default,,0,0,0,,É aí que você vai ter que ter medo de verdade, gracinha.
+Dialogue: 0,1:56:21.60,1:56:23.50,Default,,0,0,0,,Kadir, o que é isso na sua mão?
+Dialogue: 0,1:56:35.61,1:56:36.39,Default,,0,0,0,,Uma tesoura de poda.
+Dialogue: 0,1:56:37.27,1:56:38.26,Default,,0,0,0,,Não está vendo a flor?
+Dialogue: 0,1:56:38.65,1:56:41.42,Default,,0,0,0,,Ai, Kadir, olha, estou com a vida corrida, não tenho cabeça para você.
+Dialogue: 0,1:56:41.60,1:56:43.70,Default,,0,0,0,,Que cara amarrada é essa logo de manhã?
+Dialogue: 0,1:56:43.78,1:56:47.02,Default,,0,0,0,,Vim até aqui com uma flor, olha para mim, me nota, pergunta alguma coisa.
+Dialogue: 0,1:56:47.55,1:56:48.63,Default,,0,0,0,,Não posso perguntar, Kadir.
+Dialogue: 0,1:56:49.08,1:56:51.20,Default,,0,0,0,,Vou preparar o café da manhã, não tenho tempo para isso.
+Dialogue: 0,1:56:51.50,1:56:51.78,Default,,0,0,0,,Tá bom.
+Dialogue: 0,1:56:52.76,1:56:54.38,Default,,0,0,0,,Vai preparar, eu varro aqui.
+Dialogue: 0,1:56:55.79,1:56:56.11,Default,,0,0,0,,Jura.
+Dialogue: 0,1:56:56.69,1:56:58.59,Default,,0,0,0,,É, toma isso aqui e rega.
+Dialogue: 0,1:56:59.35,1:57:00.19,Default,,0,0,0,,Dá aqui que eu faço.
+Dialogue: 0,1:57:00.45,1:57:00.79,Default,,0,0,0,,O que é isso?
+Dialogue: 0,1:57:01.39,1:57:02.19,Default,,0,0,0,,Olha só.
+Dialogue: 0,1:57:01.83,1:57:03.31,Default,,0,0,0,,Até que cheira bem.
+Dialogue: 0,1:57:03.55,1:57:04.15,Default,,0,0,0,,Igual a você.
+Dialogue: 0,1:57:05.31,1:57:07.15,Default,,0,0,0,,Olha, prendi bem.
+Dialogue: 0,1:57:11.28,1:57:14.56,Default,,0,0,0,,Caramba, quanta coisa você sabe, hein, Kadir? É de impressionar.
+Dialogue: 0,1:57:15.47,1:57:17.13,Default,,0,0,0,,Olha, ficou azul.
+Dialogue: 0,1:57:17.55,1:57:19.17,Default,,0,0,0,,Depois, quando você não limpar, olha aí, ficou azul, viu?
+Dialogue: 0,1:57:19.25,1:57:22.31,Default,,0,0,0,,Uau, combinou muito com você também, tomara.
+Dialogue: 0,1:57:22.39,1:57:23.27,Default,,0,0,0,,Vai logo.
+Dialogue: 0,1:57:23.49,1:57:24.63,Default,,0,0,0,,Vai, senão minha flor vai murchar.
+Dialogue: 0,1:57:24.79,1:57:26.03,Default,,0,0,0,,Tá bom, tá bom, já tô indo.
+Dialogue: 0,1:57:26.13,1:57:26.77,Default,,0,0,0,,Vai regar aquilo.
+Dialogue: 0,1:57:27.55,1:57:29.35,Default,,0,0,0,,Não deixa minha flor murchar.
+Dialogue: 0,1:57:32.20,1:57:34.75,Default,,0,0,0,,Por que acordou a essa hora?
+Dialogue: 0,1:57:46.75,1:57:47.97,Default,,0,0,0,,Eu te esperei.
+Dialogue: 0,1:57:48.60,1:57:48.98,Default,,0,0,0,,Uau.
+Dialogue: 0,1:57:49.30,1:57:50.94,Default,,0,0,0,,Parece que você entende de cesariana.
+Dialogue: 0,1:57:51.12,1:57:51.84,Default,,0,0,0,,Vem me ajudar.
+Dialogue: 0,1:57:52.10,1:57:52.32,Default,,0,0,0,,Não.
+Dialogue: 0,1:57:52.95,1:57:54.65,Default,,0,0,0,,O bisturi fica com você, a arma comigo.
+Dialogue: 0,1:57:56.32,1:57:56.66,Default,,0,0,0,,Alya.
+Dialogue: 0,1:57:57.69,1:57:59.79,Default,,0,0,0,,Chegou a notícia de que você encostou uma arma na cabeça do Ecmel.
+Dialogue: 0,1:58:04.32,1:58:04.82,Default,,0,0,0,,Pelo amor de Deus.
+Dialogue: 0,1:58:06.68,1:58:07.38,Default,,0,0,0,,Fique no seu quadrado.
+Dialogue: 0,1:58:08.66,1:58:10.46,Default,,0,0,0,,O caso do Ecmel é comigo.
+Dialogue: 0,1:58:13.84,1:58:15.92,Default,,0,0,0,,A propósito, eu te falei sobre aquilo.
+Dialogue: 0,1:58:16.02,1:58:17.68,Default,,0,0,0,,Eu disse que contaria ao Kaya sobre o filho dele.
+Dialogue: 0,1:58:17.76,1:58:18.22,Default,,0,0,0,,Entendeu?
+Dialogue: 0,1:58:18.32,1:58:18.68,Default,,0,0,0,,Cihan.
+Dialogue: 0,1:58:19.04,1:58:19.78,Default,,0,0,0,,Ele disse a mesma coisa.
+Dialogue: 0,1:58:19.96,1:58:20.42,Default,,0,0,0,,Igualzinho a você.
+Dialogue: 0,1:58:20.62,1:58:21.50,Default,,0,0,0,,Ele também entrou em pânico.
+Dialogue: 0,1:58:23.26,1:58:24.61,Default,,0,0,0,,Depois ele ligou e conversamos.
+Dialogue: 0,1:58:24.69,1:58:27.19,Default,,0,0,0,,Se for bom para você também, nos vemos no seu hospital.
+Dialogue: 0,1:58:28.00,1:58:28.70,Default,,0,0,0,,Tá bom.
+Dialogue: 0,1:58:29.12,1:58:30.78,Default,,0,0,0,,Tô muito curioso pra saber o que vai acontecer.
+Dialogue: 0,1:58:30.90,1:58:31.26,Default,,0,0,0,,Vamos.
+Dialogue: 0,1:58:31.54,1:58:31.78,Default,,0,0,0,,Certo.
+Dialogue: 0,1:58:33.10,1:58:33.70,Default,,0,0,0,,Vai aonde assim?
+Dialogue: 0,1:58:35.45,1:58:36.73,Default,,0,0,0,,Bom dia pra você também, mãe.
+Dialogue: 0,1:58:37.26,1:58:37.94,Default,,0,0,0,,Bom dia.
+Dialogue: 0,1:58:40.51,1:58:43.45,Default,,0,0,0,,Boran tá andando de um lado pro outro de ansiedade pra ver o filho.
+Dialogue: 0,1:58:44.08,1:58:45.00,Default,,0,0,0,,Vocês vão pra onde?
+Dialogue: 0,1:58:45.40,1:58:46.64,Default,,0,0,0,,Vamos vê-lo, Senhora Sadakat.
+Dialogue: 0,1:58:48.09,1:58:49.23,Default,,0,0,0,,Ainda é muito cedo.
+Dialogue: 0,1:58:49.41,1:58:50.09,Default,,0,0,0,,Meu filho tá dormindo.
+Dialogue: 0,1:58:50.33,1:58:52.03,Default,,0,0,0,,Deixa ele acordar, tomar o café dele.
+Dialogue: 0,1:58:52.74,1:58:53.42,Default,,0,0,0,,Estar pronto.
+Dialogue: 0,1:58:54.38,1:58:55.58,Default,,0,0,0,,Nós chegamos lá nessa hora.
+Dialogue: 0,1:58:55.66,1:58:57.28,Default,,0,0,0,,Eu tenho uma cirurgia agora, tô indo pro hospital.
+Dialogue: 0,1:58:59.14,1:59:00.48,Default,,0,0,0,,Se tivesse esperado, veria ontem.
+Dialogue: 0,1:59:00.60,1:59:01.98,Default,,0,0,0,,Como a Alya disse, ele vai esperar.
+Dialogue: 0,1:59:02.30,1:59:03.10,Default,,0,0,0,,Vai aprender a ter paciência.
+Dialogue: 0,1:59:03.16,1:59:05.77,Default,,0,0,0,,Vocês assinaram o protocolo de divórcio.
+Dialogue: 0,1:59:08.13,1:59:10.00,Default,,0,0,0,,É, mãe, falei com o Erol.
+Dialogue: 0,1:59:10.08,1:59:11.64,Default,,0,0,0,,Assinamos, ele vai entrar com o pedido.
+Dialogue: 0,1:59:11.72,1:59:13.92,Default,,0,0,0,,E a data da audiência vai sair o mais rápido possível.
+Dialogue: 0,1:59:14.00,1:59:15.10,Default,,0,0,0,,Tem mais alguma pergunta?
+Dialogue: 0,1:59:15.18,1:59:17.21,Default,,0,0,0,,Obrigado, que Deus abençoe.
+Dialogue: 0,1:59:17.48,1:59:19.28,Default,,0,0,0,,Parece que diminuiu.
+Dialogue: 0,1:59:34.69,1:59:37.69,Default,,0,0,0,,Que a Zerrin venha logo e conte o que tem pra contar.
+Dialogue: 0,1:59:40.31,1:59:41.30,Default,,0,0,0,,Já tô farto.
+Dialogue: 0,1:59:41.38,1:59:43.67,Default,,0,0,0,,Quer que eu peça um chá pra você?
+Dialogue: 0,1:59:44.94,1:59:47.03,Default,,0,0,0,,Pede depois, obrigado.
+Dialogue: 0,1:59:47.33,1:59:49.13,Default,,0,0,0,,Pois não.
+Dialogue: 0,1:59:50.43,1:59:52.15,Default,,0,0,0,,Bom dia.
+Dialogue: 0,1:59:52.23,1:59:54.13,Default,,0,0,0,,Cunhada, seja bem-vinda, entra.
+Dialogue: 0,1:59:54.85,1:59:55.88,Default,,0,0,0,,Bom dia.
+Dialogue: 0,1:59:55.96,1:59:57.01,Default,,0,0,0,,Bom dia.
+Dialogue: 0,1:59:57.09,1:59:58.39,Default,,0,0,0,,Bom dia.
+Dialogue: 0,1:59:58.47,1:59:59.41,Default,,0,0,0,,Bom dia, irmão.
+Dialogue: 0,1:59:59.49,2:00:00.45,Default,,0,0,0,,Bom dia, bom dia.
+Dialogue: 0,2:00:01.28,2:00:01.83,Default,,0,0,0,,Bom dia.
+Dialogue: 0,2:00:01.95,2:00:04.27,Default,,0,0,0,,Já que vieram em peso, quer dizer que minha situação é boa, hein?
+Dialogue: 0,2:00:04.76,2:00:05.50,Default,,0,0,0,,É boa, bem isso.
+Dialogue: 0,2:00:06.37,2:00:06.69,Default,,0,0,0,,Vamos.
+Dialogue: 0,2:00:07.56,2:00:08.90,Default,,0,0,0,,Eu começo então?
+Dialogue: 0,2:00:09.46,2:00:12.98,Default,,0,0,0,,A Zerrin me disse que o bebê é do Kaya.
+Dialogue: 0,2:00:15.51,2:00:18.32,Default,,0,0,0,,Mas parece que a vizinhança inteira já sabia.
+Dialogue: 0,2:00:19.45,2:00:20.47,Default,,0,0,0,,Fui o último a saber de novo.
+Dialogue: 0,2:00:20.59,2:00:22.17,Default,,0,0,0,,Eu não deixei contar pro Cihan.
+Dialogue: 0,2:00:22.63,2:00:24.35,Default,,0,0,0,,Aí eu acabei tendo que falar.
+Dialogue: 0,2:00:24.65,2:00:26.37,Default,,0,0,0,,Agora, esse assunto tem a ver com o Kaya.
+Dialogue: 0,2:00:26.78,2:00:28.41,Default,,0,0,0,,Esse assunto diz respeito diretamente ao Kaya.
+Dialogue: 0,2:00:28.87,2:00:29.85,Default,,0,0,0,,Ele precisa saber.
+Dialogue: 0,2:00:30.11,2:00:30.47,Default,,0,0,0,,Cihan.
+Dialogue: 0,2:00:30.83,2:00:32.98,Default,,0,0,0,,Olha, juro que já estou de saco cheio, vou falar logo.
+Dialogue: 0,2:00:33.16,2:00:33.48,Default,,0,0,0,,Irmão.
+Dialogue: 0,2:00:33.64,2:00:34.92,Default,,0,0,0,,Eu já não aguento mais.
+Dialogue: 0,2:00:35.00,2:00:37.36,Default,,0,0,0,,Não, irmão, olha, é por isso que estou aqui.
+Dialogue: 0,2:00:37.60,2:00:40.67,Default,,0,0,0,,Não conte nada, mas eu tenho uma solução.
+Dialogue: 0,2:00:40.94,2:00:41.74,Default,,0,0,0,,Diz qual é a solução.
+Dialogue: 0,2:00:41.42,2:00:42.74,Default,,0,0,0,,É, eu já falei para a minha mãe também.
+Dialogue: 0,2:00:42.88,2:00:43.08,Default,,0,0,0,,Certo.
+Dialogue: 0,2:00:43.16,2:00:43.90,Default,,0,0,0,,Agora vou te contar.
+Dialogue: 0,2:00:44.88,2:00:45.73,Default,,0,0,0,,Tá bom, fala, explica.
+Dialogue: 0,2:00:47.20,2:00:49.00,Default,,0,0,0,,Conta logo, vai.
+Dialogue: 0,2:00:49.54,2:00:51.79,Default,,0,0,0,,A Zerrin diz que pode ser mandada para o exterior em segredo.
+Dialogue: 0,2:00:57.15,2:00:58.95,Default,,0,0,0,,Para o exterior.
+Dialogue: 0,2:01:04.32,2:01:04.76,Default,,0,0,0,,Com a criança.
+Dialogue: 0,2:01:05.24,2:01:05.62,Default,,0,0,0,,Isso.
+Dialogue: 0,2:01:06.60,2:01:07.52,Default,,0,0,0,,Irmão, me mandem embora.
+Dialogue: 0,2:01:08.12,2:01:09.38,Default,,0,0,0,,Eu crio ele lá.
+Dialogue: 0,2:01:11.32,2:01:13.36,Default,,0,0,0,,Que fique comigo até estarmos firmes por conta própria.
+Dialogue: 0,2:01:13.77,2:01:15.75,Default,,0,0,0,,Mas quando chegar a hora, eu mesma conto pro Kaya.
+Dialogue: 0,2:01:16.31,2:01:18.03,Default,,0,0,0,,Você vai contar pro Kaya quando chegar a hora.
+Dialogue: 0,2:01:19.52,2:01:22.49,Default,,0,0,0,,Me mandem embora, irmão, mas que ninguém além de vocês saiba.
+Dialogue: 0,2:01:22.57,2:01:25.97,Default,,0,0,0,,E eu nem sei como vou me afastar dele.
+Dialogue: 0,2:01:27.13,2:01:28.22,Default,,0,0,0,,Mãe, não faz isso.
+Dialogue: 0,2:01:28.54,2:01:30.26,Default,,0,0,0,,Tá bom, é difícil, é difícil para todos nós.
+Dialogue: 0,2:01:30.38,2:01:31.40,Default,,0,0,0,,Para você também é muito difícil.
+Dialogue: 0,2:01:32.43,2:01:38.10,Default,,0,0,0,,Mas, enquanto o Demir não aceitar o divórcio, este parece ser o caminho mais sensato.
+Dialogue: 0,2:01:38.56,2:01:41.18,Default,,0,0,0,,Você tem um caminho mais sensato para o Demir, mas né...
+Dialogue: 0,2:01:41.48,2:01:43.18,Default,,0,0,0,,A gente não consegue fazer ninguém aceitar, enfim.
+Dialogue: 0,2:01:43.40,2:01:43.72,Default,,0,0,0,,Irmão.
+Dialogue: 0,2:01:51.14,2:01:51.64,Default,,0,0,0,,Ir para o exterior.
+Dialogue: 0,2:01:53.17,2:01:54.24,Default,,0,0,0,,Para o exterior, hein.
+Dialogue: 0,2:01:54.97,2:01:56.77,Default,,0,0,0,,Cihan, irmão.
+Dialogue: 0,2:01:57.30,2:01:58.48,Default,,0,0,0,,Irmão, essa é a única solução.
+Dialogue: 0,2:01:58.66,2:01:59.14,Default,,0,0,0,,Por favor.
+Dialogue: 0,2:02:00.15,2:02:01.42,Default,,0,0,0,,Me deixe ir.
+Dialogue: 0,2:02:01.82,2:02:03.04,Default,,0,0,0,,E não conte pro Kaya.
+Dialogue: 0,2:02:03.12,2:02:03.58,Default,,0,0,0,,Crianças.
+Dialogue: 0,2:02:03.76,2:02:04.62,Default,,0,0,0,,Eu sei que é difícil.
+Dialogue: 0,2:02:04.70,2:02:05.73,Default,,0,0,0,,Para mim também é difícil.
+Dialogue: 0,2:02:08.09,2:02:09.27,Default,,0,0,0,,Mas o que posso fazer? Não tenho outro jeito.
+Dialogue: 0,2:02:11.45,2:02:15.44,Default,,0,0,0,,Irmão, irmão, eu também acho que deveríamos contar pro Kaya.
+Dialogue: 0,2:02:16.06,2:02:18.12,Default,,0,0,0,,Mas, por outro lado, estou morrendo de medo do que pode acontecer.
+Dialogue: 0,2:02:19.04,2:02:20.20,Default,,0,0,0,,Parece que este é o melhor para todos nós.
+Dialogue: 0,2:02:20.28,2:02:22.68,Default,,0,0,0,,Assim, tanto a Zerrin quanto o bebê estarão sob a nossa proteção.
+Dialogue: 0,2:02:23.54,2:02:24.24,Default,,0,0,0,,Aceita, por favor.
+Dialogue: 0,2:02:41.60,2:02:41.92,Default,,0,0,0,,Tá bom.
+Dialogue: 0,2:02:42.45,2:02:43.50,Default,,0,0,0,,Muito obrigado.
+Dialogue: 0,2:02:43.88,2:02:44.68,Default,,0,0,0,,Muito obrigado.
+Dialogue: 0,2:02:44.62,2:02:46.04,Default,,0,0,0,,O que eu vou fazer? Como vou...?
+Dialogue: 0,2:02:46.26,2:02:47.22,Default,,0,0,0,,Vou aguentar, é.
+Dialogue: 0,2:02:47.50,2:02:48.23,Default,,0,0,0,,Mãe, chega.
+Dialogue: 0,2:02:51.03,2:02:53.56,Default,,0,0,0,,Vamos dar um jeito, eu juro.
+Dialogue: 0,2:02:54.10,2:02:54.90,Default,,0,0,0,,Juro que vamos dar um jeito.
+Dialogue: 0,2:02:54.95,2:02:57.63,Default,,0,0,0,,Você já fez o que podia, agora basta.
+Dialogue: 0,2:03:26.81,2:03:27.50,Default,,0,0,0,,Não pense nisso.
+Dialogue: 0,2:03:27.68,2:03:29.48,Default,,0,0,0,,Você saiu, meu irmão.
+Dialogue: 0,2:03:47.91,2:03:48.85,Default,,0,0,0,,Eu tinha um irmão.
+Dialogue: 0,2:03:50.45,2:03:53.03,Default,,0,0,0,,Mal posso esperar para ver este momento.
+Dialogue: 0,2:03:53.22,2:03:55.12,Default,,0,0,0,,Vai logo até ele.
+Dialogue: 0,2:04:16.92,2:04:18.72,Default,,0,0,0,,O quê?
+Dialogue: 0,2:04:20.59,2:04:22.38,Default,,0,0,0,,O quê?
+Dialogue: 0,2:04:22.48,2:04:24.20,Default,,0,0,0,,Por que vocês vieram?
+Dialogue: 0,2:04:24.44,2:04:24.94,Default,,0,0,0,,O que você acha?
+Dialogue: 0,2:04:26.26,2:04:27.10,Default,,0,0,0,,O que você está fazendo?
+Dialogue: 0,2:04:27.36,2:04:28.74,Default,,0,0,0,,Nossa, que lindo que você fez.
+Dialogue: 0,2:04:30.44,2:04:32.16,Default,,0,0,0,,Vou te dizer uma coisa agora.
+Dialogue: 0,2:04:35.24,2:04:36.64,Default,,0,0,0,,Seu pai quer te ver.
+Dialogue: 0,2:04:39.66,2:04:41.57,Default,,0,0,0,,Você quer também?
+Dialogue: 0,2:04:41.65,2:04:43.05,Default,,0,0,0,,Você se sente pronto?
+Dialogue: 0,2:04:44.78,2:04:47.01,Default,,0,0,0,,Sim, eu me sinto pronto.
+Dialogue: 0,2:04:49.05,2:04:49.98,Default,,0,0,0,,Vamos?
+Dialogue: 0,2:04:57.26,2:04:59.61,Default,,0,0,0,,Onde eles estão? Por que não chegaram?
+Dialogue: 0,2:05:00.80,2:05:02.14,Default,,0,0,0,,Olha que horas são.
+Dialogue: 0,2:05:02.74,2:05:03.66,Default,,0,0,0,,Ai, tenha paciência, mãe.
+Dialogue: 0,2:05:04.30,2:05:05.93,Default,,0,0,0,,Eles foram lá com ele, já devem voltar.
+Dialogue: 0,2:05:08.61,2:05:10.41,Default,,0,0,0,,Eles chegaram?
+Dialogue: 0,2:05:12.62,2:05:13.44,Default,,0,0,0,,Meu amor está chegando.
+Dialogue: 0,2:06:12.00,2:06:13.80,Default,,0,0,0,,Finalmente nos reencontramos, meu Deniz?
+Dialogue: 0,2:06:53.75,2:06:55.47,Default,,0,0,0,,Minha esperança.
+Dialogue: 0,2:06:56.58,2:06:57.38,Default,,0,0,0,,Como ele pediu.
+Dialogue: 0,2:06:57.24,2:06:59.60,Default,,0,0,0,,Meu filho, como eu senti sua falta!
+Dialogue: 0,2:07:03.12,2:07:04.38,Default,,0,0,0,,Como eu senti falta!
+Dialogue: 0,2:07:04.69,2:07:08.92,Default,,0,0,0,,Viu só como o Cihan, seu pai, sentiu sua falta? Você também sentiu saudades dele, não foi?
+Dialogue: 0,2:07:09.68,2:07:13.11,Default,,0,0,0,,Senti, mas fiquei com um pouco de medo quando cheguei.
+Dialogue: 0,2:07:18.04,2:07:18.88,Default,,0,0,0,,Me desculpe, meu filho.
+Dialogue: 0,2:07:20.36,2:07:22.58,Default,,0,0,0,,Eu te assustei aparecendo assim de repente, não foi?
+Dialogue: 0,2:07:23.57,2:07:27.35,Default,,0,0,0,,Me desculpe, mas eu não me aguento quando te vejo.
+Dialogue: 0,2:07:27.97,2:07:29.93,Default,,0,0,0,,Senti tanta falta que quis te abraçar na mesma hora.
+Dialogue: 0,2:07:32.82,2:07:36.60,Default,,0,0,0,,Meu irmão, minha mãe e meu pai me contaram tudo.
+Dialogue: 0,2:07:42.71,2:07:43.55,Default,,0,0,0,,Não foi, pai?
+Dialogue: 0,2:07:51.62,2:07:53.91,Default,,0,0,0,,Eu achei que você tivesse morrido.
+Dialogue: 0,2:08:01.17,2:08:03.59,Default,,0,0,0,,Não, meu filho, olha, eu estou aqui.
+Dialogue: 0,2:08:07.77,2:08:09.30,Default,,0,0,0,,Eu fiquei muito triste.
+Dialogue: 0,2:08:09.38,2:08:13.30,Default,,0,0,0,,Mas quando o tio Cihan virou meu pai, meu coração doeu um pouco menos.
+Dialogue: 0,2:08:13.38,2:08:16.90,Default,,0,0,0,,Mas agora que vocês dois estão em casa, meu coração ficou completo.
+Dialogue: 0,2:08:24.83,2:08:29.07,Default,,0,0,0,,Seu pai sou eu, meu filho. Decide aí quem você vai chamar de pai.
+Dialogue: 0,2:08:36.13,2:08:37.97,Default,,0,0,0,,Ele não pode ser meu amigo?
+Dialogue: 0,2:08:46.67,2:08:51.82,Default,,0,0,0,,Claro que pode. Faça o que seu coração mandar. Chame ele do que quiser.
+Dialogue: 0,2:09:00.49,2:09:02.29,Default,,0,0,0,,O quê?
+Dialogue: 0,2:09:04.52,2:09:07.98,Default,,0,0,0,,Posso continuar brincando com o Aslan agora?
+Dialogue: 0,2:09:09.51,2:09:12.43,Default,,0,0,0,,Meu filho, acabei de te ver. A gente não podia passar mais um tempinho juntos?
+Dialogue: 0,2:09:12.51,2:09:14.73,Default,,0,0,0,,Deixa eu te abraçar mais um pouco.
+Dialogue: 0,2:09:14.94,2:09:16.46,Default,,0,0,0,,Deixa eu terminar minha brincadeira.
+Dialogue: 0,2:09:16.86,2:09:18.62,Default,,0,0,0,,Depois eu volto, pai, tá bom?
+Dialogue: 0,2:09:19.37,2:09:20.01,Default,,0,0,0,,Tá bom.
+Dialogue: 0,2:09:31.49,2:09:38.99,Default,,0,0,0,,O que foi, Boran? Em vez de abraçar o menino e matar a saudade, para que você fica confundindo a cabeça dele assim?
+Dialogue: 0,2:09:43.78,2:09:44.82,Default,,0,0,0,,Mas eu sou o pai dele.
+Dialogue: 0,2:09:46.25,2:09:47.89,Default,,0,0,0,,Tá, você já é o pai.
+Dialogue: 0,2:09:47.99,2:09:49.41,Default,,0,0,0,,Ninguém está dizendo o contrário.
+Dialogue: 0,2:09:49.91,2:09:51.95,Default,,0,0,0,,Mas não confunda a cabeça dele assim, não faça isso.
+Dialogue: 0,2:09:52.55,2:09:54.77,Default,,0,0,0,,Cihan, a cabeça dele é do Boran.
+Dialogue: 0,2:09:56.29,2:09:57.83,Default,,0,0,0,,Mãe, tem alguém dizendo o contrário?
+Dialogue: 0,2:09:58.26,2:09:59.35,Default,,0,0,0,,Quem disse o contrário?
+Dialogue: 0,2:09:59.83,2:10:01.12,Default,,0,0,0,,Boran, olha, assim não dá.
+Dialogue: 0,2:10:01.82,2:10:04.05,Default,,0,0,0,,Boran, Boran, assim não pode ser.
+Dialogue: 0,2:10:06.02,2:10:08.77,Default,,0,0,0,,O seu ego não é mais importante do que esta criança.
+Dialogue: 0,2:10:08.89,2:10:11.35,Default,,0,0,0,,Sua vaidade e sua ambição não importam mais do que este menino.
+Dialogue: 0,2:10:11.89,2:10:13.53,Default,,0,0,0,,Você precisa dar tempo ao tempo para algumas coisas.
+Dialogue: 0,2:10:13.65,2:10:15.11,Default,,0,0,0,,Algumas coisas acontecem com o tempo, Boran.
+Dialogue: 0,2:10:15.19,2:10:22.69,Default,,0,0,0,,Desculpem a franqueza, mas o bem-estar deste menino e o que ele sente são muito mais importantes e valiosos do que a sua ambição e o seu ego.
+Dialogue: 0,2:10:24.90,2:10:25.40,Default,,0,0,0,,Desista.
+Dialogue: 0,2:10:25.86,2:10:26.96,Default,,0,0,0,,Tudo o que você quer não acontece num piscar de olhos.
+Dialogue: 0,2:10:27.41,2:10:28.17,Default,,0,0,0,,Espere o momento certo.
+Dialogue: 0,2:10:29.27,2:10:30.16,Default,,0,0,0,,Ah, chega, tá bom.
+Dialogue: 0,2:10:34.57,2:10:36.37,Default,,0,0,0,,Boran, Boran.
+Dialogue: 0,2:10:41.09,2:10:42.57,Default,,0,0,0,,Boran, meu filho, se acalme.
+Dialogue: 0,2:10:43.11,2:10:45.39,Default,,0,0,0,,Vamos, tenha um pouco de paciência, calma.
+Dialogue: 0,2:10:46.45,2:10:48.03,Default,,0,0,0,,Vamos, meu filho, se fizer isso, vai perder.
+Dialogue: 0,2:10:49.11,2:10:51.05,Default,,0,0,0,,Se fizer assim, vai perder tudo, vamos, vai acabar.
+Dialogue: 0,2:10:51.57,2:10:52.55,Default,,0,0,0,,Vamos, se acalme.
+Dialogue: 0,2:10:53.63,2:10:55.17,Default,,0,0,0,,Olha, falta pouco para as audiências.
+Dialogue: 0,2:10:56.46,2:10:59.02,Default,,0,0,0,,Falta pouco para as audiências e eles vão se separar de vez.
+Dialogue: 0,2:10:59.10,2:11:01.18,Default,,0,0,0,,E nunca mais vão ficar juntos, entendeu?
+Dialogue: 0,2:11:02.14,2:11:03.49,Default,,0,0,0,,Vamos, calma.
+Dialogue: 0,2:11:34.31,2:11:39.59,Default,,0,0,0,,Senhor Erol, a data da audiência de divórcio foi marcada para o início da próxima semana.
+Dialogue: 0,2:12:27.63,2:12:32.32,Default,,0,0,0,,A senhora Alya está presente, estou aqui ao seu lado, obrigado.
+Dialogue: 0,2:13:38.36,2:13:40.16,Default,,0,0,0,,As partes estão prontas.
+Dialogue: 0,2:14:12.22,2:14:15.74,Default,,0,0,0,,Representando Alya Albora, o advogado Erol Taşkın está presente.
+Dialogue: 0,2:14:18.25,2:14:20.52,Default,,0,0,0,,Vamos perguntar às partes separadamente.
+Dialogue: 0,2:14:21.27,2:14:25.12,Default,,0,0,0,,Alya Albora, a senhora leu e assinou o acordo?
+Dialogue: 0,2:14:27.14,2:14:29.72,Default,,0,0,0,,O pedido de divórcio consensual continua?
+Dialogue: 0,2:14:30.11,2:14:32.19,Default,,0,0,0,,A senhora está sob algum tipo de pressão?
+Dialogue: 0,2:14:32.59,2:14:34.61,Default,,0,0,0,,Eu li, entendi e assinei.
+Dialogue: 0,2:14:35.64,2:14:37.68,Default,,0,0,0,,Assinei por livre e espontânea vontade, Excelência.
+Dialogue: 0,2:14:37.76,2:14:38.68,Default,,0,0,0,,Não há nenhuma pressão.
+Dialogue: 0,2:14:39.32,2:14:40.20,Default,,0,0,0,,Podem se sentar.
+Dialogue: 0,2:14:41.24,2:14:42.62,Default,,0,0,0,,Cihan Albora.
+Dialogue: 0,2:14:44.53,2:14:47.72,Default,,0,0,0,,O senhor leu o acordo e o aceita?
+Dialogue: 0,2:14:48.20,2:14:49.56,Default,,0,0,0,,É de sua livre vontade?
+Dialogue: 0,2:14:49.97,2:14:51.73,Default,,0,0,0,,Eu li, aceito, meu senhor juiz.
+Dialogue: 0,2:14:52.03,2:14:52.95,Default,,0,0,0,,É de minha livre vontade.
+Dialogue: 0,2:14:54.24,2:14:55.04,Default,,0,0,0,,Podem se sentar.
+Dialogue: 0,2:14:54.92,2:15:02.28,Default,,0,0,0,,Vemos que as partes declaram ter assinado o protocolo de divórcio consensual por livre vontade.
+Dialogue: 0,2:15:05.08,2:15:12.58,Default,,0,0,0,,Alya Albora, fale você primeiro, minha filha. Tomaram uma decisão conjunta, qual é o motivo do divórcio? Você assinou o protocolo, há violência, ameaça, pressão? Não, de jeito nenhum, Excelência. Então, o motivo? O motivo é que nós não conseguimos nos aproximar, Excelência, quer dizer, sempre queremos ficar distantes, não conseguimos resolver, na verdade, mesmo quando ficamos lado a lado, nos afastamos de novo, não queremos ficar juntos de jeito nenhum.
+Dialogue: 0,2:16:00.97,2:16:07.23,Default,,0,0,0,,Além disso, ele nunca me ouve. Não me entende. E eu também não o ouço. Não quero entender.
+Dialogue: 0,2:16:26.84,2:16:30.76,Default,,0,0,0,,Nós nos esgotamos, sabe? Nós somos os que mais nos esgotamos.
+Dialogue: 0,2:16:36.95,2:16:41.77,Default,,0,0,0,,E eu não o amo. Ele também nunca me amou. Eu sei muito bem.
+Dialogue: 0,2:16:52.65,2:16:57.67,Default,,0,0,0,,Ou seja, não nos amamos. Queremos nos divorciar. Eu quero me divorciar.
+Dialogue: 0,2:17:04.11,2:17:09.33,Default,,0,0,0,,Sua esposa disse que agora são dois estranhos e que não se amam.
+Dialogue: 0,2:17:15.52,2:17:16.75,Default,,0,0,0,,O que o senhor diz a isso, meu filho?
+Dialogue: 0,2:17:16.83,2:17:20.68,Default,,0,0,0,,Meritíssimo Juiz, o que minha esposa disser é verdade, ela tem razão.
+Dialogue: 0,2:17:22.18,2:17:23.50,Default,,0,0,0,,Eu concordo com cada palavra dela.
+Dialogue: 0,2:17:24.11,2:17:29.00,Default,,0,0,0,,Ou seja, como posso dizer, nem ela me quer tanto, nem eu a quero tanto.
+Dialogue: 0,2:17:36.27,2:17:40.06,Default,,0,0,0,,Nem ela me ama muito, nem eu a amo muito.
+Dialogue: 0,2:17:57.17,2:18:00.57,Default,,0,0,0,,Vocês já haviam feito um pedido de divórcio em nossa corte anteriormente.
+Dialogue: 0,2:18:01.07,2:18:02.17,Default,,0,0,0,,Eu fiquei curioso e olhei.
+Dialogue: 0,2:18:04.89,2:18:07.19,Default,,0,0,0,,Vocês disseram o seguinte, estou lendo a declaração de vocês.
+Dialogue: 0,2:18:07.27,2:18:10.73,Default,,0,0,0,,Na verdade, eu comecei a conhecer minha esposa depois que nos casamos.
+Dialogue: 0,2:18:11.51,2:18:15.95,Default,,0,0,0,,E como ela me disse coisas novas sobre mim mesmo, passei a me conhecer também.
+Dialogue: 0,2:18:16.47,2:18:19.13,Default,,0,0,0,,Meritíssimo Juiz, minha esposa Alya Albora é uma esposa excelente.
+Dialogue: 0,2:18:19.31,2:18:21.97,Default,,0,0,0,,Ao mesmo tempo, é uma mãe carinhosa e dedicada.
+Dialogue: 0,2:18:22.59,2:18:24.22,Default,,0,0,0,,Uma médica muito boa e respeitada.
+Dialogue: 0,2:18:24.36,2:18:27.13,Default,,0,0,0,,E ao mesmo tempo, claro, o que é muito mais importante para mim.
+Dialogue: 0,2:18:27.54,2:18:28.45,Default,,0,0,0,,Uma mulher muito corajosa.
+Dialogue: 0,2:18:29.60,2:18:31.22,Default,,0,0,0,,Resumindo a história, Meritíssimo Juiz.
+Dialogue: 0,2:18:31.55,2:18:33.95,Default,,0,0,0,,Eu não quero me divorciar da minha esposa Alya Albora.
+Dialogue: 0,2:18:34.75,2:18:36.15,Default,,0,0,0,,Eu quero continuar com o nosso casamento.
+Dialogue: 0,2:18:36.67,2:18:40.33,Default,,0,0,0,,Porque eu a respeito muito e a amo.
+Dialogue: 0,2:18:48.06,2:18:49.93,Default,,0,0,0,,Foi o que você disse, meu filho.
+Dialogue: 0,2:18:51.06,2:18:52.46,Default,,0,0,0,,Não faz nem um ano.
+Dialogue: 0,2:18:52.54,2:18:56.69,Default,,0,0,0,,O que aconteceu para um homem que disse essas palavras em tão pouco tempo...?
+Dialogue: 0,2:18:57.05,2:18:58.75,Default,,0,0,0,,Agora poder dizer que não a ama.
+Dialogue: 0,2:19:02.39,2:19:04.19,Default,,0,0,0,,Muita coisa mudou.
+Dialogue: 0,2:19:08.93,2:19:11.35,Default,,0,0,0,,Muita coisa mudou, Meritíssimo Juiz.
+Dialogue: 0,2:19:13.74,2:19:15.16,Default,,0,0,0,,É tão fácil assim, meu filho?
+Dialogue: 0,2:19:16.52,2:19:18.04,Default,,0,0,0,,No casamento, há momentos de distanciamento.
+Dialogue: 0,2:19:19.49,2:19:23.35,Default,,0,0,0,,Mas vejo em vocês o caráter para superar isso.
+Dialogue: 0,2:19:23.74,2:19:24.11,Default,,0,0,0,,Não.
+Dialogue: 0,2:19:25.82,2:19:27.92,Default,,0,0,0,,As declarações estão contradizendo a primeira audiência.
+Dialogue: 0,2:19:28.92,2:19:32.64,Default,,0,0,0,,Senhor Advogado, essas declarações simplesmente não fazem sentido na minha cabeça.
+Dialogue: 0,2:19:34.07,2:19:37.99,Default,,0,0,0,,Eu entendo, Meritíssimo Juiz, mas durante o período mencionado,
+Dialogue: 0,2:19:39.09,2:19:43.87,Default,,0,0,0,,as partes declararam mutuamente que o casamento se tornou insuportável.
+Dialogue: 0,2:19:44.64,2:19:46.78,Default,,0,0,0,,Por isso recorremos imediatamente ao seu tribunal, Excelência.
+Dialogue: 0,2:19:46.86,2:19:54.16,Default,,0,0,0,,Senhor Juiz, esses dois, esses aí, têm que se divorciar. Divorcie os dois. Eles não se ama.
+Dialogue: 0,2:20:00.37,2:20:00.99,Default,,0,0,0,,Senhora Sadakat.
+Dialogue: 0,2:20:01.38,2:20:03.43,Default,,0,0,0,,Você tem que divorciar eles, divorcie os dois.
+Dialogue: 0,2:20:03.79,2:20:08.94,Default,,0,0,0,,Silêncio, sentem-se. Se soltarem a voz mais uma vez, mandarei tirá-los da sala.
+Dialogue: 0,2:20:28.00,2:20:28.88,Default,,0,0,0,,Sentença proferida.
+Dialogue: 0,2:20:31.02,2:20:38.52,Default,,0,0,0,,Considerando as declarações na ação de divórcio aberta pelas partes recentemente em nosso tribunal, as declarações nesta sessão
+Dialogue: 0,2:20:40.04,2:20:47.54,Default,,0,0,0,,e a inconsistência nas alegações de que a vida em comum não pôde ser reestabelecida no curto espaço de tempo decorrido, visto que os pedidos contrários ao procedimento e ao mérito não podem ser aceitos por este tribunal, decide-se pela rejeição da ação.
