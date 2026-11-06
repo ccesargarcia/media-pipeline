@@ -74,7 +74,14 @@ jobs:
               phase = "login"
               ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
               phase = "change directory"
-              ftp.cwd(os.environ["FTP_BASE_DIR"])
+              try:
+                  ftp.cwd(os.environ["FTP_BASE_DIR"])
+              except Exception:
+                  phase = "create directory"
+                  print(f"Diretório {os.environ['FTP_BASE_DIR']} não encontrado. Criando diretório no FTP...")
+                  ftp.mkd(os.environ["FTP_BASE_DIR"])
+                  ftp.cwd(os.environ["FTP_BASE_DIR"])
+                  print(f"Diretório {os.environ['FTP_BASE_DIR']} criado com sucesso!")
               phase = "list directory"
               entries = ftp.nlst()
               ftp.quit()
