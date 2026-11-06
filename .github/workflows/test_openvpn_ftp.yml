@@ -95,12 +95,13 @@ jobs:
                               username=os.environ["FTP_USER"],
                               password=os.environ["FTP_PASSWORD"],
                           )
-                          total_gb = (vol.f_blocks * vol.f_frsize) / (1024**3)
-                          free_gb = (vol.f_bavail * vol.f_frsize) / (1024**3)
+                          total_gb = vol.total_size / (1024**3)
+                          free_gb = vol.actual_available_size / (1024**3)
                           used_gb = total_gb - free_gb
+                          pct_used = (used_gb / total_gb) * 100 if total_gb > 0 else 0
                           print(f"🎉 SUCESSO NO SAMBA! Share '{share}':")
                           print(f"   Espaço Total: {total_gb:.2f} GB")
-                          print(f"   Espaço Usado: {used_gb:.2f} GB")
+                          print(f"   Espaço Usado: {used_gb:.2f} GB ({pct_used:.1f}%)")
                           print(f"   Espaço Livre: {free_gb:.2f} GB")
                           break
                       except Exception as e:
