@@ -3,7 +3,7 @@ name: Monitorar Espaço do HD no Uptime Kuma
 on:
   schedule:
     # Executa a cada 1 hora
-    - cron: '0 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
 
 permissions:
