@@ -54,6 +54,9 @@ jobs:
         with:
           config: ${{ secrets.OPENVPN_CONFIG }}
 
+      - name: Instalar dependências para consulta de disco
+        run: pip3 install smbprotocol
+
       - name: Verify FTP login and directory listing
         shell: bash
         run: |
@@ -73,6 +76,38 @@ jobs:
               )
               phase = "login"
               ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
+
+              print("=== TESTE DE COMANDOS DE DISCO NO FTP ===")
+              for cmd in ["AVBL", "AVBL /G", "AVBL /", "SITE DSPACE", "SITE FREE", "STAT /G"]:
+                  try:
+                      res = ftp.sendcmd(cmd)
+                      print(f"Comando FTP '{cmd}' -> Resposta: {res}")
+                  except Exception as e:
+                      print(f"Comando FTP '{cmd}' -> Não suportado ({e})")
+
+              print("\n=== TESTE DE CONSULTA DE DISCO VIA SAMBA (SMB) ===")
+              try:
+                  import smbclient
+                  for share in ["G", "share", "tp-share", "volume1"]:
+                      try:
+                          vol = smbclient.stat_volume(
+                              f"\\\\{os.environ['FTP_HOST']}\\{share}",
+                              username=os.environ["FTP_USER"],
+                              password=os.environ["FTP_PASSWORD"],
+                          )
+                          total_gb = (vol.f_blocks * vol.f_frsize) / (1024**3)
+                          free_gb = (vol.f_bavail * vol.f_frsize) / (1024**3)
+                          used_gb = total_gb - free_gb
+                          print(f"🎉 SUCESSO NO SAMBA! Share '{share}':")
+                          print(f"   Espaço Total: {total_gb:.2f} GB")
+                          print(f"   Espaço Usado: {used_gb:.2f} GB")
+                          print(f"   Espaço Livre: {free_gb:.2f} GB")
+                          break
+                      except Exception as e:
+                          print(f"Samba share '{share}': {e}")
+              except Exception as e:
+                  print(f"Erro geral no Samba: {e}")
+
               phase = "change directory"
               try:
                   ftp.cwd(os.environ["FTP_BASE_DIR"])
