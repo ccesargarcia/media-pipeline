@@ -12,17 +12,17 @@ on:
           - 'Segunda Temporada'
           - 'Terceira Temporada'
           - 'Primeira Temporada'
-        default: 'Segunda Temporada'
+        default: 'Terceira Temporada'
       episode_start:
-        description: 'Número do episódio inicial (ex: 33)'
+        description: 'Número do episódio inicial (ex: 64)'
         required: true
         type: number
-        default: 33
+        default: 64
       episode_end:
-        description: 'Número do episódio final (ex: 33 para apenas um, ou 35 para lote)'
+        description: 'Número do episódio final (ex: 71)'
         required: true
         type: number
-        default: 33
+        default: 71
       network_mode:
         description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
         required: true
@@ -31,19 +31,40 @@ on:
           - vpn
           - direct
         default: vpn
+      skip_existing:
+        description: 'Pular episódios que já existem no FTP com tamanho válido (>150MB)'
+        required: false
+        type: boolean
+        default: true
+      notify_whatsapp:
+        description: 'Enviar notificações de progresso no WhatsApp (Evolution API)'
+        required: false
+        type: boolean
+        default: true
+      auto_subtitle:
+        description: 'Iniciar geração de legendas automaticamente após upload (legendar_ftp.yml)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  actions: write
 
 jobs:
   download-and-upload-ftp:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Instalar FFmpeg, Python e Playwright
+      - name: Configurar Python e Instalar Dependências
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg curl python3 python3-pip
-          pip3 install playwright
+          pip3 install --upgrade pip
+          pip3 install playwright yt-dlp
           playwright install --with-deps chromium
 
       - name: Conectar à VPN para enviar os episódios ao FTP
@@ -52,16 +73,27 @@ jobs:
         with:
           config: ${{ secrets.OPENVPN_CONFIG }}
 
-      - name: Processar Episódios
+      - name: Processar Episódios (Download Assíncrono + Upload)
         env:
+          SEASON_INPUT: ${{ inputs.season }}
           FTP_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           START_EP_INPUT: ${{ inputs.episode_start }}
           END_EP_INPUT: ${{ inputs.episode_end }}
+          SKIP_EXISTING: ${{ inputs.skip_existing }}
+          NOTIFY_WHATSAPP: ${{ inputs.notify_whatsapp }}
+          AUTO_SUBTITLE: ${{ inputs.auto_subtitle }}
           FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
           FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -uo pipefail
+
           START_EP="$START_EP_INPUT"
           END_EP="$END_EP_INPUT"
           if ! [[ "$START_EP" =~ ^[0-9]+$ && "$END_EP" =~ ^[0-9]+$ ]]; then
@@ -74,32 +106,124 @@ jobs:
             echo "Intervalo de episódios inválido." >&2
             exit 1
           fi
-          
-          echo "Processando episódios de $START_EP até $END_EP para a pasta: $FTP_DIR"
-          
-          # Codifica o diretório FTP para o curl
+
+          echo "=========================================================="
+          echo "🚀 Pipeline Turbo de Download: Episódios $START_EP até $END_EP"
+          echo "📂 Destino no FTP: $FTP_DIR"
+          echo "⚡ Pular existentes: $SKIP_EXISTING | Notificar WhatsApp: $NOTIFY_WHATSAPP"
+          echo "=========================================================="
+
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_DIR"]))')
+
+          UPLOAD_PID=""
+          UPLOAD_FILE=""
+          UPLOAD_EP=""
+
+          SUCCESS_EPS=()
+          SKIPPED_EPS=()
+          FAILED_EPS=()
+
+          aguardar_upload_anterior() {
+            if [ -n "$UPLOAD_PID" ]; then
+              echo "==> Aguardando conclusão do upload em background (Episódio $UPLOAD_EP: $UPLOAD_FILE)..."
+              if wait "$UPLOAD_PID"; then
+                echo "✅ Upload do Episódio $UPLOAD_EP concluído com sucesso!"
+                SUCCESS_EPS+=("$UPLOAD_EP")
+                rm -f "$UPLOAD_FILE"
+
+                if [ "$NOTIFY_WHATSAPP" = "true" ]; then
+                  python3 notificar_whatsapp.py "✅ *Uzak Şehir - Ep $UPLOAD_EP* enviado com sucesso para o FTP ($SEASON_INPUT)!" --status success || true
+                fi
+
+                if [ "$AUTO_SUBTITLE" = "true" ]; then
+                  echo "==> Disparando workflow de legendagem para $UPLOAD_FILE..."
+                  gh workflow run legendar_ftp.yml \
+                    -f video_filename="$UPLOAD_FILE" \
+                    -f season="$SEASON_INPUT" \
+                    -f network_mode=vpn || true
+                fi
+              else
+                echo "❌ Falha no upload do Episódio $UPLOAD_EP ($UPLOAD_FILE)"
+                FAILED_EPS+=("$UPLOAD_EP (falha FTP)")
+              fi
+              UPLOAD_PID=""
+              UPLOAD_FILE=""
+              UPLOAD_EP=""
+            fi
+          }
+
+          iniciar_upload_background() {
+            local file="$1"
+            local ep="$2"
+            UPLOAD_FILE="$file"
+            UPLOAD_EP="$ep"
+            echo "==> Iniciando envio de $file em background para $FTP_DIR..."
+            (
+              curl -sS --fail --ftp-pasv --ftp-create-dirs \
+                --retry 5 --retry-delay 5 --retry-connrefused \
+                -u "$FTP_USER:$FTP_PASSWORD" \
+                -T "$file" \
+                "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+            ) &
+            UPLOAD_PID=$!
+          }
 
           for (( ep=$START_EP; ep<=$END_EP; ep++ )); do
             EP_PADDED=$(printf "%02d" $ep)
             FILENAME="Uzak_Sehir_-_Episode_${EP_PADDED}.mp4"
-            echo "=================================================="
-            echo "==> Baixando Episódio $ep: $FILENAME"
-            echo "=================================================="
-            
-            # Executa o extrator com Playwright + FFmpeg
-            python3 extrair_turkish123.py $ep -o "$FILENAME"
-            
-            echo "==> Enviando $FILENAME via FTP para $FTP_DIR..."
-            curl -# --fail --ftp-pasv --ftp-create-dirs \
-              --retry 5 --retry-delay 5 --retry-connrefused \
-              -u "$FTP_USER:$FTP_PASSWORD" \
-              -T "$FILENAME" \
-              "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
-              
-            echo "==> Upload concluído com sucesso para $FILENAME!"
-            rm -f "$FILENAME" # limpa espaço no runner para o próximo episódio
+            echo "----------------------------------------------------------"
+            echo "==> [Episódio $ep] Verificando..."
+
+            # 1. Checa se o arquivo já existe no FTP com tamanho válido
+            if [ "$SKIP_EXISTING" = "true" ]; then
+              EXISTE_STATUS=$(python3 verificar_episodio_ftp.py "$FTP_DIR" "$FILENAME" || true)
+              if [[ "$EXISTE_STATUS" =~ ^EXISTE: ]]; then
+                TAMANHO="${EXISTE_STATUS#EXISTE:}"
+                echo "⏩ Episódio $ep ($FILENAME) já existe no FTP ($TAMANHO). Pulando download!"
+                SKIPPED_EPS+=("$ep")
+                continue
+              fi
+            fi
+
+            # 2. Baixa o episódio atual
+            echo "==> Baixando Episódio $ep ($FILENAME)..."
+            if ! python3 extrair_turkish123.py "$ep" -o "$FILENAME"; then
+              echo "❌ Erro ao capturar ou baixar Episódio $ep. Continuando com os demais..."
+              FAILED_EPS+=("$ep (extração/download)")
+              continue
+            fi
+
+            # 3. Antes de iniciar o novo upload, aguarda o upload do episódio anterior terminar
+            aguardar_upload_anterior
+
+            # 4. Inicia o upload do episódio recém-baixado em background
+            iniciar_upload_background "$FILENAME" "$ep"
           done
+
+          # Aguarda o último upload em background terminar
+          aguardar_upload_anterior
+
+          echo "=========================================================="
+          echo "🏁 RESUMO DO PROCESSAMENTO"
+          echo "=========================================================="
+          echo "✅ Sucesso (${#SUCCESS_EPS[@]}): ${SUCCESS_EPS[*]:-Nenhum}"
+          echo "⏩ Pulados já existentes (${#SKIPPED_EPS[@]}): ${SKIPPED_EPS[*]:-Nenhum}"
+          echo "❌ Falhas (${#FAILED_EPS[@]}): ${FAILED_EPS[*]:-Nenhum}"
+          echo "=========================================================="
+
+          if [ "$NOTIFY_WHATSAPP" = "true" ]; then
+            MSG="🎬 *Resumo Download Uzak Şehir ($SEASON_INPUT)*
+            
+✅ *Baixados:* ${#SUCCESS_EPS[@]} (${SUCCESS_EPS[*]:-nenhum})
+⏩ *Já existiam:* ${#SKIPPED_EPS[@]}
+❌ *Falhas:* ${#FAILED_EPS[@]} (${FAILED_EPS[*]:-nenhuma})"
+            python3 notificar_whatsapp.py "$MSG" --status "$([[ ${#FAILED_EPS[@]} -eq 0 ]] && echo 'success' || echo 'warning')" || true
+          fi
+
+          if [[ ${#FAILED_EPS[@]} -gt 0 && ${#SUCCESS_EPS[@]} -eq 0 && ${#SKIPPED_EPS[@]} -eq 0 ]]; then
+            echo "Todos os episódios solicitados falharam." >&2
+            exit 1
+          fi
 
       - name: Desconectar da VPN
         if: ${{ always() && inputs.network_mode == 'vpn' }}
