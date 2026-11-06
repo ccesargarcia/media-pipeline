@@ -212,11 +212,8 @@ jobs:
           echo "=========================================================="
 
           if [ "$NOTIFY_WHATSAPP" = "true" ]; then
-            MSG="🎬 *Resumo Download Uzak Şehir ($SEASON_INPUT)*
-            
-✅ *Baixados:* ${#SUCCESS_EPS[@]} (${SUCCESS_EPS[*]:-nenhum})
-⏩ *Já existiam:* ${#SKIPPED_EPS[@]}
-❌ *Falhas:* ${#FAILED_EPS[@]} (${FAILED_EPS[*]:-nenhuma})"
+            MSG=$(printf "🎬 *Resumo Download Uzak Şehir (%s)*\n\n✅ *Baixados:* %s (%s)\n⏩ *Já existiam:* %s\n❌ *Falhas:* %s (%s)" \
+              "$SEASON_INPUT" "${#SUCCESS_EPS[@]}" "${SUCCESS_EPS[*]:-nenhum}" "${#SKIPPED_EPS[@]}" "${#FAILED_EPS[@]}" "${FAILED_EPS[*]:-nenhuma}")
             python3 notificar_whatsapp.py "$MSG" --status "$([[ ${#FAILED_EPS[@]} -eq 0 ]] && echo 'success' || echo 'warning')" || true
           fi
 
