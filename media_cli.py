@@ -80,6 +80,14 @@ def cmd_run(args):
             cmd = [sys.executable, str(BASE_DIR / "traduz_openrouter.py"), str(input_file), str(translated_srt)]
             if not run_command(cmd, f"Traduzindo com OpenRouter: {input_file.name}"):
                 return False
+        elif args.engine == "huggingface":
+            cmd = [sys.executable, str(BASE_DIR / "traduz_hf.py"), str(input_file), str(translated_srt)]
+            if not run_command(cmd, f"Traduzindo com Hugging Face: {input_file.name}"):
+                return False
+        elif args.engine == "local":
+            cmd = [sys.executable, str(BASE_DIR / "traduz_local.py"), str(input_file), str(translated_srt)]
+            if not run_command(cmd, f"Traduzindo com servidor local: {input_file.name}"):
+                return False
 
     # 2. Renderização das 4 variantes
     render_cmd = [
@@ -120,7 +128,7 @@ def main():
     # Subcomando run
     p_run = subparsers.add_parser("run", help="Executa o pipeline completo (traduzir, renderizar, validar, notificar)")
     p_run.add_argument("input_srt", help="Arquivo .srt de entrada")
-    p_run.add_argument("--engine", choices=["gemini", "groq", "openrouter", "skip"], default="skip", help="Motor de tradução (default: skip se já for pt-br)")
+    p_run.add_argument("--engine", choices=["gemini", "groq", "openrouter", "huggingface", "local", "skip"], default="skip", help="Motor de tradução (local requer llama-server disponível via LOCAL_LLM_URL)")
     p_run.add_argument("--out-dir", help="Diretório de saída (default: legendas_prontas)")
     p_run.add_argument("--notify", action="store_true", help="Enviar notificação no WhatsApp ao finalizar")
     p_run.add_argument("--notify-to", help="Número do WhatsApp para notificação")

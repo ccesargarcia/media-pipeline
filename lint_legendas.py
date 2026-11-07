@@ -18,9 +18,20 @@ def parse_time(ts: str) -> float:
     if len(partes) != 3:
         raise ValueError(f"Formato de tempo inválido: {ts}")
     horas, minutos, segundos = int(partes[0]), int(partes[1]), float(partes[2])
-    if minutos >= 60 or segundos >= 60:
+    if horas < 0 or minutos < 0 or segundos < 0 or minutos >= 60 or segundos >= 60:
         raise ValueError(f"Timestamp fora do intervalo: {ts}")
     return horas * 3600 + minutos * 60 + segundos
+
+
+def parse_ass_time(ts: str) -> float:
+    """Converte timestamp ASS (centésimos) em segundos."""
+    match = re.fullmatch(r"(\d+):(\d{2}):(\d{2})\.(\d{2})", ts.strip())
+    if not match:
+        raise ValueError(f"Timestamp ASS inválido: {ts}")
+    horas, minutos, segundos, centesimos = map(int, match.groups())
+    if minutos >= 60 or segundos >= 60:
+        raise ValueError(f"Timestamp ASS fora do intervalo: {ts}")
+    return horas * 3600 + minutos * 60 + segundos + centesimos / 100
 
 
 def parse_srt(conteudo: str):
@@ -125,9 +136,22 @@ def validar_legendas(
         erros.append(f"Arquivo ASS não encontrado: {arquivo_ass}")
     elif arquivo_ass:
         conteudo_ass = arquivo_ass.read_text(encoding="utf-8-sig", errors="replace")
-        eventos_ass = sum(1 for linha in conteudo_ass.splitlines() if linha.startswith("Dialogue:"))
-        if eventos_ass != len(itens_pt):
-            erros.append(f"Contagem ASS/SRT divergente: ASS tem {eventos_ass} eventos e SRT tem {len(itens_pt)} blocos.")
+        linhas_dialogue = [linha for linha in conteudo_ass.splitlines() if linha.startswith("Dialogue:")]
+        if len(linhas_dialogue) != len(itens_pt):
+            erros.append(f"Contagem ASS/SRT divergente: ASS tem {len(linhas_dialogue)} eventos e SRT tem {len(itens_pt)} blocos.")
+        else:
+            for idx, (linha, item) in enumerate(zip(linhas_dialogue, itens_pt), start=1):
+                campos = linha.split(",", 9)
+                if len(campos) != 10 or not campos[0].startswith("Dialogue:"):
+                    erros.append(f"Evento ASS #{idx} malformado.")
+                    continue
+                try:
+                    inicio_ass, fim_ass = parse_ass_time(campos[1]), parse_ass_time(campos[2])
+                except ValueError as exc:
+                    erros.append(f"Evento ASS #{idx}: {exc}")
+                    continue
+                if inicio_ass != round(item["start"] * 100) / 100 or fim_ass != round(item["end"] * 100) / 100:
+                    erros.append(f"Evento ASS #{idx} (ID {item['idx']}): timestamps diferentes do SRT.")
         if "&H00000000" not in conteudo_ass and "BorderStyle=3" not in conteudo_ass:
             avisos.append("Arquivo ASS não parece conter a configuração de tarja preta opaca (BorderStyle=3 / &H00000000).")
         if "&H0000FFFF" not in conteudo_ass and "&H00FFFF" not in conteudo_ass:

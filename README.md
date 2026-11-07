@@ -3,7 +3,7 @@
 Pipeline automatizado no GitHub Actions para:
 1. **Baixar episódios** de sites como Turkish123 diretamente para o servidor FTP doméstico;
 2. **Extrair áudio e transcrever** com `whisper.cpp` (Large-v3-Turbo + Silero VAD);
-3. **Traduzir legendas** com contexto dramático para PT-BR (OpenRouter / Gemini / Groq);
+3. **Traduzir legendas** com contexto dramático para PT-BR (OpenRouter / Gemini / Groq / Hugging Face / modelo local);
 4. **Gerar legendas `.ass` estilizadas** com tarja preta opaca (para cobrir hardsubs embutidos) e texto em amarelo vivo.
 
 ## Workflows Disponíveis
@@ -22,8 +22,11 @@ Pipeline automatizado no GitHub Actions para:
 - `OPENROUTER_API_KEY`: Chave da API do OpenRouter
 - `GEMINI_TRANSLATE_KEY`: (Opcional) Chave da API do Google AI Studio
 - `GROQ_API_KEY`: (Opcional) Chave da API da Groq Cloud
+- `HF_TOKEN`: (Opcional) Token do Hugging Face para o mecanismo `huggingface` (`HUGGINGFACE_HUB_TOKEN` também é aceito)
 
 O workflow de legendagem também aceita `GROK_API_KEY` como alternativa a `GROQ_API_KEY`.
+
+O CLI local aceita `--engine gemini`, `groq`, `openrouter`, `huggingface`, `local` ou `skip`. Hugging Face usa `HF_TOKEN` (ou `HUGGINGFACE_HUB_TOKEN`); o modo `local` exige um `llama-server` já iniciado, compatível com a API OpenAI, em `LOCAL_LLM_URL` (padrão `http://127.0.0.1:8080/v1/chat/completions`).
 
 ## Observações operacionais
 

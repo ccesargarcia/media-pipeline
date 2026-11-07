@@ -159,6 +159,9 @@ def main():
     parser.add_argument("-b", "--batch-size", type=int, default=35, help="Falas por lote (padrão: 35)")
     args = parser.parse_args()
 
+    if args.batch_size <= 0:
+        parser.error("--batch-size precisa ser maior que zero.")
+
     entrada = Path(args.entrada).expanduser()
     if not entrada.is_file():
         print(f"Erro: Arquivo não encontrado: {entrada}", file=sys.stderr)
@@ -179,6 +182,8 @@ def main():
     dados = entrada.read_bytes()
     conteudo = dados.decode("utf-16") if dados.startswith((b"\xff\xfe", b"\xfe\xff")) else dados.decode("utf-8-sig", errors="replace")
     itens = parse_srt(conteudo)
+    if not itens:
+        raise ValueError("Nenhuma fala SRT válida foi encontrada.")
     for i, item in enumerate(itens, start=1):
         item["id"] = i
 
@@ -198,6 +203,7 @@ def main():
 
         print(f"--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
+        lote_concluido = False
         for tentativa in range(8):
             try:
                 t0 = time.time()
@@ -213,21 +219,29 @@ def main():
                         item["traducao"] = mapa[item["id"]]
                         traducoes[item["id"]] = mapa[item["id"]]
                 print(f"  ✓ Lote {idx_lote + 1} traduzido com sucesso em {dt:.2f}s", flush=True)
+                lote_concluido = True
                 break
             except urllib.error.HTTPError as e:
+                if tentativa == 7:
+                    raise RuntimeError(f"Lote {idx_lote + 1} falhou após 8 tentativas (HTTP {e.code}).") from e
                 espera = 15.0 * (tentativa + 1)
                 print(f"  [HF HTTP {e.code}]. Aguardando {espera:.1f}s...", file=sys.stderr, flush=True)
                 time.sleep(espera)
             except Exception as e:
+                if tentativa == 7:
+                    raise RuntimeError(f"Lote {idx_lote + 1} falhou após 8 tentativas: {e}") from e
                 espera = 8.0 * (tentativa + 1)
                 print(f"  [Aviso lote {idx_lote + 1}: {e}]. Tentando novamente em {espera:.1f}s...", file=sys.stderr, flush=True)
                 time.sleep(espera)
+
+        if not lote_concluido:
+            raise RuntimeError(f"Lote {idx_lote + 1} não foi traduzido; arquivo de saída não será publicado.")
 
         time.sleep(1.0)
 
     blocos_saida = []
     for item in itens:
-        texto_final = item.get("traducao") or item["texto"]
+        texto_final = item["traducao"]
         blocos_saida.append(f"{item['idx']}\n{item['tempo']}\n{texto_final}")
 
     saida.write_text("\n\n".join(blocos_saida) + "\n", encoding="utf-8")
