@@ -35,12 +35,13 @@ on:
         required: true
         type: choice
         options:
-          - 'none'
-          - 'local'
           - 'gemini'
-          - 'groq'
+          - 'huggingface'
           - 'openrouter'
-        default: 'none'
+          - 'groq'
+          - 'local'
+          - 'none'
+        default: 'gemini'
       network_mode:
         description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
         required: true
@@ -533,6 +534,7 @@ jobs:
           VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
           SEASON_INPUT: ${{ inputs.season }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GEMINI_TRANSLATE_KEYS: ${{ secrets.GEMINI_TRANSLATE_KEYS }}
           GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY || secrets.GROK_API_KEY }}
@@ -545,8 +547,11 @@ jobs:
           if [ "${{ inputs.translator }}" = "groq" ]; then
             echo "Traduzindo via Groq..."
             python3 traduz_groq.py input.srt "traducao_raw.srt"
+          elif [ "${{ inputs.translator }}" = "huggingface" ]; then
+            echo "Traduzindo via Hugging Face (Llama-3.3-70B-Instruct)..."
+            python3 traduz_hf.py input.srt "traducao_raw.srt"
           elif [ "${{ inputs.translator }}" = "openrouter" ]; then
-            echo "Traduzindo via OpenRouter..."
+            echo "Traduzindo via OpenRouter (Llama-3.3-70B-Instruct)..."
             python3 traduz_openrouter.py input.srt "traducao_raw.srt"
           else
             echo "Traduzindo via Google Gemini..."

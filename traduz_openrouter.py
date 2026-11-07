@@ -19,9 +19,9 @@ OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 
 FREE_MODELS_POOL = [
+    "meta-llama/llama-3.3-70b-instruct",
+    "meta-llama/llama-3.3-70b-instruct:free",
     "google/gemma-4-31b-it:free",
-    "google/gemma-4-26b-a4b-it:free",
-    "nvidia/nemotron-3.5-lightning:free",
 ]
 
 SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
@@ -157,7 +157,7 @@ def main():
     parser = argparse.ArgumentParser(description="Traduz legenda .srt usando OpenRouter API.")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
-    parser.add_argument("-m", "--model", default="google/gemma-4-31b-it:free", help="Modelo OpenRouter")
+    parser.add_argument("-m", "--model", default="meta-llama/llama-3.3-70b-instruct", help="Modelo OpenRouter (padrão: meta-llama/llama-3.3-70b-instruct)")
     parser.add_argument("-b", "--batch-size", type=int, default=40, help="Falas por lote (padrão: 40)")
     args = parser.parse_args()
 
