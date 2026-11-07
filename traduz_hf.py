@@ -51,6 +51,26 @@ REGRAS OBRIGATÓRIAS DE LEGENDA:
    {"subtitles": [{"id": <int>, "text": "<tradução em PT-BR>"}]}"""
 
 
+def carregar_prompt_sistema(base_prompt: str) -> str:
+    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    skill_paths = [
+        Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
+        Path.home() / ".agents/skills/dizi-translator/SKILL.md",
+    ]
+    for sp in skill_paths:
+        if sp.is_file():
+            try:
+                conteudo = sp.read_text(encoding="utf-8")
+                conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
+                print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
+                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
+            except Exception as e:
+                print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
+    return base_prompt
+
+PROMPT_SISTEMA_COMPLETO = carregar_prompt_sistema(SYSTEM_PROMPT)
+
+
 def parse_srt(conteudo: str):
     blocos = re.split(r"\r?\n\s*\r?\n", conteudo.strip())
     itens = []
@@ -90,7 +110,7 @@ def traduzir_lote_hf(api_key: str, modelo: str, contexto_anterior: list, lote_at
         "max_tokens": 4096,
         "response_format": {"type": "json_object"},
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": PROMPT_SISTEMA_COMPLETO},
             {"role": "user", "content": "\n".join(prompt_partes)},
         ],
     }

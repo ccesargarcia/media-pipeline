@@ -1,80 +1,192 @@
 ---
 name: dizi-translator
 description: >-
-  Traduz e revisa legendas de séries dramáticas turcas para Português do Brasil (PT-BR),
-  com contexto de Uzak Şehir, cuidado com gênero, relações entre personagens e qualidade de leitura.
+  Especialista em tradução de legendas de séries dramáticas turcas (dizis) para Português do Brasil (PT-BR),
+  com foco em Uzak Şehir (Longe Demais), preservação rigorosa de gênero gramatical, coesão dramática,
+  sincronismo milimétrico 1:1, recomendações de modelos de IA e geração automática de legendas .ass com tarja preta e texto amarelo.
 ---
 
-# Tradução de dizis turcas — Uzak Şehir
+# Dizi Translator — Especialista em Séries Turcas (Uzak Şehir)
 
-Use estas orientações ao traduzir ou revisar diálogos turcos de *Uzak Şehir* (Longe Demais). O objetivo é uma legenda natural, concisa e fiel à cena, sem inventar informação nem sacrificar sentido por regras mecânicas.
+Esta skill capacita o Antigravity a atuar como tradutor profissional de legendas de novelas e séries dramáticas turcas (*dizis*), garantindo máxima naturalidade no Português do Brasil (PT-BR) falado, preservação rigorosa de gênero, sincronismo milimétrico 1:1 e geração de legendas `.ass` prontas para reprodução no VLC/MPV.
 
-## Contexto da série
+---
 
-A história se passa em Mardin e acompanha principalmente as famílias Albora e Baybars. Use as informações abaixo como referência, sempre respeitando o episódio e o contexto fornecidos. **Não antecipe revelações de episódios posteriores.** Se não souber em que ponto da trama a cena ocorre, não introduza fatos de trama que não estejam no diálogo ou no material de contexto.
+## 1. Contexto e Universo de Uzak Şehir (Longe Demais - Mardin)
 
-- **Cihan Albora:** homem, líder dos Albora; primo de Şahin; filho de Sadakat.
-- **Sadakat Albora:** mulher, matriarca; mãe de Cihan, Kaya, Boran e Nare.
-- **Alya Albora:** mulher, médica pediatra canadense e mãe de Deniz.
-- **Boran Albora:** marido de Alya e pai de Deniz. Foi dado como morto e depois reapareceu vivo, em estado crítico, vegetativo e em coma. Após essa revelação, não o descreva como falecido. Aplique essa informação apenas a cenas posteriores à revelação.
-- **Kaya Albora:** homem, irmão mais novo de Cihan; noivo de İpek.
-- **İpek:** mulher, noiva de Kaya.
-- **Şahin Albora:** homem, primo de Cihan; filho de Ecmel e Fidan; ligado amorosamente a Nare.
-- **Nare:** mulher, irmã de Cihan e ligada amorosamente a Şahin.
-- **Deniz:** menino, filho de Alya e Boran. Ajuste a voz infantil à idade aparente e ao momento da história; não fixe uma idade se ela não estiver confirmada no contexto.
-- **Demir Baybars:** homem, rival dos Albora.
-- **Ecmel:** homem, pai de Şahin e Zerrin, marido de Fidan e rival interno de Cihan.
-- **Fidan:** mulher, mãe de Şahin e Zerrin, esposa de Ecmel.
-- **Zerrin:** mulher, filha de Ecmel e Fidan, irmã de Şahin.
-- **Güler Haşmetlioğlu, Mine, Dr. Yalçın e Pakize:** personagens secundários; preserve o gênero e as relações quando a cena/contexto os confirmar.
+A série se passa em Mardin e gira em torno da rivalidade entre as famílias **Albora** e **Baybars**.
 
-## Regras de tradução
+### Família Albora:
+- **Cihan Albora (Masculino):** O patriarca/chefe honrado da família. Voz de autoridade, leal, firme e protetor. Primo de Şahin, filho de Dona Sadakat.
+- **Sadakat Albora (Dona Sadakat) (Feminino):** Matriarca impiedosa, tradicional e manipuladora. Mãe de Cihan, Kaya, Boran e Nare. Deseja o controle do neto Deniz e inferniza a nora Alya.
+  - **Atenção estrita de gênero:** O pronome turco *"o"* / *"onun"* referente a ela deve ser SEMPRE traduzido como *"ela"*, *"dela"*, *"a senhora"*, *"sua mãe"*. NUNCA traduza referências a Dona Sadakat como *"ele"* ou *"dele"*.
+- **Alya Albora (Dra. Alya) (Feminino):** Médica pediatra canadense, mãe firme e protetora de Deniz. Luta contra as armadilhas de Dona Sadakat.
+- **Boran Albora (Masculino):** Marido de Alya que foi dado como morto, mas depois reapareceu vivo em estado vegetativo/coma crítico (registrado temporariamente como Ömer Bakır). **Atenção:** Não tratar Boran como falecido após essa revelação na trama.
+- **Kaya Albora (Masculino):** Irmão mais novo de Cihan. Jovem impetuoso, impulsivo e passional, noivo de İpek.
+- **İpek (Feminino):** Noiva de Kaya e futura NORA de Dona Sadakat.
+- **Şahin Albora (Masculino):** Primo de Cihan (filho de Ecmel e Fidan). Apaixonado por Nare, dividido entre o amor e a lealdade familiar. Não confundir com Cihan.
+- **Nare Albora (Feminino):** Irmã mais nova de Cihan. Apaixonada por Şahin e grávida em segredo.
+- **Deniz Albora (Masculino):** Menino de 5 anos, filho pequeno de Alya e Boran (fala como criança de 5-6 anos).
 
-### Sentido, contexto e gênero
+### Outros Personagens Importantes:
+- **Demir Baybars (Masculino):** Arqui-inimigo da família Albora. Não deve ser marcado como orador em cenas domésticas da família Albora.
+- **Ecmel Albora (Masculino):** Tio de Cihan, pai de Şahin e Zerrin, marido de Fidan. Rival interno de Cihan pelo poder.
+- **Fidan Albora (Feminino):** Mãe de Şahin e Zerrin, esposa de Ecmel.
+- **Zerrin (Feminino):** Filha de Ecmel e Fidan, irmã de Şahin. **Atenção de gênero:** sequestrada/desaparecida; referências a ela devem ser SEMPRE no feminino (*"ela"*, *"dela"*, *"se ela está viva"*).
+- **Güler Haşmetlioğlu (Feminino):** Envolvida em processos e acusações criminais contra Dona Sadakat.
+- **Mine (Feminino):** Envolvida cuja morte misteriosa desencadeia conflitos.
+- **Dr. Yalçın (Masculino):** Médico amigo/colega de Alya.
+- **Pakize (Feminino):** Empregada leal da mansão.
 
-- O turco **não marca gênero** nos pronomes de terceira pessoa *o, onun, ona, ondan*. Determine o referente pelo diálogo e pela continuidade da cena; não adivinhe quando não houver evidência suficiente. Em português, reformule a frase para evitar um pronome ambíguo quando isso soar natural.
-- Preserve gênero, parentesco, intenção, registro, emoção e subtexto. Sadakat e Zerrin são mulheres; use formas femininas quando forem o referente confirmado. Não force gênero em falas cujo referente seja incerto.
-- Mantenha continuidade entre falas quebradas em blocos usando o contexto, mas devolva cada ID solicitado separadamente. Não junte, divida, omita ou reordene blocos.
-- Não corrija uma possível falha do Whisper como se fosse certeza. Use o áudio, a cena ou contexto confirmado para resolver nomes e palavras duvidosas; se não for possível, preserve uma tradução prudente em vez de inventar.
-- Contexto de personagem é apoio para desambiguar, não autorização para acrescentar fatos que não aparecem na fala.
+---
 
-### Português brasileiro e concisão
+## 2. Regras Essenciais de Tradução e Sincronismo
 
-- Escreva em PT-BR falado, natural e adequado ao tom dramático, sem literalidade artificial. Preserve tensão, afeto, ironia, tratamento formal e pausas relevantes.
-- Seja conciso para facilitar a leitura, mas não corte informação, intenção ou nuance necessária para entender a cena.
-- Traduza expressões turcas comuns conforme o contexto: *tamam* (certo, tudo bem, combinado), *ne oluyor?* (o que está acontecendo?), *vay be* (nossa, caramba), *hadi* (vamos, anda), *Allah aşkına* (pelo amor de Deus), *geçmiş olsun* (melhoras), *başım üstüne* (às suas ordens, pode deixar). Não aplique uma equivalência fixa quando a cena pedir outra.
-- Adapte formas de tratamento sem apagar a relação entre personagens: *Hanım* pode ser “Dona” ou “Senhora”; *abi* e *abla* podem ser “irmão/irmã”, nome próprio ou outra forma natural; *yenge* pode ser “cunhada” ou um tratamento respeitoso. Escolha pela relação e pelo registro da cena.
-- *Gelin/gelinim* pode significar “nora” ou “noiva”; use a relação e quem fala para decidir. *Damat/damadım* pode ser “genro” ou “noivo”. Não use “nora”/“genro” automaticamente sem confirmar a relação.
-- *Ağa* pode ser título, forma de respeito ou referência a autoridade local; traduza pelo contexto, sem transliterar por padrão. *Konak* costuma referir-se à mansão/residência da família. *Helalim* exige adaptação contextual; evite soluções literais pouco naturais.
-- Preserve nomes próprios e palavras estrangeiras intencionais. Não deixe escapar frases turcas comuns sem traduzir, mas não altere nomes, títulos ou trechos deliberadamente mantidos no original.
+### A. Sincronismo Milimétrico 1:1 (Regra de Ouro)
+- **Timestamps Inalterados:** Preserve os tempos originais (`00:xx:xx,xxx --> 00:xx:xx,xxx`) exatamente idênticos, sem adiantar nem atrasar um milissegundo sequer.
+- **Proibido Fundir ou Dividir Blocos:** Cada fala original turca corresponde a exatamente uma fala traduzida (paridade 1:1) com o mesmo ID, garantindo que o diálogo entre e saia sincronizado perfeitamente com a boca do ator.
+- **Concisão de Legenda:** Como diálogos em turco podem ser breves, mantenha a tradução em português direta e enxuta, evitando frases excessivamente longas que ultrapassem o tempo de tela.
 
-### Oradores
+### B. Preservação Rigorosa de Gênero Gramatical
+- O turco usa pronomes de terceira pessoa neutros (*"o"*, *"onun"*, *"ona"*, *"ondan"*).
+- **Regra de Ouro:** Identifique SEMPRE quem está falando e a quem a fala se refere antes de conjugar ou aplicar pronomes.
+  - Quando Cihan, Ecmel, Kaya ou Şahin falam sobre **Sadakat** (mãe): *"ela"*, *"dela"*, *"a senhora"*, *"sua mãe"* (NUNCA *"ele"* ou *"dele"*).
+  - Quando falam sobre **Zerrin** (filha sequestrada): *"ela"*, *"dela"*, *"minha filha"*, *"minha irmã"*.
+  - Alya, İpek, Nare, Fidan: pronomes e adjetivos sempre femininos (*"obrigada"*, *"cansada"*, *"sozinha"*, *"preocupada"*).
 
-- Não atribua falas a personagens apenas com base no texto do SRT. Sem áudio, identificação fornecida ou contexto inequívoco, mantenha a fala sem etiqueta de orador.
-- Só inclua nomes de oradores quando o formato solicitado exigir e houver identificação confiável. Não invente etiquetas genéricas como `[Homem]` ou `[Mulher]` para compensar falta de evidência.
+### C. Alucinação de Orador (Speaker Attribution)
+- Em discussões acaloradas ou diálogos rápidos, **NUNCA invente ou adivinhe o orador** se o contexto não for 100% explícito.
+- **Cihan vs. Şahin:** Cihan é o patriarca firme; Şahin é o primo rebelde filho de Ecmel. Não troque a fala de Cihan por Şahin.
+- **Demir Baybars:** Não atribua falas de discussões íntimas entre Ecmel e Fidan a Demir Baybars.
+- **Em caso de dúvida:** Deixe a linha de diálogo limpa, sem o nome do orador, ou utilize tags descritivas neutras como `[Homem]:` ou `[Mulher]:`.
 
-## Integridade do SRT e sincronismo
+### D. Proibição de Vazamento de Turco (Zero Turkish Leakage)
+- Nenhuma expressão turca comum pode passar sem tradução para PT-BR. Verifique rigorosamente:
+  - *Tamam* ➔ *Tudo bem* / *Certo* / *Ok* / *Combinado*
+  - *Ne oluyor?* ➔ *O que está acontecendo?* / *O que é isso?*
+  - *Vay be* ➔ *Nossa!* / *Caramba!* / *Incrível!*
+  - *Tipi sonra* ➔ Traduzir conforme o contexto de ação/clima.
+  - *Hadi* ➔ *Vamos!* / *Anda logo!*
 
-- Na etapa de tradução, mantenha todos os IDs, a ordem, os timestamps e a separação dos blocos da entrada; retorne exatamente um texto por ID. Isso protege a correspondência com a transcrição, mas **não comprova sincronismo labial**.
-- Os fluxos do projeto não têm todos o mesmo pós-processamento. `gerar_versoes_legendas.py` deriva uma versão com etiquetas já presentes e outra limpa, mantendo os tempos do SRT nessa etapa. `srt_para_ass.py`, por padrão, normaliza durações, pode remover marcadores isolados de música e renumera blocos ao regravar o SRT; o ASS representa tempos em centésimos de segundo. Portanto, não prometa preservação exata de timestamps no arquivo final sem verificar o fluxo executado.
-- Confirme no workflow usado quais arquivos são produzidos: alguns jobs geram SRT/ASS com e sem orador; outros geram apenas o SRT traduzido e o ASS correspondente. A presença de um script no repositório não significa que todos os workflows o executem.
-- Não altere regras de timing ou de geração de arquivos para resolver um problema de tradução. Se houver defeito no sincronismo, corrija e valide separadamente o fluxo que o causou.
+### E. Adaptação de Termos Culturais e Relações de Parentesco
+- *"Sadakat Hanım"* ➔ *"Dona Sadakat"*
+- **Apenas Dona Sadakat é a "Vovó" (Parentesco Exclusivo):** Dona Sadakat é a única avó de Deniz na trama. Senhoras idosas acolhedoras ou secundárias (ex: a mãe de Pakize na casa de campo da vila) NUNCA devem ser chamadas de *"vovó"* por Deniz, mesmo que o turco use expressões coloquiais como *"anneanne"*. Traduza sempre como *"a senhora"*, *"dona"* ou *"peça a bênção para a senhora"*. Isso preserva a lógica familiar e evita confusão com a matriarca Sadakat.
+- *"Gelin"* / *"Gelinim"* ➔ Se dita pela sogra ou família do noivo (ex: Dona Sadakat para İpek), traduza OBRIGATORIAMENTE como *"Nora"* / *"Minha nora"* (NUNCA "minha noiva"). Se dita pelo próprio noivo (Kaya), traduza como *"Noiva"*.
+- *"Damat"* / *"Damadım"* ➔ Se dita pelos sogros/família, traduza como *"Genro"* / *"Nosso genro"*. Se dita pela noiva, traduza como *"Noivo"*.
+- *"Anne diyeceksin bana"* ➔ *"Vai me chamar de mãe"* (exigência tradicional da sogra para a nora na Turquia).
+- *"Abla"* ➔ *"Irmã"* / *"Tia"*
+- *"Abi"* ➔ *"Irmão"* / *"Meu irmão"*
+- *"Yenge"* ➔ *"Cunhada"* (ou *"Dona Alya"*, dependendo do respeito do funcionário)
+- *"Ağa"* / *"Ağam"* ➔ *"Patriarca"* / *"Chefe"* / *"Patrão"*
+- *"Başım üstüne"* ➔ *"Às suas ordens"* / *"Com certeza"* / *"Conte com isso"*
+- *"Allah aşkına"* ➔ *"Pelo amor de Deus"*
+- *"Geçmiş olsun"* ➔ *"Melhoras"* / *"Que passe logo"*
+- *"Konağa"* / *"Konak"* ➔ *"Mansão"*
+- *"Helalim"* ➔ *"Legítima esposa"* / *"Minha mulher de direito"*
 
-## Modelos e execução
+---
 
-Os modelos disponíveis, nomes, limites, preços e parâmetros mudam. Consulte o workflow e o script ativos antes de recomendar ou configurar um modelo; não trate taxas, desempenho ou ranking fixo como garantidos. Para comparar qualidade, use o mesmo trecho representativo, avalie precisão de sentido, contexto entre lotes, naturalidade PT-BR, nomes/gênero e validade/completude dos IDs. A escolha do modelo não substitui revisão da legenda.
+## 3. Recomendações de Modelos de IA e Limites de API (Rate Limits)
 
-## Revisão de qualidade
+| Plataforma / Modelo | Perfil de Uso | Características & Destaques |
+| :--- | :--- | :--- |
+| **Google Gemini 3.0 Flash** (`gemini-3-flash-preview` / `gemini-flash-latest`) | **Melhor Custo-Benefício Gratuito** | Janela de contexto enorme, ideal para o script `traduz_gemini.py`. **Importante:** no Free Tier (15 RPM), deve usar pacing delay de **pelo menos 4.2 segundos** entre lotes para evitar erro HTTP 429 (`ResourceExhausted`). Nunca use versão 2.5 (inexistente). |
+| **GPT-4o (ChatGPT Plus / OpenAI)** | **Melhor Qualidade Humana / Dramática** | Modelo padrão recomendado para tradução manual ou via Custom GPT. Fluência impecável em PT-BR, captação profunda de subtextos emocionais e fidelidade rigorosa a IDs. |
+| **Llama 3.3 70B (via Groq Cloud)** | **Mais Rápido na Nuvem** | Velocidade de ~250–300 tokens/s no script `traduz_groq.py`. Nível de compreensão dramática muito superior a modelos de 8B. |
+| **DeepSeek-V3 / Chat** | **Ultra Baixo Custo em Nuvem** | Custo irrisório (~R$ 0,30 por episódio de 2h) com 671B parâmetros e aderência estrita a formatos JSON. |
+| **Qwen3-8B Local (llama.cpp)** | **Melhor Opção Local / GitHub Actions** | Deve rodar com janela de **4.096 tokens** (`--ctx-size 4096`), contexto anterior de **8 a 10 falas**, sem reasoning (`--reasoning off`), e `--threads 2` em runners de 2 vCPUs. |
 
-Antes de concluir, confira:
+---
 
-1. Cada ID solicitado aparece uma vez, na ordem, sem linha vazia ou fala inventada.
-2. Nomes, gênero, parentesco e tratamento são coerentes com a cena e com o ponto da trama.
-3. Negações, perguntas, ameaças, pedidos, números e referências importantes foram preservados.
-4. Possíveis erros de transcrição foram tratados com evidência, sem transformar hipóteses em fatos.
-5. O texto soa natural em PT-BR e cabe confortavelmente na tela sem perda de conteúdo.
-6. Não há turco residual em diálogo comum nem spoilers provenientes do contexto geral.
+## 4. Regra Obrigatória: Sempre Gerar Duas Versões de Legenda
 
-## Estilo ASS usado no projeto
+Para cada episódio traduzido, devem ser geradas **SEMPRE duas versões completas** (tanto em `.srt` quanto em `.ass` estilizado):
+1. **Versão com Identificação de Orador (`.com_orador.pt-BR.srt` e `.com_orador.ass`):**
+   - Cada fala inicia com o nome de quem fala na cena (ex: `Cihan: ...`, `Alya: ...`, `Dona Sadakat: ...`, `Kaya: ...`, `[Policial]: ...`).
+   - Essencial para acompanhar diálogos rápidos, conflitos acalorados ou falas em *off* (fora da tela).
+2. **Versão Pura Cinematográfica (`.pt-BR.srt` e `.ass`):**
+   - Legenda limpa tradicional sem os nomes dos oradores, focada na imersão direta e estética padrão de cinema/TV.
 
-Os utilitários atuais geram ASS com resolução 1280×720, Arial 36 em negrito, texto amarelo (`&H0000FFFF`), caixa preta delimitada (BorderStyle 3) e margem vertical 68. Confirme o script e o workflow antes de prometer esse estilo ou qualquer conjunto específico de arquivos, pois há mais de um caminho de geração.
+### Tratamento de Regex Unicode para Remoção de Oradores
+Em turco, nomes próprios possuem caracteres especiais fora da faixa Latin-1 (`Ş`, `İ`, etc.). O script `gerar_versoes_legendas.py` utiliza a faixa Unicode `\u0100-\u017F`:
+```python
+SPEAKER_PATTERN = r'(?:\[[^\]]+\]|[A-ZÀ-ÖØ-Þ\u0100-\u017F][A-Za-zÀ-öø-ÿ\u0100-\u017F\.\'\-]+(?:\s+[A-Za-zÀ-öø-ÿ\u0100-\u017F\.\'\-]+){0,2})'
+```
+Isso impede que nomes como `Şahin:` ou `İpek:` escapem para a versão limpa.
+
+---
+
+## 5. Geração de Legenda Estilizada (.ass)
+
+Para garantir visualização confortável e cobrir os hardsubs em inglês originais, converter o SRT para ASS usando:
+- **Tarja preta delimitada por linha (Box / BorderStyle 3):** ajustada ao tamanho exato do texto, sem criar uma faixa preta vazia na tela.
+- **Texto em amarelo vivo (`&H0000FFFF`), negrito, tamanho 36, margem vertical 68.**
+
+```ini
+[Script Info]
+Title: Legenda PT-BR (Tarja Preta Delimitada + Amarelo)
+ScriptType: v4.00+
+PlayResX: 1280
+PlayResY: 720
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Arial,36,&H0000FFFF,&H0000FFFF,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,3,10,0,2,40,40,68,1
+```
+
+Script utilitário: `python3 /data/data/com.termux/files/home/media-pipeline/gerar_versoes_legendas.py <arquivo.com_orador.srt>`.
+
+---
+
+## 6. Diretórios Padrão
+- **Pasta de destino local:** `/sdcard/Download/Longe Demais/` e `/sdcard/Download/Teste traducao/`
+- **Diretório FTP da 2ª Temporada:** `/G/Series/Longe demais - Segunda Temporada/`
+
+---
+
+## 7. Automação e Disparo em Lote via GitHub Actions (CLI / MCP)
+
+Para processar novos episódios ou lotes rapidamente na nuvem:
+
+### A. Traduzir Legenda SRT Existente no FTP (Rápido, ~10-15 min)
+Quando o arquivo `.srt` original em turco já está no FTP:
+```bash
+gh workflow run traduzir_legenda_ftp.yml \
+  -f srt_filename="Uzak_Sehir_-_Episode_42.srt" \
+  -f season="Segunda Temporada" \
+  -f translator="gemini" \
+  -f network_mode="vpn"
+```
+
+### B. Transcrever Vídeo MP4 + Traduzir Completo (~1h20 min)
+Quando só existe o arquivo `.mp4` no FTP (fatia áudio, roda Whisper `large-v3-q5_0` em 4 runners paralelos e traduz via Gemini):
+```bash
+gh workflow run legendar_ftp.yml \
+  -f video_filename="Uzak_Sehir_-_Episode_43.mp4" \
+  -f season="Segunda Temporada" \
+  -f whisper_model="large-v3-q5_0" \
+  -f translator="gemini" \
+  -f network_mode="vpn"
+```
+
+### C. Disparo em Lote Automatizado (Ex: Episódios 43 ao 50)
+```bash
+for ep in {43..50}; do
+  echo "Disparando workflow para Episódio $ep..."
+  gh workflow run legendar_ftp.yml \
+    -f video_filename="Uzak_Sehir_-_Episode_${ep}.mp4" \
+    -f season="Segunda Temporada" \
+    -f whisper_model="large-v3-q5_0" \
+    -f translator="gemini" \
+    -f network_mode="vpn"
+  sleep 3
+done
+```
+
+### D. Sincronizar Legendas Ajustadas Localmente de Volta ao FTP
+```bash
+gh workflow run sincronizar_legendas_ftp.yml -f network_mode="vpn"
+```
+

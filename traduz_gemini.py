@@ -93,6 +93,8 @@ def carregar_prompt_sistema() -> str:
                 print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
     return SYSTEM_PROMPT
 
+PROMPT_SISTEMA_COMPLETO = carregar_prompt_sistema()
+
 
 def listar_modelos_flash(api_key: str) -> list[str]:
     """Consulta a API do Gemini para descobrir os modelos Flash ativos na conta em ordem de preferência."""
@@ -178,7 +180,7 @@ def traduzir_lote(api_key: str, modelo: str, contexto_anterior: list, lote_atual
     }
 
     payload = {
-        "systemInstruction": {"parts": [{"text": carregar_prompt_sistema()}]},
+        "systemInstruction": {"parts": [{"text": PROMPT_SISTEMA_COMPLETO}]},
         "contents": [{"role": "user", "parts": [{"text": "\n".join(prompt_partes)}]}],
         "generationConfig": gen_config,
     }

@@ -43,6 +43,26 @@ Regras:
 Responda somente com JSON no formato {"subtitles":[{"id":1,"text":"tradução"}]} e inclua exatamente todos os IDs recebidos."""
 
 
+def carregar_prompt_sistema(base_prompt: str) -> str:
+    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    skill_paths = [
+        Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
+        Path.home() / ".agents/skills/dizi-translator/SKILL.md",
+    ]
+    for sp in skill_paths:
+        if sp.is_file():
+            try:
+                conteudo = sp.read_text(encoding="utf-8")
+                conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
+                print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
+                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
+            except Exception as e:
+                print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
+    return base_prompt
+
+PROMPT_SISTEMA_COMPLETO = carregar_prompt_sistema(SYSTEM_PROMPT)
+
+
 def parse_json_from_text(raw_text: str):
     """Extrai e decodifica JSON de texto puro, blocos markdown ou preâmbulos/posfácios."""
     raw_text = raw_text.strip()
@@ -193,7 +213,7 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
         "temperature": 0.2,
         "max_tokens": 2048,
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": PROMPT_SISTEMA_COMPLETO},
             {"role": "user", "content": user_prompt + ("\n/no_think" if "qwen" in MODEL.lower() else "")},
         ],
     }
@@ -204,7 +224,7 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
         # Aya 23 uses the original Cohere turn tokens. Native completion accepts
         # the formatted prompt directly and bypasses the chat/PEG output parser.
         prompt = (
-            "<BOS_TOKEN><|START_OF_TURN_TOKEN|><|SYSTEM_TOKEN|>" + SYSTEM_PROMPT
+            "<BOS_TOKEN><|START_OF_TURN_TOKEN|><|SYSTEM_TOKEN|>" + PROMPT_SISTEMA_COMPLETO
             + "<|END_OF_TURN_TOKEN|><|START_OF_TURN_TOKEN|><|USER_TOKEN|>" + user_prompt
             + "<|END_OF_TURN_TOKEN|><|START_OF_TURN_TOKEN|><|CHATBOT_TOKEN|>"
         )
@@ -347,7 +367,7 @@ def main() -> None:
 
     checkpoint = output.with_suffix(".ckpt.json")
     translation_fingerprint = hashlib.sha256(
-        f"{TRANSLATION_CACHE_VERSION}\0{MODEL}\0{args.batch_size}\0{SYSTEM_PROMPT}\0temperature=0.2;max_tokens=2048;json=v1;translategemma-plain-text-v1".encode("utf-8")
+        f"{TRANSLATION_CACHE_VERSION}\0{MODEL}\0{args.batch_size}\0{PROMPT_SISTEMA_COMPLETO}\0temperature=0.2;max_tokens=2048;json=v1;translategemma-plain-text-v1".encode("utf-8")
     ).hexdigest()
     saved = {}
     if checkpoint.is_file():

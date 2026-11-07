@@ -38,6 +38,26 @@ Regras obrigatórias de tradução de legendas:
 5. Retorne EXCLUSIVAMENTE um array JSON válido no formato: [{"id": <numero>, "text": "<tradução>"}] contendo todos os IDs solicitados."""
 
 
+def carregar_prompt_sistema(base_prompt: str) -> str:
+    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    skill_paths = [
+        Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
+        Path.home() / ".agents/skills/dizi-translator/SKILL.md",
+    ]
+    for sp in skill_paths:
+        if sp.is_file():
+            try:
+                conteudo = sp.read_text(encoding="utf-8")
+                conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
+                print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
+                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
+            except Exception as e:
+                print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
+    return base_prompt
+
+PROMPT_SISTEMA_COMPLETO = carregar_prompt_sistema(SYSTEM_PROMPT)
+
+
 def get_available_models() -> list:
     """Consulta os modelos ativos no OpenRouter para evitar erros 404 de modelos descontinuados."""
     req = urllib.request.Request(OPENROUTER_MODELS_URL, headers={"User-Agent": "MediaPipeline/1.0"})
@@ -102,7 +122,7 @@ def traduzir_lote_openrouter(api_key: str, modelo: str, contexto_anterior: list,
         "model": modelo,
         "temperature": 0.2,
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT + "\nImportante: responda APENAS com o array JSON puro sem texto antes ou depois: [{\"id\": ..., \"text\": \"...\"}]"},
+            {"role": "system", "content": PROMPT_SISTEMA_COMPLETO + "\nImportante: responda APENAS com o array JSON puro sem texto antes ou depois: [{\"id\": ..., \"text\": \"...\"}]"},
             {"role": "user", "content": "\n".join(prompt_partes)},
         ],
     }
