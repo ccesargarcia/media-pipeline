@@ -67,7 +67,7 @@ REGRAS DE LEGENDA:
 
 
 def carregar_prompt_sistema(base_prompt: str) -> str:
-    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    """Carrega as diretrizes essenciais da skill dizi-translator (Seções 1 e 2: Universo, Personagens e Regras de Tradução)."""
     skill_paths = [
         Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
         Path.home() / ".agents/skills/dizi-translator/SKILL.md",
@@ -76,9 +76,12 @@ def carregar_prompt_sistema(base_prompt: str) -> str:
         if sp.is_file():
             try:
                 conteudo = sp.read_text(encoding="utf-8")
-                conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
+                # Extrai as seções de contexto, personagens e regras essenciais de tradução
+                m = re.search(r"(## 1\..*?)(?=## 3\.|$)", conteudo, re.DOTALL)
+                regras = m.group(1).strip() if m else conteudo
+                regras = re.sub(r"^---\s*\n.*?\n---\s*\n", "", regras, flags=re.DOTALL).strip()
                 print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
-                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
+                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{regras}"
             except Exception as e:
                 print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
     return base_prompt
@@ -126,6 +129,8 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
             {"role": "user", "content": "\n".join(prompt_partes)},
         ],
     }
+    if "gpt-oss" in modelo:
+        payload["reasoning_effort"] = "low"
 
     req = urllib.request.Request(
         GROQ_API_URL,
@@ -171,7 +176,7 @@ def main():
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
     parser.add_argument("-m", "--model", default="openai/gpt-oss-120b", help="Modelo Groq (padrão: openai/gpt-oss-120b)")
-    parser.add_argument("-b", "--batch-size", type=int, default=30, help="Falas por lote (padrão: 30)")
+    parser.add_argument("-b", "--batch-size", type=int, default=15, help="Falas por lote (padrão: 15)")
     args = parser.parse_args()
 
     entrada = Path(args.entrada).expanduser()
@@ -180,6 +185,7 @@ def main():
         sys.exit(1)
 
     saida = Path(args.saida).expanduser() if args.saida else entrada.with_name(f"{entrada.stem}.pt-BR.srt")
+    ckpt_file = saida.with_suffix(".ckpt.json")
 
     api_key = (
         os.environ.get("GROQ_API_KEY")
@@ -197,18 +203,32 @@ def main():
     for i, item in enumerate(itens, start=1):
         item["id"] = i
 
+    traducoes = {}
+    if ckpt_file.is_file():
+        try:
+            traducoes = {int(k): v for k, v in json.loads(ckpt_file.read_text(encoding="utf-8")).items()}
+            print(f"==> Checkpoint carregado: {len(traducoes)}/{len(itens)} falas já traduzidas.")
+            for it in itens:
+                if it["id"] in traducoes:
+                    it["traducao"] = traducoes[it["id"]]
+        except Exception as e:
+            print(f"Aviso ao carregar checkpoint: {e}", file=sys.stderr)
+
     print(f"==> Total de falas para traduzir via Groq ({args.model}): {len(itens)}", flush=True)
 
     batch_size = args.batch_size
     if batch_size <= 0:
         raise ValueError("O tamanho do lote precisa ser maior que zero.")
     total_lotes = (len(itens) + batch_size - 1) // batch_size
-    traducoes = {}
 
     for idx_lote in range(total_lotes):
         inicio = idx_lote * batch_size
         fim = min(inicio + batch_size, len(itens))
         lote_atual = itens[inicio:fim]
+
+        # Pula lote se todos já foram traduzidos no checkpoint
+        if all(it["id"] in traducoes for it in lote_atual):
+            continue
 
         ctx_inicio = max(0, inicio - 5)
         contexto_anterior = itens[ctx_inicio:inicio]
@@ -216,10 +236,11 @@ def main():
         print(f"--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
 
         lote_concluido = False
-        for tentativa in range(8):
+        modelo_ativo = args.model
+        for tentativa in range(10):
             try:
                 t0 = time.time()
-                mapa, headers = traduzir_lote_groq(api_key, args.model, contexto_anterior, lote_atual)
+                mapa, headers = traduzir_lote_groq(api_key, modelo_ativo, contexto_anterior, lote_atual)
                 dt = time.time() - t0
 
                 faltantes = [item["id"] for item in lote_atual if not mapa.get(item["id"])]
@@ -229,31 +250,43 @@ def main():
                 # Verifica consumo de TPM (tokens por minuto)
                 rem_tokens = int(headers.get("x-ratelimit-remaining-tokens", 99999))
                 reset_str = headers.get("x-ratelimit-reset-tokens", "0s")
-                if rem_tokens < 2200:
+                if rem_tokens < 2500:
                     m = re.search(r"([\d\.]+)s", str(reset_str))
-                    pausa = (float(m.group(1)) + 1.0) if m else 15.0
-                    print(f"  [Groq TPM: restam {rem_tokens} tokens. Aguardando {pausa:.1f}s para renovação da janela...]", flush=True)
+                    pausa = (float(m.group(1)) + 1.5) if m else 15.0
+                    print(f"  [Groq TPM: restam {rem_tokens} tokens. Aguardando {pausa:.1f}s...]", flush=True)
                     time.sleep(pausa)
 
                 for item in lote_atual:
                     if item["id"] in mapa:
                         item["traducao"] = mapa[item["id"]]
                         traducoes[item["id"]] = mapa[item["id"]]
-                print(f"  ✓ Lote {idx_lote + 1} traduzido com sucesso em {dt:.2f}s", flush=True)
+                
+                # Salva checkpoint a cada lote
+                try:
+                    ckpt_file.write_text(json.dumps(traducoes, ensure_ascii=False), encoding="utf-8")
+                except Exception:
+                    pass
+
+                print(f"  ✓ Lote {idx_lote + 1} traduzido com sucesso em {dt:.2f}s ({len(traducoes)}/{len(itens)})", flush=True)
                 lote_concluido = True
                 break
             except urllib.error.HTTPError as e:
                 m = re.search(r"([\d\.]+)s", str(e.headers.get("x-ratelimit-reset-tokens", "")))
                 espera = (float(m.group(1)) + 2.0) if m else (10.0 * (tentativa + 1))
                 print(f"  [Groq HTTP {e.code}]. Aguardando {espera:.1f}s para liberação da cota...", file=sys.stderr, flush=True)
+                if e.code == 429 and tentativa >= 3 and modelo_ativo != "qwen/qwen3.8-27b":
+                    print("  [Rotacionando temporariamente para qwen/qwen3.8-27b para alívio de cota...]", file=sys.stderr, flush=True)
+                    modelo_ativo = "qwen/qwen3.8-27b"
                 time.sleep(espera)
             except Exception as e:
                 espera = 4 * (tentativa + 1)
-                print(f"  [Tentativa {tentativa + 1}/8 falhou: {e}]. Tentando em {espera}s...", file=sys.stderr, flush=True)
+                print(f"  [Tentativa {tentativa + 1}/10 falhou: {e}]. Tentando em {espera}s...", file=sys.stderr, flush=True)
                 time.sleep(espera)
 
         if not lote_concluido:
-            raise RuntimeError(f"Falha ao traduzir o lote {idx_lote + 1} após 8 tentativas; nenhuma saída foi marcada como concluída.")
+            raise RuntimeError(f"Falha ao traduzir o lote {idx_lote + 1} após 10 tentativas.")
+
+        time.sleep(1.0)
 
     blocos_saida = []
     for item in itens:
@@ -262,6 +295,14 @@ def main():
 
     saida.write_text("\n\n".join(blocos_saida) + "\n", encoding="utf-8")
     print(f"\n==> Tradução concluída com sucesso! Arquivo salvo em: {saida}")
+
+    try:
+        from gerar_versoes_legendas import gerar_versoes
+        stem = saida.stem.replace(".com_orador", "").replace(".pt-BR", "")
+        gerar_versoes(saida, stem, saida.parent)
+        print("==> Versões .srt e .ass geradas com sucesso!")
+    except Exception as e:
+        print(f"Aviso ao gerar versões de legendas: {e}")
 
 
 if __name__ == "__main__":
