@@ -271,12 +271,23 @@ def main():
                 lote_concluido = True
                 break
             except urllib.error.HTTPError as e:
-                m = re.search(r"([\d\.]+)s", str(e.headers.get("x-ratelimit-reset-tokens", "")))
-                espera = (float(m.group(1)) + 2.0) if m else (10.0 * (tentativa + 1))
+                hdr_reset = str(e.headers.get("x-ratelimit-reset-tokens", "") or e.headers.get("retry-after", ""))
+                m_min = re.search(r"(\d+)m", hdr_reset)
+                m_sec = re.search(r"([\d\.]+)s", hdr_reset)
+                total = 0.0
+                if m_min:
+                    total += float(m_min.group(1)) * 60
+                if m_sec:
+                    total += float(m_sec.group(1))
+                espera = (total + 2.0) if total > 0 else (10.0 * (tentativa + 1))
                 print(f"  [Groq HTTP {e.code}]. Aguardando {espera:.1f}s para liberação da cota...", file=sys.stderr, flush=True)
-                if e.code == 429 and tentativa >= 3 and modelo_ativo != "qwen/qwen3.8-27b":
-                    print("  [Rotacionando temporariamente para qwen/qwen3.8-27b para alívio de cota...]", file=sys.stderr, flush=True)
-                    modelo_ativo = "qwen/qwen3.8-27b"
+                if e.code == 429 and tentativa >= 2:
+                    if modelo_ativo == "openai/gpt-oss-120b":
+                        print("  [Alternando para openai/gpt-oss-20b para cota separada...]", file=sys.stderr, flush=True)
+                        modelo_ativo = "openai/gpt-oss-20b"
+                    elif modelo_ativo == "openai/gpt-oss-20b":
+                        print("  [Alternando para openai/gpt-oss-120b...]", file=sys.stderr, flush=True)
+                        modelo_ativo = "openai/gpt-oss-120b"
                 time.sleep(espera)
             except Exception as e:
                 espera = 4 * (tentativa + 1)
