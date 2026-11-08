@@ -42,6 +42,7 @@ on:
 
 jobs:
   auditar:
+    name: "🔍 Auditar legendas selecionadas"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do repositório
