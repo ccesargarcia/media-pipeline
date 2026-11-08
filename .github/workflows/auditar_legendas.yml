@@ -54,84 +54,79 @@ jobs:
 
       - name: Executar Auditoria de Legendas
         continue-on-error: ${{ github.event_name == 'workflow_dispatch' && inputs.bloquear_em_falhas != true || false }}
+        env:
+          AUDIT_TARGET: ${{ inputs.alvo || 'todas_prontas' }}
+          AUDIT_EPISODE: ${{ inputs.episodio || '36' }}
+          AUDIT_CUSTOM_PATH: ${{ inputs.caminho_arquivo || '' }}
+          AUDIT_BLOCK: ${{ github.event_name == 'pull_request' || inputs.bloquear_em_falhas == true }}
+          AUDIT_STRICT: ${{ inputs.modo_estrito == true }}
         run: |
-          echo "========================================================"
-          echo "Iniciando Auditoria de Integridade e Regras da Skill..."
-          echo "========================================================"
-
-          ALVO="${{ inputs.alvo || 'todas_prontas' }}"
-          EP="${{ inputs.episodio || '36' }}"
-          CUSTOM="${{ inputs.caminho_arquivo || '' }}"
-          BLOQUEAR="${{ inputs.bloquear_em_falhas }}"
-          ESTRITO="${{ inputs.modo_estrito }}"
-
-          FLAGS=""
-          if [ "$BLOQUEAR" = "true" ]; then
-            FLAGS="$FLAGS --fail-on-skill-rules"
+          FLAGS=()
+          if [[ "$AUDIT_BLOCK" == "true" ]]; then
+            FLAGS+=(--fail-on-skill-rules)
           else
-            FLAGS="$FLAGS --warn-only"
+            FLAGS+=(--warn-only)
+          fi
+          if [[ "$AUDIT_STRICT" == "true" ]]; then
+            FLAGS+=(--strict)
           fi
 
-          if [ "$ESTRITO" = "true" ]; then
-            FLAGS="$FLAGS --strict"
-          fi
+          run_lint() {
+            local srt="$1" original="${2:-}" ass="${3:-}" paired="${4:-}"
+            local args=("$srt")
+            if [[ -n "$original" ]]; then args+=(-o "$original"); fi
+            if [[ -n "$ass" ]]; then args+=(-a "$ass"); fi
+            if [[ -n "$paired" ]]; then args+=(--paired-srt "$paired"); fi
+            python3 lint_legendas.py "${args[@]}" "${FLAGS[@]}" --summary-markdown "$GITHUB_STEP_SUMMARY"
+          }
 
-          mkdir -p /tmp/reports
-
-          if [ "$ALVO" = "episodio_especifico" ]; then
-            SRT="legendas_prontas/Uzak_Sehir_-_Episode_${EP}.pt-BR.srt"
-            ASS="legendas_prontas/Uzak_Sehir_-_Episode_${EP}.ass"
-            ORIG=""
-            # Procurar se existe original em tr
-            if [ -f "legendas_prontas/Uzak_Sehir_-_Episode_${EP}.srt" ]; then
-              ORIG="-o legendas_prontas/Uzak_Sehir_-_Episode_${EP}.srt"
-            elif [ -f "legendas_prontas/Uzak_Sehir_-_Episode_${EP}.tr.srt" ]; then
-              ORIG="-o legendas_prontas/Uzak_Sehir_-_Episode_${EP}.tr.srt"
+          find_original() {
+            local stem="$1"
+            if [[ -f "${stem}.srt" ]]; then printf '%s' "${stem}.srt"
+            elif [[ -f "${stem}.tr.srt" ]]; then printf '%s' "${stem}.tr.srt"
             fi
+          }
 
-            if [ ! -f "$SRT" ]; then
-              echo "❌ Arquivo $SRT não encontrado!"
-              exit 1
-            fi
-
-            echo "Auditando Episódio $EP..."
-            python3 lint_legendas.py "$SRT" $ORIG -a "$ASS" $FLAGS --summary-markdown "$GITHUB_STEP_SUMMARY"
-
-          elif [ "$ALVO" = "arquivo_customizado" ]; then
-            if [ -z "$CUSTOM" ] || [ ! -f "$CUSTOM" ]; then
-              echo "❌ Caminho customizado inválido ou inexistente: $CUSTOM"
-              exit 1
-            fi
-            python3 lint_legendas.py "$CUSTOM" $FLAGS --summary-markdown "$GITHUB_STEP_SUMMARY"
-
-          else
-            # Auditando todas as legendas prontas
-            echo "Auditando todas as legendas em legendas_prontas/..."
-            FILES=$(find legendas_prontas -name "*.pt-BR.srt" | sort)
-            if [ -z "$FILES" ]; then
-              echo "Nenhuma legenda encontrada em legendas_prontas/"
-              exit 0
-            fi
-
-            echo "### 📊 Resumo de Auditoria em Lote" >> "$GITHUB_STEP_SUMMARY"
-            echo "" >> "$GITHUB_STEP_SUMMARY"
-
-            for srt_file in $FILES; do
-              STEM="${srt_file%.pt-BR.srt}"
-              ASS="${STEM}.ass"
-              ORIG=""
-              if [ -f "${STEM}.srt" ]; then
-                ORIG="-o ${STEM}.srt"
-              elif [ -f "${STEM}.tr.srt" ]; then
-                ORIG="-o ${STEM}.tr.srt"
+          case "$AUDIT_TARGET" in
+            episodio_especifico)
+              if [[ ! "$AUDIT_EPISODE" =~ ^[0-9]{1,4}$ ]]; then
+                echo "Número de episódio inválido." >&2; exit 2
               fi
-              ASS_FLAG=""
-              if [ -f "$ASS" ]; then
-                ASS_FLAG="-a $ASS"
+              STEM="legendas_prontas/Uzak_Sehir_-_Episode_${AUDIT_EPISODE}"
+              SRT="${STEM}.pt-BR.srt"
+              if [[ ! -f "$SRT" ]]; then echo "Arquivo $SRT não encontrado." >&2; exit 1; fi
+              ORIG="$(find_original "$STEM")"
+              run_lint "$SRT" "$ORIG" "${STEM}.ass" "${STEM}.com_orador.pt-BR.srt"
+              ;;
+            arquivo_customizado)
+              CUSTOM="$AUDIT_CUSTOM_PATH"
+              if [[ "$CUSTOM" != *.srt || "$CUSTOM" == /* || "$CUSTOM" == *..* || ! -f "$CUSTOM" ]]; then
+                echo "Caminho customizado inválido; informe um arquivo .srt relativo ao repositório." >&2; exit 2
               fi
-
-              echo "--------------------------------------------------------"
-              echo "Auditando: $srt_file"
-              python3 lint_legendas.py "$srt_file" $ORIG $ASS_FLAG $FLAGS --summary-markdown "$GITHUB_STEP_SUMMARY" || true
-            done
-          fi
+              STEM="${CUSTOM%.pt-BR.srt}"
+              ASS=""
+              PAIRED=""
+              [[ -f "${STEM}.ass" ]] && ASS="${STEM}.ass"
+              [[ -f "${STEM}.com_orador.pt-BR.srt" ]] && PAIRED="${STEM}.com_orador.pt-BR.srt"
+              run_lint "$CUSTOM" "" "$ASS" "$PAIRED"
+              ;;
+            todas_prontas)
+              FILES=()
+              while IFS= read -r -d '' f; do FILES+=("$f"); done < <(find legendas_prontas -type f -name '*.pt-BR.srt' ! -name '*.com_orador.pt-BR.srt' -print0 | sort -z)
+              if ((${#FILES[@]} == 0)); then echo "Nenhuma legenda encontrada em legendas_prontas/"; exit 0; fi
+              echo "### 📊 Auditoria em lote" >> "$GITHUB_STEP_SUMMARY"
+              FAILED=0
+              for SRT in "${FILES[@]}"; do
+                STEM="${SRT%.pt-BR.srt}"
+                ORIG="$(find_original "$STEM")"
+                ASS=""
+                PAIRED=""
+                [[ -f "${STEM}.ass" ]] && ASS="${STEM}.ass"
+                [[ -f "${STEM}.com_orador.pt-BR.srt" ]] && PAIRED="${STEM}.com_orador.pt-BR.srt"
+                echo "Auditando: $SRT"
+                if run_lint "$SRT" "$ORIG" "$ASS" "$PAIRED"; then :; else FAILED=1; fi
+              done
+              exit "$FAILED"
+              ;;
+            *) echo "Escopo de auditoria inválido." >&2; exit 2 ;;
+          esac

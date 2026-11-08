@@ -615,7 +615,7 @@ Eu sei que é muito difícil para você.
 É muito difícil para mim também, Cihan.
 
 155
-00:13:46,550 --> 00:13:54,000
+00:13:46,550 --> 00:13:54,960
 Eu preciso saber onde você ficará se Boran acordar e aceitar, se não causar problemas.
 
 156
@@ -671,7 +671,7 @@ eu vou me separar de Boran,
 eu não quero,
 
 169
-00:14:34,620 --> 00:14:38,170
+00:14:34,620 --> 00:14:38,245
 mas se você não ficar ao meu lado,
 
 170
@@ -711,7 +711,7 @@ O que me preocupo não são eles
 Eu estou me perguntando onde você vai ficar
 
 179
-00:15:00,220 --> 00:15:03,720
+00:15:00,220 --> 00:15:03,995
 Realmente é cedo para falar disso
 
 180
@@ -867,7 +867,7 @@ Esse rebelde indomável está aqui com você, todos os seus irmãos estão com v
 Boran, vocês quatro irmãos iam com o pai de vocês para a beira do lago.
 
 218
-00:17:27,800 --> 00:17:31,800
+00:17:27,800 --> 00:17:31,900
 Você, Cihan, Nare e Kaya, sempre juntos.
 
 219
@@ -1171,7 +1171,7 @@ Mas graças a Deus, ninguém morreu agora.
 Você está viva.
 
 294
-00:21:19,680 --> 00:21:23,230
+00:21:19,680 --> 00:21:23,320
 Você voltou à vida, graças a Deus.
 
 295
@@ -3039,7 +3039,7 @@ Mãe, pai.
 Eu sou azul, fiquei urso, você ficou vermelho, fiqueu aço.
 
 761
-00:44:24,920 --> 00:44:28,420
+00:44:24,920 --> 00:44:28,545
 Entendemos, ok, vamos entrar.
 
 762
@@ -3275,7 +3275,7 @@ Apenas o rádio será usado.
 Eles também não podem falar exceto a palavra-chave.
 
 820
-00:47:55,190 --> 00:48:00,015
+00:47:55,190 --> 00:48:00,690
 Eles nos encontrarão no depósito com nossos filhos.
 
 821
@@ -3327,7 +3327,7 @@ Os túneis ao lado do antigo cemitério. Levaremos os bens por ali.
 E o Şah? Ele não vai detonar mais uma vez, certo? Se nada acontecer, nada acontecerá.
 
 833
-00:48:52,090 --> 00:48:57,065
+00:48:52,090 --> 00:48:57,740
 Ele nem saberá sobre esta remessa. Nem abrirá a boca.
 
 834
@@ -3491,11 +3491,11 @@ Enes, minha querida avó.
 Fomos nós que pegamos.
 
 874
-00:53:00,460 --> 00:53:03,960
+00:53:00,460 --> 00:53:04,160
 Nós o amamos muito, melhora logo.
 
 875
-00:53:04,680 --> 00:53:08,180
+00:53:04,680 --> 00:53:09,655
 Vem aqui, vou beijar.
 
 876
@@ -3531,7 +3531,7 @@ E cumprir minha promessa a Çin.
 Eu cumpriria minha honra para Çin.
 
 884
-00:54:14,760 --> 00:54:18,610
+00:54:14,760 --> 00:54:19,960
 Eu pagaria isso mais tarde por Kıbran.
 
 885
@@ -3599,7 +3599,7 @@ Você precisa se recompor, precisa se acalmar, precisa de amor.
 Ele precisa voltar a si, precisa ficar de pé, precisa do seu amor.
 
 901
-00:55:22,710 --> 00:55:27,910
+00:55:22,710 --> 00:55:28,510
 O que vai acontecer? Me diga, me diga, me diga, me diga.
 
 902
@@ -3651,7 +3651,7 @@ Não agradeça para mim. Agradeça a Cihan.
 Muito.
 
 914
-00:56:52,830 --> 00:56:58,180
+00:56:52,830 --> 00:56:58,480
 Você o criou tão bem. É claro que seu espírito tocou nele.
 
 915
@@ -3659,7 +3659,7 @@ Você o criou tão bem. É claro que seu espírito tocou nele.
 Seu espírito.
 
 916
-00:57:04,140 --> 00:57:07,690
+00:57:04,140 --> 00:57:08,440
 Se você sair de uma cirurgia grave
 
 917
@@ -4307,7 +4307,7 @@ Transferei os bens aqui para outros caminhões
 É por isso que eles não vão encontrar nada aqui
 
 1078
-01:09:55,098 --> 01:09:58,648
+01:09:55,098 --> 01:09:58,798
 Cihan, minha mãe, você também sabe
 
 1079
@@ -4423,7 +4423,7 @@ Vão mostrar como se estivéssemos apontando armas para a polícia.
 Parado aí, Ecmel.
 
 1107
-01:12:16,528 --> 01:12:20,678
+01:12:16,528 --> 01:12:20,978
 Você vá de baixo, você me acompanhe agora.
 
 1108
@@ -4499,7 +4499,7 @@ Kaya!
 Kaya! Kaya!
 
 1126
-01:13:49,168 --> 01:13:52,668
+01:13:49,168 --> 01:13:53,843
 Prepare o carro. Vamos sair logo.
 
 1127
@@ -4691,7 +4691,7 @@ Abra a porta.
 Já entrou, não?
 
 1174
-01:16:59,918 --> 01:17:04,743
+01:16:59,918 --> 01:17:04,893
 Comandante, eles são meus, certo? Não se preocupem.
 
 1175
@@ -5351,7 +5351,7 @@ Irmão, irmão, por que não estou enxergando?
 Acho que a retina dele se rompeu, mas precisamos examinar com calma.
 
 1339
-01:22:54,928 --> 01:23:00,278
+01:22:54,928 --> 01:23:00,428
 Cunhada, cunhada... e se eu nunca mais voltar a enxergar?!
 
 1340
@@ -5771,7 +5771,7 @@ Preste atenção
 Tudo bem, vamos
 
 1444
-01:26:27,568 --> 01:26:31,068
+01:26:27,568 --> 01:26:31,193
 Você também saiu da cirurgia
 
 1445
@@ -6083,7 +6083,7 @@ Dona Alya, se precisar de qualquer coisa me avise, estou aqui.
 De nada.
 
 1522
-01:31:44,308 --> 01:31:47,808
+01:31:44,308 --> 01:31:48,608
 Doutor, alguma mudança no Boran?
 
 1523
@@ -6099,7 +6099,7 @@ Dona Sadakat, há algo que eu possa fazer?
 Se não, está bem. Meu coração fica satisfeito ao lado do Burhan.
 
 1526
-01:32:02,138 --> 01:32:07,263
+01:32:02,138 --> 01:32:07,488
 Zerrin, minha filha. Olha, tem dois anéis aqui, talvez.
 
 1527
@@ -6683,7 +6683,7 @@ Vou até comprar isso.
 Você só está parado.
 
 1672
-01:41:36,928 --> 01:41:40,478
+01:41:36,928 --> 01:41:41,078
 Você vai ver a cara, não o túmulo.
 
 1673
@@ -6831,7 +6831,7 @@ Isso é um.
 Está tudo bem, meu amigo.
 
 1709
-01:43:35,728 --> 01:43:39,228
+01:43:35,728 --> 01:43:40,148
 Dois, Kaya acalma, recupera-se.
 
 1710
@@ -8451,7 +8451,7 @@ Como um homem que dispara contra a polícia pode nos liderar?
 Não pode!
 
 2114
-02:04:13,855 --> 02:04:18,905
+02:04:13,855 --> 02:04:19,535
 O cara que pula como um rato, que foge como um ladrão.
 
 2115
@@ -8487,15 +8487,15 @@ Agora abram bem os ouvidos e me escutem bem.
 Os Albora precisam de um líder de verdade.
 
 2123
-02:04:40,485 --> 02:04:46,210
+02:04:40,485 --> 02:04:47,410
 Este líder será corajoso, honrado e não fugirá como uma mulher.
 
 2124
-02:04:50,265 --> 02:04:53,965
+02:04:50,265 --> 02:04:54,040
 Eu sou o verdadeiro dono dos Albora.
 
 2125
-02:04:55,165 --> 02:05:00,365
+02:04:55,165 --> 02:05:00,440
 Vamos, vamos nos estendermos a mão, vamos resolver isso.
 
 2126
@@ -8743,7 +8743,7 @@ Venha, eu.
 Vamos, Dona Çınar, sente-se com a família.
 
 2187
-02:07:57,715 --> 02:08:01,265
+02:07:57,715 --> 02:08:01,565
 Deixe-me colocar Çınar na cadeira.
 
 2188

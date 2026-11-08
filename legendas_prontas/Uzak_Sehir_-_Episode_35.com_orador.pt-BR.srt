@@ -1947,7 +1947,7 @@ Demir: Eu vou ligar, estarei lá.
 Demir: Veja, eu ainda estou falando desse desgraçado do Kaya.
 
 488
-00:27:03,270 --> 00:27:09,595
+00:27:03,270 --> 00:27:09,670
 Zerrin: Pai, pelo amor de Deus, já basta! Não foi o Kaya, eu estava lá!
 
 489
@@ -2567,7 +2567,7 @@ Você é pai, chega disso!
 Fui à casa da minha família, o que há de errado em eu ir?
 
 643
-00:36:09,875 --> 00:36:15,225
+00:36:09,875 --> 00:36:15,325
 O que está rolando naquela mansão, logo tudo sairá à tona.
 
 644
@@ -3519,7 +3519,7 @@ Não, não estou entediado.
 Ela é linda.
 
 881
-00:51:26,655 --> 00:51:30,355
+00:51:26,655 --> 00:51:30,525
 A Pakize e a vovó ordenharam a vaca.
 
 882
@@ -3675,7 +3675,7 @@ Demir: Se fosse por orgulho, você teria ido.
 Cihan: Orgulho? Faz tempo que ele se despede de nós, sinceramente.
 
 920
-00:53:07,865 --> 00:53:12,240
+00:53:07,865 --> 00:53:12,315
 Cihan: Agora eu só faço o que for necessário.
 
 921
@@ -4351,7 +4351,7 @@ Dona Sadakat: É verdade. É verdade. Precisamos nos preparar.
 Posso dar uma volta na mansão até o Kaya chegar?
 
 1089
-01:02:09,035 --> 01:02:12,585
+01:02:09,035 --> 01:02:12,660
 Nunca estive aqui antes, por isso.
 
 1090
@@ -5019,7 +5019,7 @@ Dona Sadakat: Meu Deus, poupe a vida deles para mim! Proteja meus filhos! Meu De
 [Médico]: Cihan, você também vai ficar aqui. Amanhã cedo, vamos levar vocês dois daqui para a cirurgia.
 
 1256
-01:19:16,410 --> 01:19:20,185
+01:19:16,410 --> 01:19:20,260
 [Médico]: Passo aí à noite. Até logo.
 
 1257
@@ -6363,7 +6363,7 @@ Cihan: Agora fiquei triste.
 Cihan: Não.
 
 1592
-01:50:50,250 --> 01:50:53,750
+01:50:50,250 --> 01:50:54,250
 Cihan: Vem, vamos brincar juntos.
 
 1593
@@ -6479,7 +6479,7 @@ Kadir: Isso não serve?
 Cihan: Não, segure isso. Deixa eu dar uma olhada.
 
 1621
-01:52:03,780 --> 01:52:07,780
+01:52:03,780 --> 01:52:07,855
 Cihan: Virou azul. Vou fechar e guardar.
 
 1622
@@ -6487,7 +6487,7 @@ Cihan: Virou azul. Vou fechar e guardar.
 Kadir: Tudo bem, irmão.
 
 1623
-01:52:11,060 --> 01:52:14,910
+01:52:11,060 --> 01:52:15,135
 Cihan: Vem cá, vamos te limpar também.
 
 1624
@@ -6643,7 +6643,7 @@ Alya: Olhem, mas vamos deixar estar.
 Cihan: Boran, todo dia eu rezo por você...
 
 1662
-01:55:38,560 --> 01:55:44,585
+01:55:38,560 --> 01:55:45,110
 Cihan: Enquanto um lado meu reza por você, o outro se apega à Alya.
 
 1663

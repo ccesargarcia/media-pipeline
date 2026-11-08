@@ -14,7 +14,6 @@ Linter e Validador de Integridade de Legendas (.srt e .ass):
 """
 import argparse
 import json
-import os
 import re
 import sys
 from pathlib import Path
@@ -178,6 +177,7 @@ def validar_legendas(
     arquivo_ptbr: Path,
     arquivo_original: Path = None,
     arquivo_ass: Path = None,
+    arquivo_pareado: Path = None,
     max_cps: float = 23.0,
     modo_estrito: bool = False,
     verificar_regras_skill: bool = True,
@@ -256,6 +256,36 @@ def validar_legendas(
                         f"tradução {traducao['start_str']} --> {traducao['end_str']}."
                     )
 
+    # Verifica a paridade temporal entre a versão limpa e a versão com oradores.
+    if arquivo_pareado:
+        if not arquivo_pareado.is_file():
+            erros.append(f"SRT pareado não encontrado: {arquivo_pareado}")
+        else:
+            try:
+                itens_pareados = parse_srt(arquivo_pareado.read_text(encoding="utf-8-sig", errors="replace"))
+            except ValueError as exc:
+                itens_pareados = None
+                erros.append(f"SRT pareado inválido: {exc}")
+            if itens_pareados is not None:
+                if len(itens_pareados) != len(itens_pt):
+                    erros.append(
+                        f"Contagem SRT pareado divergente: versão limpa tem {len(itens_pt)} falas e "
+                        f"versão com oradores tem {len(itens_pareados)}."
+                    )
+                else:
+                    for pos, (limpa, pareada) in enumerate(zip(itens_pt, itens_pareados), start=1):
+                        if limpa["idx"] != pareada["idx"]:
+                            erros.append(
+                                f"Bloco pareado #{pos}: ID diferente (limpa {limpa['idx']}, "
+                                f"com oradores {pareada['idx']})."
+                            )
+                        if limpa["start_str"] != pareada["start_str"] or limpa["end_str"] != pareada["end_str"]:
+                            erros.append(
+                                f"Bloco pareado #{pos} (ID {limpa['idx']}): timestamps diferentes entre "
+                                f"versão limpa ({limpa['start_str']} --> {limpa['end_str']}) e com oradores "
+                                f"({pareada['start_str']} --> {pareada['end_str']})."
+                            )
+
     # 2. Validação de timestamps e leiturabilidade (CPS)
     for item in itens_pt:
         duracao = item["end"] - item["start"]
@@ -290,7 +320,7 @@ def validar_legendas(
                         f"Bloco #{item['idx']} [{item['start_str']}]: {regra['nome']} "
                         f"(Trecho: \"{match.group(0)}\") -> {regra['sugestao']}"
                     )
-                    if regras_como_erros or (regra["severidade"] == "erro" and modo_estrito):
+                    if regra["severidade"] == "erro" and (regras_como_erros or modo_estrito):
                         erros.append(msg_alerta)
                     else:
                         avisos.append(msg_alerta)
@@ -298,6 +328,8 @@ def validar_legendas(
     ids_pt = [item["idx"] for item in itens_pt]
     if len(ids_pt) != len(set(ids_pt)):
         erros.append("O SRT PT-BR contém IDs de bloco duplicados.")
+    elif ids_pt != [str(i) for i in range(1, len(ids_pt) + 1)]:
+        erros.append("Os IDs do SRT PT-BR não estão em sequência crescente de 1 até o total de blocos.")
 
     # 4. Validação de arquivo ASS se presente
     if arquivo_ass and not arquivo_ass.is_file():
@@ -343,6 +375,7 @@ def gerar_markdown_summary(
     arquivo_ptbr: Path,
     arquivo_original: Path = None,
     arquivo_ass: Path = None,
+    arquivo_pareado: Path = None,
 ) -> str:
     status_emoji = "✅ APROVADO" if resultado["valido"] else "❌ REPROVADO"
     if resultado["valido"] and resultado["avisos"]:
@@ -357,6 +390,7 @@ def gerar_markdown_summary(
         f"| **Total de Falas** | **{resultado['total_falas']}** |",
         f"| **Comparação 1:1 Original** | `{arquivo_original.name if arquivo_original else 'Não fornecido'}` |",
         f"| **Estilização ASS** | `{arquivo_ass.name if arquivo_ass else 'Não fornecido'}` |",
+        f"| **SRT pareado** | `{arquivo_pareado.name if arquivo_pareado else 'Não fornecido'}` |",
         f"| **Status Geral** | **{status_emoji}** |",
         f"| **Erros Críticos** | {len(resultado['erros'])} |",
         f"| **Avisos / Alertas** | {len(resultado['avisos'])} |",
@@ -385,8 +419,8 @@ def gerar_markdown_summary(
             linhas.append(f"- ❌ {err}")
         linhas.append("")
 
-    if resultado["avisos"] and not inconsistencias:
-        linhas.append("### ⚠️ Avisos Estruturais / Leiturabilidade")
+    if resultado["avisos"]:
+        linhas.append("### ⚠️ Avisos / Leiturabilidade")
         linhas.append("")
         for av in resultado["avisos"][:20]:
             linhas.append(f"- ⚠️ {av}")
@@ -402,9 +436,10 @@ def main():
     parser.add_argument("ptbr_srt", help="Caminho do arquivo .pt-BR.srt traduzido")
     parser.add_argument("-o", "--original", help="Caminho do .srt original em turco para checagem 1:1")
     parser.add_argument("-a", "--ass", help="Caminho do arquivo .ass para verificar estilização")
+    parser.add_argument("--paired-srt", help="SRT da variante pareada para validar contagem, IDs e timestamps")
     parser.add_argument("--strict", action="store_true", help="Falhar mesmo se houver apenas avisos")
     parser.add_argument("--skip-skill-rules", action="store_true", help="Pular auditoria de regras semânticas da skill")
-    parser.add_argument("--fail-on-skill-rules", action="store_true", help="Fazer com que inconsistências da skill contem como erros críticos")
+    parser.add_argument("--fail-on-skill-rules", action="store_true", help="Bloquear regras semânticas classificadas como erro; avisos continuam consultivos")
     parser.add_argument("--warn-only", action="store_true", help="Modo opcional/permissivo: exibe relatório mas sempre sai com código 0")
     parser.add_argument("--summary-markdown", help="Caminho do arquivo para salvar o resumo em Markdown (ex: $GITHUB_STEP_SUMMARY)")
     parser.add_argument("--json", action="store_true", help="Imprimir saída em formato JSON estruturado")
@@ -413,18 +448,20 @@ def main():
     pt_path = Path(args.ptbr_srt).expanduser()
     orig_path = Path(args.original).expanduser() if args.original else None
     ass_path = Path(args.ass).expanduser() if args.ass else None
+    paired_path = Path(args.paired_srt).expanduser() if args.paired_srt else None
 
     resultado = validar_legendas(
         arquivo_ptbr=pt_path,
         arquivo_original=orig_path,
         arquivo_ass=ass_path,
+        arquivo_pareado=paired_path,
         modo_estrito=args.strict,
         verificar_regras_skill=not args.skip_skill_rules,
         regras_como_erros=args.fail_on_skill_rules,
     )
 
     if args.summary_markdown:
-        md_text = gerar_markdown_summary(resultado, pt_path, orig_path, ass_path)
+        md_text = gerar_markdown_summary(resultado, pt_path, orig_path, ass_path, paired_path)
         try:
             with open(args.summary_markdown, "a" if Path(args.summary_markdown).exists() else "w", encoding="utf-8") as f:
                 f.write(md_text + "\n\n")

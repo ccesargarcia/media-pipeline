@@ -304,10 +304,7 @@ jobs:
           STEM="${STEM%.tr}"
           echo "STEM=$STEM" >> "$GITHUB_ENV"
           python3 mesclar_traducao_local.py input.srt "$STEM.pt-BR.srt" parts/part-*.json
-          python3 srt_para_ass.py "$STEM.pt-BR.srt" "$STEM.ass"
-          if [ -f gerar_versoes_legendas.py ]; then
-            python3 gerar_versoes_legendas.py "$STEM.pt-BR.srt" || true
-          fi
+          python3 gerar_versoes_legendas.py "$STEM.pt-BR.srt" "$STEM" .
 
       - name: Quality Gate e Auditoria de Regras (Opcional)
         if: ${{ inputs.executar_auditoria != false }}
@@ -317,6 +314,7 @@ jobs:
           python3 lint_legendas.py "$STEM.pt-BR.srt" \
             -o input.srt \
             -a "$STEM.ass" \
+            --paired-srt "$STEM.com_orador.pt-BR.srt" \
             --summary-markdown "$GITHUB_STEP_SUMMARY" \
             ${{ inputs.bloquear_em_falhas == true && '--fail-on-skill-rules' || '--warn-only' }}
 
@@ -442,6 +440,7 @@ jobs:
           python3 lint_legendas.py "${{ env.STEM }}.pt-BR.srt" \
             -o input.srt \
             -a "${{ env.STEM }}.ass" \
+            --paired-srt "${{ env.STEM }}.com_orador.pt-BR.srt" \
             --summary-markdown "$GITHUB_STEP_SUMMARY" \
             ${{ inputs.bloquear_em_falhas == true && '--fail-on-skill-rules' || '--warn-only' }}
 

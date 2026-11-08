@@ -60,6 +60,59 @@ class LinterRegressionTests(unittest.TestCase):
             self.assertFalse(result["valido"])
             self.assertIn("SRT PT-BR inválido", result["erros"][0])
 
+    def test_nonsequential_ids_fail_without_original(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "traducao.srt"
+            output.write_text(
+                "1\n00:00:01,000 --> 00:00:02,000\nOlá.\n\n"
+                "3\n00:00:03,000 --> 00:00:04,000\nTudo bem?\n",
+                encoding="utf-8",
+            )
+            result = validar_legendas(output)
+            self.assertFalse(result["valido"])
+            self.assertTrue(any("não estão em sequência" in error for error in result["erros"]))
+
+    def test_paired_srt_timestamp_mismatch_fails(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, output = self.make_files(
+                directory,
+                "1\n00:00:01,000 --> 00:00:02,000\nOlá.\n\n"
+                "2\n00:00:03,000 --> 00:00:04,000\nTudo bem?\n",
+            )
+            paired = Path(directory) / "traducao.com_orador.srt"
+            paired.write_text(
+                "1\n00:00:01,000 --> 00:00:02,000\nAlya: Olá.\n\n"
+                "2\n00:00:03,000 --> 00:00:04,100\nCihan: Tudo bem?\n",
+                encoding="utf-8",
+            )
+            result = validar_legendas(output, original, arquivo_pareado=paired)
+            self.assertFalse(result["valido"])
+            self.assertTrue(any("timestamps diferentes entre versão limpa" in error for error in result["erros"]))
+
+    def test_empty_paired_srt_fails(self):
+        with tempfile.TemporaryDirectory() as directory:
+            _, output = self.make_files(
+                directory,
+                "1\n00:00:01,000 --> 00:00:02,000\nOlá.\n\n"
+                "2\n00:00:03,000 --> 00:00:04,000\nTudo bem?\n",
+            )
+            paired = Path(directory) / "empty.com_orador.srt"
+            paired.write_text("", encoding="utf-8")
+            result = validar_legendas(output, arquivo_pareado=paired)
+            self.assertFalse(result["valido"])
+            self.assertTrue(any("Contagem SRT pareado divergente" in error for error in result["erros"]))
+
+    def test_advisory_skill_rule_is_not_promoted_by_blocking_flag(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, output = self.make_files(
+                directory,
+                "1\n00:00:01,000 --> 00:00:02,000\nMinha mãe.\n\n"
+                "2\n00:00:03,000 --> 00:00:04,000\nTudo bem?\n",
+            )
+            result = validar_legendas(output, original, regras_como_erros=True)
+            self.assertTrue(result["valido"], result)
+            self.assertTrue(any(item["regra_id"] == "VOCATIVO_MATERNO" for item in result["inconsistencias_regras"]))
+
     def test_skill_rules_detect_hallucinations_as_warnings_by_default(self):
         with tempfile.TemporaryDirectory() as directory:
             original, output = self.make_files(
@@ -78,12 +131,12 @@ class LinterRegressionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             original, output = self.make_files(
                 directory,
-                "1\n00:00:01,000 --> 00:00:02,000\nIrmão, um pássaro!\n\n"
+                "1\n00:00:01,000 --> 00:00:02,000\nDr. Boran chegou.\n\n"
                 "2\n00:00:03,000 --> 00:00:04,000\nTudo bem?\n",
             )
             result = validar_legendas(output, original, verificar_regras_skill=True, regras_como_erros=True)
             self.assertFalse(result["valido"])
-            self.assertTrue(any("Alucinação Fonética" in err for err in result["erros"]))
+            self.assertTrue(any("Homófono Dr. Burhan" in err for err in result["erros"]))
 
 
 
