@@ -216,7 +216,7 @@ jobs:
           taskset -c 0,1 nohup llama.cpp/build/bin/llama-server \
             -m models/Qwen2.5-7B-Instruct-Q4_K_M.gguf \
             --alias qwen2.5-7b-local --host 127.0.0.1 --port 8080 \
-            --ctx-size 8192 --flash-attn on --ctk q8_0 --ctv q8_0 \
+            --ctx-size 8192 --flash-attn on \
             --threads 2 --threads-batch 2 --parallel 1 --cache-prompt --reasoning off --jinja \
             > llama-server.log 2>&1 &
           SERVER_PID=$!
