@@ -203,3 +203,21 @@ Para validação de novos personagens, grafias canônicas de atores e sinopses d
   - Sinopses e guia de episódios: https://www.kanald.com.tr/uzak-sehir/bolumler
 - **Ficha Técnica IMDb:** https://www.imdb.com/title/tt34063491/
 
+
+---
+
+## 9. Regras de Tratamentos (Honoríficos Turcos) e Desambiguação de Personagens
+
+### A. Adaptação Obrigatória de Títulos Honoríficos
+Nunca manter termos turcos puros nem inverter posições em português:
+- **`[Nome] Bey`** -> **Senhor [Nome]** (ex: *Kaya Bey* -> *Senhor Kaya*; *Cihan Bey* -> *Senhor Cihan*) ou **Dr. [Nome]** quando se tratar de médico (ex: *Burhan Bey* -> *Dr. Burhan*).
+- **`[Nome] Hanım`** -> **Dona [Nome]** ou **Senhora [Nome]** (ex: *Sadakat Hanım* -> *Dona Sadakat*; *Zerrin Hanım* -> *Dona Zerrin*; *Aliye Hanım* -> *Dona Aliye*). JAMAIS inverter como *Hanım Aliye*.
+- **`[Nome] Ağa`** -> **Senhor [Nome]** ou **Patrão [Nome]** (ex: *Ecmel Ağa* -> *Senhor Ecmel*). JAMAIS traduzir como *Senhor Ağa*.
+- **`[Nome] Efendi`** -> **Senhor [Nome]** (ex: *Kadir efendi* -> *Senhor Kadir*).
+- **`Ağabey / Abi`** -> **Irmão / Meu irmão** (ex: fala de Kaya desesperado).
+- **`Abla`** -> **Irmã / Minha irmã**.
+- **`Gelin hanım`** -> **Nora / Minha nora**.
+
+### B. Desambiguação Crítica: Boran vs. Dr. Burhan
+- **Boran Albora:** Filho de Sadakat, irmão de Cihan e Kaya, marido de Alya, pai de Deniz. Está internado no hospital após acordar do coma com afasia/agnosia.
+- **Dr. Burhan:** Médico oftalmologista especialista externo trazido para examinar a perda temporária de visão de Kaya.
