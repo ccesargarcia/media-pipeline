@@ -1,0 +1,1710 @@
+{
+  "page_url": "https://sac.uol.com.br/",
+  "final_page_url": "https://sac.uol.com.br/",
+  "captured_at_utc": "2026-11-06T17:30:02.369845+00:00",
+  "targets": [
+    "api.security.pagseguro.uol.com.br",
+    "dna.uol.com.br"
+  ],
+  "request_count": 160,
+  "domains": {
+    "": 1,
+    "4b91477e-f67b-4d81-86db-a9742bd41e9c.edge.permutive.app": 1,
+    "4b91477e-f67b-4d81-86db-a9742bd41e9c.prmutv.co": 1,
+    "analytics.google.com": 2,
+    "api.permutive.app": 6,
+    "api.security.pagseguro.uol.com.br": 4,
+    "b.clarity.ms": 5,
+    "c.bing.com": 1,
+    "c.clarity.ms": 2,
+    "cdn.growthbook.io": 2,
+    "cdn.permutive.app": 1,
+    "cloud.google.com": 1,
+    "cm.g.doubleclick.net": 2,
+    "connect.facebook.net": 1,
+    "conteudo.imguol.com.br": 1,
+    "dna.uol.com.br": 1,
+    "fonts.googleapis.com": 9,
+    "fonts.gstatic.com": 1,
+    "googlesync.permutive.com": 1,
+    "ib.adnxs.com": 2,
+    "imguol.com": 29,
+    "jsuol.com.br": 17,
+    "me.jsuol.com.br": 2,
+    "run.service.uol.com.br": 5,
+    "sac.uol.com.br": 20,
+    "sb.scorecardresearch.com": 4,
+    "scripts.clarity.ms": 1,
+    "sdk.inbenta.io": 1,
+    "secure.adnxs.com": 4,
+    "stats.g.doubleclick.net": 1,
+    "stc.uol.com": 4,
+    "tm.jsuol.com.br": 7,
+    "tm.uol.com.br": 3,
+    "udr.uol.com.br": 1,
+    "unpkg.com": 1,
+    "upc.udr.uol.com.br": 2,
+    "www.clarity.ms": 1,
+    "www.google.com": 3,
+    "www.google.com.br": 1,
+    "www.googletagmanager.com": 1,
+    "www.gstatic.com": 6,
+    "www.uol.com.br": 1
+  },
+  "target_matches": [
+    {
+      "time_utc": "2026-11-06T17:29:42.242367+00:00",
+      "method": "GET",
+      "url": "https://dna.uol.com.br/js/dna.min.js",
+      "host": "dna.uol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.268141+00:00",
+      "method": "GET",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/cookie",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 404,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.268283+00:00",
+      "method": "GET",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/etag",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 412,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.286880+00:00",
+      "method": "GET",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/dpt",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.287605+00:00",
+      "method": "POST",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/sample",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 403,
+      "failure": null,
+      "redirected_from": null
+    }
+  ],
+  "websockets": [],
+  "requests": [
+    {
+      "time_utc": "2026-11-06T17:29:40.790080+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/",
+      "host": "sac.uol.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.001318+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/api/routes",
+      "host": "sac.uol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.001636+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/uol/faq/styles.css",
+      "host": "jsuol.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.001984+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/default/styles/a868542c.styles.css",
+      "host": "jsuol.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.002179+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/uol/style.css",
+      "host": "jsuol.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.002359+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/uol/fixtures.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.002537+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/validation/v0.0.70/validation-all.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.002712+00:00",
+      "method": "GET",
+      "url": "https://sdk.inbenta.io/km/1.21.0/inbenta-km-sdk.js",
+      "host": "sdk.inbenta.io",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.002882+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/default/scripts/a4999143.vendor.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.003041+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/default/scripts/directives/compile.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.003241+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/default/scripts/10fa01b0.scripts.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.003422+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/atendimento/contatos/contatos.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.003589+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/px/jquery.min.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.003738+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/px/bootstrap-tooltip.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.003959+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/g/uol/components/footer.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.004117+00:00",
+      "method": "GET",
+      "url": "https://me.jsuol.com.br/omtr/sac.js",
+      "host": "me.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:41.234156+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/dataFiles/validation/anatelCellphone.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:42.205705+00:00",
+      "method": "GET",
+      "url": "https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-regular.woff",
+      "host": "stc.uol.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:42.218793+00:00",
+      "method": "GET",
+      "url": "https://tm.jsuol.com.br/uoltm.js",
+      "host": "tm.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:42.242102+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/g/eye-catcher/2.11.0/js/uol-eye-catcher.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:42.242367+00:00",
+      "method": "GET",
+      "url": "https://dna.uol.com.br/js/dna.min.js",
+      "host": "dna.uol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:42.242595+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-feature-toggles",
+      "host": "sac.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:42.242804+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/api/login",
+      "host": "sac.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:29:42.243016+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/views/home/home.html",
+      "host": "sac.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.246044+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/helper-eye-catcher-get-menu",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.246315+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/g/eye-catcher/2.11.0/css/uol-eye-catcher.css",
+      "host": "jsuol.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.246522+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/eye-catcher/2.11.0/bg1.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.246735+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/eye-catcher/2.11.0/bg2.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.246989+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/eye-catcher/2.11.0/avatar@1x.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.247663+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/eye-catcher/2.11.0/popover-desktop.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.247901+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/eye-catcher/2.11.0/close-button.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.249794+00:00",
+      "method": "GET",
+      "url": "https://tm.uol.com.br/mercurio.html",
+      "host": "tm.uol.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.249989+00:00",
+      "method": "GET",
+      "url": "https://unpkg.com/@elastic/apm-rum@5.17.5/dist/bundles/elastic-apm-rum.umd.min.js",
+      "host": "unpkg.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.250149+00:00",
+      "method": "GET",
+      "url": "https://www.clarity.ms/tag/qwyxpo7jle",
+      "host": "www.clarity.ms",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.250297+00:00",
+      "method": "GET",
+      "url": "https://tm.jsuol.com.br/modules/policy-banner.js",
+      "host": "tm.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.250445+00:00",
+      "method": "GET",
+      "url": "https://me.jsuol.com.br/aud/uolsac.js",
+      "host": "me.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.250587+00:00",
+      "method": "GET",
+      "url": "https://tm.jsuol.com.br/modules/external/admanager/prmtv.js",
+      "host": "tm.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.250730+00:00",
+      "method": "GET",
+      "url": "https://tm.jsuol.com.br/modules/dmp-uol-sync.js",
+      "host": "tm.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.251050+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/barra/parceiro-async.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.253239+00:00",
+      "method": "GET",
+      "url": "https://jsuol.com.br/bk/sac/componentes/sac-home/0.5.158/main.js",
+      "host": "jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.254771+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/helper-eye-catcher-get-menu",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.256423+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.256632+00:00",
+      "method": "GET",
+      "url": "https://sb.scorecardresearch.com/cs/6036356/beacon.js",
+      "host": "sb.scorecardresearch.com",
+      "resource_type": "script",
+      "status": 302,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.257137+00:00",
+      "method": "GET",
+      "url": "https://tm.jsuol.com.br/modules/mercurio.js",
+      "host": "tm.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.259604+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/41/minimizar.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.259809+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/41/avatar-login.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.259961+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/41/duvidas-pagamento.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.260113+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/41/duvidas-contratacao.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.260271+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/41/comprar.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.260416+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/41/suporte-tecnico.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.260842+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/api/sessions",
+      "host": "sac.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.260984+00:00",
+      "method": "GET",
+      "url": "https://upc.udr.uol.com.br/api/policyVersion",
+      "host": "upc.udr.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.261134+00:00",
+      "method": "GET",
+      "url": "https://4b91477e-f67b-4d81-86db-a9742bd41e9c.edge.permutive.app/4b91477e-f67b-4d81-86db-a9742bd41e9c-web.js",
+      "host": "4b91477e-f67b-4d81-86db-a9742bd41e9c.edge.permutive.app",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.263978+00:00",
+      "method": "GET",
+      "url": "https://udr.uol.com.br/",
+      "host": "udr.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.264135+00:00",
+      "method": "GET",
+      "url": "https://ib.adnxs.com/getuidj",
+      "host": "ib.adnxs.com",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.264555+00:00",
+      "method": "GET",
+      "url": "https://stc.uol.com/c/webfont/projeto-grafico/v2/icones-setas/uol-icones-setas.woff",
+      "host": "stc.uol.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.264705+00:00",
+      "method": "GET",
+      "url": "https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-regular.woff2",
+      "host": "stc.uol.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.264851+00:00",
+      "method": "GET",
+      "url": "https://conteudo.imguol.com.br/c/_layout/v3/logo-30-anos/logo-uol-30-negativo-simples.svg",
+      "host": "conteudo.imguol.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.264996+00:00",
+      "method": "GET",
+      "url": "https://scripts.clarity.ms/0.8.75/clarity.js",
+      "host": "scripts.clarity.ms",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.265137+00:00",
+      "method": "GET",
+      "url": "https://cdn.growthbook.io/api/features/sdk-qwcPnwrrTQ918iYL",
+      "host": "cdn.growthbook.io",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.265636+00:00",
+      "method": "GET",
+      "url": "https://upc.udr.uol.com.br/api/userConsent",
+      "host": "upc.udr.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.266244+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-flow-menus",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.266398+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-get-onboardings",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.266544+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/gateway/sac-home-get-seen-onboardings",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 401,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.266687+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/api/login",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.266829+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-header",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.266975+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/gateway/sac-home-user-info",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 401,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.267148+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-campaign-banner",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.267301+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-campaign-banner",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.267608+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/api/login",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.267752+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-faq-config",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.267994+00:00",
+      "method": "GET",
+      "url": "https://www.uol.com.br/dna-iframe.html",
+      "host": "www.uol.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.268141+00:00",
+      "method": "GET",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/cookie",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 404,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.268283+00:00",
+      "method": "GET",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/etag",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 412,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.269542+00:00",
+      "method": "GET",
+      "url": "https://sb.scorecardresearch.com/internal-cs/6036356/beacon-and.js",
+      "host": "sb.scorecardresearch.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": "https://sb.scorecardresearch.com/cs/6036356/beacon.js"
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.270780+00:00",
+      "method": "GET",
+      "url": "https://connect.facebook.net/en_US/sdk.js",
+      "host": "connect.facebook.net",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.271166+00:00",
+      "method": "GET",
+      "url": "https://cdn.growthbook.io/sub/sdk-qwcPnwrrTQ918iYL",
+      "host": "cdn.growthbook.io",
+      "resource_type": "eventsource",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.271815+00:00",
+      "method": "GET",
+      "url": "blob:https://sac.uol.com.br/367accea-9e4e-42c0-a0e0-3065b9abdaf5",
+      "host": "",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.271967+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/1300_outback_nov26.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.273114+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/Logo%20SAC.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.273268+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/Componente.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.273423+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/Icone-atendimento-28x28px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.273567+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/Icone-financeiro-28x28px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.273708+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/Icone-minha-conta-28x28px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.273855+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/Icone-ajuda-25x25.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.274107+00:00",
+      "method": "GET",
+      "url": "https://4b91477e-f67b-4d81-86db-a9742bd41e9c.prmutv.co/v2.0/pxid",
+      "host": "4b91477e-f67b-4d81-86db-a9742bd41e9c.prmutv.co",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.274254+00:00",
+      "method": "GET",
+      "url": "https://ib.adnxs.com/getuidj",
+      "host": "ib.adnxs.com",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.274883+00:00",
+      "method": "GET",
+      "url": "https://cloud.google.com/ai/gen-app-builder/client",
+      "host": "cloud.google.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.275279+00:00",
+      "method": "GET",
+      "url": "https://api.permutive.app/ctx/v1/state",
+      "host": "api.permutive.app",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.275579+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/ui/icon/search.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.277536+00:00",
+      "method": "GET",
+      "url": "https://cm.g.doubleclick.net/pixel",
+      "host": "cm.g.doubleclick.net",
+      "resource_type": "image",
+      "status": 302,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.277907+00:00",
+      "method": "GET",
+      "url": "https://api.permutive.app/v2.0/geoip",
+      "host": "api.permutive.app",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.278054+00:00",
+      "method": "GET",
+      "url": "https://cdn.permutive.app/models/v2/4b91477e-f67b-4d81-86db-a9742bd41e9c-models.bin",
+      "host": "cdn.permutive.app",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.278706+00:00",
+      "method": "GET",
+      "url": "https://cm.g.doubleclick.net/pixel",
+      "host": "cm.g.doubleclick.net",
+      "resource_type": "image",
+      "status": 302,
+      "failure": null,
+      "redirected_from": "https://cm.g.doubleclick.net/pixel"
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.279438+00:00",
+      "method": "GET",
+      "url": "https://sb.scorecardresearch.com/b",
+      "host": "sb.scorecardresearch.com",
+      "resource_type": "image",
+      "status": 302,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.279776+00:00",
+      "method": "GET",
+      "url": "https://googlesync.permutive.com/v2.0/px/sync",
+      "host": "googlesync.permutive.com",
+      "resource_type": "image",
+      "status": 201,
+      "failure": null,
+      "redirected_from": "https://cm.g.doubleclick.net/pixel"
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.280522+00:00",
+      "method": "GET",
+      "url": "https://sb.scorecardresearch.com/b2",
+      "host": "sb.scorecardresearch.com",
+      "resource_type": "image",
+      "status": 204,
+      "failure": null,
+      "redirected_from": "https://sb.scorecardresearch.com/b"
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.281022+00:00",
+      "method": "POST",
+      "url": "https://api.permutive.app/v2.0/identify",
+      "host": "api.permutive.app",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.282207+00:00",
+      "method": "POST",
+      "url": "https://b.clarity.ms/collect",
+      "host": "b.clarity.ms",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.282644+00:00",
+      "method": "POST",
+      "url": "https://analytics.google.com/g/collect",
+      "host": "analytics.google.com",
+      "resource_type": "fetch",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.282752+00:00",
+      "method": "POST",
+      "url": "https://stats.g.doubleclick.net/g/collect",
+      "host": "stats.g.doubleclick.net",
+      "resource_type": "ping",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.282851+00:00",
+      "method": "GET",
+      "url": "https://www.google.com.br/ads/ga-audiences",
+      "host": "www.google.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.283211+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/14/23/28/29/logo-google-play.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.283306+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/14/23/28/29/badge-apple.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.283436+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/14/23/28/app-meu-uol_738x150.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.283533+00:00",
+      "method": "GET",
+      "url": "https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-bold.woff",
+      "host": "stc.uol.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.283885+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/gateway/sac-quittance-debit-statuses",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 401,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.284990+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/meios-de-pagamento-60x60px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.285091+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/meus-produtos-60x60px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.285185+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/extrato-60x60px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.285279+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/boleto-60x60px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.285371+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/3/4/5/alterar-senha-60x60px.svg",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.286781+00:00",
+      "method": "GET",
+      "url": "https://www.gstatic.com/_/mss/boq-cloud-ai-ucs/_/js/k=boq-cloud-ai-ucs.UcsWidgetUi.pt_BR.-z0BT0XvaO8.2021.O/am=AAAABhg/d=1/rs=AAj4NmwOOvPstDsykfLTwM_ttonXEcg-nw/m=bootstrap_module,ucs_widget_module,xlite_module",
+      "host": "www.gstatic.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.286880+00:00",
+      "method": "GET",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/dpt",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.286980+00:00",
+      "method": "GET",
+      "url": "https://secure.adnxs.com/seg",
+      "host": "secure.adnxs.com",
+      "resource_type": "image",
+      "status": 307,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.287336+00:00",
+      "method": "GET",
+      "url": "https://secure.adnxs.com/bounce",
+      "host": "secure.adnxs.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": "https://secure.adnxs.com/seg"
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.287605+00:00",
+      "method": "POST",
+      "url": "https://api.security.pagseguro.uol.com.br/dna/service/sample",
+      "host": "api.security.pagseguro.uol.com.br",
+      "resource_type": "xhr",
+      "status": 403,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.288000+00:00",
+      "method": "POST",
+      "url": "https://b.clarity.ms/collect",
+      "host": "b.clarity.ms",
+      "resource_type": "xhr",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.288596+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.288685+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.288775+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.288866+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.288959+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.289049+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.289140+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.289232+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.289321+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css2",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.289411+00:00",
+      "method": "GET",
+      "url": "https://www.google.com/recaptcha/api.js",
+      "host": "www.google.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.289503+00:00",
+      "method": "POST",
+      "url": "https://run.service.uol.com.br/intake/v2/rum/events",
+      "host": "run.service.uol.com.br",
+      "resource_type": "fetch",
+      "status": 202,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.291162+00:00",
+      "method": "GET",
+      "url": "https://www.gstatic.com/recaptcha/releases/bSuJ2xBC8cFy7pM4Z3Hu9boH/recaptcha__pt_br.js",
+      "host": "www.gstatic.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.291578+00:00",
+      "method": "POST",
+      "url": "https://api.permutive.app/adv/v4/segment",
+      "host": "api.permutive.app",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.291752+00:00",
+      "method": "POST",
+      "url": "https://api.permutive.app/v1.0/state",
+      "host": "api.permutive.app",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.291913+00:00",
+      "method": "GET",
+      "url": "https://www.google.com/recaptcha/api2/anchor",
+      "host": "www.google.com",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.292137+00:00",
+      "method": "POST",
+      "url": "https://sac.uol.com.br/api/public/gateway/sac-home-footer",
+      "host": "sac.uol.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.292464+00:00",
+      "method": "GET",
+      "url": "https://secure.adnxs.com/seg",
+      "host": "secure.adnxs.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.292559+00:00",
+      "method": "GET",
+      "url": "https://secure.adnxs.com/seg",
+      "host": "secure.adnxs.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.292978+00:00",
+      "method": "GET",
+      "url": "https://www.gstatic.com/recaptcha/releases/bSuJ2xBC8cFy7pM4Z3Hu9boH/styles__ltr.css",
+      "host": "www.gstatic.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.293069+00:00",
+      "method": "GET",
+      "url": "https://www.gstatic.com/recaptcha/releases/bSuJ2xBC8cFy7pM4Z3Hu9boH/recaptcha__pt_br.js",
+      "host": "www.gstatic.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.293710+00:00",
+      "method": "GET",
+      "url": "https://www.google.com/recaptcha/api2/webworker.js",
+      "host": "www.google.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.293800+00:00",
+      "method": "GET",
+      "url": "https://www.gstatic.com/recaptcha/api2/logo_48.png",
+      "host": "www.gstatic.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.293894+00:00",
+      "method": "GET",
+      "url": "https://fonts.gstatic.com/s/roboto/v48/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+      "host": "fonts.gstatic.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.294449+00:00",
+      "method": "GET",
+      "url": "https://www.gstatic.com/recaptcha/releases/bSuJ2xBC8cFy7pM4Z3Hu9boH/recaptcha__pt_br.js",
+      "host": "www.gstatic.com",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.294747+00:00",
+      "method": "GET",
+      "url": "https://tm.uol.com.br/purge-clients.html",
+      "host": "tm.uol.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.294907+00:00",
+      "method": "GET",
+      "url": "https://tm.uol.com.br/purge-clients.html",
+      "host": "tm.uol.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.295001+00:00",
+      "method": "GET",
+      "url": "https://c.clarity.ms/c.gif",
+      "host": "c.clarity.ms",
+      "resource_type": "image",
+      "status": 302,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.295479+00:00",
+      "method": "GET",
+      "url": "https://tm.jsuol.com.br/modules/client-purge.js",
+      "host": "tm.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.295639+00:00",
+      "method": "GET",
+      "url": "https://tm.jsuol.com.br/modules/client-purge.js",
+      "host": "tm.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.296333+00:00",
+      "method": "POST",
+      "url": "https://api.permutive.app/v2.0/batch/events",
+      "host": "api.permutive.app",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.296540+00:00",
+      "method": "GET",
+      "url": "https://c.bing.com/c.gif",
+      "host": "c.bing.com",
+      "resource_type": "image",
+      "status": 302,
+      "failure": null,
+      "redirected_from": "https://c.clarity.ms/c.gif"
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.296657+00:00",
+      "method": "POST",
+      "url": "https://b.clarity.ms/collect",
+      "host": "b.clarity.ms",
+      "resource_type": "xhr",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.297411+00:00",
+      "method": "GET",
+      "url": "https://c.clarity.ms/c.gif",
+      "host": "c.clarity.ms",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": "https://c.bing.com/c.gif"
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.297739+00:00",
+      "method": "POST",
+      "url": "https://run.service.uol.com.br/intake/v2/rum/events",
+      "host": "run.service.uol.com.br",
+      "resource_type": "fetch",
+      "status": 202,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.298032+00:00",
+      "method": "POST",
+      "url": "https://analytics.google.com/g/collect",
+      "host": "analytics.google.com",
+      "resource_type": "fetch",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.298264+00:00",
+      "method": "POST",
+      "url": "https://run.service.uol.com.br/intake/v2/rum/events",
+      "host": "run.service.uol.com.br",
+      "resource_type": "fetch",
+      "status": 202,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.298473+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/Banner_Djavan_1300x230px.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.298694+00:00",
+      "method": "POST",
+      "url": "https://b.clarity.ms/collect",
+      "host": "b.clarity.ms",
+      "resource_type": "xhr",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.298909+00:00",
+      "method": "POST",
+      "url": "https://run.service.uol.com.br/intake/v2/rum/events",
+      "host": "run.service.uol.com.br",
+      "resource_type": "fetch",
+      "status": 202,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.299133+00:00",
+      "method": "GET",
+      "url": "https://imguol.com/p/sac/cms/Banner_BestOfBlues_1300x230pxbestofblues.png",
+      "host": "imguol.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.299361+00:00",
+      "method": "POST",
+      "url": "https://b.clarity.ms/collect",
+      "host": "b.clarity.ms",
+      "resource_type": "xhr",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:30:02.299562+00:00",
+      "method": "POST",
+      "url": "https://run.service.uol.com.br/intake/v2/rum/events",
+      "host": "run.service.uol.com.br",
+      "resource_type": "fetch",
+      "status": 202,
+      "failure": null,
+      "redirected_from": null
+    }
+  ],
+  "query_strings_included": false
+}

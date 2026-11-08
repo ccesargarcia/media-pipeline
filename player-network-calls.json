@@ -1,0 +1,29 @@
+{
+  "page_url": "https://player.uol.com.br/",
+  "final_page_url": "about:blank",
+  "captured_at_utc": "2026-11-05T22:31:59.022141+00:00",
+  "targets": [
+    "api.security.uol.com.br",
+    "api.security.pagseguro.uol.com.br",
+    "dna.uol.com.br"
+  ],
+  "request_count": 1,
+  "domains": {
+    "player.uol.com.br": 1
+  },
+  "target_matches": [],
+  "websockets": [],
+  "requests": [
+    {
+      "time_utc": "2026-11-05T22:31:58.868708+00:00",
+      "method": "GET",
+      "url": "https://player.uol.com.br/",
+      "host": "player.uol.com.br",
+      "resource_type": "document",
+      "status": null,
+      "failure": "net::ERR_NAME_NOT_RESOLVED",
+      "redirected_from": null
+    }
+  ],
+  "query_strings_included": false
+}

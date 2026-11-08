@@ -1,0 +1,1808 @@
+{
+  "page_url": "https://corinthians.com.br/",
+  "final_page_url": "https://www.corinthians.com.br/index.php",
+  "captured_at_utc": "2026-11-06T18:12:07.570206+00:00",
+  "targets": [
+    "api.security.uol.com.br",
+    "dna.uol.com.br"
+  ],
+  "request_count": 177,
+  "domains": {
+    "analytics.google.com": 2,
+    "code.jquery.com": 1,
+    "connect.facebook.net": 2,
+    "corinthians-tv.s3.sa-east-1.amazonaws.com": 3,
+    "corinthians.com.br": 1,
+    "ep1.adtrafficquality.google": 2,
+    "ep2.adtrafficquality.google": 3,
+    "fonts.googleapis.com": 1,
+    "fonts.gstatic.com": 2,
+    "googleads.g.doubleclick.net": 2,
+    "pagead2.googlesyndication.com": 5,
+    "securepubads.g.doubleclick.net": 2,
+    "static.corinthians.com.br": 126,
+    "static.esm.com.br": 1,
+    "stats.g.doubleclick.net": 2,
+    "www.corinthians.com.br": 10,
+    "www.facebook.com": 1,
+    "www.google.com": 1,
+    "www.google.com.br": 2,
+    "www.googletagmanager.com": 7,
+    "www.googletagservices.com": 1
+  },
+  "target_matches": [],
+  "websockets": [],
+  "requests": [
+    {
+      "time_utc": "2026-11-06T18:11:46.406081+00:00",
+      "method": "GET",
+      "url": "https://corinthians.com.br/",
+      "host": "corinthians.com.br",
+      "resource_type": "document",
+      "status": 301,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:46.462966+00:00",
+      "method": "GET",
+      "url": "https://www.corinthians.com.br/index.php",
+      "host": "www.corinthians.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": "https://corinthians.com.br/"
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.027027+00:00",
+      "method": "GET",
+      "url": "https://fonts.googleapis.com/css",
+      "host": "fonts.googleapis.com",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.027452+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/dist/css/libs.min.css",
+      "host": "static.corinthians.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.028574+00:00",
+      "method": "GET",
+      "url": "https://www.corinthians.com.br/assets/css/style.min.css",
+      "host": "www.corinthians.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.028769+00:00",
+      "method": "GET",
+      "url": "https://www.corinthians.com.br/assets/css/ads.css",
+      "host": "www.corinthians.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.029443+00:00",
+      "method": "GET",
+      "url": "https://code.jquery.com/jquery-3.3.1.min.js",
+      "host": "code.jquery.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.029927+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/fonts/fontawesome-pro-5.15.4/css/all.css",
+      "host": "static.corinthians.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.030270+00:00",
+      "method": "GET",
+      "url": "https://www.googletagservices.com/tag/js/gpt.js",
+      "host": "www.googletagservices.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.030949+00:00",
+      "method": "GET",
+      "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+      "host": "pagead2.googlesyndication.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.032239+00:00",
+      "method": "GET",
+      "url": "https://www.corinthians.com.br/assets/js/ads.js",
+      "host": "www.corinthians.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.032633+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/escudos/SCCP_escudo-150px.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.032861+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones/search-icon.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.033050+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones/logo-fieltorcedor-2023-P.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.033263+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones/usccp_H_dourado.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.033542+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones/chuteinicial.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.033747+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/corinthians_tv-cropped.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.033936+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones/Logo_neo_quimica_arena_vert_branco.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.034107+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/calendario-cropped.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.034271+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/svg/instagram.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.034416+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/twitter-x-v2.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.034557+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/svg/facebook.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.034699+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/svg/youtube.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.034838+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/tiktok/header48x48.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.034976+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/whatsapp_icone.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.035113+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17740522234bf38d4a8563148936213042fa7b8b8a.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.035248+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1c2f2d8079ce8b41954cddf027e70b09.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.035399+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/9798c1e3f7debf7ebb0a7c2f0ec3dc9b.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.035537+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/e06b94bc/1793913325bea6cfd50b4f5e3c735a972cf0eb8450.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.035674+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/f9fe8988/17939133266c2e49911b68d315555d5b3eb0dd45bf.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.035813+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/2511b6af/179384654635adf1ae7eb5734122c84b7a9ea5cc13.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.036134+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/d21b4538/1793846546e6a4f65e7355bb8b7671c3a18003b146.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.037007+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/6d96d581/17937960525aa3405a3f865c10f420a4a7b55cbff3.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.037180+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/0ca9166d/1793796052f0b76267fbe12b936bd65e203dc675c1.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.037350+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/459b255a/179372584520885c72ca35d75619d6a378edea9f76.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.037496+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/a6943f91/1793725861c54e7837e0cd0ced286cb5995327d1ab.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.037639+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/wDkTeNzU/home_desktop_1920x505.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.037779+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/rRVK3bXy/1790949209bb6cbb95e11a4395a130339f75a62a6d.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.037924+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17912210574fcb3c872bf47756bb213a389d65355e.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.038086+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791218737d673961232714c34533a8a377f56090c.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.038229+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/179122083425195d1d420328b29ade310f7d629abd.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.038374+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1778264973aad9b1bc6c3120428e5544261f948727.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.038518+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791218978bf761af3a00f723f95a565761dc93dd1.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.038692+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791221199d53f5c705acaef59ea74ea594bf4ff31.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.038847+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/179122097565de3b890fee3f11e7f754aa92f93cc0.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.039036+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17924306629adb6b929b7795045a24ce72de149297.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.039202+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17912212465d0c94571c775af337a8ce5daf98409d.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.039376+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791219161fea4d773b41ad342bf02cfe70dfd2752.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.039690+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791218917ef0fcd30757f410996b4a3736f4ca1b2.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.039870+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791221567cd5178e9d3562ad0305604d74eae2bdd.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.040071+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17912195005f6b5534fcf9a4faeacc71b022a6eba1.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.040229+00:00",
+      "method": "GET",
+      "url": "https://connect.facebook.net/en_US/fbevents.js",
+      "host": "connect.facebook.net",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.040398+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17912215957145a058cd19110f72d37472f2954286.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.040834+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791221450e32aca2680d77aed634cc576f7b24cf2.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.041044+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791220918f1d9c9bd1fe1b29114d94a550eed37a1.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.041225+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/179122100739cc8bbc0b1da52bee31724022b90aec.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.041389+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791218811afce5bf4175a5744de5119a68bd58783.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.041559+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17912192203403602d6b884e5976111108278ea565.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.041728+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/179121894799179bdd063f1230028642b9a939a70b.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.041889+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17912192671c719709921c0b93fb98e94e37b3d9f3.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.042052+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791219370020647002eaf24546585ed70305d288b.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.042206+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791220877bc87ea931672b39dbff4c3f01d7f7cfe.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.042374+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791219311136cd165b0b3bd1608f9c19aa4fe67be.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.042554+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791221302372c38224e0d3ebe802ef77cbf9c8164.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.042713+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791219787174323d1fafccfb9c61cdccd46780a49.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.042856+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791220434b2dc563ea1997ad6390acbc57e6573a3.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.042998+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791218697815a0c265912ec30c97ac442ec1f0c38.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.043160+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791221696bea8878715a0d0e2d656e141d3086091.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.043368+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/17912194706cac284666565d2a42adbff60f156755.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.043526+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/179121883885c7368c678790765d62d7186242aa22.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.043681+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791218788a00d010b21a215119fea1cf4f5c93c81.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.043848+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/179122132538b552c867999d4f2a0be4ff9f5588f4.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.044003+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791219348d44d3c3cb52ed11f869be6092eaff45c.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.044173+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1791219522456fcfed45a77f2da706806519f967d2.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.044325+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1d338faa/1793972911b02d46e8a3d8d9fd6028f3f2c2495864.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.044500+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/29c9f02b/1793901991d58cc99982459ca8d73b89068f53e446.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.044656+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/4d34137d/179380462362459f4e225e2f4f196c9d42f4ad7111.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.044826+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/asa-delta.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.044978+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/basquete.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.045109+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/beach-soccer-futsal.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.045270+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/bocha.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.045417+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/boxe.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.045576+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/futebol-americano.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.045711+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/handebol.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.045845+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/mma.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.045975+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/natacao-esportes-aquaticos-triatlon.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.046116+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/rally.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.046251+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/remo.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.046417+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/skate.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.046596+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/volei.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.046727+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/xadrez.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.047006+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/corre.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.047141+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/fut-mesa.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.047278+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/futsal-feminino.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.047468+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/peteca.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.047633+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/tamboreu.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.047767+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/tenis.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.047902+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/basquete-cadeirante.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.048066+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icones-modalidades/fut-amputados.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.048199+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/16b72940c3bc37d30f4468b09673dfe5.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.048337+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/8d491473e6019321af84866baf8f2b72.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.048468+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/0bf2db855b6f804a1f19ed7deb759c12.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.048599+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/1645214963e152e282bf41bde2251ea0d5fd9f329a.jpeg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.048764+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/273124fbececb8d4536076490d74cca2.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.048898+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/icon-linkedin.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.049037+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/tiktok/footer.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.049214+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/google-news-symbol.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.049497+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/nike.svg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.049948+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/banco_bmg_novo.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050066+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/Ezze-v2.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050190+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/Broto_Legal.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050281+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/logo_BYD.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050375+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/frimesa_preto_site_novo.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050469+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/PX-v2.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050558+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/ze_delivery_preto_new.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050652+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/brahma_preto.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050739+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/black_tools_150x54_novo.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050827+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/novo_Oh_preto_200x200.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.050914+00:00",
+      "method": "GET",
+      "url": "https://corinthians-tv.s3.sa-east-1.amazonaws.com/img/matrix_logo_preto.png",
+      "host": "corinthians-tv.s3.sa-east-1.amazonaws.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051049+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/eFootball-KONAMI-2026.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051159+00:00",
+      "method": "GET",
+      "url": "https://corinthians-tv.s3.sa-east-1.amazonaws.com/img/logo_ava_preta_em_alta.png",
+      "host": "corinthians-tv.s3.sa-east-1.amazonaws.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051249+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/logo-gatorade.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051376+00:00",
+      "method": "GET",
+      "url": "https://corinthians-tv.s3.sa-east-1.amazonaws.com/img/logo_soccer_grass_preto_corte.png",
+      "host": "corinthians-tv.s3.sa-east-1.amazonaws.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051462+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/thinkers.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051551+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/logo_appgas_uso_restrito_positiva.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051641+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/uol-30anos.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051726+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/matrix_logo_preto.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051829+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/logo_ava_preta_em_alta.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.051930+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/soccer_grass_preto.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.052030+00:00",
+      "method": "GET",
+      "url": "https://static.esm.com.br/esm/logo_esm_dourado_negativo.svg",
+      "host": "static.esm.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.052118+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/dist/js/libs.min.js",
+      "host": "static.corinthians.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.052207+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/dist/js/main.min.js",
+      "host": "static.corinthians.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.052320+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.052422+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/js/cookies.js",
+      "host": "static.corinthians.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.258308+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtm.js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.268436+00:00",
+      "method": "GET",
+      "url": "https://www.corinthians.com.br/ads",
+      "host": "www.corinthians.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.307062+00:00",
+      "method": "GET",
+      "url": "https://fonts.gstatic.com/s/raleway/v37/1Ptug8zYS_SKggPNyC0IT4ttDfA.woff2",
+      "host": "fonts.gstatic.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.308393+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/fonts/fontawesome-pro-5.15.4/webfonts/fa-brands-400.woff2",
+      "host": "static.corinthians.com.br",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.324634+00:00",
+      "method": "GET",
+      "url": "https://www.corinthians.com.br/ads",
+      "host": "www.corinthians.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.324978+00:00",
+      "method": "GET",
+      "url": "https://www.corinthians.com.br/ads",
+      "host": "www.corinthians.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.361638+00:00",
+      "method": "GET",
+      "url": "https://fonts.gstatic.com/s/raleway/v37/1Pt_g8zYS_SKggPNyCgSQamb1W0lwk4S4TbMDrMfIB1fyc4.woff2",
+      "host": "fonts.gstatic.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:11:47.361921+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/files/assets/fonts/fontawesome-pro-5.15.4/webfonts/fa-solid-900.woff2",
+      "host": "static.corinthians.com.br",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.450303+00:00",
+      "method": "POST",
+      "url": "https://www.corinthians.com.br/ads/pageview",
+      "host": "www.corinthians.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": "net::ERR_ABORTED",
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.450509+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/b5fd59a8/179216806064f07f012a35c83d7c556ba0b69ef64e.gif",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.450662+00:00",
+      "method": "POST",
+      "url": "https://www.corinthians.com.br/ads/pageview",
+      "host": "www.corinthians.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": "net::ERR_ABORTED",
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.450798+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/tsoZVPlA/3ca4559d173821ef28dbebd1be9e9c1f.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.450939+00:00",
+      "method": "GET",
+      "url": "https://securepubads.g.doubleclick.net/pagead/managed/js/gpt/m202611030101/pubads_impl.js",
+      "host": "securepubads.g.doubleclick.net",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.451458+00:00",
+      "method": "GET",
+      "url": "https://connect.facebook.net/signals/config/550840126185095",
+      "host": "connect.facebook.net",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.452232+00:00",
+      "method": "POST",
+      "url": "https://www.corinthians.com.br/ads/pageview",
+      "host": "www.corinthians.com.br",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": "net::ERR_ABORTED",
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.452369+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/uploads/YKNCr3wP/885905b920fed92506e476a0843c8f74.jpg",
+      "host": "static.corinthians.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.452518+00:00",
+      "method": "GET",
+      "url": "https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202611030101/show_ads_impl_fy2021.js",
+      "host": "pagead2.googlesyndication.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.453582+00:00",
+      "method": "GET",
+      "url": "https://googleads.g.doubleclick.net/pagead/html/r20261104/r20190131/zrt_lookup_fy2021.html",
+      "host": "googleads.g.doubleclick.net",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.453730+00:00",
+      "method": "GET",
+      "url": "https://pagead2.googlesyndication.com/pagead/gen_204",
+      "host": "pagead2.googlesyndication.com",
+      "resource_type": "image",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.453966+00:00",
+      "method": "GET",
+      "url": "https://googleads.g.doubleclick.net/pagead/ads",
+      "host": "googleads.g.doubleclick.net",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.454522+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.455459+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.455615+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.455763+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.456075+00:00",
+      "method": "POST",
+      "url": "https://analytics.google.com/g/collect",
+      "host": "analytics.google.com",
+      "resource_type": "fetch",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.456239+00:00",
+      "method": "POST",
+      "url": "https://stats.g.doubleclick.net/g/collect",
+      "host": "stats.g.doubleclick.net",
+      "resource_type": "ping",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.456392+00:00",
+      "method": "GET",
+      "url": "https://www.google.com.br/ads/ga-audiences",
+      "host": "www.google.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.456630+00:00",
+      "method": "GET",
+      "url": "https://www.facebook.com/tr/",
+      "host": "www.facebook.com",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.457014+00:00",
+      "method": "GET",
+      "url": "https://securepubads.g.doubleclick.net/pagead/managed/dict/m202611050101/gpt",
+      "host": "securepubads.g.doubleclick.net",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.459178+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.459803+00:00",
+      "method": "POST",
+      "url": "https://analytics.google.com/g/collect",
+      "host": "analytics.google.com",
+      "resource_type": "fetch",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.459957+00:00",
+      "method": "POST",
+      "url": "https://stats.g.doubleclick.net/g/collect",
+      "host": "stats.g.doubleclick.net",
+      "resource_type": "ping",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.460103+00:00",
+      "method": "GET",
+      "url": "https://www.google.com.br/ads/ga-audiences",
+      "host": "www.google.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.460650+00:00",
+      "method": "GET",
+      "url": "https://ep1.adtrafficquality.google/getconfig/sodar",
+      "host": "ep1.adtrafficquality.google",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.461062+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/corinthians-tv-32x32.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.461418+00:00",
+      "method": "GET",
+      "url": "https://static.corinthians.com.br/img/corinthians-tv-32x32.png",
+      "host": "static.corinthians.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.461900+00:00",
+      "method": "GET",
+      "url": "https://ep2.adtrafficquality.google/sodar/sodar2.js",
+      "host": "ep2.adtrafficquality.google",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.462397+00:00",
+      "method": "GET",
+      "url": "https://ep2.adtrafficquality.google/sodar/sodar2/257/runner.html",
+      "host": "ep2.adtrafficquality.google",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.462625+00:00",
+      "method": "GET",
+      "url": "https://www.google.com/recaptcha/api2/aframe",
+      "host": "www.google.com",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.463217+00:00",
+      "method": "GET",
+      "url": "https://pagead2.googlesyndication.com/bg/6D8_hzYSj68hz-lwW__9Oq0piess83K8dvBy2IeJuVs.js",
+      "host": "pagead2.googlesyndication.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.463854+00:00",
+      "method": "GET",
+      "url": "https://pagead2.googlesyndication.com/pagead/sodar",
+      "host": "pagead2.googlesyndication.com",
+      "resource_type": "image",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.464645+00:00",
+      "method": "GET",
+      "url": "https://ep2.adtrafficquality.google/generate_204",
+      "host": "ep2.adtrafficquality.google",
+      "resource_type": "image",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:12:07.465215+00:00",
+      "method": "GET",
+      "url": "https://ep1.adtrafficquality.google/pagead/sodar",
+      "host": "ep1.adtrafficquality.google",
+      "resource_type": "image",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    }
+  ],
+  "query_strings_included": false
+}

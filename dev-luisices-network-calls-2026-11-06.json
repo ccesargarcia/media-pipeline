@@ -1,0 +1,469 @@
+{
+  "page_url": "https://dev.luisices.com.br/",
+  "final_page_url": "https://dev.luisices.com.br/login",
+  "captured_at_utc": "2026-11-06T18:08:40.743739+00:00",
+  "targets": [
+    "dev.luisices.com.br"
+  ],
+  "request_count": 29,
+  "domains": {
+    "": 1,
+    "apis.google.com": 2,
+    "dev.luisices.com.br": 15,
+    "firebase.googleapis.com": 1,
+    "firebaseinstallations.googleapis.com": 1,
+    "firebaselogging-pa.googleapis.com": 1,
+    "firebaseremoteconfig.googleapis.com": 1,
+    "luisices-dev.firebaseapp.com": 2,
+    "o4512090827980800.ingest.us.sentry.io": 2,
+    "static.cloudflareinsights.com": 1,
+    "www.googleapis.com": 1,
+    "www.googletagmanager.com": 1
+  },
+  "target_matches": [
+    {
+      "time_utc": "2026-11-06T18:08:18.259939+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/",
+      "host": "dev.luisices.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:19.871022+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/cdn-cgi/speculation",
+      "host": "dev.luisices.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352090+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/main-C3KpNIod.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352398+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-react-CtpGcZYC.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352590+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-pdf-Cb2k3ulq.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352763+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-charts-Blm-24T0.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352916+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-firebase-D4Dh-8Py.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.353059+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-ui-Chap1Y7I.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.353200+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-sentry-DVRwEkO6.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.354735+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/main-BA254ATP.css",
+      "host": "dev.luisices.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.640033+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/manrope-latin-C46ZzDBF.woff2",
+      "host": "dev.luisices.com.br",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.640653+00:00",
+      "method": "POST",
+      "url": "https://dev.luisices.com.br/cdn-cgi/rum",
+      "host": "dev.luisices.com.br",
+      "resource_type": "xhr",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.641345+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/favicon.ico",
+      "host": "dev.luisices.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.645798+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/images/login-bg.avif",
+      "host": "dev.luisices.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.645948+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/favicon.ico",
+      "host": "dev.luisices.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    }
+  ],
+  "websockets": [],
+  "requests": [
+    {
+      "time_utc": "2026-11-06T18:08:18.259939+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/",
+      "host": "dev.luisices.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:19.871022+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/cdn-cgi/speculation",
+      "host": "dev.luisices.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352090+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/main-C3KpNIod.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352398+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-react-CtpGcZYC.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352590+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-pdf-Cb2k3ulq.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352763+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-charts-Blm-24T0.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.352916+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-firebase-D4Dh-8Py.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.353059+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-ui-Chap1Y7I.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.353200+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/vendor-sentry-DVRwEkO6.js",
+      "host": "dev.luisices.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.354735+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/main-BA254ATP.css",
+      "host": "dev.luisices.com.br",
+      "resource_type": "stylesheet",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.355306+00:00",
+      "method": "GET",
+      "url": "https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092",
+      "host": "static.cloudflareinsights.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:20.603257+00:00",
+      "method": "GET",
+      "url": "blob:https://dev.luisices.com.br/5be530da-2b91-49d1-9f16-3524d96280ff",
+      "host": "",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.640033+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/assets/manrope-latin-C46ZzDBF.woff2",
+      "host": "dev.luisices.com.br",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.640653+00:00",
+      "method": "POST",
+      "url": "https://dev.luisices.com.br/cdn-cgi/rum",
+      "host": "dev.luisices.com.br",
+      "resource_type": "xhr",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.641345+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/favicon.ico",
+      "host": "dev.luisices.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.641781+00:00",
+      "method": "GET",
+      "url": "https://firebase.googleapis.com/v1alpha/projects/-/apps/1:998962751129:web:a4699659829f0b01b07a08/webConfig",
+      "host": "firebase.googleapis.com",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.643040+00:00",
+      "method": "POST",
+      "url": "https://firebaseinstallations.googleapis.com/v1/projects/luisices-dev/installations",
+      "host": "firebaseinstallations.googleapis.com",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.643674+00:00",
+      "method": "GET",
+      "url": "https://apis.google.com/js/api.js",
+      "host": "apis.google.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.644889+00:00",
+      "method": "GET",
+      "url": "https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.etOqPKhAhvg.O/m=gapi_iframes/rt=j/sv=1/d=1/ed=1/rs=AHpOoo-l5JrVgGKVELwC844E6riBHX86-w/cb=gapi.loaded_0",
+      "host": "apis.google.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.645389+00:00",
+      "method": "GET",
+      "url": "https://luisices-dev.firebaseapp.com/__/auth/iframe",
+      "host": "luisices-dev.firebaseapp.com",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.645609+00:00",
+      "method": "POST",
+      "url": "https://o4512090827980800.ingest.us.sentry.io/api/4512090844626944/envelope/",
+      "host": "o4512090827980800.ingest.us.sentry.io",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.645798+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/images/login-bg.avif",
+      "host": "dev.luisices.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.645948+00:00",
+      "method": "GET",
+      "url": "https://dev.luisices.com.br/favicon.ico",
+      "host": "dev.luisices.com.br",
+      "resource_type": "other",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.646897+00:00",
+      "method": "GET",
+      "url": "https://luisices-dev.firebaseapp.com/__/auth/iframe.js",
+      "host": "luisices-dev.firebaseapp.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.647514+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.648470+00:00",
+      "method": "POST",
+      "url": "https://firebaseremoteconfig.googleapis.com/v1/projects/luisices-dev/namespaces/fireperf:fetch",
+      "host": "firebaseremoteconfig.googleapis.com",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.649285+00:00",
+      "method": "GET",
+      "url": "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getProjectConfig",
+      "host": "www.googleapis.com",
+      "resource_type": "xhr",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.650214+00:00",
+      "method": "POST",
+      "url": "https://o4512090827980800.ingest.us.sentry.io/api/4512090844626944/envelope/",
+      "host": "o4512090827980800.ingest.us.sentry.io",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T18:08:40.650759+00:00",
+      "method": "POST",
+      "url": "https://firebaselogging-pa.googleapis.com/v1/firelog/legacy/log",
+      "host": "firebaselogging-pa.googleapis.com",
+      "resource_type": "ping",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    }
+  ],
+  "query_strings_included": false
+}

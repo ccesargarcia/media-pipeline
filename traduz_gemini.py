@@ -113,7 +113,7 @@ def listar_modelos_flash(api_key: str) -> list[str]:
         if "generateContent" not in metodos:
             continue
         nome = m.get("name", "").replace("models/", "")
-        if any(x in nome for x in ("tts", "image", "vision", "embedding", "aqa", "bison", "learnlm")):
+        if any(x in nome for x in ("tts", "image", "vision", "embedding", "aqa", "bison", "learnlm", "omni", "audio", "live", "realtime")):
             continue
         disponiveis.append(nome)
 
@@ -123,11 +123,11 @@ def listar_modelos_flash(api_key: str) -> list[str]:
         "gemini-3-flash",
         "gemini-flash-latest",
     ]
-    # Remove estritamente qualquer menção a 2.5 e modelos lite
-    disponiveis = [m for m in disponiveis if "2.5" not in m and "lite" not in m]
+    # Remove estritamente qualquer menção a 2.5 e modelos lite ou omni
+    disponiveis = [m for m in disponiveis if "2.5" not in m and "lite" not in m and "omni" not in m]
     ordenados = [p for p in preferidos if p in disponiveis]
     for m in sorted(disponiveis, reverse=True):
-        if "flash" in m and "lite" not in m and m not in ordenados:
+        if "flash" in m and "lite" not in m and "omni" not in m and m not in ordenados:
             ordenados.append(m)
 
     if not ordenados and disponiveis:
@@ -193,7 +193,7 @@ def traduzir_lote(api_key: str, modelo: str, contexto_anterior: list, lote_atual
         method="POST",
     )
 
-    with urllib.request.urlopen(req, timeout=90) as resp:
+    with urllib.request.urlopen(req, timeout=120) as resp:
         corpo = json.loads(resp.read().decode("utf-8"))
 
     candidatos = corpo.get("candidates", [])

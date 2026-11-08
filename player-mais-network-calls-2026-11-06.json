@@ -1,0 +1,128 @@
+{
+  "page_url": "https://player.mais.uol.com.br/",
+  "final_page_url": "https://player.mais.uol.com.br/",
+  "captured_at_utc": "2026-11-06T17:37:29.776098+00:00",
+  "targets": [
+    "api.security.pagseguro.uol.com.br",
+    "api.security.pagbank.com.br",
+    "dna.uol.com.br",
+    "dna.pagbank.com.br"
+  ],
+  "request_count": 10,
+  "domains": {
+    "analytics.google.com": 1,
+    "me.jsuol.com.br": 1,
+    "player.mais.uol.com.br": 2,
+    "s.cdn.turner.com": 1,
+    "stats.g.doubleclick.net": 1,
+    "stc.uol.com": 1,
+    "www.google.com": 1,
+    "www.google.com.br": 1,
+    "www.googletagmanager.com": 1
+  },
+  "target_matches": [],
+  "websockets": [],
+  "requests": [
+    {
+      "time_utc": "2026-11-06T17:37:14.487446+00:00",
+      "method": "GET",
+      "url": "https://player.mais.uol.com.br/",
+      "host": "player.mais.uol.com.br",
+      "resource_type": "document",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:14.573913+00:00",
+      "method": "GET",
+      "url": "https://player.mais.uol.com.br/player.js",
+      "host": "player.mais.uol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:14.668570+00:00",
+      "method": "GET",
+      "url": "https://me.jsuol.com.br/aud/uolplayer.js",
+      "host": "me.jsuol.com.br",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:29.671161+00:00",
+      "method": "GET",
+      "url": "https://stc.uol.com/c/webfont/projeto-grafico/uol-font/uol-text-light.woff2",
+      "host": "stc.uol.com",
+      "resource_type": "font",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:29.673565+00:00",
+      "method": "GET",
+      "url": "https://www.googletagmanager.com/gtag/js",
+      "host": "www.googletagmanager.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:29.674368+00:00",
+      "method": "GET",
+      "url": "https://s.cdn.turner.com/analytics/comscore/streamsense.5.2.0.160629.min.js",
+      "host": "s.cdn.turner.com",
+      "resource_type": "script",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:29.679674+00:00",
+      "method": "POST",
+      "url": "https://www.google.com/measurement/conversion",
+      "host": "www.google.com",
+      "resource_type": "fetch",
+      "status": 200,
+      "failure": "net::ERR_ABORTED",
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:29.679932+00:00",
+      "method": "POST",
+      "url": "https://analytics.google.com/g/collect",
+      "host": "analytics.google.com",
+      "resource_type": "fetch",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:29.680123+00:00",
+      "method": "POST",
+      "url": "https://stats.g.doubleclick.net/g/collect",
+      "host": "stats.g.doubleclick.net",
+      "resource_type": "ping",
+      "status": 204,
+      "failure": null,
+      "redirected_from": null
+    },
+    {
+      "time_utc": "2026-11-06T17:37:29.680302+00:00",
+      "method": "GET",
+      "url": "https://www.google.com.br/ads/ga-audiences",
+      "host": "www.google.com.br",
+      "resource_type": "image",
+      "status": 200,
+      "failure": null,
+      "redirected_from": null
+    }
+  ],
+  "query_strings_included": false
+}

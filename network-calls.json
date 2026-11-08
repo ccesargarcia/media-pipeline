@@ -1,0 +1,28 @@
+{
+  "page_url": "https://sac.uol.com.br/",
+  "final_page_url": "https://sac.uol.com.br/",
+  "captured_at_utc": "2026-11-05T22:21:32.175066+00:00",
+  "targets": [
+    "api.security.uol.com.br",
+    "dna.uol.com.br"
+  ],
+  "request_count": 1,
+  "domains": {
+    "sac.uol.com.br": 1
+  },
+  "target_matches": [],
+  "websockets": [],
+  "requests": [
+    {
+      "time_utc": "2026-11-05T22:21:16.869882+00:00",
+      "method": "GET",
+      "url": "https://sac.uol.com.br/",
+      "host": "sac.uol.com.br",
+      "resource_type": "document",
+      "status": 403,
+      "failure": null,
+      "redirected_from": null
+    }
+  ],
+  "query_strings_included": false
+}
