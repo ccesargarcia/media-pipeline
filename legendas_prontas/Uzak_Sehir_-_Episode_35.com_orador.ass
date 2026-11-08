@@ -407,23 +407,23 @@ Dialogue: 0,0:18:55.98,0:18:57.40,Default,,0,0,0,,Kadir: Talvez eu converse com 
 Dialogue: 0,0:18:57.56,0:18:59.30,Default,,0,0,0,,Kadir: Ele/ela vem, volta.
 Dialogue: 0,0:18:59.87,0:19:02.35,Default,,0,0,0,,Cihan: Cuide desse assunto da cirurgia, Kadir.
 Dialogue: 0,0:19:02.95,0:19:03.72,Default,,0,0,0,,Cihan: Tenha cuidado.
-Dialogue: 0,0:19:05.79,0:19:09.27,Default,,0,0,0,,Cihan: Cihan, mãe, por que você está fazendo isso?
-Dialogue: 0,0:19:09.45,0:19:10.09,Default,,0,0,0,,Cihan: Meu Deus do céu!
-Dialogue: 0,0:19:10.64,0:19:12.29,Default,,0,0,0,,Cihan: Olha, me ofereci como voluntário para o Ali.
-Dialogue: 0,0:19:12.37,0:19:14.79,Default,,0,0,0,,Cihan: Ele disse que eu daria, que eu daria o rim.
-Dialogue: 0,0:19:14.87,0:19:15.81,Default,,0,0,0,,Cihan: Deixe ele dar, mãe.
-Dialogue: 0,0:19:15.89,0:19:17.41,Default,,0,0,0,,Cihan: Mãe, eu vou à cirurgia.
-Dialogue: 0,0:19:17.88,0:19:19.37,Default,,0,0,0,,Cihan: Eu vou salvar o seu filho, mãe, pode ficar tranquila.
-Dialogue: 0,0:19:21.78,0:19:23.78,Default,,0,0,0,,Cihan: Escuta, esse assunto não será mais discutido aqui, tá?
+Dialogue: 0,0:19:05.79,0:19:09.27,Default,,0,0,0,,Sadakat: Cihan, meu filho, por que você está fazendo isso?
+Dialogue: 0,0:19:09.45,0:19:10.09,Default,,0,0,0,,Sadakat: Por favor, meu querido...
+Dialogue: 0,0:19:10.64,0:19:12.29,Default,,0,0,0,,Sadakat: Olha, a Alya se ofereceu como voluntária!
+Dialogue: 0,0:19:12.37,0:19:14.79,Default,,0,0,0,,Sadakat: Ela disse: "Eu mesma vou doar o rim!"
+Dialogue: 0,0:19:14.87,0:19:15.81,Default,,0,0,0,,Kaya: Deixe ela doar, mãe.
+Dialogue: 0,0:19:15.89,0:19:17.41,Default,,0,0,0,,Cihan: Mãe, eu é que vou entrar na cirurgia!
+Dialogue: 0,0:19:17.88,0:19:19.37,Default,,0,0,0,,Cihan: Eu vou salvar o Boran, mãe! Já chega!
+Dialogue: 0,0:19:21.78,0:19:23.78,Default,,0,0,0,,Cihan: E esse assunto não será mais discutido aqui, entenderam?
 Dialogue: 0,0:19:29.79,0:19:32.39,Default,,0,0,0,,Cihan: Todos os dias ligue para a sua filha, verifique se a Pakize está bem.
 Dialogue: 0,0:19:32.89,0:19:34.01,Default,,0,0,0,,Pakize: Tudo bem, querida, tudo bem.
-Dialogue: 0,0:19:36.85,0:19:39.85,Default,,0,0,0,,Hayrıdır, onde eles vão?
-Dialogue: 0,0:19:40.11,0:19:41.29,Default,,0,0,0,,Kadir: Eles estão indo para a aldeia, irmão.
-Dialogue: 0,0:19:42.00,0:19:42.80,Default,,0,0,0,,Irmão, um pássaro.
-Dialogue: 0,0:19:42.85,0:19:43.65,Default,,0,0,0,,Nare: O que foi, irmão?
-Dialogue: 0,0:19:44.10,0:19:44.42,Default,,0,0,0,,Burro.
-Dialogue: 0,0:19:44.68,0:19:45.25,Default,,0,0,0,,Aqui está Nare.
-Dialogue: 0,0:19:46.08,0:19:47.80,Default,,0,0,0,,Pelo amor de Deus, vá para a sua casa, Şahin, vamos lá.
+Dialogue: 0,0:19:36.85,0:19:39.85,Default,,0,0,0,,Kaya: O que houve? Para onde eles estão indo?
+Dialogue: 0,0:19:40.11,0:19:41.29,Default,,0,0,0,,Şahin: Estão indo para o vilarejo, irmão.
+Dialogue: 0,0:19:42.00,0:19:42.80,Default,,0,0,0,,Şahin: Irmão, fica quieto!
+Dialogue: 0,0:19:42.85,0:19:43.65,Default,,0,0,0,,Kaya: Que "irmão" o quê?!
+Dialogue: 0,0:19:44.10,0:19:44.42,Default,,0,0,0,,Kaya: Idiota!
+Dialogue: 0,0:19:44.68,0:19:45.25,Default,,0,0,0,,Şahin: A Nare está aqui!
+Dialogue: 0,0:19:46.08,0:19:47.80,Default,,0,0,0,,Kaya: Pelo amor de Deus, vão para casa, Şahin! Vamos!
 Dialogue: 0,0:19:48.36,0:19:48.82,Default,,0,0,0,,Nare: Vamos, Nare.
 Dialogue: 0,0:19:49.08,0:19:50.09,Default,,0,0,0,,Nare: Vamos embora.
 Dialogue: 0,0:19:50.98,0:19:51.72,Default,,0,0,0,,Kaya: Kaya, nos vemos.
@@ -499,7 +499,7 @@ Dialogue: 0,0:26:53.23,0:26:55.24,Default,,0,0,0,,Demir: Olha, não se preocupe.
 Dialogue: 0,0:26:55.32,0:26:56.97,Default,,0,0,0,,Demir: Cuide da sua recuperação.
 Dialogue: 0,0:26:57.05,0:26:59.14,Default,,0,0,0,,Demir: Eu vou ligar, estarei lá.
 Dialogue: 0,0:26:59.22,0:27:02.92,Default,,0,0,0,,Demir: Veja, eu ainda estou falando desse desgraçado do Kaya.
-Dialogue: 0,0:27:03.27,0:27:09.67,Default,,0,0,0,,Zerrin: Pai, pelo amor de Deus, já basta! Não foi o Kaya, eu estava lá!
+Dialogue: 0,0:27:03.27,0:27:09.60,Default,,0,0,0,,Zerrin: Pai, pelo amor de Deus, já basta! Não foi o Kaya, eu estava lá!
 Dialogue: 0,0:27:09.88,0:27:18.38,Default,,0,0,0,,Ecmel: Tudo bem, filha, tudo bem. Você se recupere. Depois cuidamos disso. Pelo amor de Deus. Não vamos causar mais incômodo.
 Dialogue: 0,0:27:19.54,0:27:21.71,Default,,0,0,0,,Demir: Fique esperando no carro. Eu estou chegando.
 Dialogue: 0,0:27:22.37,0:27:29.07,Default,,0,0,0,,Ecmel: Filha, cuide da mãe. Tenha cuidado. Minha menina, durma um pouco. Volte, recupere‑se. Tenha cuidado.
@@ -651,10 +651,10 @@ Dialogue: 0,0:35:58.11,0:35:58.91,Default,,0,0,0,,Isso combina com você.
 Dialogue: 0,0:35:58.78,0:36:03.14,Default,,0,0,0,,Ou então esse assassino que perambula pela casa da Sadakat combina com você.
 Dialogue: 0,0:36:03.38,0:36:03.82,Default,,0,0,0,,Ecmel: Pegue logo.
 Dialogue: 0,0:36:03.99,0:36:05.24,Default,,0,0,0,,Que você está falando, pai?
-Dialogue: 0,0:36:05.32,0:36:06.11,Default,,0,0,0,,O que vocês estão fazendo, hein?
+Dialogue: 0,0:36:05.32,0:36:06.12,Default,,0,0,0,,O que vocês estão fazendo, hein?
 Dialogue: 0,0:36:05.89,0:36:07.03,Default,,0,0,0,,Você é pai, chega disso!
 Dialogue: 0,0:36:07.59,0:36:09.80,Default,,0,0,0,,Fui à casa da minha família, o que há de errado em eu ir?
-Dialogue: 0,0:36:09.88,0:36:15.32,Default,,0,0,0,,O que está rolando naquela mansão, logo tudo sairá à tona.
+Dialogue: 0,0:36:09.88,0:36:15.22,Default,,0,0,0,,O que está rolando naquela mansão, logo tudo sairá à tona.
 Dialogue: 0,0:36:15.41,0:36:17.70,Default,,0,0,0,,Ecmel: Ecmel, entre logo, juro que você também chegou.
 Dialogue: 0,0:36:17.99,0:36:19.28,Default,,0,0,0,,Ecmel: Você não deixou nada de paz, né?
 Dialogue: 0,0:36:19.36,0:36:22.09,Default,,0,0,0,,Lan, de onde tira essa raiva que não consegue tirar de mim, mãe?
@@ -695,19 +695,19 @@ Dialogue: 0,0:37:42.28,0:37:43.51,Default,,0,0,0,,Kadir: Na mansão
 Dialogue: 0,0:37:43.59,0:37:47.09,Default,,0,0,0,,Kadir: Essa é a minha família
 Dialogue: 0,0:37:47.43,0:37:49.43,Default,,0,0,0,,Kadir: Então eu percebi
 Dialogue: 0,0:37:49.51,0:37:51.16,Default,,0,0,0,,Kadir: Na minha casa
-Dialogue: 0,0:37:51.24,0:37:52.03,Default,,0,0,0,,Kadir: Na minha terra
+Dialogue: 0,0:37:51.24,0:37:52.04,Default,,0,0,0,,Kadir: Na minha terra
 Dialogue: 0,0:37:51.97,0:37:52.78,Default,,0,0,0,,Kadir: Na minha mãe
 Dialogue: 0,0:37:52.47,0:37:53.28,Default,,0,0,0,,Kadir: No meu pai
 Dialogue: 0,0:37:53.22,0:37:56.72,Default,,0,0,0,,Muzaffer: Nós também estamos aqui
 Dialogue: 0,0:37:56.97,0:38:00.47,Default,,0,0,0,,Muzaffer: Minha mãe
-Dialogue: 0,0:38:01.07,0:38:01.86,Default,,0,0,0,,Muzaffer: Meu pai
+Dialogue: 0,0:38:01.07,0:38:01.87,Default,,0,0,0,,Muzaffer: Meu pai
 Dialogue: 0,0:38:01.66,0:38:04.41,Default,,0,0,0,,Muzaffer: Eles também se tornaram meus pais
 Dialogue: 0,0:38:04.49,0:38:07.99,Default,,0,0,0,,Muzaffer: Aconteça o que acontecer
 Dialogue: 0,0:38:12.89,0:38:16.39,Default,,0,0,0,,Kadir: Olha, olha pra nós, o que eu vou te dizer
 Dialogue: 0,0:38:19.84,0:38:20.93,Default,,0,0,0,,Kadir: Quer dizer, nós
 Dialogue: 0,0:38:21.01,0:38:22.57,Default,,0,0,0,,Kadir: Nós com você assim
 Dialogue: 0,0:38:22.66,0:38:25.14,Default,,0,0,0,,Kadir: Nós nos socializamos
-Dialogue: 0,0:38:25.22,0:38:26.01,Default,,0,0,0,,Kadir: Então
+Dialogue: 0,0:38:25.22,0:38:26.02,Default,,0,0,0,,Kadir: Então
 Dialogue: 0,0:38:25.43,0:38:27.66,Default,,0,0,0,,Kadir: E se fizéssemos um projeto de responsabilidade social?
 Dialogue: 0,0:38:28.11,0:38:29.18,Default,,0,0,0,,Muzaffer: O que você está dizendo, Kadir?
 Dialogue: 0,0:38:29.97,0:38:30.93,Default,,0,0,0,,Kadir: Quer dizer, eu estou falando isso.
@@ -812,7 +812,7 @@ Dialogue: 0,0:46:36.61,0:46:40.93,Default,,0,0,0,,Cihan: Mãe, o lugar dele é a
 Dialogue: 0,0:46:41.01,0:46:44.09,Default,,0,0,0,,Cihan: Sempre foi assim desde o começo, agora também será assim, mãe, faça.
 Dialogue: 0,0:46:44.16,0:46:49.28,Default,,0,0,0,,Cihan: Mãe, não faça isso, deixe Alya em paz, pare de ligar, não a incomode, não vá até ela.
 Dialogue: 0,0:46:49.36,0:46:52.16,Default,,0,0,0,,Dona Sadakat: Eu ficarei aqui, adicionei à vida esse alimento.
-Dialogue: 0,0:46:52.24,0:46:53.03,Default,,0,0,0,,Cihan: Exatamente.
+Dialogue: 0,0:46:52.24,0:46:53.04,Default,,0,0,0,,Cihan: Exatamente.
 Dialogue: 0,0:46:52.74,0:46:58.70,Default,,0,0,0,,Cihan: Conversamos com Durgun, à noite ele será levado ao hospital aqui e depois será operado.
 Dialogue: 0,0:46:58.78,0:47:02.39,Default,,0,0,0,,Cihan: Não se preocupe com essas coisas vazias, mãe, vamos, prepare‑se também.
 Dialogue: 0,0:47:02.47,0:47:03.99,Default,,0,0,0,,Cihan: Vamos, mãe.
@@ -892,7 +892,7 @@ Dialogue: 0,0:51:19.64,0:51:20.47,Default,,0,0,0,,Papai.
 Dialogue: 0,0:51:20.66,0:51:23.49,Default,,0,0,0,,Filho, está entediado ou o quê? Quero ir aí buscar você?
 Dialogue: 0,0:51:23.88,0:51:25.51,Default,,0,0,0,,Não, não estou entediado.
 Dialogue: 0,0:51:25.59,0:51:26.20,Default,,0,0,0,,Ela é linda.
-Dialogue: 0,0:51:26.66,0:51:30.53,Default,,0,0,0,,A Pakize e a vovó ordenharam a vaca.
+Dialogue: 0,0:51:26.66,0:51:30.36,Default,,0,0,0,,A Pakize e a vovó ordenharam a vaca.
 Dialogue: 0,0:51:30.66,0:51:34.07,Default,,0,0,0,,Acabei de pegar ovos da galinha.
 Dialogue: 0,0:51:34.34,0:51:35.97,Default,,0,0,0,,Vamos tomar café da manhã agora.
 Dialogue: 0,0:51:36.38,0:51:37.22,Default,,0,0,0,,Bom apetite, filho.
@@ -931,7 +931,7 @@ Dialogue: 0,0:52:54.68,0:52:55.11,Default,,0,0,0,,Demir: Claro.
 Dialogue: 0,0:53:00.99,0:53:02.03,Default,,0,0,0,,Cihan: Eu já tinha dito que não iria.
 Dialogue: 0,0:53:02.62,0:53:03.82,Default,,0,0,0,,Demir: Se fosse por orgulho, você teria ido.
 Dialogue: 0,0:53:04.30,0:53:07.78,Default,,0,0,0,,Cihan: Orgulho? Faz tempo que ele se despede de nós, sinceramente.
-Dialogue: 0,0:53:07.86,0:53:12.32,Default,,0,0,0,,Cihan: Agora eu só faço o que for necessário.
+Dialogue: 0,0:53:07.86,0:53:12.24,Default,,0,0,0,,Cihan: Agora eu só faço o que for necessário.
 Dialogue: 0,0:53:15.68,0:53:17.24,Default,,0,0,0,,Cihan: Eu tenho uma promessa feita lá.
 Dialogue: 0,0:53:19.88,0:53:23.38,Default,,0,0,0,,Varen, olha o que minha mãe está dizendo.
 Dialogue: 0,0:53:28.74,0:53:33.03,Default,,0,0,0,,Ele diz que eu tenho uma promessa feita nesse meio tempo.
@@ -1006,7 +1006,7 @@ Dialogue: 0,0:57:48.70,0:57:49.03,Default,,0,0,0,,Boran: Cihan.
 Dialogue: 0,0:57:50.18,0:57:51.32,Default,,0,0,0,,Boran: Quão atencioso você é.
 Dialogue: 0,0:57:51.66,0:57:52.76,Default,,0,0,0,,Boran: Você também pensou nisso, então?
 Dialogue: 0,0:57:53.16,0:57:57.84,Default,,0,0,0,,Boran: Quando você entrar nessa cirurgia teimosa e ficar na mesa, o que acontecerá com a criança?
-Dialogue: 0,0:57:58.78,0:57:59.57,Default,,0,0,0,,Boran: Como ele ficará triste?
+Dialogue: 0,0:57:58.78,0:57:59.58,Default,,0,0,0,,Boran: Como ele ficará triste?
 Dialogue: 0,0:57:59.59,0:58:00.76,Default,,0,0,0,,Boran: Como eu vou consolá-lo?
 Dialogue: 0,0:58:00.84,0:58:02.03,Default,,0,0,0,,Boran: O que vai acontecer?
 Dialogue: 0,0:58:02.76,0:58:04.09,Default,,0,0,0,,Boran: Você também pensou nisso?
@@ -1100,7 +1100,7 @@ Dialogue: 0,1:01:48.20,1:01:51.70,Default,,0,0,0,,Sim. A data do casamento está
 Dialogue: 0,1:01:52.28,1:01:57.91,Default,,0,0,0,,Depois vieram a festa, o enxoval... e com pouco tempo, mal conseguiremos nos instalar na mansão.
 Dialogue: 0,1:01:58.49,1:02:00.36,Default,,0,0,0,,Dona Sadakat: É verdade. É verdade. Precisamos nos preparar.
 Dialogue: 0,1:02:03.43,1:02:05.78,Default,,0,0,0,,Posso dar uma volta na mansão até o Kaya chegar?
-Dialogue: 0,1:02:09.03,1:02:12.66,Default,,0,0,0,,Nunca estive aqui antes, por isso.
+Dialogue: 0,1:02:09.03,1:02:12.59,Default,,0,0,0,,Nunca estive aqui antes, por isso.
 Dialogue: 0,1:02:17.97,1:02:20.62,Default,,0,0,0,,Dona Sadakat: Claro, minha filha. Pode passear.
 Dialogue: 0,1:02:21.86,1:02:22.93,Default,,0,0,0,,Dona Sadakat: Ümmü, acompanhe-a.
 Dialogue: 0,1:02:23.43,1:02:25.84,Default,,0,0,0,,Vamos, minha filha. Eu a acompanho.
@@ -1115,7 +1115,7 @@ Dialogue: 0,1:03:30.49,1:03:33.99,Default,,0,0,0,,O que estou procurando?
 Dialogue: 0,1:04:05.93,1:04:07.14,Default,,0,0,0,,Não estou procurando nada.
 Dialogue: 0,1:04:07.22,1:04:09.84,Default,,0,0,0,,Primeiro, explique o que esse anel está fazendo aqui.
 Dialogue: 0,1:04:10.26,1:04:11.28,Default,,0,0,0,,Muito bem, Dona.
-Dialogue: 0,1:04:11.74,1:04:12.53,Default,,0,0,0,,Entregue-o a mim.
+Dialogue: 0,1:04:11.74,1:04:12.54,Default,,0,0,0,,Entregue-o a mim.
 Dialogue: 0,1:04:12.39,1:04:13.70,Default,,0,0,0,,Não vou entregar. Kaya, diga a ela.
 Dialogue: 0,1:04:15.24,1:04:16.18,Default,,0,0,0,,O que esse anel está fazendo aqui?
 Dialogue: 0,1:04:16.61,1:04:18.28,Default,,0,0,0,,Kaya: É um anel, afinal. O que você não entendeu?
@@ -1164,7 +1164,7 @@ Dialogue: 0,1:06:59.32,1:07:02.09,Default,,0,0,0,,Alya: İhan.
 Dialogue: 0,1:07:10.55,1:07:14.05,Default,,0,0,0,,Cihan: O que está acontecendo?
 Dialogue: 0,1:07:15.68,1:07:18.49,Default,,0,0,0,,Alya: Eu disse que não quero conversar.
 Dialogue: 0,1:07:18.59,1:07:20.88,Default,,0,0,0,,Alya: Você disse que não vai falar, que nem vai abrir a boca.
-Dialogue: 0,1:07:21.47,1:07:22.26,Default,,0,0,0,,Alya: No carro.
+Dialogue: 0,1:07:21.47,1:07:22.27,Default,,0,0,0,,Alya: No carro.
 Dialogue: 0,1:07:22.07,1:07:23.78,Default,,0,0,0,,Alya: Tem uma criança na sua frente?
 Dialogue: 0,1:07:24.36,1:07:26.64,Default,,0,0,0,,Alya: Você vai me enganar com essas palavras?
 Dialogue: 0,1:07:27.53,1:07:29.68,Default,,0,0,0,,Cihan: Vamos conversar, Haliye. Vem cá.
@@ -1267,7 +1267,7 @@ Dialogue: 0,1:17:04.12,1:17:07.62,Default,,0,0,0,,Cihan: Aliás, estou exausta.
 Dialogue: 0,1:18:02.69,1:18:11.19,Default,,0,0,0,,Dona Sadakat: Meu Deus, poupe a vida deles para mim! Proteja meus filhos! Meu Deus, eu Te imploro, salve meus filhos!
 Dialogue: 0,1:18:54.22,1:19:00.77,Default,,0,0,0,,[Médico]: Este setor está desativado; era um depósito, mas o esterilizamos para Boran.
 Dialogue: 0,1:19:09.33,1:19:16.26,Default,,0,0,0,,[Médico]: Cihan, você também vai ficar aqui. Amanhã cedo, vamos levar vocês dois daqui para a cirurgia.
-Dialogue: 0,1:19:16.41,1:19:20.26,Default,,0,0,0,,[Médico]: Passo aí à noite. Até logo.
+Dialogue: 0,1:19:16.41,1:19:20.18,Default,,0,0,0,,[Médico]: Passo aí à noite. Até logo.
 Dialogue: 0,1:19:21.65,1:19:27.00,Default,,0,0,0,,[Enfermeira]: Sim, Cihan. Em breve vão levá-lo para a cirurgia e prepará-lo.
 Dialogue: 0,1:22:28.27,1:22:33.18,Default,,0,0,0,,[Enfermeira]: Uma enfermeira virá prepará-lo e trazerá as roupas cirúrgicas.
 Dialogue: 0,1:22:33.26,1:22:38.23,Default,,0,0,0,,[Enfermeira]: Mas antes da cirurgia, minha família está aqui e quer vê-lo.
@@ -1603,7 +1603,7 @@ Dialogue: 0,1:50:25.66,1:50:25.80,Default,,0,0,0,,Cihan: Hm?
 Dialogue: 0,1:50:26.60,1:50:29.10,Default,,0,0,0,,Deniz: Minha mãe não vai nos deixar, certo?
 Dialogue: 0,1:50:36.81,1:50:40.31,Default,,0,0,0,,Cihan: Agora fiquei triste.
 Dialogue: 0,1:50:45.26,1:50:46.67,Default,,0,0,0,,Cihan: Não.
-Dialogue: 0,1:50:50.25,1:50:54.25,Default,,0,0,0,,Cihan: Vem, vamos brincar juntos.
+Dialogue: 0,1:50:50.25,1:50:53.75,Default,,0,0,0,,Cihan: Vem, vamos brincar juntos.
 Dialogue: 0,1:50:57.24,1:50:59.04,Default,,0,0,0,,Cihan: Vamos brincar de bater as mãos.
 Dialogue: 0,1:50:59.47,1:51:01.22,Default,,0,0,0,,Cihan: Mas você já virou um homem grande.
 Dialogue: 0,1:51:01.44,1:51:01.62,Default,,0,0,0,,Cihan: Vamos.
@@ -1632,9 +1632,9 @@ Dialogue: 0,1:51:54.53,1:51:55.33,Default,,0,0,0,,Kadir: Então as limpei.
 Dialogue: 0,1:51:55.35,1:51:58.56,Default,,0,0,0,,Kadir: Com o que você vai limpar a criança, irmão?
 Dialogue: 0,1:51:59.50,1:52:01.04,Default,,0,0,0,,Kadir: Isso não serve?
 Dialogue: 0,1:52:01.30,1:52:03.70,Default,,0,0,0,,Cihan: Não, segure isso. Deixa eu dar uma olhada.
-Dialogue: 0,1:52:03.78,1:52:07.85,Default,,0,0,0,,Cihan: Virou azul. Vou fechar e guardar.
+Dialogue: 0,1:52:03.78,1:52:07.78,Default,,0,0,0,,Cihan: Virou azul. Vou fechar e guardar.
 Dialogue: 0,1:52:09.74,1:52:10.98,Default,,0,0,0,,Kadir: Tudo bem, irmão.
-Dialogue: 0,1:52:11.06,1:52:15.14,Default,,0,0,0,,Cihan: Vem cá, vamos te limpar também.
+Dialogue: 0,1:52:11.06,1:52:14.91,Default,,0,0,0,,Cihan: Vem cá, vamos te limpar também.
 Dialogue: 0,1:52:22.65,1:52:25.54,Default,,0,0,0,,Cihan: Então você fez um desenho para a sua mãe pelo dia 29 de outubro?
 Dialogue: 0,1:52:26.39,1:52:28.11,Default,,0,0,0,,Cihan: E escreveu alguma coisa em cima?
 Dialogue: 0,1:52:28.31,1:52:29.11,Default,,0,0,0,,Deniz: Sim.
@@ -1673,7 +1673,7 @@ Dialogue: 0,1:53:45.30,1:53:46.93,Default,,0,0,0,,Cihan: Será que ele também s
 Dialogue: 0,1:53:47.34,1:53:48.14,Default,,0,0,0,,Cihan: Levanta essa cabeça.
 Dialogue: 0,1:53:48.07,1:53:49.34,Default,,0,0,0,,Alya: Olhem, mas vamos deixar estar.
 Dialogue: 0,1:53:51.85,1:53:55.35,Default,,0,0,0,,Alya: Eu oro por você todos os dias, Ali.
-Dialogue: 0,1:55:38.56,1:55:45.11,Default,,0,0,0,,Alya: Enquanto um lado de mim ora por você, o outro se apegue a Ali.
+Dialogue: 0,1:55:38.56,1:55:44.66,Default,,0,0,0,,Alya: Enquanto um lado de mim ora por você, o outro se apegue a Ali.
 Dialogue: 0,1:55:54.79,1:55:56.28,Default,,0,0,0,,Alya: A cada respiração.
 Dialogue: 0,1:55:57.16,1:55:58.70,Default,,0,0,0,,Alya: Estou me apegando cada vez mais a Ali.
 Dialogue: 0,1:55:59.99,1:56:01.89,Default,,0,0,0,,Alya: Comecei sem conseguir escapar.

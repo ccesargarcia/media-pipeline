@@ -1580,35 +1580,35 @@ Cihan: Tenha cuidado.
 
 396
 00:19:05,790 --> 00:19:09,270
-Cihan: Cihan, mãe, por que você está fazendo isso?
+Sadakat: Cihan, meu filho, por que você está fazendo isso?
 
 397
 00:19:09,450 --> 00:19:10,090
-Cihan: Meu Deus do céu!
+Sadakat: Por favor, meu querido...
 
 398
 00:19:10,640 --> 00:19:12,290
-Cihan: Olha, me ofereci como voluntário para o Ali.
+Sadakat: Olha, a Alya se ofereceu como voluntária!
 
 399
 00:19:12,370 --> 00:19:14,790
-Cihan: Ele disse que eu daria, que eu daria o rim.
+Sadakat: Ela disse: "Eu mesma vou doar o rim!"
 
 400
 00:19:14,870 --> 00:19:15,810
-Cihan: Deixe ele dar, mãe.
+Kaya: Deixe ela doar, mãe.
 
 401
 00:19:15,890 --> 00:19:17,410
-Cihan: Mãe, eu vou à cirurgia.
+Cihan: Mãe, eu é que vou entrar na cirurgia!
 
 402
 00:19:17,880 --> 00:19:19,370
-Cihan: Eu vou salvar o seu filho, mãe, pode ficar tranquila.
+Cihan: Eu vou salvar o Boran, mãe! Já chega!
 
 403
 00:19:21,780 --> 00:19:23,780
-Cihan: Escuta, esse assunto não será mais discutido aqui, tá?
+Cihan: E esse assunto não será mais discutido aqui, entenderam?
 
 404
 00:19:29,790 --> 00:19:32,390
@@ -1620,31 +1620,31 @@ Pakize: Tudo bem, querida, tudo bem.
 
 406
 00:19:36,850 --> 00:19:39,850
-Hayrıdır, onde eles vão?
+Kaya: O que houve? Para onde eles estão indo?
 
 407
 00:19:40,110 --> 00:19:41,290
-Kadir: Eles estão indo para a aldeia, irmão.
+Şahin: Estão indo para o vilarejo, irmão.
 
 408
 00:19:42,000 --> 00:19:42,800
-Irmão, um pássaro.
+Şahin: Irmão, fica quieto!
 
 409
 00:19:42,850 --> 00:19:43,650
-Nare: O que foi, irmão?
+Kaya: Que "irmão" o quê?!
 
 410
 00:19:44,100 --> 00:19:44,420
-Burro.
+Kaya: Idiota!
 
 411
 00:19:44,680 --> 00:19:45,250
-Aqui está Nare.
+Şahin: A Nare está aqui!
 
 412
 00:19:46,080 --> 00:19:47,800
-Pelo amor de Deus, vá para a sua casa, Şahin, vamos lá.
+Kaya: Pelo amor de Deus, vão para casa, Şahin! Vamos!
 
 413
 00:19:48,360 --> 00:19:48,820
@@ -7625,3 +7625,4 @@ Boran: Abri uma saída de ar.
 1907
 02:12:43,580 --> 02:12:47,080
 Cihan: O que está acontecendo?
+
