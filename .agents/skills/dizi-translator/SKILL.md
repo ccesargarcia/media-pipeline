@@ -17,26 +17,29 @@ Esta skill capacita o Antigravity a atuar como tradutor profissional de legendas
 A série se passa em Mardin e gira em torno da rivalidade entre as famílias **Albora** e **Baybars**.
 
 ### Família Albora:
-- **Cihan Albora (Masculino):** O patriarca/chefe honrado da família. Voz de autoridade, leal, firme e protetor. Primo de Şahin, filho de Dona Sadakat.
-- **Sadakat Albora (Dona Sadakat) (Feminino):** Matriarca impiedosa, tradicional e manipuladora. Mãe de Cihan, Kaya, Boran e Nare. Deseja o controle do neto Deniz e inferniza a nora Alya.
+- **Azem Albora (In memoriam / Falecido):** O patriarca falecido fundador da autoridade familiar, marido de Dona Sadakat, pai de Boran, Cihan, Kaya e Nare. Irmão mais velho de Ecmel.
+- **Cihan Albora (Masculino - Ozan Akbaba):** O chefe honrado da família Albora. Voz de autoridade, leal, firme e protetor. Primo de Şahin, filho de Azem e Dona Sadakat.
+- **Sadakat Albora (Dona Sadakat) (Feminino - Gonca Cilasun):** Matriarca impiedosa, tradicional e manipuladora. Viúva de Azem, mãe de Cihan, Kaya, Boran e Nare. Deseja o controle absoluto do neto Deniz e inferniza a nora Alya.
   - **Atenção estrita de gênero:** O pronome turco *"o"* / *"onun"* referente a ela deve ser SEMPRE traduzido como *"ela"*, *"dela"*, *"a senhora"*, *"sua mãe"*. NUNCA traduza referências a Dona Sadakat como *"ele"* ou *"dele"*.
-- **Alya Albora (Dra. Alya) (Feminino):** Médica pediatra canadense, mãe firme e protetora de Deniz. Luta contra as armadilhas de Dona Sadakat.
+- **Alya Smith Albora (Dra. Alya) (Feminino - Sinem Ünsal):** Médica pediatra criada com valores ocidentais no Canadá, mãe protetora e inabalável de Deniz. Luta contra o cerco e as armadilhas de Dona Sadakat.
 - **Boran Albora (Masculino):** Marido de Alya que foi dado como morto, mas depois reapareceu vivo em estado vegetativo/coma crítico (registrado temporariamente como Ömer Bakır). **Atenção:** Não tratar Boran como falecido após essa revelação na trama.
-- **Kaya Albora (Masculino):** Irmão mais novo de Cihan. Jovem impetuoso, impulsivo e passional, noivo de İpek.
+- **Kaya Albora (Masculino - Atakan Özkaya):** Filho caçula impulsivo e passional de Sadakat e Azem, irmão mais novo de Cihan, noivo de İpek.
 - **İpek (Feminino):** Noiva de Kaya e futura NORA de Dona Sadakat.
-- **Şahin Albora (Masculino):** Primo de Cihan (filho de Ecmel e Fidan). Apaixonado por Nare, dividido entre o amor e a lealdade familiar. Não confundir com Cihan.
-- **Nare Albora (Feminino):** Irmã mais nova de Cihan. Apaixonada por Şahin e grávida em segredo.
-- **Deniz Albora (Masculino):** Menino de 5 anos, filho pequeno de Alya e Boran (fala como criança de 5-6 anos).
+- **Şahin Albora (Masculino - Alper Çankaya):** Primo de Cihan (filho de Ecmel e Fidan). Apaixonado por Nare, dividido entre o amor e a lealdade familiar. Não confundir com Cihan.
+- **Nare Albora (Feminino - Sahra Şaş):** Irmã de Cihan, filha de Sadakat. Apaixonada por Şahin e grávida em segredo.
+- **Deniz Cihan Albora (Masculino - Kuzey Gezer):** Menino de 5 anos, filho pequeno de Alya e Boran (fala com ingenuidade de criança de 5-6 anos).
 
-### Outros Personagens Importantes:
-- **Demir Baybars (Masculino):** Arqui-inimigo da família Albora. Não deve ser marcado como orador em cenas domésticas da família Albora.
-- **Ecmel Albora (Masculino):** Tio de Cihan, pai de Şahin e Zerrin, marido de Fidan. Rival interno de Cihan pelo poder.
-- **Fidan Albora (Feminino):** Mãe de Şahin e Zerrin, esposa de Ecmel.
-- **Zerrin (Feminino):** Filha de Ecmel e Fidan, irmã de Şahin. **Atenção de gênero:** sequestrada/desaparecida; referências a ela devem ser SEMPRE no feminino (*"ela"*, *"dela"*, *"se ela está viva"*).
+### Outros Personagens e Núcleos Importantes:
+- **Demir Baybars (Masculino - Ferit Kaya):** Arqui-inimigo da família Albora. Não deve ser marcado como orador em cenas domésticas da família Albora.
+- **Ecmel Albora (Masculino - Müfit Kayacan):** Irmão mais novo e ambicioso do falecido Azem, tio de Cihan, pai de Şahin e Zerrin, marido de Fidan. Rival interno de Cihan pelo poder.
+- **Fidan Albora (Feminino - İlkay Kayku Atalay):** Esposa de Ecmel, mãe de Şahin e Zerrin.
+- **Zerrin Albora Baybars (Feminino - Dilin Döğer):** Filha de Ecmel e Fidan, irmã de Şahin, com ligação de casamento/conflito com a família rival Baybars. **Atenção de gênero:** referências a ela devem ser SEMPRE no feminino (*"ela"*, *"dela"*, *"minha filha"*, *"minha irmã"*).
+- **Muzaffer Sancak (Masculino - Sinan Demirer):** Homem de confiança e funcionário de longa data da mansão Albora.
+- **Pakize Sancak (Feminino - Yaren Güldiken):** Filha de Muzaffer, jovem empregada leal da mansão.
+- **Hasan Karalı (Masculino - Mehmet Polat):** Figura envolvida nas disputas e alianças de poder locais.
 - **Güler Haşmetlioğlu (Feminino):** Envolvida em processos e acusações criminais contra Dona Sadakat.
 - **Mine (Feminino):** Envolvida cuja morte misteriosa desencadeia conflitos.
 - **Dr. Yalçın (Masculino):** Médico amigo/colega de Alya.
-- **Pakize (Feminino):** Empregada leal da mansão.
 
 ---
 
@@ -94,7 +97,7 @@ A série se passa em Mardin e gira em torno da rivalidade entre as famílias **A
 | **GPT-4o (ChatGPT Plus / OpenAI)** | **Melhor Qualidade Humana / Dramática** | Modelo padrão recomendado para tradução manual ou via Custom GPT. Fluência impecável em PT-BR, captação profunda de subtextos emocionais e fidelidade rigorosa a IDs. |
 | **Llama 3.3 70B (via Groq Cloud)** | **Mais Rápido na Nuvem** | Velocidade de ~250–300 tokens/s no script `traduz_groq.py`. Nível de compreensão dramática muito superior a modelos de 8B. |
 | **DeepSeek-V3 / Chat** | **Ultra Baixo Custo em Nuvem** | Custo irrisório (~R$ 0,30 por episódio de 2h) com 671B parâmetros e aderência estrita a formatos JSON. |
-| **Qwen3-8B Local (llama.cpp)** | **Melhor Opção Local / GitHub Actions** | Deve rodar com janela de **4.096 tokens** (`--ctx-size 4096`), contexto anterior de **8 a 10 falas**, sem reasoning (`--reasoning off`), e `--threads 2` em runners de 2 vCPUs. |
+| **Qwen 2.5 7B Instruct Local (llama.cpp)** | **Melhor Opção Local / GitHub Actions** | Modelo `Qwen2.5-7B-Instruct-Q4_K_M.gguf`. Deve rodar com janela expandida de **8.192 tokens** (`--ctx-size 8192`), contexto anterior de **8 a 10 falas**, sem reasoning (`--reasoning off`), e `--threads 2` em runners de 2 vCPUs. Suporta execução em matriz dinâmica de até 16 runners simultâneos no Actions. |
 
 ---
 
