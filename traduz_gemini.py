@@ -348,6 +348,7 @@ def main():
                 )
                 # Espaçamento de 4.2s para manter a taxa abaixo de 15 RPM (cota gratuita do Google AI Studio)
                 time.sleep(4.2)
+                modelo = modelos_disponiveis[0]
                 break
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
@@ -379,6 +380,7 @@ def main():
                 if tentativa < 9:
                     espera = 8 * (tentativa + 1)
                     print(f"Aviso no lote {idx_lote + 1} ({e}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                    modelo = modelos_disponiveis[0]
                     time.sleep(espera)
                 else:
                     raise RuntimeError(f"Falha definitiva no lote {idx_lote + 1} após 10 tentativas: {e}")
