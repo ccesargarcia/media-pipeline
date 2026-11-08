@@ -49,6 +49,16 @@ on:
           - vpn
           - direct
         default: vpn
+      executar_auditoria:
+        description: 'Executar análise de integridade e regras da skill (Quality Gate)'
+        required: false
+        type: boolean
+        default: true
+      bloquear_em_falhas:
+        description: 'Bloquear envio ao FTP se a auditoria reprovar (falso = apenas avisa)'
+        required: false
+        type: boolean
+        default: false
 
 env:
   FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
@@ -299,6 +309,17 @@ jobs:
             python3 gerar_versoes_legendas.py "$STEM.pt-BR.srt" || true
           fi
 
+      - name: Quality Gate e Auditoria de Regras (Opcional)
+        if: ${{ inputs.executar_auditoria != false }}
+        continue-on-error: ${{ inputs.bloquear_em_falhas != true }}
+        run: |
+          echo "Executando Quality Gate e Auditoria de Regras da Skill..."
+          python3 lint_legendas.py "$STEM.pt-BR.srt" \
+            -o input.srt \
+            -a "$STEM.ass" \
+            --summary-markdown "$GITHUB_STEP_SUMMARY" \
+            ${{ inputs.bloquear_em_falhas == true && '--fail-on-skill-rules' || '--warn-only' }}
+
       - name: Conectar à VPN para enviar as legendas
         if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
@@ -412,8 +433,17 @@ jobs:
           fi
           echo "Gerando as duas versões de legendas (.com_orador e pura) em .srt e .ass..."
           python3 gerar_versoes_legendas.py "traducao_raw.srt" "${{ env.STEM }}" .
-          echo "Executando Quality Gate (Linter de Legendas)..."
-          python3 lint_legendas.py "${{ env.STEM }}.pt-BR.srt" -o input.srt -a "${{ env.STEM }}.ass"
+
+      - name: Quality Gate e Auditoria de Regras (Opcional)
+        if: ${{ inputs.executar_auditoria != false }}
+        continue-on-error: ${{ inputs.bloquear_em_falhas != true }}
+        run: |
+          echo "Executando Quality Gate e Auditoria de Regras da Skill..."
+          python3 lint_legendas.py "${{ env.STEM }}.pt-BR.srt" \
+            -o input.srt \
+            -a "${{ env.STEM }}.ass" \
+            --summary-markdown "$GITHUB_STEP_SUMMARY" \
+            ${{ inputs.bloquear_em_falhas == true && '--fail-on-skill-rules' || '--warn-only' }}
 
       - name: Conectar à VPN para enviar as legendas
         if: ${{ inputs.network_mode == 'vpn' }}

@@ -60,6 +60,32 @@ class LinterRegressionTests(unittest.TestCase):
             self.assertFalse(result["valido"])
             self.assertIn("SRT PT-BR inválido", result["erros"][0])
 
+    def test_skill_rules_detect_hallucinations_as_warnings_by_default(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, output = self.make_files(
+                directory,
+                "1\n00:00:01,000 --> 00:00:02,000\nIrmão, um pássaro!\n\n"
+                "2\n00:00:03,000 --> 00:00:04,000\nDr. Boran chegou.\n",
+            )
+            result = validar_legendas(output, original, verificar_regras_skill=True, regras_como_erros=False)
+            self.assertTrue(result["valido"])
+            self.assertEqual(len(result["inconsistencias_regras"]), 2)
+            rule_ids = [inc["regra_id"] for inc in result["inconsistencias_regras"]]
+            self.assertIn("ASR_PASSARO", rule_ids)
+            self.assertIn("DESAMBIG_BURHAN_BORAN", rule_ids)
+
+    def test_skill_rules_block_when_configured_as_errors(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, output = self.make_files(
+                directory,
+                "1\n00:00:01,000 --> 00:00:02,000\nIrmão, um pássaro!\n\n"
+                "2\n00:00:03,000 --> 00:00:04,000\nTudo bem?\n",
+            )
+            result = validar_legendas(output, original, verificar_regras_skill=True, regras_como_erros=True)
+            self.assertFalse(result["valido"])
+            self.assertTrue(any("Alucinação Fonética" in err for err in result["erros"]))
+
+
 
 class MediaCliRegressionTests(unittest.TestCase):
     def test_render_uses_generator_positional_arguments_and_expected_stem(self):

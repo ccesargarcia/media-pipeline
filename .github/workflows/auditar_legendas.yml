@@ -1,0 +1,137 @@
+name: "🔍 Auditar Legendas & Quality Gate (Skill)"
+run-name: "🔍 Auditoria: ${{ inputs.alvo || 'Push / PR' }} ${{ inputs.episodio ? format('Ep. {0}', inputs.episodio) : '' }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      alvo:
+        description: 'Escopo da auditoria'
+        required: true
+        type: choice
+        options:
+          - 'todas_prontas'
+          - 'episodio_especifico'
+          - 'arquivo_customizado'
+        default: 'todas_prontas'
+      episodio:
+        description: 'Número do episódio (usado se alvo for episodio_especifico, ex: 35, 36)'
+        required: false
+        type: string
+        default: '36'
+      caminho_arquivo:
+        description: 'Caminho do arquivo .srt (usado se alvo for arquivo_customizado)'
+        required: false
+        type: string
+        default: ''
+      bloquear_em_falhas:
+        description: 'Falhar o workflow se encontrar erros/inconsistências (falso = apenas relatório)'
+        required: false
+        type: boolean
+        default: false
+      modo_estrito:
+        description: 'Modo estrito (reprova mesmo com avisos menores ou leitura acelerada)'
+        required: false
+        type: boolean
+        default: false
+
+  pull_request:
+    paths:
+      - 'legendas_prontas/**'
+      - 'lint_legendas.py'
+      - '.agents/skills/dizi-translator/SKILL.md'
+
+jobs:
+  auditar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Executar Auditoria de Legendas
+        continue-on-error: ${{ github.event_name == 'workflow_dispatch' && inputs.bloquear_em_falhas != true || false }}
+        run: |
+          echo "========================================================"
+          echo "Iniciando Auditoria de Integridade e Regras da Skill..."
+          echo "========================================================"
+
+          ALVO="${{ inputs.alvo || 'todas_prontas' }}"
+          EP="${{ inputs.episodio || '36' }}"
+          CUSTOM="${{ inputs.caminho_arquivo || '' }}"
+          BLOQUEAR="${{ inputs.bloquear_em_falhas }}"
+          ESTRITO="${{ inputs.modo_estrito }}"
+
+          FLAGS=""
+          if [ "$BLOQUEAR" = "true" ]; then
+            FLAGS="$FLAGS --fail-on-skill-rules"
+          else
+            FLAGS="$FLAGS --warn-only"
+          fi
+
+          if [ "$ESTRITO" = "true" ]; then
+            FLAGS="$FLAGS --strict"
+          fi
+
+          mkdir -p /tmp/reports
+
+          if [ "$ALVO" = "episodio_especifico" ]; then
+            SRT="legendas_prontas/Uzak_Sehir_-_Episode_${EP}.pt-BR.srt"
+            ASS="legendas_prontas/Uzak_Sehir_-_Episode_${EP}.ass"
+            ORIG=""
+            # Procurar se existe original em tr
+            if [ -f "legendas_prontas/Uzak_Sehir_-_Episode_${EP}.srt" ]; then
+              ORIG="-o legendas_prontas/Uzak_Sehir_-_Episode_${EP}.srt"
+            elif [ -f "legendas_prontas/Uzak_Sehir_-_Episode_${EP}.tr.srt" ]; then
+              ORIG="-o legendas_prontas/Uzak_Sehir_-_Episode_${EP}.tr.srt"
+            fi
+
+            if [ ! -f "$SRT" ]; then
+              echo "❌ Arquivo $SRT não encontrado!"
+              exit 1
+            fi
+
+            echo "Auditando Episódio $EP..."
+            python3 lint_legendas.py "$SRT" $ORIG -a "$ASS" $FLAGS --summary-markdown "$GITHUB_STEP_SUMMARY"
+
+          elif [ "$ALVO" = "arquivo_customizado" ]; then
+            if [ -z "$CUSTOM" ] || [ ! -f "$CUSTOM" ]; then
+              echo "❌ Caminho customizado inválido ou inexistente: $CUSTOM"
+              exit 1
+            fi
+            python3 lint_legendas.py "$CUSTOM" $FLAGS --summary-markdown "$GITHUB_STEP_SUMMARY"
+
+          else
+            # Auditando todas as legendas prontas
+            echo "Auditando todas as legendas em legendas_prontas/..."
+            FILES=$(find legendas_prontas -name "*.pt-BR.srt" | sort)
+            if [ -z "$FILES" ]; then
+              echo "Nenhuma legenda encontrada em legendas_prontas/"
+              exit 0
+            fi
+
+            echo "### 📊 Resumo de Auditoria em Lote" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+
+            for srt_file in $FILES; do
+              STEM="${srt_file%.pt-BR.srt}"
+              ASS="${STEM}.ass"
+              ORIG=""
+              if [ -f "${STEM}.srt" ]; then
+                ORIG="-o ${STEM}.srt"
+              elif [ -f "${STEM}.tr.srt" ]; then
+                ORIG="-o ${STEM}.tr.srt"
+              fi
+              ASS_FLAG=""
+              if [ -f "$ASS" ]; then
+                ASS_FLAG="-a $ASS"
+              fi
+
+              echo "--------------------------------------------------------"
+              echo "Auditando: $srt_file"
+              python3 lint_legendas.py "$srt_file" $ORIG $ASS_FLAG $FLAGS --summary-markdown "$GITHUB_STEP_SUMMARY" || true
+            done
+          fi

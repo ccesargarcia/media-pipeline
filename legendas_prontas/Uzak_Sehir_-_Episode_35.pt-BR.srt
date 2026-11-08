@@ -211,7 +211,7 @@ Como assim
 Eu mesmo serei o doador
 
 54
-00:03:54,870 --> 00:03:59,245
+00:03:54,870 --> 00:03:58,870
 Fiz todos os exames, fiz todos os testes
 
 55
@@ -907,7 +907,7 @@ Nesse caminho, eu também não estou ao seu lado.
 Você está fugindo de enfrentar Boran.
 
 228
-00:11:13,690 --> 00:11:17,250
+00:11:13,690 --> 00:11:17,190
 Você até aceita encarar a morte.
 
 229
@@ -1079,7 +1079,7 @@ Não tem permissão.
 Não pode ir.
 
 271
-00:12:46,910 --> 00:12:51,435
+00:12:46,910 --> 00:12:50,985
 Alya, você vai levar a criança para onde?
 
 272
@@ -1175,7 +1175,7 @@ Minha decisão é definitiva, mantenha firme.
 Alya
 
 295
-00:13:50,680 --> 00:13:55,370
+00:13:50,680 --> 00:13:55,280
 Olha, essa criança viu a gente brigando uma vez.
 
 296
@@ -1527,7 +1527,7 @@ Coloquei o homem na porta, eu disse que aceita.
 Aqui está o homem.
 
 383
-00:17:55,140 --> 00:17:58,990
+00:17:55,140 --> 00:17:58,690
 Kadir, você também vá com a gente.
 
 384
@@ -1947,7 +1947,7 @@ Eu vou ligar, estarei lá.
 Veja, eu ainda estou falando desse desgraçado do Kaya.
 
 488
-00:27:03,270 --> 00:27:09,670
+00:27:03,270 --> 00:27:08,995
 Pai, pelo amor de Deus, já basta! Não foi o Kaya, eu estava lá!
 
 489
@@ -2495,7 +2495,7 @@ Vocês já verificaram todos os hospitais?
 Não dá para procurar, Meryem.
 
 625
-00:35:31,675 --> 00:35:36,125
+00:35:31,675 --> 00:35:35,750
 Você está falando do cara que fala árabe?
 
 626
@@ -2567,7 +2567,7 @@ Você é pai, chega disso!
 Fui à casa da minha família, o que há de errado em eu ir?
 
 643
-00:36:09,875 --> 00:36:15,325
+00:36:09,875 --> 00:36:15,225
 O que está rolando naquela mansão, logo tudo sairá à tona.
 
 644
@@ -3519,7 +3519,7 @@ Não, não estou entediado.
 Ela é linda.
 
 881
-00:51:26,655 --> 00:51:30,525
+00:51:26,655 --> 00:51:30,355
 A Pakize e a vovó ordenharam a vaca.
 
 882
@@ -3675,7 +3675,7 @@ Se fosse por orgulho, você teria ido.
 Orgulho? Faz tempo que ele se despede de nós, sinceramente.
 
 920
-00:53:07,865 --> 00:53:12,315
+00:53:07,865 --> 00:53:11,715
 Agora eu só faço o que for necessário.
 
 921
@@ -4351,7 +4351,7 @@ Depois vieram a festa, o enxoval... e com pouco tempo, mal conseguiremos nos ins
 Posso dar uma volta na mansão até o Kaya chegar?
 
 1089
-01:02:09,035 --> 01:02:12,660
+01:02:09,035 --> 01:02:12,585
 Nunca estive aqui antes, por isso.
 
 1090
@@ -4947,7 +4947,7 @@ Não se preocupe comigo.
 Que assim seja, com a vontade de Deus.
 
 1238
-01:15:58,230 --> 01:16:01,780
+01:15:58,230 --> 01:16:01,730
 Sairemos dessa cirurgia ilesos.
 
 1239
@@ -5019,7 +5019,7 @@ Este setor está desativado; era um depósito, mas o esterilizamos para Boran.
 Cihan, você também vai ficar aqui. Amanhã cedo, vamos levar vocês dois daqui para a cirurgia.
 
 1256
-01:19:16,410 --> 01:19:20,260
+01:19:16,410 --> 01:19:19,910
 Passo aí à noite. Até logo.
 
 1257
@@ -5775,7 +5775,7 @@ Sou ingrato.
 Eu queimo.
 
 1445
-01:37:53,370 --> 01:37:58,330
+01:37:53,370 --> 01:37:57,745
 Queimo e viro cinzas, mas renasço a cada vez.
 
 1446
@@ -5787,7 +5787,7 @@ Pelo meu filho.
 Por você.
 
 1448
-01:38:06,050 --> 01:38:09,750
+01:38:06,050 --> 01:38:09,600
 Renasço e corro até vocês de novo.
 
 1449
@@ -5855,11 +5855,11 @@ O coração parou, mas agora ele está vivo, graças a Deus.
 Graças a Deus.
 
 1465
-01:41:40,790 --> 01:41:45,315
+01:41:40,790 --> 01:41:45,165
 Agora você entendeu o que eu senti lá dentro?
 
 1466
-01:41:50,040 --> 01:41:54,115
+01:41:50,040 --> 01:41:53,890
 Agora vocês entenderam o que eu senti?
 
 1467
@@ -6363,7 +6363,7 @@ Agora fiquei triste.
 Não.
 
 1592
-01:50:50,250 --> 01:50:54,250
+01:50:50,250 --> 01:50:53,750
 Vem, vamos brincar juntos.
 
 1593
@@ -6479,7 +6479,7 @@ Isso não serve?
 Não, segure isso. Deixa eu dar uma olhada.
 
 1621
-01:52:03,780 --> 01:52:07,855
+01:52:03,780 --> 01:52:07,280
 Virou azul. Vou fechar e guardar.
 
 1622
@@ -6487,7 +6487,7 @@ Virou azul. Vou fechar e guardar.
 Tudo bem, irmão.
 
 1623
-01:52:11,060 --> 01:52:15,135
+01:52:11,060 --> 01:52:14,560
 Vem cá, vamos te limpar também.
 
 1624
@@ -6643,7 +6643,7 @@ Olhem, mas vamos deixar estar.
 Boran, todo dia eu rezo por você...
 
 1662
-01:55:38,560 --> 01:55:45,110
+01:55:38,560 --> 01:55:44,060
 Enquanto um lado meu reza por você, o outro se apega à Alya.
 
 1663
@@ -6739,7 +6739,7 @@ Ele se mostrou bem forte.
 Nossa.
 
 1686
-01:57:25,500 --> 01:57:30,625
+01:57:25,500 --> 01:57:30,325
 Não sei como descrever o choque que estou sentindo.
 
 1687
@@ -7239,7 +7239,7 @@ Até que ele chegue, cuide da sua mãe, tá?
 Tudo bem, tudo bem, eu cuido.
 
 1811
-02:03:48,120 --> 02:03:51,745
+02:03:48,120 --> 02:03:51,620
 Venha cá, deixe-me te abraçar.
 
 1812
@@ -7359,7 +7359,7 @@ Ele conseguiu isso.
 Ele também vai abrir os olhos.
 
 1841
-02:07:34,740 --> 02:07:38,665
+02:07:34,740 --> 02:07:38,240
 Ele adorava sopa de tomate.
 
 1842
@@ -7625,4 +7625,3 @@ Abri uma saída de ar.
 1907
 02:12:43,580 --> 02:12:47,080
 O que está acontecendo?
-
