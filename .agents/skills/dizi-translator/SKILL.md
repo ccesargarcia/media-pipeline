@@ -193,3 +193,13 @@ done
 gh workflow run sincronizar_legendas_ftp.yml -f network_mode="vpn"
 ```
 
+---
+
+## 8. Fontes e Referências Oficiais de Consulta
+
+Para validação de novos personagens, grafias canônicas de atores e sinopses de episódios:
+- **Portal Oficial da Emissora (Kanal D):** https://www.kanald.com.tr/uzak-sehir
+  - Elenco e personagens oficiais: https://www.kanald.com.tr/uzak-sehir/oyuncular
+  - Sinopses e guia de episódios: https://www.kanald.com.tr/uzak-sehir/bolumler
+- **Ficha Técnica IMDb:** https://www.imdb.com/title/tt34063491/
+
