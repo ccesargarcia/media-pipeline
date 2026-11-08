@@ -236,3 +236,13 @@ Nunca manter termos turcos puros nem inverter posições em português:
 ### D. Requisito Obrigatório para a Versão com Orador (.com_orador)
 - Os arquivos com extensão `.com_orador.pt-BR.srt` e `.com_orador.ass` DEVEM conter as tags explícitas de quem fala no início da linha (ex: `Sadakat: ...`, `Cihan: ...`, `Alya: ...`, `Dr. Yalçın: ...`, `Dr. Burhan: ...`, `Kaya: ...`).
 - Os arquivos `.pt-BR.srt` e `.ass` padrão devem permanecer limpos (sem os nomes dos personagens), mantendo a distinção prometida pelas variantes.
+
+### E. Vocativo Materno Afetivo Invertido ("Annem")
+- Na cultura turca e regional de Mardin, mães costumam chamar seus filhos de forma carinhosa usando a palavra **"annem"** (que literalmente significa "minha mãe").
+- **Regra de Tradução:** Quando a matriarca (Sadakat) ou outra mãe estiver falando com o próprio filho (Boran, Cihan, Kaya), **"annem" DEVE SER SEMPRE TRADUZIDO COMO "meu filho", "meu amor" ou "meu querido"**.
+- **JAMAIS** traduza como "minha mãe", o que causa inversão bizarra de papéis (ex: Sadakat chamando o filho Boran de "minha mãe").
+
+### F. Expressões Idiomáticas Frequentes em Dizis
+- **"Çorap söküğü gibi gelecek":** Significa que uma situação travada começará a se desenrolar naturalmente em cadeia. Traduza como: *"Tudo vai se desenrolar"* ou *"as coisas vão começar a fluir"*. Nunca faça tradução literal de meias!
+- **"Gevezelik / gevzeli":** Significa tagarelice ou conversa fiada (*"Chega de conversa fiada, vamos"*).
+- **"Yüzyıl":** Cem anos (referência a contos de fadas como a Bela Adormecida que dormiu por cem anos, não mil).
