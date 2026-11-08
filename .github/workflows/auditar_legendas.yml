@@ -1,5 +1,5 @@
 name: "🔍 Auditar Legendas & Quality Gate (Skill)"
-run-name: "🔍 Auditoria: ${{ inputs.alvo || 'Push / PR' }} ${{ inputs.episodio ? format('Ep. {0}', inputs.episodio) : '' }}"
+run-name: "🔍 Auditoria: ${{ inputs.alvo || 'Push / PR' }} ${{ inputs.episodio && format('Ep. {0}', inputs.episodio) || '' }}"
 
 on:
   workflow_dispatch:

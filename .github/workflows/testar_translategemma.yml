@@ -172,8 +172,7 @@ jobs:
       fail-fast: false
       max-parallel: 4
       matrix:
-        part: [0, 1, 2, 3, 4, 5, 6, 7]
-    if: ${{ matrix.part < fromJSON(inputs.parts) }}
+        part: ${{ fromJSON(inputs.parts == '1' && '[0]' || inputs.parts == '2' && '[0, 1]' || inputs.parts == '4' && '[0, 1, 2, 3]' || '[0, 1, 2, 3, 4, 5, 6, 7]') }}
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -228,7 +227,7 @@ jobs:
           key: llama-build-ubuntu-cpu-b12034-v1
 
       - name: Validar modelo restaurado
-        if: ${{ inputs.model == "qwen3-14b" }}
+        if: ${{ inputs.model == 'qwen3-14b' }}
         run: echo "$MODEL_SHA256  $MODEL_FILE" | sha256sum --check
 
       - name: Restaurar checkpoint de tradução (se houver)
