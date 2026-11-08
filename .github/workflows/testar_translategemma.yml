@@ -1,5 +1,5 @@
 name: Testar Modelos Locais em paralelo
-run-name: "🧪 ${{ inputs.model }}: ${{ inputs.srt_filename }} · 8 shards"
+run-name: "🧪 ${{ inputs.model }}: ${{ inputs.srt_filename }} · ${{ inputs.parts }} shards"
 
 on:
   workflow_dispatch:
@@ -13,7 +13,18 @@ on:
           - 'aya-23-8b'
           - 'llama-3.1-8b'
           - 'qwen3-8b'
+          - 'qwen3-14b'
         default: 'gemma-3-4b'
+      parts:
+        description: Número de shards do piloto (comece com 1 para medir RAM e tempo)
+        required: true
+        type: choice
+        options:
+          - '1'
+          - '2'
+          - '4'
+          - '8'
+        default: '1'
       srt_filename:
         description: 'Nome do SRT original no FTP (ex: Uzak_Sehir_-_Episode_37.srt)'
         required: true
@@ -75,6 +86,12 @@ jobs:
               echo "MODEL_URL=https://huggingface.co/Qwen/Qwen3-8B-GGUF/resolve/main/Qwen3-8B-Q4_K_M.gguf?download=true" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=qwen3-8b-local" >> "$GITHUB_ENV"
               ;;
+            "qwen3-14b")
+              echo "MODEL_FILE=models/Qwen3-14B-Q4_K_M.gguf" >> "$GITHUB_ENV"
+              echo "MODEL_URL=https://huggingface.co/Qwen/Qwen3-14B-GGUF/resolve/main/Qwen3-14B-Q4_K_M.gguf?download=true" >> "$GITHUB_ENV"
+              echo "MODEL_ALIAS=qwen3-14b-local" >> "$GITHUB_ENV"
+              echo "MODEL_SHA256=500a8806e85ee9c83f3ae08420295592451379b4f8cf2d0f41c15dffeb6b81f0" >> "$GITHUB_ENV"
+              ;;
           esac
 
       - name: Conectar à VPN para baixar a legenda
@@ -116,7 +133,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v2
+          key: llama-build-ubuntu-cpu-b12034-v1
 
       - name: Baixar Modelo e Compilar llama.cpp
         run: |
@@ -127,8 +144,12 @@ jobs:
             echo "Baixando modelo ${{ inputs.model }} de $MODEL_URL..."
             curl --fail --location --retry 4 --retry-delay 3 "$MODEL_URL" -o "$MODEL_FILE"
           fi
+          if [ -n "${MODEL_SHA256:-}" ]; then
+            echo "$MODEL_SHA256  $MODEL_FILE" | sha256sum --check --status || { echo "Checksum inválido para $MODEL_FILE" >&2; exit 1; }
+            echo "Checksum SHA-256 do modelo validado."
+          fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
-            git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
+            git clone --depth 1 --branch b12034 https://github.com/ggml-org/llama.cpp.git
             cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release \
               -DGGML_NATIVE=OFF -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON -DGGML_BMI2=ON \
               -DLLAMA_BUILD_SERVER=ON -DLLAMA_BUILD_EXAMPLES=OFF -DLLAMA_BUILD_TESTS=OFF -DLLAMA_CURL=OFF
@@ -147,9 +168,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 8
+      max-parallel: 4
       matrix:
         part: [0, 1, 2, 3, 4, 5, 6, 7]
+    if: ${{ matrix.part < fromJSON(inputs.parts) }}
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -183,6 +205,12 @@ jobs:
               echo "MODEL_ALIAS=qwen3-8b-local" >> "$GITHUB_ENV"
               echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja" >> "$GITHUB_ENV"
               ;;
+            "qwen3-14b")
+              echo "MODEL_FILE=models/Qwen3-14B-Q4_K_M.gguf" >> "$GITHUB_ENV"
+              echo "MODEL_ALIAS=qwen3-14b-local" >> "$GITHUB_ENV"
+              echo "MODEL_SHA256=500a8806e85ee9c83f3ae08420295592451379b4f8cf2d0f41c15dffeb6b81f0" >> "$GITHUB_ENV"
+              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja" >> "$GITHUB_ENV"
+              ;;
           esac
 
       - name: Restaurar cache do Modelo
@@ -195,7 +223,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-v2
+          key: llama-build-ubuntu-cpu-b12034-v1
+
+      - name: Validar modelo restaurado
+        if: ${{ inputs.model == "qwen3-14b" }}
+        run: echo "$MODEL_SHA256  $MODEL_FILE" | sha256sum --check
 
       - name: Restaurar checkpoint de tradução (se houver)
         uses: actions/cache/restore@v4
@@ -212,16 +244,10 @@ jobs:
 
       - name: Tunar Sistema e Recursos do Runner
         run: |
-          echo "Otimizando memória e prioridade do runner..."
+          echo "Medindo recursos do runner para o piloto..."
           sudo systemctl stop docker mysql containerd 2>/dev/null || true
-          if [ ! -f /swapfile_tune ]; then
-            sudo fallocate -l 8G /swapfile_tune || sudo dd if=/dev/zero of=/swapfile_tune bs=1M count=8192
-            sudo chmod 600 /swapfile_tune
-            sudo mkswap /swapfile_tune
-            sudo swapon /swapfile_tune
-          fi
-          sudo sysctl -w vm.swappiness=10
           free -h
+          df -h .
 
       - name: Iniciar ${{ inputs.model }} neste runner
         run: |
@@ -235,6 +261,13 @@ jobs:
             $SERVER_ARGS \
             > llama-server.log 2>&1 &
           SERVER_PID=$!
+          echo "SERVER_PID=$SERVER_PID" >> "$GITHUB_ENV"
+          echo "PILOT_START_EPOCH=$(date +%s)" >> "$GITHUB_ENV"
+          (while kill -0 "$SERVER_PID" 2>/dev/null; do
+            ps -o rss= -p "$SERVER_PID" >> llama-rss-kb.log 2>/dev/null || true
+            sleep 5
+          done) &
+          echo "RSS_SAMPLER_PID=$!" >> "$GITHUB_ENV"
           for attempt in $(seq 1 60); do
             if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
               echo "${{ inputs.model }} pronto (PID $SERVER_PID)."
@@ -251,11 +284,35 @@ jobs:
           cat llama-server.log >&2
           exit 1
 
-      - name: Traduzir shard ${{ matrix.part }} de 8
+      - name: Traduzir shard ${{ matrix.part }} de ${{ inputs.parts }}
         run: |
           : "${MODEL_ALIAS:?MODEL_ALIAS não foi configurado}"
-          LOCAL_LLM_MODEL="$MODEL_ALIAS" PYTHONUNBUFFERED=1 python3 traduz_local.py -b 12 --parts 8 --part-index "${{ matrix.part }}" --partial-json \
+          LOCAL_LLM_MODEL="$MODEL_ALIAS" PYTHONUNBUFFERED=1 python3 traduz_local.py -b 12 --parts "${{ inputs.parts }}" --part-index "${{ matrix.part }}" --partial-json \
             input.srt "part-${{ matrix.part }}.json"
+
+      - name: Registrar métricas do shard
+        if: always()
+        run: |
+          {
+            echo "model=${{ inputs.model }}"
+            echo "part=${{ matrix.part }}"
+            echo "parts=${{ inputs.parts }}"
+            if [ -n "${PILOT_START_EPOCH:-}" ]; then
+              echo "elapsed_seconds=$(( $(date +%s) - PILOT_START_EPOCH ))"
+            else
+              echo "elapsed_seconds=unavailable"
+            fi
+            echo "runner=$(uname -a)"
+            echo "memory_after_translation:"
+            free -h
+            echo "llama_server_rss_samples_kb:"
+            cat llama-rss-kb.log 2>/dev/null || true
+            echo "disk_after_translation:"
+            df -h .
+          } > metrics-part-${{ matrix.part }}.txt
+          if [ -f llama-server.log ]; then
+            cp llama-server.log llama-server-part-${{ matrix.part }}.log
+          fi
 
       - name: Exibir log do llama-server em caso de falha
         if: failure()
@@ -274,7 +331,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-part-${{ matrix.part }}
-          path: part-${{ matrix.part }}.json
+          path: |
+            part-${{ matrix.part }}.json
+            metrics-part-${{ matrix.part }}.txt
+            llama-server-part-${{ matrix.part }}.log
+          if-no-files-found: warn
           retention-days: 1
 
   finalize_test:
@@ -294,7 +355,7 @@ jobs:
         with:
           name: test-srt-input
 
-      - name: Baixar os shards traduzidos
+      - name: Baixar shards e métricas
         uses: actions/download-artifact@v4
         with:
           pattern: test-part-*
@@ -317,4 +378,6 @@ jobs:
           path: |
             *.pt-BR.srt
             *.ass
+            parts/metrics-part-*.txt
+            parts/llama-server-part-*.log
           retention-days: 7
