@@ -44,7 +44,7 @@ Responda somente com JSON no formato {"subtitles":[{"id":1,"text":"tradução"}]
 
 
 def carregar_prompt_sistema(base_prompt: str) -> str:
-    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    """Carrega as diretrizes de personagens e tradução da skill dizi-translator se o arquivo existir."""
     skill_paths = [
         Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
         Path.home() / ".agents/skills/dizi-translator/SKILL.md",
@@ -54,8 +54,11 @@ def carregar_prompt_sistema(base_prompt: str) -> str:
             try:
                 conteudo = sp.read_text(encoding="utf-8")
                 conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
-                print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
-                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
+                match = re.search(r"##\s*3\.", conteudo)
+                if match:
+                    conteudo = conteudo[:match.start()].strip()
+                print(f"==> Diretrizes de tradução da skill dizi-translator incorporadas a partir de: {sp}", flush=True)
+                return f"{base_prompt}\n\n--- DIRETRIZES DA SÉRIE E REGRAS DE TRADUÇÃO ---\n{conteudo}"
             except Exception as e:
                 print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
     return base_prompt
