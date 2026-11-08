@@ -213,7 +213,7 @@ Dialogue: 0,0:09:58.40,0:09:59.32,Default,,0,0,0,,Alya: Estou bêbado.
 Dialogue: 0,0:09:59.64,0:10:00.02,Default,,0,0,0,,Alya: Lembre-se.
 Dialogue: 0,0:10:01.28,0:10:02.98,Default,,0,0,0,,Alya: Deixe-o zombar.
 Dialogue: 0,0:10:03.75,0:10:04.89,Default,,0,0,0,,Cihan: Vou começar o seu veneno.
-Dialogue: 0,0:10:04.97,0:10:05.49,Default,,0,0,0,,Cihan: Ali, já.
+Dialogue: 0,0:10:04.97,0:10:05.49,Default,,0,0,0,,Cihan: Alya, por favor.
 Dialogue: 0,0:10:05.77,0:10:06.05,Default,,0,0,0,,Cihan: Pare.
 Dialogue: 0,0:10:08.21,0:10:10.25,Default,,0,0,0,,Cihan: Diga por que você está fazendo isso sabendo que vai morrer.
 Dialogue: 0,0:10:11.02,0:10:11.36,Default,,0,0,0,,Cihan: Diga.
@@ -323,7 +323,7 @@ Dialogue: 0,0:14:26.22,0:14:28.01,Default,,0,0,0,,Cihan: Me ouviu, não foi?
 Dialogue: 0,0:14:28.09,0:14:30.53,Default,,0,0,0,,Cihan: Não vou te dar licença para magoar a criança.
 Dialogue: 0,0:14:30.61,0:14:34.11,Default,,0,0,0,,Dona Sadakat: Olha, não vá.
 Dialogue: 0,0:14:36.69,0:14:38.47,Default,,0,0,0,,Dona Sadakat: Você não pode ir a lugar nenhum.
-Dialogue: 0,0:14:38.55,0:14:40.37,Default,,0,0,0,,Dona Sadakat: Nem o Ali pode ir a lugar nenhum.
+Dialogue: 0,0:14:38.55,0:14:40.37,Default,,0,0,0,,Cihan: Nem a Alya pode ir a lugar nenhum.
 Dialogue: 0,0:14:40.45,0:14:43.57,Default,,0,0,0,,Dona Sadakat: Você não pode dar nem um passo para fora da mansão.
 Dialogue: 0,0:14:43.65,0:14:47.15,Default,,0,0,0,,Alya: O quê?
 Dialogue: 0,0:14:57.46,0:15:01.24,Default,,0,0,0,,Dona Sadakat: Você não pode dar um passo para fora desta sala.
@@ -334,7 +334,7 @@ Dialogue: 0,0:15:12.02,0:15:13.18,Default,,0,0,0,,Alya: Não gritaram ‘Vai emb
 Dialogue: 0,0:15:13.26,0:15:13.92,Default,,0,0,0,,Alya: O que aconteceu agora?
 Dialogue: 0,0:15:14.34,0:15:16.62,Default,,0,0,0,,Alya: Agora virei tão importante só porque disse que doaria meu rim? É por isso que estão me protegendo tanto?
 Dialogue: 0,0:15:16.70,0:15:18.06,Default,,0,0,0,,Alya: Vocês são tão possessivos.
-Dialogue: 0,0:15:18.14,0:15:21.09,Default,,0,0,0,,Dona Sadakat: Ali
+Dialogue: 0,0:15:18.14,0:15:21.09,Default,,0,0,0,,Cihan: Alya.
 Dialogue: 0,0:15:21.17,0:15:24.67,Default,,0,0,0,,Dona Sadakat: Alya, veja: a situação do Cihan está clara.
 Dialogue: 0,0:15:26.01,0:15:28.49,Default,,0,0,0,,Dona Sadakat: Você disse que ficaria.
 Dialogue: 0,0:15:28.57,0:15:30.28,Default,,0,0,0,,Alya: Ele sente isso.
@@ -427,7 +427,7 @@ Dialogue: 0,0:19:46.08,0:19:47.80,Default,,0,0,0,,Kaya: Pelo amor de Deus, vão 
 Dialogue: 0,0:19:48.36,0:19:48.82,Default,,0,0,0,,Nare: Vamos, Nare.
 Dialogue: 0,0:19:49.08,0:19:50.09,Default,,0,0,0,,Nare: Vamos embora.
 Dialogue: 0,0:19:50.98,0:19:51.72,Default,,0,0,0,,Kaya: Kaya, nos vemos.
-Dialogue: 0,0:20:23.98,0:20:27.48,Default,,0,0,0,,Convince o Ali de novo, cara.
+Dialogue: 0,0:20:23.98,0:20:27.48,Default,,0,0,0,,Kaya: Convence a Alya de novo, cara.
 Dialogue: 0,0:20:47.00,0:20:47.90,Default,,0,0,0,,Kaya: Não pode convencer o Şahin.
 Dialogue: 0,0:20:48.35,0:20:50.99,Default,,0,0,0,,Kaya: Não pode, eu sei, ele vai entrar na cirurgia, conheço meu irmão.
 Dialogue: 0,0:20:53.20,0:20:56.83,Default,,0,0,0,,Eu, Cem, entendo que é uma situação difícil.
@@ -1010,7 +1010,7 @@ Dialogue: 0,0:57:58.78,0:57:59.58,Default,,0,0,0,,Boran: Como ele ficará triste
 Dialogue: 0,0:57:59.59,0:58:00.76,Default,,0,0,0,,Boran: Como eu vou consolá-lo?
 Dialogue: 0,0:58:00.84,0:58:02.03,Default,,0,0,0,,Boran: O que vai acontecer?
 Dialogue: 0,0:58:02.76,0:58:04.09,Default,,0,0,0,,Boran: Você também pensou nisso?
-Dialogue: 0,0:58:04.62,0:58:06.01,Default,,0,0,0,,Alya: Não vai acontecer nada comigo, Ali.
+Dialogue: 0,0:58:04.62,0:58:06.01,Default,,0,0,0,,Cihan: Não vai acontecer nada comigo, Alya.
 Dialogue: 0,0:58:06.43,0:58:08.66,Default,,0,0,0,,Alya: Não fale bobagem; o médico aqui sou eu.
 Dialogue: 0,0:58:09.80,0:58:12.24,Default,,0,0,0,,Alya: Vai acontecer algo com você? Não vai? Você não pode me dizer isso.
 Dialogue: 0,0:58:12.32,0:58:13.32,Default,,0,0,0,,Alya: Eu posso te dizer.
@@ -1672,13 +1672,13 @@ Dialogue: 0,1:53:44.00,1:53:45.22,Default,,0,0,0,,Cihan: Deixa eu ver.
 Dialogue: 0,1:53:45.30,1:53:46.93,Default,,0,0,0,,Cihan: Será que ele também saiu grande?
 Dialogue: 0,1:53:47.34,1:53:48.14,Default,,0,0,0,,Cihan: Levanta essa cabeça.
 Dialogue: 0,1:53:48.07,1:53:49.34,Default,,0,0,0,,Alya: Olhem, mas vamos deixar estar.
-Dialogue: 0,1:53:51.85,1:53:55.35,Default,,0,0,0,,Alya: Eu oro por você todos os dias, Ali.
-Dialogue: 0,1:55:38.56,1:55:44.66,Default,,0,0,0,,Alya: Enquanto um lado de mim ora por você, o outro se apegue a Ali.
+Dialogue: 0,1:53:51.85,1:53:55.35,Default,,0,0,0,,Cihan: Boran, todo dia eu rezo por você...
+Dialogue: 0,1:55:38.56,1:55:44.59,Default,,0,0,0,,Cihan: Enquanto um lado meu reza por você, o outro se apega à Alya.
 Dialogue: 0,1:55:54.79,1:55:56.28,Default,,0,0,0,,Alya: A cada respiração.
-Dialogue: 0,1:55:57.16,1:55:58.70,Default,,0,0,0,,Alya: Estou me apegando cada vez mais a Ali.
+Dialogue: 0,1:55:57.16,1:55:58.70,Default,,0,0,0,,Cihan: Estou me apegando cada vez mais à Alya.
 Dialogue: 0,1:55:59.99,1:56:01.89,Default,,0,0,0,,Alya: Comecei sem conseguir escapar.
 Dialogue: 0,1:56:04.32,1:56:08.59,Default,,0,0,0,,Alya: Quanto mais tento fugir, mais meu coração é arrastado. Não sei o que fazer.
-Dialogue: 0,1:56:14.76,1:56:18.26,Default,,0,0,0,,Nare: Cihan, o Ali acordou.
+Dialogue: 0,1:56:14.76,1:56:18.26,Default,,0,0,0,,Dr. Yalçın: Cihan, a Alya acordou!
 Dialogue: 0,1:56:21.56,1:56:25.06,Default,,0,0,0,,Nare: Ele não está bem.
 Dialogue: 0,1:56:26.10,1:56:28.02,Default,,0,0,0,,Cihan: Está bem. Vamos ver.
 Dialogue: 0,1:56:28.37,1:56:29.62,Default,,0,0,0,,Cihan: Meu coração... Vamos.
