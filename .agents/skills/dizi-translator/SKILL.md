@@ -246,3 +246,7 @@ Nunca manter termos turcos puros nem inverter posições em português:
 - **"Çorap söküğü gibi gelecek":** Significa que uma situação travada começará a se desenrolar naturalmente em cadeia. Traduza como: *"Tudo vai se desenrolar"* ou *"as coisas vão começar a fluir"*. Nunca faça tradução literal de meias!
 - **"Gevezelik / gevzeli":** Significa tagarelice ou conversa fiada (*"Chega de conversa fiada, vamos"*).
 - **"Yüzyıl":** Cem anos (referência a contos de fadas como a Bela Adormecida que dormiu por cem anos, não mil).
+
+### G. Erros Fonéticos de Áudio Ruidoso (Whisper ASR)
+- **"Bir sus!" vs "Bir kuş":** Em discussões tensas, a expressão *"Bir sus!"* ("Cala a boca! / Fica quieto!") é frequentemente alucinada pelo ASR como *"Bir kuş"* ("um pássaro"). Se o contexto for uma discussão entre irmãos ou parentes, traduza como *"Fica quieto!"* ou *"Cala a boca!"*.
+- **"Hayrıdır":** Não é nome próprio nem saudação genérica. Significa: *"O que houve?"* ou *"Algum problema?"*.
