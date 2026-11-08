@@ -210,7 +210,7 @@ jobs:
               echo "MODEL_FILE=models/Qwen3-14B-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=qwen3-14b-local" >> "$GITHUB_ENV"
               echo "MODEL_SHA256=500a8806e85ee9c83f3ae08420295592451379b4f8cf2d0f41c15dffeb6b81f0" >> "$GITHUB_ENV"
-              echo "SERVER_ARGS=--ctx-size 4096 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja" >> "$GITHUB_ENV"
+              echo "SERVER_ARGS=--ctx-size 8192 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja" >> "$GITHUB_ENV"
               ;;
           esac
 
