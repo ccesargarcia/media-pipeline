@@ -87,7 +87,41 @@ A série se passa em Mardin e gira em torno da rivalidade entre as famílias **A
 - *"Konağa"* / *"Konak"* ➔ *"Mansão"*
 - *"Helalim"* ➔ *"Legítima esposa"* / *"Minha mulher de direito"*
 
+### F. Vocativo Materno Afetivo Invertido ("Annem" = "Meu Filho")
+- Na cultura turca e regional de Mardin, mães costumam chamar seus filhos de forma carinhosa usando a palavra **"annem"** (que literalmente significa "minha mãe").
+- **Regra de Ouro:** Quando a matriarca (Sadakat) ou outra mãe estiver falando com o próprio filho (Boran, Cihan, Kaya), **"annem" DEVE SER SEMPRE TRADUZIDO COMO "meu filho", "meu amor" ou "meu querido"**.
+- **JAMAIS** traduza como "minha mãe" quando a mãe fala com o filho, o que gera uma inversão bizarra de papéis (ex: Sadakat chamando o filho Boran de "minha mãe").
+
+### G. Desambiguação Crítica de Personagens e Homófonos (ASR)
+- **Dr. Burhan vs. Boran Albora:**
+  - **Boran Albora:** Filho de Sadakat, irmão de Cihan e Kaya, marido de Alya, pai de Deniz. Está internado no hospital após acordar do coma com afasia/agnosia.
+  - **Dr. Burhan:** Médico oftalmologista especialista externo trazido para examinar a perda temporária de visão de Kaya. NUNCA confunda "Dr. Burhan" com "Boran"!
+- **Alya Albora vs. Falsos Nomes "Ali" ou "Aliye":**
+  - A protagonista feminina é **ALYA ALBORA (Sinem Ünsal)**.
+  - **NÃO EXISTE "Ali" ou "Aliye" no núcleo principal dos Albora:** O áudio rápido e a declinação dativa turca (*"Alya'ya"* = para Alya) é frequentemente alucinada pelo Whisper ASR como *"Ali"* ou *"Aliye"*.
+  - Substituições obrigatórias:
+    - *"Aliye Hanım"* -> **Dona Alya**.
+    - *"Aliye yengem"* -> **Cunhada Alya**.
+    - *"Aliye ile geldi"* -> **Veio com a Alya**.
+    - *"Ali ateşin var"* -> **Alya, você está com febre**.
+    - *"Ali'ye elini çek"* -> **Alya, tire a mão daí**.
+    - *"Al"* (imperativo pegar) transcrito como *"Ali"* -> **Pegue**.
+
+### H. Alucinações Fonéticas do Whisper ASR e Expressões Regionais
+- **"Bir sus!" vs "Bir kuş":** Em discussões tensas, a ordem imperativa *"Bir sus!"* ("Cala a boca! / Fica quieto!") é frequentemente alucinada pelo ASR como *"Bir kuş"* ("um pássaro"). Se o contexto for uma discussão familiar, traduza OBRIGATORIAMENTE como *"Fica quieto!"* ou *"Cala a boca!"*. NUNCA coloque pássaros em brigas.
+- **"Hayrıdır":** Não é nome de pessoa nem saudação comum. Significa: *"O que houve?"*, *"Algum problema?"* ou *"Para onde eles vão?"*.
+- **"Eşek kadar adam":** Expressão coloquial turca que significa *"Um homem feito / um marmanjo barbado"* (que já deveria ter juízo). NUNCA faça tradução literal de animal ("homem do tamanho de um burro").
+- **"Ele avca sığmaz":** Expressão turca para alguém *"indomável / rebelde / agitado"*. NUNCA traduza como "rede do caçador".
+- **"Çorap söküğü gibi gelecek":** Ditado que significa que as coisas vão se desenrolar naturalmente em cadeia (*"Tudo vai se desenrolar"* / *"vai começar a fluir"*). NUNCA traduza como meias secando.
+- **"Böbrek":** Significa **RIM**. Cuidado redobrado em cenas de transplante hospitalar para não confundir com órgãos alheios.
+
+### I. Diretrizes Cognitivas e Sanity Check Pré-Entrega
+Antes de devolver a tradução de cada bloco de falas, a IA DEVE fazer uma checagem contextual de sanidade:
+1. **Lógica da Cena:** A frase faz sentido dentro de uma novela dramática turca? Se parecer cômica, absurda ou sem conexão com a tensão da cena (ex: pássaros em brigas, órgãos trocados, sogra chamando filho de mãe), investigue a homofonia turca ou a metáfora cultural e corrija pelo sentido real.
+2. **Deslocamento Temporal:** Em cenas rápidas de pânico (tiroteio, desfibrilador, cegueira), certifique-se de que a resposta do Personagem B não foi colocada no bloco do Personagem A.
+
 ---
+
 
 ## 3. Recomendações de Modelos de IA e Limites de API (Rate Limits)
 
