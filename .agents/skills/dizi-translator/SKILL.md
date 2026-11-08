@@ -221,3 +221,18 @@ Nunca manter termos turcos puros nem inverter posições em português:
 ### B. Desambiguação Crítica: Boran vs. Dr. Burhan
 - **Boran Albora:** Filho de Sadakat, irmão de Cihan e Kaya, marido de Alya, pai de Deniz. Está internado no hospital após acordar do coma com afasia/agnosia.
 - **Dr. Burhan:** Médico oftalmologista especialista externo trazido para examinar a perda temporária de visão de Kaya.
+
+### C. Desambiguação Fonética Crítica de ASR: Alya vs. "Aliye" / "Ali"
+- **A protagonista feminina é ALYA ALBORA (Sinem Ünsal).**
+- **NÃO EXISTE "Aliye" ou "Ali" no núcleo principal da trama:** O Whisper ASR confunde frequentemente a fala rápida e a declinação dativa turca (*"Alya'ya"* = para Alya) com o nome *"Aliye"* ou *"Ali"*.
+- **Substituições Obrigatórias:**
+  - *"Aliye Hanım"* -> **Dona Alya**.
+  - *"Aliye yengem"* -> **Cunhada Alya**.
+  - *"Aliye ile geldi"* -> **Veio com a Alya**.
+  - *"Ali ateşin var"* -> **Alya, você está com febre**.
+  - *"Ali'ye elini çek"* -> **Alya, tire a mão daí**.
+  - *"Al"* (imperativo pegar) transcrito como *"Ali"* -> **Pegue**.
+
+### D. Requisito Obrigatório para a Versão com Orador (.com_orador)
+- Os arquivos com extensão `.com_orador.pt-BR.srt` e `.com_orador.ass` DEVEM conter as tags explícitas de quem fala no início da linha (ex: `Sadakat: ...`, `Cihan: ...`, `Alya: ...`, `Dr. Yalçın: ...`, `Dr. Burhan: ...`, `Kaya: ...`).
+- Os arquivos `.pt-BR.srt` e `.ass` padrão devem permanecer limpos (sem os nomes dos personagens), mantendo a distinção prometida pelas variantes.

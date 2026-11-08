@@ -1448,7 +1448,7 @@ Na verdade, eu não estou zangada.
 
 363
 00:24:22,840 --> 00:24:24,350
-Ali está com febre.
+Cihan: Alya, você está com febre.
 
 364
 00:24:25,240 --> 00:24:26,400
@@ -1568,11 +1568,11 @@ Deixe ele tirar a mão.
 
 393
 00:25:26,240 --> 00:25:26,980
-Tire a mão de Ali.
+Cihan: Alya, tire a mão daí.
 
 394
 00:25:27,360 --> 00:25:29,060
-Tire a mão de Ali, isso te beneficiará.
+Cihan: Alya, tire a mão, isso vai te fazer bem.
 
 395
 00:25:29,380 --> 00:25:30,180
@@ -1584,7 +1584,7 @@ Não importa, não faça.
 
 397
 00:25:30,820 --> 00:25:31,080
-Ali.
+Cihan: Alya.
 
 398
 00:25:31,420 --> 00:25:32,400
@@ -1596,7 +1596,7 @@ Você não vai conseguir tirar.
 
 400
 00:25:34,310 --> 00:25:34,590
-Ali.
+Cihan: Alya.
 
 401
 00:25:35,370 --> 00:25:37,370
@@ -1704,7 +1704,7 @@ Espere, espere, espere.
 
 427
 00:27:04,920 --> 00:27:05,480
-Meu filho Ali.
+Alya: Ai, meu filho.
 
 428
 00:27:05,660 --> 00:27:07,700
@@ -6048,7 +6048,7 @@ Vou trocar de roupa e venho logo.
 
 1513
 01:31:23,188 --> 01:31:24,978
-Cihan: Dona Aliye, como estão meu pai e o Kadir?
+Cihan: Dona Alya, como estão meu pai e o Kadir?
 
 1514
 01:31:25,318 --> 01:31:27,418
@@ -6076,7 +6076,7 @@ De nada.
 
 1520
 01:31:38,898 --> 01:31:42,948
-Cihan: Dona Aliye, se precisar de qualquer coisa me avise, estou aqui.
+Cihan: Dona Alya, se precisar de qualquer coisa me avise, estou aqui.
 
 1521
 01:31:43,028 --> 01:31:44,228
@@ -7456,7 +7456,7 @@ Bismillahirrahmanirrahim.
 
 1865
 01:51:20,145 --> 01:51:23,945
-Quando Ali e a cunhada, o médico, vão chegar?
+Kaya: Quando a cunhada Alya e o médico vão entrar?
 
 1866
 01:51:24,205 --> 01:51:24,865
@@ -7716,7 +7716,7 @@ A cirurgia não foi bem-sucedida.
 
 1930
 01:54:43,335 --> 01:54:44,655
-Mãe veio aqui com Aliye.
+Cihan: Mãe veio aqui com a Alya.
 
 1931
 01:54:45,275 --> 01:54:47,355
@@ -8340,7 +8340,7 @@ Você ligará para mim daqui.
 
 2086
 02:02:41,825 --> 02:02:43,365
-Ali, você ligará para mim daqui.
+Cihan: Pegue, você vai me ligar daqui.
 
 2087
 02:02:44,125 --> 02:02:44,715
@@ -8768,7 +8768,7 @@ Nora, você pegue também. Vamos. Eu não quero pegar.
 
 2193
 02:08:55,025 --> 02:08:57,185
-Sadakat: Dona Aliye, para as mulheres.
+Sadakat: Dona Alya, para as mulheres.
 
 2194
 02:08:57,685 --> 02:08:59,945
