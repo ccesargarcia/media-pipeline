@@ -34,12 +34,13 @@ on:
         required: true
         type: choice
         options:
+          - '20'
           - '16'
           - '8'
           - '4'
           - '2'
           - '1'
-        default: '16'
+        default: '20'
       network_mode:
         description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
         required: true
@@ -115,7 +116,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-b4000
+          key: llama-build-ubuntu-cpu-avx512-v2
 
       - name: Preparar modelo e servidor para os runners
         run: |
@@ -130,7 +131,9 @@ jobs:
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
             git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
-            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release \
+              -DGGML_NATIVE=OFF -DGGML_AVX512=ON -DGGML_AVX512_VNNI=ON -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON \
+              -DLLAMA_CURL=OFF
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
 
@@ -147,7 +150,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      max-parallel: 16
+      max-parallel: 20
       matrix:
         part: ${{ fromJSON(needs.prepare_local.outputs.matrix) }}
     steps:
@@ -169,7 +172,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: llama.cpp/build
-          key: llama-build-ubuntu-cpu-b4000
+          key: llama-build-ubuntu-cpu-avx512-v2
 
       - name: Baixar SRT de entrada
         uses: actions/download-artifact@v4
@@ -199,10 +202,12 @@ jobs:
               -o models/Qwen2.5-7B-Instruct-Q4_K_M.gguf
           fi
           if [ ! -x llama.cpp/build/bin/llama-server ]; then
-            echo "llama-server ausente no cache, compilando..."
+            echo "llama-server ausente no cache, compilando com AVX-512..."
             sudo apt-get update && sudo apt-get install -y cmake build-essential
             git clone --depth 1 https://github.com/ggml-org/llama.cpp.git
-            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF
+            cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release \
+              -DGGML_NATIVE=OFF -DGGML_AVX512=ON -DGGML_AVX512_VNNI=ON -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON \
+              -DLLAMA_CURL=OFF
             cmake --build llama.cpp/build --config Release --target llama-server --parallel 2
           fi
 
@@ -211,7 +216,8 @@ jobs:
           taskset -c 0,1 nice -n -20 nohup llama.cpp/build/bin/llama-server \
             -m models/Qwen2.5-7B-Instruct-Q4_K_M.gguf \
             --alias qwen2.5-7b-local --host 127.0.0.1 --port 8080 \
-            --ctx-size 8192 --threads 2 --threads-batch 2 --parallel 1 --reasoning off --jinja \
+            --ctx-size 8192 -fa --ctk q8_0 --ctv q8_0 \
+            --threads 2 --threads-batch 2 --parallel 1 --cache-prompt --reasoning off --jinja \
             > llama-server.log 2>&1 &
           SERVER_PID=$!
           for attempt in $(seq 1 60); do

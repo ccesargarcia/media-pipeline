@@ -215,6 +215,8 @@ def request_batch(context: list[dict], batch: list[dict]) -> dict[int, str]:
         "model": MODEL,
         "temperature": 0.2,
         "max_tokens": 2048,
+        "id_slot": 0,
+        "cache_prompt": True,
         "messages": [
             {"role": "system", "content": PROMPT_SISTEMA_COMPLETO},
             {"role": "user", "content": user_prompt + ("\n/no_think" if "qwen" in MODEL.lower() else "")},
