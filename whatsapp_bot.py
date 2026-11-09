@@ -176,9 +176,9 @@ def cmd_help() -> str:
         "→ Mostra status e progresso dos últimos workflows no GitHub Actions.\n\n"
         "📁 *ftp [temporada]*\n"
         "→ Lista arquivos e legendas da temporada no FTP (ex: `ftp 2` ou `ftp 3`).\n\n"
-        "📺 *tv <comando>*\n"
-        "→ Controle do Fire TV (ex: `tv status`, `tv play`, `tv pause`).\n\n"
-        "📖 *midia* ou *ajuda midia*\n"
+        "📺 *firetv <comando>*\n"
+        "→ Controle do Fire TV (ex: `firetv status`, `firetv play`, `firetv pause`).\n\n"
+        "📖 *midia*\n"
         "→ Exibe este menu de ajuda de mídia."
     )
 
@@ -514,14 +514,19 @@ def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
     cmd = parts[0].lower()
     args = parts[1:]
 
-    if cmd in ("a70", "midia") and (not args or args[0].lower() not in ("ajuda", "help", "menu")):
-        return cmd_status()
+    # 1. Menu de ajuda de mídia
+    if cmd in ("midia", "menu_midia", "ajuda_midia"):
+        return cmd_help()
     elif cmd in ("ajuda", "menu", "comandos") and (args and args[0].lower() in ("midia", "a70")):
         return cmd_help()
-    elif cmd == "midia" and (args and args[0].lower() in ("ajuda", "help", "menu")):
-        return cmd_help()
+
+    # 2. Status técnico do Galaxy A70
+    elif cmd == "a70":
+        return cmd_status()
     elif cmd == "status" and (args and args[0].lower() in ("a70", "midia")):
         return cmd_status()
+
+    # 3. Comandos operacionais
     elif cmd in ("precache", "extrair", "audio"):
         return cmd_precache(sender_clean, args)
     elif cmd in ("legendar", "legenda", "transcrever"):
@@ -534,6 +539,38 @@ def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
         return cmd_firetv(args)
 
     return None
+
+
+PROCESSED_MESSAGES: Dict[str, float] = {}
+DEDUP_LOCK = threading.Lock()
+
+
+def is_duplicate(msg_id: str, sender: str, text: str) -> bool:
+    """Evita processar a mesma mensagem duas vezes, com debounce para eventos repetidos."""
+    now = time.time()
+    norm_text = text.strip().lower()
+    with DEDUP_LOCK:
+        # Limpa entradas com mais de 60 segundos
+        to_delete = [k for k, ts in PROCESSED_MESSAGES.items() if now - ts > 60.0]
+        for k in to_delete:
+            del PROCESSED_MESSAGES[k]
+
+        id_key = f"id:{msg_id}" if msg_id else ""
+        text_key = f"txt:{sender}:{norm_text}"
+
+        # Se já vimos o msg_id nos últimos 60 segundos
+        if id_key and id_key in PROCESSED_MESSAGES:
+            return True
+
+        # Se o mesmo remetente mandou exatamente o mesmo comando nos últimos 4 segundos (debounce)
+        if text_key in PROCESSED_MESSAGES:
+            if (now - PROCESSED_MESSAGES[text_key]) < 4.0:
+                return True
+
+        if id_key:
+            PROCESSED_MESSAGES[id_key] = now
+        PROCESSED_MESSAGES[text_key] = now
+        return False
 
 
 class WebhookHandler(http.server.BaseHTTPRequestHandler):
@@ -591,6 +628,12 @@ class WebhookHandler(http.server.BaseHTTPRequestHandler):
                 continue
 
             if is_media_command(text):
+                msg_id = key.get("id", "")
+                if is_duplicate(msg_id, sender_num, text):
+                    print(f"[Bot] Mensagem duplicada ignorada (id={msg_id}): {text}", flush=True)
+                    media_cmd_handled = True
+                    continue
+
                 print(f"[Bot] Comando de Mídia recebido de {sender_num}: {text}", flush=True)
                 resposta = process_incoming_text(sender_num, text)
                 if resposta:
@@ -600,33 +643,6 @@ class WebhookHandler(http.server.BaseHTTPRequestHandler):
         # Se NÃO foi um comando de mídia, repassa transparentemente para o Home Assistant
         if not media_cmd_handled:
             threading.Thread(target=forward_to_homeassistant, args=(raw_body,), daemon=True).start()
-
-        for item in msg_items:
-            key = item.get("key", {})
-            if key.get("fromMe", False):
-                continue  # Ignora mensagens enviadas pelo próprio bot
-
-            remote_jid = key.get("remoteJid", "")
-            sender_num = "".join(filter(str.isdigit, remote_jid.split("@")[0]))
-
-            # Valida remetente autorizado
-            if sender_num not in AUTHORIZED_NUMBERS:
-                continue
-
-            msg_content = item.get("message", {})
-            text = (
-                msg_content.get("conversation")
-                or msg_content.get("extendedTextMessage", {}).get("text")
-                or ""
-            )
-
-            if not text:
-                continue
-
-            print(f"[Bot] Mensagem recebida de {sender_num}: {text}", flush=True)
-            resposta = process_incoming_text(sender_num, text)
-            if resposta:
-                send_whatsapp(sender_num, resposta)
 
     def log_message(self, format, *args):
         # Log simplificado
