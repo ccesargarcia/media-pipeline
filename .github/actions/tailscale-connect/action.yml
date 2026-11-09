@@ -60,8 +60,8 @@ runs:
               if timeout 3 bash -c "</dev/tcp/100.97.222.39/1080" 2>/dev/null; then
                 echo "✅ Túnel Tailscale P2P Direto estabelecido com sucesso (100.97.222.39:1080)!"
                 tailscale status || true
-                echo "ALL_PROXY=socks5h://100.97.222.39:1080" >> "$GITHUB_ENV"
-                echo "NO_PROXY=$NO_PROXY_LIST" >> "$GITHUB_ENV"
+                echo "FTP_PROXY=socks5h://100.97.222.39:1080" >> "$GITHUB_ENV"
+                echo "ftp_proxy=socks5h://100.97.222.39:1080" >> "$GITHUB_ENV"
                 echo "TAILSCALE_TARGET=100.97.222.39" >> "$GITHUB_ENV"
                 exit 0
               fi
@@ -87,12 +87,12 @@ runs:
             -L 1080:wireguard.luisices.com.br:1080 \
             -L 2121:wireguard.luisices.com.br:2121 \
             -L 2222:wireguard.luisices.com.br:2222 \
-            -L 5555:wireguard.luisices.com.br:2222 \
+            -L 5555:wireguard.luisices.com.br:5555 \
             ubuntu@137.131.195.163; then
             if timeout 5 bash -c "</dev/tcp/127.0.0.1/1080" 2>/dev/null; then
               echo "✅ Fallback 1 (Gateway OCI -> wireguard.luisices.com.br) conectado!"
-              echo "ALL_PROXY=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
-              echo "NO_PROXY=$NO_PROXY_LIST" >> "$GITHUB_ENV"
+              echo "FTP_PROXY=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
+              echo "ftp_proxy=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
               echo "TAILSCALE_TARGET=127.0.0.1" >> "$GITHUB_ENV"
               exit 0
             fi
