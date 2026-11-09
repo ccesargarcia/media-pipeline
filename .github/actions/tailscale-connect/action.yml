@@ -1,0 +1,32 @@
+name: Connect to Home via Tailscale / WireGuard (Galaxy A70)
+description: Establishes a tunnel to wireguard.luisices.com.br (100.97.222.39) and configures SOCKS5 proxy for 192.168.0.1 FTP access.
+inputs:
+  oci_ssh_key:
+    description: SSH private key to reach the Tailscale node (137.131.195.163 -> wireguard.luisices.com.br)
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Start Tailscale Bridge Tunnel (wireguard.luisices.com.br)
+      shell: bash
+      env:
+        OCI_SSH_KEY: ${{ inputs.oci_ssh_key }}
+      run: |
+        set -euo pipefail
+        mkdir -p ~/.ssh
+        printf '%s\n' "$OCI_SSH_KEY" > ~/.ssh/oci_tailscale_key
+        chmod 600 ~/.ssh/oci_tailscale_key
+
+        ssh -i ~/.ssh/oci_tailscale_key \
+          -o StrictHostKeyChecking=no \
+          -o ServerAliveInterval=15 \
+          -o ExitOnForwardFailure=yes \
+          -f -N \
+          -L 1080:wireguard.luisices.com.br:1080 \
+          -L 2121:wireguard.luisices.com.br:2121 \
+          -L 2222:wireguard.luisices.com.br:2222 \
+          ubuntu@137.131.195.163
+
+        echo "ALL_PROXY=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
+        echo "NO_PROXY=localhost,127.0.0.1,github.com,api.github.com,results-receiver.actions.githubusercontent.com,wa.luisices.com.br,monitor.luisices.com.br,generativelanguage.googleapis.com,openrouter.ai,api.groq.com,huggingface.co" >> "$GITHUB_ENV"
+        echo "✅ Túnel Tailscale/WireGuard conectado em wireguard.luisices.com.br (100.97.222.39)!"

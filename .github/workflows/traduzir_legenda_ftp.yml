@@ -46,9 +46,10 @@ on:
         required: true
         type: choice
         options:
+          - tailscale
           - vpn
           - direct
-        default: vpn
+        default: tailscale
       executar_auditoria:
         description: 'Executar análise de integridade e regras da skill (Quality Gate)'
         required: false
@@ -87,6 +88,12 @@ jobs:
           echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
           echo "Matriz configurada para $COUNT partes: $MATRIX"
 
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+
       - name: Conectar à VPN para baixar a legenda
         if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
@@ -97,8 +104,8 @@ jobs:
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           SRT_NAME_INPUT: ${{ inputs.srt_filename }}
-          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
-          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
@@ -318,6 +325,12 @@ jobs:
             --summary-markdown "$GITHUB_STEP_SUMMARY" \
             ${{ inputs.bloquear_em_falhas == true && '--fail-on-skill-rules' || '--warn-only' }}
 
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+
       - name: Conectar à VPN para enviar as legendas
         if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
@@ -327,8 +340,8 @@ jobs:
       - name: Enviar legendas traduzidas de volta para o FTP
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
-          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
-          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
@@ -367,6 +380,12 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+
       - name: Conectar à VPN para baixar a legenda
         if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
@@ -377,8 +396,8 @@ jobs:
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           SRT_NAME_INPUT: ${{ inputs.srt_filename }}
-          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
-          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
@@ -444,6 +463,12 @@ jobs:
             --summary-markdown "$GITHUB_STEP_SUMMARY" \
             ${{ inputs.bloquear_em_falhas == true && '--fail-on-skill-rules' || '--warn-only' }}
 
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+
       - name: Conectar à VPN para enviar as legendas
         if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
@@ -453,8 +478,8 @@ jobs:
       - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
-          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
-          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |

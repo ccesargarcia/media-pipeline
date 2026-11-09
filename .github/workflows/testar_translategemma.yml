@@ -44,9 +44,10 @@ on:
         required: true
         type: choice
         options:
+          - tailscale
           - vpn
           - direct
-        default: vpn
+        default: tailscale
 
 permissions:
   contents: read
@@ -95,6 +96,12 @@ jobs:
               ;;
           esac
 
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+
       - name: Conectar à VPN para baixar a legenda
         if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
@@ -105,8 +112,8 @@ jobs:
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           SRT_NAME_INPUT: ${{ inputs.srt_filename }}
-          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
-          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |

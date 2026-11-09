@@ -1,33 +1,29 @@
-name: "🛡️ Monitorar Túnel WireGuard / Tailscale (Galaxy A70) & WhatsApp"
-run-name: "🛡️ Validar & Monitorar Túnel A70 (wireguard.luisices.com.br) · ${{ inputs.modo_conexao || 'auto' }}"
+name: "🛡️ Validar Túnel WireGuard / Tailscale (Galaxy A70) & WhatsApp"
+run-name: "🛡️ Validar Túnel A70 (wireguard.luisices.com.br) · [${{ inputs.modo_conexao || 'tailscale' }}]"
 
 on:
   workflow_dispatch:
     inputs:
       modo_conexao:
-        description: 'Modo de conexão da nuvem para validar a ponte A70'
+        description: 'Modo de conexão (tailscale = via wireguard.luisices.com.br | openvpn = via OpenVPN do roteador)'
         required: true
         type: choice
         options:
-          - 'auto'
           - 'tailscale'
           - 'openvpn'
-        default: 'auto'
+        default: 'tailscale'
       notificar_sucesso:
-        description: 'Enviar notificação no WhatsApp mesmo quando estiver tudo OK?'
+        description: 'Enviar notificação no WhatsApp ao concluir?'
         required: false
         type: boolean
         default: true
-  schedule:
-    # Monitoria periódica a cada 30 minutos (alerta no WhatsApp apenas se houver falha)
-    - cron: '*/30 * * * *'
 
 permissions:
   contents: read
 
 jobs:
-  monitorar_tunnel:
-    name: "Validar Ponte Galaxy A70 & Notificar WhatsApp"
+  validar_tunnel:
+    name: "Validar Ponte Galaxy A70 (${{ inputs.modo_conexao || 'tailscale' }})"
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -39,40 +35,40 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Selecionar modo de túnel (Tailscale ou OpenVPN)
-        id: mode
+      - name: Conectar via Tailscale / WireGuard (wireguard.luisices.com.br)
+        if: (inputs.modo_conexao || 'tailscale') == 'tailscale'
         env:
-          INPUT_MODE: ${{ inputs.modo_conexao || 'auto' }}
-          TS_AUTHKEY: ${{ secrets.TS_AUTHKEY }}
-          OPENVPN_CONFIG: ${{ secrets.OPENVPN_CONFIG }}
+          OCI_SSH_KEY: ${{ secrets.OCI_SSH_KEY }}
         run: |
-          if [[ "$INPUT_MODE" == "tailscale" ]] || [[ "$INPUT_MODE" == "auto" && -n "$TS_AUTHKEY" ]]; then
-            echo "selected=tailscale" >> "$GITHUB_OUTPUT"
-            echo "target_host=wireguard.luisices.com.br" >> "$GITHUB_OUTPUT"
-            echo "Usando túnel Tailscale direto para wireguard.luisices.com.br (100.97.222.39)"
-          else
-            echo "selected=openvpn" >> "$GITHUB_OUTPUT"
-            echo "target_host=192.168.0.252" >> "$GITHUB_OUTPUT"
-            echo "Usando túnel OpenVPN para validar a ponte Galaxy A70 (192.168.0.252 / 100.97.222.39)"
-          fi
+          mkdir -p ~/.ssh
+          echo "$OCI_SSH_KEY" > ~/.ssh/oci_key
+          chmod 600 ~/.ssh/oci_key
+          # Abre encaminhamento local das portas do wireguard.luisices.com.br (100.97.222.39) pelo nó Tailscale
+          ssh -i ~/.ssh/oci_key -o StrictHostKeyChecking=no -f -N \
+            -L 2222:wireguard.luisices.com.br:2222 \
+            -L 1080:wireguard.luisices.com.br:1080 \
+            -L 2121:wireguard.luisices.com.br:2121 \
+            -L 5555:wireguard.luisices.com.br:5555 \
+            ubuntu@137.131.195.163
+          echo "TARGET_HOST=127.0.0.1" >> "$GITHUB_ENV"
+          echo "DISPLAY_HOST=wireguard.luisices.com.br (100.97.222.39)" >> "$GITHUB_ENV"
 
-      - name: Conectar ao Tailscale (WireGuard)
-        if: steps.mode.outputs.selected == 'tailscale'
-        uses: tailscale/github-action@v3
-        with:
-          authkey: ${{ secrets.TS_AUTHKEY }}
-
-      - name: Conectar ao OpenVPN residencial
-        if: steps.mode.outputs.selected == 'openvpn'
+      - name: Conectar via OpenVPN (opção alternativa)
+        if: inputs.modo_conexao == 'openvpn'
         uses: ./.github/actions/openvpn-connect
         with:
           config: ${{ secrets.OPENVPN_CONFIG }}
 
-      - name: Validar DNS, Ponte Galaxy A70 (SSH, SOCKS5, FTP Forward) e Túnel WireGuard/Tailscale
+      - name: Definir host para OpenVPN
+        if: inputs.modo_conexao == 'openvpn'
+        run: |
+          echo "TARGET_HOST=192.168.0.252" >> "$GITHUB_ENV"
+          echo "DISPLAY_HOST=192.168.0.252 (OpenVPN)" >> "$GITHUB_ENV"
+
+      - name: Validar DNS, Ponte Galaxy A70 (SSH, SOCKS5, FTP Forward) e Túnel
         id: check
         env:
-          TARGET_HOST: ${{ steps.mode.outputs.target_host }}
-          MODE_USED: ${{ steps.mode.outputs.selected }}
+          MODE_USED: ${{ inputs.modo_conexao || 'tailscale' }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
@@ -84,6 +80,7 @@ jobs:
           from ftplib import FTP
 
           target_host = os.environ["TARGET_HOST"]
+          display_host = os.environ["DISPLAY_HOST"]
           mode_used = os.environ["MODE_USED"]
           ftp_user = os.environ["FTP_USER"]
           ftp_pass = os.environ["FTP_PASSWORD"]
@@ -117,7 +114,7 @@ jobs:
                   ms = int((time.time() - t0) * 1000)
                   results.append(f"✅ Porta {port} ({desc}): ONLINE ({ms}ms)")
               except Exception as e:
-                  errors.append(f"❌ Porta {port} ({desc}) em {target_host}: OFFLINE ({e})")
+                  errors.append(f"❌ Porta {port} ({desc}) em {display_host}: OFFLINE ({e})")
               finally:
                   s.close()
 
@@ -131,11 +128,11 @@ jobs:
               ftp.quit()
               mp4_count = stat_res.count(".mp4")
               srt_count = stat_res.count(".pt-BR.srt")
-              results.append(f"✅ FTP via Ponte A70 ({target_host}:2121): OK ({mp4_count} vídeos .mp4, {srt_count} legendas .pt-BR.srt)")
+              results.append(f"✅ FTP via Ponte A70 ({display_host}:2121): OK ({mp4_count} vídeos .mp4, {srt_count} legendas .pt-BR.srt)")
           except Exception as e:
-              errors.append(f"❌ FTP via Ponte A70 ({target_host}:2121) falhou: {e}")
+              errors.append(f"❌ FTP via Ponte A70 ({display_host}:2121) falhou: {e}")
 
-          summary_lines = [f"🛡️ *Monitoria da Ponte Galaxy A70 ({mode_used.upper()})*"]
+          summary_lines = [f"🛡️ *Validação da Ponte Galaxy A70 ({mode_used.upper()})*"]
           summary_lines.extend(results)
           if errors:
               summary_lines.extend(errors)
@@ -152,11 +149,11 @@ jobs:
           PY
 
       - name: Desconectar OpenVPN
-        if: always() && steps.mode.outputs.selected == 'openvpn'
+        if: always() && inputs.modo_conexao == 'openvpn'
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Enviar Notificação de Sucesso via WhatsApp
-        if: success() && (github.event_name == 'workflow_dispatch' && inputs.notificar_sucesso != false)
+        if: success() && inputs.notificar_sucesso != false
         env:
           EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
@@ -166,13 +163,13 @@ jobs:
         run: |
           python3 notificar_whatsapp.py "$REPORT_MSG" --status success
 
-      - name: Enviar Alerta de Queda/Falha via WhatsApp
+      - name: Enviar Alerta de Falha via WhatsApp
         if: failure()
         env:
           EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
-          REPORT_MSG: ${{ steps.check.outputs.report || '❌ Falha crítica ao estabelecer túnel com a rede local / Ponte Galaxy A70.' }}
+          REPORT_MSG: ${{ steps.check.outputs.report || '❌ Falha crítica ao estabelecer túnel com a Ponte Galaxy A70.' }}
         run: |
           python3 notificar_whatsapp.py "$REPORT_MSG" --status error

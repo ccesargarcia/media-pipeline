@@ -28,9 +28,10 @@ on:
         required: true
         type: choice
         options:
+          - tailscale
           - vpn
           - direct
-        default: vpn
+        default: tailscale
       skip_existing:
         description: 'Pular episódios que já existem no FTP com tamanho válido (>150MB)'
         required: false
@@ -67,6 +68,12 @@ jobs:
           pip3 install playwright yt-dlp
           playwright install --with-deps chromium
 
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+
       - name: Conectar à VPN para enviar os episódios ao FTP
         if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
@@ -82,8 +89,8 @@ jobs:
           SKIP_EXISTING: ${{ inputs.skip_existing }}
           NOTIFY_WHATSAPP: ${{ inputs.notify_whatsapp }}
           AUTO_SUBTITLE: ${{ inputs.auto_subtitle }}
-          FTP_HOST: ${{ inputs.network_mode == 'vpn' && '192.168.0.1' || secrets.FTP_HOST }}
-          FTP_PORT: ${{ inputs.network_mode == 'vpn' && '21' || secrets.FTP_PORT }}
+          FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
