@@ -129,13 +129,8 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
-          echo "Baixando vídeo do FTP com reconexão automática..."
-          curl -# --fail --ftp-pasv \
-            --retry 5 --retry-delay 5 --retry-connrefused \
-            -C - \
-            -u "$FTP_USER:$FTP_PASSWORD" \
-            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
-            -o input_media
+          echo "Baixando vídeo do FTP com múltiplas conexões paralelas (e fallback automático)..."
+          python3 baixar_ftp_paralelo.py "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" input_media 4
 
       - name: Desconectar da VPN após o download
         if: ${{ always() && inputs.network_mode == 'vpn' }}
