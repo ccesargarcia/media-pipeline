@@ -43,7 +43,7 @@ on:
           - 'none'
         default: 'gemini'
       network_mode:
-        description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
+        description: Use Tailscale (wireguard.luisices.com.br), OpenVPN (vpn) ou conexão direta (direct)
         required: true
         type: choice
         options:
@@ -51,6 +51,11 @@ on:
           - vpn
           - direct
         default: tailscale
+      usar_precache_audio:
+        description: 'Usar pré-cache de áudio leve (.audio.m4a) se existir no FTP (com fallback automático para o .mp4)?'
+        required: false
+        type: boolean
+        default: true
       executar_auditoria:
         description: 'Executar análise de integridade e regras da skill (Quality Gate)'
         required: false
@@ -121,16 +126,36 @@ jobs:
         with:
           config: ${{ secrets.OPENVPN_CONFIG }}
 
-      - name: Baixar vídeo do FTP
+      - name: Baixar mídia do FTP (Pré-Cache de Áudio com Fallback para Vídeo .mp4)
         env:
           FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
           FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          USE_PRECACHE: ${{ inputs.usar_precache_audio != false }}
         run: |
-          ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
-          echo "Baixando vídeo do FTP com múltiplas conexões paralelas (e fallback automático)..."
-          python3 baixar_ftp_paralelo.py "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" input_media 4
+          ENCODED_AUDIO_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["STEM"] + ".audio.m4a"))')
+          ENCODED_VIDEO_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
+          AUDIO_URL="ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_AUDIO_PATH}"
+          VIDEO_URL="ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_VIDEO_PATH}"
+
+          if [ "$USE_PRECACHE" = "true" ]; then
+            echo "⚡ Verificando disponibilidade de pré-cache de áudio (${STEM}.audio.m4a) no FTP..."
+            if curl -sI --fail --ftp-pasv -u "$FTP_USER:$FTP_PASSWORD" "$AUDIO_URL" | grep -qi "Content-Length:"; then
+              echo "✅ Pré-cache encontrado (${STEM}.audio.m4a)! Baixando áudio leve em alta velocidade..."
+              if python3 baixar_ftp_paralelo.py "$AUDIO_URL" input_media 4; then
+                echo "🎉 Pré-cache de áudio baixado com sucesso!"
+                exit 0
+              fi
+              echo "⚠️ Falha ao baixar pré-cache. Acionando fallback automático para o vídeo .mp4..."
+            else
+              echo "ℹ️ Pré-cache (${STEM}.audio.m4a) ainda não existe para este episódio. Acionando fallback automático para o vídeo .mp4..."
+            fi
+          else
+            echo "ℹ️ Opção usar_precache_audio desativada. Baixando vídeo .mp4 completo..."
+          fi
+
+          python3 baixar_ftp_paralelo.py "$VIDEO_URL" input_media 4
 
       - name: Desconectar da VPN após o download
         if: ${{ always() && inputs.network_mode == 'vpn' }}
