@@ -163,10 +163,11 @@ def normalizar_temporada(temp_arg: str, ep_num: int) -> str:
 
 def cmd_help() -> str:
     return (
-        "🤖 *Galaxy A70 — Central de Comandos*\n\n"
-        "Comandos disponíveis:\n\n"
-        "📊 *status*\n"
-        "→ Exibe saúde do A70, memória RAM, portas ativas e FTP.\n\n"
+        "🎬 *Central de Mídia & Galaxy A70*\n\n"
+        "Comandos de Mídia disponíveis:\n\n"
+        "📱 *a70* ou *status a70*\n"
+        "→ Exibe saúde do A70, memória RAM, portas ativas e FTP.\n"
+        "_(O comando `status` continua sendo o da sua casa no Home Assistant!)_\n\n"
         "⚡ *precache <ep> [temporada]*\n"
         "→ Extrai áudio .m4a no A70 e salva no FTP (ex: `precache 55` ou `precache 64 3`).\n\n"
         "🚀 *legendar <ep> [temporada]*\n"
@@ -176,8 +177,9 @@ def cmd_help() -> str:
         "📁 *ftp [temporada]*\n"
         "→ Lista arquivos e legendas da temporada no FTP (ex: `ftp 2` ou `ftp 3`).\n\n"
         "📺 *tv <comando>*\n"
-        "→ Testa conectividade com Fire TV (ex: `tv status`).\n\n"
-        "💡 *Dica:* Você pode digitar apenas o número do episódio no precache e legendar!"
+        "→ Controle do Fire TV (ex: `tv status`, `tv play`, `tv pause`).\n\n"
+        "📖 *midia* ou *ajuda midia*\n"
+        "→ Exibe este menu de ajuda de mídia."
     )
 
 
@@ -443,7 +445,7 @@ def cmd_ftp(args: List[str]) -> str:
         return f"❌ Erro ao consultar FTP: {e}"
 
 
-def cmd_tv(args: List[str]) -> str:
+def cmd_firetv(args: List[str]) -> str:
     is_open = check_port_open(FIRETV_HOST, FIRETV_PORT, timeout=2.0)
     if not is_open:
         return (
@@ -456,7 +458,6 @@ def cmd_tv(args: List[str]) -> str:
     if subcmd == "status":
         return f"📺 *Fire TV Stick:* 🟢 *Conectada e respondendo na porta 5555!*"
     
-    # Comandos ADB se solicitado
     keymap = {
         "pause": "KEYCODE_MEDIA_PLAY_PAUSE",
         "play": "KEYCODE_MEDIA_PLAY_PAUSE",
@@ -470,20 +471,42 @@ def cmd_tv(args: List[str]) -> str:
         try:
             subprocess.run(["adb", "connect", f"{FIRETV_HOST}:{FIRETV_PORT}"], capture_output=True, timeout=4)
             subprocess.run(["adb", "-s", f"{FIRETV_HOST}:{FIRETV_PORT}", "shell", "input", "keyevent", key], capture_output=True, timeout=4)
-            return f"📺 Comando `{subcmd}` ({key}) enviado para o Fire TV!"
+            return f"📺 Comando Fire TV `{subcmd}` ({key}) enviado com sucesso!"
         except Exception as e:
             return f"❌ Falha ao enviar comando ADB: {e}"
 
-    return f"📺 Comandos suportados: `tv status`, `tv play`, `tv pause`, `tv home`."
+    return f"📺 Comandos Fire TV suportados: `firetv status`, `firetv play`, `firetv pause`, `firetv home`."
+
+
+def is_media_command(text: str) -> bool:
+    """Verifica se o texto é destinado exclusivamente aos serviços de mídia/A70."""
+    t = text.strip()
+    if not t:
+        return False
+    if t.startswith(("!", "/")):
+        t = t[1:].strip()
+    parts = t.split()
+    if not parts:
+        return False
+    cmd = parts[0].lower()
+
+    if cmd in ("a70", "midia"):
+        return True
+    if cmd == "status" and len(parts) > 1 and parts[1].lower() in ("a70", "midia"):
+        return True
+    if cmd in ("ajuda", "menu", "comandos") and len(parts) > 1 and parts[1].lower() in ("midia", "a70"):
+        return True
+    if cmd in ("precache", "extrair", "legendar", "legenda", "transcrever", "runs", "fila", "status_runs", "ftp", "firetv"):
+        return True
+    return False
 
 
 def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
-    """Interpreta a mensagem recebida e retorna a resposta se for um comando válido."""
+    """Interpreta a mensagem de mídia e retorna a resposta."""
     t = text.strip()
     if not t:
         return None
 
-    # Normaliza comandos: remove ! ou / se houver
     if t.startswith(("!", "/")):
         t = t[1:].strip()
 
@@ -491,9 +514,13 @@ def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
     cmd = parts[0].lower()
     args = parts[1:]
 
-    if cmd in ("ajuda", "menu", "comandos", "start", "oi", "ola", "olá"):
+    if cmd in ("a70", "midia") and (not args or args[0].lower() not in ("ajuda", "help", "menu")):
+        return cmd_status()
+    elif cmd in ("ajuda", "menu", "comandos") and (args and args[0].lower() in ("midia", "a70")):
         return cmd_help()
-    elif cmd in ("status", "info"):
+    elif cmd == "midia" and (args and args[0].lower() in ("ajuda", "help", "menu")):
+        return cmd_help()
+    elif cmd == "status" and (args and args[0].lower() in ("a70", "midia")):
         return cmd_status()
     elif cmd in ("precache", "extrair", "audio"):
         return cmd_precache(sender_clean, args)
@@ -503,16 +530,9 @@ def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
         return cmd_runs()
     elif cmd in ("ftp", "arquivos", "series"):
         return cmd_ftp(args)
-    elif cmd in ("tv", "firetv"):
-        return cmd_tv(args)
-    elif re.match(r"^\d+$", cmd):
-        # Se o usuário digitou apenas um número (ex: "55")
-        return (
-            f"💡 Você enviou o número *{cmd}*.\n\n"
-            f"O que deseja fazer?\n"
-            f"• `legendar {cmd}` — Iniciar legendagem no GitHub Actions\n"
-            f"• `precache {cmd}` — Extrair áudio no A70 e salvar no FTP"
-        )
+    elif cmd == "firetv":
+        return cmd_firetv(args)
+
     return None
 
 
@@ -527,26 +547,59 @@ class WebhookHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b'{"status":"received"}')
 
-        # Encaminha para Home Assistant em segundo plano
-        threading.Thread(target=forward_to_homeassistant, args=(raw_body,), daemon=True).start()
-
         # Processa mensagem
         try:
             payload = json.loads(raw_body.decode("utf-8"))
         except Exception:
+            # Em caso de JSON inválido, repassa ao HA por segurança
+            threading.Thread(target=forward_to_homeassistant, args=(raw_body,), daemon=True).start()
             return
 
-        # Verifica evento
         event = payload.get("event")
         if event != "messages.upsert":
+            # Eventos de sistema que não são mensagens vão direto ao HA
+            threading.Thread(target=forward_to_homeassistant, args=(raw_body,), daemon=True).start()
             return
 
         data = payload.get("data")
         if not data:
+            threading.Thread(target=forward_to_homeassistant, args=(raw_body,), daemon=True).start()
             return
 
-        # Normaliza para lista se vier objeto único
         msg_items = data if isinstance(data, list) else [data]
+        media_cmd_handled = False
+
+        for item in msg_items:
+            key = item.get("key", {})
+            if key.get("fromMe", False):
+                continue
+
+            remote_jid = key.get("remoteJid", "")
+            sender_num = "".join(filter(str.isdigit, remote_jid.split("@")[0]))
+
+            if sender_num not in AUTHORIZED_NUMBERS:
+                continue
+
+            msg_content = item.get("message", {})
+            text = (
+                msg_content.get("conversation")
+                or msg_content.get("extendedTextMessage", {}).get("text")
+                or ""
+            )
+
+            if not text:
+                continue
+
+            if is_media_command(text):
+                print(f"[Bot] Comando de Mídia recebido de {sender_num}: {text}", flush=True)
+                resposta = process_incoming_text(sender_num, text)
+                if resposta:
+                    send_whatsapp(sender_num, resposta)
+                media_cmd_handled = True
+
+        # Se NÃO foi um comando de mídia, repassa transparentemente para o Home Assistant
+        if not media_cmd_handled:
+            threading.Thread(target=forward_to_homeassistant, args=(raw_body,), daemon=True).start()
 
         for item in msg_items:
             key = item.get("key", {})
