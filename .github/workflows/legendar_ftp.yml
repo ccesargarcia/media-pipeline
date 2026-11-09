@@ -126,12 +126,13 @@ jobs:
         with:
           config: ${{ secrets.OPENVPN_CONFIG }}
 
-      - name: Baixar mídia do FTP (Pré-Cache de Áudio com Fallback para Vídeo .mp4)
+      - name: Baixar mídia do FTP (Pré-Cache de Áudio com Acionamento Automático no A70 e Fallback .mp4)
         env:
           FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
           FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          OCI_SSH_KEY: ${{ secrets.OCI_SSH_KEY }}
           USE_PRECACHE: ${{ inputs.usar_precache_audio != false }}
         run: |
           ENCODED_AUDIO_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["STEM"] + ".audio.m4a"))')
@@ -141,15 +142,25 @@ jobs:
 
           if [ "$USE_PRECACHE" = "true" ]; then
             echo "⚡ Verificando disponibilidade de pré-cache de áudio (${STEM}.audio.m4a) no FTP..."
+            if ! curl -sI --fail --ftp-pasv -u "$FTP_USER:$FTP_PASSWORD" "$AUDIO_URL" | grep -qi "Content-Length:"; then
+              if [ -n "${TAILSCALE_TARGET:-}" ] && [ -n "${OCI_SSH_KEY:-}" ]; then
+                echo "📲 Áudio ainda não separado. Acionando o Galaxy A70 (${TAILSCALE_TARGET}:2222) sob demanda para separar a faixa de áudio na rede local..."
+                mkdir -p ~/.ssh
+                printf '%s\n' "$OCI_SSH_KEY" > ~/.ssh/a70_key
+                chmod 600 ~/.ssh/a70_key
+                ssh -i ~/.ssh/a70_key -o StrictHostKeyChecking=no -o ConnectTimeout=10 -p 2222 "u0_a615@${TAILSCALE_TARGET}" "~/precache_audios.sh '$STEM'" || true
+              fi
+            fi
+
             if curl -sI --fail --ftp-pasv -u "$FTP_USER:$FTP_PASSWORD" "$AUDIO_URL" | grep -qi "Content-Length:"; then
-              echo "✅ Pré-cache encontrado (${STEM}.audio.m4a)! Baixando áudio leve em alta velocidade..."
+              echo "✅ Áudio leve disponível (${STEM}.audio.m4a)! Baixando em alta velocidade..."
               if python3 baixar_ftp_paralelo.py "$AUDIO_URL" input_media 4; then
-                echo "🎉 Pré-cache de áudio baixado com sucesso!"
+                echo "🎉 Áudio leve baixado com sucesso!"
                 exit 0
               fi
-              echo "⚠️ Falha ao baixar pré-cache. Acionando fallback automático para o vídeo .mp4..."
+              echo "⚠️ Falha ao baixar áudio leve. Acionando fallback automático para o vídeo .mp4..."
             else
-              echo "ℹ️ Pré-cache (${STEM}.audio.m4a) ainda não existe para este episódio. Acionando fallback automático para o vídeo .mp4..."
+              echo "ℹ️ Áudio leve indisponível. Acionando fallback automático para o vídeo .mp4..."
             fi
           else
             echo "ℹ️ Opção usar_precache_audio desativada. Baixando vídeo .mp4 completo..."
