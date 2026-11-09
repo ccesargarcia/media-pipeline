@@ -1,32 +1,123 @@
-name: Connect to Home via Tailscale / WireGuard (Galaxy A70)
-description: Establishes a tunnel to wireguard.luisices.com.br (100.97.222.39) and configures SOCKS5 proxy for 192.168.0.1 FTP access.
+name: Connect to Home via Tailscale / WireGuard (Galaxy A70) with Auto-Fallback
+description: Connects directly via Tailscale P2P (TS_AUTHKEY + state cache) to wireguard.luisices.com.br (100.97.222.39), with automatic fallback to OCI Gateway and OpenVPN.
 inputs:
+  ts_authkey:
+    description: Tailscale Auth Key for direct P2P WireGuard connection
+    required: false
+    default: ''
   oci_ssh_key:
-    description: SSH private key to reach the Tailscale node (137.131.195.163 -> wireguard.luisices.com.br)
-    required: true
+    description: SSH private key fallback via OCI Tailscale node
+    required: false
+    default: ''
+  openvpn_config:
+    description: OpenVPN config fallback if Galaxy A70 is unreachable
+    required: false
+    default: ''
 runs:
   using: composite
   steps:
-    - name: Start Tailscale Bridge Tunnel (wireguard.luisices.com.br)
+    - name: Restore cached Tailscale node state (supports Single-Use keys)
+      uses: actions/cache@v4
+      with:
+        path: /tmp/tailscale-state
+        key: tailscale-runner-state-v1
+
+    - name: Connect via Tailscale Direct P2P (with OCI & OpenVPN Fallbacks)
       shell: bash
       env:
+        TS_AUTHKEY: ${{ inputs.ts_authkey }}
         OCI_SSH_KEY: ${{ inputs.oci_ssh_key }}
+        OPENVPN_CONFIG: ${{ inputs.openvpn_config }}
       run: |
         set -euo pipefail
-        mkdir -p ~/.ssh
-        printf '%s\n' "$OCI_SSH_KEY" > ~/.ssh/oci_tailscale_key
-        chmod 600 ~/.ssh/oci_tailscale_key
+        NO_PROXY_LIST="localhost,127.0.0.1,github.com,api.github.com,results-receiver.actions.githubusercontent.com,wa.luisices.com.br,monitor.luisices.com.br,generativelanguage.googleapis.com,openrouter.ai,api.groq.com,huggingface.co"
 
-        ssh -i ~/.ssh/oci_tailscale_key \
-          -o StrictHostKeyChecking=no \
-          -o ServerAliveInterval=15 \
-          -o ExitOnForwardFailure=yes \
-          -f -N \
-          -L 1080:wireguard.luisices.com.br:1080 \
-          -L 2121:wireguard.luisices.com.br:2121 \
-          -L 2222:wireguard.luisices.com.br:2222 \
-          ubuntu@137.131.195.163
+        # 1. TENTATIVA PRIMÁRIA: Conexão P2P Direta via Tailscale (Sem intermediários)
+        if [[ -n "$TS_AUTHKEY" ]] || [[ -f /tmp/tailscale-state/tailscaled.state ]]; then
+          echo "🚀 [1/3] Iniciando conexão Tailscale P2P direta para wireguard.luisices.com.br (100.97.222.39)..."
+          if ! command -v tailscale >/dev/null 2>&1; then
+            curl -fsSL https://tailscale.com/install.sh | sh
+          fi
+          sudo mkdir -p /var/lib/tailscale /tmp/tailscale-state
+          if [[ -f /tmp/tailscale-state/tailscaled.state ]]; then
+            echo "♻️ Restaurando estado autenticado do Tailscale do cache..."
+            sudo systemctl stop tailscaled || true
+            sudo cp /tmp/tailscale-state/tailscaled.state /var/lib/tailscale/tailscaled.state
+            sudo chmod 600 /var/lib/tailscale/tailscaled.state
+            sudo systemctl start tailscaled
+            sudo tailscale up --accept-dns=false --hostname="gh-runner-pipeline" --timeout=15s || true
+          fi
 
-        echo "ALL_PROXY=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
-        echo "NO_PROXY=localhost,127.0.0.1,github.com,api.github.com,results-receiver.actions.githubusercontent.com,wa.luisices.com.br,monitor.luisices.com.br,generativelanguage.googleapis.com,openrouter.ai,api.groq.com,huggingface.co" >> "$GITHUB_ENV"
-        echo "✅ Túnel Tailscale/WireGuard conectado em wireguard.luisices.com.br (100.97.222.39)!"
+          # Se ainda não estiver conectado, usa a TS_AUTHKEY
+          if ! tailscale status >/dev/null 2>&1 && [[ -n "$TS_AUTHKEY" ]]; then
+            sudo tailscale up --authkey="$TS_AUTHKEY" --accept-dns=false --hostname="gh-runner-pipeline" --timeout=25s || true
+          fi
+
+          if tailscale status >/dev/null 2>&1; then
+            sudo cp /var/lib/tailscale/tailscaled.state /tmp/tailscale-state/tailscaled.state || true
+            sudo chmod 644 /tmp/tailscale-state/tailscaled.state || true
+            for i in $(seq 1 12); do
+              if timeout 3 bash -c "</dev/tcp/100.97.222.39/1080" 2>/dev/null; then
+                echo "✅ Túnel Tailscale P2P Direto estabelecido com sucesso (100.97.222.39:1080)!"
+                tailscale status || true
+                echo "ALL_PROXY=socks5h://100.97.222.39:1080" >> "$GITHUB_ENV"
+                echo "NO_PROXY=$NO_PROXY_LIST" >> "$GITHUB_ENV"
+                echo "TAILSCALE_TARGET=100.97.222.39" >> "$GITHUB_ENV"
+                exit 0
+              fi
+              sleep 1
+            done
+          fi
+          echo "⚠️ Conexão P2P direta indisponível. Acionando Fallback 1 (Gateway OCI)..."
+        fi
+
+        # 2. FALLBACK 1: Gateway Tailscale via OCI
+        if [[ -n "$OCI_SSH_KEY" ]]; then
+          echo "🔄 [2/3] Tentando Fallback 1: Gateway Tailscale via OCI..."
+          mkdir -p ~/.ssh
+          printf '%s\n' "$OCI_SSH_KEY" > ~/.ssh/oci_tailscale_key
+          chmod 600 ~/.ssh/oci_tailscale_key
+
+          if ssh -i ~/.ssh/oci_tailscale_key \
+            -o StrictHostKeyChecking=no \
+            -o ConnectTimeout=10 \
+            -o ServerAliveInterval=15 \
+            -o ExitOnForwardFailure=yes \
+            -f -N \
+            -L 1080:wireguard.luisices.com.br:1080 \
+            -L 2121:wireguard.luisices.com.br:2121 \
+            -L 2222:wireguard.luisices.com.br:2222 \
+            -L 5555:wireguard.luisices.com.br:2222 \
+            ubuntu@137.131.195.163; then
+            if timeout 5 bash -c "</dev/tcp/127.0.0.1/1080" 2>/dev/null; then
+              echo "✅ Fallback 1 (Gateway OCI -> wireguard.luisices.com.br) conectado!"
+              echo "ALL_PROXY=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
+              echo "NO_PROXY=$NO_PROXY_LIST" >> "$GITHUB_ENV"
+              echo "TAILSCALE_TARGET=127.0.0.1" >> "$GITHUB_ENV"
+              exit 0
+            fi
+          fi
+          echo "⚠️ Fallback 1 indisponível. Acionando Fallback 2 (OpenVPN do Roteador)..."
+        fi
+
+        # 3. FALLBACK 2: OpenVPN Direto no Roteador (192.168.0.1)
+        if [[ -n "$OPENVPN_CONFIG" ]]; then
+          echo "🔄 [3/3] Tentando Fallback 2: OpenVPN Residencial..."
+          if ! command -v openvpn >/dev/null 2>&1; then
+            sudo apt-get update && sudo apt-get install --yes openvpn
+          fi
+          umask 077
+          printf '%s' "$OPENVPN_CONFIG" > "$RUNNER_TEMP/openvpn.ovpn"
+          sudo openvpn --config "$RUNNER_TEMP/openvpn.ovpn" --daemon --writepid "$RUNNER_TEMP/openvpn.pid" --log "$RUNNER_TEMP/openvpn.log"
+          for attempt in $(seq 1 45); do
+            if sudo grep -Fq 'Initialization Sequence Completed' "$RUNNER_TEMP/openvpn.log"; then
+              echo "✅ Fallback 2 (OpenVPN) conectado com sucesso!"
+              echo "TAILSCALE_TARGET=192.168.0.252" >> "$GITHUB_ENV"
+              exit 0
+            fi
+            sleep 2
+          done
+        fi
+
+        echo "❌ ERRO: Todas as tentativas de túnel (Tailscale P2P, Fallback OCI e Fallback OpenVPN) falharam." >&2
+        exit 1

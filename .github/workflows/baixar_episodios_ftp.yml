@@ -72,7 +72,9 @@ jobs:
         if: ${{ inputs.network_mode == 'tailscale' }}
         uses: ./.github/actions/tailscale-connect
         with:
+          ts_authkey: ${{ secrets.TS_AUTHKEY }}
           oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+          openvpn_config: ${{ secrets.OPENVPN_CONFIG }}
 
       - name: Conectar à VPN para enviar os episódios ao FTP
         if: ${{ inputs.network_mode == 'vpn' }}
