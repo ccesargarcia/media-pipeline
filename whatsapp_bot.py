@@ -10,6 +10,7 @@ Recebe webhooks da Evolution API (v2) e permite controle remoto da infraestrutur
 - Encaminhamento transparente de webhooks para o Home Assistant
 """
 
+import datetime
 import http.server
 import json
 import os
@@ -183,7 +184,65 @@ def cmd_help() -> str:
     )
 
 
+def get_battery_and_thermal_info() -> Tuple[str, str]:
+    """Lê a porcentagem da bateria e as temperaturas em tempo real do Galaxy A70."""
+    batt_temp_c = None
+    cpu_temp_c = None
+
+    # Temperatura da Bateria via sensor térmico do hardware
+    for tz_path in ["/sys/class/thermal/thermal_zone62", "/sys/class/thermal/thermal_zone61"]:
+        try:
+            raw_val = float(open(os.path.join(tz_path, "temp")).read().strip())
+            batt_temp_c = round(raw_val / 1000.0, 1)
+            break
+        except Exception:
+            pass
+
+    # Temperatura da CPU via sensor do Snapdragon 675
+    for tz_path in ["/sys/class/thermal/thermal_zone18", "/sys/class/thermal/thermal_zone19"]:
+        try:
+            raw_val = float(open(os.path.join(tz_path, "temp")).read().strip())
+            cpu_temp_c = round(raw_val / 1000.0, 1)
+            break
+        except Exception:
+            pass
+
+    # Porcentagem e status de carregamento via termux-battery-status
+    percentage = None
+    status_str = "⚡ Conectado à tomada (24/7)"
+    try:
+        res = subprocess.run(["termux-battery-status"], capture_output=True, text=True, timeout=1.5)
+        if res.returncode == 0 and res.stdout.strip():
+            b_data = json.loads(res.stdout.strip())
+            percentage = b_data.get("percentage")
+            st = b_data.get("status", "")
+            plug = b_data.get("plugged", "")
+            if st == "CHARGING" or "PLUGGED" in str(plug):
+                status_str = f"`{percentage}%` (⚡ Carregando AC)"
+            elif st == "DISCHARGING":
+                status_str = f"`{percentage}%` (🔋 Na bateria)"
+            elif st == "FULL":
+                status_str = f"`{percentage}%` (🟢 100% Completa)"
+            else:
+                status_str = f"`{percentage}%`"
+    except Exception:
+        pass
+
+    batt_display = status_str if percentage is not None else "⚡ Conectado à tomada (24/7)"
+
+    temps = []
+    if batt_temp_c is not None:
+        temps.append(f"Bateria: *{batt_temp_c}°C*")
+    if cpu_temp_c is not None:
+        temps.append(f"CPU: *{cpu_temp_c}°C*")
+
+    temp_display = " | ".join(temps) if temps else "N/A"
+    return batt_display, temp_display
+
+
 def cmd_status() -> str:
+    batt_info, temp_info = get_battery_and_thermal_info()
+
     # Uptime
     uptime_str = "Desconhecido"
     try:
@@ -225,8 +284,10 @@ def cmd_status() -> str:
 
     return (
         "📊 *Status do Sistema — Galaxy A70*\n\n"
-        f"⏱️ *Uptime:* {uptime_str}\n\n"
-        f"💾 *Memória RAM:* `{ram_str}`\n\n"
+        f"🔋 *Bateria:* {batt_info}\n"
+        f"🌡️ *Temperaturas:* {temp_info}\n\n"
+        f"⏱️ *Uptime:* {uptime_str}\n"
+        f"💾 *Memória RAM:* `{ram_str}`\n"
         f"📂 *Armazenamento:* `{disk_str}`\n\n"
         "🔌 *Serviços Locais:*\n"
         f"• SSH (2222): {p_ssh}\n"
@@ -357,8 +418,42 @@ def cmd_legendar(args: List[str]) -> str:
         return f"❌ Falha de conexão com a API do GitHub: {e}"
 
 
+def parse_iso(dt_str: Optional[str]) -> Optional[datetime.datetime]:
+    """Converte string ISO 8601 em objeto datetime UTC."""
+    if not dt_str:
+        return None
+    try:
+        if dt_str.endswith("Z"):
+            dt_str = dt_str[:-1] + "+00:00"
+        return datetime.datetime.fromisoformat(dt_str)
+    except Exception:
+        return None
+
+
+def format_br_time(dt: Optional[datetime.datetime]) -> str:
+    """Formata datetime para o fuso horário de Brasília (UTC-3)."""
+    if not dt:
+        return "N/A"
+    br_tz = datetime.timezone(datetime.timedelta(hours=-3))
+    return dt.astimezone(br_tz).strftime("%H:%M:%S (%d/%m)")
+
+
+def format_duration(seconds: float) -> str:
+    """Formata segundos em horas, minutos e segundos legíveis."""
+    s = max(0, int(seconds))
+    h = s // 3600
+    m = (s % 3600) // 60
+    sec = s % 60
+    if h > 0:
+        return f"{h}h {m:02d}m {sec:02d}s"
+    elif m > 0:
+        return f"{m}m {sec:02d}s"
+    else:
+        return f"{sec}s"
+
+
 def cmd_runs() -> str:
-    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/runs?per_page=4"
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/runs?per_page=3"
     req = urllib.request.Request(
         url,
         headers={
@@ -377,30 +472,56 @@ def cmd_runs() -> str:
             if not runs:
                 return "ℹ️ Nenhuma execução recente encontrada no repositório."
 
-            linhas = ["⏳ *Últimas Execuções no GitHub Actions:*\n"]
+            now_utc = datetime.datetime.now(datetime.timezone.utc)
+            linhas = ["⏳ *Status dos Workflows no GitHub Actions:*\n"]
+
             for r in runs:
+                run_id = r.get("id")
+                name = r.get("display_title") or r.get("name", "Workflow")
+                html_url = r.get("html_url", "")
                 status = r.get("status", "")
                 conclusion = r.get("conclusion")
-                name = r.get("display_title") or r.get("name", "Workflow")
-                run_id = r.get("id")
+
+                started_dt = parse_iso(r.get("run_started_at") or r.get("created_at"))
+                updated_dt = parse_iso(r.get("updated_at"))
+
+                start_str = format_br_time(started_dt)
+                end_str = format_br_time(updated_dt)
 
                 if status == "in_progress":
-                    icon = "🔄 *Em andamento*"
+                    elapsed_s = (now_utc - started_dt).total_seconds() if started_dt else 0
+                    dur_str = format_duration(elapsed_s)
+                    badge = f"🔄 *Em andamento* (há {dur_str})"
+                    time_info = f"🕒 *Iniciado às:* {start_str}"
                 elif status == "queued":
-                    icon = "⏳ *Na fila*"
+                    badge = "⏳ *Na fila*"
+                    time_info = f"🕒 *Criado às:* {start_str}"
                 elif status == "completed":
-                    if conclusion == "success":
-                        icon = "✅ *Concluído com Sucesso*"
-                    elif conclusion == "failure":
-                        icon = "❌ *Falhou*"
-                    elif conclusion == "cancelled":
-                        icon = "⏹️ *Cancelado*"
-                    else:
-                        icon = f"⚪ *{conclusion}*"
-                else:
-                    icon = f"⚪ *{status}*"
+                    dur_s = (updated_dt - started_dt).total_seconds() if (started_dt and updated_dt) else 0
+                    dur_str = format_duration(dur_s)
 
-                linhas.append(f"• *#{run_id}* — {icon}\n  `{name}`\n")
+                    if conclusion == "success":
+                        badge = f"✅ *Concluído com Sucesso* ({dur_str})"
+                        time_info = f"🕒 *Início:* {start_str}\n  🏁 *Finalizado às:* {end_str}"
+                    elif conclusion == "failure":
+                        badge = f"❌ *Falhou* ({dur_str})"
+                        time_info = f"🕒 *Início:* {start_str}\n  ⚠️ *Falhou às:* {end_str}"
+                    elif conclusion == "cancelled":
+                        badge = f"⏹️ *Cancelado* ({dur_str})"
+                        time_info = f"🕒 *Início:* {start_str}\n  🛑 *Cancelado às:* {end_str}"
+                    else:
+                        badge = f"⚪ *{conclusion}* ({dur_str})"
+                        time_info = f"🕒 *Início:* {start_str}\n  🏁 *Fim:* {end_str}"
+                else:
+                    badge = f"⚪ *{status}*"
+                    time_info = f"🕒 *Horário:* {start_str}"
+
+                linhas.append(
+                    f"• *#{run_id}* — {badge}\n"
+                    f"  🎬 `{name}`\n"
+                    f"  {time_info}\n"
+                    f"  🔗 {html_url}\n"
+                )
 
             linhas.append("💡 Para disparar nova legenda, digite: `legendar <número>`")
             return "\n".join(linhas)
