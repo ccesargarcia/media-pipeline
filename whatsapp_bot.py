@@ -217,12 +217,12 @@ def get_battery_and_thermal_info() -> Tuple[str, str]:
             percentage = b_data.get("percentage")
             st = b_data.get("status", "")
             plug = b_data.get("plugged", "")
-            if st == "CHARGING" or "PLUGGED" in str(plug):
+            if st == "FULL" or percentage == 100:
+                status_str = f"`{percentage}%` (🟢 100% Completa / AC)"
+            elif st == "CHARGING" or "PLUGGED" in str(plug):
                 status_str = f"`{percentage}%` (⚡ Carregando AC)"
             elif st == "DISCHARGING":
                 status_str = f"`{percentage}%` (🔋 Na bateria)"
-            elif st == "FULL":
-                status_str = f"`{percentage}%` (🟢 100% Completa)"
             else:
                 status_str = f"`{percentage}%`"
     except Exception:
