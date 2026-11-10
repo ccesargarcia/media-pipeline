@@ -187,6 +187,8 @@ def cmd_help() -> str:
         "→ Otimiza a memória RAM, sincroniza buffers e encerra processos zumbis.\n\n"
         "🔋 *bateria* ou *saude*\n"
         "→ Exibe diagnóstico aprofundado da saúde da bateria (ASOC, ciclos e capacidade).\n\n"
+        "🔄 *reiniciar* ou *reiniciar servicos*\n"
+        "→ Reinicia a pilha de serviços do A70 (SSH, SOCKS5, Relays, Bot e Monitor) de forma limpa.\n\n"
         "📖 *midia*\n"
         "→ Exibe este menu de ajuda de mídia."
     )
@@ -467,6 +469,40 @@ def cmd_limpar_ram() -> str:
         )
     except Exception as e:
         return f"❌ Erro ao otimizar memória: {e}"
+
+
+def cmd_restart_services(recipient: str) -> str:
+    """Agenda a reinicialização limpa de todos os serviços do A70."""
+    def _do_restart():
+        time.sleep(1.5)
+        restart_script = (
+            "bash ~/start_bridge.sh && "
+            "sleep 2 && "
+            "python3 -c \""
+            "import os, urllib.request, json; "
+            f"url = '{EVOLUTION_API_URL}/message/sendText/{urllib.parse.quote(EVOLUTION_INSTANCE)}'; "
+            f"headers = {{'apikey': '{EVOLUTION_API_KEY}', 'Content-Type': 'application/json'}}; "
+            f"payload = json.dumps({{'number': '{recipient}', 'text': '✅ *Serviços do Galaxy A70 reiniciados com sucesso!*\\n\\n🟢 SSH (2222)\\n🟢 SOCKS5 Proxy (1080)\\n🟢 Relay FTP (2121)\\n🟢 Relay Fire TV (5555)\\n🟢 Bot WhatsApp (8088)\\n🟢 Monitor Uptime Kuma'}}).encode(); "
+            "req = urllib.request.Request(url, data=payload, headers=headers, method='POST'); "
+            "urllib.request.urlopen(req, timeout=10)\""
+        )
+        try:
+            subprocess.Popen(["bash", "-c", restart_script], start_new_session=True)
+        except Exception as e:
+            print(f"[Bot] Erro ao disparar restart de servicos: {e}", file=sys.stderr)
+
+    threading.Thread(target=_do_restart, daemon=True).start()
+
+    return (
+        "🔄 *Reiniciando serviços do Galaxy A70...*\n\n"
+        "Encerrando e recarregando em segundo plano:\n"
+        "• Proxy SOCKS5 (1080)\n"
+        "• Relay FTP (2121)\n"
+        "• Relay Fire TV (5555)\n"
+        "• Monitor Uptime Kuma\n"
+        "• WhatsApp Bot\n\n"
+        "⏳ _Você receberá uma confirmação assim que a pilha estiver 100% online (aprox. 5s)._"
+    )
 
 
 def run_precache_worker(recipient: str, stem: str, season: str) -> None:
@@ -944,11 +980,13 @@ def is_media_command(text: str) -> bool:
         return True
     if cmd in ("bateria", "saude"):
         return True
+    if cmd in ("reiniciar", "restart", "recarregar", "reload"):
+        return True
     if cmd == "status" and len(parts) > 1 and parts[1].lower() in ("a70", "midia", "bateria", "saude"):
         return True
     if cmd in ("ajuda", "menu", "comandos") and len(parts) > 1 and parts[1].lower() in ("midia", "a70", "bateria"):
         return True
-    if cmd in ("precache", "extrair", "legendar", "legenda", "transcrever", "runs", "fila", "status_runs", "ftp", "firetv", "limpar", "otimizar", "liberar", "baixar", "download", "bateria", "saude"):
+    if cmd in ("precache", "extrair", "legendar", "legenda", "transcrever", "runs", "fila", "status_runs", "ftp", "firetv", "limpar", "otimizar", "liberar", "baixar", "download", "bateria", "saude", "reiniciar", "restart", "recarregar", "reload"):
         return True
     return False
 
@@ -983,6 +1021,8 @@ def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
         return cmd_saude_bateria()
     elif cmd in ("limpar", "otimizar", "liberar"):
         return cmd_limpar_ram()
+    elif cmd in ("reiniciar", "restart", "recarregar", "reload"):
+        return cmd_restart_services(sender_clean)
 
     # 3. Comandos operacionais
     elif cmd in ("baixar", "download"):
