@@ -695,6 +695,22 @@ def is_duplicate(msg_id: str, sender: str, text: str) -> bool:
 
 
 class WebhookHandler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        """Permite baixar o APK do Termux:API diretamente pelo navegador."""
+        if self.path.startswith("/termux-api.apk"):
+            apk_path = os.path.expanduser("~/termux-api.apk")
+            if os.path.isfile(apk_path):
+                self.send_response(200)
+                self.send_header("Content-Type", "application/vnd.android.package-archive")
+                self.send_header("Content-Length", str(os.path.getsize(apk_path)))
+                self.send_header("Content-Disposition", "attachment; filename=termux-api.apk")
+                self.end_headers()
+                with open(apk_path, "rb") as f:
+                    self.wfile.write(f.read())
+                return
+        self.send_response(404)
+        self.end_headers()
+
     def do_POST(self):
         content_length = int(self.headers.get("Content-Length", 0))
         raw_body = self.rfile.read(content_length)
