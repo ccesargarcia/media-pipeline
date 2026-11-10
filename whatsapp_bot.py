@@ -171,8 +171,9 @@ def cmd_help() -> str:
         "_(O comando `status` continua sendo o da sua casa no Home Assistant!)_\n\n"
         "⚡ *precache <ep> [temporada]*\n"
         "→ Extrai áudio .m4a no A70 e salva no FTP (ex: `precache 55` ou `precache 64 3`).\n\n"
-        "🚀 *legendar <ep> [temporada]*\n"
-        "→ Dispara o pipeline de legendagem no GitHub Actions (ex: `legendar 55`).\n\n"
+        "🚀 *legendar <ep> [temporada] [traduzir]*\n"
+        "→ Transcreve e sobe a legenda (.srt) no FTP sem tradução (ex: `legendar 55` ou `legendar 64 3`).\n"
+        "_(Para traduzir via IA, adicione `traduzir`: `legendar 55 traduzir`)_\n\n"
         "⏳ *runs* ou *fila*\n"
         "→ Mostra status e progresso dos últimos workflows no GitHub Actions.\n\n"
         "📁 *ftp [temporada]*\n"
@@ -421,7 +422,13 @@ def cmd_legendar(args: List[str]) -> str:
 
     ep_num = int(m.group(0))
     video_filename = f"Uzak_Sehir_-_Episode_{ep_num:02d}.mp4" if ep_num < 10 else f"Uzak_Sehir_-_Episode_{ep_num}.mp4"
-    season_arg = args[1] if len(args) > 1 else ""
+
+    # Permite especificar se deseja tradução ou apenas transcrição (padrão é 'none' para apenas transcrever e subir)
+    wants_translate = any(a.lower() in ("traduzir", "gemini", "traducao") for a in args)
+    translator_mode = "gemini" if wants_translate else "none"
+
+    season_candidates = [a for a in args[1:] if a.lower() not in ("traduzir", "gemini", "traducao", "none")]
+    season_arg = season_candidates[0] if season_candidates else ""
     season = normalizar_temporada(season_arg, ep_num)
 
     url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/legendar_ftp.yml/dispatches"
@@ -432,6 +439,7 @@ def cmd_legendar(args: List[str]) -> str:
             "season": season,
             "network_mode": "tailscale",
             "usar_precache_audio": True,
+            "translator": translator_mode,
         }
     }).encode("utf-8")
 
@@ -451,13 +459,15 @@ def cmd_legendar(args: List[str]) -> str:
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
             if resp.status == 204:
+                modo_txt = "Tradução Completa (Gemini AI)" if wants_translate else "Apenas Transcrição e Upload (.srt original)"
                 return (
                     f"🚀 *[Workflow Disparado com Sucesso]*\n\n"
                     f"🎬 Vídeo: `{video_filename}`\n"
                     f"📂 Temporada: *{season}*\n"
-                    f"⚡ Modo de Rede: *Tailscale / WireGuard*\n"
+                    f"⚙️ Modo: *{modo_txt}*\n"
+                    f"⚡ Rede: *Tailscale / WireGuard*\n"
                     f"🎵 Pré-cache de Áudio: *Ativado*\n\n"
-                    f"💡 O GitHub Actions iniciará o processamento em instantes. Digite *runs* para acompanhar."
+                    f"💡 O Whisper ASR transcreverá e sincronizará a legenda direto no FTP. Digite *runs* para acompanhar."
                 )
             else:
                 return f"⚠️ Resposta inesperada do GitHub: HTTP {resp.status}"

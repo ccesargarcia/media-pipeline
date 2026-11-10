@@ -349,6 +349,31 @@ jobs:
           path: input.srt
           retention-days: 1
 
+      - name: Notificar Conclusão da Transcrição via WhatsApp (Evolution API)
+        if: ${{ success() && inputs.translator == 'none' }}
+        env:
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          VIDEO_FILENAME_INPUT: ${{ inputs.video_filename }}
+          SEASON_INPUT: ${{ inputs.season }}
+        run: |
+          MSG="🎉 Episódio *$VIDEO_FILENAME_INPUT* transcrito com sucesso!\n📁 Legenda ($STEM.srt) sincronizada no FTP ($SEASON_INPUT)."
+          python3 notificar_whatsapp.py "$MSG" --status success || true
+
+      - name: Notificar Falha na Transcrição via WhatsApp (Evolution API)
+        if: ${{ failure() && inputs.translator == 'none' }}
+        env:
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+          VIDEO_FILENAME_INPUT: ${{ inputs.video_filename }}
+        run: |
+          MSG="⚠️ Falha ao transcrever *$VIDEO_FILENAME_INPUT* no workflow GitHub Actions."
+          python3 notificar_whatsapp.py "$MSG" --status error || true
+
   prepare_local:
     if: ${{ inputs.translator == 'local' }}
     needs: merge_transcription
