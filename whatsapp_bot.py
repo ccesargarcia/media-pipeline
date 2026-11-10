@@ -180,6 +180,8 @@ def cmd_help() -> str:
         "→ Lista arquivos e legendas da temporada no FTP (ex: `ftp 2` ou `ftp 3`).\n\n"
         "📺 *firetv <comando>*\n"
         "→ Controle do Fire TV (ex: `firetv status`, `firetv play`, `firetv pause`).\n\n"
+        "🧹 *limpar* ou *limpar ram*\n"
+        "→ Otimiza a memória RAM, sincroniza buffers e encerra processos zumbis.\n\n"
         "📖 *midia*\n"
         "→ Exibe este menu de ajuda de mídia."
     )
@@ -350,6 +352,59 @@ def cmd_status() -> str:
         f"• Roteador FTP (192.168.0.1): {ftp_ok}\n"
         f"• Fire TV Stick (192.168.0.218): {tv_ok}"
     )
+
+
+def cmd_limpar_ram() -> str:
+    """Executa rotina de otimização e limpeza de memória no Galaxy A70."""
+    try:
+        def get_mem_stats():
+            with open("/proc/meminfo") as f:
+                d = dict(l.split(":") for l in f if ":" in l)
+            total = int(d["MemTotal"].split()[0]) // 1024
+            avail = int(d["MemAvailable"].split()[0]) // 1024
+            cached = int(d.get("Cached", "0").split()[0]) // 1024
+            used = total - avail
+            pct = round((used / total) * 100)
+            return total, used, avail, cached, pct
+
+        total_b, used_b, avail_b, cached_b, pct_b = get_mem_stats()
+
+        # 1. Força descarregamento de buffers em disco
+        os.sync()
+
+        # 2. Coleta de lixo do Python
+        gc.collect()
+
+        # 3. Libera heap C (malloc_trim)
+        try:
+            import ctypes
+            libc = ctypes.CDLL("libc.so")
+            libc.malloc_trim(0)
+        except Exception:
+            pass
+
+        # 4. Encerra processos órfãos ou auxiliares que possam ter ficado em segundo plano
+        killed_items = []
+        for dead_proc in ("ffmpeg", "curl", "whisper-cli"):
+            res = subprocess.run(["pkill", "-9", "-x", dead_proc], capture_output=True)
+            if res.returncode == 0:
+                killed_items.append(dead_proc)
+
+        total_a, used_a, avail_a, cached_a, pct_a = get_mem_stats()
+
+        killed_str = ", ".join(killed_items) if killed_items else "Nenhum processo pendente"
+
+        return (
+            "🧹 *Otimização de Memória RAM Realizada!*\n\n"
+            f"📊 *Uso da RAM:* {pct_a}% ({used_a / 1024:.1f} GB usados de {total_a / 1024:.1f} GB)\n"
+            f"💾 *Livre para Aplicações:* *{avail_a / 1024:.1f} GB livres*\n"
+            f"⚡ *Cache de Leitura (Kernel):* {cached_a / 1024:.1f} GB\n"
+            f"🧹 *Processos Limpos:* {killed_str}\n"
+            f"🔄 *Buffers de Disco:* Sincronizados (`sync`)\n\n"
+            "💡 _Nota: No Android/Linux, a memória 'Cached' é liberada instantaneamente pelo kernel assim que qualquer processo demandar mais RAM._"
+        )
+    except Exception as e:
+        return f"❌ Erro ao otimizar memória: {e}"
 
 
 def run_precache_worker(recipient: str, stem: str, season: str) -> None:
@@ -713,7 +768,7 @@ def is_media_command(text: str) -> bool:
         return True
     if cmd in ("ajuda", "menu", "comandos") and len(parts) > 1 and parts[1].lower() in ("midia", "a70"):
         return True
-    if cmd in ("precache", "extrair", "legendar", "legenda", "transcrever", "runs", "fila", "status_runs", "ftp", "firetv"):
+    if cmd in ("precache", "extrair", "legendar", "legenda", "transcrever", "runs", "fila", "status_runs", "ftp", "firetv", "limpar", "otimizar", "liberar"):
         return True
     return False
 
@@ -742,6 +797,8 @@ def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
         return cmd_status()
     elif cmd == "status" and (args and args[0].lower() in ("a70", "midia")):
         return cmd_status()
+    elif cmd in ("limpar", "otimizar", "liberar"):
+        return cmd_limpar_ram()
 
     # 3. Comandos operacionais
     elif cmd in ("precache", "extrair", "audio"):
