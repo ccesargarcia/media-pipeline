@@ -48,7 +48,7 @@ jobs:
           ORIGINAL_SHA=$(sha256sum "$TEST_FILE" | awk '{print $1}')
           echo "SHA256 original: $ORIGINAL_SHA"
 
-          FTP_DEST_DIR="/G/Series/Longe demais - Terceira Temporada"
+          export FTP_DEST_DIR="/G/Series/Longe demais - Terceira Temporada"
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_DEST_DIR"]))')
 
           echo "==> 2. Iniciando Upload via túnel WireGuard / SOCKS5 para ftp://${FTP_HOST}:${FTP_PORT}..."
