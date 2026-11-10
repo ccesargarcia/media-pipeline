@@ -412,6 +412,47 @@ def cmd_precache(recipient: str, args: List[str]) -> str:
     )
 
 
+def parse_iso(dt_str: Optional[str]) -> Optional[datetime.datetime]:
+    """Converte string ISO 8601 em objeto datetime UTC."""
+    if not dt_str:
+        return None
+    try:
+        if dt_str.endswith("Z"):
+            dt_str = dt_str[:-1] + "+00:00"
+        return datetime.datetime.fromisoformat(dt_str)
+    except Exception:
+        return None
+
+
+def get_dispatched_run_url(workflow_file: str = "legendar_ftp.yml", max_attempts: int = 4) -> Optional[Tuple[int, str]]:
+    """Obtém o run_number e html_url do workflow recém-disparado."""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/{workflow_file}/runs?per_page=1"
+    headers = {
+        "Authorization": f"Bearer {GITHUB_TOKEN}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "A70-WhatsApp-Bot/1.0",
+    }
+    for _ in range(max_attempts):
+        time.sleep(1.2)
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                runs = data.get("workflow_runs", [])
+                if runs:
+                    r = runs[0]
+                    created_at = r.get("created_at")
+                    dt = parse_iso(created_at)
+                    if dt:
+                        diff_sec = (datetime.datetime.now(datetime.timezone.utc) - dt).total_seconds()
+                        if diff_sec < 90:
+                            return r.get("run_number"), r.get("html_url")
+        except Exception:
+            pass
+    return None
+
+
 def cmd_legendar(args: List[str]) -> str:
     if not args:
         return "⚠️ Uso incorreto: informe o número do episódio.\nExemplo: `legendar 55` ou `legendar 64 3`"
@@ -459,6 +500,13 @@ def cmd_legendar(args: List[str]) -> str:
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
             if resp.status == 204:
+                run_info = get_dispatched_run_url("legendar_ftp.yml")
+                if run_info:
+                    run_num, run_url = run_info
+                    link_txt = f"🔗 *Acompanhar em tempo real:*\n{run_url}\n_(Run #{run_num})_"
+                else:
+                    link_txt = f"🔗 *Acompanhar em tempo real:*\nhttps://github.com/{GITHUB_REPO}/actions\n_(Digite *runs* para detalhes)_"
+
                 modo_txt = "Tradução Completa (Gemini AI)" if wants_translate else "Apenas Transcrição e Upload (.srt original)"
                 return (
                     f"🚀 *[Workflow Disparado com Sucesso]*\n\n"
@@ -467,7 +515,7 @@ def cmd_legendar(args: List[str]) -> str:
                     f"⚙️ Modo: *{modo_txt}*\n"
                     f"⚡ Rede: *Tailscale / WireGuard*\n"
                     f"🎵 Pré-cache de Áudio: *Ativado*\n\n"
-                    f"💡 O Whisper ASR transcreverá e sincronizará a legenda direto no FTP. Digite *runs* para acompanhar."
+                    f"{link_txt}"
                 )
             else:
                 return f"⚠️ Resposta inesperada do GitHub: HTTP {resp.status}"
@@ -476,18 +524,6 @@ def cmd_legendar(args: List[str]) -> str:
         return f"❌ Erro ao disparar no GitHub (HTTP {e.code}):\n```{err}```"
     except Exception as e:
         return f"❌ Falha de conexão com a API do GitHub: {e}"
-
-
-def parse_iso(dt_str: Optional[str]) -> Optional[datetime.datetime]:
-    """Converte string ISO 8601 em objeto datetime UTC."""
-    if not dt_str:
-        return None
-    try:
-        if dt_str.endswith("Z"):
-            dt_str = dt_str[:-1] + "+00:00"
-        return datetime.datetime.fromisoformat(dt_str)
-    except Exception:
-        return None
 
 
 def format_br_time(dt: Optional[datetime.datetime]) -> str:
