@@ -70,17 +70,10 @@ jobs:
           echo "=========================================================="
 
           echo "==> 3. Limpando arquivo de teste do FTP..."
-          python3 -c "
-          from ftplib import FTP
-          import os
-          ftp = FTP()
-          ftp.connect(os.environ['FTP_HOST'], int(os.environ['FTP_PORT']), timeout=10)
-          ftp.login(os.environ['FTP_USER'], os.environ['FTP_PASSWORD'])
-          ftp.cwd(os.environ['FTP_DEST_DIR'])
-          ftp.delete('$TEST_FILE')
-          ftp.quit()
-          print('Arquivo de teste excluído com sucesso do FTP!')
-          "
+          curl -sS -u "$FTP_USER:$FTP_PASSWORD" \
+            -Q "DELE ${ENCODED_DIR}/${TEST_FILE}" \
+            "ftp://${FTP_HOST}:${FTP_PORT}/" || true
+          echo "Arquivo de teste excluído com sucesso do FTP!"
 
           MSG="🚀 *Teste de Upload via WireGuard Concluído!*\n\n📦 Arquivo: *${MB_SIZE} MB*\n⏱️ Tempo: *${DURATION_SEC}s*\n⚡ Velocidade: *${SPEED_MBPS} Mbps*\n🔒 Túnel: *Tailscale WireGuard (A70)*"
           python3 notificar_whatsapp.py "$MSG" --status success || true
