@@ -1,0 +1,86 @@
+name: Teste de Upload via WireGuard (Galaxy A70)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tamanho_mb:
+        description: 'Tamanho do arquivo de teste em MB (ex: 5)'
+        required: true
+        type: number
+        default: 5
+
+permissions:
+  contents: read
+
+jobs:
+  test-wireguard-upload:
+    name: Upload FTP via WireGuard
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        uses: ./.github/actions/tailscale-connect
+        with:
+          ts_authkey: ${{ secrets.TS_AUTHKEY }}
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+          openvpn_config: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Gerar Arquivo de Teste e Medir Upload para o FTP
+        env:
+          FTP_HOST: "192.168.0.1"
+          FTP_PORT: "21"
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          MB_SIZE: ${{ inputs.tamanho_mb }}
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+        run: |
+          set -euo pipefail
+
+          echo "==> 1. Gerando arquivo binário de teste de ${MB_SIZE} MB..."
+          TEST_FILE="teste_upload_wireguard_${MB_SIZE}mb.dat"
+          dd if=/dev/urandom of="$TEST_FILE" bs=1M count="$MB_SIZE" status=progress
+          ORIGINAL_SHA=$(sha256sum "$TEST_FILE" | awk '{print $1}')
+          echo "SHA256 original: $ORIGINAL_SHA"
+
+          FTP_DEST_DIR="/G/Series/Longe demais - Terceira Temporada"
+          ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_DEST_DIR"]))')
+
+          echo "==> 2. Iniciando Upload via túnel WireGuard / SOCKS5 para ftp://${FTP_HOST}:${FTP_PORT}..."
+          T0=$(date +%s%3N)
+          curl -# --fail --ftp-pasv --retry 3 --retry-delay 3 \
+            -u "$FTP_USER:$FTP_PASSWORD" \
+            -T "$TEST_FILE" \
+            "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+          T1=$(date +%s%3N)
+
+          DURATION_MS=$((T1 - T0))
+          DURATION_SEC=$(awk "BEGIN {print $DURATION_MS / 1000}")
+          SPEED_MBPS=$(awk "BEGIN {if ($DURATION_SEC > 0) printf \"%.2f\", ($MB_SIZE * 8) / $DURATION_SEC; else print 0}")
+
+          echo "=========================================================="
+          echo "🎉 Upload via WireGuard concluído com sucesso!"
+          echo "⏱️ Duração: ${DURATION_SEC}s"
+          echo "⚡ Velocidade estimada: ${SPEED_MBPS} Mbps"
+          echo "=========================================================="
+
+          echo "==> 3. Limpando arquivo de teste do FTP..."
+          python3 -c "
+          from ftplib import FTP
+          import os
+          ftp = FTP()
+          ftp.connect(os.environ['FTP_HOST'], int(os.environ['FTP_PORT']), timeout=10)
+          ftp.login(os.environ['FTP_USER'], os.environ['FTP_PASSWORD'])
+          ftp.cwd(os.environ['FTP_DEST_DIR'])
+          ftp.delete('$TEST_FILE')
+          ftp.quit()
+          print('Arquivo de teste excluído com sucesso do FTP!')
+          "
+
+          MSG="🚀 *Teste de Upload via WireGuard Concluído!*\n\n📦 Arquivo: *${MB_SIZE} MB*\n⏱️ Tempo: *${DURATION_SEC}s*\n⚡ Velocidade: *${SPEED_MBPS} Mbps*\n🔒 Túnel: *Tailscale WireGuard (A70)*"
+          python3 notificar_whatsapp.py "$MSG" --status success || true
