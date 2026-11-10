@@ -240,64 +240,114 @@ def get_battery_and_thermal_info() -> Tuple[str, str]:
     return batt_display, temp_display
 
 
+def clean_unit(val: str) -> str:
+    """Converte Gi/Mi/G/M para GB e MB amigáveis."""
+    val = val.strip()
+    if val.endswith("Gi"):
+        return f"{val[:-2]} GB"
+    elif val.endswith("Mi"):
+        return f"{val[:-2]} MB"
+    elif val.endswith("G"):
+        return f"{val[:-1]} GB"
+    elif val.endswith("M"):
+        return f"{val[:-1]} MB"
+    return val
+
+
+def format_friendly_uptime() -> str:
+    """Retorna tempo ligado em formato amigável (ex: 3h 52min)."""
+    try:
+        res = subprocess.run(["uptime"], capture_output=True, text=True, timeout=2)
+        raw_up = res.stdout.strip()
+        m = re.search(r"up\s+(?:(\d+)\s+days?,\s*)?(\d+):(\d+)", raw_up)
+        if m:
+            days, hours, mins = m.groups()
+            parts = []
+            if days:
+                d = int(days)
+                parts.append(f"{d} dia" if d == 1 else f"{d} dias")
+            if hours and int(hours) > 0:
+                parts.append(f"{int(hours)}h")
+            if mins:
+                parts.append(f"{int(mins)}min")
+            return " ".join(parts)
+        m_min = re.search(r"up\s+(\d+)\s+min", raw_up)
+        if m_min:
+            return f"{m_min.group(1)} minutos"
+    except Exception:
+        pass
+    return "Online"
+
+
+def format_friendly_ram() -> str:
+    """Retorna memória RAM formatada e legível."""
+    try:
+        res = subprocess.run(["free", "-h"], capture_output=True, text=True, timeout=2)
+        lines = res.stdout.strip().splitlines()
+        if len(lines) >= 2:
+            parts = lines[1].split()
+            total = clean_unit(parts[1])
+            used = clean_unit(parts[2])
+            avail = clean_unit(parts[-1])
+            return f"*{used} em uso* ({avail} livres de {total})"
+    except Exception:
+        pass
+    return "N/A"
+
+
+def format_friendly_disk() -> str:
+    """Retorna espaço em disco limpo e legível."""
+    try:
+        res = subprocess.run(["df", "-h", os.path.expanduser("~")], capture_output=True, text=True, timeout=2)
+        lines = res.stdout.strip().splitlines()
+        if len(lines) >= 2:
+            parts = lines[1].split()
+            total = clean_unit(parts[1])
+            avail = clean_unit(parts[3])
+            pct = parts[4]
+            return f"*{avail} livres* de {total} ({pct} usado)"
+    except Exception:
+        pass
+    return "N/A"
+
+
 def cmd_status() -> str:
     batt_info, temp_info = get_battery_and_thermal_info()
+    uptime_str = format_friendly_uptime()
+    ram_str = format_friendly_ram()
+    disk_str = format_friendly_disk()
 
-    # Uptime
-    uptime_str = "Desconhecido"
-    try:
-        res = subprocess.run(["uptime"], capture_output=True, text=True, timeout=3)
-        uptime_str = res.stdout.strip()
-    except Exception:
-        pass
+    # Checa portas locais
+    p_ssh = check_port_open("127.0.0.1", 2222)
+    p_socks = check_port_open("127.0.0.1", 1080)
+    p_ftp_relay = check_port_open("127.0.0.1", 2121)
+    p_adb_relay = check_port_open("127.0.0.1", 5555)
 
-    # Memória
-    ram_str = "N/A"
-    try:
-        res = subprocess.run(["free", "-h"], capture_output=True, text=True, timeout=3)
-        lines = res.stdout.strip().splitlines()
-        if len(lines) >= 2:
-            ram_str = lines[1]
-    except Exception:
-        pass
-
-    # Armazenamento
-    disk_str = "N/A"
-    try:
-        res = subprocess.run(["df", "-h", os.path.expanduser("~")], capture_output=True, text=True, timeout=3)
-        lines = res.stdout.strip().splitlines()
-        if len(lines) >= 2:
-            disk_str = lines[1]
-    except Exception:
-        pass
-
-    # Portas
-    p_ssh = "🟢 Ativa" if check_port_open("127.0.0.1", 2222) else "🔴 Inativa"
-    p_socks = "🟢 Ativa" if check_port_open("127.0.0.1", 1080) else "🔴 Inativa"
-    p_ftp_relay = "🟢 Ativa" if check_port_open("127.0.0.1", 2121) else "🔴 Inativa"
-    p_adb_relay = "🟢 Ativa" if check_port_open("127.0.0.1", 5555) else "🔴 Inativa"
-    p_bot = "🟢 Ativa (8088)"
+    if p_ssh and p_socks and p_ftp_relay and p_adb_relay:
+        servicos_status = "🟢 *Todos Online* (SSH, SOCKS5, Relays, Bot)"
+    else:
+        status_items = []
+        status_items.append("SSH: 🟢" if p_ssh else "SSH: 🔴")
+        status_items.append("Proxy: 🟢" if p_socks else "Proxy: 🔴")
+        status_items.append("FTP Relay: 🟢" if p_ftp_relay else "FTP Relay: 🔴")
+        status_items.append("FireTV: 🟢" if p_adb_relay else "FireTV: 🔴")
+        servicos_status = " · ".join(status_items)
 
     # Dispositivos locais
-    ftp_ok = "🟢 Conectado" if check_port_open(FTP_HOST, FTP_PORT) else "🔴 Inacessível"
-    tv_ok = "🟢 Conectado" if check_port_open(FIRETV_HOST, FIRETV_PORT) else "🟡 Standby/Desligada"
+    ftp_ok = "🟢 *Conectado*" if check_port_open(FTP_HOST, FTP_PORT) else "🔴 *Inacessível*"
+    tv_ok = "🟢 *Conectada*" if check_port_open(FIRETV_HOST, FIRETV_PORT) else "🟡 *Standby / Desligada*"
 
     return (
-        "📊 *Status do Sistema — Galaxy A70*\n\n"
+        "📊 *Galaxy A70 — Status do Servidor*\n\n"
         f"🔋 *Bateria:* {batt_info}\n"
         f"🌡️ *Temperaturas:* {temp_info}\n\n"
-        f"⏱️ *Uptime:* {uptime_str}\n"
-        f"💾 *Memória RAM:* `{ram_str}`\n"
-        f"📂 *Armazenamento:* `{disk_str}`\n\n"
-        "🔌 *Serviços Locais:*\n"
-        f"• SSH (2222): {p_ssh}\n"
-        f"• SOCKS5 Proxy (1080): {p_socks}\n"
-        f"• FTP Relay (2121): {p_ftp_relay}\n"
-        f"• Fire TV Relay (5555): {p_adb_relay}\n"
-        f"• WhatsApp Bot: {p_bot}\n\n"
+        f"⏱️ *Ligado há:* {uptime_str}\n"
+        f"💾 *Memória RAM:* {ram_str}\n"
+        f"📂 *Armazenamento:* {disk_str}\n\n"
+        f"🔌 *Serviços no A70:* {servicos_status}\n\n"
         "🌐 *Rede Doméstica:*\n"
-        f"• Roteador FTP ({FTP_HOST}:{FTP_PORT}): {ftp_ok}\n"
-        f"• Fire TV Stick ({FIRETV_HOST}:{FIRETV_PORT}): {tv_ok}"
+        f"• Roteador FTP (192.168.0.1): {ftp_ok}\n"
+        f"• Fire TV Stick (192.168.0.218): {tv_ok}"
     )
 
 
