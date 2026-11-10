@@ -127,6 +127,10 @@ jobs:
           UPLOAD_PID=""
           UPLOAD_FILE=""
           UPLOAD_EP=""
+          UPLOAD_LOG=""
+          UPLOAD_START_TIME=0
+          UPLOAD_SIZE_MB=0
+          UPLOAD_MONITOR_PID=""
 
           SUCCESS_EPS=()
           SKIPPED_EPS=()
@@ -134,14 +138,37 @@ jobs:
 
           aguardar_upload_anterior() {
             if [ -n "$UPLOAD_PID" ]; then
-              echo "==> Aguardando conclusão do upload em background (Episódio $UPLOAD_EP: $UPLOAD_FILE)..."
+              echo "==> Aguardando conclusão do upload em background (Episódio $UPLOAD_EP: $UPLOAD_FILE | ${UPLOAD_SIZE_MB} MB)..."
+              local last_prog=""
+              while kill -0 "$UPLOAD_PID" 2>/dev/null; do
+                if [ -f "$UPLOAD_LOG" ]; then
+                  local current_prog=$(tr '\r' '\n' < "$UPLOAD_LOG" 2>/dev/null | grep -E '[0-9]+\.[0-9]+%|[0-9]+%' | tail -n 1 | sed 's/^[ \t]*//')
+                  if [ -n "$current_prog" ] && [ "$current_prog" != "$last_prog" ]; then
+                    echo "  ⏳ [Upload Ep $UPLOAD_EP] $current_prog (${UPLOAD_SIZE_MB} MB)"
+                    last_prog="$current_prog"
+                  fi
+                fi
+                sleep 5
+              done
+
+              # Finaliza monitor auxiliar se ainda estiver ativo
+              if [ -n "$UPLOAD_MONITOR_PID" ]; then
+                kill "$UPLOAD_MONITOR_PID" 2>/dev/null || true
+                wait "$UPLOAD_MONITOR_PID" 2>/dev/null || true
+              fi
+
               if wait "$UPLOAD_PID"; then
-                echo "✅ Upload do Episódio $UPLOAD_EP concluído com sucesso!"
+                local upload_elapsed=$(( $(date +%s) - UPLOAD_START_TIME ))
+                local speed_mbs="0"
+                if (( upload_elapsed > 0 && UPLOAD_SIZE_MB > 0 )); then
+                  speed_mbs=$(awk "BEGIN {printf \"%.2f\", $UPLOAD_SIZE_MB / $upload_elapsed}")
+                fi
+                echo "✅ Upload do Episódio $UPLOAD_EP concluído com sucesso em ${upload_elapsed}s (~${speed_mbs} MB/s)!"
                 SUCCESS_EPS+=("$UPLOAD_EP")
-                rm -f "$UPLOAD_FILE"
+                rm -f "$UPLOAD_FILE" "$UPLOAD_LOG" 2>/dev/null || true
 
                 if [ "$NOTIFY_WHATSAPP" = "true" ]; then
-                  python3 notificar_whatsapp.py "✅ *Uzak Şehir - Ep $UPLOAD_EP* enviado com sucesso para o FTP ($SEASON_INPUT)!" --status success || true
+                  python3 notificar_whatsapp.py "✅ *Uzak Şehir - Ep $UPLOAD_EP* enviado com sucesso para o FTP ($SEASON_INPUT) em ${upload_elapsed}s (~${speed_mbs} MB/s)!" --status success || true
                 fi
 
                 if [ "$AUTO_SUBTITLE" = "true" ]; then
@@ -153,11 +180,20 @@ jobs:
                 fi
               else
                 echo "❌ Falha no upload do Episódio $UPLOAD_EP ($UPLOAD_FILE)"
+                if [ -f "$UPLOAD_LOG" ]; then
+                  echo "--- Detalhes do erro curl ---"
+                  tail -n 25 "$UPLOAD_LOG"
+                  echo "-----------------------------"
+                fi
                 FAILED_EPS+=("$UPLOAD_EP (falha FTP)")
               fi
               UPLOAD_PID=""
               UPLOAD_FILE=""
               UPLOAD_EP=""
+              UPLOAD_LOG=""
+              UPLOAD_START_TIME=0
+              UPLOAD_SIZE_MB=0
+              UPLOAD_MONITOR_PID=""
             fi
           }
 
@@ -166,15 +202,41 @@ jobs:
             local ep="$2"
             UPLOAD_FILE="$file"
             UPLOAD_EP="$ep"
-            echo "==> Iniciando envio de $file em background para $FTP_DIR..."
+            UPLOAD_LOG="upload_ep_${ep}.log"
+            UPLOAD_START_TIME=$(date +%s)
+            local file_bytes=$(stat -c%s "$file" 2>/dev/null || echo 0)
+            UPLOAD_SIZE_MB=$(( file_bytes / 1024 / 1024 ))
+            echo "==> Iniciando envio de $file (${UPLOAD_SIZE_MB} MB) em background para $FTP_DIR..."
+
+            if [ "$NOTIFY_WHATSAPP" = "true" ]; then
+              python3 notificar_whatsapp.py "📤 *Uzak Şehir - Ep $ep* baixado (${UPLOAD_SIZE_MB} MB). Iniciando envio para o FTP..." --status info || true
+            fi
+
             (
-              curl -sS --fail --ftp-pasv --ftp-create-dirs \
+              curl -# --fail --ftp-pasv --ftp-create-dirs \
                 --retry 5 --retry-delay 5 --retry-connrefused \
                 -u "$FTP_USER:$FTP_PASSWORD" \
                 -T "$file" \
-                "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+                "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/" \
+                2> "$UPLOAD_LOG"
             ) &
             UPLOAD_PID=$!
+
+            # Monitor em background para reportar progresso mesmo se outros passos estiverem executando
+            (
+              local last_mon_prog=""
+              while kill -0 "$UPLOAD_PID" 2>/dev/null; do
+                sleep 8
+                if [ -f "$UPLOAD_LOG" ]; then
+                  local p=$(tr '\r' '\n' < "$UPLOAD_LOG" 2>/dev/null | grep -E '[0-9]+\.[0-9]+%|[0-9]+%' | tail -n 1 | sed 's/^[ \t]*//')
+                  if [ -n "$p" ] && [ "$p" != "$last_mon_prog" ]; then
+                    echo "  📤 [Upload Ep $ep em andamento] $p (${UPLOAD_SIZE_MB} MB)"
+                    last_mon_prog="$p"
+                  fi
+                fi
+              done
+            ) &
+            UPLOAD_MONITOR_PID=$!
           }
 
           for (( ep=$START_EP; ep<=$END_EP; ep++ )); do

@@ -178,7 +178,9 @@ def cmd_help() -> str:
         "⏳ *runs* ou *fila*\n"
         "→ Mostra status e progresso dos últimos workflows no GitHub Actions.\n\n"
         "📁 *ftp [temporada]*\n"
-        "→ Lista arquivos e legendas da temporada no FTP (ex: `ftp 2` ou `ftp 3`).\n\n"
+        "→ Lista arquivos e legendas da temporada no FTP (ex: `ftp 3` ou `ftp 2`).\n\n"
+        "📥 *baixar <ep> [temporada]*\n"
+        "→ Baixa episódio do Turkish123 e envia para o FTP com progresso em tempo real (ex: `baixar 72` ou `baixar 64 72`).\n\n"
         "📺 *firetv <comando>*\n"
         "→ Controle do Fire TV (ex: `firetv status`, `firetv play`, `firetv pause`).\n\n"
         "🧹 *limpar* ou *limpar ram*\n"
@@ -604,6 +606,120 @@ def format_duration(seconds: float) -> str:
         return f"{sec}s"
 
 
+def cmd_baixar(args: List[str]) -> str:
+    if not args:
+        return (
+            "⚠️ Uso incorreto: informe o número do episódio.\n"
+            "Exemplo: `baixar 72` ou `baixar 64 72` (para intervalo) ou `baixar 72 3`"
+        )
+
+    nums = [int(n) for n in re.findall(r"\d+", " ".join(args))]
+    if not nums:
+        return f"❌ Nenhum número de episódio válido em `{' '.join(args)}`"
+
+    if len(nums) == 1:
+        ep_start = nums[0]
+        ep_end = nums[0]
+        season_candidates = [a for a in args if not a.isdigit()]
+        season_arg = season_candidates[0] if season_candidates else ""
+    elif len(nums) >= 2:
+        if nums[1] < 10 and nums[0] >= 10:
+            ep_start = nums[0]
+            ep_end = nums[0]
+            season_arg = str(nums[1])
+        else:
+            ep_start = min(nums[0], nums[1])
+            ep_end = max(nums[0], nums[1])
+            season_candidates = [a for a in args if not a.isdigit()]
+            season_arg = season_candidates[0] if season_candidates else ""
+    else:
+        ep_start = nums[0]
+        ep_end = nums[0]
+        season_arg = ""
+
+    season = normalizar_temporada(season_arg, ep_start)
+
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/workflows/baixar_episodios_ftp.yml/dispatches"
+    payload = json.dumps({
+        "ref": "main",
+        "inputs": {
+            "season": season,
+            "episode_start": ep_start,
+            "episode_end": ep_end,
+            "network_mode": "tailscale",
+            "skip_existing": True,
+            "notify_whatsapp": True,
+            "auto_subtitle": False,
+        }
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        url,
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {GITHUB_TOKEN}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "Content-Type": "application/json",
+            "User-Agent": "A70-WhatsApp-Bot/1.0",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            if resp.status == 204:
+                run_info = get_dispatched_run_url("baixar_episodios_ftp.yml")
+                if run_info:
+                    run_num, run_url = run_info
+                    link_txt = f"🔗 *Acompanhar em tempo real:*\n{run_url}\n_(Run #{run_num})_"
+                else:
+                    link_txt = f"🔗 *Acompanhar em tempo real:*\nhttps://github.com/{GITHUB_REPO}/actions\n_(Digite *runs* para detalhes)_"
+
+                range_txt = f"Episódio {ep_start}" if ep_start == ep_end else f"Episódios {ep_start} até {ep_end}"
+                return (
+                    f"📥 *[Download Disparado via Turkish123]*\n\n"
+                    f"🎬 {range_txt}\n"
+                    f"📂 Temporada: *{season}*\n"
+                    f"⚡ Rede: *Tailscale / WireGuard*\n"
+                    f"📊 Progresso em tempo real ativado no log e WhatsApp!\n\n"
+                    f"{link_txt}"
+                )
+            else:
+                return f"⚠️ Resposta inesperada do GitHub: HTTP {resp.status}"
+    except urllib.error.HTTPError as e:
+        err = e.read().decode("utf-8", "replace")[:300]
+        return f"❌ Erro ao disparar download no GitHub (HTTP {e.code}):\n```{err}```"
+    except Exception as e:
+        return f"❌ Falha de conexão com a API do GitHub: {e}"
+
+
+def get_run_active_step(run_id: int) -> Optional[str]:
+    """Obtém a etapa ativa de uma execução in_progress no GitHub Actions."""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/runs/{run_id}/jobs"
+    req = urllib.request.Request(
+        url,
+        headers={
+            "Authorization": f"Bearer {GITHUB_TOKEN}",
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "A70-WhatsApp-Bot/1.0",
+        },
+        method="GET",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            for job in data.get("jobs", []):
+                if job.get("status") == "in_progress":
+                    for step in job.get("steps", []):
+                        if step.get("status") == "in_progress":
+                            return step.get("name")
+                    return job.get("name")
+    except Exception:
+        pass
+    return None
+
+
 def cmd_runs() -> str:
     url = f"https://api.github.com/repos/{GITHUB_REPO}/actions/runs?per_page=3"
     req = urllib.request.Request(
@@ -644,7 +760,9 @@ def cmd_runs() -> str:
                     elapsed_s = (now_utc - started_dt).total_seconds() if started_dt else 0
                     dur_str = format_duration(elapsed_s)
                     badge = f"🔄 *Em andamento* (há {dur_str})"
-                    time_info = f"🕒 *Iniciado às:* {start_str}"
+                    active_step = get_run_active_step(run_id)
+                    step_txt = f"\n  📍 *Etapa:* `{active_step}`" if active_step else ""
+                    time_info = f"🕒 *Iniciado às:* {start_str}{step_txt}"
                 elif status == "queued":
                     badge = "⏳ *Na fila*"
                     time_info = f"🕒 *Criado às:* {start_str}"
@@ -675,14 +793,14 @@ def cmd_runs() -> str:
                     f"  🔗 {html_url}\n"
                 )
 
-            linhas.append("💡 Para disparar nova legenda, digite: `legendar <número>`")
+            linhas.append("💡 Para disparar nova legenda: `legendar <ep>` | Novo download: `baixar <ep>`")
             return "\n".join(linhas)
     except Exception as e:
         return f"❌ Erro ao consultar execuções no GitHub: {e}"
 
 
 def cmd_ftp(args: List[str]) -> str:
-    season_arg = args[0] if args else "2"
+    season_arg = args[0] if args else "3"
     season = normalizar_temporada(season_arg, 50)
     encoded_season = urllib.parse.quote(season)
     ftp_url = f"ftp://{FTP_HOST}:{FTP_PORT}/G/Series/Longe%20demais%20-%20{encoded_season}/"
@@ -769,7 +887,7 @@ def is_media_command(text: str) -> bool:
         return True
     if cmd in ("ajuda", "menu", "comandos") and len(parts) > 1 and parts[1].lower() in ("midia", "a70"):
         return True
-    if cmd in ("precache", "extrair", "legendar", "legenda", "transcrever", "runs", "fila", "status_runs", "ftp", "firetv", "limpar", "otimizar", "liberar"):
+    if cmd in ("precache", "extrair", "legendar", "legenda", "transcrever", "runs", "fila", "status_runs", "ftp", "firetv", "limpar", "otimizar", "liberar", "baixar", "download"):
         return True
     return False
 
@@ -802,6 +920,8 @@ def process_incoming_text(sender_clean: str, text: str) -> Optional[str]:
         return cmd_limpar_ram()
 
     # 3. Comandos operacionais
+    elif cmd in ("baixar", "download"):
+        return cmd_baixar(args)
     elif cmd in ("precache", "extrair", "audio"):
         return cmd_precache(sender_clean, args)
     elif cmd in ("legendar", "legenda", "transcrever"):
