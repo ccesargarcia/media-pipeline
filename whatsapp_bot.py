@@ -11,6 +11,7 @@ Recebe webhooks da Evolution API (v2) e permite controle remoto da infraestrutur
 """
 
 import datetime
+import gc
 import http.server
 import json
 import os

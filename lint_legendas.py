@@ -118,6 +118,13 @@ REGRAS_SKILL = [
         "sugestao": "Expressão comum em turco que deveria ter sido vertida para Português do Brasil.",
         "severidade": "aviso",
     },
+    {
+        "id": "PORTUGUES_DE_PORTUGAL",
+        "nome": "Termo do Português de Portugal (PT-PT) detectado",
+        "padrao": re.compile(r"\b(mi[úu]d[oa]s?|raparigas?|ecr[ãa]s?|autocarros?)\b|\b(estou|est[áa]|estavam|est[ãa]o)\s+a\s+[a-z]+(?:ar|er|ir)\b", re.IGNORECASE),
+        "sugestao": "Termo típico de Portugal. No Brasil use 'criança/menino(a)', 'moça/garota', 'tela', 'ônibus' ou gerúndio ('estou fazendo').",
+        "severidade": "erro",
+    },
 ]
 
 
