@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Galaxy A70 Resource Monitor for Uptime Kuma (Hardened Edition)
-Pushes Memory (RAM), Disk (Storage), and Battery/Temperature metrics
-to Uptime Kuma push monitors with high resilience and anti-doze protection.
+Galaxy A70 Resource & Tunnel Monitor for Uptime Kuma (Hardened Edition)
+Pushes Memory (RAM), Disk (Storage), Battery/Temperature, and Tailscale/WireGuard Tunnel
+metrics to Uptime Kuma push monitors with high resilience and anti-doze protection.
 """
 
 import json
 import os
+import socket
 import subprocess
 import sys
 import time
@@ -16,6 +17,7 @@ import urllib.request
 KUMA_RAM_URL = "https://monitor.luisices.com.br/api/push/A70RamPushToken2026X"
 KUMA_DISK_URL = "https://monitor.luisices.com.br/api/push/A70DiskPushToken2026X"
 KUMA_BATTERY_URL = "https://monitor.luisices.com.br/api/push/A70BatteryPushToken2026X"
+KUMA_TUNNEL_URL = "https://monitor.luisices.com.br/api/push/A70WireGuardTunnelPushToken2026X"
 
 # Limiares de alerta
 RAM_MIN_AVAILABLE_MB = 250   # Alerta down se RAM livre < 250MB
@@ -34,11 +36,11 @@ def push_metric(url: str, ok: bool, msg: str, ping_val: int) -> bool:
         params = urllib.parse.urlencode({
             "status": "up" if ok else "down",
             "msg": msg,
-            "ping": ping_val,
+            "ping": max(1, int(ping_val)),
         })
         req = urllib.request.Request(
             f"{url}?{params}",
-            headers={"User-Agent": "A70ResourceMonitor/2.0"}
+            headers={"User-Agent": "A70ResourceMonitor/2.1"}
         )
         with urllib.request.urlopen(req, timeout=8) as resp:
             return resp.status == 200
@@ -103,7 +105,6 @@ def check_battery():
     global _last_battery_time, _cached_battery_data
     now = time.time()
 
-    # Só chama termux-battery-status se passaram mais de 120s para não onerar o sistema
     if now - _last_battery_time > 120:
         try:
             res = subprocess.run(["termux-battery-status"], capture_output=True, text=True, timeout=2.0)
@@ -140,7 +141,6 @@ def check_battery():
     batt_temp = _cached_battery_data.get("batt_temp")
     cpu_temp = None
 
-    # Leitura direta do sysfs do kernel (ultra rápida, ~0.1ms)
     try:
         with open("/sys/class/thermal/thermal_zone62/temp", "r") as f:
             batt_temp = round(int(f.read().strip()) / 1000, 1)
@@ -192,6 +192,36 @@ def check_battery():
     return ok, msg, pct
 
 
+def check_tunnel():
+    """Verifica interface Tailscale tun0 (100.97.222.39), MagicDNS e portas da ponte."""
+    try:
+        res = subprocess.run(
+            ["/system/bin/ip", "-4", "addr", "show", "dev", "tun0"],
+            capture_output=True, text=True, timeout=2.0
+        )
+        if res.returncode != 0 or "100.97.222.39" not in res.stdout:
+            return False, "Tailscale tun0 OFFLINE (100.97.222.39 ausente)", 0
+    except Exception as e:
+        return False, f"Erro checagem tun0: {e}", 0
+
+    t0 = time.time()
+    try:
+        with socket.create_connection(("100.100.100.100", 53), timeout=3.0):
+            pass
+    except Exception:
+        return False, "Tunel Tailscale sem trafego (100.100.100.100 inacessivel)", 0
+    ping_ms = max(1, round((time.time() - t0) * 1000))
+
+    for port in (2222, 1080, 2121):
+        try:
+            with socket.create_connection(("127.0.0.1", port), timeout=1.5):
+                pass
+        except Exception:
+            return False, f"Servico da ponte na porta {port} parado no A70", ping_ms
+
+    return True, "OK: Tunel WireGuard/Tailscale (100.97.222.39) + SSH/SOCKS5/FTP Ativos", ping_ms
+
+
 def run_cycle():
     ram_ok, ram_msg, ram_pct = check_ram()
     push_metric(KUMA_RAM_URL, ram_ok, ram_msg, ram_pct)
@@ -202,11 +232,15 @@ def run_cycle():
     bat_ok, bat_msg, bat_pct = check_battery()
     push_metric(KUMA_BATTERY_URL, bat_ok, bat_msg, bat_pct)
 
+    tun_ok, tun_msg, tun_ping = check_tunnel()
+    push_metric(KUMA_TUNNEL_URL, tun_ok, tun_msg, tun_ping)
+
     print(
         f"[{time.strftime('%H:%M:%S')}] Pushed to Kuma | "
         f"RAM: {ram_pct}% ({'UP' if ram_ok else 'DOWN'}) | "
         f"Disco: {disk_pct}% ({'UP' if disk_ok else 'DOWN'}) | "
-        f"Bat: {bat_pct}% ({'UP' if bat_ok else 'DOWN'})",
+        f"Bat: {bat_pct}% ({'UP' if bat_ok else 'DOWN'}) | "
+        f"Tunnel: {'UP' if tun_ok else 'DOWN'} ({tun_ping}ms)",
         flush=True
     )
 
