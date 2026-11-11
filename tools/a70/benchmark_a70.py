@@ -22,6 +22,9 @@ import threading
 import multiprocessing
 import urllib.request
 import urllib.parse
+import tempfile
+import glob
+import re
 from typing import Dict, List, Tuple, Any
 
 # Configurações de Notificação
@@ -31,8 +34,7 @@ EVOLUTION_API_KEY = "a73c59c3dbaf6728290db85b20fbb9593b8d7088b1df44298f00ec78e34
 RECIPIENT = "5511975526876"
 
 # Sensores Sysfs do Galaxy A70
-PATH_CPU_TEMP = "/sys/class/thermal/thermal_zone18/temp"
-PATH_BATT_TEMP = "/sys/class/thermal/thermal_zone62/temp"
+THERMAL_ROOT = "/sys/class/thermal"
 PATH_CPU_SILVER_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
 PATH_CPU_GOLD_FREQ = "/sys/devices/system/cpu/cpu6/cpufreq/scaling_cur_freq"
 
@@ -54,21 +56,31 @@ def send_whatsapp(text: str) -> bool:
         return False
 
 
-def get_cpu_temp() -> float:
-    try:
-        with open(PATH_CPU_TEMP, "r") as f:
-            return round(int(f.read().strip()) / 1000.0, 1)
-    except Exception:
-        return 0.0
+def get_thermal_temp(kind: str) -> float | None:
+    """Resolve sensors by sysfs type because thermal zone indexes vary."""
+    for zone in sorted(glob.glob(os.path.join(THERMAL_ROOT, "thermal_zone*"))):
+        try:
+            with open(os.path.join(zone, "type")) as f:
+                name = f.read().strip().lower()
+            tokens = set(re.split(r"[^a-z0-9]+", name))
+            matched = ("battery" in name or "batt" in name) if kind == "battery" else (
+                any(token in name for token in ("cpu", "soc", "package")) or "ap" in tokens
+            )
+            if matched:
+                with open(os.path.join(zone, "temp")) as f:
+                    value = int(f.read().strip())
+                return round(value / (1000 if abs(value) >= 1000 else 1), 1)
+        except (OSError, ValueError):
+            continue
+    return None
 
 
-def get_batt_temp() -> float:
-    try:
-        with open(PATH_BATT_TEMP, "r") as f:
-            return round(int(f.read().strip()) / 1000.0, 1)
-    except Exception:
-        return 0.0
+def get_cpu_temp() -> float | None:
+    return get_thermal_temp("cpu")
 
+
+def get_batt_temp() -> float | None:
+    return get_thermal_temp("battery")
 
 def get_frequencies() -> Tuple[int, int]:
     silver_mhz = 0
@@ -91,6 +103,10 @@ class ThermalTracker:
         self.stop_event = threading.Event()
         self.samples = []
         self.thread = None
+        self.cpu_load_active = False
+
+    def set_cpu_load(self, active: bool):
+        self.cpu_load_active = active
 
     def _poll(self):
         while not self.stop_event.is_set():
@@ -103,8 +119,9 @@ class ThermalTracker:
                 "batt_temp": t_bat,
                 "gold_mhz": f_gold,
                 "silver_mhz": f_silv,
+                "cpu_load": self.cpu_load_active,
             })
-            time.sleep(1.0)
+            self.stop_event.wait(1.0)
 
     def start(self):
         self.stop_event.clear()
@@ -120,30 +137,32 @@ class ThermalTracker:
     def summary(self) -> Dict[str, Any]:
         if not self.samples:
             return {}
-        cpu_temps = [s["cpu_temp"] for s in self.samples if s["cpu_temp"] > 0]
-        batt_temps = [s["batt_temp"] for s in self.samples if s["batt_temp"] > 0]
+        cpu_temps = [s["cpu_temp"] for s in self.samples if s["cpu_temp"] is not None]
+        batt_temps = [s["batt_temp"] for s in self.samples if s["batt_temp"] is not None]
         gold_freqs = [s["gold_mhz"] for s in self.samples if s["gold_mhz"] > 0]
+        loaded_freqs = [s["gold_mhz"] for s in self.samples if s.get("cpu_load") and s["gold_mhz"] > 0]
 
         return {
-            "initial_cpu": cpu_temps[0] if cpu_temps else 0.0,
-            "peak_cpu": max(cpu_temps) if cpu_temps else 0.0,
-            "final_cpu": cpu_temps[-1] if cpu_temps else 0.0,
-            "initial_batt": batt_temps[0] if batt_temps else 0.0,
-            "peak_batt": max(batt_temps) if batt_temps else 0.0,
-            "final_batt": batt_temps[-1] if batt_temps else 0.0,
+            "initial_cpu": cpu_temps[0] if cpu_temps else None,
+            "peak_cpu": max(cpu_temps) if cpu_temps else None,
+            "final_cpu": cpu_temps[-1] if cpu_temps else None,
+            "initial_batt": batt_temps[0] if batt_temps else None,
+            "peak_batt": max(batt_temps) if batt_temps else None,
+            "final_batt": batt_temps[-1] if batt_temps else None,
             "max_gold_freq": max(gold_freqs) if gold_freqs else 0,
-            "min_gold_freq_under_load": min(gold_freqs[len(gold_freqs)//4:]) if len(gold_freqs) > 4 else (min(gold_freqs) if gold_freqs else 0),
+            "min_gold_freq": min(gold_freqs) if gold_freqs else None,
+            "min_gold_freq_under_load": min(loaded_freqs) if len(loaded_freqs) >= 3 else None,
             "samples_count": len(self.samples),
         }
 
 
-def _cpu_worker(duration_sec: float, result_queue: multiprocessing.Queue):
+def _cpu_worker(duration_sec: float, result_queue: multiprocessing.Queue, stop_event):
     t_end = time.time() + duration_sec
     ops_sha = 0
     ops_math = 0
     chunk = b"X" * (1024 * 1024)  # 1MB buffer
 
-    while time.time() < t_end:
+    while time.time() < t_end and not stop_event.is_set():
         hashlib.sha256(chunk).digest()
         ops_sha += 1
 
@@ -155,120 +174,167 @@ def _cpu_worker(duration_sec: float, result_queue: multiprocessing.Queue):
     result_queue.put((ops_sha, ops_math))
 
 
-def run_cpu_test(duration_sec: int) -> Dict[str, Any]:
-    print(f"==> Iniciando estresse de CPU em todos os 8 nucleos por {duration_sec}s...", flush=True)
-    q = multiprocessing.Queue()
-    procs = []
-    num_cpus = multiprocessing.cpu_count()
+def get_available_memory_mb() -> int | None:
+    try:
+        with open("/proc/meminfo") as f:
+            for line in f:
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) // 1024
+    except (OSError, ValueError, IndexError):
+        pass
+    return None
 
-    t_start = time.time()
-    for _ in range(num_cpus):
-        p = multiprocessing.Process(target=_cpu_worker, args=(duration_sec, q))
+
+def run_cpu_test(duration_sec: int) -> Dict[str, Any]:
+    duration_sec = max(1, duration_sec)
+    print(f"==> Estresse limitado de CPU por até {duration_sec}s...", flush=True)
+    q = multiprocessing.Queue()
+    stop_event = multiprocessing.Event()
+    count = max(1, min(8, multiprocessing.cpu_count()))
+    procs = []
+    started = time.time()
+    cpu_deadline = started + duration_sec
+    for _ in range(count):
+        p = multiprocessing.Process(target=_cpu_worker, args=(duration_sec, q, stop_event))
         p.start()
         procs.append(p)
 
+    aborted_reason = None
+    while time.time() < cpu_deadline and any(p.is_alive() for p in procs):
+        temperature = get_cpu_temp()
+        available_mb = get_available_memory_mb()
+        if temperature is not None and temperature >= 75:
+            aborted_reason = f"temperatura CPU atingiu {temperature} °C"
+            break
+        if available_mb is not None and available_mb < 300:
+            aborted_reason = f"memória disponível caiu para {available_mb} MB"
+            break
+        time.sleep(min(0.2, max(0, cpu_deadline - time.time())))
+
+    stop_event.set()
+    join_deadline = time.time() + 1.5
     for p in procs:
-        p.join()
-    t_elapsed = time.time() - t_start
+        p.join(timeout=max(0, join_deadline - time.time()))
+    for p in procs:
+        if p.is_alive():
+            p.terminate()
+            p.join(timeout=0.2)
 
-    total_sha_mb = 0
-    total_math_ops = 0
-    while not q.empty():
-        s, m = q.get()
-        total_sha_mb += s
-        total_math_ops += m
-
-    sha_mb_s = round(total_sha_mb / t_elapsed, 1)
-    math_mops_s = round((total_math_ops / t_elapsed) / 1_000_000, 2)
-
+    elapsed = time.time() - started
+    total_sha_mb = total_math_ops = completed = 0
+    for p in procs:
+        try:
+            sha, ops = q.get(timeout=0.5)
+            total_sha_mb += sha
+            total_math_ops += ops
+            completed += 1
+        except Exception:
+            pass
+    q.close()
+    q.join_thread()
     return {
-        "duration": round(t_elapsed, 1),
+        "duration": round(elapsed, 1),
         "total_sha_mb": total_sha_mb,
-        "sha_mb_s": sha_mb_s,
-        "math_mops_s": math_mops_s,
+        "sha_mb_s": round(total_sha_mb / max(elapsed, 0.001), 1),
+        "math_mops_s": round((total_math_ops / max(elapsed, 0.001)) / 1_000_000, 2),
+        "aborted_reason": aborted_reason,
+        "workers_completed": completed,
     }
 
-
-def run_ram_test(num_blocks: int = 24) -> Dict[str, Any]:
-    print(f"==> Teste de largura de banda e pressao de RAM ({num_blocks * 64} MB)...", flush=True)
-    block_size = 64 * 1024 * 1024  # 64MB blocks
+def run_ram_test(num_blocks: int = 4, deadline: float | None = None) -> Dict[str, Any]:
+    available = get_available_memory_mb()
+    blocks = max(0, min(4, num_blocks, ((available - 512) // 64) if available is not None else 4))
+    if blocks < 1:
+        return {"allocated_mb": 0, "write_gb_s": None, "read_gb_s": None,
+                "skipped_reason": "menos de 576 MB de memória disponível"}
+    print(f"==> Teste de RAM limitado a {blocks * 64} MB...", flush=True)
+    block_size = 64 * 1024 * 1024
     allocated = []
-
-    # Teste de Escrita
     t0 = time.time()
-    for _ in range(num_blocks):
+    for _ in range(blocks):
+        if deadline is not None and time.time() >= deadline - 2.0:
+            break
+        available = get_available_memory_mb()
+        if available is not None and available < 512:
+            break
         allocated.append(bytearray(b"\xaa" * block_size))
+    written_mb = len(allocated) * 64
     t_write = time.time() - t0
-    write_gb_s = round((num_blocks * 64 / 1024) / max(t_write, 0.001), 2)
-
-    # Teste de Leitura
     t1 = time.time()
     checksum = 0
+    bytes_read = 0
+    chunk_size = 1024 * 1024
     for buf in allocated:
-        checksum += buf[0] + buf[-1]
+        view = memoryview(buf)
+        for offset in range(0, len(view), chunk_size):
+            if deadline is not None and time.time() >= deadline - 1.0:
+                break
+            chunk = view[offset:offset + chunk_size]
+            checksum += sum(chunk)
+            bytes_read += len(chunk)
+        if deadline is not None and time.time() >= deadline - 1.0:
+            break
     t_read = time.time() - t1
-    read_gb_s = round((num_blocks * 64 / 1024) / max(t_read, 0.001), 2)
-
     del allocated
     import gc
     gc.collect()
-
     return {
-        "allocated_mb": num_blocks * 64,
-        "write_gb_s": write_gb_s,
-        "read_gb_s": read_gb_s,
+        "allocated_mb": written_mb,
+        "write_gb_s": round((written_mb / 1024) / max(t_write, 0.001), 2) if written_mb else None,
+        "read_gb_s": round((bytes_read / (1024 ** 3)) / max(t_read, 0.001), 2) if bytes_read else None,
+        "bytes_read": bytes_read,
+        "checksum": checksum,
     }
 
-
-def run_storage_test(total_mb: int = 400) -> Dict[str, Any]:
-    print(f"==> Benchmark de I/O em UFS 2.1 ({total_mb} MB)...", flush=True)
-    test_path = os.path.expanduser("~/benchmark_test.tmp")
-    data = os.urandom(1024 * 1024)  # 1MB buffer
-
-    # Escrita Sequencial com fsync
-    t0 = time.time()
-    with open(test_path, "wb") as f:
-        for _ in range(total_mb):
-            f.write(data)
-        f.flush()
-        os.fsync(f.fileno())
-    t_write = time.time() - t0
-    write_mb_s = round(total_mb / max(t_write, 0.001), 1)
-
-    # Leitura Sequencial
-    t1 = time.time()
-    with open(test_path, "rb") as f:
-        while f.read(1024 * 1024):
+def run_storage_test(total_mb: int = 64, deadline: float | None = None) -> Dict[str, Any]:
+    total_mb = max(1, min(64, total_mb))
+    print(f"==> Teste de armazenamento limitado ({total_mb} MB)...", flush=True)
+    data = os.urandom(1024 * 1024)
+    fd, path = tempfile.mkstemp(prefix="a70-benchmark-", suffix=".tmp", dir=os.path.expanduser("~"))
+    try:
+        t0 = time.time()
+        written_mb = 0
+        with os.fdopen(fd, "wb") as f:
+            for _ in range(total_mb):
+                if deadline is not None and time.time() >= deadline - 0.5:
+                    break
+                f.write(data)
+                written_mb += 1
+            f.flush()
+            os.fsync(f.fileno())
+        write_elapsed = time.time() - t0
+        t1 = time.time()
+        bytes_read = 0
+        with open(path, "rb") as f:
+            while deadline is None or time.time() < deadline - 0.25:
+                chunk = f.read(1024 * 1024)
+                if not chunk:
+                    break
+                bytes_read += len(chunk)
+        read_elapsed = time.time() - t1
+        read_mb = bytes_read / (1024 * 1024)
+        return {"file_size_mb": written_mb,
+                "write_mb_s": round(written_mb / max(write_elapsed, 0.001), 1),
+                "read_mb_s": round(read_mb / max(read_elapsed, 0.001), 1),
+                "note": "leitura pode vir do cache do sistema"}
+    finally:
+        try:
+            os.remove(path)
+        except FileNotFoundError:
             pass
-    t_read = time.time() - t1
-    read_mb_s = round(total_mb / max(t_read, 0.001), 1)
 
+def probe_service(host: str, port: int, timeout: float = 0.15) -> Tuple[bool, float]:
+    started = time.time()
     try:
-        os.remove(test_path)
-    except Exception:
-        pass
-
-    return {
-        "file_size_mb": total_mb,
-        "write_mb_s": write_mb_s,
-        "read_mb_s": read_mb_s,
-    }
-
-
-def probe_service(host: str, port: int, timeout: float = 2.0) -> Tuple[bool, float]:
-    t0 = time.time()
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(timeout)
-        s.connect((host, port))
-        s.close()
-        return True, round((time.time() - t0) * 1000, 1)
-    except Exception:
+        with socket.create_connection((host, port), timeout=timeout):
+            return True, round((time.time() - started) * 1000, 1)
+    except OSError:
         return False, 0.0
 
 
-def run_resilience_test(duration_sec: int = 30) -> Dict[str, Any]:
-    print(f"==> Monitorando resiliencia e latencia dos servicos locais ({duration_sec}s)...", flush=True)
+def run_resilience_test(duration_sec: float = 30) -> Dict[str, Any]:
+    duration_sec = max(0.0, duration_sec)
+    print(f"==> Monitorando resiliencia e latencia dos servicos locais ({duration_sec:.0f}s)...", flush=True)
     services = [
         ("SSH", 2222),
         ("SOCKS5", 1080),
@@ -276,162 +342,170 @@ def run_resilience_test(duration_sec: int = 30) -> Dict[str, Any]:
         ("FireTV Relay", 5555),
         ("WhatsApp Bot", 8088),
     ]
+    stats = {name: {"latencies": [], "failures": 0} for name, _ in services}
+    deadline = time.time() + duration_sec
 
-    service_stats = {s[0]: {"latencies": [], "failures": 0} for s in services}
-    t_end = time.time() + duration_sec
-
-    while time.time() < t_end:
+    while time.time() < deadline:
         for name, port in services:
-            ok, lat = probe_service("127.0.0.1", port)
+            remaining = deadline - time.time()
+            if remaining <= 0:
+                break
+            ok, latency = probe_service("127.0.0.1", port, timeout=min(0.05, remaining))
             if ok:
-                service_stats[name]["latencies"].append(lat)
+                stats[name]["latencies"].append(latency)
             else:
-                service_stats[name]["failures"] += 1
-        time.sleep(1.0)
+                stats[name]["failures"] += 1
+        remaining = deadline - time.time()
+        if remaining > 0:
+            time.sleep(min(1.0, remaining))
 
     results = {}
-    for name, s in service_stats.items():
-        lats = s["latencies"]
-        avg_lat = round(sum(lats) / len(lats), 1) if lats else 0.0
-        max_lat = max(lats) if lats else 0.0
-        online = s["failures"] == 0 and len(lats) > 0
+    for name, values in stats.items():
+        latencies = values["latencies"]
         results[name] = {
-            "online": online,
-            "avg_latency_ms": avg_lat,
-            "max_latency_ms": max_lat,
-            "probes_count": len(lats) + s["failures"],
-            "failures": s["failures"],
+            "online": values["failures"] == 0 and bool(latencies),
+            "avg_latency_ms": round(sum(latencies) / len(latencies), 1) if latencies else 0.0,
+            "max_latency_ms": max(latencies) if latencies else 0.0,
+            "probes_count": len(latencies) + values["failures"],
+            "failures": values["failures"],
         }
     return results
 
-
 def main():
     parser = argparse.ArgumentParser(description="Galaxy A70 Benchmark")
-    parser.add_argument("--duration", type=int, default=7, help="Duracao em minutos (padrao: 7)")
+    parser.add_argument("--duration", type=int, default=2, help="Janela de teste em minutos (1 a 10)")
     args = parser.parse_args()
+    if args.duration < 1 or args.duration > 10:
+        parser.error("--duration deve ficar entre 1 e 10 minutos")
 
-    dur_min = args.duration
-    if dur_min >= 7:
-        cpu_duration = 300       # 5 min
-        ram_blocks = 24         # ~1.5 GB
-        storage_mb = 400        # 400 MB
-        resilience_sec = 40     # 40 s
-        label_profile = f"{dur_min} Minutos (Estresse Estendido & Resiliência Térmica)"
-    else:
-        cpu_duration = 60
-        ram_blocks = 20
-        storage_mb = 200
-        resilience_sec = 20
-        label_profile = f"{dur_min} Minutos (Express)"
+    requested_sec = args.duration * 60
+    started = time.time()
+    deadline = started + requested_sec
+    cpu_duration = max(10, int(requested_sec * 0.40))
+    ram_blocks = 1  # teto planejado: 64 MiB; run_ram_test revalida memória disponível
+    storage_mb = min(32, max(4, args.duration * 4))
+    label_profile = f"limite total de {args.duration} min"
+    print(f"Iniciando Benchmark no Galaxy A70 — {label_profile}", flush=True)
 
-    print("==========================================================", flush=True)
-    print(f"Iniciando Benchmark no Galaxy A70 — Perfil {label_profile}", flush=True)
-    print("==========================================================", flush=True)
-
-    # Telemetria Inicial
     cpu_init = get_cpu_temp()
     batt_init = get_batt_temp()
-    f_silv_init, f_gold_init = get_frequencies()
-
-    # 1. Notificação de Início
+    _, f_gold_init = get_frequencies()
+    temp_label = lambda value: f"{value}°C" if value is not None else "N/D"
     msg_inicio = (
-        f"🔥 *[Iniciando Teste de Carga no Galaxy A70 — {dur_min} Minutos]*\n\n"
+        f"🔥 *[Iniciando Teste de Carga no Galaxy A70 — {args.duration} Minutos]*\n\n"
         f"⚡ *Perfil:* {label_profile}\n"
-        "🎯 *Objetivo:* Testar saturação térmica da CPU sob estresse contínuo, estabilidade da memória e resiliência dos daemons.\n\n"
+        "🎯 *Objetivo:* Observar CPU, memória, armazenamento e disponibilidade dos serviços locais com limites de segurança.\n\n"
         "📊 *Condições Iniciais:*\n"
-        f"• CPU (Snapdragon 675): *{cpu_init}°C*\n"
-        f"• Bateria: *{batt_init}°C* (70% saúde / 100% AC)\n"
-        f"• Clock Kryo Gold: *{f_gold_init} MHz* (2.0 GHz)\n\n"
+        f"• CPU (Snapdragon 675): *{temp_label(cpu_init)}*\n"
+        f"• Bateria: *{temp_label(batt_init)}*\n"
+        f"• Clock Kryo Gold: *{f_gold_init} MHz*\n\n"
         "⚙️ *Cronograma do Teste:*\n"
-        f"1️⃣ CPU Multi-Core Stress: *{cpu_duration}s* contínuos (8 núcleos a 100%)\n"
-        f"2️⃣ Pressão de Memória RAM: alocação e churn de *{ram_blocks * 64} MB*\n"
-        f"3️⃣ Armazenamento UFS 2.1: gravação e leitura de *{storage_mb} MB* com fsync\n"
-        f"4️⃣ Resiliência do Gateway: *{resilience_sec}s* de sondagem contínua de latência\n\n"
-        "⏳ _O relatório executivo detalhado será enviado ao término do ciclo!_"
+        f"1️⃣ CPU Multi-Core: até *{cpu_duration}s* (interrupção por temperatura/memória)\n"
+        f"2️⃣ Pressão de Memória RAM: até *{ram_blocks * 64} MB*\n"
+        f"3️⃣ Armazenamento: gravação e leitura de até *{storage_mb} MB* com fsync\n"
+        "4️⃣ Serviços: sondagens TCP se houver tempo restante\n\n"
+        "⏳ _O relatório detalhado será enviado ao término do teste!_"
     )
     send_whatsapp(msg_inicio)
 
     tracker = ThermalTracker()
     tracker.start()
-
-    # Execução das Fases
-    res_cpu = run_cpu_test(duration_sec=cpu_duration)
-    res_ram = run_ram_test(num_blocks=ram_blocks)
-    res_io = run_storage_test(total_mb=storage_mb)
-    res_serv = run_resilience_test(duration_sec=resilience_sec)
-
-    tracker.stop()
+    res_cpu = {"duration": 0, "total_sha_mb": 0, "sha_mb_s": 0, "math_mops_s": 0,
+               "aborted_reason": "ignorado: sem tempo restante", "workers_completed": 0}
+    res_ram = {"allocated_mb": 0, "write_gb_s": None, "read_gb_s": None, "skipped_reason": "sem tempo restante"}
+    res_io = {"file_size_mb": 0, "write_mb_s": None, "read_mb_s": None, "skipped_reason": "sem tempo restante"}
+    res_serv = {}
+    try:
+        remaining = max(0, deadline - time.time())
+        if remaining > 5:
+            tracker.set_cpu_load(True)
+            res_cpu = run_cpu_test(min(cpu_duration, int(remaining - 3)))
+            tracker.set_cpu_load(False)
+        remaining = max(0.0, deadline - time.time())
+        if remaining > 10:
+            res_ram = run_ram_test(ram_blocks, deadline=deadline)
+        remaining = max(0.0, deadline - time.time())
+        if remaining > 4:
+            res_io = run_storage_test(storage_mb, deadline=deadline)
+        remaining = max(0.0, deadline - time.time())
+        if remaining > 0.5:
+            res_serv = run_resilience_test(max(0.0, remaining - 0.5))
+    finally:
+        tracker.set_cpu_load(False)
+        tracker.stop()
+    elapsed_total = round(time.time() - started, 1)
     thermal = tracker.summary()
 
-    # Análise de Throttling
-    gold_peak = thermal.get("max_gold_freq", f_gold_init)
-    gold_min = thermal.get("min_gold_freq_under_load", f_gold_init)
-    delta_cpu = round(thermal.get("peak_cpu", 0) - thermal.get("initial_cpu", 0), 1)
-    delta_bat = round(thermal.get("peak_batt", 0) - thermal.get("initial_batt", 0), 1)
-
-    if gold_min >= 1900:
-        throttling_status = "🟢 *0% (Sem Throttling — Clock mantido a 2.0 GHz)*"
+    gold_min = thermal.get("min_gold_freq_under_load")
+    if gold_min is None:
+        throttling_status = "N/D (amostras insuficientes durante carga)"
+    elif gold_min >= 1900:
+        throttling_status = f"sem queda observada (mínimo sob carga: {gold_min} MHz)"
     elif gold_min >= 1600:
-        throttling_status = f"🟡 *Leve ({gold_min} MHz sustentados)*"
+        throttling_status = f"queda de clock observada (mínimo: {gold_min} MHz)"
     else:
-        throttling_status = f"🔴 *Moderado ({gold_min} MHz)*"
+        throttling_status = f"clock baixo sob carga (mínimo: {gold_min} MHz)"
 
-    # Status dos Serviços
     serv_lines = []
-    all_serv_ok = True
-    for s_name, s_info in res_serv.items():
-        st_icon = "🟢" if s_info["online"] else "🔴"
-        serv_lines.append(f"• {s_name}: {st_icon} Méd {s_info['avg_latency_ms']}ms (Máx {s_info['max_latency_ms']}ms)")
-        if not s_info["online"]:
-            all_serv_ok = False
+    for s_name, info in res_serv.items():
+        icon = "🟢" if info["online"] else "🔴"
+        serv_lines.append(f"• {s_name}: {icon} média {info['avg_latency_ms']}ms; falhas {info['failures']}")
+    serv_txt = "\n".join(serv_lines) if serv_lines else "Sondagem não executada (limite de tempo)."
+    service_ok = bool(res_serv) and all(item["online"] for item in res_serv.values())
+    verdict = "Todos os testes executados concluíram; serviços responderam às sondagens TCP." if service_ok else "Resultado parcial ou uma ou mais sondagens TCP falharam."
+    if res_cpu.get("aborted_reason"):
+        verdict += f" Estresse de CPU interrompido: {res_cpu['aborted_reason']}."
 
-    serv_txt = "\n".join(serv_lines)
-    veredito_icon = "🏆" if all_serv_ok and gold_min >= 1900 else "✅"
-
-    # Salva JSON de Resultados localmente
     results_dump = {
-        "timestamp": time.time(),
-        "duration_min": dur_min,
-        "cpu": res_cpu,
-        "thermal": thermal,
-        "ram": res_ram,
-        "storage": res_io,
-        "services": res_serv,
+        "timestamp": time.time(), "requested_duration_min": args.duration,
+        "actual_duration_sec": elapsed_total, "cpu": res_cpu, "thermal": thermal,
+        "ram": res_ram, "storage": res_io, "services": res_serv,
     }
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    results_path = os.path.expanduser(f"~/benchmark_results-{stamp}.json")
     try:
-        with open(os.path.expanduser("~/benchmark_results.json"), "w") as f:
+        with open(results_path, "x") as f:
             json.dump(results_dump, f, indent=2)
-    except Exception:
-        pass
+    except OSError as e:
+        print(f"Falha ao salvar JSON: {e}", file=sys.stderr)
+        results_path = "não salvo"
 
-    # 2. Notificação Final no WhatsApp
+    def metric(value, suffix=""):
+        return f"{value}{suffix}" if value is not None else "N/D"
+
+    cpu_initial = thermal.get("initial_cpu")
+    cpu_peak = thermal.get("peak_cpu")
+    cpu_final = thermal.get("final_cpu")
+    batt_initial = thermal.get("initial_batt")
+    batt_peak = thermal.get("peak_batt")
+    batt_final = thermal.get("final_batt")
+    cpu_delta = round(cpu_peak - cpu_initial, 1) if cpu_peak is not None and cpu_initial is not None else None
+    batt_delta = round(batt_peak - batt_initial, 1) if batt_peak is not None and batt_initial is not None else None
+    verdict_icon = "✅" if service_ok and not res_cpu.get("aborted_reason") else "⚠️"
     msg_resultado = (
-        f"🏁 *Relatório de Carga & Resiliência — Galaxy A70 ({dur_min} Minutos)*\n\n"
+        f"🏁 *Relatório de Carga & Resiliência — Galaxy A70 ({elapsed_total}s / {args.duration} min solicitados)*\n\n"
         f"🔥 *1. Poder de Fogo da CPU (8 Núcleos por {res_cpu['duration']}s):*\n"
         f"• Throughput Criptográfico: *{res_cpu['sha_mb_s']} MB/s* (SHA-256)\n"
         f"• Taxa de Cálculo: *{res_cpu['math_mops_s']} Milhões de ops/s*\n"
         f"• Criptografia Total: *{res_cpu['total_sha_mb']} MB* processados\n"
-        f"• Throttling Térmico: {throttling_status}\n\n"
-        f"🌡️ *2. Curva Térmica Sustentada:*\n"
-        f"• CPU: *{thermal.get('initial_cpu')}°C* ➔ Pico *{thermal.get('peak_cpu')}°C* ➔ Final *{thermal.get('final_cpu')}°C* (ΔT: +{delta_cpu}°C)\n"
-        f"• Bateria: *{thermal.get('initial_batt')}°C* ➔ Pico *{thermal.get('peak_batt')}°C* (ΔT: +{delta_bat}°C / Operação Fria)\n"
-        f"• Amostras de Temperatura: *{thermal.get('samples_count')} leituras (1/s)*\n\n"
-        f"💾 *3. Memória RAM (LPDDR4X):*\n"
-        f"• Taxa de Escrita: *{res_ram['write_gb_s']} GB/s*\n"
-        f"• Taxa de Leitura: *{res_ram['read_gb_s']} GB/s*\n"
-        f"• Pressão Real: *{res_ram['allocated_mb']} MB* alocados sem LMK\n\n"
-        f"📂 *4. Armazenamento UFS 2.1 ({res_io['file_size_mb']} MB):*\n"
-        f"• Escrita Sequencial (fsync): *{res_io['write_mb_s']} MB/s*\n"
-        f"• Leitura Sequencial: *{res_io['read_mb_s']} MB/s*\n\n"
-        f"🔌 *5. Resiliência dos Serviços sob Sobrecarga:*\n"
+        f"• Throttling Térmico: *{throttling_status}*\n\n"
+        f"🌡️ *2. Curva Térmica:*\n"
+        f"• CPU: *{metric(cpu_initial, '°C')}* ➔ Pico *{metric(cpu_peak, '°C')}* ➔ Final *{metric(cpu_final, '°C')}* (ΔT: {metric(cpu_delta, '°C')})\n"
+        f"• Bateria: *{metric(batt_initial, '°C')}* ➔ Pico *{metric(batt_peak, '°C')}* ➔ Final *{metric(batt_final, '°C')}* (ΔT: {metric(batt_delta, '°C')})\n"
+        f"• Amostras de Temperatura: *{thermal.get('samples_count', 0)} leituras (1/s)*\n\n"
+        f"💾 *3. Memória RAM:*\n"
+        f"• Taxa de Escrita: *{metric(res_ram.get('write_gb_s'), ' GB/s')}*\n"
+        f"• Taxa de Leitura: *{metric(res_ram.get('read_gb_s'), ' GB/s')}*\n"
+        f"• Memória Alocada: *{res_ram.get('allocated_mb', 0)} MB*\n\n"
+        f"📂 *4. Armazenamento ({res_io.get('file_size_mb', 0)} MB):*\n"
+        f"• Escrita Sequencial (fsync): *{metric(res_io.get('write_mb_s'), ' MB/s')}*\n"
+        f"• Leitura Sequencial: *{metric(res_io.get('read_mb_s'), ' MB/s')}* (pode usar cache)\n\n"
+        f"🔌 *5. Resiliência dos Serviços (sondagens TCP):*\n"
         f"{serv_txt}\n\n"
-        f"{veredito_icon} *Veredito do Servidor:*\n"
-        "O Galaxy A70 suportou o ciclo estendido de estresse térmico mantendo estabilidade total de gateway. "
-        "Todos os daemons permaneceram online sem throttling severo."
+        f"{verdict_icon} *Veredito do Servidor:*\n{verdict}"
     )
-
-    send_whatsapp(msg_resultado)
-    print("==> Benchmark de 7 minutos concluido e enviado com sucesso!", flush=True)
+    sent = send_whatsapp(msg_resultado)
+    print(f"==> Benchmark finalizado em {elapsed_total}s; relatório {results_path}; WhatsApp {'enviado' if sent else 'não enviado'}.", flush=True)
 
 
 if __name__ == "__main__":

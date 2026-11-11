@@ -14,7 +14,8 @@ import select
 import termios
 import tty
 import socket
-from typing import Dict, List, Tuple
+import re
+from typing import Any, Dict, List, Tuple
 
 # Paleta ANSI 256 cores
 C_RESET = "\033[0m"
@@ -30,35 +31,72 @@ C_WHITE = "\033[38;5;255m"
 C_GRAY = "\033[38;5;244m"
 C_BG_BAR = "\033[38;5;238m"
 
-PATH_CPU_TEMP = "/sys/class/thermal/thermal_zone18/temp"
-PATH_BATT_TEMP = "/sys/class/thermal/thermal_zone62/temp"
-HEALTH_FILE = os.path.expanduser("~/.battery_health.json")
+THERMAL_ROOT = "/sys/class/thermal"
+HEALTH_FILES = [os.path.expanduser(p) for p in (
+    "~/.battery_health_a70.json", "~/.battery_health.json"
+)]
 
 
-def get_cpu_temp() -> float:
+def get_thermal_temp(kind: str) -> float | None:
+    """Find sensor zones by type; thermal_zone indexes vary across devices."""
     try:
-        with open(PATH_CPU_TEMP, "r") as f:
-            return round(int(f.read().strip()) / 1000.0, 1)
-    except Exception:
-        return 0.0
+        for zone in glob.glob(os.path.join(THERMAL_ROOT, "thermal_zone*")):
+            try:
+                with open(os.path.join(zone, "type")) as f:
+                    zone_type = f.read().strip().lower()
+                if kind == "battery":
+                    matches = "battery" in zone_type or "batt" in zone_type
+                else:
+                    tokens = set(re.split(r"[^a-z0-9]+", zone_type))
+                    matches = any(token in zone_type for token in ("cpu", "soc", "package")) or "ap" in tokens
+                if not matches:
+                    continue
+                with open(os.path.join(zone, "temp")) as f:
+                    value = int(f.read().strip())
+                return round(value / (1000.0 if abs(value) >= 1000 else 1.0), 1)
+            except (OSError, ValueError):
+                continue
+    except OSError:
+        pass
+    return None
 
 
-def get_batt_temp() -> float:
-    try:
-        with open(PATH_BATT_TEMP, "r") as f:
-            return round(int(f.read().strip()) / 1000.0, 1)
-    except Exception:
-        return 0.0
+def get_cpu_temp() -> float | None:
+    return get_thermal_temp("cpu")
+
+
+def get_batt_temp() -> float | None:
+    return get_thermal_temp("battery")
 
 
 def get_batt_health_info() -> str:
+    import json
+    for health_file in HEALTH_FILES:
+        try:
+            with open(health_file, "r") as f:
+                data = json.load(f)
+            health = data.get("asoc_pct", data.get("asoc"))
+            cycles = data.get("charge_cycles", data.get("cycles"))
+            parts = []
+            if health is not None:
+                parts.append(f"Saúde {health}%")
+            if cycles is not None:
+                parts.append(f"{cycles}c")
+            if parts:
+                return " · ".join(parts)
+        except (OSError, ValueError, TypeError, AttributeError):
+            continue
+    return "Saúde indisponível"
+
+
+def is_cpu_online(cpu_idx: int) -> bool:
+    online_path = f"/sys/devices/system/cpu/cpu{cpu_idx}/online"
     try:
-        import json
-        with open(HEALTH_FILE, "r") as f:
-            data = json.load(f)
-            return f"Saúde {data.get('asoc_pct', 70)}% · {data.get('charge_cycles', 1711)}c"
-    except Exception:
-        return "Saúde 70% (1711c)"
+        with open(online_path) as f:
+            return f.read().strip() != "0"
+    except OSError:
+        # cpu0 normally has no online file; the directory indicates its presence.
+        return os.path.isdir(f"/sys/devices/system/cpu/cpu{cpu_idx}")
 
 
 def get_cpu_idle_us(cpu_idx: int) -> int:
@@ -177,7 +215,8 @@ def make_bar(percent: float, width: int = 16) -> str:
 
 def render_dashboard(idle_prev: List[int], time_prev: float) -> Tuple[List[int], float]:
     time_now = time.time()
-    idle_now = [get_cpu_idle_us(i) for i in range(8)]
+    online = [is_cpu_online(i) for i in range(8)]
+    idle_now = [get_cpu_idle_us(i) if online[i] else 0 for i in range(8)]
     dt_us = max(1.0, (time_now - time_prev) * 1_000_000)
 
     # Per-core utilization
@@ -185,7 +224,7 @@ def render_dashboard(idle_prev: List[int], time_prev: float) -> Tuple[List[int],
     freqs = []
     for i in range(8):
         d_idle = max(0, idle_now[i] - idle_prev[i])
-        u = max(0.0, min(100.0, 100.0 * (1.0 - (d_idle / dt_us))))
+        u = max(0.0, min(100.0, 100.0 * (1.0 - (d_idle / dt_us)))) if online[i] else 0.0
         utils.append(u)
         freqs.append(get_cpu_freq_mhz(i))
 
@@ -209,13 +248,15 @@ def render_dashboard(idle_prev: List[int], time_prev: float) -> Tuple[List[int],
     buf.append(f"{C_BOLD}{C_CYAN}╭────────────────────────────────────────────────────────────────────────╮{C_RESET}")
     buf.append(f"{C_BOLD}{C_CYAN}│ {C_WHITE}Galaxy A70 (Snapdragon 675 · Kryo 460 · 8 Cores · 6GB RAM){C_CYAN}               │{C_RESET}")
     
-    temp_cpu_col = C_GREEN if cpu_t < 45 else (C_YELLOW if cpu_t < 65 else C_RED)
-    temp_bat_col = C_GREEN if batt_t < 35 else (C_YELLOW if batt_t < 42 else C_RED)
+    temp_cpu_col = C_GRAY if cpu_t is None else (C_GREEN if cpu_t < 45 else (C_YELLOW if cpu_t < 65 else C_RED))
+    temp_bat_col = C_GRAY if batt_t is None else (C_GREEN if batt_t < 35 else (C_YELLOW if batt_t < 42 else C_RED))
+    cpu_temp_label = f"{cpu_t}°C" if cpu_t is not None else "N/D"
+    batt_temp_label = f"{batt_t}°C" if batt_t is not None else "N/D"
     
     sub_line = (
-        f"│ CPU: {temp_cpu_col}{cpu_t}°C{C_RESET} │ "
-        f"Bat: {temp_bat_col}{batt_t}°C{C_RESET} ({health_str}) │ "
-        f"Cores: {C_GREEN}8 Ativos{C_RESET} │"
+        f"│ CPU: {temp_cpu_col}{cpu_temp_label}{C_RESET} │ "
+        f"Bat: {temp_bat_col}{batt_temp_label}{C_RESET} ({health_str}) │ "
+        f"Cores: {C_GREEN}{sum(online)} Ativos{C_RESET} │"
     )
     buf.append(f"{C_CYAN}{sub_line:<82}│{C_RESET}")
     buf.append(f"{C_BOLD}{C_CYAN}├────────────────────────────────────────────────────────────────────────┤{C_RESET}")
@@ -233,14 +274,14 @@ def render_dashboard(idle_prev: List[int], time_prev: float) -> Tuple[List[int],
         mhz_l, str_l = freqs[c_left]
         tag_l = "Silver"
         bar_l = make_bar(u_l, width=12)
-        col_left = f"CPU{c_left} [{bar_l}] {u_l:5.1f}% {str_l:>8} ({tag_l})"
+        col_left = f"CPU{c_left} [{bar_l}] {u_l:5.1f}% {str_l:>8} ({tag_l})" if online[c_left] else f"CPU{c_left} offline"
 
         # Coluna Direita (cpu4 a cpu7)
         u_r = utils[c_right]
         mhz_r, str_r = freqs[c_right]
         tag_r = "Gold ⚡" if c_right >= 6 else "Silver"
         bar_r = make_bar(u_r, width=12)
-        col_right = f"CPU{c_right} [{bar_r}] {u_r:5.1f}% {str_r:>8} ({tag_r})"
+        col_right = f"CPU{c_right} [{bar_r}] {u_r:5.1f}% {str_r:>8} ({tag_r})" if online[c_right] else f"CPU{c_right} offline"
 
         line = f"│ {col_left}  │ {col_right} │"
         buf.append(line)
