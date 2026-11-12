@@ -1,0 +1,35 @@
+name: Benchmark de Modelos (Golden Set)
+run-name: "🧪 Benchmark Modelos — Golden Set Uzak Şehir"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Executar Benchmark em Todos os Motores Cloud
+        env:
+          GEMINI_TRANSLATE_KEY: ${{ secrets.GEMINI_TRANSLATE_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python3 benchmark/run_benchmark.py
+          echo "=== RESULTADO DO BENCHMARK ==="
+          cat benchmark/resultado_benchmark.md
+
+      - name: Publicar Relatório no Summary do Action
+        if: always()
+        run: |
+          if [ -f benchmark/resultado_benchmark.md ]; then
+            cat benchmark/resultado_benchmark.md >> "$GITHUB_STEP_SUMMARY"
+          fi

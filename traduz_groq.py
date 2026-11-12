@@ -81,7 +81,16 @@ def carregar_prompt_sistema(base_prompt: str) -> str:
                 regras = m.group(1).strip() if m else conteudo
                 regras = re.sub(r"^---\s*\n.*?\n---\s*\n", "", regras, flags=re.DOTALL).strip()
                 print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
-                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{regras}"
+                cabecalho = (
+                    'Você é um tradutor sênior de legendas de séries dramáticas turcas (dizis) para o Português do Brasil (PT-BR), '
+                    'especializado em "Uzak Şehir" (Longe Demais).\n'
+                    'REGRAS DE FORMATO:\n'
+                    '1. PT-BR coloquial dramático, natural e conciso para leitura em tela.\n'
+                    '2. Nunca deixe falas vazias ou omita IDs; mantenha paridade 1:1.\n'
+                    '3. Responda EXCLUSIVAMENTE em formato JSON válido com a chave "subtitles":\n'
+                    '   {"subtitles": [{"id": <int>, "text": "<tradução em PT-BR>"}]}'
+                )
+                return f"{cabecalho}\n\n{regras}"
             except Exception as e:
                 print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
     return base_prompt
@@ -171,12 +180,28 @@ def traduzir_lote_groq(api_key: str, modelo: str, contexto_anterior: list, lote_
     return mapa, headers
 
 
+def pre_higienizar_texto_turco(texto: str) -> str:
+    """Corrige ruídos fonéticos conhecidos do Whisper no turco antes de enviar à LLM."""
+    regras = [
+        (r"\bAliye\b", "Alya"),
+        (r"\bCihal\b", "Cihan"),
+        (r"\bEcmui\b", "Ecmel"),
+        (r"\bSadaka\s+tanım\b", "Sadakat Hanım"),
+        (r"\bAltyazı\s+M\.K\.?", "[Müzik]"),
+        (r"\bBora'na\b", "Boran'a"),
+        (r"\bBora'nın\b", "Boran'ın"),
+    ]
+    for pat, rep in regras:
+        texto = re.sub(pat, rep, texto, flags=re.IGNORECASE)
+    return texto
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Traduz legenda .srt usando Groq Cloud API (openai/gpt-oss-120b).")
+    parser = argparse.ArgumentParser(description="Traduz legenda .srt usando Groq Cloud API (qwen/qwen3.8-27b).")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
-    parser.add_argument("-m", "--model", default="openai/gpt-oss-120b", help="Modelo Groq (padrão: openai/gpt-oss-120b)")
-    parser.add_argument("-b", "--batch-size", type=int, default=15, help="Falas por lote (padrão: 15)")
+    parser.add_argument("-m", "--model", default="qwen/qwen3.8-27b", help="Modelo Groq (padrão: qwen/qwen3.8-27b)")
+    parser.add_argument("-b", "--batch-size", type=int, default=40, help="Falas por lote (padrão: 40)")
     args = parser.parse_args()
 
     entrada = Path(args.entrada).expanduser()
@@ -202,6 +227,7 @@ def main():
     itens = parse_srt(conteudo)
     for i, item in enumerate(itens, start=1):
         item["id"] = i
+        item["texto"] = pre_higienizar_texto_turco(item["texto"])
 
     traducoes = {}
     if ckpt_file.is_file():
