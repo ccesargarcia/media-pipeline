@@ -19,9 +19,10 @@ OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 
 FREE_MODELS_POOL = [
-    "meta-llama/llama-3.3-70b-instruct",
     "qwen/qwen3.8-27b",
+    "qwen/qwen-2.5-72b-instruct",
     "deepseek/deepseek-chat",
+    "meta-llama/llama-3.3-70b-instruct",
 ]
 
 SYSTEM_PROMPT = """Você é um tradutor sênior de legendas de séries dramáticas turcas (dizis) para o Português do Brasil (PT-BR), especializado em "Uzak Şehir" (Longe Demais - ambientada em Mardin).
@@ -123,7 +124,8 @@ def traduzir_lote_openrouter(api_key: str, modelo: str, contexto_anterior: list,
     payload = {
         "model": modelo,
         "temperature": 0.2,
-        "max_tokens": 2048,
+        "max_tokens": 1200,
+        "reasoning": {"enabled": False},
         "provider": {
             "ignore": ["Cloudflare"],
             "allow_fallbacks": True,
@@ -150,7 +152,10 @@ def traduzir_lote_openrouter(api_key: str, modelo: str, contexto_anterior: list,
     with urllib.request.urlopen(req, timeout=90) as resp:
         corpo = json.loads(resp.read().decode("utf-8"))
 
-    conteudo_resp = corpo["choices"][0]["message"]["content"].strip()
+    msg = corpo["choices"][0]["message"]
+    conteudo_resp = (msg.get("content") or msg.get("reasoning") or "").strip()
+    if not conteudo_resp:
+        raise ValueError("A resposta da API veio vazia (content=None).")
     if conteudo_resp.startswith("```"):
         conteudo_resp = re.sub(r"^```(?:json)?\s*|\s*```$", "", conteudo_resp, flags=re.DOTALL).strip()
 
@@ -184,7 +189,7 @@ def main():
     parser = argparse.ArgumentParser(description="Traduz legenda .srt usando OpenRouter API.")
     parser.add_argument("entrada", help="Arquivo .srt de entrada")
     parser.add_argument("saida", nargs="?", help="Arquivo .srt de saída")
-    parser.add_argument("-m", "--model", default="meta-llama/llama-3.3-70b-instruct", help="Modelo OpenRouter (padrão: meta-llama/llama-3.3-70b-instruct)")
+    parser.add_argument("-m", "--model", default="qwen/qwen3.8-27b", help="Modelo OpenRouter (padrão: qwen/qwen3.8-27b)")
     parser.add_argument("-b", "--batch-size", type=int, default=40, help="Falas por lote (padrão: 40)")
     args = parser.parse_args()
 
