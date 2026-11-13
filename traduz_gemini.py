@@ -123,13 +123,17 @@ def listar_modelos_flash(api_key: str) -> list[str]:
         "gemini-3.0-flash",
         "gemini-3-flash-preview",
         "gemini-3-flash",
-        "gemini-flash-latest",
+        "gemini-3.1-flash-lite-preview",
+        "gemini-flash-lite-latest",
     ]
-    # Remove estritamente qualquer menção a 2.5 e modelos lite ou omni
-    disponiveis = [m for m in disponiveis if "2.5" not in m and "lite" not in m and "omni" not in m]
+    # Remove estritamente qualquer menção a 2.5, omni ou modelos instáveis que travam (3.6, 3.7, 3.8)
+    disponiveis = [
+        m for m in disponiveis
+        if not any(x in m for x in ("2.5", "omni", "3.6", "3.7", "3.8"))
+    ]
     ordenados = [p for p in preferidos if p in disponiveis]
     for m in sorted(disponiveis, reverse=True):
-        if "flash" in m and "lite" not in m and "omni" not in m and m not in ordenados:
+        if "flash" in m and m not in ordenados:
             ordenados.append(m)
 
     if not ordenados and disponiveis:

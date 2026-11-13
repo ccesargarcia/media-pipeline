@@ -459,7 +459,10 @@ jobs:
             python3 traduz_openrouter.py input.srt "traducao_raw.srt"
           else
             echo "Traduzindo via Google Gemini..."
-            python3 traduz_gemini.py -b 50 input.srt "traducao_raw.srt"
+            if ! python3 traduz_gemini.py -b 50 input.srt "traducao_raw.srt"; then
+              echo "⚠️ Cota do Gemini atingida; continuando automaticamente do mesmo checkpoint via Groq (qwen/qwen3.8-27b)..."
+              python3 traduz_groq.py input.srt "traducao_raw.srt"
+            fi
           fi
           echo "Gerando as duas versões de legendas (.com_orador e pura) em .srt e .ass..."
           python3 gerar_versoes_legendas.py "traducao_raw.srt" "${{ env.STEM }}" .
