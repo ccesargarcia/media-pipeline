@@ -215,7 +215,20 @@ def main():
     if batch_size <= 0:
         raise ValueError("O tamanho do lote precisa ser maior que zero.")
     total_lotes = (total_itens + batch_size - 1) // batch_size
+    
+    # Checkpoint em disco para recuperação resiliente
+    ckpt_file = saida.with_suffix(".ckpt.json")
     traducoes = {}
+    if ckpt_file.is_file():
+        try:
+            traducoes = {int(k): v for k, v in json.loads(ckpt_file.read_text(encoding="utf-8")).items()}
+            print(f"==> Checkpoint carregado: {len(traducoes)}/{total_itens} falas já traduzidas.", flush=True)
+            for item in itens:
+                if item["id"] in traducoes:
+                    item["traducao"] = traducoes[item["id"]]
+        except Exception as e:
+            print(f"Aviso ao carregar checkpoint ({e}); iniciando do zero.", file=sys.stderr, flush=True)
+            traducoes = {}
 
     print("=" * 70, flush=True)
     print(f"==> Iniciando Tradução via OpenRouter ({active_model})", flush=True)
@@ -228,6 +241,11 @@ def main():
         inicio = idx_lote * batch_size
         fim = min(inicio + batch_size, total_itens)
         lote_atual = itens[inicio:fim]
+
+        # Pular lote se já estiver 100% no checkpoint
+        if all(item["id"] in traducoes for item in lote_atual):
+            print(f"--> Lote {idx_lote + 1}/{total_lotes} já concluído no checkpoint (#{inicio + 1} a #{fim}). Pulando.", flush=True)
+            continue
 
         ctx_inicio = max(0, inicio - 6)
         contexto_anterior = itens[ctx_inicio:inicio]
@@ -250,6 +268,12 @@ def main():
                     item["traducao"] = texto
                     traducoes[item["id"]] = texto
 
+                # Salvar checkpoint após cada lote
+                try:
+                    ckpt_file.write_text(json.dumps(traducoes, ensure_ascii=False), encoding="utf-8")
+                except Exception as ckpt_err:
+                    print(f"Aviso ao salvar checkpoint: {ckpt_err}", file=sys.stderr, flush=True)
+
                 tempo_decorrido = time.time() - t_inicio
                 pct_concluido = (fim / total_itens) * 100
                 velocidade = fim / tempo_decorrido if tempo_decorrido > 0 else 0
@@ -268,6 +292,13 @@ def main():
                 sucesso = True
                 break
             except urllib.error.HTTPError as e:
+                # Ler corpo detalhado do erro
+                detalhe_erro = ""
+                try:
+                    detalhe_erro = e.read().decode("utf-8", errors="replace")
+                except Exception:
+                    pass
+
                 if e.code == 429:
                     novo_modelo = next_free_model(active_model, active_pool)
                     espera = 4 + (tentativa * 3)
@@ -283,12 +314,20 @@ def main():
                     time.sleep(2)
                     continue
 
+                if e.code == 400:
+                    novo_modelo = next_free_model(active_model, active_pool)
+                    espera = 3 + (tentativa * 2)
+                    print(f"  HTTP 400 (Bad Request) com '{active_model}': {detalhe_erro[:150]}. Alternando para '{novo_modelo}' em {espera}s...", file=sys.stderr, flush=True)
+                    active_model = novo_modelo
+                    time.sleep(espera)
+                    continue
+
                 if tentativa < max_tentativas - 1:
                     espera = 5 * (tentativa + 1)
-                    print(f"  Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                    print(f"  Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason} - {detalhe_erro[:120]}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    raise RuntimeError(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas.")
+                    raise RuntimeError(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas (HTTP {e.code}: {detalhe_erro[:120]}).")
 
             except Exception as e:
                 if tentativa < max_tentativas - 1:
@@ -311,6 +350,8 @@ def main():
 
     saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text("\n\n".join(blocos_saida) + "\n", encoding="utf-8")
+    if ckpt_file.is_file() and len(traducoes) >= total_itens:
+        ckpt_file.unlink(missing_ok=True)
     print("=" * 70, flush=True)
     print(f"==> Concluído com sucesso via OpenRouter em {tot_m:02d}m{tot_s:02d}s!", flush=True)
     print(f"==> Legenda salva em: {saida}", flush=True)
