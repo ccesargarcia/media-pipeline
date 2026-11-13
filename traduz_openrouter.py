@@ -20,8 +20,8 @@ OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 
 FREE_MODELS_POOL = [
     "meta-llama/llama-3.3-70b-instruct",
-    "meta-llama/llama-3.3-70b-instruct:free",
-    "google/gemma-4-31b-it:free",
+    "qwen/qwen3.8-27b",
+    "deepseek/deepseek-chat",
 ]
 
 SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
@@ -39,7 +39,7 @@ Regras obrigatórias de tradução de legendas:
 
 
 def carregar_prompt_sistema(base_prompt: str) -> str:
-    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    """Carrega apenas as Seções 1 e 2 da skill dizi-translator (Universo, Personagens e Regras de Tradução) para manter o prompt enxuto (<4000 tokens) e não exceder o limite de 8192 tokens dos provedores."""
     skill_paths = [
         Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
         Path.home() / ".agents/skills/dizi-translator/SKILL.md",
@@ -48,9 +48,19 @@ def carregar_prompt_sistema(base_prompt: str) -> str:
         if sp.is_file():
             try:
                 conteudo = sp.read_text(encoding="utf-8")
-                conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
+                m = re.search(r"(## 1\..*?)(?=## 3\.|$)", conteudo, re.DOTALL)
+                regras = m.group(1).strip() if m else conteudo
+                regras = re.sub(r"^---\s*\n.*?\n---\s*\n", "", regras, flags=re.DOTALL).strip()
                 print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
-                return f"{base_prompt}\n\n--- DIRETRIZES COMPLETAS DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
+                cabecalho = (
+                    'Você é um tradutor sênior de legendas de séries dramáticas turcas (dizis) para o Português do Brasil (PT-BR), '
+                    'especializado em "Uzak Şehir" (Longe Demais).\n'
+                    'REGRAS DE FORMATO:\n'
+                    '1. PT-BR coloquial dramático, natural e conciso para leitura em tela.\n'
+                    '2. Nunca deixe falas vazias ou omita IDs; mantenha paridade 1:1.\n'
+                    '3. Retorne EXCLUSIVAMENTE um array JSON válido no formato: [{"id": <numero>, "text": "<tradução>"}] contendo todos os IDs solicitados.'
+                )
+                return f"{cabecalho}\n\n{regras}"
             except Exception as e:
                 print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
     return base_prompt
@@ -121,6 +131,10 @@ def traduzir_lote_openrouter(api_key: str, modelo: str, contexto_anterior: list,
     payload = {
         "model": modelo,
         "temperature": 0.2,
+        "provider": {
+            "ignore": ["Cloudflare"],
+            "allow_fallbacks": True,
+        },
         "messages": [
             {"role": "system", "content": PROMPT_SISTEMA_COMPLETO + "\nImportante: responda APENAS com o array JSON puro sem texto antes ou depois: [{\"id\": ..., \"text\": \"...\"}]"},
             {"role": "user", "content": "\n".join(prompt_partes)},

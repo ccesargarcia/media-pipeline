@@ -428,6 +428,13 @@ jobs:
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
             -o input.srt
 
+          ENCODED_CKPT=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["STEM"] + ".ckpt.json"))')
+          if curl -s --fail --ftp-pasv -u "$FTP_USER:$FTP_PASSWORD" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_CKPT}" -o traducao_raw.ckpt.json; then
+            echo "✓ Checkpoint anterior (${STEM}.ckpt.json) encontrado no FTP! A tradução continuará de onde parou."
+          else
+            rm -f traducao_raw.ckpt.json
+          fi
+
       - name: Desconectar da VPN após o download
         if: ${{ always() && inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-disconnect
@@ -470,7 +477,7 @@ jobs:
             ${{ inputs.bloquear_em_falhas == true && '--fail-on-skill-rules' || '--warn-only' }}
 
       - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
-        if: ${{ inputs.network_mode == 'tailscale' }}
+        if: ${{ always() && inputs.network_mode == 'tailscale' }}
         uses: ./.github/actions/tailscale-connect
         with:
           ts_authkey: ${{ secrets.TS_AUTHKEY }}
@@ -478,12 +485,13 @@ jobs:
           openvpn_config: ${{ secrets.OPENVPN_CONFIG }}
 
       - name: Conectar à VPN para enviar as legendas
-        if: ${{ inputs.network_mode == 'vpn' }}
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
         with:
           config: ${{ secrets.OPENVPN_CONFIG }}
 
-      - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) de volta para o FTP
+      - name: Enviar legendas traduzidas (.pt-BR.srt e .ass) ou Checkpoint parcial de volta para o FTP
+        if: always()
         env:
           FTP_BASE_DIR: "/G/Series/Longe demais - ${{ inputs.season }}"
           FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
@@ -493,17 +501,32 @@ jobs:
         run: |
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
           
-          echo "Enviando todas as versões de legendas geradas (.srt e .ass) para o FTP..."
-          for file in "${{ env.STEM }}"*.srt "${{ env.STEM }}"*.ass; do
-            if [ -f "$file" ]; then
-              echo "-> Enviando $file..."
-              curl -# --fail --ftp-pasv \
-                --retry 5 --retry-delay 5 --retry-connrefused \
-                -u "$FTP_USER:$FTP_PASSWORD" \
-                -T "$file" \
-                "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
-            fi
-          done
+          if [ -f "traducao_raw.ckpt.json" ]; then
+            cp -f "traducao_raw.ckpt.json" "${{ env.STEM }}.ckpt.json"
+            echo "-> Salvando checkpoint parcial (${{ env.STEM }}.ckpt.json) no FTP para retomada..."
+            curl -# --fail --ftp-pasv \
+              --retry 3 --retry-delay 3 --retry-connrefused \
+              -u "$FTP_USER:$FTP_PASSWORD" \
+              -T "${{ env.STEM }}.ckpt.json" \
+              "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/" || true
+          fi
+
+          shopt -s nullglob
+          FILES=("${{ env.STEM }}"*.srt "${{ env.STEM }}"*.ass)
+          if [ ${#FILES[@]} -gt 0 ]; then
+            echo "Enviando todas as versões de legendas geradas (.srt e .ass) para o FTP..."
+            for file in "${FILES[@]}"; do
+              if [ -f "$file" ]; then
+                echo "-> Enviando $file..."
+                curl -# --fail --ftp-pasv \
+                  --retry 5 --retry-delay 5 --retry-connrefused \
+                  -u "$FTP_USER:$FTP_PASSWORD" \
+                  -T "$file" \
+                  "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+              fi
+            done
+            curl -s -u "$FTP_USER:$FTP_PASSWORD" "ftp://${FTP_HOST}:${FTP_PORT}/" -Q "DELE ${FTP_BASE_DIR}/${{ env.STEM }}.ckpt.json" >/dev/null 2>&1 || true
+          fi
 
       - name: Desconectar da VPN após o envio
         if: ${{ always() && inputs.network_mode == 'vpn' }}
@@ -517,6 +540,7 @@ jobs:
           path: |
             ${{ env.STEM }}*.srt
             ${{ env.STEM }}*.ass
+            ${{ env.STEM }}*.ckpt.json
 
       - name: Notificar Conclusão via WhatsApp (Evolution API)
         if: ${{ success() }}
