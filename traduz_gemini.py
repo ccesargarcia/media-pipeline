@@ -77,7 +77,7 @@ REGRAS DE LEGENDA:
    [{"id": <numero>, "text": "<tradução em PT-BR>"}]"""
 
 def carregar_prompt_sistema() -> str:
-    """Carrega as diretrizes completas da skill dizi-translator se o arquivo existir, combinando com o prompt base."""
+    """Carrega apenas as Seções 1 e 2 da skill dizi-translator para manter o prompt enxuto e rápido (<3500 tokens), reduzindo timeouts e HTTP 503."""
     skill_paths = [
         Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
         Path.home() / ".agents/skills/dizi-translator/SKILL.md",
@@ -86,9 +86,11 @@ def carregar_prompt_sistema() -> str:
         if sp.is_file():
             try:
                 conteudo = sp.read_text(encoding="utf-8")
-                conteudo = re.sub(r"^---\s*\n.*?\n---\s*\n", "", conteudo, flags=re.DOTALL).strip()
+                m = re.search(r"(## 1\..*?)(?=## 3\.|$)", conteudo, re.DOTALL)
+                regras = m.group(1).strip() if m else conteudo
+                regras = re.sub(r"^---\s*\n.*?\n---\s*\n", "", regras, flags=re.DOTALL).strip()
                 print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
-                return f"{SYSTEM_PROMPT}\n\n--- DIRETRIZES DA SKILL DIZI-TRANSLATOR ---\n{conteudo}"
+                return f"{SYSTEM_PROMPT}\n\n--- DIRETRIZES ESSENCIAIS DA SKILL DIZI-TRANSLATOR ---\n{regras}"
             except Exception as e:
                 print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
     return SYSTEM_PROMPT
@@ -307,15 +309,15 @@ def main():
     for idx_lote in range(total_lotes):
         inicio = idx_lote * batch_size
         fim = min(inicio + batch_size, len(itens))
-        lote_atual = itens[inicio:fim]
-
-        if all("traducao" in item for item in lote_atual):
+        lote_atual = [item for item in itens[inicio:fim] if "traducao" not in item]
+        if not lote_atual:
+            print(f"--> Lote {idx_lote + 1}/{total_lotes} já concluído no checkpoint (#{inicio + 1} a #{fim}). Pulando.", flush=True)
             continue
 
         ctx_inicio = max(0, inicio - 8)
         contexto_anterior = itens[ctx_inicio:inicio]
 
-        print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{inicio + 1} a #{fim})...", flush=True)
+        print(f"\n--> Processando Lote {idx_lote + 1}/{total_lotes} ({len(lote_atual)} falas: #{lote_atual[0]['id']} a #{lote_atual[-1]['id']})...", flush=True)
 
         for tentativa in range(10):
             try:
@@ -353,7 +355,7 @@ def main():
             except urllib.error.HTTPError as e:
                 detalhe = e.read().decode("utf-8", "replace")[:300]
                 if e.code in (429, 500, 502, 503, 504) and tentativa < 9:
-                    espera = 25 + (tentativa * 10)
+                    espera = 10 + (tentativa * 5)
                     # Só cota negada justifica trocar a chave; chaves do mesmo projeto podem compartilhar a cota.
                     # O backoff progressivo continua ativo para não martelar uma cota compartilhada ou um serviço indisponível.
                     if e.code == 429 and len(api_keys) > 1:

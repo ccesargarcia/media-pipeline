@@ -334,6 +334,9 @@ def main():
                 else:
                     raise RuntimeError(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas: {e}") from e
 
+        if not sucesso:
+            raise RuntimeError(f"Falha definitiva no lote {idx_lote + 1} após {max_tentativas} tentativas (cota/créditos esgotados).")
+
         # Intervalo seguro para não estourar rate limit
         time.sleep(2.5)
 
