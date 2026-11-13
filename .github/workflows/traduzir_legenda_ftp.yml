@@ -413,7 +413,7 @@ jobs:
             exit 1
           fi
           STEM="${SRT_NAME%.*}"
-          STEM="${STEM%.tr}"
+          export STEM="${STEM%.tr}"
           
           echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> $GITHUB_ENV
           echo "SRT_NAME=$SRT_NAME" >> $GITHUB_ENV
