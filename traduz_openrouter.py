@@ -24,45 +24,37 @@ FREE_MODELS_POOL = [
     "deepseek/deepseek-chat",
 ]
 
-SYSTEM_PROMPT = """Você é um tradutor profissional de legendas de cinema e séries dramáticas turcas (dizi), especializado em traduzir do Turco (TR) para o Português do Brasil (PT-BR).
+SYSTEM_PROMPT = """Você é um tradutor sênior de legendas de séries dramáticas turcas (dizis) para o Português do Brasil (PT-BR), especializado em "Uzak Şehir" (Longe Demais - ambientada em Mardin).
 
-Contexto da série (Uzak Şehir / Longe Demais - ambientada em Mardin):
-- Personagens masculinos: Cihan (chefe da família Albora), Boran (marido de Alya e pai de Deniz; dado como morto e depois encontrado vivo em estado crítico, vegetativo e em coma), Kaya (irmão mais novo), Şahin (primo), Demir (rival Baybars), Ecmel (pai de Şahin), Kadir, Muzaffer, Deniz (filho pequeno de Alya), Halis, Özkan. Não antecipe a revelação de Boran em cenas anteriores.
-- Personagens femininas: Alya (médica, mãe de Deniz), Sadakat (matriarca dos Albora), Nare, Zerrin, Mine, Fidan, Pakize, Ümmü Hanım.
+ELENCO E GÊNERO GRAMATICAL (em turco "o" é neutro; acerte o gênero por quem fala e de quem se fala):
+- Homens: Cihan (chefe dos Albora), Boran (marido de Alya, pai de Deniz; em estado crítico/coma), Kaya (irmão caçula), Şahin (primo), Demir (rival Baybars), Ecmel (pai de Şahin), Kadir, Muzaffer, Deniz (Cihan Deniz, filho pequeno de Alya), Halis, Özkan.
+- Mulheres: Alya (médica, mãe de Deniz), Sadakat (matriarca dos Albora, mãe de Cihan/Boran/Kaya/Nare), Nare (irmã), Zerrin, Mine, Fidan, Pakize, Ümmü Hanım.
 
-Regras obrigatórias de tradução de legendas:
-1. Gênero gramatical: determine masculino/feminino pelo contexto de quem fala e de quem se fala (em turco "o" é neutro).
-2. Use o contexto para manter a continuidade de falas quebradas entre blocos, mas preserve cada ID como uma unidade independente; não junte, divida, omita ou reordene blocos.
-3. Adapte expressões idiomáticas ("Yenge" -> "Cunhada", "Abi" -> "Irmão", "Abla" -> "Irmã", "Ağa", "Hanım", "Geçmiş olsun", "Başım üstüne") para o português brasileiro falado.
-4. Mantenha o texto conciso para leitura em tela sem cortar sentido. Não acrescente etiquetas de orador quando não forem solicitadas e confiavelmente identificáveis.
-5. Retorne EXCLUSIVAMENTE um array JSON válido no formato: [{"id": <numero>, "text": "<tradução>"}] contendo todos os IDs solicitados."""
+EXPRESSÕES IDIOMÁTICAS E ARMADILHAS (PROIBIDO TRADUZIR LITERALMENTE):
+- "Kurban" / "Kurban olduğum" -> Vocativo afetivo: "meu amor", "meu querido", "minha vida" (NUNCA traduza como "sacrifício", "vítima" ou "cordeiro").
+- "Parlama" -> "Não se exalte", "Não exploda" (NUNCA traduza como "brilhar").
+- "Ayağına sağlık" -> "Obrigado por ter vindo" (NUNCA mencione "saúde nos pés").
+- "Allah razı olsun" -> "Muito obrigado", "Deus lhe pague" (NUNCA "Que Deus agradeça").
+- "Hoş geldiniz" / "Geliniz" -> "Bem-vindos" / "Hoş bulduk" -> "Obrigado, é um prazer".
+- "Yenge" -> "Cunhada" | "Abi" -> "Irmão" | "Abla" -> "Irmã" | "Ağa" -> "Agha/Patrão" | "Hanım" -> "Dona/Senhora" | "Geçmiş olsun" -> "Melhoras" | "Başım üstüne" -> "Com certeza".
+- Correções fonéticas do Whisper: "Aliye/Ali Hanım" = Alya; "Cihal" = Cihan; "Ecmui/Ecmen" = Ecmel; "Sadaka tanım" = Sadakat Hanım; "Bora'na" = Boran'a; "Altyazı M.K." = "[Müzik]".
+
+REGRAS DE FORMATO:
+1. PT-BR coloquial dramático, natural e conciso para tela. Não adicione etiquetas de orador.
+2. Paridade 1:1 estrita: não junte, divida ou omita IDs.
+3. Retorne EXCLUSIVAMENTE um array JSON válido: [{"id": <numero>, "text": "<tradução>"}]"""
 
 
 def carregar_prompt_sistema(base_prompt: str) -> str:
-    """Carrega apenas as Seções 1 e 2 da skill dizi-translator (Universo, Personagens e Regras de Tradução) para manter o prompt enxuto (<4000 tokens) e não exceder o limite de 8192 tokens dos provedores."""
+    """Mantém o prompt compacto (~750 tokens) com todas as regras essenciais da skill dizi-translator para caber com folga em provedores com limite de 4096 tokens (Input + max_tokens)."""
     skill_paths = [
         Path(__file__).resolve().parent / ".agents/skills/dizi-translator/SKILL.md",
         Path.home() / ".agents/skills/dizi-translator/SKILL.md",
     ]
     for sp in skill_paths:
         if sp.is_file():
-            try:
-                conteudo = sp.read_text(encoding="utf-8")
-                m = re.search(r"(## 1\..*?)(?=## 3\.|$)", conteudo, re.DOTALL)
-                regras = m.group(1).strip() if m else conteudo
-                regras = re.sub(r"^---\s*\n.*?\n---\s*\n", "", regras, flags=re.DOTALL).strip()
-                print(f"==> Skill dizi-translator incorporada ao prompt a partir de: {sp}", flush=True)
-                cabecalho = (
-                    'Você é um tradutor sênior de legendas de séries dramáticas turcas (dizis) para o Português do Brasil (PT-BR), '
-                    'especializado em "Uzak Şehir" (Longe Demais).\n'
-                    'REGRAS DE FORMATO:\n'
-                    '1. PT-BR coloquial dramático, natural e conciso para leitura em tela.\n'
-                    '2. Nunca deixe falas vazias ou omita IDs; mantenha paridade 1:1.\n'
-                    '3. Retorne EXCLUSIVAMENTE um array JSON válido no formato: [{"id": <numero>, "text": "<tradução>"}] contendo todos os IDs solicitados.'
-                )
-                return f"{cabecalho}\n\n{regras}"
-            except Exception as e:
-                print(f"Aviso ao carregar skill ({sp}): {e}", file=sys.stderr)
+            print(f"==> Diretrizes compactas da skill dizi-translator ativas ({sp})", flush=True)
+            break
     return base_prompt
 
 PROMPT_SISTEMA_COMPLETO = carregar_prompt_sistema(SYSTEM_PROMPT)
@@ -131,6 +123,7 @@ def traduzir_lote_openrouter(api_key: str, modelo: str, contexto_anterior: list,
     payload = {
         "model": modelo,
         "temperature": 0.2,
+        "max_tokens": 2048,
         "provider": {
             "ignore": ["Cloudflare"],
             "allow_fallbacks": True,
@@ -313,35 +306,20 @@ def main():
                 except Exception:
                     pass
 
-                if e.code == 429:
-                    novo_modelo = next_free_model(active_model, active_pool)
-                    espera = 4 + (tentativa * 3)
-                    print(f"  HTTP 429 (Rate Limit) com '{active_model}'. Alternando para '{novo_modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
-                    active_model = novo_modelo
-                    time.sleep(espera)
-                    continue
-
-                if e.code == 404:
-                    novo_modelo = next_free_model(active_model, active_pool)
-                    print(f"  HTTP 404 com '{active_model}'. Trocando para '{novo_modelo}'...", file=sys.stderr, flush=True)
-                    active_model = novo_modelo
-                    time.sleep(2)
-                    continue
-
-                if e.code == 400:
+                if e.code in (429, 402, 404):
                     novo_modelo = next_free_model(active_model, active_pool)
                     espera = 3 + (tentativa * 2)
-                    print(f"  HTTP 400 (Bad Request) com '{active_model}': {detalhe_erro[:150]}. Alternando para '{novo_modelo}' em {espera}s...", file=sys.stderr, flush=True)
+                    print(f"  HTTP {e.code} com '{active_model}'. Alternando para '{novo_modelo}' e aguardando {espera}s...", file=sys.stderr, flush=True)
                     active_model = novo_modelo
                     time.sleep(espera)
                     continue
 
                 if tentativa < max_tentativas - 1:
-                    espera = 5 * (tentativa + 1)
-                    print(f"  Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason} - {detalhe_erro[:120]}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
+                    espera = 3 + (tentativa * 2)
+                    print(f"  Aviso no lote {idx_lote + 1} (HTTP {e.code}: {e.reason} - {detalhe_erro[:160]}). Tentando novamente em {espera}s...", file=sys.stderr, flush=True)
                     time.sleep(espera)
                 else:
-                    raise RuntimeError(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas (HTTP {e.code}: {detalhe_erro[:120]}).")
+                    raise RuntimeError(f"Falha no lote {idx_lote + 1} após {max_tentativas} tentativas (HTTP {e.code}: {detalhe_erro[:160]}).")
 
             except Exception as e:
                 if tentativa < max_tentativas - 1:
