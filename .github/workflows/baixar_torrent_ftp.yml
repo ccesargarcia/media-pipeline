@@ -1,0 +1,146 @@
+name: Baixar Torrent para FTP
+run-name: "🧲 Baixar Torrent → FTP (${{ inputs.ftp_dir }}) · ${{ inputs.network_mode }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      torrent_source:
+        description: 'Magnet link (magnet:?xt=...) ou URL direta .torrent (opcional se usar search_query)'
+        required: false
+        type: string
+        default: ''
+      search_query:
+        description: 'Ou busque pelo nome do filme/série via Prowlarr (ex: Duna Parte 2)'
+        required: false
+        type: string
+        default: ''
+      quality:
+        description: 'Filtro de qualidade na busca Prowlarr'
+        required: false
+        type: choice
+        options:
+          - '1080p'
+          - 'qualquer'
+          - '720p'
+          - '4K'
+          - 'DUAL'
+        default: '1080p'
+      ftp_dir:
+        description: 'Diretório de destino no FTP (ex: /G/Downloads, /G/Filmes, /G/Series/MinhaSerie)'
+        required: true
+        type: string
+        default: '/G/Downloads'
+      subfolder_name:
+        description: 'Subpasta opcional dentro do destino (deixe vazio para usar a estrutura original)'
+        required: false
+        type: string
+        default: ''
+      network_mode:
+        description: 'Modo de rede para alcançar o FTP (tailscale, vpn ou direct)'
+        required: true
+        type: choice
+        options:
+          - tailscale
+          - vpn
+          - direct
+        default: tailscale
+      max_download_minutes:
+        description: 'Tempo máximo em minutos para o download do torrent'
+        required: false
+        type: number
+        default: 240
+      free_disk_space:
+        description: 'Liberar ~25-30 GB extras no runner Ubuntu antes de baixar'
+        required: false
+        type: boolean
+        default: true
+      skip_existing:
+        description: 'Pular arquivos que já existem no FTP com o mesmo tamanho'
+        required: false
+        type: boolean
+        default: true
+      notify_whatsapp:
+        description: 'Enviar notificações de progresso no WhatsApp (Evolution API)'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  download-torrent-and-upload-ftp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Liberar espaço em disco no runner
+        if: ${{ inputs.free_disk_space }}
+        run: |
+          df -h /
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android /usr/share/swift || true
+          df -h /
+
+      - name: Instalar Dependências (aria2, curl, python3)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y aria2 curl python3
+
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          ts_authkey: ${{ secrets.TS_AUTHKEY }}
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+          openvpn_config: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Conectar à VPN para enviar os arquivos ao FTP
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Baixar Torrent e Enviar para FTP
+        env:
+          TORRENT_SOURCE: ${{ inputs.torrent_source }}
+          SEARCH_QUERY: ${{ inputs.search_query }}
+          QUALITY: ${{ inputs.quality }}
+          FTP_DIR: ${{ inputs.ftp_dir }}
+          SUBFOLDER_NAME: ${{ inputs.subfolder_name }}
+          MAX_MINUTES: ${{ inputs.max_download_minutes }}
+          SKIP_EXISTING: ${{ inputs.skip_existing }}
+          NOTIFY_WHATSAPP: ${{ inputs.notify_whatsapp }}
+          PROWLARR_URL: ${{ secrets.PROWLARR_URL }}
+          PROWLARR_API_KEY: ${{ secrets.PROWLARR_API_KEY }}
+          FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
+          FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+        run: |
+          set -euo pipefail
+          EXTRA_FLAGS=()
+          if [ "$SKIP_EXISTING" = "true" ]; then
+            EXTRA_FLAGS+=("--skip-existing")
+          fi
+          if [ "$NOTIFY_WHATSAPP" = "true" ]; then
+            EXTRA_FLAGS+=("--notify-whatsapp")
+          fi
+
+          python3 baixar_torrent_ftp.py \
+            --source "$TORRENT_SOURCE" \
+            --query "$SEARCH_QUERY" \
+            --quality "$QUALITY" \
+            --ftp-dir "$FTP_DIR" \
+            --subfolder-name "$SUBFOLDER_NAME" \
+            --max-minutes "$MAX_MINUTES" \
+            "${EXTRA_FLAGS[@]}"
+
+      - name: Desconectar da VPN
+        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-disconnect

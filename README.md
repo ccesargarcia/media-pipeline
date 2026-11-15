@@ -9,6 +9,7 @@ Pipeline automatizado no GitHub Actions para:
 ## Workflows Disponíveis
 
 - **Baixar Episódios para FTP (Turkish123):** Baixa episódios individuais ou em lote e envia para `/G/Series/Longe demais - [Temporada]`.
+- **Baixar Torrent para FTP:** Baixa torrents via magnet link ou URL `.torrent` (`aria2c` sem seed após concluir) e envia todos os arquivos diretamente para o FTP mantendo a estrutura de pastas.
 - **Legendar Série via FTP:** Pega o vídeo do FTP, transcreve com Whisper, traduz para PT-BR e envia as legendas (`.pt-BR.srt` e `.ass`) de volta para o FTP. O mecanismo `local` usa Qwen3-8B GGUF Q4 via llama.cpp no runner Ubuntu.
 - **Traduzir Legenda Existente do FTP:** Baixa um `.srt`, traduz com o mecanismo escolhido (Gemini, Groq, OpenRouter ou local), gera `.ass` e envia ambos ao FTP.
 - **Sincronizar Legendas Prontas com FTP:** Envia os arquivos versionados em `legendas_prontas/` para a pasta escolhida.
@@ -23,6 +24,8 @@ Pipeline automatizado no GitHub Actions para:
 - `GEMINI_TRANSLATE_KEY`: (Opcional) Chave da API do Google AI Studio
 - `GROQ_API_KEY`: (Opcional) Chave da API da Groq Cloud
 - `HF_TOKEN`: (Opcional) Token do Hugging Face para o mecanismo `huggingface` (`HUGGINGFACE_HUB_TOKEN` também é aceito)
+- `PROWLARR_URL`: (Opcional) URL do Prowlarr acessível pelo runner/Tailscale (ex: `http://100.x.x.x:9696`) para busca por nome no workflow de torrent
+- `PROWLARR_API_KEY`: (Opcional) Chave de API do Prowlarr
 
 O workflow de legendagem também aceita `GROK_API_KEY` como alternativa a `GROQ_API_KEY`.
 
