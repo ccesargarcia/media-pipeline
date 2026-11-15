@@ -276,6 +276,7 @@ def enviar_arquivo_ftp_curl(
 
     cmd = [
         "curl",
+        "-g",
         "-#",
         "--fail",
         "--ftp-pasv",

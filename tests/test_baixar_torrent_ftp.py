@@ -91,6 +91,7 @@ class TestBaixarTorrentFtp(unittest.TestCase):
                     arquivo, "192.168.0.1", 21, "user", "pass", "/G/Minha Pasta", arquivo.name
                 )
                 cmd = run_mock.call_args[0][0]
+                self.assertIn("-g", cmd)
                 self.assertIn(
                     "ftp://192.168.0.1:21/G/Minha%20Pasta/Ep%2001%20%5B1080p%5D.mkv",
                     cmd,
