@@ -147,6 +147,22 @@ def validar_e_preparar_fonte(source: str, work_dir: Path) -> str:
     raise ValueError("Origem não suportada. Informe um magnet link ('magnet:...') ou URL HTTP(S) de um .torrent.")
 
 
+DEFAULT_BT_TRACKERS = [
+    "http://tracker.opentrackr.org:1337/announce",
+    "https://opentracker.i2p.rocks:443/announce",
+    "http://tracker.openbittorrent.com:80/announce",
+    "http://open.acgnxtracker.com:80/announce",
+    "https://tracker.tamersunion.org:443/announce",
+    "https://tracker.gbitt.info:443/announce",
+    "https://tracker.loligirl.cn:443/announce",
+    "udp://tracker.opentrackr.org:1337/announce",
+    "udp://open.stealth.si:80/announce",
+    "udp://tracker.torrent.eu.org:451/announce",
+    "udp://exodus.desync.com:6969/announce",
+    "udp://open.demonii.com:1337/announce",
+]
+
+
 def baixar_torrent(
     target: str,
     download_dir: Path,
@@ -160,6 +176,9 @@ def baixar_torrent(
         f"--dir={download_dir}",
         "--seed-time=0",
         f"--bt-stop-timeout={bt_stop_timeout}",
+        "--bt-max-peers=100",
+        "--bt-tracker-connect-timeout=10",
+        f"--bt-tracker={','.join(DEFAULT_BT_TRACKERS)}",
         "--max-connection-per-server=16",
         "--enable-dht=true",
         "--enable-peer-exchange=true",
