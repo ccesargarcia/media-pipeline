@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from ftplib import FTP
@@ -107,13 +108,36 @@ def validar_e_preparar_fonte(source: str, work_dir: Path) -> str:
         return fonte
 
     if fonte.startswith(("http://", "https://")):
+        class _MagnetRedirectHandler(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, req, fp, code, msg, headers, newurl):
+                if newurl.startswith("magnet:"):
+                    raise _MagnetRedirect(newurl)
+                return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+        class _MagnetRedirect(Exception):
+            def __init__(self, magnet_url: str):
+                super().__init__(magnet_url)
+                self.magnet_url = magnet_url
+
         torrent_path = work_dir / "input.torrent"
         req = urllib.request.Request(
             fonte,
             headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) MediaPipeline/1.0"},
         )
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            conteudo = resp.read()
+        opener = urllib.request.build_opener(_MagnetRedirectHandler())
+        try:
+            with opener.open(req, timeout=30) as resp:
+                conteudo = resp.read()
+        except _MagnetRedirect as redir:
+            print("🧲 URL redirecionou para magnet link.", flush=True)
+            return redir.magnet_url
+        except urllib.error.HTTPError as err:
+            loc = err.headers.get("Location", "") if err.headers else ""
+            if loc.startswith("magnet:"):
+                print("🧲 URL redirecionou para magnet link.", flush=True)
+                return loc
+            raise
+
         if not conteudo or not conteudo.startswith(b"d"):
             raise ValueError("O arquivo baixado da URL não parece ser um arquivo .torrent válido.")
         torrent_path.write_bytes(conteudo)

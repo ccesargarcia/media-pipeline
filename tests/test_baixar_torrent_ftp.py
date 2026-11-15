@@ -31,10 +31,28 @@ class TestBaixarTorrentFtp(unittest.TestCase):
             resp_mock.__enter__ = MagicMock(return_value=resp_mock)
             resp_mock.__exit__ = MagicMock(return_value=False)
 
-            with patch("baixar_torrent_ftp.urllib.request.urlopen", return_value=resp_mock):
+            opener_mock = MagicMock()
+            opener_mock.open.return_value = resp_mock
+            with patch("baixar_torrent_ftp.urllib.request.build_opener", return_value=opener_mock):
                 res = btf.validar_e_preparar_fonte("https://exemplo.com/filme.torrent", Path(tmp))
                 self.assertTrue(res.endswith("input.torrent"))
                 self.assertTrue(Path(res).exists())
+
+    def test_validar_url_redireciona_para_magnet(self):
+        import urllib.error
+        from email.message import Message
+
+        magnet = "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567"
+        hdrs = Message()
+        hdrs["Location"] = magnet
+        err = urllib.error.HTTPError("https://torrent.luisices.com.br/1/download", 301, "Moved", hdrs, None)
+
+        opener_mock = MagicMock()
+        opener_mock.open.side_effect = err
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch("baixar_torrent_ftp.urllib.request.build_opener", return_value=opener_mock):
+                res = btf.validar_e_preparar_fonte("https://torrent.luisices.com.br/1/download", Path(tmp))
+                self.assertEqual(res, magnet)
 
     def test_listar_arquivos_ignora_controle(self):
         with tempfile.TemporaryDirectory() as tmp:
