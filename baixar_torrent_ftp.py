@@ -151,7 +151,7 @@ def baixar_torrent(
     target: str,
     download_dir: Path,
     max_minutes: int = 240,
-    bt_stop_timeout: int = 600,
+    bt_stop_timeout: int = 180,
 ) -> None:
     """Executa o aria2c para baixar o torrent sem fazer seed após concluir."""
     download_dir.mkdir(parents=True, exist_ok=True)
@@ -401,7 +401,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--subfolder-name", default="", help="Subpasta opcional dentro do diretório FTP")
     parser.add_argument("--work-dir", default="torrent_work", help="Diretório temporário de trabalho")
     parser.add_argument("--max-minutes", type=int, default=240, help="Timeout total do download em minutos")
-    parser.add_argument("--bt-stop-timeout", type=int, default=600, help="Timeout do aria2c sem peers (segundos)")
+    parser.add_argument("--bt-stop-timeout", type=int, default=180, help="Timeout do aria2c sem peers (segundos)")
     parser.add_argument("--skip-existing", action="store_true", help="Pular arquivos já existentes no FTP")
     parser.add_argument("--notify-whatsapp", action="store_true", help="Enviar notificações via WhatsApp")
     return parser.parse_args()
