@@ -222,16 +222,20 @@ jobs:
             ) &
             UPLOAD_PID=$!
 
-            # Monitor em background para reportar progresso mesmo se outros passos estiverem executando
+            # Monitor em background para reportar progresso em barra limpa a cada 5%
             (
-              local last_mon_prog=""
+              local last_step=-1
               while kill -0 "$UPLOAD_PID" 2>/dev/null; do
-                sleep 8
+                sleep 5
                 if [ -f "$UPLOAD_LOG" ]; then
-                  local p=$(tr '\r' '\n' < "$UPLOAD_LOG" 2>/dev/null | grep -E '[0-9]+\.[0-9]+%|[0-9]+%' | tail -n 1 | sed 's/^[ \t]*//')
-                  if [ -n "$p" ] && [ "$p" != "$last_mon_prog" ]; then
-                    echo "  📤 [Upload Ep $ep em andamento] $p (${UPLOAD_SIZE_MB} MB)"
-                    last_mon_prog="$p"
+                  local pct=$(tr '\r' '\n' < "$UPLOAD_LOG" 2>/dev/null | grep -oE '[0-9]+(\.[0-9]+)?%' | tail -n 1 | tr -d '%')
+                  if [ -n "$pct" ]; then
+                    local step=$(awk "BEGIN {printf \"%d\", int($pct / 5)}")
+                    if (( step > last_step )); then
+                      last_step=$step
+                      local bar_line=$(python3 -c "pct=max(0.0,min(100.0,float('$pct'))); f=int(round(24*pct/100.0)); bar='█'*f+'░'*(24-f); mb=($UPLOAD_SIZE_MB*pct)/100.0; el=max(1,$(date +%s)-$UPLOAD_START_TIME); print(f'  📤 [Upload Ep $ep] [{bar}] {pct:5.1f}% | {mb:.0f}/$UPLOAD_SIZE_MB MB | {mb/el:.1f} MB/s')" 2>/dev/null || echo "  📤 [Upload Ep $ep] ${pct}% (${UPLOAD_SIZE_MB} MB)")
+                      echo "$bar_line"
+                    fi
                   fi
                 fi
               done

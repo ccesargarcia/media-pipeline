@@ -132,6 +132,70 @@ def capturar_stream_episodio(url_episodio: str) -> str:
     return escolhido
 
 
+def _format_bar(pct: float, width: int = 24) -> str:
+    pct_clamped = max(0.0, min(100.0, pct))
+    filled = int(round(width * pct_clamped / 100.0))
+    return "█" * filled + "░" * (width - filled)
+
+
+def _run_ytdlp_with_progress(cmd_ytdlp: list) -> int:
+    is_tty = sys.stdout.isatty() and os.environ.get("GITHUB_ACTIONS") != "true"
+    proc = subprocess.Popen(
+        cmd_ytdlp,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,
+        errors="replace",
+    )
+
+    last_step = -1
+    last_print_time = 0.0
+    re_prog = re.compile(
+        r"\[download\]\s+(\d+(?:\.\d+)?)%\s+of\s+~?\s*(\S+)\s+at\s+(\S+)\s+ETA\s+(\S+)(?:\s+\(frag\s+(\d+/\d+)\))?"
+    )
+
+    assert proc.stdout is not None
+    for raw_line in proc.stdout:
+        line = raw_line.strip()
+        if not line:
+            continue
+
+        m = re_prog.search(line)
+        if m:
+            pct = float(m.group(1))
+            total = m.group(2)
+            speed = m.group(3)
+            eta = m.group(4)
+            frag = f" (frag {m.group(5)})" if m.group(5) else ""
+            bar = _format_bar(pct)
+            msg = f"  📥 [{bar}] {pct:5.1f}% | {total} | {speed} | ETA {eta}{frag}"
+
+            if is_tty:
+                sys.stdout.write(f"\r{msg}")
+                sys.stdout.flush()
+            else:
+                step = int(pct // 5)
+                now = time.monotonic()
+                if step > last_step or (pct >= 100.0 and last_step < 20) or (now - last_print_time >= 20.0):
+                    last_step = step
+                    last_print_time = now
+                    print(msg, flush=True)
+            continue
+
+        # Mantém mensagens importantes (erros, remux, destino), oculta ruído repetitivo de fragmentos
+        if line.startswith("[download] Destination:") or line.startswith("[Merger]") or line.startswith("[Fixup") or line.startswith("ERROR:") or line.startswith("WARNING:"):
+            if is_tty:
+                sys.stdout.write("\n")
+            print(f"  {line}", flush=True)
+
+    if is_tty:
+        sys.stdout.write("\n")
+        sys.stdout.flush()
+
+    return proc.wait()
+
+
 def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: str = "auto"):
     import urllib.parse
     parsed = urllib.parse.urlparse(stream_url)
@@ -146,6 +210,7 @@ def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: s
         cmd_ytdlp = [
             "yt-dlp",
             "--no-check-certificates",
+            "--newline",
             "--concurrent-fragments", "8",
             "--add-header", f"Referer: {stream_origin}/",
             "--add-header", f"Origin: {stream_origin}",
@@ -154,8 +219,8 @@ def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: s
             "-o", output_path,
             stream_url,
         ]
-        res = subprocess.run(cmd_ytdlp)
-        if res.returncode == 0 and os.path.exists(output_path) and os.path.getsize(output_path) > 100 * 1024 * 1024:
+        returncode = _run_ytdlp_with_progress(cmd_ytdlp)
+        if returncode == 0 and os.path.exists(output_path) and os.path.getsize(output_path) > 100 * 1024 * 1024:
             print(f"==> Download concluído com sucesso via yt-dlp: {output_path} ({os.path.getsize(output_path)} bytes)", flush=True)
             return
         print("==> Aviso: yt-dlp não concluiu ou arquivo incompleto. Alternando para FFmpeg como fallback...", flush=True)
@@ -172,7 +237,8 @@ def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: s
         "-hide_banner",
         "-loglevel",
         "warning",
-        "-stats",
+        "-nostats",
+        "-progress", "pipe:1",
         "-reconnect", "1",
         "-reconnect_streamed", "1",
         "-reconnect_delay_max", "5",
@@ -187,9 +253,28 @@ def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: s
         "-y",
         output_path,
     ]
-    res = subprocess.run(cmd_ffmpeg)
-    if res.returncode != 0:
-        raise RuntimeError(f"FFmpeg falhou ao baixar o stream (código {res.returncode})")
+    proc = subprocess.Popen(cmd_ffmpeg, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1, errors="replace")
+    last_ff_time = 0.0
+    out_time = "00:00:00"
+    total_bytes = 0
+    assert proc.stdout is not None
+    for raw_line in proc.stdout:
+        line = raw_line.strip()
+        if line.startswith("out_time="):
+            out_time = line.split("=", 1)[1].split(".")[0]
+        elif line.startswith("total_size="):
+            try:
+                total_bytes = int(line.split("=", 1)[1])
+            except ValueError:
+                pass
+        elif line == "progress=continue" or line == "progress=end":
+            now = time.monotonic()
+            if line == "progress=end" or now - last_ff_time >= 15.0:
+                last_ff_time = now
+                mb = total_bytes / (1024 * 1024)
+                print(f"  📥 [FFmpeg] Tempo: {out_time} | Baixado: {mb:.1f} MB", flush=True)
+    if proc.wait() != 0:
+        raise RuntimeError(f"FFmpeg falhou ao baixar o stream (código {proc.returncode})")
     print(f"==> Download concluído com sucesso via FFmpeg: {output_path} ({os.path.getsize(output_path)} bytes)", flush=True)
 
 
