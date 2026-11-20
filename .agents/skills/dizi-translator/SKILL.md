@@ -344,7 +344,7 @@ Para atingir qualidade nível estúdio sem falhas de gênero, todo episódio dev
 
 ### D. Uso no Codex CLI (`codex-cli`)
 No Codex CLI, execute o mesmo pipeline de 2 passagens usando o script auxiliar `/data/data/com.termux/files/home/media-pipeline/workflows/uzak_cli.py`:
-1. **Preparar 4 chunks com contexto anterior:**
+1. **Preparar 4 chunks com contexto anterior (busca automática: backup local → FTP → download automático no SubtitleCat priorizando `setwillow6a`/`sebeder.org`):**
    ```bash
    python3 /data/data/com.termux/files/home/media-pipeline/workflows/uzak_cli.py prepare <EP> --season "Segunda Temporada"
    ```

@@ -23,71 +23,37 @@ STEM = f"Uzak_Sehir_-_Episode_{ep:02d}"
 EN_SRT = WORK_BASE / f"{STEM}.en.srt"
 
 # ==============================================================================
-# FASE 1: PREPARAÇÃO & FATIAMENTO COM OVERLAP DE CONTEXTO
+# FASE 1: PREPARAÇÃO & FATIAMENTO COM OVERLAP DE CONTEXTO (LOCAL -> FTP -> SUBTITLECAT)
 # ==============================================================================
 phase(f"Fase 1 — Preparação Ep {ep}")
 
-if not EN_SRT.exists():
-    candidates = [
-        Path(f"/data/data/com.termux/files/home/.gemini/antigravity-cli/brain/{CONVERSATION_ID}/scratch/en_backup/{STEM}.en.srt"),
-        MEDIA_DIR / "legendas_prontas" / f"{STEM}.en.srt",
-    ]
-    found = next((p for p in candidates if p.exists()), None)
-    if found:
-        shutil.copy2(found, EN_SRT)
-        log(f"Legenda oficial copiada de: {found}")
-    else:
-        log(f"Baixando {STEM}.en.srt do FTP...")
-        ftp = ftplib.FTP("192.168.0.1", timeout=15)
-        ftp.login("admin", "63274c0954")
-        ftp.cwd(f"/G/Series/Longe demais - {season}")
-        with open(EN_SRT, "wb") as fp:
-            ftp.retrbinary(f"RETR {STEM}.en.srt", fp.write)
-        ftp.quit()
-        log(f"Baixado do FTP com sucesso: {EN_SRT}")
+prep_out = subprocess.run(
+    ["python3", str(MEDIA_DIR / "workflows" / "uzak_cli.py"), "prepare", str(ep), "--season", season],
+    capture_output=True,
+    text=True,
+    check=True,
+)
+log(prep_out.stdout.strip())
 
 raw_blocks = [b.strip() for b in EN_SRT.read_text(encoding="utf-8-sig").strip().split("\n\n") if b.strip()]
 total_blocks = len(raw_blocks)
 chunk_size = math.ceil(total_blocks / 4)
-log(f"Total de blocos em {STEM}.en.srt: {total_blocks} (4 chunks de ~{chunk_size} blocos)")
 
 chunks_meta = []
 for cid in range(1, 5):
-    start_idx = (cid - 1) * chunk_size
-    end_idx = min(total_blocks, cid * chunk_size)
-    if start_idx >= total_blocks:
+    chunk_en_path = WORK_BASE / f"chunk{cid}.en.srt"
+    if not chunk_en_path.exists():
         break
-    chunk_blocks = raw_blocks[start_idx:end_idx]
+    chunk_blocks = [b.strip() for b in chunk_en_path.read_text(encoding="utf-8-sig").strip().split("\n\n") if b.strip()]
     first_id = int(chunk_blocks[0].splitlines()[0])
     last_id = int(chunk_blocks[-1].splitlines()[0])
-
-    chunk_en_path = WORK_BASE / f"chunk{cid}.en.srt"
-    chunk_en_path.write_text("\n\n".join(chunk_blocks) + "\n", encoding="utf-8")
-
-    # Compacto com contexto das 5 falas anteriores (para fronteiras de cena)
-    compact_lines = []
-    if start_idx > 0:
-        prev_ctx = raw_blocks[max(0, start_idx - 5):start_idx]
-        compact_lines.append("=== CONTEXTO ANTERIOR (APENAS REFERÊNCIA — NÃO TRADUZIR) ===")
-        for pb in prev_ctx:
-            pl = pb.splitlines()
-            compact_lines.append(f"[CTX #{pl[0]}]: {' | '.join(pl[2:])}")
-        compact_lines.append("=== INÍCIO DO CHUNK PARA TRADUZIR ===")
-
-    for b in chunk_blocks:
-        bl = b.splitlines()
-        compact_lines.append(f"{bl[0]}: {' | '.join(bl[2:])}")
-
-    compact_path = WORK_BASE / f"chunk{cid}_compact.txt"
-    compact_path.write_text("\n".join(compact_lines) + "\n", encoding="utf-8")
-
     chunks_meta.append({
         "cid": cid,
         "first_id": first_id,
         "last_id": last_id,
         "count": len(chunk_blocks),
         "en_path": str(chunk_en_path),
-        "compact_path": str(compact_path),
+        "compact_path": str(WORK_BASE / f"chunk{cid}_compact.txt"),
         "pt_path": str(WORK_BASE / f"chunk{cid}.pt-BR.srt"),
         "build_path": str(WORK_BASE / f"build_chunk{cid}.py"),
         "review_path": str(WORK_BASE / f"review_chunk{cid}.txt"),

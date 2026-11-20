@@ -12,15 +12,69 @@ import argparse
 import ftplib
 import json
 import math
+import re
 import shutil
 import subprocess
 import sys
+import urllib.parse
+import urllib.request
 from pathlib import Path
 
 MEDIA_DIR = Path("/data/data/com.termux/files/home/media-pipeline")
 FTP_HOST = "192.168.0.1"
 FTP_USER = "admin"
 FTP_PASS = "63274c0954"
+
+
+def fetch_en_srt_subtitlecat(ep: int):
+    """Busca e baixa automaticamente a melhor legenda .en.srt no SubtitleCat (prioriza setwillow6a/sebeder)."""
+    queries = [f"Uzak+Sehir+{ep}", f"Uzak+Sehir+{ep}.+Bolum"]
+    candidate_pages = []
+    seen = set()
+    for q in queries:
+        url = f"https://www.subtitlecat.com/index.php?search={q}"
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            html = urllib.request.urlopen(req, timeout=15).read().decode("utf-8", errors="ignore")
+        except Exception:
+            continue
+        for href, title in re.findall(r'href="(subs/[^"]+)"[^>]*>([^<]+)<', html):
+            if href in seen:
+                continue
+            if re.search(rf"(?<!\d){ep}(?!\d)", title) and "uzak" in title.lower():
+                seen.add(href)
+                # Evita priorizar auto-generated se houver humana
+                is_auto = "auto-generated" in title.lower()
+                candidate_pages.append((is_auto, title, "https://www.subtitlecat.com/" + href))
+
+    candidate_pages.sort(key=lambda x: x[0])
+    best = None
+    for is_auto, title, page_url in candidate_pages:
+        try:
+            req = urllib.request.Request(page_url, headers={"User-Agent": "Mozilla/5.0"})
+            html = urllib.request.urlopen(req, timeout=15).read().decode("utf-8", errors="ignore")
+        except Exception:
+            continue
+        srts = re.findall(r'href="([^"]+\.srt)"', html)
+        en_srts = [s for s in srts if s.lower().endswith("-en.srt") or s.lower().endswith("en.srt")]
+        for s in en_srts:
+            dl_url = "https://www.subtitlecat.com" + urllib.parse.quote(s) if s.startswith("/") else s
+            try:
+                data = urllib.request.urlopen(
+                    urllib.request.Request(dl_url, headers={"User-Agent": "Mozilla/5.0"}), timeout=20
+                ).read().decode("utf-8-sig", errors="replace")
+                blocks = [b.strip() for b in data.strip().replace("\r\n", "\n").split("\n\n") if b.strip()]
+                if len(blocks) < 500:
+                    continue
+                is_official = ("setwillow6a" in data.lower()) or ("sebeder.org" in data.lower())
+                clean_text = "\n\n".join(blocks) + "\n"
+                if is_official:
+                    return clean_text, s, len(blocks), True
+                if best is None or (not is_auto and best[3] == "auto") or len(blocks) > best[2]:
+                    best = (clean_text, s, len(blocks), "auto" if is_auto else "human")
+            except Exception:
+                continue
+    return best
 
 
 def get_work_dir(ep: int) -> Path:
@@ -61,10 +115,26 @@ def cmd_prepare(args):
             except ftplib.error_perm as exc:
                 if tmp_path.exists():
                     tmp_path.unlink()
-                avail = sorted([f for f in ftp.nlst() if f.endswith(".en.srt")])
                 ftp.quit()
-                sys.exit(f"Erro: {stem}.en.srt não encontrado no FTP ({exc}).\nDisponíveis no FTP: {avail}")
-            ftp.quit()
+                print(f"[AVISO] {stem}.en.srt não está no FTP ({exc}). Buscando automaticamente no SubtitleCat...")
+                fetched = fetch_en_srt_subtitlecat(ep)
+                if not fetched:
+                    sys.exit(f"Erro: {stem}.en.srt não encontrado no FTP nem no SubtitleCat.")
+                clean_text, src_path, blk_count, quality = fetched
+                en_srt.write_text(clean_text, encoding="utf-8")
+                print(f"[WEB] Baixado do SubtitleCat: {src_path} ({blk_count} blocos, tipo={quality})")
+                try:
+                    ftp_up = ftplib.FTP(FTP_HOST, timeout=15)
+                    ftp_up.login(FTP_USER, FTP_PASS)
+                    ftp_up.cwd(f"/G/Series/Longe demais - {season}")
+                    with open(en_srt, "rb") as fp:
+                        ftp_up.storbinary(f"STOR {stem}.en.srt", fp)
+                    ftp_up.quit()
+                    print(f"[FTP] Backup de {stem}.en.srt salvo no FTP.")
+                except Exception as up_exc:
+                    print(f"[AVISO] Não foi possível salvar backup no FTP: {up_exc}")
+            else:
+                ftp.quit()
 
     raw_blocks = [b.strip() for b in en_srt.read_text(encoding="utf-8-sig").strip().split("\n\n") if b.strip()]
     total = len(raw_blocks)
