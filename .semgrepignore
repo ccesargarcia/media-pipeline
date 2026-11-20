@@ -1,0 +1,31 @@
+# Artefatos de mídia, legendas e diretórios temporários de trabalho
+*.srt
+*.ass
+*.vtt
+*.mp4
+*.mkv
+*.aac
+*.m4a
+*.mp3
+*.wav
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gguf
+*.m8
+
+# Pastas de dados/resultados locais
+audit_episodes/
+legendas_prontas/
+work_uzak_sehir/
+benchmark/outputs/
+qwen3_test/
+ep*_work/
+ep*_fixed_work/
+ep*_subagent*/
+ep*_q5_work/
+ep*_new_pipeline/
+ep*_test/
+__pycache__/
+.st/
