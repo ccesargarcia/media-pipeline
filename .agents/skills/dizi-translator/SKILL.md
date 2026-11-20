@@ -49,6 +49,11 @@ A série se passa em Mardin e gira em torno da rivalidade entre as famílias **A
 - **Timestamps Inalterados:** Preserve os tempos originais (`00:xx:xx,xxx --> 00:xx:xx,xxx`) exatamente idênticos, sem adiantar nem atrasar um milissegundo sequer.
 - **Proibido Fundir ou Dividir Blocos:** Cada fala original turca corresponde a exatamente uma fala traduzida (paridade 1:1) com o mesmo ID, garantindo que o diálogo entre e saia sincronizado perfeitamente com a boca do ator.
 - **Concisão de Legenda:** Como diálogos em turco podem ser breves, mantenha a tradução em português direta e enxuta, evitando frases excessivamente longas que ultrapassem o tempo de tela.
+- **PT-BR Autêntico e Rigoroso (Proibição Total de PT-PT):**
+  * **"miúdo / miúda"**: JAMAIS usar. Use *criança*, *menino(a)*, *pequeno(a)*, *garoto(a)* ou *pirralho*.
+  * **"rapariga"**: JAMAIS usar. Use *moça*, *garota* ou *jovem*.
+  * **Construções "a + infinitivo"**: NUNCA usar *"estou a ver"*, *"está a falar"*. Use SEMPRE o gerúndio brasileiro (*"estou vendo"*, *"está falando"*).
+  * **Vocabulário de Portugal**: NUNCA usar *ecrã* (tela), *autocarro* (ônibus), *fato* (terno).
 
 ### B. Preservação Rigorosa de Gênero Gramatical
 - O turco usa pronomes de terceira pessoa neutros (*"o"*, *"onun"*, *"ona"*, *"ondan"*).
@@ -284,3 +289,55 @@ Nunca manter termos turcos puros nem inverter posições em português:
 ### G. Erros Fonéticos de Áudio Ruidoso (Whisper ASR)
 - **"Bir sus!" vs "Bir kuş":** Em discussões tensas, a expressão *"Bir sus!"* ("Cala a boca! / Fica quieto!") é frequentemente alucinada pelo ASR como *"Bir kuş"* ("um pássaro"). Se o contexto for uma discussão entre irmãos ou parentes, traduza como *"Fica quieto!"* ou *"Cala a boca!"*.
 - **"Hayrıdır":** Não é nome próprio nem saudação genérica. Significa: *"O que houve?"* ou *"Algum problema?"*.
+
+---
+
+## 10. Bíblia Atualizada do Elenco (T1–T3) e Armadilhas Turco → Inglês → PT-BR
+
+### A. Matriz Completa de Gênero e Parentesco (Referência Rápida)
+| Personagem | Gênero | Papel / Relações Críticas |
+| :--- | :---: | :--- |
+| **Alya Albora** | **F** | Médica, mãe de Deniz/Cihan, ex-esposa de Boran, ama Cihan |
+| **Sadakat Albora** | **F** | Matriarca, mãe de Boran, Cihan, Nare e Kaya; única "Vovó" de Deniz |
+| **Nare Albora** | **F** | Irmã mais velha de Kaya, irmã de Cihan/Boran; ama Şahin |
+| **Zerrin Albora Baybars** | **F** | Filha de Ecmel e Fidan, irmã de Şahin; casada com Demir, ama Kaya |
+| **Fidan Albora** | **F** | Esposa de Ecmel, mãe de Şahin e Zerrin |
+| **Ümmü Sancak** | **F** | Esposa de Muzaffer, mãe de Pakize; funcionária da mansão Albora |
+| **Pakize Sancak** | **F** | Filha de Muzaffer e Ümmü; interesse amoroso de Kadir |
+| **İpek** | **F** | Noiva/pretendente de Kaya |
+| **Bebê da Zerrin** | **F** | Menina (filha recém-nascida prematura de Zerrin) |
+| **Cihan Albora** | **M** | Chefe da família Albora, ama Alya, figura paterna de Deniz |
+| **Boran Albora** | **M** | Irmão de Cihan/Kaya/Nare (filho biológico de Ecmel), recuperado do coma, pai biológico de Deniz |
+| **Kaya Albora** | **M** | Irmão **mais novo** de Cihan, Boran e Nare (NUNCA chamar de "irmão mais velho" da Nare) |
+| **Deniz / Cihan (menino)** | **M** | Filho pequeno de Alya e Boran (chamado de "Deniz" por Alya/Boran e "Cihan" por Cihan/Sadakat) |
+| **Şahin Albora** | **M** | Filho de Ecmel e Fidan, irmão de Zerrin, primo de Cihan |
+| **Ecmel Albora** | **M** | Pai de Şahin, Zerrin e Boran; tio rival de Cihan |
+| **Demir Baybars** | **M** | Filho de Nadim, marido de Zerrin, arqui-inimigo de Cihan |
+| **Nadim Baybars** | **M** | Pai de Demir |
+| **Muzaffer ("Velho" / "Old Man")** | **M** | Braço direito de Cihan, pai de Pakize, marido de Ümmü |
+| **Kadir** | **M** | Segurança leal de Cihan, apaixonado por Pakize |
+| **Vurgun** | **M** | Funcionário/capanga ligado à mansão (tem uma filha mulher) |
+| **Dr. Yalçın** | **M** | Médico-chefe do hospital, amigo de Alya/Nare |
+| **Erol** | **M** | Advogado |
+| **Beyto / Mahmut / Kartal / Enver** | **M** | Personagens masculinos secundários/recorrentes |
+
+### B. Armadilhas Clássicas do Inglês (Closed Captions `setwillow6a`) para PT-BR
+1. **Rastreio Obrigatório `[Falante → Ouvinte]`:** Em inglês, expressões como *Thank you*, *Are you ready?*, *Be ready*, *Don't be ridiculous*, *You're alone*, *You're crazy*, *Take care* não têm marca de gênero. Antes de escrever `obrigado/obrigada`, `pronto/pronta`, `mesmo/mesma`, `ridículo/ridícula`, `sozinho/sozinha`, confirme quem está falando e com quem.
+2. **Plural Misto:** Homem + mulher (ex.: Kaya e Nare) em português é **SEMPRE masculino plural** (`vocês dois`, `quietos`, `eles`). Nunca usar feminino plural (`vocês duas`) quando houver um homem no grupo.
+3. **Vocativos Afetivos Invertidos no Turco:**
+   - *"annem"* (mãe falando com filho/filha) → **"meu filho" / "minha filha" / "meu amor"** (JAMAIS *"minha mãe"*).
+   - *"babaannem"* (avó Sadakat falando com Deniz — traduzido no inglês como *"grandma"*) → **"meu netinho" / "meu amor"** (JAMAIS *"vovó, vamos!"* dito pela própria avó!).
+4. **Calques Turcos via Inglês:**
+   - *"with Zerrin, we're going..."* (`Zerrin'le gidiyoruz`) → **"eu e a Zerrin vamos..."** (significa 2 pessoas, não 3).
+   - *"Al işte!"* (no inglês: *"Great, take him"* / *"There you go"*) → **"Ótimo, era só o que faltava."**
+   - *"bareheaded"* → **"de cabeça descoberta"** (NUNCA *"de cabeça erguida"*).
+   - *"gave life to my sons"* → **"deu vida aos meus filhos"** (NUNCA *"deu a vida pelos meus filhos"*).
+   - *"with your lady"* (quando não são casados, ex.: Kaya e Zerrin) → **"com a sua dama"** / **"com a sua amada"** (NUNCA *"com a sua esposa"*).
+   - *"Salaam Alaikum"* → **"A paz esteja com vocês."**
+
+### C. Pipeline Obrigatório em 2 Passagens (Workflow Especializado)
+Para atingir qualidade nível estúdio sem falhas de gênero, todo episódio deve rodar via workflow especializado:
+- **Script:** `/data/data/com.termux/files/home/media-pipeline/workflows/traduzir_uzak_sehir.py`
+- **Passagem 1 (Tradução Paralela):** 4 agentes `uzak-sehir-translator` traduzem os 4 chunks em paralelo com sobreposição de contexto das falas anteriores.
+- **Passagem 2 (Auditoria Paralela de Gênero & Precisão):** 4 agentes `uzak-sehir-reviewer` leem `EN + PT` lado a lado cena a cena, caçam falhas de gênero/parentesco/calques e geram `fixes_chunkN.json`.
+- **Passagem 3 (Consolidação + Linter + Distribuição):** Mescla correções, valida com `lint_legendas.py` (0 erros), gera as 4 variantes via `gerar_versoes_legendas.py` e envia para Celular, FTP e Fire TV (`emulator-5554` via `a70`).
