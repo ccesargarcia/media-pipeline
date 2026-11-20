@@ -305,7 +305,7 @@ Nunca manter termos turcos puros nem inverter posições em português:
 | **Ümmü Sancak** | **F** | Esposa de Muzaffer, mãe de Pakize; funcionária da mansão Albora |
 | **Pakize Sancak** | **F** | Filha de Muzaffer e Ümmü; interesse amoroso de Kadir |
 | **İpek** | **F** | Noiva/pretendente de Kaya |
-| **Bebê da Zerrin** | **F** | Menina (filha recém-nascida prematura de Zerrin) |
+| **Bebê da Zerrin (Şimal)** | **F** | Menina (filha recém-nascida prematura de Zerrin) |
 | **Cihan Albora** | **M** | Chefe da família Albora, ama Alya, figura paterna de Deniz |
 | **Boran Albora** | **M** | Irmão de Cihan/Kaya/Nare (filho biológico de Ecmel), recuperado do coma, pai biológico de Deniz |
 | **Kaya Albora** | **M** | Irmão **mais novo** de Cihan, Boran e Nare (NUNCA chamar de "irmão mais velho" da Nare) |
@@ -335,9 +335,27 @@ Nunca manter termos turcos puros nem inverter posições em português:
    - *"with your lady"* (quando não são casados, ex.: Kaya e Zerrin) → **"com a sua dama"** / **"com a sua amada"** (NUNCA *"com a sua esposa"*).
    - *"Salaam Alaikum"* → **"A paz esteja com vocês."**
 
-### C. Pipeline Obrigatório em 2 Passagens (Workflow Especializado)
+### C. Pipeline Obrigatório em 2 Passagens (Antigravity Workflow)
 Para atingir qualidade nível estúdio sem falhas de gênero, todo episódio deve rodar via workflow especializado:
 - **Script:** `/data/data/com.termux/files/home/media-pipeline/workflows/traduzir_uzak_sehir.py`
 - **Passagem 1 (Tradução Paralela):** 4 agentes `uzak-sehir-translator` traduzem os 4 chunks em paralelo com sobreposição de contexto das falas anteriores.
 - **Passagem 2 (Auditoria Paralela de Gênero & Precisão):** 4 agentes `uzak-sehir-reviewer` leem `EN + PT` lado a lado cena a cena, caçam falhas de gênero/parentesco/calques e geram `fixes_chunkN.json`.
 - **Passagem 3 (Consolidação + Linter + Distribuição):** Mescla correções, valida com `lint_legendas.py` (0 erros), gera as 4 variantes via `gerar_versoes_legendas.py` e envia para Celular, FTP e Fire TV (`emulator-5554` via `a70`).
+
+### D. Uso no Codex CLI (`codex-cli`)
+No Codex CLI, execute o mesmo pipeline de 2 passagens usando o script auxiliar `/data/data/com.termux/files/home/media-pipeline/workflows/uzak_cli.py`:
+1. **Preparar 4 chunks com contexto anterior:**
+   ```bash
+   python3 /data/data/com.termux/files/home/media-pipeline/workflows/uzak_cli.py prepare <EP> --season "Segunda Temporada"
+   ```
+2. **Passagem 1 (Tradução Paralela):** lance 4 subagentes em paralelo (ou traduza chunk 1..4) lendo `work_uzak_sehir/ep<EP>/chunkN_compact.txt` e gerando `chunkN.pt-BR.srt` com os timestamps exatos de `chunkN.en.srt` e todas as regras desta skill.
+3. **Gerar comparativo EN vs PT para Revisão QA:**
+   ```bash
+   python3 /data/data/com.termux/files/home/media-pipeline/workflows/uzak_cli.py make-review <EP>
+   ```
+4. **Passagem 2 (Revisão QA de Gênero & Sentido):** lance 4 subagentes revisores lendo `review_chunkN.txt` lado a lado e salvando apenas os blocos corrigidos em `fixes_chunkN.json` (`{"123": "texto\ncorrigido"}`).
+5. **Consolidar, validar linter, gerar `.ass` e distribuir (Celular + FTP + Fire TV):**
+   ```bash
+   python3 /data/data/com.termux/files/home/media-pipeline/workflows/uzak_cli.py finalize <EP> --season "Segunda Temporada"
+   ```
+   *(Adicione `--no-distribute` se quiser apenas gerar e validar localmente sem subir para FTP/Fire TV.)*
