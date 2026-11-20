@@ -36,11 +36,14 @@ def cmd_prepare(args):
     stem = f"Uzak_Sehir_-_Episode_{ep:02d}"
     en_srt = work / f"{stem}.en.srt"
 
+    if en_srt.exists() and en_srt.stat().st_size == 0:
+        en_srt.unlink()
+
     if not en_srt.exists():
         # Procura em backups locais antes de baixar do FTP
         candidates = list(Path("/data/data/com.termux/files/home/.gemini/antigravity-cli/brain").glob(f"*/scratch/en_backup/{stem}.en.srt"))
         candidates.append(MEDIA_DIR / "legendas_prontas" / f"{stem}.en.srt")
-        found = next((p for p in candidates if p.exists()), None)
+        found = next((p for p in candidates if p.exists() and p.stat().st_size > 0), None)
         if found:
             shutil.copy2(found, en_srt)
             print(f"[OK] Copiado de: {found}")
@@ -49,10 +52,19 @@ def cmd_prepare(args):
             ftp = ftplib.FTP(FTP_HOST, timeout=15)
             ftp.login(FTP_USER, FTP_PASS)
             ftp.cwd(f"/G/Series/Longe demais - {season}")
-            with open(en_srt, "wb") as fp:
-                ftp.retrbinary(f"RETR {stem}.en.srt", fp.write)
+            try:
+                tmp_path = en_srt.with_suffix(".tmp")
+                with open(tmp_path, "wb") as fp:
+                    ftp.retrbinary(f"RETR {stem}.en.srt", fp.write)
+                tmp_path.replace(en_srt)
+                print(f"[OK] Baixado do FTP: {en_srt}")
+            except ftplib.error_perm as exc:
+                if tmp_path.exists():
+                    tmp_path.unlink()
+                avail = sorted([f for f in ftp.nlst() if f.endswith(".en.srt")])
+                ftp.quit()
+                sys.exit(f"Erro: {stem}.en.srt não encontrado no FTP ({exc}).\nDisponíveis no FTP: {avail}")
             ftp.quit()
-            print(f"[OK] Baixado do FTP: {en_srt}")
 
     raw_blocks = [b.strip() for b in en_srt.read_text(encoding="utf-8-sig").strip().split("\n\n") if b.strip()]
     total = len(raw_blocks)
