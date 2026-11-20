@@ -217,12 +217,14 @@ jobs:
 
       - name: Compilar whisper.cpp (Otimizado OpenMP) e Baixar Modelos
         if: steps.cache-whisper.outputs.cache-hit != 'true'
+        env:
+          WHISPER_MODEL: ${{ inputs.whisper_model }}
         run: |
           git clone --depth 1 https://github.com/ggerganov/whisper.cpp.git
           cd whisper.cpp
           cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_OPENMP=ON -DGGML_NATIVE=OFF -DGGML_AVX2=ON -DGGML_FMA=ON -DGGML_F16C=ON
           cmake --build build --config Release -j$(nproc)
-          sh ./models/download-ggml-model.sh ${{ inputs.whisper_model }}
+          sh ./models/download-ggml-model.sh "$WHISPER_MODEL"
           sh ./models/download-vad-model.sh silero-v6.2.0
 
       - name: Baixar Parte de Áudio
@@ -234,21 +236,23 @@ jobs:
       - name: Transcrever Parte ${{ matrix.part }} com Whisper ${{ inputs.whisper_model }}
         env:
           LANG_INPUT: ${{ inputs.lang }}
+          WHISPER_MODEL: ${{ inputs.whisper_model }}
+          MATRIX_PART: ${{ matrix.part }}
         run: |
           NTHREADS=$(nproc)
-          echo "Transcrevendo parte ${{ matrix.part }} com $NTHREADS núcleos usando ${{ inputs.whisper_model }}..."
+          echo "Transcrevendo parte $MATRIX_PART com $NTHREADS núcleos usando $WHISPER_MODEL..."
           ./whisper.cpp/build/bin/whisper-cli \
-            -m ./whisper.cpp/models/ggml-${{ inputs.whisper_model }}.bin \
+            -m "./whisper.cpp/models/ggml-${WHISPER_MODEL}.bin" \
             -vm ./whisper.cpp/models/ggml-silero-v6.2.0.bin \
             --vad \
-            -f "audio_parts/part_${{ matrix.part }}.wav" \
+            -f "audio_parts/part_${MATRIX_PART}.wav" \
             -l "$LANG_INPUT" \
             -t $NTHREADS \
             -sns \
             -mc 0 \
             --prompt "Uzak Şehir, Cihan, Alya, Dona Sadakat, Boran, Kaya, İpek, Şahin, Nare, Demir, Ecmel, Zerrin, Hamada, Fidan, Mardin" \
             -osrt \
-            -of "part_${{ matrix.part }}"
+            -of "part_${MATRIX_PART}"
 
       - name: Salvar Transcrição Parcial
         uses: actions/upload-artifact@v4
@@ -637,6 +641,7 @@ jobs:
           PYTHONUNBUFFERED: "1"
           VIDEO_NAME_INPUT: ${{ inputs.video_filename }}
           SEASON_INPUT: ${{ inputs.season }}
+          TRANSLATOR_INPUT: ${{ inputs.translator }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           GEMINI_TRANSLATE_KEYS: ${{ secrets.GEMINI_TRANSLATE_KEYS }}
@@ -648,13 +653,13 @@ jobs:
           FTP_BASE_DIR="/G/Series/Longe demais - $SEASON_INPUT"
           echo "FTP_BASE_DIR=$FTP_BASE_DIR" >> "$GITHUB_ENV"
 
-          if [ "${{ inputs.translator }}" = "groq" ]; then
+          if [ "$TRANSLATOR_INPUT" = "groq" ]; then
             echo "Traduzindo via Groq..."
             python3 traduz_groq.py input.srt "traducao_raw.srt"
-          elif [ "${{ inputs.translator }}" = "huggingface" ]; then
+          elif [ "$TRANSLATOR_INPUT" = "huggingface" ]; then
             echo "Traduzindo via Hugging Face (Llama-3.3-70B-Instruct)..."
             python3 traduz_hf.py input.srt "traducao_raw.srt"
-          elif [ "${{ inputs.translator }}" = "openrouter" ]; then
+          elif [ "$TRANSLATOR_INPUT" = "openrouter" ]; then
             echo "Traduzindo via OpenRouter (Llama-3.3-70B-Instruct)..."
             python3 traduz_openrouter.py input.srt "traducao_raw.srt"
           else

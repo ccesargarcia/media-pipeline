@@ -66,8 +66,10 @@ jobs:
           python-version: '3.11'
 
       - name: Configurar Parâmetros Específicos do Modelo
+        env:
+          MODEL_INPUT: ${{ inputs.model }}
         run: |
-          case "${{ inputs.model }}" in
+          case "$MODEL_INPUT" in
             "gemma-3-4b")
               echo "MODEL_FILE=models/gemma-3-4b-it-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_URL=https://huggingface.co/ggml-org/gemma-3-4b-it-GGUF/resolve/main/gemma-3-4b-it-Q4_K_M.gguf?download=true" >> "$GITHUB_ENV"
@@ -146,12 +148,14 @@ jobs:
           key: llama-build-ubuntu-cpu-b12034-v1
 
       - name: Baixar Modelo e Compilar llama.cpp
+        env:
+          MODEL_INPUT: ${{ inputs.model }}
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake build-essential
           mkdir -p models
           if [ ! -s "$MODEL_FILE" ]; then
-            echo "Baixando modelo ${{ inputs.model }} de $MODEL_URL..."
+            echo "Baixando modelo $MODEL_INPUT de $MODEL_URL..."
             curl --fail --location --retry 4 --retry-delay 3 "$MODEL_URL" -o "$MODEL_FILE"
           fi
           if [ -n "${MODEL_SHA256:-}" ]; then
@@ -192,8 +196,10 @@ jobs:
           python-version: '3.11'
 
       - name: Configurar Parâmetros Específicos do Modelo
+        env:
+          MODEL_INPUT: ${{ inputs.model }}
         run: |
-          case "${{ inputs.model }}" in
+          case "$MODEL_INPUT" in
             "gemma-3-4b")
               echo "MODEL_FILE=models/gemma-3-4b-it-Q4_K_M.gguf" >> "$GITHUB_ENV"
               echo "MODEL_ALIAS=gemma-3-4b-it-local" >> "$GITHUB_ENV"
@@ -260,6 +266,8 @@ jobs:
           df -h .
 
       - name: Iniciar ${{ inputs.model }} neste runner
+        env:
+          MODEL_INPUT: ${{ inputs.model }}
         run: |
           if [ ! -s "$MODEL_FILE" ] || [ ! -x llama.cpp/build/bin/llama-server ]; then
             echo "Modelo ou llama-server não foi encontrado no cache." >&2
@@ -280,7 +288,7 @@ jobs:
           echo "RSS_SAMPLER_PID=$!" >> "$GITHUB_ENV"
           for attempt in $(seq 1 60); do
             if curl --fail --silent http://127.0.0.1:8080/health >/dev/null; then
-              echo "${{ inputs.model }} pronto (PID $SERVER_PID)."
+              echo "$MODEL_INPUT pronto (PID $SERVER_PID)."
               exit 0
             fi
             if ! kill -0 "$SERVER_PID" 2>/dev/null; then
@@ -290,23 +298,30 @@ jobs:
             fi
             sleep 2
           done
-          echo "Timeout aguardando ${{ inputs.model }}. Log:" >&2
+          echo "Timeout aguardando $MODEL_INPUT. Log:" >&2
           cat llama-server.log >&2
           exit 1
 
       - name: Traduzir shard ${{ matrix.part }} de ${{ inputs.parts }}
+        env:
+          PARTS_INPUT: ${{ inputs.parts }}
+          MATRIX_PART: ${{ matrix.part }}
         run: |
           : "${MODEL_ALIAS:?MODEL_ALIAS não foi configurado}"
-          LOCAL_LLM_MODEL="$MODEL_ALIAS" PYTHONUNBUFFERED=1 python3 traduz_local.py -b 12 --parts "${{ inputs.parts }}" --part-index "${{ matrix.part }}" --partial-json \
-            input.srt "part-${{ matrix.part }}.json"
+          LOCAL_LLM_MODEL="$MODEL_ALIAS" PYTHONUNBUFFERED=1 python3 traduz_local.py -b 12 --parts "$PARTS_INPUT" --part-index "$MATRIX_PART" --partial-json \
+            input.srt "part-${MATRIX_PART}.json"
 
       - name: Registrar métricas do shard
         if: always()
+        env:
+          MODEL_INPUT: ${{ inputs.model }}
+          PARTS_INPUT: ${{ inputs.parts }}
+          MATRIX_PART: ${{ matrix.part }}
         run: |
           {
-            echo "model=${{ inputs.model }}"
-            echo "part=${{ matrix.part }}"
-            echo "parts=${{ inputs.parts }}"
+            echo "model=$MODEL_INPUT"
+            echo "part=$MATRIX_PART"
+            echo "parts=$PARTS_INPUT"
             if [ -n "${PILOT_START_EPOCH:-}" ]; then
               echo "elapsed_seconds=$(( $(date +%s) - PILOT_START_EPOCH ))"
             else
@@ -319,9 +334,9 @@ jobs:
             cat llama-rss-kb.log 2>/dev/null || true
             echo "disk_after_translation:"
             df -h .
-          } > metrics-part-${{ matrix.part }}.txt
+          } > "metrics-part-${MATRIX_PART}.txt"
           if [ -f llama-server.log ]; then
-            cp llama-server.log llama-server-part-${{ matrix.part }}.log
+            cp llama-server.log "llama-server-part-${MATRIX_PART}.log"
           fi
 
       - name: Exibir log do llama-server em caso de falha

@@ -80,12 +80,13 @@ jobs:
       - name: Notificar Sincronização via WhatsApp (Evolution API)
         if: ${{ success() }}
         env:
+          FTP_DIR_INPUT: ${{ inputs.ftp_dir }}
           EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
           EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
           EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
           WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
         run: |
-          MSG="📤 *Legendas Prontas Sincronizadas!*\nTodos os arquivos de 'legendas_prontas/' foram enviados para o FTP (${{ inputs.ftp_dir }})."
+          MSG="📤 *Legendas Prontas Sincronizadas!*\nTodos os arquivos de 'legendas_prontas/' foram enviados para o FTP (${FTP_DIR_INPUT})."
           python3 notificar_whatsapp.py "$MSG" --status success || true
 
       - name: Notificar Falha via WhatsApp (Evolution API)
