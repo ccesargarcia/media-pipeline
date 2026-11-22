@@ -192,6 +192,20 @@ def cmd_make_review(args):
         print(f"[OK] Gerado {out} ({len(en_b)} blocos)")
 
 
+def sanitize_cue_text(text: str) -> str:
+    r"""Normaliza quebras de linha (\N, ' / ') e travessões longos (—) vindos de revisões automáticas."""
+    # Converte \N (sintaxe ASS) em quebra de linha real de SRT
+    text = text.replace(r"\N", "\n")
+    # Converte separador visual ' / ' copiado de review_chunk*.txt em quebra de linha real
+    text = re.sub(r"\s+/\s+", "\n", text)
+    # Normaliza travessão longo (—) em hífen padrão (- )
+    text = re.sub(r"(?m)^—\s*", "- ", text)
+    text = re.sub(r"\s+—\s+", "\n- ", text)
+    # Remove linhas vazias extras dentro do mesmo bloco
+    clean_lines = [l.strip() for l in text.splitlines() if l.strip()]
+    return "\n".join(clean_lines)
+
+
 def cmd_finalize(args):
     ep = args.episode
     season = args.season
@@ -210,6 +224,7 @@ def cmd_finalize(args):
                 all_fixes[int(k)] = v.strip()
 
     final_blocks = []
+    sanitized_count = 0
     for cid in range(1, 5):
         pt_p = work / f"chunk{cid}.pt-BR.srt"
         if not pt_p.exists():
@@ -218,17 +233,18 @@ def cmd_finalize(args):
             lines = b.splitlines()
             idx = int(lines[0])
             timing = lines[1]
-            if idx in all_fixes:
-                final_blocks.append(f"{idx}\n{timing}\n{all_fixes[idx]}")
-            else:
-                final_blocks.append(b)
+            raw_text = all_fixes[idx] if idx in all_fixes else "\n".join(lines[2:])
+            clean_text = sanitize_cue_text(raw_text)
+            if clean_text != raw_text.strip():
+                sanitized_count += 1
+            final_blocks.append(f"{idx}\n{timing}\n{clean_text}")
 
     if len(final_blocks) != total_expected:
         sys.exit(f"Erro de paridade: final={len(final_blocks)} != original={total_expected}")
 
     com_orador = work / f"{stem}.com_orador.pt-BR.srt"
     com_orador.write_text("\n\n".join(final_blocks) + "\n", encoding="utf-8")
-    print(f"[OK] Mesclados {len(final_blocks)} blocos ({len(all_fixes)} correções QA aplicadas).")
+    print(f"[OK] Mesclados {len(final_blocks)} blocos ({len(all_fixes)} correções QA | {sanitized_count} blocos sanitizados).")
 
     subprocess.run(["python3", str(MEDIA_DIR / "gerar_versoes_legendas.py"), str(com_orador), stem, str(work)], check=True)
 
