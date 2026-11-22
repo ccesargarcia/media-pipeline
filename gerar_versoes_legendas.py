@@ -44,6 +44,18 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
 
 
+def html_to_ass_tags(text: str) -> str:
+    """Converte tags HTML de SRT (<i>, <b>, <u>) para override tags válidas do formato ASS."""
+    text = re.sub(r"<\s*i\s*>", r"{\\i1}", text, flags=re.IGNORECASE)
+    text = re.sub(r"<\s*/\s*i\s*>", r"{\\i0}", text, flags=re.IGNORECASE)
+    text = re.sub(r"<\s*b\s*>", r"{\\b1}", text, flags=re.IGNORECASE)
+    text = re.sub(r"<\s*/\s*b\s*>", r"{\\b0}", text, flags=re.IGNORECASE)
+    text = re.sub(r"<\s*u\s*>", r"{\\u1}", text, flags=re.IGNORECASE)
+    text = re.sub(r"<\s*/\s*u\s*>", r"{\\u0}", text, flags=re.IGNORECASE)
+    text = re.sub(r"</?(?:font|span|div|br)[^>]*>", "", text, flags=re.IGNORECASE)
+    return text
+
+
 def srt_to_ass(srt_path: Path, ass_path: Path):
     content = srt_path.read_text(encoding="utf-8-sig", errors="replace").strip()
     blocks = re.split(r"\r?\n\s*\r?\n", content)
@@ -55,7 +67,7 @@ def srt_to_ass(srt_path: Path, ass_path: Path):
             start_s, end_s = lines[1].split("-->")
             start = parse_time(start_s)
             end = parse_time(end_s)
-            text_lines = lines[2:]
+            text_lines = [html_to_ass_tags(l) for l in lines[2:]]
             text_ass = r"\N".join(text_lines)
             ini = srt_time_to_ass(start)
             fim = srt_time_to_ass(end)

@@ -105,7 +105,14 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     for item in parsed:
         ini = srt_time_to_ass(item["start"])
         fim = srt_time_to_ass(item["end"])
-        txt_ass = r"\N".join(l.strip() for l in item["text"].splitlines() if l.strip())
+        txt_raw = r"\N".join(l.strip() for l in item["text"].splitlines() if l.strip())
+        txt_ass = re.sub(r"<\s*i\s*>", r"{\\i1}", txt_raw, flags=re.IGNORECASE)
+        txt_ass = re.sub(r"<\s*/\s*i\s*>", r"{\\i0}", txt_ass, flags=re.IGNORECASE)
+        txt_ass = re.sub(r"<\s*b\s*>", r"{\\b1}", txt_ass, flags=re.IGNORECASE)
+        txt_ass = re.sub(r"<\s*/\s*b\s*>", r"{\\b0}", txt_ass, flags=re.IGNORECASE)
+        txt_ass = re.sub(r"<\s*u\s*>", r"{\\u1}", txt_ass, flags=re.IGNORECASE)
+        txt_ass = re.sub(r"<\s*/\s*u\s*>", r"{\\u0}", txt_ass, flags=re.IGNORECASE)
+        txt_ass = re.sub(r"</?(?:font|span|div|br)[^>]*>", "", txt_ass, flags=re.IGNORECASE)
         ass_events.append(f"Dialogue: 0,{ini},{fim},Default,,0,0,0,,{txt_ass}")
 
     ass_path.write_text(ass_header + "\n".join(ass_events) + "\n", encoding="utf-8")
