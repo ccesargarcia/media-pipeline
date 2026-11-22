@@ -285,17 +285,37 @@ def cmd_finalize(args):
     ftp.quit()
     print(f"[FTP] 4 arquivos enviados para /G/Series/Longe demais - {season}")
 
-    tmp_a70 = f"/data/data/com.termux/files/home/tmp_ep{ep}_push"
-    subprocess.run(["ssh", "a70", f"mkdir -p {tmp_a70}"], check=True)
-    for f in deliverables:
-        subprocess.run(["scp", "-q", str(f), f"a70:{tmp_a70}/{f.name}"], check=True)
-    devs = subprocess.run(["ssh", "a70", "adb devices"], capture_output=True, text=True).stdout
-    target_dev = "emulator-5554" if "emulator-5554" in devs else "192.168.0.218:5555"
-    for f in deliverables:
-        subprocess.run(["ssh", "a70", f"adb -s {target_dev} push {tmp_a70}/{f.name} /sdcard/Download/"], check=False)
-        subprocess.run(["ssh", "a70", f"adb -s {target_dev} push {tmp_a70}/{f.name} /sdcard/Android/data/org.courville.nova/cache/subtitles/"], check=False)
-    subprocess.run(["ssh", "a70", f"rm -rf {tmp_a70}"], check=True)
-    print(f"[FIRE TV] 4 arquivos enviados para {target_dev} (Download + Nova cache)")
+    # 3. Fire TV: tenta ADB direto local (192.168.0.218:5555) primeiro; fallback para ssh a70
+    firetv_addr = "192.168.0.218:5555"
+    pushed_direct = False
+    if shutil.which("adb"):
+        subprocess.run(["adb", "connect", firetv_addr], capture_output=True, text=True, timeout=8)
+        local_devs = subprocess.run(["adb", "devices"], capture_output=True, text=True, timeout=5).stdout
+        if f"{firetv_addr}\tdevice" in local_devs:
+            ok_cnt = 0
+            for f in deliverables:
+                r1 = subprocess.run(["adb", "-s", firetv_addr, "push", str(f), "/sdcard/Download/"], capture_output=True, text=True)
+                r2 = subprocess.run(["adb", "-s", firetv_addr, "push", str(f), "/sdcard/Android/data/org.courville.nova/cache/subtitles/"], capture_output=True, text=True)
+                if r1.returncode == 0 and r2.returncode == 0:
+                    ok_cnt += 1
+            print(f"[FIRE TV] {ok_cnt}/4 arquivos enviados diretamente via ADB local ({firetv_addr}) -> Download + Nova cache")
+            pushed_direct = ok_cnt == len(deliverables)
+
+    if not pushed_direct:
+        tmp_a70 = f"/data/data/com.termux/files/home/tmp_ep{ep}_push"
+        subprocess.run(["ssh", "a70", f"mkdir -p {tmp_a70}"], check=True)
+        for f in deliverables:
+            subprocess.run(["scp", "-q", str(f), f"a70:{tmp_a70}/{f.name}"], check=True)
+        devs = subprocess.run(["ssh", "a70", "adb devices"], capture_output=True, text=True).stdout
+        target_dev = "emulator-5554" if "emulator-5554\tdevice" in devs else firetv_addr
+        ok_cnt = 0
+        for f in deliverables:
+            r1 = subprocess.run(["ssh", "a70", f"adb -s {target_dev} push {tmp_a70}/{f.name} /sdcard/Download/"], capture_output=True, text=True)
+            r2 = subprocess.run(["ssh", "a70", f"adb -s {target_dev} push {tmp_a70}/{f.name} /sdcard/Android/data/org.courville.nova/cache/subtitles/"], capture_output=True, text=True)
+            if r1.returncode == 0 and r2.returncode == 0:
+                ok_cnt += 1
+        subprocess.run(["ssh", "a70", f"rm -rf {tmp_a70}"], check=True)
+        print(f"[FIRE TV] {ok_cnt}/4 arquivos enviados via A70 ({target_dev}) -> Download + Nova cache")
 
 
 def main():
