@@ -27,6 +27,24 @@ FTP_PROXY_ENV_VARS = (
     "all_proxy",
 )
 
+_PACKER_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+_PACKER_RE = re.compile(
+    r"eval\(function\(p,a,c,k,e,d\)\{.*?\}\('((?:\\.|[^'\\])*)',(\d+),(\d+),'((?:\\.|[^'\\])*)'\.split\('\|'\)(?:,\d+,\{\})?\)\)",
+    re.S,
+)
+_STREAM_URL_RE = re.compile(r"""https?://[^\s"'<>\\]+?\.(?:m3u8|mp4)(?:[^\s"'<>\\]*)?""", re.I)
+_AD_SKIP_TERMS = ("google", "doubleclick", "analytics", "banner", "ads")
+_NON_PLAYER_FRAME_TERMS = (
+    "recaptcha",
+    "google.com",
+    "gstatic.com",
+    "facebook.com",
+    "doubleclick",
+    "googlesyndication",
+    "cloudfront.net",
+    "googletagmanager",
+)
+
 
 def _clean_http_env() -> list[str]:
     """Remove variáveis de proxy FTP/SOCKS do ambiente para não vazar ao Chromium/yt-dlp/ffmpeg."""
@@ -36,6 +54,147 @@ def _clean_http_env() -> list[str]:
             os.environ.pop(var, None)
             removed.append(var)
     return removed
+
+
+def _parse_base(token: str, base: int) -> int | None:
+    if base < 2 or base > len(_PACKER_ALPHABET):
+        return None
+    val = 0
+    for ch in token:
+        digit = _PACKER_ALPHABET.find(ch)
+        if digit < 0 or digit >= base:
+            return None
+        val = val * base + digit
+    return val
+
+
+def _desempacotar_packer(html: str) -> list[str]:
+    """Decodifica blocos Dean Edwards packer sem executar código arbitrário."""
+    unpacked_blocks: list[str] = []
+    for match in _PACKER_RE.finditer(html or ""):
+        p_str, base_s, _count_s, k_str = match.groups()
+        base = int(base_s)
+        words = k_str.replace("\\'", "'").replace("\\\\", "\\").split("|")
+        p_unesc = p_str.replace("\\'", "'").replace("\\\\", "\\")
+
+        def _repl(tok: re.Match[str]) -> str:
+            word = tok.group(0)
+            idx = _parse_base(word, base)
+            if idx is not None and 0 <= idx < len(words) and words[idx]:
+                return words[idx]
+            return word
+
+        unpacked_blocks.append(re.sub(r"\b[0-9a-zA-Z]+\b", _repl, p_unesc))
+    return unpacked_blocks
+
+
+def _filtrar_stream_urls(urls: list[str]) -> list[str]:
+    filtradas: list[str] = []
+    for raw in urls:
+        u = raw.strip()
+        if not u:
+            continue
+        low = u.lower()
+        if any(ext in low for ext in (".m3u8", ".mp4")) and not any(skip in low for skip in _AD_SKIP_TERMS):
+            if u not in filtradas:
+                filtradas.append(u)
+    return filtradas
+
+
+def _extrair_urls_m3u8_de_texto(texto: str) -> list[str]:
+    """Extrai URLs de stream (.m3u8 prioritário) do HTML bruto ou desempacotado."""
+    candidatos: list[str] = []
+    for bloco in [texto or "", *_desempacotar_packer(texto or "")]:
+        candidatos.extend(_STREAM_URL_RE.findall(bloco))
+    filtradas = _filtrar_stream_urls(candidatos)
+    m3u8 = [u for u in filtradas if ".m3u8" in u.lower()]
+    return m3u8 if m3u8 else filtradas
+
+
+def _eh_frame_player(frame_url: str, page_url: str = "") -> bool:
+    """Identifica frames de vídeo ignorando página raiz, about:blank e widgets terceiros."""
+    url = (frame_url or "").strip()
+    if not url or url.startswith("about:") or (page_url and url == page_url):
+        return False
+    low = url.lower()
+    return not any(term in low for term in _NON_PLAYER_FRAME_TERMS)
+
+
+def _extrair_streams_de_frames(page, tentar_click: bool = False) -> list[str]:
+    """Inspeciona iframes de player já montados procurando playlist/m3u8 direto do JWPlayer ou HTML."""
+    page_url = ""
+    try:
+        page_url = page.url
+    except Exception:
+        pass
+
+    encontrados: list[str] = []
+    for frame in page.frames:
+        if not _eh_frame_player(frame.url, page_url):
+            continue
+
+        try:
+            jw_urls = frame.evaluate(
+                """() => {
+                    const out = [];
+                    if (typeof jwplayer === 'function') {
+                        try {
+                            const inst = jwplayer();
+                            const pl = inst.getPlaylist ? inst.getPlaylist() : null;
+                            if (Array.isArray(pl)) {
+                                for (const item of pl) {
+                                    if (item && item.file) out.push(item.file);
+                                    if (item && Array.isArray(item.sources)) {
+                                        for (const s of item.sources) if (s && s.file) out.push(s.file);
+                                    }
+                                }
+                            }
+                            const cfg = inst.getConfig ? inst.getConfig() : null;
+                            if (cfg && Array.isArray(cfg.playlist)) {
+                                for (const item of cfg.playlist) {
+                                    if (item && item.file) out.push(item.file);
+                                    if (item && Array.isArray(item.sources)) {
+                                        for (const s of item.sources) if (s && s.file) out.push(s.file);
+                                    }
+                                }
+                            }
+                        } catch (e) {}
+                    }
+                    return out;
+                }"""
+            )
+            if isinstance(jw_urls, list):
+                encontrados.extend(_filtrar_stream_urls([str(u) for u in jw_urls]))
+        except Exception:
+            pass
+
+        if encontrados:
+            return encontrados
+
+        try:
+            html = frame.content()
+            encontrados.extend(_extrair_urls_m3u8_de_texto(html))
+        except Exception:
+            pass
+
+        if encontrados:
+            return encontrados
+
+        if tentar_click:
+            for sel in ("#vplayer", ".jw-display-icon-container", ".jw-icon-display", "video"):
+                try:
+                    loc = frame.locator(sel).first
+                    if loc.is_visible(timeout=500):
+                        loc.click(timeout=1000)
+                        break
+                except Exception:
+                    pass
+            try:
+                frame.evaluate("() => { if (typeof jwplayer === 'function') { jwplayer().play(); } }")
+            except Exception:
+                pass
+
+    return _filtrar_stream_urls(encontrados)
 
 
 def capturar_stream_episodio(url_episodio: str) -> str:
@@ -72,19 +231,18 @@ def capturar_stream_episodio(url_episodio: str) -> str:
         )
         page = context.new_page()
 
-        # Otimização: Bloqueia recursos desnecessários (imagens, fontes, anúncios) para carregamento quase instantâneo
+        # Otimização: Bloqueia recursos pesados (apenas imagens e fontes), preservando media e scripts do player
         def rotear_requisicao(route):
             req = route.request
             url_low = req.url.lower()
             res_type = req.resource_type
 
-            # Não bloqueia playlists nem streams
-            if ".m3u8" in url_low or ".mp4" in url_low:
+            # Não bloqueia playlists, streams nem assets do JWPlayer
+            if ".m3u8" in url_low or ".mp4" in url_low or "jwplayer" in url_low or "tokvoy" in url_low:
                 route.continue_()
                 return
 
-            # Bloqueia tipos pesados irrelevantes para captura
-            if res_type in ("image", "font", "media"):
+            if res_type in ("image", "font"):
                 route.abort()
                 return
 
@@ -113,7 +271,7 @@ def capturar_stream_episodio(url_episodio: str) -> str:
             req_url = request.url
             all_requests.append(req_url)
             if any(ext in req_url for ext in (".m3u8", ".mp4", "/playlist.m3u8", "master.m3u8")) and not any(
-                skip in req_url for skip in ("google", "doubleclick", "analytics", "banner", "ads")
+                skip in req_url for skip in _AD_SKIP_TERMS
             ):
                 video_urls.append(req_url)
 
@@ -134,34 +292,47 @@ def capturar_stream_episodio(url_episodio: str) -> str:
         page.on("response", registrar_resposta)
         page.on("console", registrar_console)
 
+        def _verificar_e_anexar(tentar_click: bool = False) -> bool:
+            if any(".m3u8" in u.lower() for u in video_urls):
+                return True
+            for u in _extrair_streams_de_frames(page, tentar_click=tentar_click):
+                if u not in video_urls:
+                    video_urls.append(u)
+            return any(".m3u8" in u.lower() for u in video_urls)
+
         try:
             main_resp = page.goto(url_episodio, timeout=45000, wait_until="domcontentloaded")
             main_status = main_resp.status if main_resp is not None else None
 
-            # Clica no player ou nos seletores de servidor
-            selectors_to_click = [
-                "#content-embed",
-                ".fake_player a.lnkplay",
-                ".playads",
-                "a[href='#tab1']",
-                "a[href='#tab2']",
-                "iframe",
-            ]
-            for sel in selectors_to_click:
-                if video_urls and any(".m3u8" in u for u in video_urls):
+            # 1. Aguarda o iframe padrão do player montar antes de clicar em abas (evita destruir #tab2)
+            for idx in range(12):
+                if _verificar_e_anexar(tentar_click=(idx == 4)):
                     break
-                try:
-                    loc = page.locator(sel).first
-                    if loc.is_visible(timeout=1000):
-                        loc.click(timeout=1500)
-                except Exception:
-                    pass
+                time.sleep(0.5)
 
-            # Monitora requisições e encerra assim que a stream for interceptada
-            for _ in range(15):
-                if video_urls and any(".m3u8" in u for u in video_urls):
-                    break
-                time.sleep(1)
+            # 2. Somente se o player padrão não retornou stream, alterna abas de servidor uma por vez
+            if not _verificar_e_anexar():
+                tab_selectors = [
+                    "a[href='#tab2']",
+                    "a[href='#tab1']",
+                    "a[href='#tab3']",
+                    "a[href='#tab4']",
+                    "a[href='#tab5']",
+                    ".fake_player a.lnkplay",
+                ]
+                for sel in tab_selectors:
+                    if _verificar_e_anexar():
+                        break
+                    try:
+                        loc = page.locator(sel).first
+                        if loc.is_visible(timeout=800):
+                            loc.click(timeout=1500)
+                    except Exception:
+                        continue
+                    for step in range(8):
+                        if _verificar_e_anexar(tentar_click=(step == 3)):
+                            break
+                        time.sleep(0.5)
 
             try:
                 page_url_final = page.url
@@ -256,6 +427,7 @@ def _run_ytdlp_with_progress(cmd_ytdlp: list) -> int:
 
 
 def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: str = "auto"):
+    _clean_http_env()
     import urllib.parse
     parsed = urllib.parse.urlparse(stream_url)
     stream_origin = f"{parsed.scheme}://{parsed.netloc}"
@@ -338,7 +510,6 @@ def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: s
 
 
 def main():
-    _clean_http_env()
     parser = argparse.ArgumentParser(description="Baixa episódio de Uzak Şehir de turkish123.pro")
     parser.add_argument("episode", type=int, help="Número do episódio (ex: 33)")
     parser.add_argument("-o", "--output", help="Caminho do arquivo mp4 de saída")
