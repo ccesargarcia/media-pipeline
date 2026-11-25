@@ -62,7 +62,9 @@ runs:
                 tailscale status || true
                 echo "FTP_PROXY=socks5h://100.97.222.39:1080" >> "$GITHUB_ENV"
                 echo "ftp_proxy=socks5h://100.97.222.39:1080" >> "$GITHUB_ENV"
+                echo "TAILSCALE_FTP_PROXY=socks5h://100.97.222.39:1080" >> "$GITHUB_ENV"
                 echo "TAILSCALE_TARGET=100.97.222.39" >> "$GITHUB_ENV"
+                echo "ACTIVE_TUNNEL_MODE=tailscale_p2p" >> "$GITHUB_ENV"
                 exit 0
               fi
               sleep 1
@@ -93,7 +95,9 @@ runs:
               echo "✅ Fallback 1 (Gateway OCI -> wireguard.luisices.com.br) conectado!"
               echo "FTP_PROXY=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
               echo "ftp_proxy=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
+              echo "TAILSCALE_FTP_PROXY=socks5h://127.0.0.1:1080" >> "$GITHUB_ENV"
               echo "TAILSCALE_TARGET=127.0.0.1" >> "$GITHUB_ENV"
+              echo "ACTIVE_TUNNEL_MODE=tailscale_oci" >> "$GITHUB_ENV"
               exit 0
             fi
           fi
@@ -112,7 +116,11 @@ runs:
           for attempt in $(seq 1 45); do
             if sudo grep -Fq 'Initialization Sequence Completed' "$RUNNER_TEMP/openvpn.log"; then
               echo "✅ Fallback 2 (OpenVPN) conectado com sucesso!"
+              echo "FTP_PROXY=" >> "$GITHUB_ENV"
+              echo "ftp_proxy=" >> "$GITHUB_ENV"
+              echo "TAILSCALE_FTP_PROXY=" >> "$GITHUB_ENV"
               echo "TAILSCALE_TARGET=192.168.0.252" >> "$GITHUB_ENV"
+              echo "ACTIVE_TUNNEL_MODE=openvpn_fallback" >> "$GITHUB_ENV"
               exit 0
             fi
             sleep 2

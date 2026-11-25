@@ -14,7 +14,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from ftplib import FTP
+from ftp_transport import VALID_FTP_MODES, connect_ftp, resolve_curl_proxy
 from pathlib import Path
 
 try:
@@ -239,14 +239,22 @@ def arquivo_existe_no_ftp(
     remote_dir: str,
     filename: str,
     expected_size: int,
+    ftp_mode: str = "auto",
+    tailscale_proxy: str = "",
 ) -> bool:
     """Verifica via FTP se o arquivo já existe com exatamente o mesmo tamanho."""
     if not user or expected_size <= 0:
         return False
     try:
-        ftp = FTP()
-        ftp.connect(host, port, timeout=15)
-        ftp.login(user, password)
+        ftp, _route = connect_ftp(
+            host=host,
+            port=port,
+            user=user,
+            password=password,
+            mode=ftp_mode,
+            proxy_url=tailscale_proxy,
+            timeout=15,
+        )
         try:
             ftp.cwd(remote_dir)
             tamanho_remoto = ftp.size(filename)
@@ -268,6 +276,7 @@ def enviar_arquivo_ftp_curl(
     password: str,
     remote_dir: str,
     filename: str,
+    proxy_url: str = "",
 ) -> float:
     """Envia um arquivo local ao FTP via curl e retorna a velocidade em MB/s."""
     encoded_dir = urllib.parse.quote(remote_dir.rstrip("/") or "/", safe="/")
@@ -290,6 +299,8 @@ def enviar_arquivo_ftp_curl(
         "-T", str(local_path),
         ftp_url,
     ]
+    if proxy_url:
+        cmd.extend(["--proxy", proxy_url])
 
     inicio = time.monotonic()
     proc = subprocess.run(cmd, check=False)
@@ -361,6 +372,20 @@ def executar_pipeline(args: argparse.Namespace) -> int:
         args.notify_whatsapp,
     )
 
+    ftp_mode = getattr(args, "ftp_mode", "auto")
+    tailscale_proxy = getattr(args, "tailscale_proxy", "")
+    curl_proxy = (
+        resolve_curl_proxy(
+            mode=ftp_mode,
+            proxy_url=tailscale_proxy,
+            host=ftp_host,
+            port=ftp_port,
+        )
+        or ""
+    )
+    rota_inicial = f"tailscale({curl_proxy})" if curl_proxy else "direct/openvpn"
+    print(f"🌐 Transporte FTP selecionado ({ftp_mode}): {rota_inicial}", flush=True)
+
     enviados = 0
     pulados = 0
     falhas: list[str] = []
@@ -371,7 +396,15 @@ def executar_pipeline(args: argparse.Namespace) -> int:
         print(f"📄 Arquivo: {rel_path} ({formatar_tamanho(size_bytes)}) -> {remote_dir}/{filename}", flush=True)
 
         if args.skip_existing and arquivo_existe_no_ftp(
-            ftp_host, ftp_port, ftp_user, ftp_password, remote_dir, filename, size_bytes
+            ftp_host,
+            ftp_port,
+            ftp_user,
+            ftp_password,
+            remote_dir,
+            filename,
+            size_bytes,
+            ftp_mode=ftp_mode,
+            tailscale_proxy=tailscale_proxy,
         ):
             print(f"⏩ Arquivo já existe no FTP com o mesmo tamanho. Pulando.", flush=True)
             pulados += 1
@@ -379,9 +412,37 @@ def executar_pipeline(args: argparse.Namespace) -> int:
             continue
 
         try:
-            speed_mbs = enviar_arquivo_ftp_curl(
-                local_path, ftp_host, ftp_port, ftp_user, ftp_password, remote_dir, filename
-            )
+            try:
+                speed_mbs = enviar_arquivo_ftp_curl(
+                    local_path,
+                    ftp_host,
+                    ftp_port,
+                    ftp_user,
+                    ftp_password,
+                    remote_dir,
+                    filename,
+                    proxy_url=curl_proxy,
+                )
+            except Exception as exc:
+                if curl_proxy and ftp_mode in ("auto", "tailscale"):
+                    print(
+                        f"⚠️ Upload via Tailscale ({curl_proxy}) falhou ({exc}); "
+                        "usando fallback direto/OpenVPN...",
+                        file=sys.stderr,
+                    )
+                    curl_proxy = ""
+                    speed_mbs = enviar_arquivo_ftp_curl(
+                        local_path,
+                        ftp_host,
+                        ftp_port,
+                        ftp_user,
+                        ftp_password,
+                        remote_dir,
+                        filename,
+                        proxy_url="",
+                    )
+                else:
+                    raise
             print(f"✅ Enviado com sucesso (~{speed_mbs:.2f} MB/s)", flush=True)
             enviados += 1
             local_path.unlink(missing_ok=True)
@@ -426,6 +487,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--bt-stop-timeout", type=int, default=180, help="Timeout do aria2c sem peers (segundos)")
     parser.add_argument("--skip-existing", action="store_true", help="Pular arquivos já existentes no FTP")
     parser.add_argument("--notify-whatsapp", action="store_true", help="Enviar notificações via WhatsApp")
+    parser.add_argument(
+        "--ftp-mode",
+        choices=VALID_FTP_MODES,
+        default="auto",
+        help="Modo de transporte FTP (auto, lan, vpn, direct, tailscale)",
+    )
+    parser.add_argument(
+        "--tailscale-proxy",
+        default="",
+        help="Proxy SOCKS5 do Tailscale (ex: socks5h://100.97.222.39:1080)",
+    )
     return parser.parse_args()
 
 

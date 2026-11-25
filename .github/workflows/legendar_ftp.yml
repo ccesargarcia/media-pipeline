@@ -143,7 +143,7 @@ jobs:
 
           if [ "$USE_PRECACHE" = "true" ]; then
             echo "⚡ Verificando disponibilidade de pré-cache de áudio (${STEM}.audio.m4a) em '${SEASON_INPUT}'..."
-            if ! curl -sI --fail --ftp-pasv -u "$FTP_USER:$FTP_PASSWORD" "$AUDIO_URL" | grep -qi "Content-Length:"; then
+            if ! curl -sI --fail --ftp-pasv --ftp-skip-pasv-ip -u "$FTP_USER:$FTP_PASSWORD" "$AUDIO_URL" | grep -qi "Content-Length:"; then
               if [ -n "${TAILSCALE_TARGET:-}" ] && [ -n "${OCI_SSH_KEY:-}" ]; then
                 echo "📲 Áudio ainda não separado. Acionando o Galaxy A70 (${TAILSCALE_TARGET}:2222) sob demanda para separar a faixa de áudio na rede local..."
                 mkdir -p ~/.ssh
@@ -153,7 +153,7 @@ jobs:
               fi
             fi
 
-            if curl -sI --fail --ftp-pasv -u "$FTP_USER:$FTP_PASSWORD" "$AUDIO_URL" | grep -qi "Content-Length:"; then
+            if curl -sI --fail --ftp-pasv --ftp-skip-pasv-ip -u "$FTP_USER:$FTP_PASSWORD" "$AUDIO_URL" | grep -qi "Content-Length:"; then
               echo "✅ Áudio leve disponível (${STEM}.audio.m4a)! Baixando em alta velocidade..."
               if python3 baixar_ftp_paralelo.py "$AUDIO_URL" input_media 4; then
                 echo "🎉 Áudio leve baixado com sucesso!"
@@ -170,7 +170,7 @@ jobs:
           python3 baixar_ftp_paralelo.py "$VIDEO_URL" input_media 4
 
       - name: Desconectar da VPN após o download
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Extrair áudio e Fatiar em 4 partes por Silêncio
@@ -327,7 +327,7 @@ jobs:
               -T "$STEM.srt" \
               "sftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
           else
-            curl -# --fail --ftp-pasv \
+            curl -# --fail --ftp-pasv --ftp-skip-pasv-ip \
               --retry 5 --retry-delay 5 --retry-connrefused \
               -u "$FTP_USER:$FTP_PASSWORD" \
               -T "$STEM.srt" \
@@ -335,7 +335,7 @@ jobs:
           fi
 
       - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar SRT original no GitHub Artifacts
@@ -598,15 +598,15 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"]))')
-          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+          curl --fail --ftp-pasv --ftp-skip-pasv-ip --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.pt-BR.srt" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
-          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+          curl --fail --ftp-pasv --ftp-skip-pasv-ip --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" -T "$STEM.ass" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
 
       - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar artefatos no GitHub
@@ -712,7 +712,7 @@ jobs:
               if [ "$FTP_PORT" = "22" ]; then
                 curl -# --fail -k --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "sftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
               else
-                curl -# --fail --ftp-pasv --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+                curl -# --fail --ftp-pasv --ftp-skip-pasv-ip --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
               fi
             fi
           }
@@ -723,7 +723,7 @@ jobs:
           upload_file "$STEM.ass"
 
       - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar artefatos no GitHub

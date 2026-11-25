@@ -12,6 +12,7 @@ import argparse
 import ftplib
 import json
 import math
+import os
 import re
 import shutil
 import subprocess
@@ -20,10 +21,27 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-MEDIA_DIR = Path("/data/data/com.termux/files/home/media-pipeline")
+MEDIA_DIR = Path(__file__).resolve().parent.parent
+if str(MEDIA_DIR) not in sys.path:
+    sys.path.insert(0, str(MEDIA_DIR))
+
+from ftp_transport import VALID_FTP_MODES, connect_ftp
+
 FTP_HOST = "192.168.0.1"
 FTP_USER = "admin"
 FTP_PASS = "63274c0954"
+
+
+def _connect_ftp_cli(args, timeout: float = 15.0):
+    return connect_ftp(
+        host=os.environ.get("FTP_HOST") or FTP_HOST,
+        port=int(os.environ.get("FTP_PORT") or 21),
+        user=os.environ.get("FTP_USER") or FTP_USER,
+        password=os.environ.get("FTP_PASSWORD") or FTP_PASS,
+        mode=getattr(args, "ftp_mode", "auto"),
+        proxy_url=getattr(args, "tailscale_proxy", ""),
+        timeout=timeout,
+    )
 
 
 def fetch_en_srt_subtitlecat(ep: int):
@@ -102,20 +120,22 @@ def cmd_prepare(args):
             shutil.copy2(found, en_srt)
             print(f"[OK] Copiado de: {found}")
         else:
-            print(f"[FTP] Baixando {stem}.en.srt de /G/Series/Longe demais - {season}...")
-            ftp = ftplib.FTP(FTP_HOST, timeout=15)
-            ftp.login(FTP_USER, FTP_PASS)
+            ftp, route = _connect_ftp_cli(args, timeout=15)
+            print(f"[FTP/{route}] Baixando {stem}.en.srt de /G/Series/Longe demais - {season}...")
             ftp.cwd(f"/G/Series/Longe demais - {season}")
             try:
                 tmp_path = en_srt.with_suffix(".tmp")
                 with open(tmp_path, "wb") as fp:
                     ftp.retrbinary(f"RETR {stem}.en.srt", fp.write)
                 tmp_path.replace(en_srt)
-                print(f"[OK] Baixado do FTP: {en_srt}")
+                print(f"[OK] Baixado do FTP ({route}): {en_srt}")
             except ftplib.error_perm as exc:
                 if tmp_path.exists():
                     tmp_path.unlink()
-                ftp.quit()
+                try:
+                    ftp.quit()
+                except Exception:
+                    pass
                 print(f"[AVISO] {stem}.en.srt não está no FTP ({exc}). Buscando automaticamente no SubtitleCat...")
                 fetched = fetch_en_srt_subtitlecat(ep)
                 if not fetched:
@@ -124,17 +144,24 @@ def cmd_prepare(args):
                 en_srt.write_text(clean_text, encoding="utf-8")
                 print(f"[WEB] Baixado do SubtitleCat: {src_path} ({blk_count} blocos, tipo={quality})")
                 try:
-                    ftp_up = ftplib.FTP(FTP_HOST, timeout=15)
-                    ftp_up.login(FTP_USER, FTP_PASS)
-                    ftp_up.cwd(f"/G/Series/Longe demais - {season}")
-                    with open(en_srt, "rb") as fp:
-                        ftp_up.storbinary(f"STOR {stem}.en.srt", fp)
-                    ftp_up.quit()
-                    print(f"[FTP] Backup de {stem}.en.srt salvo no FTP.")
+                    ftp_up, up_route = _connect_ftp_cli(args, timeout=15)
+                    try:
+                        ftp_up.cwd(f"/G/Series/Longe demais - {season}")
+                        with open(en_srt, "rb") as fp:
+                            ftp_up.storbinary(f"STOR {stem}.en.srt", fp)
+                    finally:
+                        try:
+                            ftp_up.quit()
+                        except Exception:
+                            pass
+                    print(f"[FTP/{up_route}] Backup de {stem}.en.srt salvo no FTP.")
                 except Exception as up_exc:
                     print(f"[AVISO] Não foi possível salvar backup no FTP: {up_exc}")
             else:
-                ftp.quit()
+                try:
+                    ftp.quit()
+                except Exception:
+                    pass
 
     raw_blocks = [b.strip() for b in en_srt.read_text(encoding="utf-8-sig").strip().split("\n\n") if b.strip()]
     total = len(raw_blocks)
@@ -298,14 +325,18 @@ def cmd_finalize(args):
         shutil.copy2(f, local_dir / f.name)
     print(f"[LOCAL] 4 arquivos copiados para {local_dir}")
 
-    ftp = ftplib.FTP(FTP_HOST, timeout=20)
-    ftp.login(FTP_USER, FTP_PASS)
-    ftp.cwd(f"/G/Series/Longe demais - {season}")
-    for f in deliverables:
-        with open(f, "rb") as fp:
-            ftp.storbinary(f"STOR {f.name}", fp)
-    ftp.quit()
-    print(f"[FTP] 4 arquivos enviados para /G/Series/Longe demais - {season}")
+    ftp, route = _connect_ftp_cli(args, timeout=20)
+    try:
+        ftp.cwd(f"/G/Series/Longe demais - {season}")
+        for f in deliverables:
+            with open(f, "rb") as fp:
+                ftp.storbinary(f"STOR {f.name}", fp)
+    finally:
+        try:
+            ftp.quit()
+        except Exception:
+            pass
+    print(f"[FTP/{route}] 4 arquivos enviados para /G/Series/Longe demais - {season}")
 
     # 3. Fire TV: tenta ADB direto local (192.168.0.218:5555) primeiro; fallback para ssh a70
     firetv_addr = "192.168.0.218:5555"
@@ -340,6 +371,20 @@ def cmd_finalize(args):
         print(f"[FIRE TV] {ok_cnt}/4 arquivos enviados via A70 ({target_dev}) -> Download + Nova cache")
 
 
+def _add_ftp_args(parser):
+    parser.add_argument(
+        "--ftp-mode",
+        choices=VALID_FTP_MODES,
+        default="auto",
+        help="Modo de transporte FTP (auto, lan, vpn, direct, tailscale)",
+    )
+    parser.add_argument(
+        "--tailscale-proxy",
+        default="",
+        help="Proxy SOCKS5 do Tailscale (ex: socks5h://100.97.222.39:1080)",
+    )
+
+
 def main():
     p = argparse.ArgumentParser(description="CLI de tradução 2-pass para Uzak Şehir")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -347,6 +392,7 @@ def main():
     p1 = sub.add_parser("prepare")
     p1.add_argument("episode", type=int)
     p1.add_argument("--season", default="Segunda Temporada")
+    _add_ftp_args(p1)
     p1.set_defaults(func=cmd_prepare)
 
     p2 = sub.add_parser("make-review")
@@ -357,6 +403,7 @@ def main():
     p3.add_argument("episode", type=int)
     p3.add_argument("--season", default="Segunda Temporada")
     p3.add_argument("--no-distribute", action="store_true")
+    _add_ftp_args(p3)
     p3.set_defaults(func=cmd_finalize)
 
     args = p.parse_args()

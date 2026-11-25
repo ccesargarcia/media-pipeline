@@ -1,4 +1,4 @@
-name: Test OpenVPN FTP connection
+name: Test FTP connection (Tailscale + OpenVPN fallback)
 
 on:
   workflow_dispatch:
@@ -12,13 +12,21 @@ on:
           - Terceira Temporada
           - Primeira Temporada
         default: Segunda Temporada
+      network_mode:
+        description: Use Tailscale (com fallback automático para OpenVPN) ou OpenVPN direto (vpn)
+        required: true
+        type: choice
+        options:
+          - tailscale
+          - vpn
+        default: tailscale
 
 permissions:
   contents: read
 
 jobs:
   test-vpn-ftp:
-    name: Connect to FTP through OpenVPN
+    name: Connect to FTP (${{ inputs.network_mode }})
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -27,6 +35,7 @@ jobs:
       FTP_USER: ${{ secrets.FTP_USER }}
       FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
       FTP_BASE_DIR: /G/Series/Longe demais - ${{ inputs.season }}
+      NETWORK_MODE: ${{ inputs.network_mode }}
 
     steps:
       - name: Checkout repository
@@ -49,7 +58,16 @@ jobs:
         env:
           OPENVPN_CONFIG: ${{ secrets.OPENVPN_CONFIG }}
 
+      - name: Connect via Tailscale (OpenVPN fallback)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          ts_authkey: ${{ secrets.TS_AUTHKEY }}
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+          openvpn_config: ${{ secrets.OPENVPN_CONFIG }}
+
       - name: Connect to OpenVPN
+        if: ${{ inputs.network_mode == 'vpn' }}
         uses: ./.github/actions/openvpn-connect
         with:
           config: ${{ secrets.OPENVPN_CONFIG }}
@@ -64,19 +82,22 @@ jobs:
           python3 - <<'PY'
           import os
           import sys
-          from ftplib import FTP
+          from ftp_transport import connect_ftp
 
           phase = "connect"
           try:
-              ftp = FTP()
-              ftp.connect(
-                  os.environ["FTP_HOST"],
-                  int(os.environ["FTP_PORT"]),
+              ftp_mode = "vpn" if os.environ.get("NETWORK_MODE") == "vpn" else "auto"
+              ftp, route = connect_ftp(
+                  host=os.environ["FTP_HOST"],
+                  port=int(os.environ["FTP_PORT"]),
+                  user=os.environ["FTP_USER"],
+                  password=os.environ["FTP_PASSWORD"],
+                  mode=ftp_mode,
                   timeout=20,
               )
-              phase = "login"
-              ftp.login(os.environ["FTP_USER"], os.environ["FTP_PASSWORD"])
+              print(f"Conexão FTP estabelecida via: {route}")
 
+              phase = "commands"
               print("=== TESTE DE COMANDOS DE DISCO NO FTP ===")
               for cmd in ["AVBL", "AVBL /G", "AVBL /", "SITE DSPACE", "SITE FREE", "STAT /G"]:
                   try:
@@ -86,28 +107,31 @@ jobs:
                       print(f"Comando FTP '{cmd}' -> Não suportado ({e})")
 
               print("\n=== TESTE DE CONSULTA DE DISCO VIA SAMBA (SMB) ===")
-              try:
-                  import smbclient
-                  for share in ["G", "share", "tp-share", "volume1"]:
-                      try:
-                          vol = smbclient.stat_volume(
-                              f"\\\\{os.environ['FTP_HOST']}\\{share}",
-                              username=os.environ["FTP_USER"],
-                              password=os.environ["FTP_PASSWORD"],
-                          )
-                          total_gb = vol.total_size / (1024**3)
-                          free_gb = vol.actual_available_size / (1024**3)
-                          used_gb = total_gb - free_gb
-                          pct_used = (used_gb / total_gb) * 100 if total_gb > 0 else 0
-                          print(f"🎉 SUCESSO NO SAMBA! Share '{share}':")
-                          print(f"   Espaço Total: {total_gb:.2f} GB")
-                          print(f"   Espaço Usado: {used_gb:.2f} GB ({pct_used:.1f}%)")
-                          print(f"   Espaço Livre: {free_gb:.2f} GB")
-                          break
-                      except Exception as e:
-                          print(f"Samba share '{share}': {e}")
-              except Exception as e:
-                  print(f"Erro geral no Samba: {e}")
+              if route == "direct":
+                  try:
+                      import smbclient
+                      for share in ["G", "share", "tp-share", "volume1"]:
+                          try:
+                              vol = smbclient.stat_volume(
+                                  f"\\\\{os.environ['FTP_HOST']}\\{share}",
+                                  username=os.environ["FTP_USER"],
+                                  password=os.environ["FTP_PASSWORD"],
+                              )
+                              total_gb = vol.total_size / (1024**3)
+                              free_gb = vol.actual_available_size / (1024**3)
+                              used_gb = total_gb - free_gb
+                              pct_used = (used_gb / total_gb) * 100 if total_gb > 0 else 0
+                              print(f"🎉 SUCESSO NO SAMBA! Share '{share}':")
+                              print(f"   Espaço Total: {total_gb:.2f} GB")
+                              print(f"   Espaço Usado: {used_gb:.2f} GB ({pct_used:.1f}%)")
+                              print(f"   Espaço Livre: {free_gb:.2f} GB")
+                              break
+                          except Exception as e:
+                              print(f"Samba share '{share}': {e}")
+                  except Exception as e:
+                      print(f"Erro geral no Samba: {e}")
+              else:
+                  print(f"ℹ️ Samba (porta 445) pulado na rota SOCKS5 ({route}); disponível apenas no fallback OpenVPN.")
 
               phase = "change directory"
               try:

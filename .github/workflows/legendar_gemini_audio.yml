@@ -80,7 +80,7 @@ jobs:
         run: |
           ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["VIDEO_NAME"]))')
           echo "Baixando vídeo do FTP..."
-          curl -# --fail --ftp-pasv \
+          curl -# --fail --ftp-pasv --ftp-skip-pasv-ip \
             --retry 5 --retry-delay 5 --retry-connrefused \
             -C - \
             -u "$FTP_USER:$FTP_PASSWORD" \
@@ -88,7 +88,7 @@ jobs:
             -o input_media
 
       - name: Desconectar da VPN após o download
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Extrair áudio e Fatiar em 4 partes por Silêncio
@@ -211,7 +211,7 @@ jobs:
             if [ "$FTP_PORT" = "22" ]; then
               curl -# --fail -k --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "sftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
             else
-              curl -# --fail --ftp-pasv --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
+              curl -# --fail --ftp-pasv --ftp-skip-pasv-ip --retry 5 --retry-delay 5 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
             fi
           }
 
@@ -221,7 +221,7 @@ jobs:
           upload_file "$STEM.ass"
 
       - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar Artefatos Finais no GitHub

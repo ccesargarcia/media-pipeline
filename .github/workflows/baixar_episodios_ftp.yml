@@ -91,6 +91,7 @@ jobs:
           SKIP_EXISTING: ${{ inputs.skip_existing }}
           NOTIFY_WHATSAPP: ${{ inputs.notify_whatsapp }}
           AUTO_SUBTITLE: ${{ inputs.auto_subtitle }}
+          NETWORK_MODE_INPUT: ${{ inputs.network_mode }}
           FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
           FTP_PORT: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '21' || secrets.FTP_PORT }}
           FTP_USER: ${{ secrets.FTP_USER }}
@@ -172,11 +173,11 @@ jobs:
                 fi
 
                 if [ "$AUTO_SUBTITLE" = "true" ]; then
-                  echo "==> Disparando workflow de legendagem para $UPLOAD_FILE..."
+                  echo "==> Disparando workflow de legendagem para $UPLOAD_FILE (modo $NETWORK_MODE_INPUT)..."
                   gh workflow run legendar_ftp.yml \
                     -f video_filename="$UPLOAD_FILE" \
                     -f season="$SEASON_INPUT" \
-                    -f network_mode=vpn || true
+                    -f network_mode="$NETWORK_MODE_INPUT" || true
                 fi
               else
                 echo "❌ Falha no upload do Episódio $UPLOAD_EP ($UPLOAD_FILE)"
@@ -213,7 +214,7 @@ jobs:
             fi
 
             (
-              curl -# --fail --ftp-pasv --ftp-create-dirs \
+              curl -# --fail --ftp-pasv --ftp-skip-pasv-ip --ftp-create-dirs \
                 --retry 5 --retry-delay 5 --retry-connrefused \
                 -u "$FTP_USER:$FTP_PASSWORD" \
                 -T "$file" \
@@ -251,7 +252,7 @@ jobs:
 
             # 1. Checa se o arquivo já existe no FTP com tamanho válido
             if [ "$SKIP_EXISTING" = "true" ]; then
-              EXISTE_STATUS=$(python3 verificar_episodio_ftp.py "$FTP_DIR" "$FILENAME" || true)
+              EXISTE_STATUS=$(python3 verificar_episodio_ftp.py "$FTP_DIR" "$FILENAME" --ftp-mode "$NETWORK_MODE_INPUT" || true)
               if [[ "$EXISTE_STATUS" =~ ^EXISTE: ]]; then
                 TAMANHO="${EXISTE_STATUS#EXISTE:}"
                 echo "⏩ Episódio $ep ($FILENAME) já existe no FTP ($TAMANHO). Pulando download!"
@@ -298,5 +299,5 @@ jobs:
           fi
 
       - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect

@@ -51,9 +51,9 @@ jobs:
           export FTP_DEST_DIR="/G/Series/Longe demais - Terceira Temporada"
           ENCODED_DIR=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_DEST_DIR"]))')
 
-          echo "==> 2. Iniciando Upload via túnel WireGuard / SOCKS5 para ftp://${FTP_HOST}:${FTP_PORT}..."
+          echo "==> 2. Iniciando Upload via túnel (${ACTIVE_TUNNEL_MODE:-tailscale}) para ftp://${FTP_HOST}:${FTP_PORT}..."
           T0=$(date +%s%3N)
-          curl -# --fail --ftp-pasv --retry 3 --retry-delay 3 \
+          curl -# --fail --ftp-pasv --ftp-skip-pasv-ip --retry 3 --retry-delay 3 \
             -u "$FTP_USER:$FTP_PASSWORD" \
             -T "$TEST_FILE" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
@@ -64,16 +64,20 @@ jobs:
           SPEED_MBPS=$(awk "BEGIN {if ($DURATION_SEC > 0) printf \"%.2f\", ($MB_SIZE * 8) / $DURATION_SEC; else print 0}")
 
           echo "=========================================================="
-          echo "🎉 Upload via WireGuard concluído com sucesso!"
+          echo "🎉 Upload via túnel (${ACTIVE_TUNNEL_MODE:-tailscale}) concluído com sucesso!"
           echo "⏱️ Duração: ${DURATION_SEC}s"
           echo "⚡ Velocidade estimada: ${SPEED_MBPS} Mbps"
           echo "=========================================================="
 
           echo "==> 3. Limpando arquivo de teste do FTP..."
-          curl -sS -u "$FTP_USER:$FTP_PASSWORD" \
+          curl -sS --ftp-pasv --ftp-skip-pasv-ip -u "$FTP_USER:$FTP_PASSWORD" \
             -Q "DELE ${ENCODED_DIR}/${TEST_FILE}" \
             "ftp://${FTP_HOST}:${FTP_PORT}/" || true
           echo "Arquivo de teste excluído com sucesso do FTP!"
 
-          MSG="🚀 *Teste de Upload via WireGuard Concluído!*\n\n📦 Arquivo: *${MB_SIZE} MB*\n⏱️ Tempo: *${DURATION_SEC}s*\n⚡ Velocidade: *${SPEED_MBPS} Mbps*\n🔒 Túnel: *Tailscale WireGuard (A70)*"
+          MSG="🚀 *Teste de Upload FTP Concluído!*\n\n📦 Arquivo: *${MB_SIZE} MB*\n⏱️ Tempo: *${DURATION_SEC}s*\n⚡ Velocidade: *${SPEED_MBPS} Mbps*\n🔒 Túnel: *${ACTIVE_TUNNEL_MODE:-tailscale}*"
           python3 notificar_whatsapp.py "$MSG" --status success || true
+
+      - name: Desconectar da VPN (Fallback OpenVPN, se utilizado)
+        if: always()
+        uses: ./.github/actions/openvpn-disconnect

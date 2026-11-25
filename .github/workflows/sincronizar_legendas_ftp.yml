@@ -56,7 +56,7 @@ jobs:
             if [ -f "$f" ]; then
               echo "----------------------------------------"
               echo "Enviando $f para $FTP_BASE_DIR..."
-              curl -# --fail --ftp-pasv \
+              curl -# --fail --ftp-pasv --ftp-skip-pasv-ip \
                 --retry 5 --retry-delay 5 --retry-connrefused \
                 -u "$FTP_USER:$FTP_PASSWORD" \
                 -T "$f" \
@@ -66,8 +66,8 @@ jobs:
           done
           echo "Todos os arquivos foram enviados com sucesso!"
 
-      - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+      - name: Desconectar da VPN (OpenVPN / Fallback)
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar Artifact de Backup no GitHub

@@ -112,6 +112,7 @@ jobs:
           MAX_MINUTES: ${{ inputs.max_download_minutes }}
           SKIP_EXISTING: ${{ inputs.skip_existing }}
           NOTIFY_WHATSAPP: ${{ inputs.notify_whatsapp }}
+          FTP_NETWORK_MODE_INPUT: ${{ inputs.network_mode }}
           PROWLARR_URL: ${{ secrets.PROWLARR_URL }}
           PROWLARR_API_KEY: ${{ secrets.PROWLARR_API_KEY }}
           FTP_HOST: ${{ (inputs.network_mode == 'vpn' || inputs.network_mode == 'tailscale') && '192.168.0.1' || secrets.FTP_HOST }}
@@ -139,8 +140,9 @@ jobs:
             --ftp-dir "$FTP_DIR" \
             --subfolder-name "$SUBFOLDER_NAME" \
             --max-minutes "$MAX_MINUTES" \
+            --ftp-mode "$FTP_NETWORK_MODE_INPUT" \
             "${EXTRA_FLAGS[@]}"
 
       - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect

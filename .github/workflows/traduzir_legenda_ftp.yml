@@ -42,7 +42,7 @@ on:
           - '1'
         default: '20'
       network_mode:
-        description: Use OpenVPN (recomendado) ou a conexão direta do runner com a internet
+        description: Use Tailscale (com fallback OpenVPN), OpenVPN direto (vpn) ou conexão direta (direct)
         required: true
         type: choice
         options:
@@ -118,12 +118,12 @@ jobs:
             exit 1
           fi
           ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["SRT_NAME"]))')
-          curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+          curl --fail --ftp-pasv --ftp-skip-pasv-ip --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" -o input.srt
 
       - name: Desconectar da VPN após o download
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Cache do modelo local Qwen2.5-7B Q4
@@ -354,14 +354,14 @@ jobs:
           for f in "$STEM"*.srt "$STEM"*.ass; do
             if [ -f "$f" ]; then
               echo "Enviando $f para o FTP..."
-              curl --fail --ftp-pasv --retry 5 --retry-delay 5 --retry-connrefused \
+              curl --fail --ftp-pasv --ftp-skip-pasv-ip --retry 5 --retry-delay 5 --retry-connrefused \
                 -u "$FTP_USER:$FTP_PASSWORD" -T "$f" \
                 "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/" || true
             fi
           done
 
       - name: Desconectar da VPN
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar legendas como artifact de backup
@@ -423,21 +423,21 @@ jobs:
           ENCODED_PATH=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["SRT_NAME"]))')
           
           echo "Baixando $SRT_NAME do FTP..."
-          curl -# --fail --ftp-pasv \
+          curl -# --fail --ftp-pasv --ftp-skip-pasv-ip \
             --retry 5 --retry-delay 5 --retry-connrefused \
             -u "$FTP_USER:$FTP_PASSWORD" \
             "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_PATH}" \
             -o input.srt
 
           ENCODED_CKPT=$(python3 -c 'import urllib.parse, os; print(urllib.parse.quote(os.environ["FTP_BASE_DIR"] + "/" + os.environ["STEM"] + ".ckpt.json"))')
-          if curl -s --fail --ftp-pasv -u "$FTP_USER:$FTP_PASSWORD" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_CKPT}" -o traducao_raw.ckpt.json; then
+          if curl -s --fail --ftp-pasv --ftp-skip-pasv-ip -u "$FTP_USER:$FTP_PASSWORD" "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_CKPT}" -o traducao_raw.ckpt.json; then
             echo "✓ Checkpoint anterior (${STEM}.ckpt.json) encontrado no FTP! A tradução continuará de onde parou."
           else
             rm -f traducao_raw.ckpt.json
           fi
 
       - name: Desconectar da VPN após o download
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Traduzir para PT-BR (${{ inputs.translator }}) e Gerar .ass
@@ -509,7 +509,7 @@ jobs:
           if [ -f "traducao_raw.ckpt.json" ]; then
             cp -f "traducao_raw.ckpt.json" "${{ env.STEM }}.ckpt.json"
             echo "-> Salvando checkpoint parcial (${{ env.STEM }}.ckpt.json) no FTP para retomada..."
-            curl -# --fail --ftp-pasv \
+            curl -# --fail --ftp-pasv --ftp-skip-pasv-ip \
               --retry 3 --retry-delay 3 --retry-connrefused \
               -u "$FTP_USER:$FTP_PASSWORD" \
               -T "${{ env.STEM }}.ckpt.json" \
@@ -523,18 +523,18 @@ jobs:
             for file in "${FILES[@]}"; do
               if [ -f "$file" ]; then
                 echo "-> Enviando $file..."
-                curl -# --fail --ftp-pasv \
+                curl -# --fail --ftp-pasv --ftp-skip-pasv-ip \
                   --retry 5 --retry-delay 5 --retry-connrefused \
                   -u "$FTP_USER:$FTP_PASSWORD" \
                   -T "$file" \
                   "ftp://${FTP_HOST}:${FTP_PORT}${ENCODED_DIR}/"
               fi
             done
-            curl -s -u "$FTP_USER:$FTP_PASSWORD" "ftp://${FTP_HOST}:${FTP_PORT}/" -Q "DELE ${FTP_BASE_DIR}/${{ env.STEM }}.ckpt.json" >/dev/null 2>&1 || true
+            curl -s --ftp-pasv --ftp-skip-pasv-ip -u "$FTP_USER:$FTP_PASSWORD" "ftp://${FTP_HOST}:${FTP_PORT}/" -Q "DELE ${FTP_BASE_DIR}/${{ env.STEM }}.ckpt.json" >/dev/null 2>&1 || true
           fi
 
       - name: Desconectar da VPN após o envio
-        if: ${{ always() && inputs.network_mode == 'vpn' }}
+        if: always()
         uses: ./.github/actions/openvpn-disconnect
 
       - name: Salvar Legendas como Artifact de Backup no GitHub

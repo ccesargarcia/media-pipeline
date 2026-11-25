@@ -3,19 +3,27 @@ Workflow Especializado em 2 Passagens para Tradução de Uzak Şehir (Longe Dema
 Uso via run_workflow:
   Args: {"episode": 47, "season": "Segunda Temporada", "distribute": true}
 """
-import ftplib
 import json
 import math
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 ep = int(args["episode"])
 season = args.get("season", "Segunda Temporada")
 distribute = bool(args.get("distribute", True))
+ftp_mode = str(args.get("ftp_mode", "auto"))
+tailscale_proxy = str(args.get("tailscale_proxy", ""))
 
 MEDIA_DIR = Path("/data/data/com.termux/files/home/media-pipeline")
+if str(MEDIA_DIR) not in sys.path:
+    sys.path.insert(0, str(MEDIA_DIR))
+
+from ftp_transport import connect_ftp
+from workflows.uzak_cli import FTP_HOST, FTP_PASS, FTP_USER
+
 WORK_BASE = MEDIA_DIR / "work_uzak_sehir" / f"ep{ep}"
 WORK_BASE.mkdir(parents=True, exist_ok=True)
 
@@ -27,8 +35,21 @@ EN_SRT = WORK_BASE / f"{STEM}.en.srt"
 # ==============================================================================
 phase(f"Fase 1 — Preparação Ep {ep}")
 
+prep_cmd = [
+    "python3",
+    str(MEDIA_DIR / "workflows" / "uzak_cli.py"),
+    "prepare",
+    str(ep),
+    "--season",
+    season,
+    "--ftp-mode",
+    ftp_mode,
+]
+if tailscale_proxy:
+    prep_cmd.extend(["--tailscale-proxy", tailscale_proxy])
+
 prep_out = subprocess.run(
-    ["python3", str(MEDIA_DIR / "workflows" / "uzak_cli.py"), "prepare", str(ep), "--season", season],
+    prep_cmd,
     capture_output=True,
     text=True,
     check=True,
@@ -208,14 +229,26 @@ if distribute:
     log(f"Copiados 4 arquivos para {local_dir}")
 
     # 2. FTP
-    ftp = ftplib.FTP("192.168.0.1", timeout=20)
-    ftp.login("admin", "63274c0954")
-    ftp.cwd(f"/G/Series/Longe demais - {season}")
-    for f in deliverables:
-        with open(f, "rb") as fp:
-            ftp.storbinary(f"STOR {f.name}", fp)
-    ftp.quit()
-    log(f"Upload FTP concluído em /G/Series/Longe demais - {season}")
+    ftp, route = connect_ftp(
+        host=os.environ.get("FTP_HOST") or FTP_HOST,
+        port=int(os.environ.get("FTP_PORT") or 21),
+        user=os.environ.get("FTP_USER") or FTP_USER,
+        password=os.environ.get("FTP_PASSWORD") or FTP_PASS,
+        mode=ftp_mode,
+        proxy_url=tailscale_proxy,
+        timeout=20,
+    )
+    try:
+        ftp.cwd(f"/G/Series/Longe demais - {season}")
+        for f in deliverables:
+            with open(f, "rb") as fp:
+                ftp.storbinary(f"STOR {f.name}", fp)
+    finally:
+        try:
+            ftp.quit()
+        except Exception:
+            pass
+    log(f"Upload FTP concluído via {route} em /G/Series/Longe demais - {season}")
 
     # 3. Fire TV via A70 ADB
     tmp_a70 = f"/data/data/com.termux/files/home/tmp_ep{ep}_push"
