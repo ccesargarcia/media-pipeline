@@ -125,9 +125,13 @@ review_schema = {
 }
 
 def make_reviewer(m):
-    prompt = f"""Faça a revisão minuciosa cena a cena do Chunk {m['cid']} (blocos #{m['first_id']} a #{m['last_id']}) de Uzak Şehir Episódio {ep}.
+    prompt = f"""Faça o DOUBLE-CHECK obrigatório cena a cena do Chunk {m['cid']} (blocos #{m['first_id']} a #{m['last_id']}) de Uzak Şehir Episódio {ep}.
 
-Leia integralmente `{m['review_path']}` (EN e PT lado a lado), rastreie [Falante -> Ouvinte] em cada cena e corrija TODO erro de gênero, vocativo invertido (annem/babaannem), parentesco, sentido ou naturalidade PT-BR.
+Leia integralmente `{m['review_path']}` (EN e PT lado a lado) e aplique os 4 pilares obrigatórios:
+1. **GÊNERO (inclusive erros herdados do inglês!):** Rastreie [Falante -> Ouvinte] em cada cena. Nunca confie cegamente em he/she/him/her do EN (turco 'o' é neutro). Valide cada obrigado/obrigada, bem-vindo/bem-vinda, querido/querida, pronto/pronta, sozinho/sozinha, preocupado/preocupada, mesmo/mesma, ele/ela, o/a e plural misto (vocês dois).
+2. **CONCORDÂNCIA & VOCATIVOS:** Corrija concordância de número/pessoa/sujeito (ex.: 'Mrs. Alya is sleeping' -> 'Dona Alya, ele está dormindo') e vocativos invertidos turcos (annem -> meu filho/meu amor; babaannem -> meu netinho).
+3. **PALAVRAS SOLTAS EM TURCO & CENSURA:** Elimine 100% de termos turcos residuais (tamam, efendim, hayır, abi, abla, yenge, hanım, vallahi, inşallah, hadi, peki) e remova todos os asteriscos '***' usando PT-BR natural.
+4. **SINCRONIA / ALINHAMENTO 1:1:** Confirme que cada #ID traduz EXATAMENTE o seu EN: correspondente (sem deslocar ou fundir falas entre blocos vizinhos). Use '\\n' real (nunca ' / ' ou '\\N') e preserve <i>...</i> e hifens '- '.
 
 Salve o JSON apenas com os blocos corrigidos em `{m['fixes_path']}` (formato `{{"123": "Linha 1\\nLinha 2"}}`; se não houver erros, salve `{{}}`).
 Retorne o resumo no finish."""

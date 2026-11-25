@@ -359,3 +359,20 @@ No Codex CLI, execute o mesmo pipeline de 2 passagens usando o script auxiliar `
    python3 /data/data/com.termux/files/home/media-pipeline/workflows/uzak_cli.py finalize <EP> --season "Segunda Temporada"
    ```
    *(Adicione `--no-distribute` se quiser apenas gerar e validar localmente sem subir para FTP/Fire TV.)*
+
+### E. Double-Check Obrigatório Pré-Entrega (4 Pilares — Antigravity e Codex CLI)
+Antes de considerar qualquer episódio concluído, a Passagem 2 (QA) DEVE executar explicitamente este checklist de 4 pilares em **100% dos blocos**:
+1. **Gênero (inclusive erros herdados do inglês!):**
+   - **NUNCA confie cegamente em `he/she/him/her` da legenda `.en.srt`:** o pronome turco *o* é neutro e o tradutor inglês ocasionalmente erra (ex.: chamar Pakize de `he`, Boran de `she`, ou Dona Fidan de `take him`). Valide SEMPRE pela cena real e pela Matriz de Elenco.
+   - Revise TODOS os termos sem marca de gênero no inglês: `obrigado/obrigada`, `bem-vindo/bem-vinda`, `querido/querida`, `pronto/pronta`, `sozinho/sozinha`, `cansado/cansada`, `preocupado/preocupada`, `mesmo/mesma`, `certo/certa`, `errado/errada`, `ridículo/ridícula`.
+   - Plural misto (homem + mulher) é SEMPRE masculino (`vocês dois`, `quietos`, `eles`).
+2. **Concordância (Número, Pessoa e Sujeito):**
+   - Verifique singular vs. plural (não usar `vocês` quando um personagem fala a sós com outro).
+   - Verifique vocativos sem vírgula no inglês que invertem o sujeito (ex.: `Mrs. Alya is sleeping` → `Dona Alya, ele está dormindo`).
+   - Verifique vocativos afetivos invertidos turcos (*annem* = `meu filho/meu amor`, *babaannem* = `meu netinho/meu amor`, jamais `minha mãe` ou `vovó` dito pela mãe/avó).
+3. **Zero Palavras Soltas em Turco e Zero Censura (`***`):**
+   - Varra e elimine qualquer termo turco solto (`tamam`, `efendim`, `hayır`, `evet`, `abla`, `abi`, `yenge`, `hanım`, `ağam`, `annem`, `babaannem`, `inşallah`, `maşallah`, `vallahi`, `billahi`, `hadi`, `peki`).
+   - Remova todos os asteriscos de censura (`***`) substituindo por expressões naturais em PT-BR.
+4. **Sincronia e Alinhamento 1:1:**
+   - Confirme que cada bloco `#ID` traduz EXATAMENTE a fala `EN:` daquele mesmo `#ID` — nunca empurre metade da frase para o bloco anterior ou seguinte (o que gera sensação de legenda adiantada/atrasada mesmo com timestamps iguais).
+   - Garanta que `len(EN) == len(PT)`, timestamps intactos ao milissegundo, quebras de linha reais (`\n`, nunca ` / ` ou `\N`) e tags `<i>...</i>` preservadas (convertidas automaticamente para `{\i1}/{\i0}` no `.ass`).

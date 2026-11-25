@@ -246,6 +246,28 @@ def cmd_finalize(args):
     com_orador.write_text("\n\n".join(final_blocks) + "\n", encoding="utf-8")
     print(f"[OK] Mesclados {len(final_blocks)} blocos ({len(all_fixes)} correções QA | {sanitized_count} blocos sanitizados).")
 
+    # Double-check automático de segurança (turco solto, censura ***, possíveis desalinhamentos de tamanho)
+    en_blocks_raw = [b.strip() for b in en_srt.read_text(encoding="utf-8-sig").strip().split("\n\n") if b.strip()]
+    tr_leak_re = re.compile(r"\b(tamam|efendim|hayır|evet|abla|yenge|hanım|ağam|annem|babaannem|vallahi|billahi|inşallah|maşallah|peki)\b", re.I)
+    qa_alerts = []
+    for eb, pb in zip(en_blocks_raw, final_blocks):
+        el, pl = eb.splitlines(), pb.splitlines()
+        bid = el[0]
+        e_txt = " ".join(el[2:])
+        p_txt = " ".join(pl[2:])
+        if tr_leak_re.search(p_txt):
+            qa_alerts.append(f"#{bid} [TURCO]: {p_txt}")
+        if "***" in p_txt:
+            qa_alerts.append(f"#{bid} [CENSURA ***]: {p_txt}")
+        if len(e_txt) > 45 and len(p_txt) < len(e_txt) * 0.42:
+            qa_alerts.append(f"#{bid} [POSSÍVEL SHIFT/OMISSÃO]: EN='{e_txt}' | PT='{p_txt}'")
+    if qa_alerts:
+        print(f"[DOUBLE-CHECK] ⚠️ {len(qa_alerts)} alerta(s) encontrado(s):")
+        for a in qa_alerts[:15]:
+            print(f"  - {a}")
+    else:
+        print("[DOUBLE-CHECK] ✅ 0 palavras turcas soltas | 0 censuras *** | 0 suspeitas de shift/omissão.")
+
     subprocess.run(["python3", str(MEDIA_DIR / "gerar_versoes_legendas.py"), str(com_orador), stem, str(work)], check=True)
 
     pt_srt = work / f"{stem}.pt-BR.srt"
