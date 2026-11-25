@@ -297,6 +297,15 @@ def resolve_curl_proxy(
     return None
 
 
+def _login_binary(ftp: ftplib.FTP, user: str, password: str) -> None:
+    if user:
+        ftp.login(user, password)
+    else:
+        ftp.login()
+    # Servidores FTP como o do roteador TP-Link recusam SIZE em modo ASCII padrão.
+    ftp.voidcmd("TYPE I")
+
+
 def _connect_direct(
     host: str,
     port: int,
@@ -308,10 +317,7 @@ def _connect_direct(
     ftp = ftplib.FTP()
     try:
         ftp.connect(host, port, timeout=connect_timeout)
-        if user:
-            ftp.login(user, password)
-        else:
-            ftp.login()
+        _login_binary(ftp, user, password)
         ftp.timeout = session_timeout
         return ftp, "direct"
     except Exception:
@@ -337,10 +343,7 @@ def _connect_tailscale(
     ftp = Socks5FTP(p_host, p_port, skip_pasv_ip=True)
     try:
         ftp.connect(host, port, timeout=timeout)
-        if user:
-            ftp.login(user, password)
-        else:
-            ftp.login()
+        _login_binary(ftp, user, password)
         return ftp, f"tailscale({p_host}:{p_port})"
     except Exception:
         try:

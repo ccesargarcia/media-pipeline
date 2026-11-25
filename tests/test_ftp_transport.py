@@ -149,6 +149,7 @@ class _MockPasvFtpServer:
 
     def _handle_client(self, conn: socket.socket) -> None:
         data_listener = None
+        transfer_type = "A"
         try:
             f = conn.makefile("r", encoding="utf-8", errors="replace")
             conn.sendall(b"220 Mock FTP ready\r\n")
@@ -163,6 +164,7 @@ class _MockPasvFtpServer:
                 elif upper.startswith("PASS "):
                     conn.sendall(b"230 Logged in\r\n")
                 elif upper.startswith("TYPE "):
+                    transfer_type = cmd_line[5:].strip().upper()
                     conn.sendall(b"200 Type set\r\n")
                 elif upper == "PWD":
                     conn.sendall(f'257 "{self.current_dir}"\r\n'.encode())
@@ -170,6 +172,9 @@ class _MockPasvFtpServer:
                     self.current_dir = cmd_line[4:].strip()
                     conn.sendall(b"250 CWD command successful\r\n")
                 elif upper.startswith("SIZE "):
+                    if transfer_type != "I":
+                        conn.sendall(b"550 SIZE not allowed in ASCII mode\r\n")
+                        continue
                     name = cmd_line[5:].strip()
                     if name in self.files:
                         conn.sendall(f"213 {len(self.files[name])}\r\n".encode())
