@@ -19,9 +19,39 @@ except ImportError:
     sys.exit(1)
 
 
+FTP_PROXY_ENV_VARS = (
+    "FTP_PROXY",
+    "ftp_proxy",
+    "TAILSCALE_FTP_PROXY",
+    "ALL_PROXY",
+    "all_proxy",
+)
+
+
+def _clean_http_env() -> list[str]:
+    """Remove variáveis de proxy FTP/SOCKS do ambiente para não vazar ao Chromium/yt-dlp/ffmpeg."""
+    removed: list[str] = []
+    for var in FTP_PROXY_ENV_VARS:
+        if var in os.environ:
+            os.environ.pop(var, None)
+            removed.append(var)
+    return removed
+
+
 def capturar_stream_episodio(url_episodio: str) -> str:
+    removed_proxies = _clean_http_env()
+    if removed_proxies:
+        print(f"==> [ENV] Removido proxy FTP do extrator: {', '.join(removed_proxies)}", flush=True)
     print(f"==> Acessando página: {url_episodio}", flush=True)
-    video_urls = []
+    video_urls: list[str] = []
+    all_requests: list[str] = []
+    failed_requests: list[str] = []
+    error_responses: list[str] = []
+    console_errors: list[str] = []
+    main_status: int | None = None
+    page_url_final = url_episodio
+    page_title_final = ""
+    frame_urls: list[str] = []
 
     with sync_playwright() as p:
         browser = p.chromium.launch(
@@ -34,6 +64,7 @@ def capturar_stream_episodio(url_episodio: str) -> str:
                 "--no-first-run",
                 "--no-zygote",
                 "--disable-gpu",
+                "--no-proxy-server",
             ],
         )
         context = browser.new_context(
@@ -80,15 +111,32 @@ def capturar_stream_episodio(url_episodio: str) -> str:
 
         def interceptar_requisicao(request):
             req_url = request.url
+            all_requests.append(req_url)
             if any(ext in req_url for ext in (".m3u8", ".mp4", "/playlist.m3u8", "master.m3u8")) and not any(
                 skip in req_url for skip in ("google", "doubleclick", "analytics", "banner", "ads")
             ):
                 video_urls.append(req_url)
 
+        def registrar_falha(request):
+            if len(failed_requests) < 15:
+                failed_requests.append(f"{request.url} -> {request.failure}")
+
+        def registrar_resposta(response):
+            if response.status >= 400 and len(error_responses) < 10:
+                error_responses.append(f"{response.status} {response.url}")
+
+        def registrar_console(msg):
+            if msg.type == "error" and len(console_errors) < 10:
+                console_errors.append(msg.text)
+
         page.on("request", interceptar_requisicao)
+        page.on("requestfailed", registrar_falha)
+        page.on("response", registrar_resposta)
+        page.on("console", registrar_console)
 
         try:
-            page.goto(url_episodio, timeout=45000, wait_until="domcontentloaded")
+            main_resp = page.goto(url_episodio, timeout=45000, wait_until="domcontentloaded")
+            main_status = main_resp.status if main_resp is not None else None
 
             # Clica no player ou nos seletores de servidor
             selectors_to_click = [
@@ -115,10 +163,21 @@ def capturar_stream_episodio(url_episodio: str) -> str:
                     break
                 time.sleep(1)
 
+            try:
+                page_url_final = page.url
+                page_title_final = page.title()
+                frame_urls = [f.url for f in page.frames]
+            except Exception:
+                pass
         finally:
             browser.close()
 
     if not video_urls:
+        print(f"[DIAG] main_status={main_status} url={page_url_final!r} title={page_title_final!r} total_requests={len(all_requests)}", flush=True)
+        print(f"[DIAG] frames({len(frame_urls)}): {frame_urls}", flush=True)
+        print(f"[DIAG] failed_requests({len(failed_requests)}): {failed_requests[:15]}", flush=True)
+        print(f"[DIAG] error_responses({len(error_responses)}): {error_responses[:10]}", flush=True)
+        print(f"[DIAG] console_errors({len(console_errors)}): {console_errors[:10]}", flush=True)
         raise RuntimeError(f"Não foi possível interceptar o stream de vídeo em: {url_episodio}")
 
     # Prioriza master playlist m3u8 ou o stream de mais alta qualidade
@@ -279,6 +338,7 @@ def baixar_stream(stream_url: str, output_path: str, referer: str, downloader: s
 
 
 def main():
+    _clean_http_env()
     parser = argparse.ArgumentParser(description="Baixa episódio de Uzak Şehir de turkish123.pro")
     parser.add_argument("episode", type=int, help="Número do episódio (ex: 33)")
     parser.add_argument("-o", "--output", help="Caminho do arquivo mp4 de saída")
