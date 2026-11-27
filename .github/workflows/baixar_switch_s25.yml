@@ -100,20 +100,19 @@ jobs:
           printf '%s\n' "$S25_SSH_KEY" > ~/.ssh/s25_key
           chmod 600 ~/.ssh/s25_key
 
-          SSH_OPTS=(
+          COMMON_OPTS=(
             -i ~/.ssh/s25_key
-            -p "$S25_PORT"
             -o StrictHostKeyChecking=no
             -o ConnectTimeout=15
             -o ServerAliveInterval=30
             -o ServerAliveCountMax=5
           )
           if [ -n "${TAILSCALE_TARGET:-}" ]; then
-            SSH_OPTS+=(-o "ProxyCommand=nc -X 5 -x ${TAILSCALE_TARGET}:1080 %h %p")
+            COMMON_OPTS+=(-o "ProxyCommand=nc -X 5 -x ${TAILSCALE_TARGET}:1080 %h %p")
           fi
 
           # Garante que a versão mais recente do script esteja no S25
-          scp -P "$S25_PORT" "${SSH_OPTS[@]:2}" -i ~/.ssh/s25_key \
+          scp -P "$S25_PORT" "${COMMON_OPTS[@]}" \
             baixar_switch_s25.py notificar_whatsapp.py \
             "${S25_USER}@${S25_HOST}:~/media-pipeline/"
 
@@ -140,7 +139,7 @@ jobs:
             --dest "$DEST_DIR" \
             "${EXTRA_FLAGS[@]}")
 
-          ssh "${SSH_OPTS[@]}" "${S25_USER}@${S25_HOST}" "$REMOTE_CMD"
+          ssh -p "$S25_PORT" "${COMMON_OPTS[@]}" "${S25_USER}@${S25_HOST}" "$REMOTE_CMD"
 
       - name: Desconectar da VPN
         if: always()
