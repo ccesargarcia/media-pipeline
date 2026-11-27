@@ -247,9 +247,13 @@ def baixar_torrent(
         target,
     ]
 
+    clean_env = os.environ.copy()
+    for var in ("FTP_PROXY", "ftp_proxy", "ALL_PROXY", "all_proxy"):
+        clean_env.pop(var, None)
+
     print(f"🧲 Iniciando download do torrent (timeout={max_minutes} min)...", flush=True)
     try:
-        proc = subprocess.run(cmd, timeout=max_minutes * 60, check=False)
+        proc = subprocess.run(cmd, env=clean_env, timeout=max_minutes * 60, check=False)
     except subprocess.TimeoutExpired as exc:
         raise RuntimeError(f"Download excedeu o tempo máximo de {max_minutes} minutos.") from exc
 

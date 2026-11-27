@@ -161,6 +161,16 @@ class TestBaixarTorrentFtp(unittest.TestCase):
                     btf.verificar_espaco_disco(Path(tmp), 10 * (1024 ** 3))
                 btf.verificar_espaco_disco(Path(tmp), 2 * (1024 ** 3))
 
+    def test_baixar_torrent_remove_ftp_proxy_do_env(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch.dict("os.environ", {"FTP_PROXY": "socks5h://127.0.0.1:1080", "ftp_proxy": "socks5h://127.0.0.1:1080"}):
+                with patch("baixar_torrent_ftp.subprocess.run") as run_mock:
+                    run_mock.return_value = MagicMock(returncode=0)
+                    btf.baixar_torrent("magnet:?xt=urn:btih:abc", Path(tmp))
+                    passed_env = run_mock.call_args.kwargs["env"]
+                    self.assertNotIn("FTP_PROXY", passed_env)
+                    self.assertNotIn("ftp_proxy", passed_env)
+
 
 if __name__ == "__main__":
     unittest.main()
