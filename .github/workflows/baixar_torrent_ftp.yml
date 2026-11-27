@@ -4,29 +4,49 @@ run-name: "🧲 Baixar Torrent → FTP (${{ inputs.ftp_dir }}) · ${{ inputs.net
 on:
   workflow_dispatch:
     inputs:
+      content_type:
+        description: 'Tipo de conteúdo (jogo direciona /G/Downloads automaticamente para /G/Jogos)'
+        required: false
+        type: choice
+        options:
+          - 'filme_serie'
+          - 'jogo'
+          - 'qualquer'
+        default: 'qualquer'
       torrent_source:
         description: 'Magnet link (magnet:?xt=...) ou URL direta .torrent (opcional se usar search_query)'
         required: false
         type: string
         default: ''
       search_query:
-        description: 'Ou busque pelo nome do filme/série via Prowlarr (ex: Duna Parte 2)'
+        description: 'Ou busque pelo nome do filme, série ou jogo via Prowlarr (ex: Hollow Knight)'
         required: false
         type: string
         default: ''
       quality:
-        description: 'Filtro de qualidade na busca Prowlarr'
+        description: 'Filtro de qualidade ou release na busca Prowlarr'
         required: false
         type: choice
         options:
-          - '1080p'
           - 'qualquer'
+          - '1080p'
           - '720p'
           - '4K'
           - 'DUAL'
-        default: '1080p'
+          - 'FitGirl'
+          - 'DODI'
+          - 'GOG'
+          - 'ElAmigos'
+          - 'RUNE'
+          - 'Switch'
+        default: 'qualquer'
+      max_size_gb:
+        description: 'Tamanho máximo em GB na busca Prowlarr (0 = sem limite; runner tem ~45 GB livres)'
+        required: false
+        type: number
+        default: 45
       ftp_dir:
-        description: 'Diretório de destino no FTP (ex: /G/Downloads, /G/Filmes, /G/Series/MinhaSerie)'
+        description: 'Diretório de destino no FTP (ex: /G/Downloads, /G/Filmes, /G/Jogos, /G/Series/MinhaSerie)'
         required: true
         type: string
         default: '/G/Downloads'
@@ -104,9 +124,12 @@ jobs:
 
       - name: Baixar Torrent e Enviar para FTP
         env:
+          PYTHONUNBUFFERED: "1"
+          CONTENT_TYPE: ${{ inputs.content_type }}
           TORRENT_SOURCE: ${{ inputs.torrent_source }}
           SEARCH_QUERY: ${{ inputs.search_query }}
           QUALITY: ${{ inputs.quality }}
+          MAX_SIZE_GB: ${{ inputs.max_size_gb }}
           FTP_DIR: ${{ inputs.ftp_dir }}
           SUBFOLDER_NAME: ${{ inputs.subfolder_name }}
           MAX_MINUTES: ${{ inputs.max_download_minutes }}
@@ -134,9 +157,11 @@ jobs:
           fi
 
           python3 baixar_torrent_ftp.py \
+            --content-type "$CONTENT_TYPE" \
             --source "$TORRENT_SOURCE" \
             --query "$SEARCH_QUERY" \
             --quality "$QUALITY" \
+            --max-size-gb "${MAX_SIZE_GB:-0}" \
             --ftp-dir "$FTP_DIR" \
             --subfolder-name "$SUBFOLDER_NAME" \
             --max-minutes "$MAX_MINUTES" \

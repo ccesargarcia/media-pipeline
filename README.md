@@ -9,7 +9,7 @@ Pipeline automatizado no GitHub Actions para:
 ## Workflows Disponíveis
 
 - **Baixar Episódios para FTP (Turkish123):** Baixa episódios individuais ou em lote e envia para `/G/Series/Longe demais - [Temporada]`.
-- **Baixar Torrent para FTP:** Baixa torrents via magnet link ou URL `.torrent` (`aria2c` sem seed após concluir) e envia todos os arquivos diretamente para o FTP mantendo a estrutura de pastas.
+- **Baixar Torrent para FTP:** Baixa filmes, séries ou jogos via magnet link, URL `.torrent` ou busca Prowlarr (`1080p`, `4K`, `FitGirl`, `DODI`, `GOG`, etc., com limite opcional `max_size_gb`) e envia todos os arquivos diretamente para o FTP (`/G/Filmes`, `/G/Jogos`, `/G/Downloads`) mantendo a estrutura de pastas.
 - **Legendar Série via FTP:** Pega o vídeo do FTP, transcreve com Whisper, traduz para PT-BR e envia as legendas (`.pt-BR.srt` e `.ass`) de volta para o FTP. O mecanismo `local` usa Qwen3-8B GGUF Q4 via llama.cpp no runner Ubuntu.
 - **Traduzir Legenda Existente do FTP:** Baixa um `.srt`, traduz com o mecanismo escolhido (Gemini, Groq, OpenRouter ou local), gera `.ass` e envia ambos ao FTP.
 - **Sincronizar Legendas Prontas com FTP:** Envia os arquivos versionados em `legendas_prontas/` para a pasta escolhida.

@@ -125,6 +125,42 @@ class TestBaixarTorrentFtp(unittest.TestCase):
             res = btf.buscar_torrent_prowlarr("Filme 2026", "http://100.64.0.1:9696", "abc123", quality="4K")
             self.assertEqual(res, "https://idx/f.torrent")
 
+    def test_buscar_jogo_fitgirl_com_limite_tamanho(self):
+        gb = 1024 ** 3
+        payload = [
+            {"title": "Cyberpunk 2077 Unpacked", "seeders": 200, "size": 95 * gb, "magnetUrl": "magnet:?xt=urn:btih:big"},
+            {"title": "Cyberpunk 2077 [FitGirl Repack]", "seeders": 150, "size": 40 * gb, "magnetUrl": "magnet:?xt=urn:btih:fg"},
+            {"title": "Cyberpunk 2077 [DODI Repack]", "seeders": 90, "size": 42 * gb, "magnetUrl": "magnet:?xt=urn:btih:dodi"},
+        ]
+        resp_mock = MagicMock()
+        resp_mock.read.return_value = json.dumps(payload).encode("utf-8")
+        resp_mock.__enter__ = MagicMock(return_value=resp_mock)
+        resp_mock.__exit__ = MagicMock(return_value=False)
+
+        with patch("baixar_torrent_ftp.urllib.request.urlopen", return_value=resp_mock):
+            res = btf.buscar_torrent_prowlarr(
+                "Cyberpunk 2077", "http://100.64.0.1:9696", "abc123", quality="FitGirl", max_size_gb=45
+            )
+            self.assertEqual(res, "magnet:?xt=urn:btih:fg")
+
+            res_any = btf.buscar_torrent_prowlarr(
+                "Cyberpunk 2077", "http://100.64.0.1:9696", "abc123", quality="qualquer", max_size_gb=45
+            )
+            self.assertEqual(res_any, "magnet:?xt=urn:btih:fg")
+
+    def test_resolver_ftp_dir_para_jogos(self):
+        self.assertEqual(btf.resolver_ftp_dir("/G/Downloads", "jogo"), "/G/Jogos")
+        self.assertEqual(btf.resolver_ftp_dir("/G/Jogos/Switch", "jogo"), "/G/Jogos/Switch")
+        self.assertEqual(btf.resolver_ftp_dir("/G/Downloads", "filme_serie"), "/G/Downloads")
+
+    def test_verificar_espaco_disco_insuficiente(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            fake_usage = MagicMock(free=5 * (1024 ** 3))
+            with patch("baixar_torrent_ftp.shutil.disk_usage", return_value=fake_usage):
+                with self.assertRaises(RuntimeError):
+                    btf.verificar_espaco_disco(Path(tmp), 10 * (1024 ** 3))
+                btf.verificar_espaco_disco(Path(tmp), 2 * (1024 ** 3))
+
 
 if __name__ == "__main__":
     unittest.main()

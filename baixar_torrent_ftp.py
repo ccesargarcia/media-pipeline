@@ -41,14 +41,15 @@ def notificar(texto: str, ativo: bool) -> None:
         print(f"[WhatsApp] Aviso ao notificar: {exc}", file=sys.stderr)
 
 
-def buscar_torrent_prowlarr(
+def selecionar_release_prowlarr(
     query: str,
     prowlarr_url: str,
     api_key: str,
     quality: str = "",
     min_seeders: int = 1,
-) -> str:
-    """Consulta a API do Prowlarr e retorna o magnetUrl ou downloadUrl com mais seeders."""
+    max_size_gb: float = 0.0,
+) -> dict:
+    """Consulta a API do Prowlarr e retorna o dicionário do release com mais seeders."""
     if not prowlarr_url or not api_key:
         raise ValueError("PROWLARR_URL e PROWLARR_API_KEY são obrigatórios para busca por nome.")
 
@@ -61,7 +62,8 @@ def buscar_torrent_prowlarr(
             "User-Agent": "MediaPipeline-Prowlarr/1.0",
         },
     )
-    print(f"🔎 Buscando no Prowlarr: '{query}' (qualidade='{quality or 'qualquer'}')...", flush=True)
+    limite_txt = f", max={max_size_gb:.1f} GB" if max_size_gb and max_size_gb > 0 else ""
+    print(f"🔎 Buscando no Prowlarr: '{query}' (filtro='{quality or 'qualquer'}'{limite_txt})...", flush=True)
     with urllib.request.urlopen(req, timeout=30) as resp:
         resultados = json.loads(resp.read().decode("utf-8"))
 
@@ -84,6 +86,19 @@ def buscar_torrent_prowlarr(
             raise ValueError(f"Nenhum release com '{quality}' encontrado. Disponíveis: {exemplos}")
         validos = filtrados
 
+    if max_size_gb and max_size_gb > 0:
+        max_bytes = int(max_size_gb * (1024 ** 3))
+        cabem = [r for r in validos if int(r.get("size") or 0) <= max_bytes]
+        if not cabem:
+            menores = sorted(validos, key=lambda r: int(r.get("size") or 0))[:3]
+            resumo = ", ".join(
+                f"{r.get('title')} ({formatar_tamanho(int(r.get('size') or 0))})" for r in menores
+            )
+            raise ValueError(
+                f"Todos os releases encontrados ultrapassam o limite de {max_size_gb:.1f} GB. Menores: {resumo}"
+            )
+        validos = cabem
+
     validos.sort(key=lambda r: int(r.get("seeders") or 0), reverse=True)
     escolhido = validos[0]
     tamanho = formatar_tamanho(int(escolhido.get("size") or 0))
@@ -93,7 +108,49 @@ def buscar_torrent_prowlarr(
         f"Indexador: {escolhido.get('indexer') or 'N/A'}",
         flush=True,
     )
+    return escolhido
+
+
+def buscar_torrent_prowlarr(
+    query: str,
+    prowlarr_url: str,
+    api_key: str,
+    quality: str = "",
+    min_seeders: int = 1,
+    max_size_gb: float = 0.0,
+) -> str:
+    """Consulta a API do Prowlarr e retorna o magnetUrl ou downloadUrl com mais seeders."""
+    escolhido = selecionar_release_prowlarr(
+        query,
+        prowlarr_url,
+        api_key,
+        quality=quality,
+        min_seeders=min_seeders,
+        max_size_gb=max_size_gb,
+    )
     return escolhido.get("magnetUrl") or escolhido["downloadUrl"]
+
+
+def resolver_ftp_dir(ftp_dir: str, content_type: str = "qualquer") -> str:
+    """Resolve o diretório de destino no FTP, direcionando jogos para /G/Jogos quando padrão."""
+    destino = ftp_dir.strip() or "/G/Downloads"
+    if content_type == "jogo" and destino.rstrip("/") == "/G/Downloads":
+        return "/G/Jogos"
+    return destino
+
+
+def verificar_espaco_disco(download_dir: Path, expected_size_bytes: int, reserve_gb: float = 1.0) -> None:
+    """Garante que há espaço livre suficiente no runner antes de iniciar o download."""
+    if expected_size_bytes <= 0:
+        return
+    download_dir.mkdir(parents=True, exist_ok=True)
+    livre = shutil.disk_usage(download_dir).free
+    necessario = expected_size_bytes + int(reserve_gb * (1024 ** 3))
+    if livre < necessario:
+        raise RuntimeError(
+            f"Espaço em disco insuficiente ({formatar_tamanho(livre)} livres) para baixar "
+            f"{formatar_tamanho(expected_size_bytes)} com margem de segurança."
+        )
 
 
 def validar_e_preparar_fonte(source: str, work_dir: Path) -> str:
@@ -322,6 +379,10 @@ def executar_pipeline(args: argparse.Namespace) -> int:
         print("❌ Credenciais FTP (FTP_USER / FTP_PASSWORD) não configuradas.", file=sys.stderr)
         return 1
 
+    content_type = getattr(args, "content_type", "qualquer")
+    ftp_dir = resolver_ftp_dir(args.ftp_dir, content_type)
+    icone = "🎮" if content_type == "jogo" else "🧲"
+
     work_dir = Path(args.work_dir).resolve()
     download_dir = work_dir / "downloads"
     work_dir.mkdir(parents=True, exist_ok=True)
@@ -329,19 +390,24 @@ def executar_pipeline(args: argparse.Namespace) -> int:
     inicio_total = time.monotonic()
     try:
         fonte_resolvida = args.source.strip()
+        expected_size = 0
         if not fonte_resolvida:
             if not args.query.strip():
                 raise ValueError("Informe --source (magnet/URL) ou --query (busca no Prowlarr).")
-            fonte_resolvida = buscar_torrent_prowlarr(
+            release = selecionar_release_prowlarr(
                 args.query.strip(),
                 os.environ.get("PROWLARR_URL", ""),
                 os.environ.get("PROWLARR_API_KEY", ""),
                 quality=args.quality,
                 min_seeders=args.min_seeders,
+                max_size_gb=getattr(args, "max_size_gb", 0.0),
             )
+            fonte_resolvida = release.get("magnetUrl") or release["downloadUrl"]
+            expected_size = int(release.get("size") or 0)
+        verificar_espaco_disco(download_dir, expected_size)
         target = validar_e_preparar_fonte(fonte_resolvida, work_dir)
         notificar(
-            f"🧲 *Torrent → FTP iniciado*\n📂 Destino: `{args.ftp_dir}`",
+            f"{icone} *Torrent → FTP iniciado*\n📂 Destino: `{ftp_dir}`",
             args.notify_whatsapp,
         )
         baixar_torrent(
@@ -368,7 +434,7 @@ def executar_pipeline(args: argparse.Namespace) -> int:
     print(f"\n✅ Download concluído: {len(arquivos)} arquivo(s), total {formatar_tamanho(total_bytes)}", flush=True)
     notificar(
         f"📥 *Torrent baixado!* ({len(arquivos)} arquivo(s) · {formatar_tamanho(total_bytes)})\n"
-        f"📤 Iniciando upload para `{args.ftp_dir}`...",
+        f"📤 Iniciando upload para `{ftp_dir}`...",
         args.notify_whatsapp,
     )
 
@@ -391,7 +457,7 @@ def executar_pipeline(args: argparse.Namespace) -> int:
     falhas: list[str] = []
 
     for local_path, rel_path, size_bytes in arquivos:
-        remote_dir, filename = construir_destino_ftp(args.ftp_dir, args.subfolder_name, rel_path)
+        remote_dir, filename = construir_destino_ftp(ftp_dir, args.subfolder_name, rel_path)
         print("----------------------------------------------------------", flush=True)
         print(f"📄 Arquivo: {rel_path} ({formatar_tamanho(size_bytes)}) -> {remote_dir}/{filename}", flush=True)
 
@@ -461,7 +527,7 @@ def executar_pipeline(args: argparse.Namespace) -> int:
     status_icon = "✅" if not falhas else ("⚠️" if enviados > 0 or pulados > 0 else "❌")
     resumo_msg = (
         f"{status_icon} *Resumo Torrent → FTP*\n\n"
-        f"📂 *Destino:* `{args.ftp_dir}`\n"
+        f"📂 *Destino:* `{ftp_dir}`\n"
         f"📦 *Total:* {formatar_tamanho(total_bytes)} em {duracao_total}s\n"
         f"✅ *Enviados:* {enviados}\n"
         f"⏩ *Pulados:* {pulados}\n"
@@ -476,10 +542,17 @@ def executar_pipeline(args: argparse.Namespace) -> int:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Download de torrent e upload direto ao FTP.")
+    parser.add_argument(
+        "--content-type",
+        choices=("filme_serie", "jogo", "qualquer"),
+        default="qualquer",
+        help="Tipo de conteúdo (jogo direciona /G/Downloads para /G/Jogos)",
+    )
     parser.add_argument("--source", default="", help="Magnet link ou URL de arquivo .torrent")
     parser.add_argument("--query", default="", help="Termo de busca via API do Prowlarr (quando --source vazio)")
-    parser.add_argument("--quality", default="", help="Filtro de qualidade na busca Prowlarr (ex: 1080p, 720p, 4K, DUAL)")
+    parser.add_argument("--quality", default="", help="Filtro de qualidade ou release na busca Prowlarr (ex: 1080p, FitGirl, DODI, GOG)")
     parser.add_argument("--min-seeders", type=int, default=1, help="Mínimo de seeders na busca Prowlarr")
+    parser.add_argument("--max-size-gb", type=float, default=0.0, help="Tamanho máximo em GB na busca Prowlarr (0 = sem limite)")
     parser.add_argument("--ftp-dir", required=True, help="Diretório base de destino no FTP")
     parser.add_argument("--subfolder-name", default="", help="Subpasta opcional dentro do diretório FTP")
     parser.add_argument("--work-dir", default="torrent_work", help="Diretório temporário de trabalho")
