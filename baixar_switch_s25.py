@@ -8,6 +8,7 @@ import html as html_lib
 import json
 import re
 import shutil
+import struct
 import subprocess
 import sys
 import urllib.parse
@@ -57,6 +58,30 @@ def detectar_extensao_rom(file_path: Path) -> str:
     if len(cabecalho) >= 0x104 and cabecalho[0x100:0x104] == b"HEAD":
         return ".xci"
     return ".nsp"
+
+
+def validar_integridade_nsp(file_path: Path) -> None:
+    """Valida se um arquivo .nsp (PFS0) não está truncado em relação à tabela de arquivos interna."""
+    if file_path.suffix.lower() != ".nsp" or not file_path.is_file():
+        return
+    tamanho_real = file_path.stat().st_size
+    if tamanho_real < 16:
+        raise RuntimeError(f"Arquivo .nsp inválido/muito pequeno ({tamanho_real} bytes): {file_path.name}")
+    with file_path.open("rb") as fh:
+        header = fh.read(16)
+        magic, nfiles, str_sz, _ = struct.unpack("<4sIII", header)
+        if magic != b"PFS0":
+            return
+        entries_raw = fh.read(nfiles * 24)
+        if len(entries_raw) < nfiles * 24:
+            raise RuntimeError(f"Cabeçalho PFS0 truncado em {file_path.name}.")
+        total_data = sum(struct.unpack("<QQII", entries_raw[i * 24:(i + 1) * 24])[1] for i in range(nfiles))
+    esperado_min = 16 + nfiles * 24 + str_sz + total_data
+    if tamanho_real < esperado_min:
+        raise RuntimeError(
+            f"Arquivo .nsp corrompido/truncado na origem ({file_path.name}): "
+            f"{tamanho_real} bytes baixados, mas o cabeçalho PFS0 exige {esperado_min} bytes."
+        )
 
 
 def _http_get_text(url: str, timeout: int = 20) -> str:
@@ -252,9 +277,15 @@ def baixar_arquivo_com_curl(
     if ext in (".zip", ".rar", ".7z") and extract_zip:
         print(f"📦 Extraindo ROM de {final_path.name}...", flush=True)
         extraidos = extrair_arquivo_comprimido(final_path, ext, dest_dir)
-        if extraidos:
-            return extraidos
-    return [final_path]
+        resultados = extraidos if extraidos else [final_path]
+    else:
+        resultados = [final_path]
+
+    for item in resultados:
+        validar_integridade_nsp(item)
+        if shutil.which("termux-media-scan"):
+            subprocess.run(["termux-media-scan", str(item)], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return resultados
 
 
 def filtrar_versoes(versoes: list[dict], version_filter: str) -> list[dict]:

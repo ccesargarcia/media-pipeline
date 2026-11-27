@@ -1,4 +1,5 @@
 import json
+import struct
 import tempfile
 import unittest
 from pathlib import Path
@@ -79,6 +80,18 @@ class TestBaixarSwitchS25(unittest.TestCase):
                 self.assertEqual(nome, "Zelda_ Skyward Sword")
                 self.assertEqual(size, 7595066462)
                 self.assertEqual(url, "https://datadock-host.site/api/f/QOU2rBoI/download?token=tok123")
+
+    def test_validar_integridade_nsp_detecta_truncado(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p_ok = Path(tmp) / "ok.nsp"
+            hdr = struct.pack("<4sIII", b"PFS0", 1, 4, 0) + struct.pack("<QQII", 0, 8, 0, 0) + b"a.n\x00"
+            p_ok.write_bytes(hdr + b"12345678")
+            sw.validar_integridade_nsp(p_ok)
+
+            p_bad = Path(tmp) / "bad.nsp"
+            p_bad.write_bytes(hdr + b"1234")
+            with self.assertRaises(RuntimeError):
+                sw.validar_integridade_nsp(p_bad)
 
 
 if __name__ == "__main__":
