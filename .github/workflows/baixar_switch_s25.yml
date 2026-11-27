@@ -114,7 +114,7 @@ jobs:
           # Garante que a versão mais recente do script esteja no S25
           scp -P "$S25_PORT" "${COMMON_OPTS[@]}" \
             baixar_switch_s25.py notificar_whatsapp.py \
-            "${S25_USER}@${S25_HOST}:~/media-pipeline/"
+            "${S25_USER}@${S25_HOST}:media-pipeline/"
 
           EXTRA_FLAGS=()
           if [ "$LIST_ONLY" = "true" ]; then
@@ -124,7 +124,7 @@ jobs:
             EXTRA_FLAGS+=("--notify-whatsapp")
           fi
 
-          # Passa argumentos com segurança usando printf %q
+          # Passa argumentos com segurança usando printf %q (caminho relativo ao $HOME do S25)
           REMOTE_CMD=$(printf '%q ' \
             env \
             PYTHONUNBUFFERED=1 \
@@ -132,7 +132,7 @@ jobs:
             "EVOLUTION_API_URL=${EVOLUTION_API_URL}" \
             "EVOLUTION_INSTANCE=${EVOLUTION_INSTANCE}" \
             "WHATSAPP_RECIPIENT=${WHATSAPP_RECIPIENT}" \
-            python3 -u ~/media-pipeline/baixar_switch_s25.py \
+            python3 -u media-pipeline/baixar_switch_s25.py \
             --search "$SEARCH_QUERY" \
             --url "$GAME_URL" \
             --version-filter "$VERSION_FILTER" \
