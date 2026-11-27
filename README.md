@@ -10,6 +10,7 @@ Pipeline automatizado no GitHub Actions para:
 
 - **Baixar Episódios para FTP (Turkish123):** Baixa episódios individuais ou em lote e envia para `/G/Series/Longe demais - [Temporada]`.
 - **Baixar Torrent para FTP:** Baixa filmes, séries ou jogos via magnet link, URL `.torrent` ou busca Prowlarr (`1080p`, `4K`, `FitGirl`, `DODI`, `GOG`, etc., com limite opcional `max_size_gb`) e envia todos os arquivos diretamente para o FTP (`/G/Filmes`, `/G/Jogos`, `/G/Downloads`) mantendo a estrutura de pastas.
+- **Baixar Switch ROM para S25 (`/sdcard/NSG`):** Conecta no S25 via Tailscale/SSH e baixa jogos Nintendo Switch (`.nsp`/`.xci`) de `app.switchsrom.com` diretamente para `/sdcard/NSG`.
 - **Legendar Série via FTP:** Pega o vídeo do FTP, transcreve com Whisper, traduz para PT-BR e envia as legendas (`.pt-BR.srt` e `.ass`) de volta para o FTP. O mecanismo `local` usa Qwen3-8B GGUF Q4 via llama.cpp no runner Ubuntu.
 - **Traduzir Legenda Existente do FTP:** Baixa um `.srt`, traduz com o mecanismo escolhido (Gemini, Groq, OpenRouter ou local), gera `.ass` e envia ambos ao FTP.
 - **Sincronizar Legendas Prontas com FTP:** Envia os arquivos versionados em `legendas_prontas/` para a pasta escolhida.

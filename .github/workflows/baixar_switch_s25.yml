@@ -1,0 +1,147 @@
+name: Baixar Switch ROM para S25 (/sdcard/NSG)
+run-name: "🎮 Switch → S25 (${{ inputs.search_query || inputs.game_url }}) · ${{ inputs.version_filter }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      search_query:
+        description: 'Nome do jogo em app.switchsrom.com (ex: Skyward Sword)'
+        required: false
+        type: string
+        default: ''
+      game_url:
+        description: 'Ou URL direta da página do jogo em app.switchsrom.com'
+        required: false
+        type: string
+        default: ''
+      version_filter:
+        description: 'Versão a baixar (base, all, update, dlc)'
+        required: false
+        type: choice
+        options:
+          - base
+          - all
+          - update
+          - dlc
+        default: base
+      dest_dir:
+        description: 'Pasta de destino no S25'
+        required: false
+        type: string
+        default: '/sdcard/NSG'
+      list_only:
+        description: 'Apenas listar jogos e versões disponíveis sem baixar'
+        required: false
+        type: boolean
+        default: false
+      notify_whatsapp:
+        description: 'Enviar notificação no WhatsApp ao concluir/falhar'
+        required: false
+        type: boolean
+        default: true
+      network_mode:
+        description: 'Modo de rede para alcançar o S25 na LAN'
+        required: true
+        type: choice
+        options:
+          - tailscale
+          - vpn
+        default: tailscale
+
+permissions:
+  contents: read
+
+jobs:
+  run-on-s25:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar cliente SSH e netcat-openbsd
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssh-client netcat-openbsd
+
+      - name: Conectar ao Tailscale / WireGuard (Galaxy A70)
+        if: ${{ inputs.network_mode == 'tailscale' }}
+        uses: ./.github/actions/tailscale-connect
+        with:
+          ts_authkey: ${{ secrets.TS_AUTHKEY }}
+          oci_ssh_key: ${{ secrets.OCI_SSH_KEY }}
+          openvpn_config: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Conectar à VPN (OpenVPN)
+        if: ${{ inputs.network_mode == 'vpn' }}
+        uses: ./.github/actions/openvpn-connect
+        with:
+          config: ${{ secrets.OPENVPN_CONFIG }}
+
+      - name: Executar download direto no S25 (/sdcard/NSG)
+        env:
+          S25_SSH_KEY: ${{ secrets.S25_SSH_KEY }}
+          S25_HOST: ${{ secrets.S25_HOST || '192.168.0.153' }}
+          S25_PORT: ${{ secrets.S25_PORT || '8022' }}
+          S25_USER: ${{ secrets.S25_USER || 'u0_a800' }}
+          SEARCH_QUERY: ${{ inputs.search_query }}
+          GAME_URL: ${{ inputs.game_url }}
+          VERSION_FILTER: ${{ inputs.version_filter }}
+          DEST_DIR: ${{ inputs.dest_dir }}
+          LIST_ONLY: ${{ inputs.list_only }}
+          NOTIFY_WHATSAPP: ${{ inputs.notify_whatsapp }}
+          EVOLUTION_API_KEY: ${{ secrets.EVOLUTION_API_KEY }}
+          EVOLUTION_API_URL: ${{ secrets.EVOLUTION_API_URL || 'https://wa.luisices.com.br' }}
+          EVOLUTION_INSTANCE: ${{ secrets.EVOLUTION_INSTANCE || 'homeassistant' }}
+          WHATSAPP_RECIPIENT: ${{ secrets.WHATSAPP_RECIPIENT }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          printf '%s\n' "$S25_SSH_KEY" > ~/.ssh/s25_key
+          chmod 600 ~/.ssh/s25_key
+
+          SSH_OPTS=(
+            -i ~/.ssh/s25_key
+            -p "$S25_PORT"
+            -o StrictHostKeyChecking=no
+            -o ConnectTimeout=15
+            -o ServerAliveInterval=30
+            -o ServerAliveCountMax=5
+          )
+          if [ -n "${TAILSCALE_TARGET:-}" ]; then
+            SSH_OPTS+=(-o "ProxyCommand=nc -X 5 -x ${TAILSCALE_TARGET}:1080 %h %p")
+          fi
+
+          # Garante que a versão mais recente do script esteja no S25
+          scp -P "$S25_PORT" "${SSH_OPTS[@]:2}" -i ~/.ssh/s25_key \
+            baixar_switch_s25.py notificar_whatsapp.py \
+            "${S25_USER}@${S25_HOST}:~/media-pipeline/"
+
+          EXTRA_FLAGS=()
+          if [ "$LIST_ONLY" = "true" ]; then
+            EXTRA_FLAGS+=("--list")
+          fi
+          if [ "$NOTIFY_WHATSAPP" = "true" ]; then
+            EXTRA_FLAGS+=("--notify-whatsapp")
+          fi
+
+          # Passa argumentos com segurança usando printf %q
+          REMOTE_CMD=$(printf '%q ' \
+            env \
+            PYTHONUNBUFFERED=1 \
+            "EVOLUTION_API_KEY=${EVOLUTION_API_KEY}" \
+            "EVOLUTION_API_URL=${EVOLUTION_API_URL}" \
+            "EVOLUTION_INSTANCE=${EVOLUTION_INSTANCE}" \
+            "WHATSAPP_RECIPIENT=${WHATSAPP_RECIPIENT}" \
+            python3 -u ~/media-pipeline/baixar_switch_s25.py \
+            --search "$SEARCH_QUERY" \
+            --url "$GAME_URL" \
+            --version-filter "$VERSION_FILTER" \
+            --dest "$DEST_DIR" \
+            "${EXTRA_FLAGS[@]}")
+
+          ssh "${SSH_OPTS[@]}" "${S25_USER}@${S25_HOST}" "$REMOTE_CMD"
+
+      - name: Desconectar da VPN
+        if: always()
+        uses: ./.github/actions/openvpn-disconnect
