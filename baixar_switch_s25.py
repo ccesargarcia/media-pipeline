@@ -43,11 +43,15 @@ def sanitizar_nome_arquivo(nome: str) -> str:
 
 
 def detectar_extensao_rom(file_path: Path) -> str:
-    """Detecta a extensão real da ROM pelos magic bytes (ZIP, NSP/PFS0 ou XCI)."""
+    """Detecta a extensão real do arquivo pelos magic bytes (ZIP, RAR, 7Z, NSP/PFS0 ou XCI)."""
     with file_path.open("rb") as fh:
         cabecalho = fh.read(0x110)
     if cabecalho.startswith(b"PK\x03\x04"):
         return ".zip"
+    if cabecalho.startswith(b"Rar!\x1a\x07"):
+        return ".rar"
+    if cabecalho.startswith(b"7z\xbc\xaf'\x1c"):
+        return ".7z"
     if cabecalho.startswith(b"PFS0"):
         return ".nsp"
     if len(cabecalho) >= 0x104 and cabecalho[0x100:0x104] == b"HEAD":
@@ -157,22 +161,41 @@ def arquivo_ja_existe(dest_dir: Path, base_name: str, expected_size: int) -> Pat
     return None
 
 
-def extrair_zip_roms(zip_path: Path, dest_dir: Path) -> list[Path]:
-    """Extrai arquivos .nsp/.xci/.nsz/.xcz de um .zip para dest_dir e remove o .zip."""
+def extrair_arquivo_comprimido(archive_path: Path, ext: str, dest_dir: Path) -> list[Path]:
+    """Extrai arquivos .nsp/.xci/.nsz/.xcz de .zip, .rar ou .7z para dest_dir e remove o arquivo compactado."""
     extraidos: list[Path] = []
-    with zipfile.ZipFile(zip_path, "r") as zf:
-        for member in zf.infolist():
-            if member.is_dir():
-                continue
-            nome = Path(member.filename).name
-            if Path(nome).suffix.lower() in VALID_ROM_EXTS:
-                alvo = dest_dir / sanitizar_nome_arquivo(nome)
-                with zf.open(member) as src, alvo.open("wb") as dst:
-                    shutil.copyfileobj(src, dst)
-                extraidos.append(alvo)
+    if ext == ".zip":
+        with zipfile.ZipFile(archive_path, "r") as zf:
+            for member in zf.infolist():
+                if member.is_dir():
+                    continue
+                nome = Path(member.filename).name
+                if Path(nome).suffix.lower() in VALID_ROM_EXTS:
+                    alvo = dest_dir / sanitizar_nome_arquivo(nome)
+                    with zf.open(member) as src, alvo.open("wb") as dst:
+                        shutil.copyfileobj(src, dst)
+                    extraidos.append(alvo)
+    elif ext in (".rar", ".7z"):
+        antes = {p.name for p in dest_dir.iterdir() if p.is_file()}
+        cmd = (
+            ["unrar", "e", "-o+", str(archive_path), str(dest_dir) + "/"]
+            if ext == ".rar" and shutil.which("unrar")
+            else ["7z", "e", "-y", f"-o{dest_dir}", str(archive_path)]
+        )
+        proc = subprocess.run(cmd, check=False)
+        if proc.returncode != 0:
+            raise RuntimeError(f"Falha ao extrair {archive_path.name} (código {proc.returncode}).")
+        depois = [p for p in dest_dir.iterdir() if p.is_file() and p.name not in antes and p.suffix.lower() in VALID_ROM_EXTS]
+        extraidos.extend(depois)
+
     if extraidos:
-        zip_path.unlink(missing_ok=True)
+        archive_path.unlink(missing_ok=True)
     return extraidos
+
+
+def extrair_zip_roms(zip_path: Path, dest_dir: Path) -> list[Path]:
+    """Mantido por compatibilidade; delega para extrair_arquivo_comprimido."""
+    return extrair_arquivo_comprimido(zip_path, ".zip", dest_dir)
 
 
 def baixar_arquivo_com_curl(
@@ -209,20 +232,26 @@ def baixar_arquivo_com_curl(
     if proc.returncode != 0:
         raise RuntimeError(f"curl falhou ao baixar '{base_name}' (código {proc.returncode}).")
 
-    ext = Path(base_name).suffix.lower()
-    if ext not in (*VALID_ROM_EXTS, ".zip", ".rar", ".7z"):
-        ext = detectar_extensao_rom(part_path)
-        final_name = f"{base_name}{ext}"
-    else:
+    # Sempre verifica os magic bytes reais (alguns uploads vêm como .rar/.zip renomeados para .NSP)
+    ext_real = detectar_extensao_rom(part_path)
+    ext_nome = Path(base_name).suffix.lower()
+    if ext_real in (".zip", ".rar", ".7z"):
+        ext = ext_real
+        final_name = f"{Path(base_name).stem}{ext}" if ext_nome else f"{base_name}{ext}"
+    elif ext_nome in (*VALID_ROM_EXTS, ".zip", ".rar", ".7z"):
+        ext = ext_nome
         final_name = base_name
+    else:
+        ext = ext_real
+        final_name = f"{base_name}{ext}"
 
     final_path = dest_dir / final_name
     part_path.replace(final_path)
     print(f"✅ Salvo em: {final_path}", flush=True)
 
-    if ext == ".zip" and extract_zip:
+    if ext in (".zip", ".rar", ".7z") and extract_zip:
         print(f"📦 Extraindo ROM de {final_path.name}...", flush=True)
-        extraidos = extrair_zip_roms(final_path, dest_dir)
+        extraidos = extrair_arquivo_comprimido(final_path, ext, dest_dir)
         if extraidos:
             return extraidos
     return [final_path]

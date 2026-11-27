@@ -28,6 +28,14 @@ class TestBaixarSwitchS25(unittest.TestCase):
             p_xci.write_bytes(b"\x00" * 0x100 + b"HEAD" + b"\x00" * 8)
             self.assertEqual(sw.detectar_extensao_rom(p_xci), ".xci")
 
+            p_rar = Path(tmp) / "d.NSP"
+            p_rar.write_bytes(b"Rar!\x1a\x07\x01\x00")
+            self.assertEqual(sw.detectar_extensao_rom(p_rar), ".rar")
+
+            p_7z = Path(tmp) / "e.NSP"
+            p_7z.write_bytes(b"7z\xbc\xaf'\x1c\x00\x04")
+            self.assertEqual(sw.detectar_extensao_rom(p_7z), ".7z")
+
     def test_listar_versoes_jogo_e_filtrar(self):
         sample_html = """
         <a href="https://app.switchsrom.com/download/zelda/0/" class="rom-dl-btn">
